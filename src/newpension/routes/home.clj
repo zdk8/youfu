@@ -29,7 +29,7 @@
   (POST "/saveold" request (old/create-old request))
   (GET "/old" [] (old/get-olds))
   (POST "/old" [name] (old/get-olds name))
-  (GET "/search" [id] (home/get-old id))
+  (GET "/search" [id] (old/get-old id))
   ;  (GET "/searchid" [id] (home/get-oldbyid id))
   (GET "/log" [functionid] (old/get-logs functionid))
   (POST "/updateold" request (old/update-old request))
