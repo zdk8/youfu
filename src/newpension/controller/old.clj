@@ -1,4 +1,4 @@
-(ns pension.controller.home
+(ns pension.controller.old
   (:use compojure.core)
   (:use korma.core
         [korma.db :only [oracle]])
