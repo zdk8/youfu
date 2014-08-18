@@ -7,26 +7,31 @@
             [newpension.layout :as layout]
             ))
 
-(def oldinfo [:jk_qibq :xq_aih :jk_jiyl :address :hjj_hjj :jz_erdianh :jz_lxdh :age :status :jk_gms :culture  :jk_xuex  :jz_yis  :birthd  :xq_canjiast :telephone :xq_huod :hjj_kind :name :pensionimgpath :hjj_phone :jz_wuy  :xq_jiaos :jk_shil :jk_huod :identityid :type :operator_date :jz_menwdh :hjj_type :jz_yidianh :xq_tez :jk_tingl :jz_erxingm :jk_chux :jk_chuany :marriage :operators :vocation :jz_yiweiz :jz_erweiz :jz_sheqyy :jk_xuey :jk_jib :districtid :jk_dingx :xq_tec :gender :live :retirewage :registration :jk_xiz :economy :jz_yixingm :mobilephone :jz_zhibdh :nation])
+(def oldinfo [:jk_qibq :xq_aih :jk_jiyl :address :hjj_hjj :jz_erdianh :jz_lxdh :age :status :jk_gms :culture
+              :jk_xuex  :jz_yis  :birthd  :xq_canjiast :telephone :xq_huod :hjj_kind :name :pensionimgpath
+              :hjj_phone :jz_wuy  :xq_jiaos :jk_shil :jk_huod :identityid :type :operator_date :jz_menwdh
+              :hjj_type :jz_yidianh :xq_tez :jk_tingl :jz_erxingm :jk_chux :jk_chuany :marriage :operators
+              :vocation :jz_yiweiz :jz_erweiz :jz_sheqyy :jk_xuey :jk_jib :districtid :jk_dingx :xq_tec
+              :gender :live :retirewage :registration :jk_xiz :economy :jz_yixingm :mobilephone :jz_zhibdh :nation])
 
-(defn login [name pwd]
+(defn login [name pwd]        ;;用户登录
   (if (= name "")
-    (if (= pwd "")
+    (if (= pwd "")                        ;;用户名和密码输入空值的情况
       (layout/render
         "login.html"
         {:loginmsg "用户名和密码不能为空"})
       (layout/render
         "login.html"
         {:loginmsg "用户名不能为空"}))
-    (if (= pwd "")
+    (if (= pwd "")                        ;;用户名不输入空值，密码为空值
       (layout/render
         "login.html"
         {:loginmsg "密码不能为空"})
-      (if (= (db/get-user name) nil)
+      (if (= (db/get-user name) nil)      ;;根据输入的用户名查询用户表
         (layout/render
           "login.html"
           {:loginmsg "用户不存在"})
-        (if (= (db/get-user name pwd) nil)
+        (if (= (db/get-user name pwd) nil)  ;;判断输入的密码是否正确
           (layout/render
             "login.html"
             {:loginmsg "密码输入错误"})
@@ -37,22 +42,18 @@
              :username (:username (db/get-user name pwd))}))))))
 
 (defn get-olds
-  ([] (layout/render
+  ([] (layout/render                  ;;查询所有养老信息
         "old.html"
         {:olds (:body (resp/json {:total (count (db/get-olds )) :rows (db/get-olds)}))}))
-  ([name] (layout/render
+  ([name] (layout/render              ;;根据关键字查询
             "old.html"
             {:olds (:body (resp/json {:total (count (db/get-olds name)) :rows (db/get-olds name)}))})))
 
-(defn get-old [id]
+(defn get-old [id]                    ;;根据主键查询养老信息
   (layout/render
     "addold.html"
     {:old (:body (resp/json  (db/get-old id)))}))
 
-;(defn get-oldbyid [id]
-;  (layout/render
-;    "addold.html"
-;    {:old (:body (resp/json  (db/get-oldbyid id)))}))
 
 ;(defn get-max []
 ;  (let [a (db/get-olds)]
@@ -64,71 +65,77 @@
 ;  )
 
 
-(defn create-old [request]
+(defn create-old [request]               ;;养老信息录入，参数为养老信息录入页面提交的所有信息
   (let [{olds :params} request
         keyword "olds"
-        opseno (inc (:max (db/get-max "userlog")))
+        opseno (inc (:max (db/get-max "userlog")))        ;;获取自增主键
         digest (str "姓名" (:name (:params request))
                  " 身份证" (:identityid (:params request))
                  " 性别" (if (= (:gender (:params request)) "1") "男" "女"))
-        tprkey (inc (:max (db/get-max "olds")))
+        tprkey (inc (:max (db/get-max "olds")))         ;;获取自增外键
         functionid "mHLcDiwTflgEshNKIiOV"
         dvcode (:dvcode (:params request))
         loginname (:loginname (:params request))
         username  (:operators (:params request))
-        auditid (inc (:max (db/get-max "audits")))]
+        auditid (inc (:max (db/get-max "audits")))]       ;;获取自增主键
     ;    (resp/json {:success true :msg (str
-    (db/create-old
+    (db/create-old                                                 ;;新增养老信息
       (into {} (cons [:lr_id (inc (:max (db/get-max keyword)))]
                  (select-keys olds oldinfo))))
-    (db/create-userlog opseno digest tprkey functionid dvcode loginname username)
-    (db/create-audit opseno auditid)
+    (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
+    (db/create-audit opseno auditid)             ;;新增对应的审核表
     (str "录入成功")))
 
 
-(defn update-old [request]
+(defn update-old [request]                     ;;修改养老信息，参数为养老信息修改页面提交的所有信息
   ;  (str (:gender (:params request)) ))
   (let [{olds :params} request
-        opseno (inc (:max (db/get-max "userlog")))
+        opseno (inc (:max (db/get-max "userlog")))           ;;获取自增主键
         digest (str "姓名" (:name (:params request))
                  " 身份证" (:identityid (:params request))
                  " 性别" (if (= (:gender (:params request)) "1") "男" "女"))
         dvcode (:dvcode (:params request))
         loginname (:loginname (:params request))
         username (:operators (:params request))
-        auditid (:auditid (db/get-audit (:lr_id (:params request))))]
-    (db/update-old (select-keys olds oldinfo) (:lr_id (:params request)))
-    (db/create-userlog opseno (str digest " 信息修改") (:lr_id (:params request)) "mHLcDiwTflgEshNKIiOV" dvcode loginname username)
-    (if (= (:status (:params request)) "驳回")
-      (do (db/update-oldstatus "自由" (:lr_id (:params request)))
-        (db/create-userlog (inc (:max (db/get-max "userlog"))) (str digest " 驳回处理") auditid "txFUV5pFpWVLv6Th4vQl" dvcode loginname username)
-        (db/update-audit "0" "0" dvcode "驳回已处理" loginname (inc (:max (db/get-max "userlog"))) "0" auditid opseno))
-      (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))
+        auditid (:auditid (db/get-audit (:lr_id (:params request))))]       ;;根据外键查询审核表得到审核主键
+    (db/update-old (select-keys olds oldinfo) (:lr_id (:params request)))      ;;修改养老信息表
+    (db/create-userlog opseno                    ;;新增对应的操作日志
+      (str digest " 信息修改") (:lr_id (:params request)) "mHLcDiwTflgEshNKIiOV" dvcode loginname username)
+    (if (= (:status (:params request)) "驳回")            ;;判断要修改养老信息的状态
+      (do (db/update-oldstatus "自由" (:lr_id (:params request)))  ;;驳回的状态下
+        (db/create-userlog (inc (:max (db/get-max "userlog")))    ;;新增对应的操作日志
+          (str digest " 驳回处理") auditid "txFUV5pFpWVLv6Th4vQl" dvcode loginname username)
+        (db/update-audit "0" "0" dvcode "驳回已处理" loginname    ;;修改对应的审核表
+          (inc (:max (db/get-max "userlog"))) "0" auditid opseno))
+      (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由的状态下，修改对应审核表
     (str "修改成功")))
 
-(defn delete-old [request]
+(defn delete-old [request]           ;;删除养老信息，参数为用户页面提交的所有信息
   (let [{olds :params} request
-        opseno (inc (:max (db/get-max "userlog")))
+        opseno (inc (:max (db/get-max "userlog")))        ;;获取自增主键
         digest (str "姓名" (:name (:params request))
                  " 身份证" (:identityid (:params request))
                  " 性别" (if (= (:gender (:params request)) "1") "男" "女"))
         dvcode (:dvcode (:params request))
         loginname (:loginname (:params request))
         username (:operators (:params request))
-        auditid (:auditid (db/get-audit (:lr_id (:params request))))]
-    (db/delete-old (:lr_id (:params request)))
-    (db/create-userlog opseno (str digest " 信息删除") (:lr_id (:params request)) "mHLcDiwTflgEshNKIiOV" dvcode loginname username)
-    (db/delete-audit auditid)
+        auditid (:auditid (db/get-audit (:lr_id (:params request))))]    ;;根据外键查询审核表得到审核主键
+    (db/delete-old (:lr_id (:params request)))    ;;根据主键删除养老信息
+    (db/create-userlog opseno (str digest " 信息删除")          ;;新增对应的操作日志
+      (:lr_id (:params request)) "mHLcDiwTflgEshNKIiOV" dvcode loginname username)
+    (db/delete-audit auditid)          ;;根据主键删除对应的审核表
     (db/create-userlog (inc (:max (db/get-max "userlog"))) (str digest " 信息删除") auditid "txFUV5pFpWVLv6Th4vQl" dvcode loginname username)
     (str "删除成功")))
 
-(defn get-audits [functionid loginname dvcode]
+(defn get-audits [functionid loginname dvcode]          ;;待办业务查询
   (layout/render
     "audit.html"
-    {:audits (:body (resp/json {:total (count (db/get-audits functionid loginname dvcode)) :rows (db/get-audits functionid loginname dvcode)}))
-     :bkaudits (:body (resp/json {:total (count (db/get-backaudits functionid loginname dvcode)) :rows (db/get-backaudits functionid loginname dvcode)}))}))
+    {:audits (:body (resp/json {:total (count (db/get-audits functionid loginname dvcode))   ;;待审核业务
+                                :rows (db/get-audits functionid loginname dvcode)}))
+     :bkaudits (:body (resp/json {:total (count (db/get-backaudits functionid loginname dvcode))  ;;回退业务
+                                  :rows (db/get-backaudits functionid loginname dvcode)}))}))
 
-(defn update-audit [flag aulevel digest tprkey auditid dvcode loginname username opseno]
+(defn update-audit [flag aulevel digest tprkey auditid dvcode loginname username opseno]    ;;修改审核表
   (let [status (nth ["自由" "提交" "审核" "审批"] (inc (Integer/parseInt aulevel)));;得到审核字段
         level   (str (inc (Integer/parseInt aulevel)))
         auopseno (inc (:max (db/get-max "userlog")))
@@ -144,11 +151,11 @@
         (db/update-audit level "0" dvcode (str status flag) loginname auopseno "1" auditid opseno)))      ;;修改审核表
     (get-audits "mHLcDiwTflgEshNKIiOV" loginname dvcode)))    ;;待办业务
 
-(defn get-logs [functionid]
+(defn get-logs [functionid]       ;;根据外键查询操作日志
   (layout/render
     "log.html"
     {:logs (:body (resp/json {:total (count (db/get-userlogs functionid)) :rows (db/get-userlogs functionid)}))}))
 
-(defn get-funcs [username]
-  (str (:functionid (nth (db/get-funcs username "businessmenu") 2))))
+;(defn get-funcs [username]
+;  (str (:functionid (nth (db/get-funcs username "businessmenu") 2))))
 
