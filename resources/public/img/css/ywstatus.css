@@ -1,0 +1,25 @@
+/*业务状态指示小方块*/
+.yw-stepzerobgcolor {background-color: #33CC33;}
+.yw-steponebgcolor {background-color: darkgreen; }
+.yw-steptwobgcolor {background-color: #CC0000;}
+.yw-stepthreebgcolor {background-color: #000099; }
+.yw-changebgcolor {background-color: #aa0099; }
+.yw-logoutbgcolor {background-color: #FF9900; }
+div.yw-block{
+    margin-top: 5px;
+    margin-right: 5px;
+    height: 14px;
+    float: right;
+}
+div.yw-block > div{
+
+    width: 12px;
+    height: 12px;
+    float: left;
+}
+div.yw-block > span{
+    line-height:14px;
+    font-family: 'Courier New';
+    display: block;
+    float: left;
+}

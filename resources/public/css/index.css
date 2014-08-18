@@ -1,0 +1,279 @@
+@import url("/img/css/icon.css");
+@import url("/img/css/ywstatus.css");
+
+html,body {
+    font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
+    padding:20px;
+    font-size:13px;
+    margin: 0;
+    height:100%;
+}
+body {
+    background:url(/img/bg-gray.gif) 0 0 repeat #fff;
+    color:#5F7A77;
+}
+
+
+h2 {
+    font-size:18px;
+    font-weight:bold;
+    margin:0;
+    margin-bottom:15px;
+}
+.signatures{
+    position: absolute!important;
+    z-index: 1000;
+    top: 100px;
+}
+.demo-info{
+    background:#FFFEE6;
+    color:#8F5700;
+    padding:12px;
+}
+.demo-tip{
+    width:16px;
+    height:16px;
+    margin-right:8px;
+    float:left;
+}
+
+.formtable {
+    width:100%;
+    padding: 0px;
+    margin: 0px;
+    font-family:Arial, Tahoma, Verdana, Sans-Serif;
+    border-left:1px solid #ADD8E6;
+    border-top: 1px solid #ADD8E6;
+    border-collapse:collapse;
+}
+
+
+
+/*单元格样式。*/
+.formtable td {
+    border-right: 1px solid #ADD8E6;
+    border-bottom: 1px solid #ADD8E6;
+
+    /*background: #fff;*/
+
+    font-size:12px;
+    padding: 3px 3px 3px 6px;
+    color: #303030;
+    word-break:break-all;
+    word-wrap:break-word;
+    white-space:normal;
+}
+/*表头样式*/
+.formtable th {
+    font-size:13px;
+    font-weight:600;
+    color: #303030;
+    border-right: 1px solid #ADD8E6;
+    border-bottom: 1px solid #ADD8E6;
+    border-top: 1px solid #ADD8E6;
+    letter-spacing: 2px;
+    text-align: left;
+    padding: 10px 0px 10px 0px;
+    /*background: url(/img/tablehdbg.png);*/
+    white-space:nowrap;
+    text-align:center;
+    overflow: hidden;
+}
+.formtdtext {
+    width: 13%;
+}
+.panel-body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+.layout-split-proxy-h{
+    position:absolute;
+    width:2px;
+    background:#888;
+    font-size:1px;
+    cursor:e-resize;
+    display:none;
+    z-index:5;
+}
+
+
+
+.layout-split-north{
+    border-bottom:5px solid #efefef;
+}
+.layout-split-south{
+    border-top:5px solid #efefef;
+}
+.layout-split-east{
+    border-left:0px solid #efefef;
+}
+.layout-split-west{
+    border-right:0px solid #efefef;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+a:active {
+    text-decoration: none;
+}
+.cs-south {
+    height:20px;
+}.cs-north {
+    height:90px;
+    overflow-y:hidden ;
+}
+.cs-north-bg {
+    /*width: 100%;*/
+    height: 100%;
+    background: url(/img/head.jpg) repeat-x;
+}
+.cs-north-logo {
+    height: 40px;
+    margin: 15px 0px 0px 5px;
+    display: inline-block;
+    color:#000000;font-size:22px;font-weight:bold;text-decoration:none
+}
+.cs-west {
+    width:200px;padding:0px;
+}
+.cs-navi-tab {
+    padding: 5px;
+}
+.cs-tab-menu {
+    width:120px;
+}
+.cs-home-remark {
+    padding: 10px;
+}
+#indextime{
+    float: right;padding-right: 30px;
+}
+.wrapper {
+    float: right;
+    height: 30px;
+    margin-left: 10px;
+}
+.ui-skin-nav {
+    float: right;
+    padding: 0;
+    margin-right: 10px;
+    list-style: none outside none;
+    height: 30px;
+}
+#headnavul {
+    float: left;
+    padding: 0;
+    position: absolute;
+
+    margin-top:12px;
+    margin-bottom:0px;
+    margin-left: 500px;
+    list-style: none outside none;
+    /*height: 30px;*/
+}
+
+.indexbackground
+{
+    background:#e6f4fc url(/img/mainbg.jpg) bottom center no-repeat;
+}
+
+.ui-skin-nav .li-skinitem,#headnavul .li-skinitem {
+    float: left;
+    font-size: 12px;
+    /*line-height: 30px;*/
+    margin-left: 10px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+.ui-skin-nav .li-skinitem span {
+    cursor: pointer;
+    width:10px;
+    height:10px;
+    display:inline-block;
+}
+.ui-skin-nav .li-skinitem span.cs-skin-on{
+    border: 1px solid #FFFFFF;
+}
+
+.ui-skin-nav .li-skinitem span.gray{background-color:gray;}
+.ui-skin-nav .li-skinitem span.default{background-color:blue;}
+.ui-skin-nav .li-skinitem span.bootstrap{background-color:#D7EBF9;}
+.ui-skin-nav .li-skinitem span.black{background-color:black;}
+.ui-skin-nav .li-skinitem span.metro{background-color:#FFE57E;}
+.ui-skin-nav .li-skinitem span.pepper-grinder{background-color:#BC3604;}
+.ui-skin-nav .li-skinitem span.blue{background-color:blue;}
+.ui-skin-nav .li-skinitem span.cupertino{background-color:#D7EBF9;}
+.ui-skin-nav .li-skinitem span.dark-hive{background-color:black;}
+.ui-skin-nav .li-skinitem span.sunny{background-color:#FFE57E;}
+
+
+
+.pingfen{
+    border-top:0px;
+    border-right:0px;
+    border-left:0px;
+    text-align: center;
+    border-bottom: 1px solid red;
+}
+
+/*radio checkbox打钗样式*/
+.newRadio input+label {
+    padding-left: 26px;
+    background: url(/img/form/UnCheck.png) no-repeat;
+    font-size: 13px;
+}
+.newRadio input+label.checked {
+    padding-left: 26px;
+    background: url(/img/form/CheckIt.bmp) no-repeat;
+    color: #008800;
+}
+.newRadio input+label.over {
+    color: #0000FF;
+}
+
+
+
+.newToolBar li{
+    display:inline;
+    color: #00003a;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    border-bottom: 1px dotted #83abc6;
+    /*padding-left: 8px;*/
+    border-right-width: 0;
+    list-style: none;
+}
+.newToolBar li a:link,
+.newToolBar li a:visited,
+.newToolBar li a:active {
+    padding-left: 8px;
+    color: #404040;
+    text-decoration: none;
+    display: inline-block;
+}
+.newToolBar li a:hover {
+    color:brown;
+    background-color: lightskyblue;
+}
+
+.businesstb a:hover{
+    text-decoration: none;
+    cursor:pointer;
+    background-color: #52CCCC;
+}
+#westpanel div.accordion-body{
+    background-color:#ECFFF5;
+}
+#westpanel .tree-node-hover {
+    background: #52CCCC;
+    color: #660033;
+}

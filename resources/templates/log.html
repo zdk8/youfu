@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/bootstrap/easyui.css">
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.7.0/jquery.min.js"></script>
+    <script type="text/javascript">window.jQuery||document.write('<script src="js/jquery-1.8.3.min.js"><\/script>');</script>
+    <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var obj = eval('('+$("#test4").text()+')');
+            $("#logGrid").datagrid("loadData", obj);
+        });
+        var dateformatter=function timeFormatter(v,r,i) {
+            var now = new Date(v);
+            var year = now.getFullYear();       //年
+            var month = now.getMonth() + 1;     //月
+            var day = now.getDate();            //日
+            var hh = now.getHours();            //时
+            var mm = now.getMinutes();          //分
+            var ss = now.getSeconds();          //秒
+            var clock = year + "-";
+            if(month < 10)
+                clock += "0";
+            clock += month + "-";
+            if(day < 10)
+                clock += "0";
+            clock += day + " ";
+            if(hh < 10)
+                clock += "0";
+            clock += hh + ":";
+            if (mm < 10)
+                clock += "0";
+            clock += mm+":";
+            if (ss < 10)
+                clock += "0";
+            clock += ss;
+            return(clock);
+        };
+    </script>
+</head>
+<style>
+    .icon-refresh{
+        background:url('img/refresh.gif') no-repeat;
+</style>
+<body>
+<div hidden="true">
+    <p  id="test4" >{{logs}}</p>
+</div>
+<body>
+<table id="logGrid" class="easyui-datagrid"
+       data-options="rownumbers:true,singleSelect:true,toolbar:'#tb',
+           fit:true, pagination:true,
+           border:false,fitColumns: true, pageSize:20,pageList: [15,30,45,60]">
+    <thead>
+    <tr>
+        <th data-options="field:'opseno',width:70">操作日志流水号</th>
+        <th data-options="field:'tprkey',width:50,hidden:true">业务序号</th>
+        <th data-options="field:'digest',width:350,align:'left'"><a>摘要</a></th>
+        <th data-options="field:'username',width:60,align:'left'">办理人</th>
+        <th data-options="field:'bsnyue',width:60,align:'center'">业务期</th>
+        <th data-options="field:'bstime',width:100,align:'center',formatter:dateformatter">时间</th>
+        <!--<th data-options="field:'ro',width:80,align:'center'">回退</th>-->
+    </tr>
+    </thead>
+</table>
+<div id="tb">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-refresh" plain="true" id="edit" onclick="location.reload()">刷新</a>
+</div>
+
+<!--<div class="tb">-->
+    <!--<form method="post" action="{{servlet-context}}/old">-->
+        <!--<input name="name" class="easyui-validatebox">-->
+        <!--<input type="submit" value="查询" class="easyui-linkbutton">-->
+        <!--<input type="button" value="编辑" class="easyui-linkbutton" id="edit">-->
+        <!--&lt;!&ndash;<a opt="search" href="" class="easyui-linkbutton" onclick="window.onload('/old','name',name)" >查询</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a opt="edit" href="#" class="easyui-linkbutton" >编辑</a>&ndash;&gt;-->
+    <!--</form>-->
+</div>
+
+
+
+</body>
+</html>

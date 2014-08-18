@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/bootstrap/easyui.css">
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.7.0/jquery.min.js"></script>
+    <script type="text/javascript">window.jQuery||document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>');</script>
+    <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var obj = $("#t1").text();
+            var jq = top.jQuery;
+            $("#loginname").val(jq("#login").val());
+            $("#dvcode").val(jq("#code").val());
+            $("#username").val(jq("#user").val());
+            $("#t2").datagrid("loadData", eval('('+obj+')'));
+//            $("d1").text(obj);
+            var bkobj = $("#b1").text();
+            $("#t3").datagrid("loadData", eval('('+bkobj+')'));
+            $("#c1").click(function(){
+            var auditid = $("#t2").datagrid("getSelected").auditid;
+            var tprkey = $("#t2").datagrid("getSelected").tprkey;
+            var aulevel = $("#t2").datagrid("getSelected").aulevel;
+            var digest = $("#t2").datagrid("getSelected").digest;
+            var opseno = $("#t2").datagrid("getSelected").opseno;
+            var audate = new Date();
+            $("#auditid").val(auditid);
+            $("#tprkey").val(tprkey);
+            $("#aulevel").val(aulevel);
+            $("#digest").val(digest);
+            $("#opseno").val(opseno);
+            $("#audate").val(audate.toLocaleString( ));
+            $("#win").window("open");
+                alert("check"+id);
+            });
+            $("#c2").click(function(){
+                var strs = $("#t3").datagrid("getSelected").digest;
+                var str = strs.split(" ")[0].replace("姓名","");
+                var id = $("#t3").datagrid("getSelected").tprkey;
+                alert(str+id);
+                var jq = top.jQuery;
+                if (jq('#tabs').tabs('exists', str+'详细信息处理')){
+                    jq('#tabs').tabs('select', str+'详细信息处理');
+                } else {
+                    var content = '<iframe scrolling="auto" frameborder="0"  src="'+"search?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+                    jq('#tabs').tabs('add',{
+                        title:str+'详细信息处理',
+                        content:content,
+                        closable:true
+                    });
+                }
+            });
+        });
+        function addTab(title, url){
+            var jq = top.jQuery;
+            if (jq('#tabs').tabs('exists', title)){
+                jq('#tabs').tabs('select', title);
+            } else {
+                var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+                jq('#tabs').tabs('add',{
+                    title:title,
+                    content:content,
+                    closable:true
+                });
+            }
+        };
+        var approvalProcess=['自由','提交','审核','审批'];
+        var pass = ['未审核','通过'];
+        var pass2 = ['未通过','通过'];
+        var dateformatter=function timeFormatter(v,r,i) {
+            var now = new Date(v);
+            var year = now.getFullYear();       //年
+            var month = now.getMonth() + 1;     //月
+            var day = now.getDate();            //日
+            var hh = now.getHours();            //时
+            var mm = now.getMinutes();          //分
+            var ss = now.getSeconds();          //秒
+            var clock = year + "-";
+            if(month < 10)
+                clock += "0";
+            clock += month + "-";
+            if(day < 10)
+                clock += "0";
+            clock += day + " ";
+            if(hh < 10)
+                clock += "0";
+            clock += hh + ":";
+            if (mm < 10)
+                clock += '0';
+            clock += mm+":";
+            if (ss < 10)
+                clock += "0";
+            clock += ss;
+            return(clock);
+        };
+    </script>
+</head>
+<style>
+    html,body {
+        margin: 0;
+        height:100%;
+    }
+    .icon-save{
+        background:url('img/shenghe.gif') no-repeat;
+    }
+    .icon-refresh{
+        background:url('img/refresh.gif') no-repeat;
+    }.icon-search{
+         background:url('img/search.gif') no-repeat;
+     }.icon-log{
+          background:url('img/mylog.gif') no-repeat;
+      }
+    a:link, a:visited, a:active {
+        color: #404040;
+        text-decoration: none;
+    }
+
+</style>
+<script>
+//    $.extend($.fn.validatebox.defaults.rules, {
+//        mustDesc: {
+//            validator: function(value,param){
+//                return true;
+//            },
+//            message: 'Field do not match.'
+//        }
+//    });
+
+//    var passformatter=function(v,r,i){
+//        for (var i = 0; i < pass.length; i++) {
+//            if (pass[i].id == v) {
+//                return pass[i].text;
+//            }
+//        }
+//        return v;
+//    }
+//    var digestformatter=function(v,r,i){
+//        var s = '<a style="text-decoration: none" href="#" onclick="view(\''+ r.functionid+','+ r.opseno+','+ r.tprkey+'\')">'+v+'</a> ';
+//        return s;
+//    }
+//    var styleFn=function(i,data){
+//        //if(++i%2==0)return "background-color:#EEE";
+//    }
+//    var bstimeformatter=function(v,r,i){
+//        return v.split('.')[0].substr(5)
+//    }
+</script>
+<body>
+<p id="t1" hidden="true">{{audits}}</p>
+<p id="b1" hidden="true">{{bkaudits}}</p>
+<!--<p id="d1"></p>-->
+<table id="t2" class="easyui-datagrid" title="老年审核信息"   style="width: auto"
+       data-options="
+               method:'get',
+               toolbar:'#tb',
+               singleSelect:true,
+               rownumbers:true,
+               pagination:true,
+               pageSize:20,
+               pageList: [15,30,45,60]" >
+    <thead>
+    <tr>
+        <th data-options="field:'auditid',width:80">业务序号</th>
+        <th data-options="field:'opseno',hidden:true"></th>
+        <th data-options="field:'aulevel',width:100,align:'center',
+            formatter: function(value,row,index){
+                return approvalProcess[value]
+			}">审核等级</th>
+        <th data-options="field:'auflag',width:80,align:'center',
+            formatter: function(value,row,index){
+                return pass[value]
+			}">审核状态</th>
+        <th data-options="field:'audesc',width:200">备注</th>
+        <th data-options="field:'digest',width:350">摘要</th>
+        <th data-options="field:'username',width:60">办理人</th>
+        <th data-options="field:'bsnyue',width:60">业务期</th>
+        <th data-options="field:'bstime',width:150,align:'right',formatter:dateformatter">时间</th>
+    </tr>
+    </thead>
+</table>
+<table id="t3" class="easyui-datagrid" title="老年回退信息"   style="width: auto"
+       data-options="
+               method:'get',
+               toolbar:'#tb1',
+               rownumbers:true,
+               singleSelect:true,
+               pagination:true,
+               pageSize:20,
+               pageList: [15,30,45,60]" >
+    <thead>
+    <tr>
+        <th data-options="field:'auditid',width:80">业务序号</th>
+        <th data-options="field:'opseno',hidden:true"></th>
+        <th data-options="field:'aulevel',width:100,align:'center',
+            formatter: function(value,row,index){
+                return approvalProcess[value]
+			}">审核等级</th>
+        <th data-options="field:'auflag',width:80,align:'center',
+        formatter: function(value,row,index){
+        return pass2[value]
+        }">审核状态</th>
+        <th data-options="field:'audesc',width:200">备注</th>
+        <th data-options="field:'digest',width:350">摘要</th>
+        <th data-options="field:'username',width:60">办理人</th>
+        <th data-options="field:'bsnyue',width:60">业务期</th>
+        <th data-options="field:'bstime',width:150,align:'right',formatter:dateformatter">时间</th>
+    </tr>
+    </thead>
+</table>
+<div id="tb">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" id="c1">审核</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-refresh" plain="true" id="edit" onclick="location.reload()">刷新</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-log" plain="true" onclick="addTab('审核操作日志','log?functionid=txFUV5pFpWVLv6Th4vQl')">操作日志</a>
+</div>
+<div id="tb1">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" id="c2">处理</a></div>
+<div id="win" class="easyui-window" title="审核" style="width:320px;height:320px;text-align: center" closed="true">
+    <form method="post" action="{{servlet-context}}/checkaudit">
+        <p>业务序号: <input id="auditid" name="auditid" readonly="true"></p>
+        <p>审核级别: <input id="aulevel" name="aulevel" readonly="true"></p>
+        <p>备&nbsp&nbsp&nbsp&nbsp注: <input id="digest" name="digest" readonly="true"></p>
+        <p>外&nbsp&nbsp&nbsp&nbsp键: <input id="tprkey" name="tprkey" readonly="true"></p>
+        <p>审核日期: <input id="audate" name="audate"></p>
+        <p>审核结果: <input  name="flag" value="通过"></p>
+        <input type="hidden" name="opseno" id="opseno">
+        <input type="hidden" name="loginname" id="loginname">
+        <input type="hidden" name="dvcode" id="dvcode">
+        <input type="hidden" name="username" id="username">
+        <input type="submit" value="确定">
+        <input type="button" value="取消" onclick="jQuery:$('#win').window('close')">
+    </form>
+</div>
+</body>
+</html>
+
+<!--<script>-->
+    <!--var editindex=undefined;-->
+    <!--var method='<%=request.getAttribute("method")%>';-->
+    <!--var functionid='<%=request.getAttribute("functionid")%>';-->
+
+    <!--var toolbar = [-->
+        <!--{-->
+            <!--text:'审核',-->
+            <!--iconCls:'icon-save',-->
+            <!--handler:function(){saveApproval();}-->
+        <!--},{-->
+            <!--text:'刷新',-->
+            <!--iconCls:'icon-refresh',-->
+            <!--handler:function(){$('#auditGrid').datagrid('reload')}-->
+        <!--},{-->
+            <!--text:'高级搜索',-->
+            <!--iconCls:'icon-search',-->
+            <!--handler:function(){$('#auditGrid').datagrid('reload')}-->
+        <!--},{-->
+            <!--text:'操作日志',-->
+            <!--iconCls:'icon-log',-->
+            <!--handler:function(){cj.searchLog(functionid,true)}-->
+        <!--}];-->
+
+    <!--function loadAuditData(){-->
+        <!--$('#auditGrid').datagrid({-->
+            <!--url:'audit.do?method='+method+'&eventName=queryAudit'-->
+        <!--})-->
+    <!--}-->
+    <!--loadAuditData();-->
+    <!--var saveApproval=function(){-->
+        <!--var auditmsgs=[];-->
+        <!--$('#auditGrid').datagrid('acceptChanges');-->
+        <!--$('#auditGrid').datagrid('getSelections').forEach(function(item,i){-->
+            <!--auditmsgs.push({-->
+                <!--auditid:$(item).attr('auditid'),-->
+                <!--auflag:$(item).attr('audefault'),-->
+                <!--aulevel:$(item).attr('aulevel'),-->
+                <!--audesc:$(item).attr('audesc')-->
+            <!--})-->
+        <!--})-->
+
+        <!--if(auditmsgs.length==0){-->
+            <!--$.messager.alert('提示','请选中再操作!','info');-->
+            <!--return;-->
+        <!--}-->
+        <!--var a= eval('('+JSON.stringify(auditmsgs)+')')-->
+        <!--for(var i=0;i<a.length;i++){-->
+            <!--m=a[i];-->
+            <!--if(m.auflag=='0'&&(!m.audesc || !(m.audesc.trim()))){-->
+                <!--$.messager.alert('提示','业务没有通过,请填写备注信息!','info');-->
+                <!--return;-->
+            <!--}-->
+        <!--}-->
+        <!--$.ajax({-->
+            <!--url:'audit.do?method='+method+'&eventName=saveAudit',-->
+            <!--type:'post',-->
+            <!--data:{-->
+                <!--auditmsgs:JSON.stringify(auditmsgs),-->
+                <!--functionid:functionid-->
+            <!--},-->
+            <!--success:loadAuditData-->
+        <!--})-->
+    <!--}-->
+    <!--function onClickCellFun(index,field, value){-->
+        <!--if("audefault"==field||"audesc"==field){-->
+            <!--if(editindex){-->
+                <!--$(this).datagrid('endEdit',editindex);//-->
+                <!--//$(this).datagrid('selectRow',editindex);-->
+            <!--}-->
+            <!--$(this).datagrid('beginEdit', index);-->
+            <!--var ed = $(this).datagrid('getEditor', {index:index,field:field});-->
+            <!--$(ed.target).focus();-->
+            <!--editindex=index;-->
+        <!--}-->
+    <!--}-->
+    <!--function view(a){-->
+        <!--var functionid= a.split(',')[0];-->
+        <!--var opseno= a.split(',')[1];-->
+        <!--var tprkey= a.split(',')[2];-->
+        <!--$.ajax({-->
+            <!--url:'lr.do?model=manager.Function&eventName=queryFunctionById',-->
+            <!--data:{id:functionid},-->
+            <!--success:function(res){-->
+                <!--var d=eval('('+res+')');-->
+                <!--var htmlfile, jsfile;-->
+                <!--if(d.location){-->
+                    <!--var widget=d.location.replace(/\./g,'/');-->
+                    <!--htmlfile='text!views/'+widget+'.htm';-->
+                    <!--jsfile='views/'+widget;-->
+                <!--}-->
+                <!--var title='原始界面';-->
+                <!--$.ajax({-->
+                    <!--url:'log.do?eventName=queryOriginalpage',-->
+                    <!--data:{opseno:opseno,method:functionid},-->
+                    <!--success:function(res2){-->
+                        <!--cj.showContent({-->
+                            <!--title:title,-->
+                            <!--htmfile:htmlfile,-->
+                            <!--jsfile:jsfile,-->
+                            <!--readonly:true,-->
+                            <!--location:d.location,-->
+                            <!--functionid: d.functionid,-->
+                            <!--res:parent.$.evalJSON(res2),-->
+                            <!--tprkey:tprkey,-->
+                            <!--useproxy:!true-->
+                        <!--})-->
+                    <!--}-->
+                <!--})-->
+            <!--}-->
+        <!--})-->
+
+    <!--}-->
+<!--</script>-->
+
