@@ -130,10 +130,12 @@
 (defn get-audits [functionid loginname dvcode]          ;;待办业务查询
   (layout/render
     "audit.html"
-    {:audits (:body (resp/json {:total (count (db/get-audits functionid loginname dvcode))   ;;待审核业务
-                                :rows (db/get-audits functionid loginname dvcode)}))
-     :bkaudits (:body (resp/json {:total (count (db/get-backaudits functionid loginname dvcode))  ;;回退业务
-                                  :rows (db/get-backaudits functionid loginname dvcode)}))}))
+    {:audits (:body (resp/json {:total (+ (count (db/get-audits functionid loginname dvcode))          ;;待审核业务
+                                          (count (db/get-backaudits functionid loginname dvcode)))      ;;回退业务
+                                :rows (into (db/get-audits functionid loginname dvcode)
+                                       (db/get-backaudits functionid loginname dvcode))}))}))
+;     :bkaudits (:body (resp/json {:total (count (db/get-backaudits functionid loginname dvcode))
+;                                  :rows (db/get-backaudits functionid loginname dvcode)}))}))
 
 (defn update-audit [flag aulevel digest tprkey auditid dvcode loginname username opseno]    ;;修改审核表
   (let [status (nth ["自由" "提交" "审核" "审批"] (inc (Integer/parseInt aulevel)));;得到审核字段

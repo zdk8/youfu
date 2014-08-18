@@ -120,7 +120,7 @@
 ;;审核表
 (defn get-audits [functionid loginname dvcode]     ;;查询满足用户和功能权限的审核信息
   (select audits
-    (fields :auditid :aulevel :auflag :audesc)                      ;;页面显示内容
+    (fields :auditid :aulevel :auflag :audesc :auendflag)                      ;;页面显示内容
     (with userlog
       (fields :opseno :digest :tprkey :username :bsnyue :bstime)
       (where {:functionid functionid :dvcode [like (str  dvcode "%")]})
@@ -144,7 +144,7 @@
 
 (defn get-backaudits [functionid loginname dvcode]       ;;查询满足用户和功能权限的回退信息
   (select audits
-    (fields :auditid :aulevel :auflag :audesc)
+    (fields :auditid :aulevel :auflag :audesc :auendflag)
     (with userlog
       (fields :opseno :digest :tprkey :username :bsnyue :bstime)
       (where {:functionid functionid :dvcode  dvcode })  ;;直接回退
