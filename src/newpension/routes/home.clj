@@ -49,5 +49,5 @@
   (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))
   ;;获取行政区划下拉选项列表
   (GET "/get-divisionlist" [dvhigh] (old/get-divisionlist dvhigh))
-  )
+
   )
