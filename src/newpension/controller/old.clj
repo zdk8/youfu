@@ -12,7 +12,10 @@
               :hjj_phone :jz_wuy  :xq_jiaos :jk_shil :jk_huod :identityid :type :operator_date :jz_menwdh
               :hjj_type :jz_yidianh :xq_tez :jk_tingl :jz_erxingm :jk_chux :jk_chuany :marriage :operators
               :vocation :jz_yiweiz :jz_erweiz :jz_sheqyy :jk_xuey :jk_jib :districtid :jk_dingx :xq_tec
-              :gender :live :retirewage :registration :jk_xiz :economy :jz_yixingm :mobilephone :jz_zhibdh :nation])
+              :gender :live :retirewage :registration :jk_xiz :economy :jz_yixingm :mobilephone :jz_zhibdh :nation
+              :fwlx_jjyl :fwlx_fwj :fwlx_mftj :fwlx_dylnb :fwlx_jgyl :fwlx_tyfw :fwlx_hjj :fwlx_qt :jk_rcws_st
+              :jk_rcws_xl :jk_rcws_xt :jk_rcws_sy :jk_rcws_xj :jk_rcws_tx :jk_rcws_xzj :jk_rcws_xy :jk_bs_gaoxy
+              :jk_bs_tangnb :jk_bs_fengs :jk_bs_xinzb :jk_bs_chid :jk_bs_guz :jk_bs_qit])
 
 (defn login [name pwd]        ;;用户登录
   (if (= name "")
@@ -89,12 +92,12 @@
         username  (:operators (:params request))
         auditid (inc (:max (db/get-max "audits")))]       ;;获取自增主键
     ;    (resp/json {:success true :msg (str
-    (db/create-old                                                 ;;新增养老信息
+    (db/create-old                                        ;;新增养老信息
       (into {} (cons [:lr_id (inc (:max (db/get-max keyword)))]
                  (select-keys olds oldinfo))))
     (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
     (db/create-audit opseno auditid)             ;;新增对应的审核表
-    (str "录入成功")))
+    (str "新增成功")))
 
 
 (defn update-old [request]                     ;;修改养老信息，参数为养老信息修改页面提交的所有信息
