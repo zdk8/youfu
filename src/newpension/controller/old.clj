@@ -179,3 +179,11 @@
 ;(defn get-funcs [username]
 ;  (str (:functionid (nth (db/get-funcs username "businessmenu") 2))))
 
+;;获取输入框下拉选项列表
+(defn get-inputlist [aaa100]
+  (resp/json {:result true :msg (db/get-inputlist aaa100)})
+  )
+;;获取行政区划下拉选项列表
+(defn get-divisionlist [dvhigh]
+  (resp/json {:result true :msg (db/get-divisionlist dvhigh)})
+
