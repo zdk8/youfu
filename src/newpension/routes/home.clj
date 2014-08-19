@@ -44,4 +44,10 @@
   (POST "/checkaudit" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;待办业务操作
     (old/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
 ;  (GET "/func" [username] (old/get-funcs username))
+
+  ;;获取输入框下拉选项列表
+  (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))
+  ;;获取行政区划下拉选项列表
+  (GET "/get-divisionlist" [dvhigh] (old/get-divisionlist dvhigh))
+  )
   )
