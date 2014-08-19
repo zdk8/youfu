@@ -58,6 +58,19 @@
   (database dboracle)
   )
 
+;;输入框下拉选项列表
+(defentity aa10
+  (pk :prseno)
+  (table :aa10)
+  (database dboracle)
+  )
+;;行政区划表
+(defentity division
+  (pk :dvcode)
+  (table :division)
+  (database dboracle)
+  )
+
 (defn get-user
   ( [name pwd] (first
                  (select users
@@ -207,3 +220,16 @@
 ;        (with users
 ;          (fields)
 ;          (where {:username username}))))))
+
+;;获取输入框下拉选项列表
+(defn get-inputlist [aaa100]
+  (select aa10
+    (where {:aaa100 aaa100})
+    )
+  )
+;;获取行政区划的选项列表
+(defn get-divisionlist [dvhigh]
+  (select division
+    (where {:dvhigh dvhigh})
+    )
+  )
