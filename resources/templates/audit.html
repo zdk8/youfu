@@ -10,12 +10,13 @@
     <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            var obj = $("#t1").text();
             var jq = top.jQuery;
             $("#loginname").val(jq("#login").val());
             $("#dvcode").val(jq("#code").val());
             $("#username").val(jq("#user").val());
             $("#t2").datagrid({
+                url:'/audit?functionid=mHLcDiwTflgEshNKIiOV&loginname='+jq("#login").val()+'&dvcode='+jq("#code").val(),
+                method:'get',
                 onDblClickRow: function(){
                     var selected = $('#t2').datagrid('getSelected');
                     if (selected){
@@ -37,7 +38,6 @@
                     }
                 }
             })
-            $("#t2").datagrid("loadData", eval('('+obj+')'));
             $("#c1").click(function(){
                 var auditid = $("#t2").datagrid("getSelected").auditid;
                 var tprkey = $("#t2").datagrid("getSelected").tprkey;
@@ -155,7 +155,7 @@
 </style>
 
 <body>
-<p id="t1" hidden="true">{{audits}}</p>
+<!--<p id="t1" hidden="true">{{audits}}</p>-->
 <table id="t2" class="easyui-datagrid" title="老年审核信息"   style="width: auto"
        data-options="
                toolbar:'#tb',
@@ -187,8 +187,7 @@
 </table>
 <div id="tb">
     <a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" id="c1">处理</a>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-refresh" plain="true" id="re" onclick="location.reload()">刷新</a>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-log" plain="true" onclick="addTab('审核操作日志','log?functionid=txFUV5pFpWVLv6Th4vQl')">操作日志</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-log" plain="true" onclick="addTab('审核操作日志','logs')">操作日志</a>
 </div>
 <div id="win" class="easyui-window" title="审核" style="width:320px;height:320px;text-align: center" closed="true">
     <form method="post" action="{{servlet-context}}/checkaudit">

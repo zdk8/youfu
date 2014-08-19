@@ -10,8 +10,8 @@
     <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            var obj = eval('('+$("#test").text()+')');
             $("#tt").datagrid({
+                url:'/old',
                 onDblClickRow: function(){
                     var selected = $('#tt').datagrid('getSelected');
                     if (selected){
@@ -31,16 +31,18 @@
                         }
                     }
                 }
+            });
+            $("#search").click(function(){
+                var name = document.getElementById('name').value;
+                $("#tt").datagrid({
+                    url:'/oldname?name='+name
+                })
             })
-            $("#tt").datagrid("loadData", obj);
         });
         var gender = ['女','男'];
     </script>
 </head>
 <body>
-<div hidden="true">
-<p  id="test" >{{olds}}</p>
-</div>
 <table id="tt" class="easyui-datagrid" title="老年基本信息"   style="width: auto"
        data-options="
                method:'get',
@@ -48,9 +50,7 @@
                rownumbers:true,
                fit:true,
                singleSelect:true,
-               pagination:true,
-               pageSize:20,
-               pageList: [15,30,45,60]">
+               pagination:true">
     <thead>
     <tr>
         <th data-options="field:'lr_id',hidden:true" ></th>
@@ -65,9 +65,9 @@
     </table>
 
 <div class="tb">
-    <form method="post" action="{{servlet-context}}/old">
-    <input name="name" class="easyui-validatebox">
-    <input type="submit" value="查询" class="easyui-linkbutton">
+    <form >
+    <input name="name" class="easyui-validatebox" id="name">
+    <input type="button" value="查询" id="search">
     </form>
 </div>
 

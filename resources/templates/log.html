@@ -9,10 +9,6 @@
     <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            var obj = eval('('+$("#test4").text()+')');
-            $("#logGrid").datagrid("loadData", obj);
-        });
         var dateformatter=function timeFormatter(v,r,i) {
             var now = new Date(v);
             var year = now.getFullYear();       //年
@@ -38,22 +34,19 @@
                 clock += "0";
             clock += ss;
             return(clock);
-        };
+        }
     </script>
 </head>
 <style>
     .icon-refresh{
         background:url('img/refresh.gif') no-repeat;
+    }
 </style>
 <body>
-<div hidden="true">
-    <p  id="test4" >{{logs}}</p>
-</div>
-<body>
-<table id="logGrid" class="easyui-datagrid"
+<table id="logGrid" class="easyui-datagrid" title="操作日志列表"
        data-options="rownumbers:true,singleSelect:true,toolbar:'#tb',
-           fit:true, pagination:true,
-           border:false,fitColumns: true, pageSize:20,pageList: [15,30,45,60]">
+           fit:true, pagination:true,url:'log?functionid=txFUV5pFpWVLv6Th4vQl',method:'get',
+           border:false,fitColumns: true">
     <thead>
     <tr>
         <th data-options="field:'opseno',width:70">操作日志流水号</th>
@@ -66,21 +59,6 @@
     </tr>
     </thead>
 </table>
-<div id="tb">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-refresh" plain="true" id="edit" onclick="location.reload()">刷新</a>
 </div>
-
-<!--<div class="tb">-->
-    <!--<form method="post" action="{{servlet-context}}/old">-->
-        <!--<input name="name" class="easyui-validatebox">-->
-        <!--<input type="submit" value="查询" class="easyui-linkbutton">-->
-        <!--<input type="button" value="编辑" class="easyui-linkbutton" id="edit">-->
-        <!--&lt;!&ndash;<a opt="search" href="" class="easyui-linkbutton" onclick="window.onload('/old','name',name)" >查询</a>&ndash;&gt;-->
-        <!--&lt;!&ndash;<a opt="edit" href="#" class="easyui-linkbutton" >编辑</a>&ndash;&gt;-->
-    <!--</form>-->
-</div>
-
-
-
 </body>
 </html>

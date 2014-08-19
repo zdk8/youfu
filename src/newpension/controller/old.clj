@@ -42,12 +42,22 @@
              :username (:username (db/get-user name pwd))}))))))
 
 (defn get-olds
-  ([] (layout/render                  ;;查询所有养老信息
-        "old.html"
-        {:olds (:body (resp/json {:total (count (db/get-olds )) :rows (db/get-olds)}))}))
-  ([name] (layout/render              ;;根据关键字查询
-            "old.html"
-            {:olds (:body (resp/json {:total (count (db/get-olds name)) :rows (db/get-olds name)}))})))
+  ([page rows]             ;;查询所有养老信息
+    (let [p (Integer/parseInt page)
+          r (Integer/parseInt rows)
+          c (count (db/get-olds ))]
+      (if (<= (* p r) c)                              ;;分页
+        (:body (resp/json {:total c :rows (subvec(db/get-olds) (* (dec p) r) (* p r))}))
+        (:body (resp/json {:total c :rows (subvec(db/get-olds) (* (dec p) r) c)}))))))
+
+(defn get-oldname
+  ([name page rows]              ;;根据关键字查询
+    (let [p (Integer/parseInt page)
+          r (Integer/parseInt rows)
+          c (count (db/get-olds name))]
+      (if (<= (* p r) c)                              ;;分页
+        (:body (resp/json {:total c :rows (subvec(db/get-olds name) (* (dec p) r) (* p r))}))
+        (:body (resp/json {:total c :rows (subvec(db/get-olds name) (* (dec p) r) c)}))))))
 
 (defn get-old [id]                    ;;根据主键查询养老信息
   (layout/render
@@ -127,15 +137,20 @@
     (db/create-userlog (inc (:max (db/get-max "userlog"))) (str digest " 信息删除") auditid "txFUV5pFpWVLv6Th4vQl" dvcode loginname username)
     (str "删除成功")))
 
-(defn get-audits [functionid loginname dvcode]          ;;待办业务查询
-  (layout/render
-    "audit.html"
-    {:audits (:body (resp/json {:total (+ (count (db/get-audits functionid loginname dvcode))          ;;待审核业务
-                                          (count (db/get-backaudits functionid loginname dvcode)))      ;;回退业务
-                                :rows (into (db/get-audits functionid loginname dvcode)
-                                       (db/get-backaudits functionid loginname dvcode))}))}))
-;     :bkaudits (:body (resp/json {:total (count (db/get-backaudits functionid loginname dvcode))
-;                                  :rows (db/get-backaudits functionid loginname dvcode)}))}))
+(defn get-audits [functionid loginname dvcode page rows]          ;;待办业务查询
+  (let [p (Integer/parseInt page)
+        r (Integer/parseInt rows)
+        c (+ (count (db/get-audits functionid loginname dvcode))
+             (count (db/get-backaudits functionid loginname dvcode)))]
+    (if (<= (* p r) c)                              ;;分页
+      (:body (resp/json {:total c :rows (subvec (into(db/get-audits functionid loginname dvcode)
+                                                   (db/get-backaudits functionid loginname dvcode))
+                                        (* (dec p) r) (* p r))}))
+      (:body (resp/json {:total c :rows (subvec (into(db/get-audits functionid loginname dvcode)
+                                                  (db/get-backaudits functionid loginname dvcode))
+                                          (* (dec p) r) c)}))
+      )))
+
 
 (defn update-audit [flag aulevel digest tprkey auditid dvcode loginname username opseno]    ;;修改审核表
   (let [status (nth ["自由" "提交" "审核" "审批"] (inc (Integer/parseInt aulevel)));;得到审核字段
@@ -153,10 +168,13 @@
         (db/update-audit level "0" dvcode (str status flag) loginname auopseno "1" auditid opseno)))      ;;修改审核表
     (get-audits "mHLcDiwTflgEshNKIiOV" loginname dvcode)))    ;;待办业务
 
-(defn get-logs [functionid]       ;;根据外键查询操作日志
-  (layout/render
-    "log.html"
-    {:logs (:body (resp/json {:total (count (db/get-userlogs functionid)) :rows (db/get-userlogs functionid)}))}))
+(defn get-logs [functionid page rows]       ;;根据外键查询操作日志
+  (let [p (Integer/parseInt page)
+        r (Integer/parseInt rows)
+        c (count (db/get-userlogs functionid))]
+    (if (<= (* p r) c)                              ;;分页
+      (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) (* p r))}))
+      (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) c)})))))
 
 ;(defn get-funcs [username]
 ;  (str (:functionid (nth (db/get-funcs username "businessmenu") 2))))
