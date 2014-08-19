@@ -1,54 +1,170 @@
+
 <!--老年人基本信息-->
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title></title>
-    <link rel="stylesheet" type="text/css" href="easyui/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://112.124.50.195:8080/easyui/themes/bootstrap/easyui.css">
     <script type="text/javascript" src="http://libs.baidu.com/jquery/1.7.0/jquery.min.js"></script>
-    <script type="text/javascript">window.jQuery||document.write('<script src="/js/jquery-1.8.3.min.js"><\/script>');</script>
-    <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">window.jQuery||document.write('<script src="js/jquery-1.8.3.min.js"><\/script>');</script>
+    <script type="text/javascript" src="http://112.124.50.195:8080/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="http://112.124.50.195:8080/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <style>
+            /*屏蔽错误提示图标*/
+        .validatebox-invalid {
+            background-image: url('images/validatebox_warning1.png');
+        }
+    </style>
     <script type="text/javascript">
-        $(document).ready(function(){
-            var jq = top.jQuery;
-            $("#loginname").val(jq("#login").val());
-            $("#dvcode").val(jq("#code").val());
-            $("#username").val(jq("#user").val());
-            var obj = eval('('+$("#t3").text()+')');
-            for(var key in obj ){
-                var name = key;
-                var value = obj[key];
-                if($("#"+name).hasClass("easyui-combobox"))
-                    $("#"+name).combobox("setValue",value);
-                else if($("#"+name).hasClass("easyui-datebox"))
-                    $("#"+name).datebox("setValue", value);
-                else if(value)
-                    $("[name = "+name+"]:checkbox").attr("checked", true);
-                $("#"+name).val( value);
-//                $("[name = "+name+"]:checkbox").attr("checked", true)
+        //加载下拉列表
+        var cj={
+            getLoader:function(type,param,success,error)
+            {
+                return function(param,success,error){
+                    $.ajax({
+                        url:'get-inputlist',
+                        data:{aaa100:type},
+                        success:function(data){
+                            var items = $.map(data.msg, function(item){
+                                return {
+                                    id: item.aaa102,
+                                    text: item.aaa103
+                                };
+                            });
+                            success(items)
+                        },
+                        error: function(){
+                            error.apply(this, arguments);
+                        }
+                    })
+                }
+
             }
-            var status = $("#status").val();
-            $("#update").click(function(){
-                if (status == "自由"|| status == "驳回"){
-                    var returnVal = window.confirm("是否修改？", "标题");
-                    if(returnVal)
-                        $("form").submit();
-                }else
-                    alert("该信息还在审核中，不能修改！");
-            });
-            if (status == "驳回"){
-                $("#delete").show();
-            }
-            $("#delete").click(function(){
-                var id = $("#lr_id").val();
-                alert("id:"+id);
-                var returnVal = window.confirm("是否删除？", "标题");
-                if(returnVal){
-                    $("form").attr("action","{{servlet-context}}/deleteold");
-                    $("form").submit();
+        };
+
+        //行政区划（districtid）
+        $(document).ready(function(local,parameters,res){
+            var datavision = new Array();
+            var divisiontree = $(':input[opt=divisiontree]') ;
+            divisiontree.combotree({
+                url:'get-divisionlist?dvhigh=330000',
+                method: 'get',
+                onLoadSuccess:function(load,data){
+                    /*datavision = [{
+                     text: data.msg[0].totalname,
+                     children: [{
+                     text: 'Java'
+                     },{
+                     text: 'C++'
+                     }]
+                     }];
+                     $('#districtid').combotree('loadData', datavision);*/
+                    /*console.log(data.msg[0].totalname);
+                     console.log(data.msg[0].dvcode);
+                     console.log(!this.firstloaded);*/
+                    //若首次加载
+                    if(!this.firstloaded&&!res){
+                        datavision = [{
+                            id:data.msg[0].dvcode,
+                            text: data.msg[0].totalname,
+                            children: [{
+                                text: 'Java'
+                            }]
+                        }];
+                        $('#districtid').combotree('loadData', datavision);
+//                        divisiontree.combotree('setValue', data.totalname);
+                        this.firstloaded=true;
+                    }
+                },
+                onBeforeExpand: function (node) {
+                    console.log("node",node.dvcode)
+
+                    divisiontree.combotree("tree").tree("options").url
+                            ="get-divisionlist?dvhigh=" + node.dvcode;
+                },
+                onHidePanel: function () {
+                    console.log(divisiontree.combotree('tree').tree('getSelected'));
+                    /* divisiontree.combotree('setValue',
+                     divisiontree.combotree('tree').tree('getSelected').totalname);*/
                 }
             });
+
+
+        })
+
+        /*$(document).ready(function(){
+         *//*var data = [{
+         //                id: 1,
+         text: 'Languages',
+         children: [{
+         //                    id: 11,
+         text: 'Java'
+         },{
+         //                    id: 12,
+         text: 'C++'
+         }]
+         }];
+         $('#districtid').combotree('loadData', data);*//*
+         $("#districtid").combotree({
+         url:'get-divisionlist',
+         method: 'get',
+         data:{
+         dvhigh:330000
+         },
+         onLoadSuccess:function(data){
+         console.log(data);
+         },
+         onBeforeExpand: function (node) {
+         divisiontree.combotree("tree").tree("options").url
+         =preUrl+ "ajax/gettreedivisionnew.jsp?onlychild=true&node=" + node.parentid;
+         }
+         });
+         });*/
+
+        $(document).ready(function(){
+            var jq = top.jQuery;
+            /* $("#loginname").val(jq("#login").val());
+             $("#dvcode").val(jq("#code").val());
+             $("#username").val(jq("#user").val());
+             var obj = eval('('+$("#t3").text()+')');
+             for(var key in obj ){
+             var name = key;
+             var value = obj[key];
+             if($("#"+name).hasClass("easyui-combobox"))
+             $("#"+name).combobox("setValue",value);
+             else if($("#"+name).hasClass("easyui-datebox"))
+             $("#"+name).datebox("setValue", value);
+             else if(value)
+             $("[name = "+name+"]:checkbox").attr("checked", true);
+             $("#"+name).val( value);
+             }
+             var status = $("#status").val();
+             $("#update").click(function(){
+             if (status == "自由"|| status == "驳回"){
+             var returnVal = window.confirm("是否修改？", "标题");
+             if(returnVal)
+             $("form").submit();
+             }else
+             alert("该信息还在审核中，不能修改！");
+             });
+             if (status == "驳回"){
+             $("#delete").show();
+             }
+             $("#delete").click(function(){
+             var id = $("#lr_id").val();
+             alert("id:"+id);
+             var returnVal = window.confirm("是否删除？", "标题");
+             if(returnVal){
+             $("form").attr("action","{{servlet-context}}/deleteold");
+             $("form").submit();
+             }
+             });*/
+
+
+
+
         });
         function addTab(title, url){
             var jq = top.jQuery;
@@ -63,6 +179,9 @@
                 });
             }
         };
+
+
+
     </script>
 </head>
 <body>
@@ -82,9 +201,14 @@
         <table class="formtable" style="width: 900px">
             <tr>
                 <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
-                <td colspan="5"><input class="easyui-combotree" opt="divisiontree"
-                                       data-options="required:true,valueField:'divisionpath'"
-                                       style="width: 300px;"  name="districtid" id="districtid"></td>
+                <td colspan="5">
+                    <input class="easyui-combotree"  opt="divisiontree"
+                           data-options="
+                                       required:true,
+                                       valueField:'totalname'
+                                       "
+                           style="width: 300px;"  name="districtid" id="districtid">
+                </td>
                 <td rowspan="4" colspan="2" style="text-align: center">
                     <img name="pensionimgpath" src="img/noperson.gif" value="" opt="personimg" alt="用户照片" width="150px" height="120px">
                     <input name ="pensionimgpath" type="hidden">
@@ -101,10 +225,8 @@
                 <td>
                     <input opt="sex" class="easyui-combobox lazy-combobox" id="gender"
                            name="gender"
-                           style="width: 100px"
                            data-options="
-                                data:[{id:'0',text:'女'},
-                                      {id:'1',text:'男'}],
+                                loader:cj.getLoader('gender'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -118,11 +240,11 @@
                 <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd"></td>
                 <td class="formtdtext">民族</td>
                 <td>
-                    <input class="easyui-combobox lazy-combobox" id="nation"
+                    <input class="easyui-combobox" id="nation"
                            name="nation"
-                           style="width: 100px"
                            data-options="
-
+                                loader: cj.getLoader('NATION'),
+                                mode: 'remote',
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -139,7 +261,7 @@
                            name="type"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('oldtype'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text',
@@ -160,7 +282,7 @@
                            style="width: 100px"
                            data-options="
                                 required:true,
-
+                                loader:cj.getLoader('liveplace'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -173,7 +295,7 @@
                            style="width: 100px"
                            data-options="
                                 required:true,
-
+                                loader:cj.getLoader('marriage'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -186,7 +308,7 @@
                            style="width: auto"
                            data-options="
                                 required:true,
-
+                                loader:cj.getLoader('economy'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -203,7 +325,7 @@
                            style="width: 100px"
                            data-options="
                                 required:true,
-
+                                loader:cj.getLoader('culture'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -227,7 +349,7 @@
                            name="hjj_kind"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('hjjkind'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -240,7 +362,7 @@
                            id="hjj_type"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('hjjtype'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -258,14 +380,14 @@
 <fieldset style="width: 900px;margin: 0px auto">
     <legend>享受服务类型</legend>
     <div opt="lrxsfwlx">
-        <input name="fwlx_jjyl" id="fwlx_jjyl" type="checkbox" value="100" /><label>居家养老服务 </label>
-        <input name="fwlx_fwj" id="fwlx_fwj" type="checkbox" value="100" /><label>服务卷 </label>
-        <input name="fwlx_mftj" id="fwlx_mftj" type="checkbox" value="100" /><label>免费体检 </label>
-        <input name="fwlx_dylnb" id="fwlx_dylnb" type="checkbox" value="100" /><label>订阅老年报 </label>
-        <input name="fwlx_jgyl" id="fwlx_jgyl" type="checkbox" value="100" /><label>机构养老 </label>
-        <input name="fwlx_tyfw" id="fwlx_tyfw" type="checkbox" value="100" /><label>体验服务 </label>
-        <input name="fwlx_hjj" id="fwlx_hjj" type="checkbox" value="100" /><label>呼叫机 </label>
-        <input name="fwlx_qt" id="fwlx_qt" type="checkbox" value="100" /><label>其他 </label>
+        <input name="fwlx_jjyl" id="fwlx_jjyl" type="checkbox" value="100" /><!--<label>-->居家养老服务 <!--</label>-->
+        <input name="fwlx_fwj" id="fwlx_fwj" type="checkbox" value="100" /><!--<label>-->服务卷 <!--</label>-->
+        <input name="fwlx_mftj" id="fwlx_mftj" type="checkbox" value="100" /><!--<label>-->免费体检 <!--</label>-->
+        <input name="fwlx_dylnb" id="fwlx_dylnb" type="checkbox" value="100" /><!--<label>-->订阅老年报 <!--</label>-->
+        <input name="fwlx_jgyl" id="fwlx_jgyl" type="checkbox" value="100" /><!--<label>-->机构养老 <!--</label>-->
+        <input name="fwlx_tyfw" id="fwlx_tyfw" type="checkbox" value="100" /><!--<label>-->体验服务 <!--</label>-->
+        <input name="fwlx_hjj" id="fwlx_hjj" type="checkbox" value="100" /><!--<label>-->呼叫机 <!--</label>-->
+        <input name="fwlx_qt" id="fwlx_qt" type="checkbox" value="100" /><!--<label>-->其他 <!--</label>-->
     </div>
 </fieldset>
 
@@ -284,7 +406,7 @@
                            id="jz_yiweiz"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('neighborposition'),
                                 method:'get' ,
                                 editable:false,
                                 valueField:'id',
@@ -304,7 +426,7 @@
                            id="jz_erweiz"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('neighborposition'),
                                 method:'get' ,
                                 editable:false,
                                 valueField:'id',
@@ -347,7 +469,7 @@
                            id="jk_xuex"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('bloodtype'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -360,7 +482,7 @@
                            id="jk_xuey"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('bloodpressure'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -373,7 +495,7 @@
                            id="jk_qibq"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('pacemaker'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -390,7 +512,7 @@
                            id="jk_shil"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('eyesight'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -403,7 +525,7 @@
                            id="jk_tingl"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('hearing'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -418,7 +540,7 @@
                            id="jk_huod"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('activity'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -431,7 +553,7 @@
                            id="jk_chux"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('goout'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -444,7 +566,7 @@
                            id="jk_jiyl"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('memory'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -459,7 +581,7 @@
                            id="jk_chuany"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('dress'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -472,7 +594,7 @@
                            id="jk_dingx"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('direction'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -485,7 +607,7 @@
                            id="jk_xiz"
                            style="width: 100px"
                            data-options="
-
+                                loader:cj.getLoader('bathe'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
@@ -495,26 +617,26 @@
             <tr>
                 <td class="formtdtext">日常卫生</td>                   <!--document.getElementById('shutou').checked=true-->
                 <td opt="lrrcws" colspan="5">
-                    <input opt="shutou" name="jk_rcws_st" id="jk_rcws_st" type="checkbox" value="110" /><label>自己梳头 </label>
-                    <input opt="xinian" name="jk_rcws_xl" id="jk_rcws_xl" type="checkbox" value="110" /><label>自己洗脸 </label>
-                    <input opt="xitou" name="jk_rcws_xt" id="jk_rcws_xt" type="checkbox" value="110" /> <label>自己洗头 </label>
-                    <input opt="shuaya" name="jk_rcws_sy" id="jk_rcws_sy" type="checkbox" value="110" /><label>自己刷牙 </label>
-                    <input opt="xijiao"  name="jk_rcws_xj" id="jk_rcws_xj" type="checkbox" value="110" /><label>自己洗脚 </label>
-                    <input opt="tixu" name="jk_rcws_tx" id="jk_rcws_tx" type="checkbox" value="110" /><label>自己剃须 </label>
-                    <input opt="xiuzhijia" name="jk_rcws_xzj" id="jk_rcws_xzj" type="checkbox" value="110" /><label>自己修指甲 </label>
-                    <input opt="xiyi" name="jk_rcws_xy" id="jk_rcws_xy" type="checkbox" value="110" /><label>自己洗衣 </label>
+                    <input opt="shutou" name="jk_rcws_st" id="jk_rcws_st" type="checkbox" value="110" /><!--<label>-->自己梳头 <!--</label>-->
+                    <input opt="xinian" name="jk_rcws_xl" id="jk_rcws_xl" type="checkbox" value="110" /><!--<label>-->自己洗脸 <!--</label>-->
+                    <input opt="xitou" name="jk_rcws_xt" id="jk_rcws_xt" type="checkbox" value="110" /> <!--<label>-->自己洗头 <!--</label>-->
+                    <input opt="shuaya" name="jk_rcws_sy" id="jk_rcws_sy" type="checkbox" value="110" /><!--<label>-->自己刷牙 <!--</label>-->
+                    <input opt="xijiao"  name="jk_rcws_xj" id="jk_rcws_xj" type="checkbox" value="110" /><!--<label>-->自己洗脚 <!--</label>-->
+                    <input opt="tixu" name="jk_rcws_tx" id="jk_rcws_tx" type="checkbox" value="110" /><!--<label>-->自己剃须 <!--</label>-->
+                    <input opt="xiuzhijia" name="jk_rcws_xzj" id="jk_rcws_xzj" type="checkbox" value="110" /><!--<label>-->自己修指甲 <!--</label>-->
+                    <input opt="xiyi" name="jk_rcws_xy" id="jk_rcws_xy" type="checkbox" value="110" /><!--<label>-->自己洗衣 <!--</label>-->
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">病史情况</td>
                 <td opt="lrbsqk" colspan="5">
-                    <input name="jk_bs_gaoxy" id="jk_bs_gaoxy" type="checkbox" value="111" /><label>高血压 </label>
-                    <input name="jk_bs_tangnb" id="jk_bs_tangnb" type="checkbox" value="111" /><label>糖尿病 </label>
-                    <input name="jk_bs_fengs" id="jk_bs_fengs" type="checkbox" value="111" /><label>风湿病 </label>
-                    <input name="jk_bs_xinzb" id="jk_bs_xinzb" type="checkbox" value="111" /><label>心脏病 </label>
-                    <input name="jk_bs_chid" id="jk_bs_chid" type="checkbox" value="111" /><label>老年痴呆 </label>
-                    <input name="jk_bs_guz" id="jk_bs_guz" type="checkbox" value="111" /><label>扭伤骨折 </label>
-                    <input name="jk_bs_qit" id="jk_bs_qit" type="checkbox" value="111" /><label>其他 </label>
+                    <input name="jk_bs_gaoxy" id="jk_bs_gaoxy" type="checkbox" value="111" /><!--<label>-->高血压 <!--</label>-->
+                    <input name="jk_bs_tangnb" id="jk_bs_tangnb" type="checkbox" value="111" /><!--<label>-->糖尿病 <!--</label>-->
+                    <input name="jk_bs_fengs" id="jk_bs_fengs" type="checkbox" value="111" /><!--<label>-->风湿病 <!--</label>-->
+                    <input name="jk_bs_xinzb" id="jk_bs_xinzb" type="checkbox" value="111" /><!--<label>-->心脏病 <!--</label>-->
+                    <input name="jk_bs_chid" id="jk_bs_chid" type="checkbox" value="111" /><!--<label>-->老年痴呆 <!--</label>-->
+                    <input name="jk_bs_guz" id="jk_bs_guz" type="checkbox" value="111" /><!--<label>-->扭伤骨折 <!--</label>-->
+                    <input name="jk_bs_qit" id="jk_bs_qit" type="checkbox" value="111" /><!--<label>-->其他 <!--</label>-->
                 </td>
             </tr>
             <tr>
@@ -563,7 +685,7 @@
 <!--家庭成员-->
 <fieldset style="width: 900px;margin: 0px auto">
     <div opt="familymembersdiv">
-        <table class="easyui-datagrid" title="家庭成员列表" opt="familymembersgrid" style="width: 900px"
+        <table class="easyui-datagrid" title="家庭成员列表" opt="familymembersgrid" id="familymembersgrid1" style="width: 900px"
                data-options="rownumbers:true,toolbar:'#pensionmembertb',singleSelect:true,showFooter:true">
 
             <thead data-options="frozen:true">
@@ -575,7 +697,7 @@
                  type:'combobox',
                  options:{
                     required:true,
-
+                    loader:cj.getLoader('relation'),
                     method:'get' ,
                     editable:false,
                     width:60,
@@ -603,7 +725,7 @@
 							type:'combobox',
 							options:{
 							    required:true,
-
+                                loader:cj.getLoader('gender'),
                                 method:'get' ,
                                 editable:false,
                                 width:60,
@@ -618,7 +740,7 @@
                 <th class="lazy-combobox" data-options="field:'gx_culture',align:'center',width:60,editor:{
 							type:'combobox',
 							options:{
-
+                               loader:cj.getLoader('culture'),
                                 method:'get' ,
                                 editable:false,
                                 width:60,
@@ -631,7 +753,7 @@
                 <th class="lazy-combobox" data-options="field:'gx_nation',align:'center',width:60,editor:{
 							type:'combobox',
 							options:{
-
+                                loader:cj.getLoader('NATION'),
                                 method:'get' ,
                                 editable:false,
                                 width:60,
@@ -645,8 +767,8 @@
             </thead>
         </table>
         <div opt="familymembertb" style="height:auto">
-            <a opt="newfamilymemeradd_btn" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
-            <a opt="delfamilymemer_btn" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+            <a opt="newfamilymemeradd_btn" id="newfamilymemeraddid" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+            <a opt="delfamilymemer_btn" id="delfamilymemerid" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
         </div>
     </div>
 </fieldset>
@@ -658,7 +780,9 @@
                 <table style="width: 450px">
                     <tr>
                         <td class="formtdtext" style="text-align: right;width: 70px">制单日期:</td>
-                        <td style="width: 100;text-align: left" ><input class="easyui-datebox" opt="setdaytime" name="operator_date" data-options="formatter:myformatter,parser:myparser" id="operator_date"></td>
+                        <td style="width: 100;text-align: left" >
+                            <input class="easyui-datebox" opt="setdaytime" name="operator_date" data-options="formatter:myformatter,parser:myparser" id="operator_date">
+                        </td>
                     </tr>
                 </table>
             </td>
@@ -688,18 +812,18 @@
     <input type="button" value="修改" id="update">
     <input type="button" value="删除" hidden="true" id="delete">
     {% else %}
-<input type="submit" value="保存">
+    <input type="submit" value="保存">
     {% endif %}
-<input type="button" value="操作日志" onclick="addTab('录入操作日志','log?functionid=mHLcDiwTflgEshNKIiOV')">
+    <input type="button" value="操作日志" onclick="addTab('录入操作日志','log?functionid=mHLcDiwTflgEshNKIiOV')">
 </div>
 
 </form>
 </div>
 
 <!--<div opt="pensionbutton" style="width: 900px;text-align: center;margin: 0px auto">-->
-    <!--<a opt="pensionsubmit" href="#" class="easyui-linkbutton" data-options="iconCls:'yw-change'">修改保存</a>-->
-    <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">保存添加</a>&ndash;&gt;-->
-    <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>&ndash;&gt;-->
+<!--<a opt="pensionsubmit" href="#" class="easyui-linkbutton" data-options="iconCls:'yw-change'">修改保存</a>-->
+<!--&lt;!&ndash;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">保存添加</a>&ndash;&gt;-->
+<!--&lt;!&ndash;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>&ndash;&gt;-->
 <!--</div>-->
 
 <div>
@@ -725,6 +849,27 @@
             return new Date();
         }
     }
+
+</script>
+<script>
+
+    $(document).ready(function(local,parameters,res){
+        /*家庭成员列表添加*/
+        $("#newfamilymemeraddid").click(function(){
+            $("#familymembersgrid1").datagrid('appendRow', {name: "", relationship: ""});
+            var editIndex = $("#familymembersgrid1").datagrid('getRows').length-1;
+            $("#familymembersgrid1").datagrid('selectRow', editIndex)
+                    .datagrid('beginEdit', editIndex);
+        });
+        /*家庭成员列表删除*/
+        $("#delfamilymemerid").click(function(){
+            var selectrow= $("#familymembersgrid1").datagrid('getSelected');
+            var index=$("#familymembersgrid1").datagrid('getRowIndex',selectrow);
+            $("#familymembersgrid1").datagrid('deleteRow', index);
+        });
+
+    });
+
 
 </script>
 </body>
