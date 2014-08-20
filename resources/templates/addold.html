@@ -122,49 +122,60 @@
          }
          });
          });*/
-
         $(document).ready(function(){
             var jq = top.jQuery;
              $("#loginname").val(jq("#login").val());
              $("#dvcode").val(jq("#code").val());
              $("#username").val(jq("#user").val());
              var obj = eval('('+$("#t3").text()+')');
+            $("#add").click(function(){
+                alert("!!!");
+                var returnVal = window.confirm("是否录入？", "标题");
+                if(returnVal){
+                    $("form").submit();
+                }
+            });
              for(var key in obj ){
-             var name = key;
-             var value = obj[key];
-             if($("#"+name).hasClass("easyui-combobox"))
-             $("#"+name).combobox("setValue",value);
-             else if($("#"+name).hasClass("easyui-datebox"))
-             $("#"+name).datebox("setValue", value);
-             else if(value)
-             $("[name = "+name+"]:checkbox").attr("checked", true);
-             $("#"+name).val( value);
+                 var name = key;
+                 var value = obj[key];
+                 if($("#"+name).hasClass("easyui-combobox"))
+                     $("#"+name).combobox("setValue",value);
+                 else if($("#"+name).hasClass("easyui-datebox"))
+                     $("#"+name).datebox("setValue", value);
+                 else if(value){
+                     $("[name = "+name+"]:checkbox").click();
+                     $("#"+name).val( value);
+                 }
              }
-             var status = $("#status").val();
-             $("#update").click(function(){
-             if (status == "自由"|| status == "驳回"){
-             var returnVal = window.confirm("是否修改？", "标题");
-             if(returnVal)
-             $("form").submit();
-             }else
-             alert("该信息还在审核中，不能修改！");
-             });
-             if (status == "驳回"){
-             $("#delete").show();
-             }
-             $("#delete").click(function(){
-             var id = $("#lr_id").val();
-             alert("id:"+id);
-             var returnVal = window.confirm("是否删除？", "标题");
-             if(returnVal){
-             $("form").attr("action","{{servlet-context}}/deleteold");
-             $("form").submit();
-             }
-             });
-
-
-
-
+            $('#ff').form({
+                success:function(){
+                    alert("操作成功！");
+                    var str = $("#name").val();
+                    var jq = top.jQuery;
+                    jq('#tabs').tabs('close', str+'详细信息');
+                }
+            });
+            var status = $("#status").val();
+            $("#update").click(function(){
+                if (status == "自由"|| status == "驳回"){
+                    var returnVal = window.confirm("是否修改？", "标题");
+                    if(returnVal){
+                        $("form").submit();
+                    }
+                }else
+                    alert("该信息还在审核中，不能修改！");
+            });
+            if (status == "驳回")
+                $("#delete").show();
+            $("#delete").click(function(){
+                var id = $("#lr_id").val();
+                alert("id:"+id);
+                var returnVal = window.confirm("是否删除？", "标题");
+                if(returnVal){
+                    $("form").attr("action","{{servlet-context}}/deleteold");
+                    $("form").submit();
+                }
+            });
         });
         function addTab(title, url){
             var jq = top.jQuery;
@@ -179,9 +190,20 @@
                 });
             }
         };
-
-
-
+        function add(title){
+            $('#fs').form({
+                success:function(){
+                    alert("操作成功！");
+                    var jq = top.jQuery;
+                    jq('#tabs').tabs('close', '养老信息录入');
+                }
+            });
+            alert(title);
+            var returnVal = window.confirm("是否新增？", "标题");
+            if(returnVal){
+                $("form").submit();
+            }
+        };
     </script>
 </head>
 <body>
@@ -190,9 +212,9 @@
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
 {% if old %}
-<form opt="pensionform" method="post" action="{{servlet-context}}/updateold">
+<form opt="pensionform" method="post" action="{{servlet-context}}/updateold" id="ff">
 {% else %}
-<form opt="pensionform" method="post" action="{{servlet-context}}/saveold">
+<form opt="pensionform" method="post" action="{{servlet-context}}/saveold" id="fs">
 {% endif %}
 <fieldset style="width: 900px;margin: 0px auto">
     <legend>老年人基本信息</legend>
@@ -812,9 +834,9 @@
     <input type="button" value="修改" id="update">
     <input type="button" value="删除" hidden="true" id="delete">
     {% else %}
-    <input type="submit" value="保存">
+    <input type="button" value="保存"  onclick="add('nice')">
     {% endif %}
-    <input type="button" value="操作日志" onclick="addTab('录入操作日志','log?functionid=mHLcDiwTflgEshNKIiOV')">
+    <input type="button" value="操作日志" onclick="addTab('录入操作日志','logs?functionid=mHLcDiwTflgEshNKIiOV')">
 </div>
 
 </form>
@@ -826,9 +848,6 @@
 <!--&lt;!&ndash;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>&ndash;&gt;-->
 <!--</div>-->
 
-<div>
-    <br>
-</div>
 
 <script type="text/javascript">
     function myformatter(date){

@@ -20,8 +20,8 @@
 (defn login-page []
   (layout/render "login.html"))
 
-(defn log-page []
-  (layout/render "log.html"))
+(defn log-page [functionid]
+  (layout/render "log.html" {:functionid functionid}))
 
 (defn audit-page []
   (layout/render "audit.html"))
@@ -29,7 +29,7 @@
 (defroutes home-routes
   (GET "/" [] (login-page)) ;;登录页面
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
-  (GET "/logs" [] (log-page))      ;;操作日志页面
+  (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
   (GET "/audits" [] (audit-page))     ;;待办业务页面
   (GET "/olds" [] (old-page))      ;;养老信息查询页面
   (POST "/login" [username password] (old/login username password))  ;;用户登录
