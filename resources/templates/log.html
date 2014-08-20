@@ -9,6 +9,12 @@
     <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
+        $(document).ready(function(){
+            var func = $("#func").text();
+            $("#logGrid").datagrid({
+                url:'log?functionid='+func
+            })
+        });
         var dateformatter=function timeFormatter(v,r,i) {
             var now = new Date(v);
             var year = now.getFullYear();       //年
@@ -43,9 +49,10 @@
     }
 </style>
 <body>
+<p hidden="true" id="func">{{functionid}}</p>
 <table id="logGrid" class="easyui-datagrid" title="操作日志列表"
        data-options="rownumbers:true,singleSelect:true,toolbar:'#tb',
-           fit:true, pagination:true,url:'log?functionid=txFUV5pFpWVLv6Th4vQl',method:'get',
+           fit:true, pagination:true,method:'get',
            border:false,fitColumns: true">
     <thead>
     <tr>
