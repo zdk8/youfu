@@ -14,11 +14,11 @@
     <style>
             /*屏蔽错误提示图标*/
         .validatebox-invalid {
-            background-image: url('images/validatebox_warning1.png');
+            background-image: url('');
         }
     </style>
     <script type="text/javascript">
-        //加载下拉列表
+        /*加载下拉列表*/
         var cj={
             getLoader:function(type,param,success,error)
             {
@@ -40,101 +40,32 @@
                         }
                     })
                 }
-
             }
         };
-
-        //行政区划（districtid）
-        $(document).ready(function(local,parameters,res){
-            var datavision = new Array();
+        $(document).ready(function(){
+            /*加载地区树*/
             var divisiontree = $(':input[opt=divisiontree]') ;
             divisiontree.combotree({
                 url:'get-divisionlist?dvhigh=330000',
                 method: 'get',
-                onLoadSuccess:function(load,data){
-                    /*datavision = [{
-                     text: data.msg[0].totalname,
-                     children: [{
-                     text: 'Java'
-                     },{
-                     text: 'C++'
-                     }]
-                     }];
-                     $('#districtid').combotree('loadData', datavision);*/
-                    /*console.log(data.msg[0].totalname);
-                     console.log(data.msg[0].dvcode);
-                     console.log(!this.firstloaded);*/
-                    //若首次加载
-                    if(!this.firstloaded&&!res){
-                        datavision = [{
-                            id:data.msg[0].dvcode,
-                            text: data.msg[0].totalname,
-                            children: [{
-                                text: 'Java'
-                            }]
-                        }];
-                        $('#districtid').combotree('loadData', datavision);
-//                        divisiontree.combotree('setValue', data.totalname);
-                        this.firstloaded=true;
-                    }
-                },
                 onBeforeExpand: function (node) {
-                    console.log("node",node.dvcode)
-
                     divisiontree.combotree("tree").tree("options").url
-                            ="get-divisionlist?dvhigh=" + node.dvcode;
+                            ="get-divisionlist?dvhigh=" + node.parentid;
                 },
                 onHidePanel: function () {
-                    console.log(divisiontree.combotree('tree').tree('getSelected'));
-                    /* divisiontree.combotree('setValue',
-                     divisiontree.combotree('tree').tree('getSelected').totalname);*/
+                    divisiontree.combotree('setValue',
+                            divisiontree.combotree('tree').tree('getSelected').divisionpath);
                 }
             });
-
-
-        })
-
-        /*$(document).ready(function(){
-         *//*var data = [{
-         //                id: 1,
-         text: 'Languages',
-         children: [{
-         //                    id: 11,
-         text: 'Java'
-         },{
-         //                    id: 12,
-         text: 'C++'
-         }]
-         }];
-         $('#districtid').combotree('loadData', data);*//*
-         $("#districtid").combotree({
-         url:'get-divisionlist',
-         method: 'get',
-         data:{
-         dvhigh:330000
-         },
-         onLoadSuccess:function(data){
-         console.log(data);
-         },
-         onBeforeExpand: function (node) {
-         divisiontree.combotree("tree").tree("options").url
-         =preUrl+ "ajax/gettreedivisionnew.jsp?onlychild=true&node=" + node.parentid;
-         }
-         });
-         });*/
-        $(document).ready(function(){
             var jq = top.jQuery;
              $("#loginname").val(jq("#login").val());
              $("#dvcode").val(jq("#code").val());
              $("#username").val(jq("#user").val());
-             var obj = eval('('+$("#t3").text()+')');
-            $("#add").click(function(){
-                alert("!!!");
-                var returnVal = window.confirm("是否录入？", "标题");
-                if(returnVal){
-                    $("form").submit();
-                }
-            });
+            var obj;
+            if($("#t3").text())
+                obj = eval('('+$("#t3").text()+')');
+            $("#operator_date").datebox("setValue",myformatter(new Date())); //填充当前时间
+            /*填充表单*/
              for(var key in obj ){
                  var name = key;
                  var value = obj[key];
@@ -142,11 +73,14 @@
                      $("#"+name).combobox("setValue",value);
                  else if($("#"+name).hasClass("easyui-datebox"))
                      $("#"+name).datebox("setValue", value);
-                 else if(value){
+                 else if($("#"+name).hasClass("easyui-combotree")){
+                     $("#"+name).combotree("setValue", value);
+                 }else if(value){
                      $("[name = "+name+"]:checkbox").click();
-                     $("#"+name).val( value);
+                     $("#"+name).val(value);
                  }
              }
+            /*提交表单操作*/
             $('#ff').form({
                 success:function(){
                     alert("操作成功！");
@@ -156,6 +90,7 @@
                 }
             });
             var status = $("#status").val();
+            /*修改操作*/
             $("#update").click(function(){
                 if (status == "自由"|| status == "驳回"){
                     var returnVal = window.confirm("是否修改？", "标题");
@@ -167,6 +102,7 @@
             });
             if (status == "驳回")
                 $("#delete").show();
+            /*删除操作*/
             $("#delete").click(function(){
                 var id = $("#lr_id").val();
                 alert("id:"+id);
@@ -176,7 +112,53 @@
                     $("form").submit();
                 }
             });
+            /*根据身份证获取基本信息*/
+            $("#identityid").change(function(){
+                var val = $("#identityid").val();
+                var sex;
+                var birthdayValue;
+                var age;
+                var sexcode;
+                if (15 == val.length) { //15位身份证号码
+                    birthdayValue = val.charAt(6) + val.charAt(7);
+                    if (parseInt(birthdayValue) < 10) {
+                        birthdayValue = '20' + birthdayValue;
+                    }
+                    else {
+                        birthdayValue = '19' + birthdayValue;
+                    }
+                    age = Date.getFullYear()-parseInt(birthdayValue); //年龄
+                    birthdayValue = birthdayValue + '-' + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11);
+                    if (parseInt(val.charAt(14) / 2) * 2 != val.charAt(14)) {
+                        sex = '男';
+                        sexcode = '1';
+                    }
+                    else{
+                        sex = '女';
+                        sexcode = '0';
+                    }
+
+                }
+                if (18 == val.length) { //18位身份证号码
+                    birthdayValue = val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11)
+
+                            + '-' + val.charAt(12) + val.charAt(13);
+                    if (parseInt(val.charAt(16) / 2) * 2 != val.charAt(16)){
+                        sex = '男';
+                        sexcode = '1';
+                    }
+                    else{
+                        sex = '女';
+                        sexcode = '0';
+                    }
+                    age =(new Date()).getFullYear()-parseInt((val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9)));
+                }
+                $('#birthd').datebox('setValue',birthdayValue) ;
+                $('#gender').combobox('setValue',sexcode) ;
+                $('#age').val(age);
+            });
         });
+        /*新增选项卡*/
         function addTab(title, url){
             var jq = top.jQuery;
             if (jq('#tabs').tabs('exists', title)){
@@ -190,6 +172,7 @@
                 });
             }
         };
+        /*新增操作*/
         function add(title){
             $('#fs').form({
                 success:function(){
@@ -204,6 +187,52 @@
                 $("form").submit();
             }
         };
+        /*身份证校验*/
+        $.extend($.fn.validatebox.defaults.rules, {
+            identityid: {
+                validator: function (code) {
+                    var city = {11: "北京", 12: "天津", 13: "河北", 14: "山西", 15: "内蒙古", 21: "辽宁", 22: "吉林", 23: "黑龙江 ", 31: "上海", 32: "江苏", 33: "浙江", 34: "安徽", 35: "福建", 36: "江西", 37: "山东", 41: "河南", 42: "湖北 ", 43: "湖南", 44: "广东", 45: "广西", 46: "海南", 50: "重庆", 51: "四川", 52: "贵州", 53: "云南", 54: "西藏 ", 61: "陕西", 62: "甘肃", 63: "青海", 64: "宁夏", 65: "新疆", 71: "台湾", 81: "香港", 82: "澳门", 91: "国外 "};
+                    var tip = "";
+                    var pass = true;
+
+                    if (!code || !/^\d{6}((18)|(19)|(20))\d{2}((0[1-9])|(1[012]))((0[1-9])|([12]\d)|(3[01]))\d{3}(\d|X)$/i.test(code)) {
+                        tip = "身份证号格式错误";
+                        pass = false;
+                    }
+
+                    else if (!city[code.substr(0, 2)]) {
+                        tip = "地址编码错误";
+                        pass = false;
+                    }
+                    else {
+                        //18位身份证需要验证最后一位校验位
+                        if (code.length == 18) {
+                            code = code.split('');
+                            //∑(ai×Wi)(mod 11)
+                            //加权因子
+                            var factor = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ];
+                            //校验位
+                            var parity = [ 1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2 ];
+                            var sum = 0;
+                            var ai = 0;
+                            var wi = 0;
+                            for (var i = 0; i < 17; i++) {
+                                ai = code[i];
+                                wi = factor[i];
+                                sum += ai * wi;
+                            }
+                            var last = parity[sum % 11];
+                            if (parity[sum % 11] != code[17]) {
+                                tip = "校验位错误";
+                                pass = false;
+                            }
+                        }
+                    }
+                    return pass;
+                },
+                message: '身份证不合法,请确认身份证是否正确输入!'
+            }
+        });
     </script>
 </head>
 <body>
@@ -224,11 +253,7 @@
             <tr>
                 <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
                 <td colspan="5">
-                    <input class="easyui-combotree"  opt="divisiontree"
-                           data-options="
-                                       required:true,
-                                       valueField:'totalname'
-                                       "
+                    <input class="easyui-combotree"  opt="divisiontree" data-options="required:true, valueField:'divisionpath'"
                            style="width: 300px;"  name="districtid" id="districtid">
                 </td>
                 <td rowspan="4" colspan="2" style="text-align: center">
@@ -868,7 +893,6 @@
             return new Date();
         }
     }
-
 </script>
 <script>
 
