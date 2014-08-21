@@ -22,6 +22,9 @@
                 :fwlx_qt "" :jk_rcws_st "" :jk_rcws_xl "" :jk_rcws_xt "" :jk_rcws_sy "" :jk_rcws_xj "" :jk_rcws_tx ""
                 :jk_rcws_xzj "" :jk_rcws_xy "" :jk_bs_gaoxy "" :jk_bs_tangnb "" :jk_bs_fengs "" :jk_bs_xinzb ""
                 :jk_bs_chid "" :jk_bs_guz "" :jk_bs_qit ""})
+(def fimallyrelinfo [:guanx :gx_name :gx_identityid :gx_gender :gx_birth :gx_telephone :gx_mobilephone
+                      :gx_economy :gx_culture :gx_registration :gx_nation :gx_work])
+(def fimallyrelflag [:flag 0])
 
 (defn login [name pwd]        ;;用户登录
   (if (= name "")
@@ -83,6 +86,19 @@
 ;        )))
 ;  )
 
+;;新增养老家庭成员信息
+(defn insert-oldsocrel [fields]
+  (let [{olds_gx :params} fields
+        keyword "olds"
+        lrgxid (inc (:max (db/get-max keyword)))] (str olds_gx)
+    ;    (str (vec (vals (select-keys olds_gx [:lrgx_id]))))
+    (db/insert-oldsocrel  (into {} (cons [:lrgx_id lrgxid]                   ;;新增家庭成员信息
+                                     (cons [:lr_id (+ (:max (db/get-max keyword)) 1)]
+                                       (select-keys olds_gx fimallyrelinfo)))))
+    (str "true")
+    )
+  )
+
 
 (defn create-old [request]               ;;养老信息录入，参数为养老信息录入页面提交的所有信息
   (let [{olds :params} request
@@ -103,7 +119,14 @@
     (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
     (db/create-audit opseno auditid)             ;;新增对应的审核表
     (str "新增成功")))
+;    (str olds)
 
+
+
+
+(defn sele_oldsocrel [gx_name]
+  (str (db/sele_oldsocrel gx_name))
+  )
 
 (defn update-old [request]                     ;;修改养老信息，参数为养老信息修改页面提交的所有信息
   (let [{olds :params} request
@@ -191,7 +214,16 @@
 (defn get-inputlist [aaa100]
   (resp/json {:result true :msg (db/get-inputlist aaa100)}))
 
+;;行政区树转换
+(defn divisiontree [dv]
+  (let [leaf (count (db/get-divisionlist (:dvcode dv)))]
+    {:text (:dvname dv) :divisionpath (:totalname dv) :id (:dvrank dv) :parentid (:dvcode dv)
+            :iconCls (if (> leaf 0) "" "division-tree-leaf") :leaf (if (> leaf 0) false true)
+            :state (if (> leaf 0) "closed" "open")}))
+
 ;;获取行政区划下拉选项列表
 (defn get-divisionlist [dvhigh]
-  (resp/json {:result true :msg (db/get-divisionlist dvhigh)}))
+  (let [dv (db/get-divisionlist dvhigh)]
+    (resp/json   (map #(divisiontree %) dv))))
+
 
