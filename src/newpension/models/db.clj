@@ -6,7 +6,7 @@
             ))
 
 (defdb dboracle schema/db-oracle)
-(declare users olds oldsocrel functions audits rolefunc roleuser userlog)  ;;数据声明
+(declare users olds oldsocrel functions audits rolefunc roleuser userlog division)  ;;数据声明
 
 ;;数据库表实体及各实体关联
 (defentity users
@@ -68,6 +68,7 @@
 (defentity division
   (pk :dvcode)
   (table :division)
+  (has-many division {:fk :dvhigh})
   (database dboracle)
   )
 
@@ -225,7 +226,9 @@
 (defn get-inputlist [aaa100]
   (select aa10
     (where {:aaa100 aaa100})))
+
 ;;获取行政区划的选项列表
 (defn get-divisionlist [dvhigh]
   (select division
     (where {:dvhigh dvhigh})))
+

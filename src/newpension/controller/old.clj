@@ -191,7 +191,16 @@
 (defn get-inputlist [aaa100]
   (resp/json {:result true :msg (db/get-inputlist aaa100)}))
 
+;;行政区树转换
+(defn divisiontree [dv]
+  (let [leaf (count (db/get-divisionlist (:dvcode dv)))]
+    {:text (:dvname dv) :divisionpath (:totalname dv) :id (:dvrank dv) :parentid (:dvcode dv)
+            :iconCls (if (> leaf 0) "" "division-tree-leaf") :leaf (if (> leaf 0) false true)
+            :state (if (> leaf 0) "closed" "open")}))
+
 ;;获取行政区划下拉选项列表
 (defn get-divisionlist [dvhigh]
-  (resp/json {:result true :msg (db/get-divisionlist dvhigh)}))
+  (let [dv (db/get-divisionlist dvhigh)]
+    (resp/json   (map #(divisiontree %) dv))))
+
 
