@@ -34,6 +34,8 @@
   (GET "/olds" [] (old-page))      ;;养老信息查询页面
   (POST "/login" [username password] (old/login username password))  ;;用户登录
   (POST "/saveold" request (old/create-old request))  ;;养老信息录入
+  (POST "/insert-oldsocrel" fields (old/insert-oldsocrel fields)) ;;新增养老家庭成员信息
+  (GET "/sele_oldsocrel" [gx_name] (old/sele_oldsocrel gx_name))
   (GET "/old" [page rows] (old/get-olds page rows))       ;;养老信息查询
   (GET "/oldname" [name page rows] (old/get-oldname name page rows))       ;;根据关键字模糊查询养老信息
   (GET "/search" [id] (old/get-old id))          ;;根据主键查看养老详细信息
