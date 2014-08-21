@@ -42,6 +42,24 @@
                 }
             }
         };
+        var flag = 0; //记录数据条数
+        $(document).ready(function(local,parameters,res){
+            /*家庭成员列表添加*/
+            $("#newfamilymemeraddid").click(function(){
+                flag +=1;
+                $("#familymembersgrid1").datagrid('appendRow', {name: "", relationship: ""});
+                var editIndex = $("#familymembersgrid1").datagrid('getRows').length-1;
+                $("#familymembersgrid1").datagrid('selectRow', editIndex)
+                        .datagrid('beginEdit', editIndex);
+            });
+            /*家庭成员列表删除*/
+            $("#delfamilymemerid").click(function(){
+                flag -=1;
+                var selectrow= $("#familymembersgrid1").datagrid('getSelected');
+                var index=$("#familymembersgrid1").datagrid('getRowIndex',selectrow);
+                $("#familymembersgrid1").datagrid('deleteRow', index);
+            });
+        })
         $(document).ready(function(){
             /*加载地区树*/
             var divisiontree = $(':input[opt=divisiontree]') ;
@@ -184,6 +202,8 @@
             alert(title);
             var returnVal = window.confirm("是否新增？", "标题");
             if(returnVal){
+                //添加家庭成员信息
+                addfimalycel();
                 $("form").submit();
             }
         };
@@ -863,17 +883,85 @@
     {% endif %}
     <input type="button" value="操作日志" onclick="addTab('录入操作日志','logs?functionid=mHLcDiwTflgEshNKIiOV')">
 </div>
-
+<div style="display: none">
+    <input name="flag" id="flag" type="text">
+    <input name="guanx" id="guanx" type="text">
+    <input name="gx_name" id="gx_name" type="text">
+    <input name="gx_identityid" id="gx_identityid" type="text">
+    <input name="gx_gender" id="gx_gender" type="text">
+    <input name="gx_birth" id="gx_birth" type="text">
+    <input name="gx_telephone" id="gx_telephone" type="text">
+    <input name="gx_mobilephone" id="gx_mobilephone" type="text">
+    <input name="gx_economy" id="gx_economy" type="text">
+    <input name="gx_culture" id="gx_culture" type="text">
+    <input name="gx_registration" id="gx_registration" type="text">
+    <input name="gx_nation" id="gx_nation" type="text">
+    <input name="gx_work" id="gx_work" type="text">
+</div>
+</form>
 </form>
 </div>
 
-<!--<div opt="pensionbutton" style="width: 900px;text-align: center;margin: 0px auto">-->
-<!--<a opt="pensionsubmit" href="#" class="easyui-linkbutton" data-options="iconCls:'yw-change'">修改保存</a>-->
-<!--&lt;!&ndash;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">保存添加</a>&ndash;&gt;-->
-<!--&lt;!&ndash;<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-back'">返回</a>&ndash;&gt;-->
-<!--</div>-->
 
 
+
+<script>
+    /*添加家庭成员信息*/
+    function addfimalycel(){
+        var familrelfields = $("#familymembersgrid1").datagrid("getColumnFields");  /*获取全部元素的字段名*/
+        var famildata_all = new Array();   //存放新增数据条
+        //若有新增数据
+        if(flag>0){
+            for(i=0;i<flag;i++){
+                var datach = "data"+i;
+                var famildata = new Array();    //存放新增数据
+                for(j=0;j<familrelfields.length;j++){
+                    datach  =  $("#familymembersgrid1").datagrid('getEditor',{index:i,field:familrelfields[j]});
+                    if($(datach.target).val() == ""){
+                        famildata.push("");
+                    }else{
+                        famildata.push($(datach.target).val());
+                    }
+                }
+                famildata_all.push(famildata);
+            }
+        }
+        //数据条不为空
+        if(famildata_all.length > 0){
+            for(a=0;a<famildata_all.length;a++){
+                var famildata_all_child = famildata_all[a];   //取出每条数据
+                for(b=0;b<famildata_all_child.length;b++){
+                    $("#"+familrelfields[b]).val(famildata_all_child[b]);  //将值设置到上面定义的div中
+                    $("#flag").val(flag);
+                }
+                $.post(
+                        'insert-oldsocrel',
+                        {
+                            guanx:$("#guanx").val(),
+                            gx_name:$("#gx_name").val(),
+                            gx_identityid:$("#gx_identityid").val(),
+                            gx_gender:$("#gx_gender").val(),
+                            gx_birth:$("#gx_birth").val(),
+                            gx_telephone:$("#gx_telephone").val(),
+                            gx_mobilephone:$("#gx_mobilephone").val(),
+                            gx_economy:$("#gx_economy").val(),
+                            gx_culture:$("#gx_culture").val(),
+                            gx_registration:$("#gx_registration").val(),
+                            gx_nation:$("#gx_nation").val(),
+                            gx_work:$("#gx_work").val()
+                        },
+                        function(data){
+                            /*if(data == "true"){
+                                $.messager.alert("提示","添加成功!");
+                            }else{
+                                $.messager.alert("提示","添加失败!");
+                            }*/
+                        }
+                );
+            }
+        }
+    }
+</script>
 <script type="text/javascript">
     function myformatter(date){
         var y = date.getFullYear();
@@ -893,26 +981,6 @@
             return new Date();
         }
     }
-</script>
-<script>
-
-    $(document).ready(function(local,parameters,res){
-        /*家庭成员列表添加*/
-        $("#newfamilymemeraddid").click(function(){
-            $("#familymembersgrid1").datagrid('appendRow', {name: "", relationship: ""});
-            var editIndex = $("#familymembersgrid1").datagrid('getRows').length-1;
-            $("#familymembersgrid1").datagrid('selectRow', editIndex)
-                    .datagrid('beginEdit', editIndex);
-        });
-        /*家庭成员列表删除*/
-        $("#delfamilymemerid").click(function(){
-            var selectrow= $("#familymembersgrid1").datagrid('getSelected');
-            var index=$("#familymembersgrid1").datagrid('getRowIndex',selectrow);
-            $("#familymembersgrid1").datagrid('deleteRow', index);
-        });
-
-    });
-
 
 </script>
 </body>
