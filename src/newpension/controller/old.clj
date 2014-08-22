@@ -207,8 +207,18 @@
       (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) (* p r))}))
       (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) c)})))))
 
-;(defn get-funcs [username]
-;  (str (:functionid (nth (db/get-funcs username "businessmenu") 2))))
+;;折叠框转换
+(defn accordion [ad username]
+  (let [leaf (count (db/get-funcs username (:functionid ad)))]
+    (assoc  ad :id (:functionid ad) :leaf (if (> leaf 0) false true) :leafcount leaf
+           :state (if (> leaf 0) "closed" "open") :text (:title ad) :value (:location ad))))
+
+;;获取折叠框
+(defn get-funcs [username functionid]
+  (let [ads (db/get-funcs username functionid)]
+    (resp/json (map #(accordion % username) ads))))
+;  (str (db/get-funcs username "businessmenu")))
+
 
 ;;获取输入框下拉选项列表
 (defn get-inputlist [aaa100]
@@ -224,6 +234,6 @@
 ;;获取行政区划下拉选项列表
 (defn get-divisionlist [dvhigh]
   (let [dv (db/get-divisionlist dvhigh)]
-    (resp/json   (map #(divisiontree %) dv))))
+    (resp/json (map #(divisiontree %) dv))))
 
 
