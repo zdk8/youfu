@@ -217,8 +217,6 @@
 (defn get-funcs [username functionid]
   (let [ads (db/get-funcs username functionid)]
     (resp/json (map #(accordion % username) ads))))
-;  (str (db/get-funcs username "businessmenu")))
-
 
 ;;获取输入框下拉选项列表
 (defn get-inputlist [aaa100]

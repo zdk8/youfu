@@ -155,7 +155,7 @@
       (fields :opseno :digest :tprkey :username :bsnyue :bstime)
       (where
         (and {:functionid functionid } (or {:dvcode [like (str  dvcode "%")]} (= dvcode "330100")))))
-    (where  {:auendflag "0"                          ;;要满足的条件：审核未完成，审核等级达到权限要求
+    (where  {:auendflag "0"                         ;;要满足的条件：审核未完成，审核等级达到权限要求
              :aulevel [in (map #(str %)
                             (map #(dec %)
                               (map #(Integer/parseInt %)
