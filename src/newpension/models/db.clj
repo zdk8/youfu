@@ -246,6 +246,6 @@
 ;;获取行政区划的选项列表
 (defn get-divisionlist [dvhigh]
   (select division
-    (fields :dvcode :dvhigh :totalname)
+    (fields :dvcode :dvhigh :totalname :dvname)
     (where {:dvhigh dvhigh})))
 
