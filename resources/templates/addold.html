@@ -195,15 +195,15 @@
             $('#fs').form({
                 success:function(){
                     alert("操作成功！");
+                    //添加家庭成员信息
+                    addfimalycel();
                     var jq = top.jQuery;
                     jq('#tabs').tabs('close', '养老信息录入');
                 }
             });
-            alert(title);
+//            alert(title);
             var returnVal = window.confirm("是否新增？", "标题");
             if(returnVal){
-                //添加家庭成员信息
-                addfimalycel();
                 $("form").submit();
             }
         };
@@ -760,6 +760,10 @@
                 <th data-options="field:'bottom',width:40,align:'center',editor:'icon-remove'">
                     <a data-options="plain:true">选择</a>
                 </th>
+            </tr>
+            </thead>
+            <thead>
+            <tr>
                 <th class="lazy-combobox" data-options="field:'guanx',align:'center',width:100,editor:{
                  type:'combobox',
                  options:{
@@ -774,10 +778,6 @@
                  }">
                     关系<span style="color: red">*</span>
                 </th>
-            </tr>
-            </thead>
-            <thead>
-            <tr>
                 <th data-options="required:true,field:'gx_name',width:90,align:'center',editor:{
                     type:'validatebox',
                     options:{required:true}
@@ -917,8 +917,8 @@
                 var famildata = new Array();    //存放新增数据
                 for(j=0;j<familrelfields.length;j++){
                     datach  =  $("#familymembersgrid1").datagrid('getEditor',{index:i,field:familrelfields[j]});
-                    if($(datach.target).val() == ""){
-                        famildata.push("");
+                    if(datach.type == "combobox"){
+                        famildata.push($(datach.target).combobox('getText'));
                     }else{
                         famildata.push($(datach.target).val());
                     }
