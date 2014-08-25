@@ -6,78 +6,78 @@
             ))
 
 (defdb dboracle schema/db-oracle)
-(declare users olds oldsocrel functions audits rolefunc roleuser userlog division)  ;;数据声明
+(declare users olds oldsocrel functions audits rolefunc roleuser userlog division needs)  ;;数据声明
 
 ;;数据库表实体及各实体关联
+;;用户表
 (defentity users
   (pk :userid)
   (table :xt_user)
   (belongs-to roleuser {:fk :userid})
-  (database dboracle)
-  )
+  (database dboracle))
 
+;;老年人主表
 (defentity olds
   (table :t_oldpeople)
-  (database dboracle)
-  )
+  (database dboracle))
 
+;;老年人社会关系信息表
 (defentity oldsocrel
   (table :t_oldsocrel)
-  (database dboracle)
-  )
+  (database dboracle))
 
+;;系统功能表
 (defentity functions
   (pk :functionid)
   (table :xt_function)
   (has-one rolefunc {:fk :functionid})
-  (database dboracle)
-  )
+  (database dboracle))
 
+;;业务审核表
 (defentity audits
   (table :opaudit)
   (belongs-to userlog {:fk :opseno})
-  (database dboracle)
-  )
+  (database dboracle))
 
+;;功能权限表
 (defentity rolefunc
   (table :xt_rolefunc)
   (belongs-to roleuser {:fk :roleid})
-  (database dboracle)
-  )
+  (database dboracle))
 
+;;用户权限表
 (defentity roleuser
   (pk :roleid)
   (table :xt_roleuser)
   (belongs-to users {:fk :userid})
-  (database dboracle)
-  )
+  (database dboracle))
 
+;;操作日志表
 (defentity userlog
   (pk :opseno)
   (table :xt_userlog)
-  (database dboracle)
-  )
+  (database dboracle))
 
 ;;输入框下拉选项列表
 (defentity aa10
   (pk :prseno)
   (table :aa10)
-  (database dboracle)
-  )
+  (database dboracle))
+
 ;;行政区划表
 (defentity division
   (pk :dvcode)
   (table :division)
   (has-many division {:fk :dvhigh})
-  (database dboracle)
-  )
-
-;;家庭成员关系表
-(defentity t_oldsocrel
-  (pk :lrgx_id)
-  (table :t_oldsocrel)
   (database dboracle))
 
+;;人员评估表
+(defentity needs
+  (table :t_needassessment)
+  (database dboracle))
+
+ ;;数据库操作函数
+ ;;用户登录
 (defn get-user
   ( [name pwd] (first
                  (select users
@@ -86,7 +86,8 @@
              (select users
                (where {:loginname name})))))
 
-(defn get-max [keywords]     ;;根据关键字获取该表自增主键
+;;根据关键字获取该表自增主键
+(defn get-max [keywords]
   (first
     (case keywords
       "olds" (select olds
@@ -96,59 +97,64 @@
       "audits" (select audits
                  (aggregate (max :auditid) :max)))))
 
-;;养老信息表
-(defn get-olds        ;;查询养老信息
+;;查询养老信息
+(defn get-olds
   ( [] (select olds                  ;;查询所有养老信息
          (fields :lr_id :name :gender :birthd :identityid :address)))
   ( [keyword] (select olds           ;;根据关键字模糊查询
                 (where {:name [like (str "%" (if (nil? keyword) "" keyword) "%")]}))))
 
-(defn get-old [id]      ;;根据主键查看养老信息
+;;根据主键查看养老信息
+(defn get-old [id]
   (first
     (select olds
       (where {:lr_id  id}))))
 
-(defn create-old [old]       ;;新增养老信息
+;;新增养老信息
+(defn create-old [old]
   (insert olds
     (values old)))
 
 ;;新增养老家庭成员信息
 (defn insert-oldsocrel [fiels]
-  (insert t_oldsocrel
+  (insert oldsocrel
   (values fiels)))
 
 (defn sele_oldsocrel [gx_name]
-  (select t_oldsocrel
-  (where {:gx_name [= (str gx_name)]}) )
-  )
+  (select oldsocrel
+  (where {:gx_name [= (str gx_name)]})))
 
-(defn update-old [old id]       ;;修改养老信息
+;;修改养老信息
+(defn update-old [old id]
   (update olds
     (set-fields old)
     (where {:lr_id id})))
 
-(defn update-oldstatus [status id]     ;;修改养老信息表状态
+;;修改养老信息表状态
+(defn update-oldstatus [status id]
   (update olds
     (set-fields {:status status})
     (where {:lr_id id})))
 
-(defn delete-old [id]            ;;删除养老信息
+;;删除养老信息
+(defn delete-old [id]
   (delete olds
     (where {:lr_id id})))
 
-;;操作日志表
-(defn get-userlogs [functionid]     ;;根据功能id查询操作日志
+;;根据功能id查询操作日志
+(defn get-userlogs [functionid]
   (select userlog
     (fields :opseno :digest :tprkey :username :bsnyue :bstime )
     (where {:functionid functionid})
     (order :opseno :desc)))      ;;降序排列
 
-(defn create-userlog [opseno digest tprkey functionid dvcode loginname username]      ;;新增操作日志
+;;新增操作日志
+(defn create-userlog [opseno digest tprkey functionid dvcode loginname username]
   (insert userlog
     (values {:opseno opseno :digest digest :tprkey tprkey :functionid functionid :dvcode dvcode :loginname loginname :username username})))
 
-;;审核表
-(defn get-audits [functionid loginname dvcode]     ;;查询满足用户和功能权限的审核信息
+;;查询满足用户和功能权限的审核信息
+(defn get-audits [functionid loginname dvcode]
   (select audits
     (fields :auditid :aulevel :auflag :audesc :auendflag)                      ;;页面显示内容
     (with userlog
@@ -172,7 +178,8 @@
                                           (where {:loginname loginname })))))))))]})
     (order :opseno :desc)))           ;;降序排列
 
-(defn get-backaudits [functionid loginname dvcode]       ;;查询满足用户和功能权限的回退信息
+;;查询满足用户和功能权限的回退信息
+(defn get-backaudits [functionid loginname dvcode]
   (select audits
     (fields :auditid :aulevel :auflag :audesc :auendflag)
     (with userlog
@@ -205,28 +212,33 @@
     ;                                          (where {:loginname loginname }))))))))))]})
     (order :opseno :desc)))            ;;降序排列
 
-(defn get-audit [id]           ;;根据外键查询审核信息
+;;根据外键查询审核信息
+(defn get-audit [id]
   (first
     (select audits
       (with userlog
         (where {:tprkey id})))))
 
-(defn create-audit [opseno auditid]       ;;新增审核信息
+;;新增审核信息
+(defn create-audit [opseno auditid]
   (insert audits
     (values {:opseno opseno :auditid auditid :auflag "0" :aulevel "0" :auendflag "0"})))
 
-(defn update-audit [aulevel auflag aaa027 audesc auuser auopseno auendflag auditid opseno]   ;;修改审核信息
+;;修改审核信息
+(defn update-audit [aulevel auflag aaa027 audesc auuser auopseno auendflag auditid opseno]
   (update audits
-    (set-fields {:aulevel aulevel :auflag auflag :aaa027 aaa027 :audesc audesc
+    (set-fields {:aulevel aulevel :auflag auflag  :audesc audesc
                  :audate (new Timestamp (System/currentTimeMillis)) :opseno opseno
                  :auuser auuser :auopseno auopseno :auendflag auendflag
                  })
     (where {:auditid  auditid})))
 
-(defn delete-audit [id]            ;;删除审核信息
+;;删除审核信息
+(defn delete-audit [id]
   (delete audits
     (where {:auditid id})))
 
+;;查询满足满足用户权限的功能
 (defn get-funcs [username parent]
   (select functions
     (where (and {:parent parent
@@ -251,3 +263,6 @@
     (fields :dvcode :dvhigh :totalname :dvname)
     (where {:dvhigh dvhigh})))
 
+;;查询评估信息
+(defn get-needs []
+  (select needs))

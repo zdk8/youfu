@@ -26,7 +26,8 @@
                       :gx_economy :gx_culture :gx_registration :gx_nation :gx_work])
 (def fimallyrelflag [:flag 0])
 
-(defn login [name pwd]        ;;用户登录
+;;用户登录
+(defn login [name pwd]
   (if (= name "")
     (if (= pwd "")                        ;;用户名和密码输入空值的情况
       (layout/render
@@ -53,8 +54,9 @@
              :dvcode (:regionid (db/get-user name pwd))
              :username (:username (db/get-user name pwd))}))))))
 
+;;查询所有养老信息
 (defn get-olds
-  ([page rows]             ;;查询所有养老信息
+  ([page rows]
     (let [p (Integer/parseInt page)
           r (Integer/parseInt rows)
           c (count (db/get-olds ))]
@@ -62,8 +64,9 @@
         (:body (resp/json {:total c :rows (subvec(db/get-olds) (* (dec p) r) (* p r))}))
         (:body (resp/json {:total c :rows (subvec(db/get-olds) (* (dec p) r) c)}))))))
 
+;;根据关键字查询
 (defn get-oldname
-  ([name page rows]              ;;根据关键字查询
+  ([name page rows]
     (let [p (Integer/parseInt page)
           r (Integer/parseInt rows)
           c (count (db/get-olds name))]
@@ -71,11 +74,11 @@
         (:body (resp/json {:total c :rows (subvec(db/get-olds name) (* (dec p) r) (* p r))}))
         (:body (resp/json {:total c :rows (subvec(db/get-olds name) (* (dec p) r) c)}))))))
 
-(defn get-old [id]                    ;;根据主键查询养老信息
+;;根据主键查询养老信息
+(defn get-old [id]
   (layout/render
     "addold.html"
     {:old (:body (resp/json  (db/get-old id)))}))
-
 
 ;(defn get-max []
 ;  (let [a (db/get-olds)]
@@ -95,12 +98,10 @@
     (db/insert-oldsocrel  (into {} (cons [:lrgx_id lrgxid]                   ;;新增家庭成员信息
                                      (cons [:lr_id (+ (:max (db/get-max keyword)) 1)]
                                        (select-keys olds_gx fimallyrelinfo)))))
-    (str "true")
-    )
-  )
+    (str "true")))
 
-
-(defn create-old [request]               ;;养老信息录入，参数为养老信息录入页面提交的所有信息
+;;养老信息录入，参数为养老信息录入页面提交的所有信息
+(defn create-old [request]
   (let [{olds :params} request
         keyword "olds"
         opseno (inc (:max (db/get-max "userlog")))        ;;获取自增主键
@@ -121,14 +122,12 @@
     (str "新增成功")))
 ;    (str olds)
 
-
-
-
 (defn sele_oldsocrel [gx_name]
   (str (db/sele_oldsocrel gx_name))
   )
 
-(defn update-old [request]                     ;;修改养老信息，参数为养老信息修改页面提交的所有信息
+;;修改养老信息，参数为养老信息修改页面提交的所有信息
+(defn update-old [request]
   (let [{olds :params} request
         opseno (inc (:max (db/get-max "userlog")))           ;;获取自增主键
         digest (str "姓名" (:name (:params request))
@@ -138,7 +137,6 @@
         loginname (:loginname (:params request))
         username (:operators (:params request))
         auditid (:auditid (db/get-audit (:lr_id (:params request))))]       ;;根据外键查询审核表得到审核主键
-
     (db/update-old (into {} (cons (conj checkinfo (select-keys  olds (vec (keys checkinfo)))) (select-keys olds oldinfo))) (:lr_id (:params request)))      ;;修改养老信息表
     (db/create-userlog opseno                    ;;新增对应的操作日志
       (str digest " 信息修改") (:lr_id (:params request)) "mHLcDiwTflgEshNKIiOV" dvcode loginname username)
@@ -151,7 +149,8 @@
       (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由的状态下，修改对应审核表
     (str "修改成功")))
 
-(defn delete-old [request]           ;;删除养老信息，参数为用户页面提交的所有信息
+;;删除养老信息，参数为用户页面提交的所有信息
+(defn delete-old [request]
   (let [{olds :params} request
         opseno (inc (:max (db/get-max "userlog")))        ;;获取自增主键
         digest (str "姓名" (:name (:params request))
@@ -168,7 +167,8 @@
     (db/create-userlog (inc (:max (db/get-max "userlog"))) (str digest " 信息删除") auditid "txFUV5pFpWVLv6Th4vQl" dvcode loginname username)
     (str "删除成功")))
 
-(defn get-audits [functionid loginname dvcode page rows]          ;;待办业务查询
+;;待办业务查询
+(defn get-audits [functionid loginname dvcode page rows]
   (let [p (Integer/parseInt page)
         r (Integer/parseInt rows)
         c (+ (count (db/get-audits functionid loginname dvcode))
@@ -179,11 +179,10 @@
                                         (* (dec p) r) (* p r))}))
       (:body (resp/json {:total c :rows (subvec (into(db/get-audits functionid loginname dvcode)
                                                   (db/get-backaudits functionid loginname dvcode))
-                                          (* (dec p) r) c)}))
-      )))
+                                          (* (dec p) r) c)})))))
 
-
-(defn update-audit [flag aulevel digest tprkey auditid dvcode loginname username opseno]    ;;修改审核表
+;;修改审核表
+(defn update-audit [flag aulevel digest tprkey auditid dvcode loginname username opseno]
   (let [status (nth ["自由" "提交" "审核" "审批"] (inc (Integer/parseInt aulevel)));;得到审核字段
         level   (str (inc (Integer/parseInt aulevel)))
         auopseno (inc (:max (db/get-max "userlog")))
@@ -197,9 +196,10 @@
       (do (db/update-oldstatus "驳回" tprkey)   ;;修改老人表状态为驳回
         (db/create-userlog auopseno (str digest " "status flag) auditid functionid dvcode loginname username)      ;;新增审核日志
         (db/update-audit level "0" dvcode (str status flag) loginname auopseno "1" auditid opseno)))      ;;修改审核表
-    (get-audits "mHLcDiwTflgEshNKIiOV" loginname dvcode)))    ;;待办业务
+    (layout/render "audit.html")))    ;;待办业务
 
-(defn get-logs [functionid page rows]       ;;根据外键查询操作日志
+;;根据外键查询操作日志
+(defn get-logs [functionid page rows]
   (let [p (Integer/parseInt page)
         r (Integer/parseInt rows)
         c (count (db/get-userlogs functionid))]
@@ -234,4 +234,11 @@
   (let [dv (db/get-divisionlist dvhigh)]
     (resp/json (map #(divisiontree %) dv))))
 
+;;评估信息转换
+(defn need [nd]
+  (into  nd (db/get-old (:lr_id nd))))
 
+;;查询评估信息
+(defn get-needs []
+  (let [nd (db/get-needs)]
+    (:body (resp/json {:total (count nd) :rows  (map #(need %) nd)}))))
