@@ -90,14 +90,14 @@
 (defn insert-oldsocrel [fields]
   (let [{olds_gx :params} fields
         keyword "olds"
-        lrgxid (inc (:max (db/get-max keyword)))] (str olds_gx)
+        keywordfami "famillyref"
+        lrgxid (inc (:max (db/get-max keywordfami)))]
     ;    (str (vec (vals (select-keys olds_gx [:lrgx_id]))))
     (db/insert-oldsocrel  (into {} (cons [:lrgx_id lrgxid]                   ;;新增家庭成员信息
-                                     (cons [:lr_id (+ (:max (db/get-max keyword)) 1)]
+                                     (cons [:lr_id  (:max (db/get-max keyword))]
                                        (select-keys olds_gx fimallyrelinfo)))))
     (str "true")
-    )
-  )
+    ))
 
 
 (defn create-old [request]               ;;养老信息录入，参数为养老信息录入页面提交的所有信息
@@ -226,4 +226,7 @@
   (let [dv (db/get-divisionlist dvhigh)]
     (resp/json   (map #(divisiontree %) dv))))
 
+;;查询家庭成员关系表
+(defn get-oldsocrel [lr_id]
+  (resp/json (db/get-oldsocrel lr_id)))
 

@@ -51,5 +51,7 @@
   (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))
   ;;获取行政区划下拉选项列表
   (GET "/get-divisionlist" [dvhigh] (old/get-divisionlist dvhigh))
+  ;;查询家庭成员关系表
+  (POST "/get-oldsocrel" [lr_id] (old/get-oldsocrel lr_id))
 
   )

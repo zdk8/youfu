@@ -20,7 +20,7 @@
   (table :t_oldpeople)
   (database dboracle)
   )
-
+;;家庭成员关系表
 (defentity oldsocrel
   (table :t_oldsocrel)
   (database dboracle)
@@ -94,7 +94,10 @@
       "userlog" (select userlog
                   (aggregate (max :opseno) :max))
       "audits" (select audits
-                 (aggregate (max :auditid) :max)))))
+                 (aggregate (max :auditid) :max))
+      "famillyref" (select oldsocrel
+                     (aggregate (max :lrgx_id) :max))
+      )))
 
 ;;养老信息表
 (defn get-olds        ;;查询养老信息
@@ -248,4 +251,9 @@
   (select division
     (fields :dvcode :dvhigh :totalname :dvname)
     (where {:dvhigh dvhigh})))
+
+;;查询家庭成员关系表
+(defn get-oldsocrel [lr_id]
+  (select t_oldsocrel
+    (where {:lr_id lr_id})))
 
