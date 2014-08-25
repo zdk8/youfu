@@ -156,9 +156,9 @@
     (fields :auditid :aulevel :auflag :audesc :auendflag)                      ;;页面显示内容
     (with userlog
       (fields :opseno :digest :tprkey :username :bsnyue :bstime)
-      (where {:functionid functionid :dvcode [like (str  dvcode "%")]})
-      )
-    (where  {:auendflag "0"                          ;;要满足的条件：审核未完成，审核等级达到权限要求
+      (where
+        (and {:functionid functionid } (or {:dvcode [like (str  dvcode "%")]} (= dvcode "330100")))))
+    (where  {:auendflag "0"                         ;;要满足的条件：审核未完成，审核等级达到权限要求
              :aulevel [in (map #(str %)
                             (map #(dec %)
                               (map #(Integer/parseInt %)
@@ -230,16 +230,18 @@
   (delete audits
     (where {:auditid id})))
 
-;(defn get-funcs [username parent]
-;  (select functions
-;    (where {:parent parent})
-;    (with rolefunc
-;      (fields)
-;      (with roleuser
-;        (fields)
-;        (with users
-;          (fields)
-;          (where {:username username}))))))
+(defn get-funcs [username parent]
+  (select functions
+    (where (and {:parent parent
+                 :functionid [in
+                              (subselect rolefunc
+                                (fields :functionid)
+                                (with roleuser
+                                  (fields)
+                                  (with users
+                                    (fields)
+                                    (where {:username username}))))]}  {:functionid [not= "weouDjr2ji7k5w4EA0Ws"]}))
+    (order :orderno)))
 
 ;;获取输入框下拉选项列表
 (defn get-inputlist [aaa100]
