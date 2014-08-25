@@ -95,7 +95,10 @@
       "userlog" (select userlog
                   (aggregate (max :opseno) :max))
       "audits" (select audits
-                 (aggregate (max :auditid) :max)))))
+                 (aggregate (max :auditid) :max))
+      "famillyref" (select oldsocrel
+                     (aggregate (max :lrgx_id) :max))
+      )))
 
 ;;查询养老信息
 (defn get-olds
@@ -262,6 +265,11 @@
   (select division
     (fields :dvcode :dvhigh :totalname :dvname)
     (where {:dvhigh dvhigh})))
+
+;;查询家庭成员关系表
+(defn get-oldsocrel [lr_id]
+  (select t_oldsocrel
+    (where {:lr_id lr_id})))
 
 ;;查询评估信息
 (defn get-needs []

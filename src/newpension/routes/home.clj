@@ -50,6 +50,7 @@
   (POST "/checkaudit" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;待办业务操作
     (old/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
   (GET "/func" [username functionid] (old/get-funcs username functionid))
+ (POST "/get-oldsocrel" [lr_id] (old/get-oldsocrel lr_id))                   ;;查询家庭成员关系表
   (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))                  ;;获取输入框下拉选项列表
   (GET "/get-divisionlist" [dvhigh] (old/get-divisionlist dvhigh))                   ;;获取行政区划下拉选项列表
   (GET "/needs" [] (old/get-needs))             ;;人员评估信息查询
