@@ -124,7 +124,7 @@
 ;    (str olds)
 
 (defn sele_oldsocrel [gx_name]
-  (str (db/sele_oldsocrel gx_name))
+  (str (db/sele-oldsocrel gx_name))
   )
 
 ;;修改养老信息，参数为养老信息修改页面提交的所有信息
@@ -239,11 +239,4 @@
 (defn get-oldsocrel [lr_id]
   (resp/json (db/get-oldsocrel lr_id)))
 
-;;评估信息转换
-(defn need [nd]
-  (into  nd (db/get-old (:lr_id nd))))
 
-;;查询评估信息
-(defn get-needs []
-  (let [nd (db/get-needs)]
-    (:body (resp/json {:total (count nd) :rows  (map #(need %) nd)}))))
