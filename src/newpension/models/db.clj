@@ -123,7 +123,7 @@
   (insert oldsocrel
   (values fiels)))
 
-(defn sele_oldsocrel [gx_name]
+(defn sele-oldsocrel [gx_name]
   (select oldsocrel
   (where {:gx_name [= (str gx_name)]})))
 
@@ -268,7 +268,7 @@
 
 ;;查询家庭成员关系表
 (defn get-oldsocrel [lr_id]
-  (select t_oldsocrel
+  (select oldsocrel
     (where {:lr_id lr_id})))
 
 ;;查询评估信息
