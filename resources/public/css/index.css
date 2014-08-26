@@ -9,7 +9,7 @@ html,body {
     height:100%;
 }
 body {
-    background:url(/img/bg-gray.gif) 0 0 repeat #fff;
+    /*background:url(/img/bg-gray.gif) 0 0 repeat #fff;*/
     color:#5F7A77;
 }
 
