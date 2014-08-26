@@ -83,6 +83,7 @@ $(document).ready(function(local,parameters,res){
     /*家庭成员列表添加*/
     $("#newfamilymemeraddid").click(function(){
         flag +=1;
+//        queryflag+=1;
         $("#familymembersgrid1").datagrid('appendRow', {name: "", relationship: ""});
         var editIndex = $("#familymembersgrid1").datagrid('getRows').length-1;
         $("#familymembersgrid1").datagrid('selectRow', editIndex)
