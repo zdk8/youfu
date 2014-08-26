@@ -13,18 +13,18 @@
               :hjj_type :jz_yidianh :xq_tez :jk_tingl :jz_erxingm :jk_chux :jk_chuany :marriage :operators
               :vocation :jz_yiweiz :jz_erweiz :jz_sheqyy :jk_xuey :jk_jib :districtid :jk_dingx :xq_tec
               :gender :live :retirewage :registration :jk_xiz :economy :jz_yixingm :mobilephone :jz_zhibdh :nation
-;              :fwlx_jjyl :fwlx_fwj :fwlx_mftj :fwlx_dylnb :fwlx_jgyl :fwlx_tyfw :fwlx_hjj :fwlx_qt :jk_rcws_st
-;              :jk_rcws_xl :jk_rcws_xt :jk_rcws_sy :jk_rcws_xj :jk_rcws_tx :jk_rcws_xzj :jk_rcws_xy :jk_bs_gaoxy
-;              :jk_bs_tangnb :jk_bs_fengs :jk_bs_xinzb :jk_bs_chid :jk_bs_guz :jk_bs_qit
+              ;              :fwlx_jjyl :fwlx_fwj :fwlx_mftj :fwlx_dylnb :fwlx_jgyl :fwlx_tyfw :fwlx_hjj :fwlx_qt :jk_rcws_st
+              ;              :jk_rcws_xl :jk_rcws_xt :jk_rcws_sy :jk_rcws_xj :jk_rcws_tx :jk_rcws_xzj :jk_rcws_xy :jk_bs_gaoxy
+              ;              :jk_bs_tangnb :jk_bs_fengs :jk_bs_xinzb :jk_bs_chid :jk_bs_guz :jk_bs_qit
               ])
 
 (def checkinfo {:fwlx_jjyl "" :fwlx_fwj "" :fwlx_mftj "":fwlx_dylnb "":fwlx_jgyl "" :fwlx_tyfw "" :fwlx_hjj ""
                 :fwlx_qt "" :jk_rcws_st "" :jk_rcws_xl "" :jk_rcws_xt "" :jk_rcws_sy "" :jk_rcws_xj "" :jk_rcws_tx ""
                 :jk_rcws_xzj "" :jk_rcws_xy "" :jk_bs_gaoxy "" :jk_bs_tangnb "" :jk_bs_fengs "" :jk_bs_xinzb ""
                 :jk_bs_chid "" :jk_bs_guz "" :jk_bs_qit ""})
-(def fimallyrelinfo [:guanx :gx_name :gx_identityid :gx_gender :gx_birth :gx_telephone :gx_mobilephone
-                      :gx_economy :gx_culture :gx_registration :gx_nation :gx_work])
-(def fimallyrelflag [:flag 0])
+(def fimallyrelinfo [:lrgx_id :guanx :gx_name :gx_identityid :gx_gender :gx_birth :gx_telephone :gx_mobilephone
+                     :gx_economy :gx_culture :gx_registration :gx_nation :gx_work])
+(def oldlrid [:lr_id])
 
 ;;用户登录
 (defn login [name pwd]
@@ -88,17 +88,18 @@
 ;          (recur (conj b (get (a i) :lr_id)) (inc i)) b)
 ;        )))
 ;  )
-
+;;家庭成员信息表主键
+(defn oldsocrelkey []
+  (let [keywordfami "famillyref"
+        lrgxid (inc (:max (db/get-max keywordfami)))] (str lrgxid)))
 ;;新增养老家庭成员信息
 (defn insert-oldsocrel [fields]
   (let [{olds_gx :params} fields
         keyword "olds"
         keywordfami "famillyref"
         lrgxid (inc (:max (db/get-max keywordfami)))]
-    ;    (str (vec (vals (select-keys olds_gx [:lrgx_id]))))
-    (db/insert-oldsocrel  (into {} (cons [:lrgx_id lrgxid]                   ;;新增家庭成员信息
-                                     (cons [:lr_id  (:max (db/get-max keyword))]
-                                       (select-keys olds_gx fimallyrelinfo)))))
+    (db/insert-oldsocrel  (into {} (cons [:lr_id  (:max (db/get-max keyword))]
+                                          (select-keys olds_gx fimallyrelinfo))))
     (str "true")))
 
 ;;养老信息录入，参数为养老信息录入页面提交的所有信息
@@ -150,6 +151,16 @@
       (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由的状态下，修改对应审核表
     (str "修改成功")))
 
+;;修改养老家庭成员信息
+(defn update-oldsorel [reuqest]
+  (let [{oldsocrel :params} reuqest] (str oldsocrel )
+    (resp/json (db/update-oldsorel  (into {} (cons (select-keys oldsocrel oldlrid)
+                                               (select-keys oldsocrel fimallyrelinfo)))
+                 (:lrgx_id oldsocrel)))))
+
+;;删除家庭成员关系表
+(defn dele-oldsorel [lrgx_id]
+  (resp/json (db/dele-oldsorel lrgx_id)))
 ;;删除养老信息，参数为用户页面提交的所有信息
 (defn delete-old [request]
   (let [{olds :params} request

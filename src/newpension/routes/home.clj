@@ -32,6 +32,7 @@
   (layout/render "need.html"))
 
 (defroutes home-routes
+  (GET "/test" [] (layout/render "test.html"))
   (GET "/" [] (login-page)) ;;登录页面
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
   (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
@@ -52,8 +53,11 @@
   (POST "/checkaudit" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;待办业务操作
     (old/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
   (GET "/func" [username functionid] (old/get-funcs username functionid))
-  (POST "/get-oldsocrel" [lr_id] (old/get-oldsocrel lr_id))                   ;;查询家庭成员关系表
-  (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))                  ;;获取输入框下拉选项列表
-  (GET "/get-divisionlist" [dvhigh] (old/get-divisionlist dvhigh))                   ;;获取行政区划下拉选项列表
+  (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))  ;;获取输入框下拉选项列表
+  (GET "/get-divisionlist" [dvhigh] (old/get-divisionlist dvhigh))  ;;获取行政区划下拉选项列表
+  (POST "/get-oldsocrel" [lr_id] (old/get-oldsocrel lr_id))   ;;查询家庭成员关系表
+  (POST "/update-oldsorel" reuqest (old/update-oldsorel reuqest))    ;;修改养老家庭成员信息
+  (POST "/oldsocrelkey" [] (old/oldsocrelkey))    ;;家庭成员信息表主键
+  (POST "/dele-oldsorel" [lrgx_id] (old/dele-oldsorel lrgx_id))   ;;删除家庭成员关系表
   (GET "/needs" [] (need/get-needs))             ;;人员评估信息查询
   )
