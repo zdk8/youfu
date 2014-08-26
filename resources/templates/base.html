@@ -4,10 +4,10 @@
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>民政养老救助系统</title>
       <link rel="stylesheet" type="text/css" href="/css/index.css">
-      <script type="text/javascript"  src="http://112.124.50.195:8080/easyui/jquery-1.8.0.min.js"></script>
-      <script type="text/javascript"  src="http://112.124.50.195:8080/easyui/jquery.easyui.min.js"></script>
-      <script type="text/javascript"  src="http://112.124.50.195:8080/easyui/locale/easyui-lang-zh_CN.js"></script>
-      <link rel="stylesheet" type="text/css"  href="http://112.124.50.195:8080/easyui/themes/default/easyui.css">
+      <script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery-1.8.0.min.js"></script>
+      <script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+      <script type="text/javascript"  src="http://www.jeasyui.com/easyui/locale/easyui-lang-zh_CN.js"></script>
+      <link rel="stylesheet" type="text/css"  href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
       <script type="text/javascript">
           $(document).ready(function() {
               var name = $("#user").val();
@@ -20,21 +20,22 @@
                               $('#accord').accordion('add',{
                                   title: n.title,
                                   selected: false,
-//                                  fit:true,
-                                  content:'<div style="padding:10px"><div name="'+n.title+'"'+'id="'+ n.id+'"></ul></div>'
+                                  content:'<ul name="'+n.title+'"'+'id="'+ n.id+'"></ul>'
                               });
                           }
                       });
+                      $('#accord').accordion('select',0);
                   }
               });
+
               $('#accord').accordion({
                   onSelect: function(title,index){
-                      var id=$("div[name='"+title+"']").attr("id");
-                      $("div[name='"+title+"']").tree({
+                      var id=$("ul[name='"+title+"']").attr("id");
+                      $("ul[name='"+title+"']").tree({
                           method:'get',
                           url: '/func?username='+name+'&functionid='+id ,
                           onBeforeExpand: function (node){
-                              $("div[name='"+title+"']").tree("options").url
+                              $("ul[name='"+title+"']").tree("options").url
                                       = '/func?username='+name+'&functionid='+node.id
                           },
                           onClick:function(node){
@@ -42,7 +43,6 @@
                                   addTab(node.title,node.urlpath);
                           }
                       });
-                      alert(id);
                   }
               });
           });
@@ -68,7 +68,7 @@
     </div>
     <div region="west" id="westpanel" border="true" split="true" title="业务导航" class="cs-west" style="border-right: 0">
         <div id="menu_pension" fit="true" border="false">
-            <div class="easyui-accordion" id="accord">
+            <div class="easyui-accordion" id="accord" >
             </div>
         </div>
     </div>
