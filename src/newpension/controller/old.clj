@@ -13,9 +13,9 @@
               :hjj_type :jz_yidianh :xq_tez :jk_tingl :jz_erxingm :jk_chux :jk_chuany :marriage :operators
               :vocation :jz_yiweiz :jz_erweiz :jz_sheqyy :jk_xuey :jk_jib :districtid :jk_dingx :xq_tec
               :gender :live :retirewage :registration :jk_xiz :economy :jz_yixingm :mobilephone :jz_zhibdh :nation
-;              :fwlx_jjyl :fwlx_fwj :fwlx_mftj :fwlx_dylnb :fwlx_jgyl :fwlx_tyfw :fwlx_hjj :fwlx_qt :jk_rcws_st
-;              :jk_rcws_xl :jk_rcws_xt :jk_rcws_sy :jk_rcws_xj :jk_rcws_tx :jk_rcws_xzj :jk_rcws_xy :jk_bs_gaoxy
-;              :jk_bs_tangnb :jk_bs_fengs :jk_bs_xinzb :jk_bs_chid :jk_bs_guz :jk_bs_qit
+              ;              :fwlx_jjyl :fwlx_fwj :fwlx_mftj :fwlx_dylnb :fwlx_jgyl :fwlx_tyfw :fwlx_hjj :fwlx_qt :jk_rcws_st
+              ;              :jk_rcws_xl :jk_rcws_xt :jk_rcws_sy :jk_rcws_xj :jk_rcws_tx :jk_rcws_xzj :jk_rcws_xy :jk_bs_gaoxy
+              ;              :jk_bs_tangnb :jk_bs_fengs :jk_bs_xinzb :jk_bs_chid :jk_bs_guz :jk_bs_qit
               ])
 
 (def checkinfo {:fwlx_jjyl "" :fwlx_fwj "" :fwlx_mftj "":fwlx_dylnb "":fwlx_jgyl "" :fwlx_tyfw "" :fwlx_hjj ""
@@ -151,6 +151,16 @@
       (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由的状态下，修改对应审核表
     (str "修改成功")))
 
+;;修改养老家庭成员信息
+(defn update-oldsorel [reuqest]
+  (let [{oldsocrel :params} reuqest] (str oldsocrel )
+    (resp/json (db/update-oldsorel  (into {} (cons (select-keys oldsocrel oldlrid)
+                                               (select-keys oldsocrel fimallyrelinfo)))
+                 (:lrgx_id oldsocrel)))))
+
+;;删除家庭成员关系表
+(defn dele-oldsorel [lrgx_id]
+  (resp/json (db/dele-oldsorel lrgx_id)))
 ;;删除养老信息，参数为用户页面提交的所有信息
 (defn delete-old [request]
   (let [{olds :params} request

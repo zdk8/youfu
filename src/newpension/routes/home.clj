@@ -35,6 +35,7 @@
   (layout/render "addneed.html"))
 
 (defroutes home-routes
+  (GET "/test" [] (layout/render "test.html"))
   (GET "/" [] (login-page)) ;;登录页面
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
   (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
