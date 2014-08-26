@@ -102,6 +102,14 @@
                                           (select-keys olds_gx fimallyrelinfo))))
     (str "true")))
 
+;;修改后新增养老家庭成员信息
+(defn editadd-oldsocrel [fields]
+  (let [{olds_gx :params} fields]
+    (db/insert-oldsocrel olds_gx)
+    (str "true")
+    )
+  )
+
 ;;养老信息录入，参数为养老信息录入页面提交的所有信息
 (defn create-old [request]
   (let [{olds :params} request
@@ -125,7 +133,7 @@
 ;    (str olds)
 
 (defn sele_oldsocrel [gx_name]
-  (str (db/sele-oldsocrel gx_name))
+  (str (db/sele_oldsocrel gx_name))
   )
 
 ;;修改养老信息，参数为养老信息修改页面提交的所有信息
