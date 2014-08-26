@@ -88,10 +88,12 @@
 ;          (recur (conj b (get (a i) :lr_id)) (inc i)) b)
 ;        )))
 ;  )
+
 ;;家庭成员信息表主键
 (defn oldsocrelkey []
   (let [keywordfami "famillyref"
         lrgxid (inc (:max (db/get-max keywordfami)))] (str lrgxid)))
+
 ;;新增养老家庭成员信息
 (defn insert-oldsocrel [fields]
   (let [{olds_gx :params} fields
@@ -130,11 +132,9 @@
     (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
     (db/create-audit opseno auditid)             ;;新增对应的审核表
     (str "新增成功")))
-;    (str olds)
 
 (defn sele_oldsocrel [gx_name]
-  (str (db/sele_oldsocrel gx_name))
-  )
+  (str (db/sele_oldsocrel gx_name)))
 
 ;;修改养老信息，参数为养老信息修改页面提交的所有信息
 (defn update-old [request]
@@ -164,11 +164,12 @@
   (let [{oldsocrel :params} reuqest] (str oldsocrel )
     (resp/json (db/update-oldsorel  (into {} (cons (select-keys oldsocrel oldlrid)
                                                (select-keys oldsocrel fimallyrelinfo)))
-                 (:lrgx_id oldsocrel)))))
+                                    (:lrgx_id oldsocrel)))))
 
 ;;删除家庭成员关系表
 (defn dele-oldsorel [lrgx_id]
   (resp/json (db/dele-oldsorel lrgx_id)))
+
 ;;删除养老信息，参数为用户页面提交的所有信息
 (defn delete-old [request]
   (let [{olds :params} request

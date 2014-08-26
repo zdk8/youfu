@@ -855,7 +855,9 @@ $.extend($.fn.validatebox.defaults.rules, {
                 <th opt="gxidentityid" data-options="field:'gx_identityid',width:150,align:'center',editor:{
                             type:'validatebox',
                             options:{
-                                required:true
+                                required:true,
+                                invalidMessage:'请输入正确的身份证号',
+                                validType:'identityid'
                             }
                         }">身份证号<span style="color: red">*</span></th>
                 <th class="lazy-combobox" data-options="field:'gx_gender',align:'center',width:60,editor:{
@@ -961,7 +963,7 @@ $.extend($.fn.validatebox.defaults.rules, {
     <input id="lr_id_rel" type="text">
     <input id="guanx_rel" type="text">
     <input id="gx_name_rel" type="text">
-    <input id="gx_identityid_rel" type="text">
+    <input id="gx_identityid_rel" type="text" >
     <input id="gx_gender_rel" type="text">
     <input id="gx_birth_rel" type="text">
     <input id="gx_telephone_rel" type="text">
