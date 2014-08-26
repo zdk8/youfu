@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript"  src="http://112.124.50.195:8080/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript"  src="http://www.jeasyui.com/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css"  href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+</head>
+<script type="text/javascript">
+    var cj={
+        getLoader:function(type,param,success,error)
+        {
+            return function(param,success,error){
+                $.ajax({
+                    url:'get-inputlist',
+                    data:{aaa100:type},
+                    success:function(data){
+                        var items = $.map(data.msg, function(item){
+                            return {
+                                id: item.aaa102,
+                                text: item.aaa103
+                            };
+                        });
+                        success(items)
+                    },
+                    error: function(){
+                        error.apply(this, arguments);
+                    }
+                })
+            }
+        }
+    };
+</script>
+<body>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info0"><legend>用户基本信息</legend>
+    <div>
+        <input type="hidden" name="lr_id">
+        <table class="formtable">
+            <tr>
+                <td class="formtdtext">行政区划:</td>
+                <td colspan="3">
+                    <input name="registration" data-options="idField:'dvcode', textField:'dvname'"></td>
+                <td rowspan="4" colspan="2" style="text-align: center;" >
+                    <img src="img/noperson.gif" opt="personimg" alt="用户照片" height="120" width="120"></td>
+            </tr>
+
+            <tr>
+                <td class="formtdtext">姓名:</td>
+                <td><input class="easyui-validatebox" type="text" name="name" data-options="required:true"></td>
+                <td class="formtdtext">身份证<span style="color: red">*</span></td>
+                <td><input opt="identityid" name="identityid" class="x-easyui-validatebox"
+                           data-options="required:true"></td>
+            </tr>
+
+            <tr>
+                <td class="formtdtext">性别:</td>
+                <td><input class="easyui-combobox" name="gender"
+                           data-options=" loader:cj.getLoader('gender'), editable:false, valueField:'id', textField:'text' ">
+
+                </td>
+                <td class="formtdtext">出生年月:</td>
+                <td><input name="birthd"></td>
+
+            </tr>
+
+            <tr>
+                <td class="formtdtext">民族:</td>
+                <td><input class="easyui-combobox" name="nation"
+                           data-options=" loader:cj.getLoader('NATION'), editable:false, valueField:'id', textField:'text' ">
+                </td>
+                <td class="formtdtext">文化程度:</td>
+                <td><input class="easyui-combobox" name="culture"
+                           data-options=" loader:cj.getLoader('culture'), editable:false, valueField:'id', textField:'text' ">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">籍贯:</td>
+                <td><input  type="text" name="registration" ></td>
+                <td class="formtdtext">婚姻状况:</td>
+                <td><input  type="text" name="realaddress" ></td>
+
+
+            </tr>
+            <tr>
+                <td class="formtdtext">曾从事职业:</td>
+                <td><input  type="text" name="telnum" ></td>
+                <td class="formtdtext">社保卡号:</td>
+                <td><input  type="text" name="securitid" ></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">居住情况:</td>
+                <td ><input type="text" name="bankid"></td>
+                <td class="formtdtext">经济条件:</td>
+                <td ><input type="text" name="bankid"></td>
+            </tr>
+
+            <tr>
+                <td class="formtdtext">户籍所在地:</td>
+                <td ><input type="text" name="registration"></td>
+                <td class="formtdtext">邮编:</td>
+                <td ><input type="text" name="bankid"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">居住地址:</td>
+                <td colspan="3"><input type="text" name="address" size="50"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">住宅电话:</td>
+                <td ><input type="text" name="mobilephone"></td>
+                <td class="formtdtext">申请人手机:</td>
+                <td ><input type="text" name="telephone"></td>
+            </tr>
+
+        </table>
+    </div>
+
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info1"><legend>生活自理能力</legend>
+
+    <table class="formtable">
+        <tbody>
+        <tr style="height: 40px;">
+            <td style="width: 50px;">评估事项</td>
+            <td colspan="4" style="text-align: center;">评估内容</td>
+            <td style="width: 50px;">评估分</td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td >(1)<br/>进食</td>
+            <td style="width: 175px;">
+                <input name="sh_jings" type="radio" value="0" />
+                <label>0分<br/>自己在合理的时间内(约十秒种吃一口)可用筷子取食眼前的食物.若需进食辅具的,应会自行穿脱.</label>
+            </td>
+            <td style="width: 175px;"></td>
+            <td style="width: 175px;"><input name="sh_jings" type="radio" value="5" />
+                <label>5分<br/>需别人帮助穿脱辅具或只会用汤匙进食</label>
+            </td>
+            <td style="width: 175px;"><input name="sh_jings" type="radio" value="10" />
+                <label>10分<br/>无法自行取食或耗费时间过长.</label>
+            </td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td >(2)<br/>移动</td>
+            <td ><input name="sh_yid" type="radio" value="0" /><label>可独立完成,包括轮椅的刹车及移开脚踏板.</label></td>
+            <td ><input name="sh_yid" type="radio" value="5" /><label>需要稍微的协助(例如:予以轻扶以保持平衡)或需要口头指导.</label></td>
+            <td ><input name="sh_yid" type="radio" value="10" /><label>可自行从床上坐起来,但移位时仍需别人帮助.</label></td>
+            <td ><input name="sh_yid" type="radio" value="15" /><label>需别人帮助方可坐起来或需别人帮助方可移位.</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td >(3)<br/>个人卫生</td>
+            <td ><input name="sh_weis" type="radio" value="0" /><label>可独立完成洗脸,洗手,刷牙及梳头.</label></td>
+            <td ></td>
+            <td ></td>
+            <td ><input name="sh_weis" type="radio" value="5" /><label>需要别人帮助</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+        <tr>
+            <td >(4)<br/>入厕</td>
+            <td ><input name="sh_ruc" type="radio" value="0" /><label>可自行进出厕所,不会弄脏衣物,并能穿好衣服,使用便盆者,可自行清理便盆.</label></td>
+            <td ></td>
+            <td ><input name="sh_ruc" type="radio" value="5" /><label>需要别人帮助</label></td>
+            <td ><input name="sh_ruc" type="radio" value="10" /><label>需帮助保持姿势平衡,整理衣物或使用卫生纸.使用便盆者,可自行取放,但须依赖他人清理.</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+        <tr>
+            <td >(5)<br/>洗澡</td>
+            <td ><input name="sh_xiz" type="radio" value="0" /><label>可独立完成(不论是盆浴或沐浴)</label></td>
+            <td ></td>
+            <td ></td>
+            <td ><input name="sh_xiz" type="radio" value="5" /><label>需要别人帮助.</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+        <tr>
+            <td >(6)<br/>行走于平地上</td>
+            <td ><input name="sh_xingz" type="radio" value="0" /><label>使用或不使用辅具皆可独立行走50米以上</label></td>
+            <td ><input name="sh_xingz" type="radio" value="5" /><label>需要稍微的扶持或口头指导方可行走50米以上</label></td>
+            <td ><input name="sh_xingz" type="radio" value="10" /><label>虽无法行走,但可独立操纵轮椅(包括转弯,进门,接近桌子和床沿)并可推行轮椅50米以上.</label></td>
+            <td ><input name="sh_xingz" type="radio" value="15" /><label>需别人帮助推轮椅</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+        <tr>
+            <td >(7)<br/>上下楼梯</td>
+            <td ><input name="sh_lout" type="radio" value="0" /><label>独立完成</label></td>
+            <td ></td>
+            <td ><input name="sh_lout" type="radio" value="5" /><label>需要稍微帮助或口头指导</label></td>
+            <td ><input name="sh_lout" type="radio" value="10" /><label>无法上下楼梯</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+        <tr>
+            <td >(8)<br/>穿脱衣服</td>
+            <td ><input name="sh_chuany" type="radio" value="0" /><label>可自行穿脱衣服,鞋子及辅具</label></td>
+            <td ></td>
+            <td ><input name="sh_chuany" type="radio" value="5" /><label>在别人帮助下,可完成一半以上的上述动作</label></td>
+            <td ><input name="sh_chuany" type="radio" value="10" /><label>不能自行穿脱衣服</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+
+        <tr>
+            <td >(9)<br/>大便控制</td>
+            <td ><input name="sh_dab" type="radio" value="0" /><label>无大小便失禁,并可自行使用塞剂.</label></td>
+            <td ></td>
+            <td ><input name="sh_dab" type="radio" value="5" /><label>偶有失禁(每周不超过一次)或使用塞剂时需人帮助</label></td>
+            <td ><input name="sh_dab" type="radio" value="10" /><label>经常失禁,需要别人处理.</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+
+        <tr>
+            <td >(10)<br/>小便控制</td>
+            <td ><input name="sh_xiaob" type="radio" value="0" /><label>日夜皆不会尿失禁,或可自行使用并清理尿套</label></td>
+            <td ></td>
+            <td ><input name="sh_xiaob" type="radio" value="5" /><label>偶尔会尿失禁(每周不超过一次)或尿急(无法等待便盆或无法及时赶到厕所)或需别人帮助处理尿套</label></td>
+            <td ><input name="sh_xiaob" type="radio" value="10" /><label>经常失禁,需要别人处理.</label></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng"></td>
+        </tr>
+
+        <tr>
+            <td >总分</td>
+            <td colspan="2" style="text-align: center;">
+                <input name="sh_zongf">
+            </td>
+            <td >评估分</td>
+            <td colspan="2" style="text-align: center;">
+                <input name="sh_pingguf">
+            </td>
+        </tr>
+
+        <tr>
+            <td >结论</td>
+            <td colspan="5">
+                <ul>
+                    <li style="margin-left: 20px; display: inline;"><input name="sh_jiel" type="radio" value="0" /><label>正常 </label></li>
+                    <li style="margin-left: 40px; display: inline;"><input name="sh_jiel" type="radio" value="1" /><label>轻度依赖 </label></li>
+                    <li style="margin-left: 40px; display: inline;"><input name="sh_jiel" type="radio" value="2" /><label>中度依赖 </label></li>
+                    <li style="margin-left: 40px; display: inline;"><input name="sh_jiel" type="radio" value="3" /><label>重度依赖 </label></li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td >评估员</td>
+            <td colspan="5">
+                <input name="sh_pingguy">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info2"><legend>生活自理能力</legend>
+    <table class="formtable">
+        <tr>
+            <td rowspan="5">经济条件</td>
+            <td>分类</td>
+            <td>判断评分</td>
+            <td>本人收入</td>
+        </tr>
+        <tr>
+            <td>退休工资(2000元-3000元)</td>
+            <td><input name="jj_shour" type="radio" value="10" /><label>10分</label></td>
+            <td>本人收入<input size="1" class="pingfen">元/月</td>
+        </tr>
+        <tr>
+            <td>低退休工资(2000元以下)</td>
+            <td><input name="jj_shour" type="radio" value="15" /><label>15分</label></td>
+            <td>本人收入<input size="1" class="pingfen">元/月</td>
+        </tr>
+        <tr>
+            <td>无社保</td>
+            <td><input name="jj_shour" type="radio" value="20" /><label>20分</label></td>
+            <td>本人收入<input size="1" class="pingfen">元/月</td>
+        </tr>
+        <tr>
+            <td>低保</td>
+            <td><input name="jj_shour" type="radio" value="25" /><label>25分</label></td>
+            <td></td>
+        </tr>
+        <tr><td>评分</td>
+            <td colspan="3">
+                <input name="jj_pingguf">
+            </td>
+        </tr>
+        <tr><td>评估员</td>
+            <td colspan="3">
+                <input name="jj_pingguy">
+            </td>
+        </tr>
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info3"><legend>居住环境</legend>
+    <table class="formtable">
+        <tr>
+            <td rowspan="4">居住环境</td>
+            <td style="text-align: center;">分类</td>
+            <td>判断评分</td>
+            <td>是否有生活照料</td>
+        </tr>
+        <tr>
+            <td>与子女,亲友共住</td>
+            <td><input name="jz_fenl" type="radio" value="15" /><label>15分</label></td>
+            <td>
+                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>是</label>
+                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>否</label>
+            </td>
+        </tr>
+        <tr>
+            <td>空巢</td>
+            <td><input name="jz_fenl" type="radio" value="20" /><label>20分</label></td>
+            <td>
+                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>是</label>
+                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>否</label>
+            </td>
+        </tr>
+        <tr>
+            <td>独居,孤寡</td>
+            <td><input name="jz_fenl" type="radio" value="25" /><label>25分</label></td>
+            <td>
+                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>是</label>
+                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>否</label>
+            </td>
+        </tr>
+
+        <tr><td>评分</td>
+            <td colspan="3">
+                <input name="jz_pingguf">
+            </td>
+        </tr>
+        <tr><td>评估员</td>
+            <td colspan="3">
+                <input name="jz_pingguy">
+            </td>
+        </tr>
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info4"><legend>年龄情况</legend>
+    <table class="formtable">
+        <tr>
+            <td rowspan="2">年龄情况</td>
+            <td>出生日期:
+                <input opt="csrq" name="chushengriqi"/>
+            </td>
+            <td opt="textymd">__年__月__日(以身份证为准)</td>
+        </tr>
+        <tr>
+            <td>现有年龄:<input size="1" class="pingfen" opt="xynl"></td>
+            <td>
+                <ul style="list-style-type:none">
+                    <li><span style="width: 100px;">1. 60-79&nbsp;&nbsp;</span><input name="nl_fenl" type="radio" value="0" /><label>0分</label></li>
+                    <li><span style="width: 100px;">2. 80-89&nbsp;&nbsp;</span><input name="nl_fenl" type="radio" value="5" /><label>5分</label></li>
+                    <li><span style="width: 100px;">3. 90以上</span><input name="nl_fenl" type="radio" value="10" /><label>10分</label></li>
+                </ul>
+            </td>
+
+        </tr>
+
+
+        <tr><td>评分</td>
+            <td colspan="3">
+                <input name="nl_pingguf">
+            </td>
+        </tr>
+
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info5"><legend>特殊贡献</legend>
+    <table class="formtable">
+        <tr>
+            <td>特殊贡献</td>
+            <td>
+                <ul style="list-style-type:none">
+                    <li><span style="width: 100px;">1. 市级以上劳模</span><input name="gx_laom" type="checkbox" value="10" /><label>10分</label></li>
+                    <li><span style="width: 100px;">2. 重点优抚对象</span><input name="gx_youf" type="checkbox" value="10" /><label>10分</label></li>
+                    <li><span style="width: 100px;">2. 纯居干&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span><input name="gx_chunjg" type="checkbox" value="10" /><label>10分</label></li>
+                    <li><span style="width: 100px;">3. 离休干部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span><input name="gx_ganb" type="checkbox" value="10" /><label>10分</label></li>
+                </ul>
+            </td>
+
+        </tr>
+
+
+        <tr><td>评分</td>
+            <td>
+                <input name="gx_pingguf">
+            </td>
+        </tr>
+        <tr><td>评估员</td>
+            <td>
+                <input name="gx_pingguy">
+            </td>
+        </tr>
+
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info6"><legend>残障情况</legend>
+    <table class="formtable">
+        <tr>
+            <td>视力</td>
+            <td>
+                <ul style="list-style-type:none">
+                    <li><input name="cz_shil" type="radio" value="0" /><label>轻度不健全,但尚能照顾个人安全</label></li>
+                    <li><input name="cz_shil" type="radio" value="1" /><label>重度不健全,只有光感,但在熟悉的环境下,足以照顾自己</label></li>
+                    <li><input name="cz_shil" type="radio" value="2" /><label>失明,需他人护理</label></li>
+                </ul>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>听力</td>
+            <td>
+                <ul style="list-style-type:none">
+                    <li><input name="cz_tingl" type="radio" value="0" /><label>需配带助听器</label></li>
+                    <li><input name="cz_tingl" type="radio" value="1" /><label>轻度受损</label></li>
+                    <li><input name="cz_tingl" type="radio" value="2" /><label>重度受损</label></li>
+                    <li><input name="cz_tingl" type="radio" value="3" /><label>失聪</label></li>
+                </ul>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>肢体</td>
+            <td>
+                <ul style="list-style-type:none">
+                    <li><input name="cz_zhit" type="radio" value="0" /><label>上肢</label></li>
+                    <li><input name="cz_zhit" type="radio" value="1" /><label>下肢</label></li>
+                </ul>
+            </td>
+
+        </tr>
+
+
+        <tr><td>其他</td>
+            <td><textarea name="cz_qit" style="height: 20px;width: 99%;"></textarea></td>
+        </tr>
+        <tr><td>评估员</td>
+            <td>
+                <input name="cz_pingguy">
+            </td>
+        </tr>
+
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info7"><legend>住房情况</legend>
+    <table class="formtable">
+        <tr>
+            <td>住房情况</td>
+            <td>
+                <ul style="list-style-type:none">
+                    <li><span style="width: 100px;display:inline-block;">1.廉租房</span>
+                        <input name="zf_lianzf" type="radio" value="0" /><label>无</label>
+                        <input name="zf_lianzf" type="radio" value="1" /><label>有</label>
+                    </li>
+                    <li><span style="width: 100px;display:inline-block;">2.租赁房</span>
+                        <input name="zf_zhulf" type="radio" value="0" /><label>无</label>
+                        <input name="zf_zhulf" type="radio" value="1" /><label>有</label>
+                    </li>
+                    <li><span style="width: 100px;display:inline-block;">3.经济适用房</span>
+                        <input name="zf_shiyf" type="radio" value="0" /><label>无</label>
+                        <input name="zf_shiyf" type="radio" value="1" /><label>有</label>
+                        <input size="1" class="pingfen"/>套</label>
+                    </li>
+                    <li><span style="width: 100px;display:inline-block;">4.商品房</span>
+                        <input name="zf_shangpf" type="radio" value="0" /><label>无</label>
+                        <input name="zf_shangpf" type="radio" value="1" /><label>有</label>
+                        <input size="1" class="pingfen"/>套</label>
+                    </li>
+                    <li><span style="width: 100px;display:inline-block;">5.农村自建房</span>
+                        <input name="zf_zijf" type="radio" value="0" /><label>无</label>
+                        <input name="zf_zijf" type="radio" value="1" /><label>有</label>
+                        <input size="1" class="pingfen"/>套</label>
+
+                    </li>
+                    <li><span style="width: 100px;display:inline-block;">6.其他
+                        <input name="zf_qit">
+                    </span>
+                    </li>
+                </ul>
+            </td>
+
+        </tr>
+        <tr><td>评估员</td>
+            <td>
+                <input name="zf_pingguy">
+            </td>
+        </tr>
+
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info8"><legend>重大疾病</legend>
+    <table class="formtable" >
+        <tr>
+            <td>疾病名称</td>
+            <td>医生诊断</td>
+            <td>在接受治疗</td>
+            <td>结束治疗</td>
+        </tr>
+        <tr opt="zhongdajibing">
+            <td>
+                <ol>
+                    <li>高血压</li>
+                    <li>老年心力衰竭</li>
+                    <li>冠心病</li>
+                    <li>心律失常</li>
+                    <li>慢性支气管炎</li>
+                    <li>肺气肿</li>
+                    <li>肺心病</li>
+                    <li>肺炎</li>
+                    <li>脑血管意外</li>
+                    <li>帕金森氏症</li>
+                    <li>老年痴呆症</li>
+                    <li>忧郁症</li>
+                    <li>糖尿病</li>
+                    <li>痛风</li>
+                    <li>肢体骨折</li>
+                    <li>肩周炎</li>
+                    <li>颈椎病</li>
+                    <li>类风湿性关节炎</li>
+                    <li>肝胆疾病</li>
+                    <li>白内障</li>
+                    <li>青光眼</li>
+                    <li>视网膜血管性疾病</li>
+                    <li>糖尿病视网膜病变</li>
+                    <li>肾脏疾病</li>
+                    <li>恶性肿瘤</li>
+                    <li>其他</li>
+                    <li>__</li>
+                    <li>__</li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_gaoxy" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_xinlsj" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_guanxb" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_xinlshic" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_manxzhiqguany" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_feiqz" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_feixb" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_feiy" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_naoxguanyw" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_pajshensz" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_laonchidz" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_youyz" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_tangnb" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_tongf" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_zhitguz" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_jianzy" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_jinzb" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_leifshigjiey" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_gandjib" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_bainz" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_qinguany" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_shiwmoxguanjib" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_tangnbingswangmbingb" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_shenzjib" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_qit1" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_qit2" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_qit3" type="radio" value="1" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">1</span><input name="jb_qit4" type="radio" value="1" /><label></label></li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_gaoxy" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_xinlsj" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_guanxb" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_xinlshic" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_manxzhiqguany" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_feiqz" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_feixb" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_feiy" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_naoxguanyw" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_pajshensz" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_laonchidz" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_youyz" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_tangnb" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_tongf" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_zhitguz" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_jianzy" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_jinzb" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_leifshigjiey" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_gandjib" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_bainz" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qinguany" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_shiwmoxguanjib" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_tangnbingswangmbingb" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_shenzjib" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit2" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit2" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit3" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit4" type="radio" value="2" /><label></label></li>
+                </ol>
+            </td>
+
+            <td>
+                <ol>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_gaoxy" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_xinlsj" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_guanxb" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_xinlshic" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_manxzhiqguany" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_feiqz" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_feixb" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_feiy" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_naoxguanyw" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_pajshensz" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_laonchidz" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_youyz" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_tangnb" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_tongf" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_zhitguz" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_jianzy" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_jinzb" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_leifshigjiey" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_gandjib" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_bainz" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qinguany" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_shiwmoxguanjib" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_tangnbingswangmbingb" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_shenzjib" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit3" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit2" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit3" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit4" type="radio" value="3" /><label></label></li>
+                </ol>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>评估员</td>
+            <td colspan="3">
+                <input name="jb_pingguy">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"><textarea name="jb_beiz" style="width: 100%;"
+                                      placeholder="填写备注信息"></textarea></td>
+        </tr>
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="result1">
+    <legend>评估报告一:评估总分计算</legend>
+    <input type="hidden" name="pg_id">
+    <table class="formtable" style="width:100%">
+        <tr>
+            <td style="width: 90px;">评估参数</td>
+            <td>判断等级</td>
+            <td style="width: 70px;">评估分值</td>
+        </tr>
+        <tr>
+            <td>1.生活处理能力<br/>(0-50分)</td>
+            <td>
+                <input name="sum_sh_jiel" type="radio" value="0" /><label>正常</label>
+                <input name="sum_sh_jiel" type="radio" value="1" /><label>轻度</label>
+                <input name="sum_sh_jiel" type="radio" value="2" /><label>中度依赖</label>
+                <input name="sum_sh_jiel" type="radio" value="3" /><label>重度依赖</label>
+            </td>
+            <td ><input size="1" class="pingfen" name="sum_sh_pingguf"></td>
+        </tr>
+        <tr>
+            <td>2.经济条件<br/>(0-25分)</td>
+            <td>
+                <input name="sum_jj_shour" type="radio" value="10" /><label>低保</label>
+                <input name="sum_jj_shour" type="radio" value="15" /><label>无社保</label>
+                <input name="sum_jj_shour" type="radio" value="20" /><label>低退休工资</label>
+                <input name="sum_jj_shour" type="radio" value="25" /><label>退休工资</label>
+            </td>
+            <td ><input size="1" class="pingfen" name="sum_jj_pingguf"></td>
+        </tr>
+        <tr>
+            <td>3.居住环境<br/>(0-25分)</td>
+            <td>
+                <input name="sum_jz_fenl" type="radio" value="15" /><label>独居,孤寡</label>
+                <input name="sum_jz_fenl" type="radio" value="20" /><label>空巢</label>
+                <input name="sum_jz_fenl" type="radio" value="25" /><label>与子女,亲友共住</label>
+            </td>
+            <td ><input size="1" class="pingfen" name="sum_jz_pingguf"></td>
+        </tr>
+        <tr>
+            <td>4.年龄<br/>(0-10分)</td>
+            <td>
+                <input name="sum_nl_fenl" type="radio" value="0" /><label>60-79</label>
+                <input name="sum_nl_fenl" type="radio" value="5" /><label>80-90</label>
+                <input name="sum_nl_fenl" type="radio" value="10" /><label>90以上</label>
+            </td>
+            <td ><input size="1" class="pingfen" name="sum_nl_pingguf"></td>
+        </tr>
+        <tr>
+            <td>5.特殊贡献<br/>(0-10分)</td>
+            <td>
+                <input name="sum_gx_laom" type="checkbox" value="10" /><label>市级以上劳模</label>
+                <input name="sum_gx_youf" type="checkbox" value="10" /><label>重点优抚对象</label>
+                <input name="sum_gx_chunjg" type="checkbox" value="10" /><label>纯居干</label>
+                <input name="sum_gx_ganb" type="checkbox" value="10" /><label>离休干部</label>
+            </td>
+            <td ><input size="1" class="pingfen" name="sum_gx_pingguf"></td>
+        </tr>
+        <tr>
+            <td>6.残障情况</td>
+            <td>
+                <textarea style="width: 99%;height: 50px;" opt="canzhangqingkuang" name="canzhangqingkuang"></textarea>
+            </td>
+            <td ><input size="1" class="pingfen"  name="cz_pingguf"></td>
+        </tr>
+        <tr>
+            <td>7.住房情况</td>
+            <td>
+                <textarea style="width: 99%;height: 50px;" opt="zhufangqingkuang" name="zhufangqingkuang"></textarea>
+            </td>
+            <td ><input size="1" class="pingfen"  name="zf_pingguf"></td>
+        </tr>
+        <tr>
+            <td>8.重大疾病</td>
+            <td>
+                <textarea style="width: 99%;height: 50px;" opt="zhongdajibing" name="zhongdajibing"></textarea>
+            </td>
+            <td ><input size="1" class="pingfen"  name="jb_pingguf"></td>
+        </tr>
+        <tr>
+            <td>评估总分</td>
+            <td style="text-align: center;">
+                <label><input name="pinggusum" size="2" class="pingfen">分</label>
+            </td>
+            <td><a opt="recalculate">重新计算</a></td>
+        </tr>
+        <tr>
+            <td>建议服务标准</td>
+            <td colspan="2" style="text-align: center;">
+                <label><input name="standard" size="2" class="pingfen">小时</label>
+            </td>
+        </tr>
+        <tr>
+            <td>建议服务形式</td>
+            <td colspan="2" style="text-align: center;">
+                <input name="fuwuxingshi" type="radio" value="1" /><label>居家养老</label>
+                <input name="fuwuxingshi" type="radio" value="2" /><label>机构养老</label>
+            </td>
+        </tr>
+
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="result2" name="result2">
+    <legend>评估报告三:评估报告确认</legend>
+
+    <table class="formtable">
+        <tr>
+            <td colspan="5" style="text-align: center;">评估表基本信息</td>
+        </tr>
+        <tr>
+            <td colspan="2">评估表编号</td>
+            <td opt="pg_id"></td>
+            <td>完成日期</td>
+            <td opt="pingguenddate"></td>
+        </tr>
+        <tr>
+            <td rowspan="5" style="width: 30px;">评估确认员完成</td>
+            <td style="width: 200px;">评估员姓名</td>
+            <td style="width: 200px;"><input size="25" name="pingguyname"></td>
+            <td rowspan="2" style="width: 150px;">确认完成</td>
+            <td rowspan="2">
+                <ul style="list-style-type:none">
+                    <li>首次评估<input type="radio" name="realend"><label></label></li>
+                    <li>复检评估<input type="radio" name="realend"><label></label></li>
+                    <li>变更评估<input type="radio" name="realend"><label></label></li>
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td>联络电话</td>
+            <td><input size="25" name="pingguyphone"></td>
+        </tr>
+
+        <tr>
+            <td>所属单位</td>
+            <td colspan="3"><input size="75" name="pingguydept"></td>
+        </tr>
+
+        <tr>
+            <td>评估员签名</td>
+            <td><input size="25"></td>
+            <td>日期</td>
+            <td><input size="25"></td>
+        </tr>
+
+        <tr>
+            <td>评估分值</td>
+            <td><input size="25" name="pinggusum"></td>
+            <td>服务时间</td>
+            <td><input size="25"></td>
+        </tr>
+
+        <tr>
+            <td>社区(村)意见</td>
+            <td colspan="4"><textarea style="width: 99%;height: 50px;" name="shequcomment"></textarea></td>
+        </tr>
+        <tr>
+            <td>街镇审查</td>
+            <td colspan="4"><textarea style="width: 99%;height: 50px;" name="xiangzhencomment"></textarea></td>
+        </tr>
+        <tr>
+            <td>民政局审核</td>
+            <td colspan="4"><textarea style="width: 99%;height: 50px;" name="minzhengcomment"></textarea></td>
+        </tr>
+
+
+    </table>
+</fieldset>
+</body>
+</html>

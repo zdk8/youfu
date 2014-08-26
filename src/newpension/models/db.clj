@@ -71,6 +71,12 @@
   (has-many division {:fk :dvhigh})
   (database dboracle))
 
+;;家庭成员关系表
+(defentity t_oldsocrel
+  (pk :lrgx_id)
+  (table :t_oldsocrel)
+  (database dboracle))
+
 ;;人员评估表
 (defentity needs
   (table :t_needassessment)
@@ -120,18 +126,30 @@
 
 ;;新增养老家庭成员信息
 (defn insert-oldsocrel [fiels]
-  (insert oldsocrel
-  (values fiels)))
+  (insert t_oldsocrel
+    (values fiels)))
 
-(defn sele-oldsocrel [gx_name]
-  (select oldsocrel
-  (where {:gx_name [= (str gx_name)]})))
+(defn sele_oldsocrel [gx_name]
+  (select t_oldsocrel
+    (where {:gx_name [= (str gx_name)]}) )
+  )
 
 ;;修改养老信息
 (defn update-old [old id]
   (update olds
     (set-fields old)
     (where {:lr_id id})))
+
+;;修改养老家庭成员信息
+(defn update-oldsorel [oldsorel lrgx_id]
+  (update t_oldsocrel
+    (set-fields oldsorel)
+    (where {:lrgx_id lrgx_id})))
+
+;;删除家庭成员关系表
+(defn dele-oldsorel [lrgx_id]
+  (delete t_oldsocrel
+    (where {:lrgx_id lrgx_id})))
 
 ;;修改养老信息表状态
 (defn update-oldstatus [status id]
@@ -268,7 +286,7 @@
 
 ;;查询家庭成员关系表
 (defn get-oldsocrel [lr_id]
-  (select oldsocrel
+  (select t_oldsocrel
     (where {:lr_id lr_id})))
 
 ;;查询评估信息

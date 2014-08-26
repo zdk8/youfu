@@ -22,9 +22,9 @@
                 :fwlx_qt "" :jk_rcws_st "" :jk_rcws_xl "" :jk_rcws_xt "" :jk_rcws_sy "" :jk_rcws_xj "" :jk_rcws_tx ""
                 :jk_rcws_xzj "" :jk_rcws_xy "" :jk_bs_gaoxy "" :jk_bs_tangnb "" :jk_bs_fengs "" :jk_bs_xinzb ""
                 :jk_bs_chid "" :jk_bs_guz "" :jk_bs_qit ""})
-(def fimallyrelinfo [:guanx :gx_name :gx_identityid :gx_gender :gx_birth :gx_telephone :gx_mobilephone
-                      :gx_economy :gx_culture :gx_registration :gx_nation :gx_work])
-(def fimallyrelflag [:flag 0])
+(def fimallyrelinfo [:lrgx_id :guanx :gx_name :gx_identityid :gx_gender :gx_birth :gx_telephone :gx_mobilephone
+                     :gx_economy :gx_culture :gx_registration :gx_nation :gx_work])
+(def oldlrid [:lr_id])
 
 ;;用户登录
 (defn login [name pwd]
@@ -88,17 +88,18 @@
 ;          (recur (conj b (get (a i) :lr_id)) (inc i)) b)
 ;        )))
 ;  )
-
+;;家庭成员信息表主键
+(defn oldsocrelkey []
+  (let [keywordfami "famillyref"
+        lrgxid (inc (:max (db/get-max keywordfami)))] (str lrgxid)))
 ;;新增养老家庭成员信息
 (defn insert-oldsocrel [fields]
   (let [{olds_gx :params} fields
         keyword "olds"
         keywordfami "famillyref"
         lrgxid (inc (:max (db/get-max keywordfami)))]
-    ;    (str (vec (vals (select-keys olds_gx [:lrgx_id]))))
-    (db/insert-oldsocrel  (into {} (cons [:lrgx_id lrgxid]                   ;;新增家庭成员信息
-                                     (cons [:lr_id  (:max (db/get-max keyword))]
-                                       (select-keys olds_gx fimallyrelinfo)))))
+    (db/insert-oldsocrel  (into {} (cons [:lr_id  (:max (db/get-max keyword))]
+                                          (select-keys olds_gx fimallyrelinfo))))
     (str "true")))
 
 ;;养老信息录入，参数为养老信息录入页面提交的所有信息
