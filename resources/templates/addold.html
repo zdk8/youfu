@@ -170,12 +170,13 @@ $(document).ready(function(local,parameters,res){
         $('#age').val(age);
     });
 })
+var obj;
 $(document).ready(function(){
     var jq = top.jQuery;
     $("#loginname").val(jq("#login").val());
     $("#dvcode").val(jq("#code").val());
     $("#username").val(jq("#user").val());
-    var obj;
+//    var obj;
     if($("#t3").text())
         obj = eval('('+$("#t3").text()+')');
     $("#operator_date").datebox("setValue",myformatter(new Date())); //填充当前时间
@@ -1022,8 +1023,12 @@ $.extend($.fn.validatebox.defaults.rules, {
                 for(b=0;b<famildata_all_child.length;b++){
                     $("#"+familrelfields[b]+"_rel").val(famildata_all_child[b]);  //将值设置到上面定义的div中
                 }
-                var lrid_data  =  $("#familymembersgrid1").datagrid('getEditor',{index:0,field:"lr_id"});
-                $("#lr_id_rel").val($(lrid_data.target).val());
+//                var lrid_data  =  $("#familymembersgrid1").datagrid('getEditor',{index:0,field:"lr_id"});
+//                $("#lr_id_rel").val($(lrid_data.target).val());
+                //若为修改，则将主表主键取出
+                if(func == "editadd-oldsocrel"){
+                    $("#lr_id_rel").val(obj["lr_id"]);
+                }
                 $.post(
 //                        'insert-oldsocrel',
 //                        'editadd-oldsocrel',
