@@ -199,15 +199,6 @@ $(document).ready(function(){
     if(obj["lr_id"] != ""){
         famillylist(obj["lr_id"]);
     }
-    /*提交表单操作*/
-    /*$('#ff').form({
-     success:function(){
-     alert("操作成功！");
-     var str = $("#name").val();
-     var jq = top.jQuery;
-     jq('#tabs').tabs('close', str+'详细信息');
-     }
-     });*/
     var status = $("#status").val();
     /*修改操作*/
     $("#update").click(function(){
@@ -233,6 +224,14 @@ $(document).ready(function(){
         $("#delete").show();
     /*删除操作*/
     $("#delete").click(function(){
+        $('#ff').form({
+            success:function(){
+                alert("操作成功！");
+                var str = $("#name").val();
+                var jq = top.jQuery;
+                jq('#tabs').tabs('close', str+'详细信息');
+            }
+        });
         var id = $("#lr_id").val();
         alert("id:"+id);
         var returnVal = window.confirm("是否删除？", "标题");
@@ -969,6 +968,7 @@ $.extend($.fn.validatebox.defaults.rules, {
     <input id="gx_nation_rel" type="text">
     <input id="gx_work_rel" type="text">
 </div>
+
 </form>
 </form>
 </div>
