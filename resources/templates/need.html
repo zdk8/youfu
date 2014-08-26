@@ -22,8 +22,8 @@
         <th rowspan="2" data-options="field:'ro',width:80,align:'center',formatter:function(value,rowData,rowIndex)
             {
                 var str='<div></div>';
-                str=$(str).append('<a action=&quot;edit&quot;>变更</a>');
-                str=$(str).append('<a action=&quot;logout&quot;>注销</a>');
+                str=$(str).append('<a action=&quot;edit&quot; href=&quot;#&quot;>变更</a>');
+                str=$(str).append('<a action=&quot;logout&quot;href=&quot;#&quot;>注销</a>');
                 return str.html();
             }">操作</th>
         <th rowspan="2" data-options="field:'pg_id'">评估序号</th>

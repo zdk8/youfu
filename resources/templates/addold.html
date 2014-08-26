@@ -106,9 +106,11 @@ $(document).ready(function(local,parameters,res){
                         console.log(data)
                     }
             )
+            flag+=1;
         }
         //删除显示在界面上的行
         $("#familymembersgrid1").datagrid('deleteRow', index);
+        queryflag-=1;
     });
     /*加载地区树*/
     var divisiontree = $(':input[opt=divisiontree]') ;
@@ -170,12 +172,13 @@ $(document).ready(function(local,parameters,res){
         $('#age').val(age);
     });
 })
+var obj;
 $(document).ready(function(){
     var jq = top.jQuery;
     $("#loginname").val(jq("#login").val());
     $("#dvcode").val(jq("#code").val());
     $("#username").val(jq("#user").val());
-    var obj;
+//    var obj;
     if($("#t3").text())
         obj = eval('('+$("#t3").text()+')');
     $("#operator_date").datebox("setValue",myformatter(new Date())); //填充当前时间
@@ -262,7 +265,7 @@ function add(title){
         success:function(){
             alert("操作成功！");
             //添加家庭成员信息
-            addFimalyCel(flag,0);
+            addFimalyCel(flag,0,"insert-oldsocrel");
             var jq = top.jQuery;
             jq('#tabs').tabs('close', '老年基本信息录入');
         }
@@ -851,7 +854,9 @@ $.extend($.fn.validatebox.defaults.rules, {
                 <th opt="gxidentityid" data-options="field:'gx_identityid',width:150,align:'center',editor:{
                             type:'validatebox',
                             options:{
-                                required:true
+                                required:true,
+                                invalidMessage:'请输入正确的身份证号',
+                                validType:'identityid'
                             }
                         }">身份证号<span style="color: red">*</span></th>
                 <th class="lazy-combobox" data-options="field:'gx_gender',align:'center',width:60,editor:{
@@ -957,7 +962,7 @@ $.extend($.fn.validatebox.defaults.rules, {
     <input id="lr_id_rel" type="text">
     <input id="guanx_rel" type="text">
     <input id="gx_name_rel" type="text">
-    <input id="gx_identityid_rel" type="text">
+    <input id="gx_identityid_rel" type="text" >
     <input id="gx_gender_rel" type="text">
     <input id="gx_birth_rel" type="text">
     <input id="gx_telephone_rel" type="text">
@@ -981,7 +986,7 @@ $.extend($.fn.validatebox.defaults.rules, {
                 familly_key = parseInt(data);
             }
     );
-    function addFimalyCel(addfalg,editflag){
+    function addFimalyCel(addfalg,editflag,func){
         var familrelfields = $("#familymembersgrid1").datagrid("getColumnFields");  //获取全部元素的字段名
         var famildata_all = new Array();   //存放新增数据条
         //若有新增数据
@@ -1022,10 +1027,15 @@ $.extend($.fn.validatebox.defaults.rules, {
                 for(b=0;b<famildata_all_child.length;b++){
                     $("#"+familrelfields[b]+"_rel").val(famildata_all_child[b]);  //将值设置到上面定义的div中
                 }
+                //若为修改，则将主表主键取出
+                if(func == "editadd-oldsocrel"){
+                    $("#lr_id_rel").val(obj["lr_id"]);
+                }
                 $.post(
-                        'insert-oldsocrel',
+                        func,
                         {
                             lrgx_id:familly_key++,
+                            lr_id:$("#lr_id_rel").val(),
                             guanx:$("#guanx_rel").val(),
                             gx_name:$("#gx_name_rel").val(),
                             gx_identityid:$("#gx_identityid_rel").val(),
@@ -1040,7 +1050,7 @@ $.extend($.fn.validatebox.defaults.rules, {
                             gx_work:$("#gx_work_rel").val()
                         },
                         function(data){
-                            console.log(data)
+                            console.log("editadd:"+data)
                         }
                 );
             }
@@ -1109,7 +1119,7 @@ $.extend($.fn.validatebox.defaults.rules, {
         /*若有再次新增的数据则调用新增方法*/
         if(flag > 0){
 //            alert("ok")
-            addFimalyCel(0,flag);
+            addFimalyCel(0,flag,"editadd-oldsocrel");
         }
     }
 

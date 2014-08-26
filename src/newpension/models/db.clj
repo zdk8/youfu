@@ -6,7 +6,7 @@
             ))
 
 (defdb dboracle schema/db-oracle)
-(declare users olds oldsocrel functions audits rolefunc roleuser userlog division needs)  ;;数据声明
+(declare users olds functions audits rolefunc roleuser userlog division t_oldsocrel needs needsums)  ;;数据声明
 
 ;;数据库表实体及各实体关联
 ;;用户表
@@ -19,11 +19,6 @@
 ;;老年人主表
 (defentity olds
   (table :t_oldpeople)
-  (database dboracle))
-
-;;老年人社会关系信息表
-(defentity oldsocrel
-  (table :t_oldsocrel)
   (database dboracle))
 
 ;;系统功能表
@@ -82,6 +77,11 @@
   (table :t_needassessment)
   (database dboracle))
 
+;;人员评估汇总表
+(defentity needsums
+  (table :t_needassessmentsum)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 (defn get-user
@@ -102,9 +102,8 @@
                   (aggregate (max :opseno) :max))
       "audits" (select audits
                  (aggregate (max :auditid) :max))
-      "famillyref" (select oldsocrel
-                     (aggregate (max :lrgx_id) :max))
-      )))
+      "famillyref" (select t_oldsocrel
+                     (aggregate (max :lrgx_id) :max)))))
 
 ;;查询养老信息
 (defn get-olds
@@ -131,8 +130,7 @@
 
 (defn sele_oldsocrel [gx_name]
   (select t_oldsocrel
-    (where {:gx_name [= (str gx_name)]}) )
-  )
+    (where {:gx_name [= (str gx_name)]})))
 
 ;;修改养老信息
 (defn update-old [old id]
@@ -291,4 +289,21 @@
 
 ;;查询评估信息
 (defn get-needs []
-  (select needs))
+  (select needs
+    (order :pg_id :desc)))
+
+;;新增评估信息
+(defn create-need [need]
+  (insert needs
+    (values need)))
+
+;;查询评估汇总信息
+(defn get-needsum [id]
+  (first
+    (select needsums
+      (where {:pg_id id}))))
+
+;;新增评估汇总信息
+(defn create-needsum [needsum]
+  (insert needsum
+    (values needsum)))
