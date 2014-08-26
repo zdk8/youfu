@@ -83,6 +83,7 @@ $(document).ready(function(local,parameters,res){
     /*家庭成员列表添加*/
     $("#newfamilymemeraddid").click(function(){
         flag +=1;
+//        queryflag+=1;
         $("#familymembersgrid1").datagrid('appendRow', {name: "", relationship: ""});
         var editIndex = $("#familymembersgrid1").datagrid('getRows').length-1;
         $("#familymembersgrid1").datagrid('selectRow', editIndex)
@@ -106,9 +107,11 @@ $(document).ready(function(local,parameters,res){
                         console.log(data)
                     }
             )
+            flag+=1;
         }
         //删除显示在界面上的行
         $("#familymembersgrid1").datagrid('deleteRow', index);
+        queryflag-=1;
     });
     /*加载地区树*/
     var divisiontree = $(':input[opt=divisiontree]') ;
@@ -1023,15 +1026,11 @@ $.extend($.fn.validatebox.defaults.rules, {
                 for(b=0;b<famildata_all_child.length;b++){
                     $("#"+familrelfields[b]+"_rel").val(famildata_all_child[b]);  //将值设置到上面定义的div中
                 }
-//                var lrid_data  =  $("#familymembersgrid1").datagrid('getEditor',{index:0,field:"lr_id"});
-//                $("#lr_id_rel").val($(lrid_data.target).val());
                 //若为修改，则将主表主键取出
                 if(func == "editadd-oldsocrel"){
                     $("#lr_id_rel").val(obj["lr_id"]);
                 }
                 $.post(
-//                        'insert-oldsocrel',
-//                        'editadd-oldsocrel',
                         func,
                         {
                             lrgx_id:familly_key++,
