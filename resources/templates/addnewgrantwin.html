@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript"  src="http://112.124.50.195:8080/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"  src="http://www.jeasyui.com/easyui/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" type="text/css"  href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+</head>
+<body>
+<div id="addnewgrantwin" >
+    <div class="easyui-tabs">
+        <div title="月发放">
+                <table class="formtable grantmoneypersonquery0" >
+                    <tr>
+                       <td>
+                           业务期:<input placeholder="业务期" name="bsnyue" id="bsnyue"
+                                  style="width:100px">
+                           <a class="easyui-linkbutton" id="querybsnyueid" data-options="height:23,width:50">查询</a>
+                           <input id="querytype">
+                           <!--<input name="query_text" type="text" value=""/>-->
+                           发放金额:<input id="money" placeholder="金额">
+                       </td>
+                    </tr>
+                </table>
+
+            <div class="grantmoneyperson0">
+                <div style="clear:both"></div>           <!--url:'get-cangrantmoney?bsnyue=201405',-->
+                <table name="grid" style="height:250px;" class="easyui-datagrid" id="newgrantwinid"
+                       data-options="
+                       method:'get',
+                       rownumbers:true,
+                       singleSelect:false,
+                       pagination:true
+                       ">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'ck',checkbox:true"></th>
+                        <th data-options="field:'pg_id',hidden:true"></th>
+                        <th data-options="field:'name',width:60">姓名</th>
+                        <th data-options="field:'identityid',width:150">户主身份证</th>
+                        <th data-options="field:'money',width:60,editor:'numberbox'">金额</th>
+                        <!--<th data-options="field:'madeflag',width:60">到账</th>-->
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    /*取当前年月为业务期*/
+    function myformatter(date){
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        return y+(m<10?('0'+m):m);
+    }
+    /*需求评估信息表主键*/
+    var pgidarr = new Array();
+    $.post(
+            'get-needsid',
+            function(data){
+                for(i=0;i<data.length;i++){
+                    var pgid = data[i].pg_id;
+                    pgidarr.push(pgid);
+                }
+            }
+    );
+
+
+    $(document).ready(function(){
+        /*设置业务期*/
+        $("#bsnyue").val(myformatter(new Date()));
+        $('#querytype').combobox({
+            valueField: 'value',
+            textField: 'label',
+            readonly:false,
+            data: [
+                { label: '全部', value: '0' },
+                { label: '未发放', value: '1' },
+                { label: '已发放', value: '2' },
+                { label: '已到账', value: '3' }
+            ]
+        });
+    });
+
+    //查询
+    $("#querybsnyueid").click(function(){
+        lazgrantold($("#bsnyue").val());
+    });
+
+    /*加载可以发放人员*/
+    function lazgrantold(bsnyue){
+        var datagrantold = new Array();
+        if(pgidarr.length > 0){
+            for(p=0;p<pgidarr.length;p++){
+                $.post(
+                        'get-cangrantmoney',
+                        {
+                            bsnyue:bsnyue,
+                            pg_id:pgidarr[p]
+                        },
+                        function(data){
+                            //数据库中不存在
+                            if(data != 0){
+                                for(d=0;d<data.length;d++){
+                                    datagrantold.push(data[d])
+                                }
+                            }
+                            $("#newgrantwinid").datagrid('loadData',datagrantold);
+                        }
+                )
+            }
+        }
+    }
+
+
+</script>
+</body>
