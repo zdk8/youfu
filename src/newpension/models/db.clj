@@ -18,6 +18,7 @@
 
 ;;老年人主表
 (defentity olds
+  (pk :lr_id)
   (table :t_oldpeople)
   (database dboracle))
 
@@ -74,12 +75,22 @@
 
 ;;人员评估表
 (defentity needs
+  (pk :lr_id)
   (table :t_needassessment)
+  (has-one olds {:fk :lr_id})
   (database dboracle))
 
 ;;人员评估汇总表
 (defentity needsums
   (table :t_needassessmentsum)
+  (database dboracle))
+
+
+;;资金发放表
+(defentity t_grantmoney
+  (pk :pg_id)
+  (table :t_grantmoney)
+  (has-one needs {:fk :pg_id})
   (database dboracle))
 
  ;;数据库操作函数
@@ -307,3 +318,60 @@
 (defn create-needsum [needsum]
   (insert needsum
     (values needsum)))
+
+;;资金发放表查询
+(defn get-grantmoney []
+  (select t_grantmoney
+    (fields :pg_id :bsnyue :money )
+    (with needs
+      (fields :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_lout)
+      (with olds
+        (fields :name :identityid :birthd :gender :age :nation)))
+    (order :bsnyue :desc)))
+
+;;查询能够进行资金发放人员
+(defn get-cangrantmoney [pg_id]
+    (select needs
+         (fields :pg_id)
+         (with olds
+           (fields :name :identityid))
+      (where (= :pg_id pg_id))
+      (order :pg_id :desc)))
+
+;;查询资金发放表,判断granttype是否为空
+(defn hasgranttype []
+  (select t_grantmoney
+    (fields :granttype)))
+
+;;查询业务期（bsnyue）是否存在
+(defn hasbsnyue [bsnyue pg_id]
+  (select t_grantmoney
+    (fields :money :bsnyue)
+    (with needs
+      (fields :pg_id))
+    (where (and (= :bsnyue bsnyue)(= :pg_id pg_id)))
+    ))
+
+;;新增已享受资金发放人员
+(defn insert-grantmoney [fields]
+  (insert t_grantmoney
+    (values fields)))
+
+;;查询资金发放表主键
+(defn sel-grantmoneyid []
+  (let [qcount (count (select t_grantmoney))] (str qcount)
+    (if (> qcount 0)
+      (first
+        (select t_grantmoney
+          (aggregate (max :grantid) :max)))
+      (str "0"))))
+
+;;取出需求评估信息表主键
+(defn get-needsid []
+  (select needs
+    (fields :pg_id)))
+
+;;资金发放记录删除
+(defn del-grantmoney [bsnyue]
+  (delete t_grantmoney
+    (where {:bsnyue bsnyue})))
