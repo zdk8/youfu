@@ -329,19 +329,76 @@
         (fields :name :identityid :birthd :gender :age :nation)))
     (order :bsnyue :desc)))
 
-;;查询能够进行资金发放人员
-(defn get-cangrantmoney [pg_id]
-    (select needs
-         (fields :pg_id)
-         (with olds
-           (fields :name :identityid))
-      (where (= :pg_id pg_id))
-      (order :pg_id :desc)))
-
-;;查询资金发放表,判断granttype是否为空
-(defn hasgranttype []
-  (select t_grantmoney
-    (fields :granttype)))
+;;资金发放条件查询
+(defn get-grantmoneyByEle [name identityid bsnyue]
+  (if (not= name "0")
+    (if (not= identityid "0")
+      (if (not= bsnyue "0")
+        (select t_grantmoney
+          (fields :pg_id :bsnyue :money )
+          (with needs
+            (fields :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_lout)
+            (with olds
+              (fields :name :identityid :birthd :gender :age :nation)
+              (where {:name name})
+              (where {:identityid identityid})))
+          (where {:bsnyue bsnyue})
+          (order :bsnyue :desc))
+        (select t_grantmoney
+          (fields :pg_id :bsnyue :money )
+          (with needs
+            (fields :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_lout)
+            (with olds
+              (fields :name :identityid :birthd :gender :age :nation)
+              (where {:name name})
+              (where {:identityid identityid})))
+          (order :bsnyue :desc)))
+      (if (not= bsnyue "0")
+        (select t_grantmoney
+          (fields :pg_id :bsnyue :money )
+          (with needs
+            (fields :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_lout)
+            (with olds
+              (fields :name :identityid :birthd :gender :age :nation)
+              (where {:name name})))
+          (where {:bsnyue bsnyue})
+          (order :bsnyue :desc))
+        (select t_grantmoney
+          (fields :pg_id :bsnyue :money )
+          (with needs
+            (fields :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_lout)
+            (with olds
+              (fields :name :identityid :birthd :gender :age :nation)
+              (where {:name name})))
+          (order :bsnyue :desc))))
+    (if (not= identityid "0")
+      (if (not= bsnyue "0")
+        (select t_grantmoney
+          (fields :pg_id :bsnyue :money )
+          (with needs
+            (fields :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_lout)
+            (with olds
+              (fields :name :identityid :birthd :gender :age :nation)
+              (where {:identityid identityid})))
+          (where {:bsnyue bsnyue})
+          (order :bsnyue :desc))
+        (select t_grantmoney
+          (fields :pg_id :bsnyue :money )
+          (with needs
+            (fields :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_lout)
+            (with olds
+              (fields :name :identityid :birthd :gender :age :nation)
+              (where {:identityid identityid})))
+          (order :bsnyue :desc)))
+      (if (not= bsnyue "0")
+        (select t_grantmoney
+          (fields :pg_id :bsnyue :money )
+          (with needs
+            (fields :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_lout)
+            (with olds
+              (fields :name :identityid :birthd :gender :age :nation)))
+          (where {:bsnyue bsnyue})
+          (order :bsnyue :desc))))))
 
 ;;查询业务期（bsnyue）是否存在
 (defn hasbsnyue [bsnyue pg_id]
@@ -349,8 +406,29 @@
     (fields :money :bsnyue)
     (with needs
       (fields :pg_id))
-    (where (and (= :bsnyue bsnyue)(= :pg_id pg_id)))
-    ))
+    (where (and (= :bsnyue bsnyue)(= :pg_id pg_id)))))
+
+
+;;查询能够进行资金发放人员
+(defn get-cangrantmoney [bsnyue]
+  (select needs
+    (fields :pg_id)
+    (with olds
+      (fields :name :identityid))
+    (where {:pg_id [not-in (subselect t_grantmoney
+                             (fields :pg_id)
+                             (where {:bsnyue bsnyue}))]})
+    (order :pg_id :desc)))
+
+
+
+
+;;查询资金发放表,判断granttype是否为空
+(defn hasgranttype []
+  (select t_grantmoney
+    (fields :granttype)))
+
+
 
 ;;新增已享受资金发放人员
 (defn insert-grantmoney [fields]
@@ -371,7 +449,7 @@
   (select needs
     (fields :pg_id)))
 
-;;资金发放记录删除
+;;资金发放记录删除(重新发放)
 (defn del-grantmoney [bsnyue]
   (delete t_grantmoney
     (where {:bsnyue bsnyue})))

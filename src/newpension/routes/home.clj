@@ -67,8 +67,10 @@
   (POST "/dele-oldsorel" [lrgx_id] (old/dele-oldsorel lrgx_id))   ;;删除家庭成员关系表
   (GET "/needs" [] (need/get-needs))             ;;人员评估信息查询
   (GET "/addnewgrantwin" [] (layout/render "addnewgrantwin.html")) ;;资金发放窗口
-  (GET "/get-grantmoney" [] (money/get-grantmoney ))    ;;资金发放表查询
-  (POST "/get-cangrantmoney" [bsnyue pg_id] (money/get-cangrantmoney bsnyue pg_id))  ;;查询能够进行资金发放人员
+  (GET "/searchGrant" [] (layout/render "searchGrant.html")) ;;搜索框
+  (GET "/get-grantmoney" [page rows] (money/get-grantmoney page rows))    ;;资金发放表查询
+  (POST "/get-grantmoneyByEle" [name identityid bsnyue] (money/get-grantmoneyByEle name identityid bsnyue));;资金发放条件查询
+  (GET "/get-cangrantmoney" [bsnyue page rows] (money/get-cangrantmoney bsnyue page rows))  ;;查询能够进行资金发放人员
   (POST "/insert-grantmoney" fields (money/insert-grantmoney fields))    ;;新增已享受资金发放人员
   (POST "/sel-grantmoneyid" [] (money/sel-grantmoneyid )) ;;查询资金发放表主键
   (POST "/get-needsid" [] (money/get-needsid )) ;;取出需求评估信息表主键
