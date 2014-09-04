@@ -35,7 +35,7 @@
   (layout/render "addneed.html"))
 
 (defroutes home-routes
-  (GET "/test" [] (layout/render "test.html"))
+  (GET "/test" [] (layout/render "GrantMoneyMng.html"))
   (GET "/" [] (login-page)) ;;登录页面
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
   (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
@@ -43,6 +43,7 @@
   (GET "/olds" [] (old-page))      ;;养老信息查询页面
   (GET "/need" [] (need-page))      ;;人员评估信息查询页面
   (GET "/addneed" [] (addneed-page))      ;;人员评估信息录入页面
+  (GET "/GrantMoneyMng" [] (layout/render "GrantMoneyMng.html"))  ;;资金发放页面
   (POST "/login" [username password] (old/login username password))  ;;用户登录
   (POST "/saveold" request (old/create-old request))  ;;养老信息录入
   (POST "/insert-oldsocrel" fields (old/insert-oldsocrel fields)) ;;新增养老家庭成员信息
@@ -73,4 +74,13 @@
   (POST "/updateneed" request (need/update-need request))
   (POST "/checkneed" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;评估信息待办业务操作
     (need/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
+  (GET "/addnewgrantwin" [] (layout/render "addnewgrantwin.html")) ;;资金发放窗口
+  (GET "/searchGrant" [] (layout/render "searchGrant.html")) ;;搜索框
+  (GET "/get-grantmoney" [page rows] (money/get-grantmoney page rows))    ;;资金发放表查询
+  (POST "/get-grantmoneyByEle" [name identityid bsnyue] (money/get-grantmoneyByEle name identityid bsnyue));;资金发放条件查询
+  (GET "/get-cangrantmoney" [bsnyue page rows] (money/get-cangrantmoney bsnyue page rows))  ;;查询能够进行资金发放人员
+  (POST "/insert-grantmoney" fields (money/insert-grantmoney fields))    ;;新增已享受资金发放人员
+  (POST "/sel-grantmoneyid" [] (money/sel-grantmoneyid )) ;;查询资金发放表主键
+  (POST "/get-needsid" [] (money/get-needsid )) ;;取出需求评估信息表主键
+  (POST "/del-grantmoney" [bsnyue] (money/del-grantmoney bsnyue))  ;;资金发放记录删除
   )
