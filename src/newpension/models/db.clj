@@ -103,7 +103,9 @@
       "audits" (select audits
                  (aggregate (max :auditid) :max))
       "famillyref" (select t_oldsocrel
-                     (aggregate (max :lrgx_id) :max)))))
+                     (aggregate (max :lrgx_id) :max))
+      "needs" (select needs
+                (aggregate (max :pg_id) :max)))))
 
 ;;查询养老信息
 (defn get-olds
@@ -117,6 +119,12 @@
   (first
     (select olds
       (where {:lr_id  id}))))
+
+;;根据身份证查询养老信息
+(defn get-ids [id]
+  (select olds
+           (where {:identityid [like (str id "%")]})
+           (order :identityid)))
 
 ;;新增养老信息
 (defn create-old [old]
@@ -292,10 +300,28 @@
   (select needs
     (order :pg_id :desc)))
 
+;;根据主键查询评估信息
+(defn get-need [id]
+  (first
+    (select needs
+      (where {:pg_id id}))))
+
 ;;新增评估信息
 (defn create-need [need]
   (insert needs
     (values need)))
+
+;;修改评估信息
+(defn update-need [need id]
+  (update needs
+    (set-fields need)
+    (where {:pg_id id})))
+
+;;修改评估状态
+(defn update-active [active id]
+  (update needs
+    (set-fields {:active active})
+      (where {:pg_id id})))
 
 ;;查询评估汇总信息
 (defn get-needsum [id]
@@ -305,5 +331,11 @@
 
 ;;新增评估汇总信息
 (defn create-needsum [needsum]
-  (insert needsum
+  (insert needsums
     (values needsum)))
+
+;;修改汇总信息
+(defn update-needsum [needsum id]
+  (update needsums
+    (set-fields needsum)
+    (where {:pg_id id})))

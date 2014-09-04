@@ -33,11 +33,418 @@
             }
         }
     };
+    $(document).ready(function(){
+        var jq = top.jQuery;
+        $("#loginname").val(jq("#login").val());
+        $("#dvcode").val(jq("#code").val());
+        $("#username").val(jq("#user").val());
+        var name = jq("#user").val() ;
+        var id = $("input[opt='identityid']").val();
+        if($("#pg").val()){
+            $.ajax({
+                url:'searchneed?id='+$("#pg").val(),
+                type:'get',
+                success:function(res){
+                    if(res){
+                        $('form[opt=mainform]').form('load',res);
+                        for(var key in res ){
+                            var name = key;
+                            var value = res[key];
+                            if($('input[name='+name+']:radio').val()){
+                                $('input[name='+name+'][type=radio][value='+value+']').attr("checked","checked");
+                                $('input[name='+name+'][type=radio][value='+value+']+label').addClass("checked");
+                            }else if($('input[name='+name+']:checkbox').val()){
+                                $('input[name='+name+'][type=checkbox][value='+value+']').attr("checked","checked");
+                                $('input[name='+name+'][type=checkbox][value='+value+']+label').addClass("checked");
+                            }
+                        }
+                        $('[opt=csrq]').datebox('setValue',$('[opt=birthd]').datebox('getValue'));
+                        $(':input[name=sh_zongf]').attr("readonly","readonly").val(100);
+                        $(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val($(':input[name=sh_pingguf]').val());
+                        $(':input[name=sum_jj_pingguf]').attr("readonly","readonly").val($(':input[name=jj_pingguf]').val());
+                        $(':input[name=sum_jz_pingguf]').attr("readonly","readonly").val($(':input[name=jz_pingguf]').val());
+                        $(':input[name=sum_nl_pingguf]').attr("readonly","readonly").val($(':input[name=nl_pingguf]').val());
+                        $(':input[name=sum_gx_pingguf]').attr("readonly","readonly").val($(':input[name=gx_pingguf]').val());
+                        $('fieldset[opt=info1]')
+                                .find(':input[type=radio]+label').each(function(i){
+                                    var radioValue=0;
+                                    if($(this).prev()[0].checked){
+                                        radioValue= ($(this).prev()).val();
+                                        $($(this).parent().parent().children().last().children()[0]).val(radioValue);
+                                    }
+                                    $('fieldset[opt=info1]').find(':input[opt=info1pingfeng]').each(function(){
+                                        $(this).attr("readonly","readonly");
+                                    })
+                                })
+                        var active=res['active']
+//                        console.log("111"+active)
+
+                        /*修改操作*/
+                        $("#update").click(function(){
+                            if (active == null|| active == "2"){
+                                var returnVal = window.confirm("是否变更？", "标题");
+                                if(returnVal){
+                                    alert("222"+active);
+                                    var str = $('input[name=name]').val();
+                                    console.log(str);
+                                    $("form").attr("action","{{servlet-context}}/updateneed");
+                                    $('#fs').form({
+                                        success:function(){
+                                            alert("操作成功！");
+                                            jq('#tabs').tabs('close', str+'评估信息');
+                                        }
+                                    });
+                                    $("form").submit();
+                                }
+                            }else {
+                                alert(active+"!!!!!");
+                                alert("该信息还在审核中，不能修改！");
+                            }
+                        });
+                        if (active == "2")
+                            $("#delete").show();
+                        /*删除操作*/
+                        $("#delete").click(function(){
+                            $('#ff').form({
+                                success:function(){
+                                    alert("操作成功！");
+                                    var str = $("#name").val();
+                                    jq('#tabs').tabs('close', str+'评估信息');
+                                }
+                            });
+                            var id = $("#lr_id").val();
+                            alert("id:"+id);
+                            var returnVal = window.confirm("是否注销？", "标题");
+                            if(returnVal){
+//                                $("form").attr("action","{{servlet-context}}/deleteold");
+//                                $("form").submit();
+                            }
+                        });
+                    }
+                }
+            })
+        }
+        $(':input[name=sh_zongf]').attr("readonly","readonly").val(100)
+        $("input[name$=_pingguy]").attr("readonly","readonly").val(name);
+        $("input[opt='identityid']").combogrid({
+            panelWidth:350,
+            panelHeight:400,
+            url:'oldid',
+            method:'post',
+            idField:'identityid',
+            textField:'identityid',
+            fitColumns:true,
+            mode:'remote',
+            columns:[[
+                {field:'name',title:'姓名',width:60},
+                {field:'identityid',title:'身份证',width:80},
+                {field:'address',title:'地址',align:'right',width:60}
+            ]],
+            onClickRow:function(index,row){
+                $.ajax({
+                    url:'searchid',
+                    data:{
+                        id:row.lr_id
+                    },
+                    type:'get',
+                    success:function(res){
+                        if(res){
+                            $('form[opt=mainform]').form('load',res);
+                            $('[opt=csrq]').datebox('setValue',res.birthd);
+                            var date = $(':input[opt=csrq]').datebox('getValue');
+                            var age = res.age;
+                            if (age >= 60 && age < 80){
+                                $('input[name=nl_fenl]:eq(0)').attr("checked","checked");
+                                $('input[name=sum_nl_fenl]:eq(0)').attr("checked","checked");
+                                $('input[name=nl_fenl]:eq(0)+label').addClass("checked");
+                                $('input[name=sum_nl_fenl]:eq(0)+label').addClass("checked");
+                                $('input[name=nl_pingguf]').attr("readonly","readonly").val(0);
+                                $('input[name=sum_nl_pingguf]').attr("readonly","readonly").val(0);
+                            } else if(age >= 80 && age <= 90){
+                                $('input[name=nl_fenl]:eq(1)').attr("checked","checked");
+                                $('input[name=sum_nl_fenl]:eq(1)').attr("checked","checked");
+                                $('input[name=nl_fenl]:eq(1)+label').addClass("checked");
+                                $('input[name=sum_nl_fenl]:eq(1)+label').addClass("checked");
+                                $('input[name=nl_pingguf]').attr("readonly","readonly").val(5);
+                                $('input[name=sum_nl_pingguf]').attr("readonly","readonly").val(5);
+                            }else if(age >90){
+                                $('input[name=nl_fenl]:eq(2)').attr("checked","checked");
+                                $('input[name=sum_nl_fenl]:eq(2)').attr("checked","checked");
+                                $('input[name=nl_fenl]:eq(2)+label').addClass("checked");
+                                $('input[name=sum_nl_fenl]:eq(2)+label').addClass("checked");
+                                $('input[name=nl_pingguf]').attr("readonly","readonly").val(10);
+                                $('input[name=sum_nl_pingguf]').attr("readonly","readonly").val(10);
+                            }
+                        }else{
+                            alert('无数据')
+                        }
+                    }
+                })
+            }
+        })
+        var me = ($(this))
+        var selectRadio = ":input[type=radio] + label";
+        $(selectRadio).each(function () {
+            if ($(this).prev()[0].checked){
+                $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
+            }
+        }).click(function () {               //为第个元素注册点击事件
+                    var s = $($(this).prev()[0]).attr('name')
+                    s = ":input[name=" + s + "]+label"
+                    var isChecked=$(this).prev()[0].checked;
+                    me.find(s).each(function (i) {
+                        $(this).prev()[0].checked = false;
+                        $(this).removeClass("checked");
+                        $($(this).prev()[0]).removeAttr("checked");
+                    });
+                    if(isChecked){
+                        //如果单选已经为选中状态,则什么都不做
+                    }else{
+                        $(this).prev()[0].checked = true;
+                        $(this).addClass("checked");
+                        $($(this).prev()[0]).attr("checked","checked");
+                    }
+                })
+                .prev().hide();     //原来的圆点样式设置为不可见
+        $(":input[type=checkbox] + label").each(function () {
+            if ($(this).prev()[0].checked) {
+                $(this).addClass("checked");
+            }
+        }).toggle(function () {
+                    $(this).prev()[0].checked = true;
+                    $(this).addClass("checked");
+                    $($(this).prev()[0]).attr("checked","checked");
+                },
+                function () {
+                    $(this).prev()[0].checked = false;
+                    $(this).removeClass("checked");
+                    $($(this).prev()[0]).removeAttr("checked");
+                }).prev().hide();
+        $('fieldset[opt=info1]')
+                .find(':input[type=radio]+label').each(function(i){
+                    $(this).bind('click',function(){
+                        var radioValue=0;
+                        if($(this).prev()[0].checked){
+                            radioValue= ($(this).prev()).val();
+                            $($(this).parent().parent().children().last().children()[0]).val(radioValue);
+                        }else{
+                            $($(this).parent().parent().children().last().children()[0]).removeAttr("value");
+                        }
+                        var sh_zongf=0;
+                        $('fieldset[opt=info1]').find(':input[opt=info1pingfeng]').each(function(){
+                            $(this).attr("readonly","readonly");
+                            sh_zongf+=Number($(this).val())
+                        })
+                        $(':input[name=sh_pingguf]').attr("readonly","readonly").val(sh_zongf)
+                        $('fieldset[opt=result1]').find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val(sh_zongf)
+                        $(':input[name=sh_jiel]+label').removeClass("checked");
+                        $(':input[name=sh_jiel]').removeAttr("checked");
+                        $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]+label').removeClass("checked");
+                        $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]').removeAttr("checked");
+                        if(sh_zongf <= 25){
+                            $(':input[name=sh_jiel]:eq(0)').attr("checked","checked");
+                            $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)').attr("checked","checked");
+                            $(':input[name=sh_jiel]:eq(0)+label').addClass("checked");
+                            $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)+label').addClass("checked");
+                        }else if(sh_zongf > 25 &&sh_zongf <= 50){
+                            $(':input[name=sh_jiel]:eq(1)').attr("checked","checked");
+                            $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)').attr("checked","checked");
+                            $(':input[name=sh_jiel]:eq(1)+label').addClass("checked");
+                            $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)+label').addClass("checked");
+                        }else if(sh_zongf > 50 &&sh_zongf <= 75){
+                            $(':input[name=sh_jiel]:eq(2)').attr("checked","checked");
+                            $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)').attr("checked","checked");
+                            $(':input[name=sh_jiel]:eq(2)+label').addClass("checked");
+                            $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)+label').addClass("checked");
+                        }else{
+                            $(':input[name=sh_jiel]:eq(3)').attr("checked","checked");
+                            $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(3)').attr("checked","checked");
+                            $(':input[name=sh_jiel]:eq(3)+label').addClass("checked");
+                            $('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(3)+label').addClass("checked");
+                        }
+                    })
+                })
+        $('[opt=info2] :input[name=jj_shour]+label').each(function(i){
+            $(this).bind('click',function(){
+                $('fieldset[opt=result1]').find(':input[name=sum_jj_shour]+label').removeClass("checked");
+                $('fieldset[opt=result1]').find(':input[name=sum_jj_shour]').removeAttr("checked");
+                if($(this).hasClass("checked")){
+                    var v=$(this).prev().val();
+                    $('fieldset[opt=result1]').find(':input[name=sum_jj_shour][value='+ v +']+label').addClass("checked");
+                    $('fieldset[opt=result1]').find(':input[name=sum_jj_shour][value='+ v +']').attr("checked","checked");
+                }else
+                    var v = 0;
+                $(':input[name=jj_pingguf]').attr("readonly","readonly").val(v)
+                $('fieldset[opt=result1] :input[name=sum_jj_pingguf]').attr("readonly","readonly").val(v)
+            })
+        })
+        $('fieldset[opt=info3] :input[name=jz_fenl]+label').each(function(i){
+            $(this).bind('click',function(){
+                $('fieldset[opt=result1]').find(':input[name=sum_jz_fenl]+label').removeClass("checked");
+                $('fieldset[opt=result1]').find(':input[name=sum_jz_fenl]').removeAttr("checked");
+                if($(this).hasClass("checked")){
+                    var v=$(this).prev().val();
+                    $('fieldset[opt=result1]').find(':input[name=sum_jz_fenl][value='+ v +']+label').addClass("checked");
+                    $('fieldset[opt=result1]').find(':input[name=sum_jz_fenl][value='+ v +']').attr("checked","checked");
+                }else
+                    var v = 0;
+                $(':input[name=jz_pingguf]').attr("readonly","readonly").val(v);
+                $('fieldset[opt=result1] :input[name=sum_jz_pingguf]').attr("readonly","readonly").val(v);
+            })
+        })
+        var checks = [];
+        $('fieldset[opt=info5] :input[type=checkbox]+label').each(function(i){
+            checks.push($(this));
+            $(this).bind('click',function(){
+                var sum=0;
+                for(var i=0;i<checks.length;i++){
+                    if(checks[i].prev()[0].checked){
+                        sum+=Number(checks[i].prev().val());
+                    }
+                }
+               $( 'input[name=gx_pingguf]').attr("readonly","readonly").val(sum);
+                //同步到result1
+                $('input[name=sum_gx_pingguf]').attr("readonly","readonly").val(sum);
+                var ischecked= $(this).prev()[0].checked;
+                var sum_gx_label=$('input[name=sum_'+$(this).prev()[0].name+']+label');
+                if(ischecked){
+                    $(sum_gx_label).prev()[0].checked = true;
+                    $(sum_gx_label).addClass("checked");
+                }else{
+                    $(sum_gx_label).prev()[0].checked = false;
+                    $(sum_gx_label).removeClass("checked");
+                }
+            })
+        })
+        var radioLables=[];
+        $('fieldset[opt=info6] :input[type=radio]+label').each(function(i){
+            radioLables.push($(this))
+            $(this).bind('click',function(){
+                var text='';
+                var v = 0;
+                for(var i=0;i<radioLables.length;i++){
+                    var title=$(radioLables[i].parent().parent().parent().parent().children()[0]).text()
+                    if(radioLables[i].prev()[0].checked){
+                        text+='-'+title+' : '+ radioLables[i].text()+'-';
+                        v+=Number($(radioLables[i].prev()[0]).val());
+                    }
+                }
+                $('input[name=cz_pingguf]').attr("readonly","readonly").val(v);
+                $('[opt=canzhangqingkuang]').val(text);
+            })
+        })
+        var radioLable = [];
+        var getMessage=function(){
+            var text='';
+            var v = 0;
+            for(var i=0;i<radioLable.length;i++){
+                if(radioLable[i].prev()[0].checked){
+                    var title=$(radioLable[i].parent().children()[0]).text().substr(2);
+                    var youwu=radioLable[i].parent().children('label[class=checked]').text();
+                    var tao=radioLable[i].parent().children(':input[class=pingfen]').val();
+                    tao1=tao?tao+'套':'';
+                    tao2=tao?Number(tao):1;
+                    text+='<'+title+youwu+tao1+'>';
+                    v+=Number($(radioLable[i].prev()[0]).val()) * tao2;
+                }
+            }
+            var qita= $('input[name=zf_qit]').val();
+            if(qita){
+                text+='<其他'+qita+'>'
+                v+=1;
+            }
+            $('[opt=zhufangqingkuang]').val(text);
+            $('input[name=zf_pingguf]').attr("readonly","readonly").val(v);
+        }
+        $('fieldset[opt=info7] :input[type=radio]+label').each(function(i){
+            radioLable.push($(this))
+            $(this).bind('click',getMessage)
+            $(this).next(':input').bind('change',getMessage)
+            $(this).parent().parent().find(':input[name=zf_qit]').bind('change',getMessage)
+        })
+        var info=$('fieldset[opt=info8]')
+        $('ol:first>li').css({'line-height':'21px'});
+        zhongdajibing=info.find('tr[opt=zhongdajibing]');
+        var titles=[];
+        var qks=['','医生诊断','在接受治疗','结束治疗'];
+        $(zhongdajibing.children()[0]).find('li').each(function(){
+            titles.push($(this).text())
+        })
+        for(var i=1;i<zhongdajibing.children().length;i++){
+            $(zhongdajibing.children()[i]).find('li').each(function(index){
+                $(this).attr('opt1',i).attr('opt2',index)
+                var title=titles[$(this).attr('opt2')] ;
+                var v = 0;
+                $(this).find(':input+label').attr('title',title).attr('qk',qks[i]).bind('click',function(){
+                    var sum_text='';
+                    zhongdajibing.find(':input[type=radio]+label').each(function(){
+                        if($(this).prev()[0].checked){
+                            sum_text+=$(this).attr('title')+  $(this).attr('qk')
+                            v+=Number($($(this).prev()[0]).val());
+                        }
+                    })
+                    $('textarea[opt=zhongdajibing]').val(sum_text);
+                    $('input[name=jb_pingguf]').attr("readonly","readonly").val(v);
+                })
+            })
+        }
+        var result=$('fieldset[opt=result1]') ;
+        var calculate=function(){
+            var value=0;
+            result.find('td>:input[class=pingfen]').each(function(){
+                value+=Number($(this).val())
+            })
+            result.find(':input[name=pinggusum]').val(value)
+        }
+        result.find('td>:input[class=pingfen]').each(function(){
+            $(this).bind('change',calculate)
+        })
+        result.find('a[opt=recalculate]').bind('click',calculate)
+    });
+    function myformatter(date){
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        var d = date.getDate();
+        return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+    }
+    function myparser(s){
+        if (!s) return new Date();
+        var ss = (s.split('-'));
+        var y = parseInt(ss[0],10);
+        var m = parseInt(ss[1],10);
+        var d = parseInt(ss[2],10);
+        if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+            return new Date(y,m-1,d);
+        } else {
+            return new Date();
+        }
+    }
+    /*新增选项卡*/
+    function addTab(title, url){
+        var jq = top.jQuery;
+        if (jq('#tabs').tabs('exists', title)){
+            jq('#tabs').tabs('select', title);
+        } else {
+            var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+            jq('#tabs').tabs('add',{
+                title:title,
+                content:content,
+                closable:true
+            });
+        }
+    };
+
 </script>
 <body>
 <div  class="easyui-panel newRadio" opt="neededitformpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
+
+<form method="post" action="/saveneed" opt="mainform" id="fs">
+<input hidden="true" id="pg" value="{{id}}">
+<!--<input type="hidden" name="status" value="自由" id="status">-->
+<input type="hidden" name="loginname" id="loginname">
+<input type="hidden" name="dvcode" id="dvcode">
 <fieldset style="width: 900px;margin: 0px auto;" opt="info0"><legend>用户基本信息</legend>
     <div>
         <input type="hidden" name="lr_id">
@@ -54,18 +461,18 @@
                 <td class="formtdtext">姓名:</td>
                 <td><input class="easyui-validatebox" type="text" name="name" data-options="required:true"></td>
                 <td class="formtdtext">身份证<span style="color: red">*</span></td>
-                <td><input opt="identityid" name="identityid" class="x-easyui-validatebox"
+                <td><input opt="identityid" name="identityid" class="easyui-validatebox"
                            data-options="required:true"></td>
             </tr>
 
             <tr>
                 <td class="formtdtext">性别:</td>
-                <td><input class="easyui-combobox" name="gender"
+                <td><input class="easyui-combobox" name="gender" opt="gender"
                            data-options=" loader:cj.getLoader('gender'), editable:false, valueField:'id', textField:'text' ">
 
                 </td>
                 <td class="formtdtext">出生年月:</td>
-                <td><input name="birthd"></td>
+                <td><input  name="birthd" opt="birthd" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser"></td>
 
             </tr>
 
@@ -78,43 +485,6 @@
                 <td><input class="easyui-combobox" name="culture"
                            data-options=" loader:cj.getLoader('culture'), editable:false, valueField:'id', textField:'text' ">
                 </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">籍贯:</td>
-                <td><input  type="text" name="registration" ></td>
-                <td class="formtdtext">婚姻状况:</td>
-                <td><input  type="text" name="realaddress" ></td>
-
-
-            </tr>
-            <tr>
-                <td class="formtdtext">曾从事职业:</td>
-                <td><input  type="text" name="telnum" ></td>
-                <td class="formtdtext">社保卡号:</td>
-                <td><input  type="text" name="securitid" ></td>
-            </tr>
-            <tr>
-                <td class="formtdtext">居住情况:</td>
-                <td ><input type="text" name="bankid"></td>
-                <td class="formtdtext">经济条件:</td>
-                <td ><input type="text" name="bankid"></td>
-            </tr>
-
-            <tr>
-                <td class="formtdtext">户籍所在地:</td>
-                <td ><input type="text" name="registration"></td>
-                <td class="formtdtext">邮编:</td>
-                <td ><input type="text" name="bankid"></td>
-            </tr>
-            <tr>
-                <td class="formtdtext">居住地址:</td>
-                <td colspan="3"><input type="text" name="address" size="50"></td>
-            </tr>
-            <tr>
-                <td class="formtdtext">住宅电话:</td>
-                <td ><input type="text" name="mobilephone"></td>
-                <td class="formtdtext">申请人手机:</td>
-                <td ><input type="text" name="telephone"></td>
             </tr>
 
         </table>
@@ -258,27 +628,27 @@
             <td rowspan="5">经济条件</td>
             <td>分类</td>
             <td>判断评分</td>
-            <td>本人收入</td>
+
         </tr>
         <tr>
             <td>退休工资(2000元-3000元)</td>
             <td><input name="jj_shour" type="radio" value="10" /><label>10分</label></td>
-            <td>本人收入<input size="1" class="pingfen">元/月</td>
+
         </tr>
         <tr>
             <td>低退休工资(2000元以下)</td>
             <td><input name="jj_shour" type="radio" value="15" /><label>15分</label></td>
-            <td>本人收入<input size="1" class="pingfen">元/月</td>
+
         </tr>
         <tr>
             <td>无社保</td>
             <td><input name="jj_shour" type="radio" value="20" /><label>20分</label></td>
-            <td>本人收入<input size="1" class="pingfen">元/月</td>
+
         </tr>
         <tr>
             <td>低保</td>
             <td><input name="jj_shour" type="radio" value="25" /><label>25分</label></td>
-            <td></td>
+
         </tr>
         <tr><td>评分</td>
             <td colspan="3">
@@ -303,26 +673,18 @@
         <tr>
             <td>与子女,亲友共住</td>
             <td><input name="jz_fenl" type="radio" value="15" /><label>15分</label></td>
-            <td>
-                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>是</label>
-                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>否</label>
+            <td rowspan="3">
+                <input name="jz_zhaol" type="radio" value="1" /><label>是</label>
+                <input name="jz_zhaol" type="radio" value="0" /><label>否</label>
             </td>
         </tr>
         <tr>
             <td>空巢</td>
             <td><input name="jz_fenl" type="radio" value="20" /><label>20分</label></td>
-            <td>
-                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>是</label>
-                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>否</label>
-            </td>
         </tr>
         <tr>
             <td>独居,孤寡</td>
             <td><input name="jz_fenl" type="radio" value="25" /><label>25分</label></td>
-            <td>
-                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>是</label>
-                <input name="jz_zhaol" type="radio" value="jk_bs_gaoxy" /><label>否</label>
-            </td>
         </tr>
 
         <tr><td>评分</td>
@@ -342,12 +704,8 @@
         <tr>
             <td rowspan="2">年龄情况</td>
             <td>出生日期:
-                <input opt="csrq" name="chushengriqi"/>
+                <input opt="csrq" name="chushengriqi" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser"/>
             </td>
-            <td opt="textymd">__年__月__日(以身份证为准)</td>
-        </tr>
-        <tr>
-            <td>现有年龄:<input size="1" class="pingfen" opt="xynl"></td>
             <td>
                 <ul style="list-style-type:none">
                     <li><span style="width: 100px;">1. 60-79&nbsp;&nbsp;</span><input name="nl_fenl" type="radio" value="0" /><label>0分</label></li>
@@ -593,7 +951,7 @@
                     <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_shiwmoxguanjib" type="radio" value="2" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_tangnbingswangmbingb" type="radio" value="2" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_shenzjib" type="radio" value="2" /><label></label></li>
-                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit2" type="radio" value="2" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit1" type="radio" value="2" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit2" type="radio" value="2" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit3" type="radio" value="2" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">2</span><input name="jb_qit4" type="radio" value="2" /><label></label></li>
@@ -626,7 +984,7 @@
                     <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_shiwmoxguanjib" type="radio" value="3" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_tangnbingswangmbingb" type="radio" value="3" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_shenzjib" type="radio" value="3" /><label></label></li>
-                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit3" type="radio" value="3" /><label></label></li>
+                    <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit1" type="radio" value="3" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit2" type="radio" value="3" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit3" type="radio" value="3" /><label></label></li>
                     <li><span style="width: 20px;display:inline-block;">3</span><input name="jb_qit4" type="radio" value="3" /><label></label></li>
@@ -657,7 +1015,7 @@
             <td style="width: 70px;">评估分值</td>
         </tr>
         <tr>
-            <td>1.生活处理能力<br/>(0-50分)</td>
+            <td>1.生活处理能力<br/>(0-100分)</td>
             <td>
                 <input name="sum_sh_jiel" type="radio" value="0" /><label>正常</label>
                 <input name="sum_sh_jiel" type="radio" value="1" /><label>轻度</label>
@@ -695,7 +1053,7 @@
             <td ><input size="1" class="pingfen" name="sum_nl_pingguf"></td>
         </tr>
         <tr>
-            <td>5.特殊贡献<br/>(0-10分)</td>
+            <td>5.特殊贡献<br/>(0-40分)</td>
             <td>
                 <input name="sum_gx_laom" type="checkbox" value="10" /><label>市级以上劳模</label>
                 <input name="sum_gx_youf" type="checkbox" value="10" /><label>重点优抚对象</label>
@@ -730,7 +1088,7 @@
             <td style="text-align: center;">
                 <label><input name="pinggusum" size="2" class="pingfen">分</label>
             </td>
-            <td><a opt="recalculate">重新计算</a></td>
+            <td><a opt="recalculate">计算</a></td>
         </tr>
         <tr>
             <td>建议服务标准</td>
@@ -755,18 +1113,18 @@
         <tr>
             <td colspan="5" style="text-align: center;">评估表基本信息</td>
         </tr>
-        <tr>
-            <td colspan="2">评估表编号</td>
-            <td opt="pg_id"></td>
-            <td>完成日期</td>
-            <td opt="pingguenddate"></td>
-        </tr>
+        <!--<tr>-->
+            <!--<td colspan="2">评估表编号</td>-->
+            <!--<td opt="pg_id"></td>-->
+            <!--<td>完成日期</td>-->
+            <!--<td opt="pingguenddate"></td>-->
+        <!--</tr>-->
         <tr>
             <td rowspan="5" style="width: 30px;">评估确认员完成</td>
             <td style="width: 200px;">评估员姓名</td>
             <td style="width: 200px;"><input size="25" name="pingguyname"></td>
-            <td rowspan="2" style="width: 150px;">确认完成</td>
-            <td rowspan="2">
+            <td rowspan="3" style="width: 150px;">确认完成</td>
+            <td rowspan="3">
                 <ul style="list-style-type:none">
                     <li>首次评估<input type="radio" name="realend"><label></label></li>
                     <li>复检评估<input type="radio" name="realend"><label></label></li>
@@ -779,24 +1137,20 @@
             <td>联络电话</td>
             <td><input size="25" name="pingguyphone"></td>
         </tr>
-
+        <tr>
+            <td>完成时间</td>
+            <td><input size="25" name="pingguenddate" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser"></td>
+        </tr>
         <tr>
             <td>所属单位</td>
             <td colspan="3"><input size="75" name="pingguydept"></td>
         </tr>
 
         <tr>
-            <td>评估员签名</td>
-            <td><input size="25"></td>
-            <td>日期</td>
-            <td><input size="25"></td>
-        </tr>
-
-        <tr>
             <td>评估分值</td>
-            <td><input size="25" name="pinggusum"></td>
+            <td><input size="25" opt="pinggusum"></td>
             <td>服务时间</td>
-            <td><input size="25"></td>
+            <td><input size="25" name="servicedate"></td>
         </tr>
 
         <tr>
@@ -815,6 +1169,17 @@
 
     </table>
 </fieldset>
+   <input name="active" hidden="true" opt="active">
+<div opt="needbutton" style="width: 900px;text-align: center;margin: 0px auto">
+    {% if id %}
+    <input type="button" value="变更" id="update">
+    <input type="button" value="注销" id="delete" hidden="true">
+    {% else %}
+    <input type="submit" value="保存" >
+    {% endif %}
+    <input type="button" value="操作日志" onclick="addTab('录入操作日志','logs?functionid=wJhlMNIq8C20mH7Bm6tj')">
+</div>
+</form>
 </div>
 </body>
 </html>

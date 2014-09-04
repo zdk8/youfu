@@ -49,9 +49,8 @@
           });
       </script>
   </head>
-  <body>
-    <body class="easyui-layout" id="mainlayoutpanel" border="false">
-    <div region="north" border="false" class="cs-north" >
+    <body class="easyui-layout" id="mainlayoutpanel" border="false" >
+    <div region="north" border="false" class="cs-north" style="overflow:hidden">
         <div class="cs-north-bg">
             <div class="cs-north-logo"></div>
             <ul id="headnavul">
@@ -83,10 +82,6 @@
 
         </div>
     </div>
-
-
-
-    </body>
     <script type="text/javascript">
       var context = "{{servlet-context}}";
     </script>
@@ -95,7 +90,7 @@
             if ($('#tabs').tabs('exists', title)){
                 $('#tabs').tabs('select', title);
             } else {
-                var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+                var content = '<iframe scrolling="no" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
                 $('#tabs').tabs('add',{
                     title:title,
                     content:content,

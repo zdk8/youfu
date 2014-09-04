@@ -8,26 +8,90 @@
     <script type="text/javascript"  src="http://www.jeasyui.com/easyui/locale/easyui-lang-zh_CN.js"></script>
     <link rel="stylesheet" type="text/css"  href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
 </head>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#need").datagrid({
+            onDblClickRow: function(){
+                var selected = $('#need').datagrid('getSelected');
+                if (selected){
+                    var post = $("#need").datagrid("getSelected").name;
+                    var id = $("#need").datagrid("getSelected").pg_id;
+                    alert("ok"+post+"id:"+id);
+                    var jq = top.jQuery;
+                    if (jq('#tabs').tabs('exists', post+'评估信息'))
+                        jq('#tabs').tabs('select', post+'评估信息');
+                    else {
+                        var content = '<iframe scrolling="auto" frameborder="0"  src="'+"tneed?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+                        jq('#tabs').tabs('add',{
+                            title:post+'评估信息',
+                            content:content,
+                            closable:true
+                        });
+                    }
+                }
+            }
+        });
+//        $("#search").click(function(){
+//            var name = document.getElementById('name').value;
+//            $("#tt").datagrid({
+//                url:'/oldname?name='+name
+//            })
+//        })
+    });
+//    function edit(){
+//        var selected = $('#need').datagrid('getSelected');
+//        alert(selected.pg_id+"!!!");
+//        url='tneed?id='+selected.pg_id;
+//        addTab(selected.name+'评估信息',url) ;
+//    }
+//    function addTab(title, url){
+//        var jq = top.jQuery;
+//        if (jq('#tabs').tabs('exists', title)){
+//            jq('#tabs').tabs('select', title);
+//        } else {
+//            var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+//            jq('#tabs').tabs('add',{
+//                title:title,
+//                content:content,
+//                closable:true
+//            });
+//        }
+//    }
+</script>
+<style>
+    html,body {
+        margin: 0;
+        height:100%;
+    }
+    .icon-save{
+        background:url('img/shenghe.gif') no-repeat;
+    }
+    .icon-refresh{
+        background:url('img/refresh.gif') no-repeat;
+    }.icon-search{
+         background:url('img/search.gif') no-repeat;
+     }.icon-log{
+          background:url('img/mylog.gif') no-repeat;
+      }
+    a:link, a:visited, a:active {
+        color: #404040;
+        text-decoration: none;
+    }
+</style>
 <body>
 <table class="easyui-datagrid" id="need"
        data-options="
                fit:true,
                method:'get',
+               toolbar:'.tb',
                border:false,
                 url:'/needs',
                singleSelect:true,
                pagination:true">
     <thead data-options="frozen:true">
     <tr>
-        <th rowspan="2" data-options="field:'ro',width:80,align:'center',formatter:function(value,rowData,rowIndex)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;edit&quot; href=&quot;#&quot;>变更</a>');
-                str=$(str).append('<a action=&quot;logout&quot;href=&quot;#&quot;>注销</a>');
-                return str.html();
-            }">操作</th>
         <th rowspan="2" data-options="field:'pg_id'">评估序号</th>
-        <th rowspan="2" data-options="field:'active'">有效</th>
+        <!--<th rowspan="2" data-options="field:'active'">有效</th>-->
         <th rowspan="2" data-options="field:'name',formatter:function(v,r,i)
             {
                 var str='<div></div>';
@@ -84,5 +148,11 @@
     </tr>
     </thead>
 </table>
+<!--<div class="tb">-->
+    <!--<form >-->
+        <!--<input name="name" class="easyui-validatebox" id="name">-->
+        <!--<input type="button" value="查询" id="search">-->
+    <!--</form>-->
+<!--</div>-->
 </body>
 </html>

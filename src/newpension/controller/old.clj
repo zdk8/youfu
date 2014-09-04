@@ -13,9 +13,6 @@
               :hjj_type :jz_yidianh :xq_tez :jk_tingl :jz_erxingm :jk_chux :jk_chuany :marriage :operators
               :vocation :jz_yiweiz :jz_erweiz :jz_sheqyy :jk_xuey :jk_jib :districtid :jk_dingx :xq_tec
               :gender :live :retirewage :registration :jk_xiz :economy :jz_yixingm :mobilephone :jz_zhibdh :nation
-              ;              :fwlx_jjyl :fwlx_fwj :fwlx_mftj :fwlx_dylnb :fwlx_jgyl :fwlx_tyfw :fwlx_hjj :fwlx_qt :jk_rcws_st
-              ;              :jk_rcws_xl :jk_rcws_xt :jk_rcws_sy :jk_rcws_xj :jk_rcws_tx :jk_rcws_xzj :jk_rcws_xy :jk_bs_gaoxy
-              ;              :jk_bs_tangnb :jk_bs_fengs :jk_bs_xinzb :jk_bs_chid :jk_bs_guz :jk_bs_qit
               ])
 
 (def checkinfo {:fwlx_jjyl "" :fwlx_fwj "" :fwlx_mftj "":fwlx_dylnb "":fwlx_jgyl "" :fwlx_tyfw "" :fwlx_hjj ""
@@ -80,6 +77,14 @@
     "addold.html"
     {:old (:body (resp/json  (db/get-old id)))}))
 
+(defn get-oldid [id]
+ (resp/json  (db/get-old id)))
+
+;;根据身份证查询养老信息
+(defn get-id [id]
+  (:body (resp/json {:total (count (db/get-ids id)) :rows (db/get-ids id)})))
+
+
 ;(defn get-max []
 ;  (let [a (db/get-olds)]
 ;    (apply max
@@ -108,14 +113,11 @@
 (defn editadd-oldsocrel [fields]
   (let [{olds_gx :params} fields]
     (db/insert-oldsocrel olds_gx)
-    (str "true")
-    )
-  )
+    (str "true")))
 
 ;;养老信息录入，参数为养老信息录入页面提交的所有信息
 (defn create-old [request]
   (let [{olds :params} request
-        keyword "olds"
         opseno (inc (:max (db/get-max "userlog")))        ;;获取自增主键
         digest (str "姓名" (:name (:params request))
                  " 身份证" (:identityid (:params request))
@@ -127,7 +129,7 @@
         username  (:operators (:params request))
         auditid (inc (:max (db/get-max "audits")))]       ;;获取自增主键
     (db/create-old (into {} (cons (select-keys olds (vec (keys checkinfo)))    ;;新增养老信息
-                              (cons [:lr_id (inc (:max (db/get-max keyword)))]
+                              (cons [:lr_id tprkey]
                                 (select-keys olds oldinfo)))))
     (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
     (db/create-audit opseno auditid)             ;;新增对应的审核表
@@ -217,7 +219,7 @@
       (do (db/update-oldstatus "驳回" tprkey)   ;;修改老人表状态为驳回
         (db/create-userlog auopseno (str digest " "status flag) auditid functionid dvcode loginname username)      ;;新增审核日志
         (db/update-audit level "0" dvcode (str status flag) loginname auopseno "1" auditid opseno)))      ;;修改审核表
-    (layout/render "audit.html")))    ;;待办业务
+    (layout/render "audit.html" {:funcid "txFUV5pFpWVLv6Th4vQl" :functionid "mHLcDiwTflgEshNKIiOV"})))    ;;待办业务
 
 ;;根据外键查询操作日志
 (defn get-logs [functionid page rows]

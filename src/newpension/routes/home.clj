@@ -25,8 +25,8 @@
 (defn log-page [functionid]
   (layout/render "log.html" {:functionid functionid}))
 
-(defn audit-page []
-  (layout/render "audit.html"))
+(defn audit-page [functionid funcid]
+  (layout/render "audit.html" {:functionid functionid :funcid funcid}))
 
 (defn need-page []
   (layout/render "need.html"))
@@ -39,7 +39,7 @@
   (GET "/" [] (login-page)) ;;登录页面
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
   (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
-  (GET "/audits" [] (audit-page))     ;;待办业务页面
+  (GET "/audits" [functionid funcid] (audit-page functionid funcid))     ;;待办业务页面
   (GET "/olds" [] (old-page))      ;;养老信息查询页面
   (GET "/need" [] (need-page))      ;;人员评估信息查询页面
   (GET "/addneed" [] (addneed-page))      ;;人员评估信息录入页面
@@ -49,13 +49,15 @@
   (POST "/editadd-oldsocrel" fields (old/editadd-oldsocrel fields));;修改后新增养老家庭成员信息
   (GET "/sele_oldsocrel" [gx_name] (old/sele_oldsocrel gx_name))
   (GET "/old" [page rows] (old/get-olds page rows))       ;;养老信息查询
+  (POST "/oldid" [q] (old/get-id q))
   (GET "/oldname" [name page rows] (old/get-oldname name page rows))       ;;根据关键字模糊查询养老信息
   (GET "/search" [id] (old/get-old id))          ;;根据主键查看养老详细信息
+  (GET "/searchid" [id] (old/get-oldid id))          ;;根据主键查看养老详细信息
   (GET "/log" [functionid page rows] (old/get-logs functionid page rows))       ;;操作日志查询
   (POST "/updateold" request (old/update-old request))       ;;修改养老信息
   (POST "/deleteold" request (old/delete-old request))        ;;删除养老信息
   (GET "/audit" [functionid loginname dvcode page rows] (old/get-audits functionid loginname dvcode page rows))      ;;待办业务查询
-  (POST "/checkaudit" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;待办业务操作
+  (POST "/checkaudit" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;养老信息待办业务操作
     (old/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
   (GET "/func" [username functionid] (old/get-funcs username functionid))
   (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))  ;;获取输入框下拉选项列表
@@ -65,4 +67,10 @@
   (POST "/oldsocrelkey" [] (old/oldsocrelkey))    ;;家庭成员信息表主键
   (POST "/dele-oldsorel" [lrgx_id] (old/dele-oldsorel lrgx_id))   ;;删除家庭成员关系表
   (GET "/needs" [] (need/get-needs))             ;;人员评估信息查询
+  (GET "/tneed" [id] (need/tneed id))
+  (GET "/searchneed" [id] (need/get-need id))                  ;;根据主键查询人员评估信息
+  (POST "/saveneed" request (need/create-need request))
+  (POST "/updateneed" request (need/update-need request))
+  (POST "/checkneed" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;评估信息待办业务操作
+    (need/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
   )
