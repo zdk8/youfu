@@ -40,15 +40,9 @@
         >
     <thead data-options="frozen:true">
     <tr>
-        <th rowspan="2" data-options="field:'ro',width:80,align:'center',
-        formatter:function(value,rowData,rowIndex)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;edit&quot;>变更    </a>');
-                str=$(str).append('<a action=&quot;logout&quot;>注销</a>');
-                return str.html();
-            }
-            ">操作</th>
+        <!--<th rowspan="2" data-options="field:'ro',width:80,align:'center',
+        formatter:format
+            ">操作</th>-->
         <th rowspan="2" data-options="field:'pg_id'">评估序号</th>
         <!--<th rowspan="2" data-options="field:'active', formatter:cj.enumFormatter('active') ">有效</th>-->
         <th rowspan="2" data-options="field:'name'">姓名</th>
@@ -77,8 +71,51 @@
     </tr>
     </thead>
 </table>
+<div style="display: none">
+    <input id="opepg_id" type="text" value="121231">
+</div>
 
 <script>
+    /*function format()
+    {
+        var str='<div></div>';
+        str=$(str).append('<a onclick="editgrant();">变更    </a>');
+        str=$(str).append('<a onclick="logoutgrant();">注销</a>');
+        return str.html();
+    }*/
+    //变更
+    /*function editgrant(){
+        var row = $("#grantmoneyid").datagrid('getSelected');
+        console.log(row.pg_id)
+        *//*if (jq('#tabs').tabs('exists', '变更'))
+            jq('#tabs').tabs('select', '变更');
+        else {
+//                    var content = '<iframe scrolling="auto" frameborder="0"  src="'+"search?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+            jq('#tabs').tabs('add',{
+                title:'变更',
+                content:row,
+//                href:'test',
+                closable:true
+            });
+        }*//*
+    }
+    //注销
+    function logoutgrant(){
+        if (jq('#tabs').tabs('exists', '注销'))
+            jq('#tabs').tabs('select', '注销');
+        else {
+//                    var content = '<iframe scrolling="auto" frameborder="0"  src="'+"search?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+            jq('#tabs').tabs('add',{
+                title:'注销',
+//                        content:content,
+                href:'test',
+                closable:true
+            });
+        }
+    }*/
+
+
+
     var jq = top.jQuery;
     function myformatter(date){
         var y = date.getFullYear();
@@ -99,17 +136,21 @@
             onLoadSuccess:function(data){
             },
             onDblClickRow:function(rowindex,rowdata){
-                console.log(rowdata.pg_id)
-                if (jq('#tabs').tabs('exists', '人员综合查询'))
-                    jq('#tabs').tabs('select', '人员综合查询');
-                else {
-//                    var content = '<iframe scrolling="auto" frameborder="0"  src="'+"search?id=" + id+'" style="width:100%;height:100%;"></iframe>';
-                    jq('#tabs').tabs('add',{
-                        title:'人员综合查询',
-//                        content:content,
-                        href:'test',
-                        closable:true
-                    });
+                var selected = $('#grantmoneyid').datagrid('getSelected');
+                if (selected){
+                    var post = $("#grantmoneyid").datagrid("getSelected").name;
+                    var id = $("#grantmoneyid").datagrid("getSelected").pg_id;
+                    var jq = top.jQuery;
+                    if (jq('#tabs').tabs('exists', post+'评估信息'))
+                        jq('#tabs').tabs('select', post+'评估信息');
+                    else {
+                        var content = '<iframe scrolling="auto" frameborder="0"  src="'+"tneed?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+                        jq('#tabs').tabs('add',{
+                            title:post+'评估信息',
+                            content:content,
+                            closable:true
+                        });
+                    }
                 }
             },
             toolbar:[{
@@ -134,6 +175,7 @@
             ]
         });
     }
+
     $(document).ready(function(){
         lazgrantoldready();
         //查询资金发放表主键
@@ -242,6 +284,19 @@
                 }
             ]
         })
+    }
+
+    var logout=function(option,row){
+        console.log(row)
+        /*cj.showContent({
+            url:'lr.do?model=pension.EvaluateLrInfo&eventName=queryById',
+            title:'注销',
+            htmfile:'text!views/pension/EvaluateLrInfoLogout.htm',
+            jsfile:'views/pension/EvaluateLrInfoLogout',
+            location:'pension.EvaluateLrInfoLogout',
+            functionid:'P6IyVH34P1sgn7VzU4q8',
+            tprkey:row.pg_id
+        })*/
     }
 </script>
 </body>
