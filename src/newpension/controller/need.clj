@@ -97,6 +97,26 @@
       (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由状态下,修改对应审核表
     (str "成功")))
 
+;;评估信息注销
+(defn need-logout [request]
+  (let [{needs :params} request
+        opseno (inc (:max (db/get-max "userlog")))        ;;获取自增主键
+        digest (str "姓名" (:name (:params request))
+                 " 身份证" (:identityid (:params request))
+                 " 性别" (if (= (:gender (:params request)) "1") "男" "女"))
+        dvcode (:dvcode (:params request))
+        loginname (:loginname (:params request))
+        username (:operators (:params request))
+        auditid (:auditid (db/get-audit (:pg_id (:params request))))]    ;;根据外键查询审核表得到审核主键
+    (db/update-active "3" (:pg_id (:params request)))    ;;根据主键修改评估信息状态
+    (db/create-userlog opseno (str digest " 信息注销")          ;;新增对应的操作日志
+      (:pg_id (:params request)) "wJhlMNIq8C20mH7Bm6tj" dvcode loginname username)
+    (db/create-userlog (inc (:max (db/get-max "userlog"))) (str digest " 信息注销") auditid "RsYYAyoMAWG70Gt5GeH6" dvcode loginname username)
+    (db/update-audit "0" "0" dvcode "注销" loginname    ;;修改对应的审核表
+        (inc (:max (db/get-max "userlog"))) "0" auditid opseno)
+    (str "注销成功")))
+
+
 ;;修改审核表
 (defn update-audit [flag aulevel digest tprkey auditid dvcode loginname username opseno]
   (let [status (nth ["自由" "提交" "审核" "审批"] (inc (Integer/parseInt aulevel)));;得到审核字段

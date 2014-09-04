@@ -78,23 +78,23 @@
                                 })
                         var active=res['active']
 //                        console.log("111"+active)
-
                         /*修改操作*/
                         $("#update").click(function(){
                             if (active == null|| active == "2"){
                                 var returnVal = window.confirm("是否变更？", "标题");
                                 if(returnVal){
-                                    alert("222"+active);
+//                                    alert("222"+active);
                                     var str = $('input[name=name]').val();
                                     console.log(str);
-                                    $("form").attr("action","{{servlet-context}}/updateneed");
-                                    $('#fs').form({
+                                    $("form").form('submit', {
+                                        url:'/updateneed',
+                                        onSubmit: function(){
+                                        },
                                         success:function(){
                                             alert("操作成功！");
                                             jq('#tabs').tabs('close', str+'评估信息');
                                         }
                                     });
-                                    $("form").submit();
                                 }
                             }else {
                                 alert(active+"!!!!!");
@@ -103,21 +103,24 @@
                         });
                         if (active == "2")
                             $("#delete").show();
-                        /*删除操作*/
+                        if(active == "3")
+                            $("#update").hide();
+                        /*注销操作*/
                         $("#delete").click(function(){
-                            $('#ff').form({
-                                success:function(){
-                                    alert("操作成功！");
-                                    var str = $("#name").val();
-                                    jq('#tabs').tabs('close', str+'评估信息');
-                                }
-                            });
-                            var id = $("#lr_id").val();
+                            var id = $("#pg_id").val();
                             alert("id:"+id);
                             var returnVal = window.confirm("是否注销？", "标题");
+                            var str = $('input[name=name]').val();
                             if(returnVal){
-//                                $("form").attr("action","{{servlet-context}}/deleteold");
-//                                $("form").submit();
+                                $("form").form('submit', {
+                                    url:'/needlogout',
+                                    onSubmit: function(){
+                                    },
+                                    success:function(){
+                                        alert("操作成功！");
+                                        jq('#tabs').tabs('close', str+'评估信息');
+                                    }
+                                });
                             }
                         });
                     }
@@ -128,12 +131,13 @@
         $("input[name$=_pingguy]").attr("readonly","readonly").val(name);
         $("input[opt='identityid']").combogrid({
             panelWidth:350,
-            panelHeight:400,
+            panelHeight:350,
             url:'oldid',
             method:'post',
             idField:'identityid',
             textField:'identityid',
             fitColumns:true,
+            pagination:true,
             mode:'remote',
             columns:[[
                 {field:'name',title:'姓名',width:60},
@@ -433,18 +437,35 @@
             });
         }
     };
-
+    //新增操作
+    function add(title){
+//        alert(title);
+        var jq = top.jQuery;
+        var returnVal = window.confirm("是否新增？", "标题");
+        if(returnVal){
+            $("form").form('submit', {
+                url:'/saveneed',
+                onSubmit: function(){
+                },
+                success:function(){
+                    alert("操作成功！");
+                    jq('#tabs').tabs('close', str+'评估信息');
+                }
+            });
+        }
+    };
 </script>
 <body>
 <div  class="easyui-panel newRadio" opt="neededitformpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
 
-<form method="post" action="/saveneed" opt="mainform" id="fs">
+<form method="post" opt="mainform" id="fs">
 <input hidden="true" id="pg" value="{{id}}">
 <!--<input type="hidden" name="status" value="自由" id="status">-->
 <input type="hidden" name="loginname" id="loginname">
 <input type="hidden" name="dvcode" id="dvcode">
+<input type="hidden" name="username" id="username">
 <fieldset style="width: 900px;margin: 0px auto;" opt="info0"><legend>用户基本信息</legend>
     <div>
         <input type="hidden" name="lr_id">
@@ -1018,7 +1039,7 @@
             <td>1.生活处理能力<br/>(0-100分)</td>
             <td>
                 <input name="sum_sh_jiel" type="radio" value="0" /><label>正常</label>
-                <input name="sum_sh_jiel" type="radio" value="1" /><label>轻度</label>
+                <input name="sum_sh_jiel" type="radio" value="1" /><label>轻度依赖</label>
                 <input name="sum_sh_jiel" type="radio" value="2" /><label>中度依赖</label>
                 <input name="sum_sh_jiel" type="radio" value="3" /><label>重度依赖</label>
             </td>
@@ -1175,7 +1196,7 @@
     <input type="button" value="变更" id="update">
     <input type="button" value="注销" id="delete" hidden="true">
     {% else %}
-    <input type="submit" value="保存" >
+    <input type="button" value="保存" onclick="add('nice')">
     {% endif %}
     <input type="button" value="操作日志" onclick="addTab('录入操作日志','logs?functionid=wJhlMNIq8C20mH7Bm6tj')">
 </div>

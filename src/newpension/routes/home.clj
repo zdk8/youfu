@@ -50,7 +50,7 @@
   (POST "/editadd-oldsocrel" fields (old/editadd-oldsocrel fields));;修改后新增养老家庭成员信息
   (GET "/sele_oldsocrel" [gx_name] (old/sele_oldsocrel gx_name))
   (GET "/old" [page rows] (old/get-olds page rows))       ;;养老信息查询
-  (POST "/oldid" [q] (old/get-id q))
+  (POST "/oldid" [q page rows] (old/get-id q page rows))
   (GET "/oldname" [name page rows] (old/get-oldname name page rows))       ;;根据关键字模糊查询养老信息
   (GET "/search" [id] (old/get-old id))          ;;根据主键查看养老详细信息
   (GET "/searchid" [id] (old/get-oldid id))          ;;根据主键查看养老详细信息
@@ -74,6 +74,7 @@
   (POST "/updateneed" request (need/update-need request))
   (POST "/checkneed" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;评估信息待办业务操作
     (need/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
+  (POST "/needlogout" request (need/need-logout request))
   (GET "/addnewgrantwin" [] (layout/render "addnewgrantwin.html")) ;;资金发放窗口
   (GET "/searchGrant" [] (layout/render "searchGrant.html")) ;;搜索框
   (GET "/get-grantmoney" [page rows] (money/get-grantmoney page rows))    ;;资金发放表查询

@@ -81,8 +81,13 @@
  (resp/json  (db/get-old id)))
 
 ;;根据身份证查询养老信息
-(defn get-id [id]
-  (:body (resp/json {:total (count (db/get-ids id)) :rows (db/get-ids id)})))
+(defn get-id [id page rows]
+  (let [p (Integer/parseInt page)
+        r (Integer/parseInt rows)
+        c (count (db/get-ids id))]
+    (if (<= (* p r) c)
+      (:body (resp/json {:total c :rows (subvec (db/get-ids id) (* (dec p) r) (* p r))}))
+      (:body (resp/json {:total c :rows (subvec (db/get-ids id) (* (dec p) r) c)})))))
 
 
 ;(defn get-max []

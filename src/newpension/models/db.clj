@@ -287,7 +287,13 @@
                                   (fields)
                                   (with users
                                     (fields)
-                                    (where {:username username}))))]}  {:functionid [not= "weouDjr2ji7k5w4EA0Ws"]}))
+                                    (where {:username username}))))]}  {:functionid [not-in ["weouDjr2ji7k5w4EA0Ws"
+                                                                                             "4CkaX11T23bhDwXa9EHZ"
+                                                                                             "P6IyVH34P1sgn7VzU4q8"
+                                                                                             "5P7oQzbn9ISfSkKAJbOd"
+                                                                                             "XGcoe8yNX0DfdZHn4CMa"
+                                                                                             "yw8Q05XYP5SiUC24nvCC"
+                                                                                             "2SF0N1S5hYYE2Vhlxk2T"]]}))
     (order :orderno)))
 
 ;;获取输入框下拉选项列表
