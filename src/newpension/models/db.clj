@@ -95,13 +95,23 @@
 
  ;;数据库操作函数
  ;;用户登录
-(defn get-user
-  ( [name pwd] (first
-                 (select users
-                   (where {:loginname name :passwd pwd}))))
-  ( [name] (first
-             (select users
-               (where {:loginname name})))))
+;(defn get-user
+;  ( [name pwd] (first
+;                 (select users
+;                   (fields)
+;                   (where {:loginname name :passwd pwd})))
+;   )
+;  ( [name] (first
+;             (select users
+;               (where {:loginname name})))))
+(defn get-user [name pwd]
+  (first
+    (select users
+;      (fields :loginname)
+      (where {:loginname name :passwd pwd})
+      )
+  )
+  )
 
 ;;根据关键字获取该表自增主键
 (defn get-max [keywords]

@@ -26,7 +26,7 @@
         }
     </style>
 <body>
-<form id="myform" method='post' action="login" >
+<form id="myform" method='post' action="loginbtn" >
     <table align='center' class='table-4'>
         <tr>
             <td class='rowhead'>用户名：</td>
@@ -46,7 +46,7 @@
 
         </tr>
         <tr>
-            <td colspan="2" align="right" style="font-size: 13px;">{{loginmsg}}</td>
+            <span opt="loginmsg"><td colspan="2" align="right" style="font-size: 13px;color: red;">{{loginmsg}}</td></span>
         </tr>
 
     </table>
@@ -62,6 +62,7 @@
 </body>
 </html>
 <script type="text/javascript">
+
 
     window.onload=function(){
         /*var a=CryptoJS.MD5("hvit");

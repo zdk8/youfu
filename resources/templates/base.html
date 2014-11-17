@@ -58,7 +58,9 @@
                 <li class="li-skinitem"><img src="img/head/2.png"/><a id="domneedtodocount" style="cursor:pointer">待办业务(55)</a></li>
                 <li class="li-skinitem"><img src="img/head/4.png"/><a id="onlinenums">在线人数(1)</a></li>
                 <li class="li-skinitem"><img src="img/head/5.png"/><a id="domshowalterpwd">重设密码</a></li>
-                <li class="li-skinitem"><img src="img/head/7.png"/> <a id="domlogout" style="text-decoration: none;cursor:pointer" href="/">退出</a></li>
+                <li class="li-skinitem"><img src="img/head/7.png"/>
+                    <a opt="logout" style="text-decoration: none;cursor:pointer" href="/">退出</a>
+                </li>
                 <li class="li-skinitem"><span id="currentDate"></span></li>
             </ul>
             <input type="hidden" name="loginname" id="login" value={{loginname}}>
@@ -104,6 +106,19 @@
                 $('#tabs').tabs('close','主页');
             }
         }
+        /*注销*/
+        $('[opt=logout]').click(function(){
+            $.ajax({
+                url:'logout',
+                type:'post',
+                success:function(data){
+                    document.location.href="login"
+                    /*var opened=window.open('about:blank','_self');
+                    opened.opener=null;
+                    opened.close();*/
+                }
+            })
+        })
     </script>
     {% block page-scripts %}
     {% endblock %}
