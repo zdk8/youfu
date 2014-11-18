@@ -33,9 +33,8 @@
 
 (defroutes home-routes
   (GET "/" request (old/login request)) ;;登录页面
-  (GET "/login" request (old/login request))  ;;退出后跳到登录页面
+  (GET "/index" request (old/login request))  ;;退出后跳到登录页面
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
-  (GET "/loginbtn" request (old/loginbtn request))  ;;用户登录
   (POST "/logout" request (old/logout request))      ;;退出登录
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
   (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
