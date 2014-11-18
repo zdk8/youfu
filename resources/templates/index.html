@@ -27,7 +27,7 @@
                               $('#accord').accordion('add',{
                                   title: n.title,
                                   selected: false,
-                                  height:465,
+                                  height:400,
                                   content:'<ul name="'+n.title+'"'+'id="'+ n.id+'"></ul>'
                               });
                           }
@@ -47,6 +47,8 @@
                                       = '/func?username='+name+'&functionid='+node.id
                           },
                           onClick:function(node){
+                              console.log(node.title)
+                              console.log(node.urlpath)
                               if(node.nodetype ==0)
                                   addTab(node.title,node.urlpath);
                           }
@@ -56,7 +58,7 @@
           });
       </script>
   </head>
-    <body class="easyui-layout" id="mainlayoutpanel" border="false" >
+  <body class="easyui-layout" id="mainlayoutpanel" border="false" >
     <div region="north" border="false" class="cs-north" style="overflow:hidden">
         <div class="cs-north-bg">
             <div class="cs-north-logo"></div>
@@ -75,7 +77,7 @@
             <input type="hidden" name="username" id="user" value={{username}}>
         </div>
     </div>
-    <div region="west" id="westpanel" border="true" split="true" title="业务导航" class="cs-west" style="border-right: 0">
+    <div region="west" id="westpanel" split="true" title="业务导航" class="cs-west" style="border-right: 0">
         <div id="menu_pension" fit="true" border="false">
             <div class="easyui-accordion" id="accord" >
             </div>
@@ -94,7 +96,7 @@
     <div id="grantMoneyDig"></div>
     <div id="searchDig"></div>
 
-    </body>
+  </body>
     <script type="text/javascript">
       var context = "{{servlet-context}}";
     </script>
