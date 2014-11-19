@@ -33,9 +33,8 @@
 
 (defroutes home-routes
   (GET "/" request (old/login request)) ;;登录页面
-  (GET "/login" request (old/login request))  ;;退出后跳到登录页面
+  (GET "/index" request (old/login request))  ;;退出后跳到登录页面
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
-  (GET "/loginbtn" request (old/loginbtn request))  ;;用户登录
   (POST "/logout" request (old/logout request))      ;;退出登录
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
   (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
@@ -44,6 +43,7 @@
   (GET "/need" [] (need-page))      ;;人员评估信息查询页面
   (GET "/addneed" [] (addneed-page))      ;;人员评估信息录入页面
   (GET "/GrantMoneyMng" [] (layout/render "GrantMoneyMng.html"))  ;;资金发放页面
+  (GET "/YangLaoJGManagement" [] (layout/render-public "js/views/pension/YangLaoJGManagement.htm"))  ;;资金发放页面
 
   (POST "/saveold" request (old/create-old request))  ;;养老信息录入
   (POST "/insert-oldsocrel" fields (old/insert-oldsocrel fields)) ;;新增养老家庭成员信息

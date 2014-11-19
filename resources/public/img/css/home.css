@@ -1,0 +1,18 @@
+/*login.html*/
+.body {background-image:url(../../img/loginbg.jpg); background-position:50% 50%; background-repeat:no-repeat;}
+.form {padding-top:300px; text-align:center}
+.table, tr, td, th, input{ border:none;}
+.rowhead {font-family:'微软雅黑',Tahoma,arial,verdana,sans-serif;width:80px;
+    font-weight:normal; font-size:14px;  border:none; text-align:right;}
+.text-2  {width:150px; height:22px; background-color:#a4c5e0; border:1px solid #035793; font-size:16px; font-weight:bold}
+#poweredby   {color:#fff; margin-top:30px; height:50px; text-align:center; line-height:1; font-size:14px;}
+#poweredby a {color:#fff}
+#demoUsers span{color:white}
+#demoUsers a{color:yellow}
+#browserlinkdiv{
+    position: absolute;
+    left: 10px;
+    bottom: 20px;
+    text-align: left;
+    font-size: 13px;
+}

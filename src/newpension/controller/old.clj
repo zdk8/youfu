@@ -26,33 +26,6 @@
 (def oldlrid [:lr_id])
 
 ;;用户登录
-;(defn login [name pwd]
-;  (if (= name "")
-;    (if (= pwd "")                        ;;用户名和密码输入空值的情况
-;      (layout/render
-;        "login.html"
-;        {:loginmsg "用户名和密码不能为空"})
-;      (layout/render
-;        "login.html"
-;        {:loginmsg "用户名不能为空"}))
-;    (if (= pwd "")                        ;;用户名不输入空值，密码为空值
-;      (layout/render
-;        "login.html"
-;        {:loginmsg "密码不能为空"})
-;      (if (= (db/get-user name) nil)      ;;根据输入的用户名查询用户表
-;        (layout/render
-;          "login.html"
-;          {:loginmsg "用户不存在"})
-;        (if (= (db/get-user name pwd) nil)  ;;判断输入的密码是否正确
-;          (layout/render
-;            "login.html"
-;            {:loginmsg "密码输入错误"})
-;          (layout/render
-;            "base.html"
-;            {:loginname (:loginname (db/get-user name pwd))
-;             :dvcode (:regionid (db/get-user name pwd))
-;             }(session/put! :username (:username (db/get-user name pwd)))))))))
-;;用户登录
 (defn login [request]
   (try
     (let
@@ -63,12 +36,12 @@
        {username :username} result
        {userid :userid} result]
       (if result
-        (do (session/put! :user_id userid) (layout/render "base.html" (session/put! :username username)))
+        (do (session/put! :user_id userid) (layout/render "index.html" (session/put! :username username)))
         (layout/render "login.html"))
       (if (session/get :username)
-        (layout/render "base.html" {:username (session/get :username)})
+        (layout/render "index.html" {:username (session/get :username)})
         (layout/render "login.html")))
-    (catch Exception e (layout/render "need.html" {:loginmsg "服务器连接不上！"}))))
+    (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
 (defn loginbtn [request]
   (try
     (let
@@ -79,39 +52,9 @@
        {username :username} result
        {userid :userid} result]
       (if result
-        (do (session/put! :user_id userid) (layout/render "base.html" (session/put! :username username)))
-        (layout/render "login.html" {:loginmsg "用户名或密码错误！"}))
-      (if (session/get :username)
-        (layout/render "base.html" {:username (session/get :username)})
-        (layout/render "login.html" {:loginmsg "用户名或密码错误！"}))
-      )
-    (catch Exception e (layout/render "need.html" {:loginmsg "服务器连接不上！"})))
-  ;  (if (= name "")
-  ;    (if (= pwd "")                        ;;用户名和密码输入空值的情况
-  ;      (layout/render
-  ;        "login.html"
-  ;        {:loginmsg "用户名和密码不能为空"})
-  ;      (layout/render
-  ;        "login.html"
-  ;        {:loginmsg "用户名不能为空"}))
-  ;    (if (= pwd "")                        ;;用户名不输入空值，密码为空值
-  ;      (layout/render
-  ;        "login.html"
-  ;        {:loginmsg "密码不能为空"})
-  ;      (if (= (db/get-user name) nil)      ;;根据输入的用户名查询用户表
-  ;        (layout/render
-  ;          "login.html"
-  ;          {:loginmsg "用户不存在"})
-  ;        (if (= (db/get-user name pwd) nil)  ;;判断输入的密码是否正确
-  ;          (layout/render
-  ;            "login.html"
-  ;            {:loginmsg "密码输入错误"})
-  ;          (layout/render
-  ;            "base.html"
-  ;            {:loginname (:loginname (db/get-user name pwd))
-  ;             :dvcode (:regionid (db/get-user name pwd))
-  ;             }(session/put! :username (:username (db/get-user name pwd))))))))
-  )
+        (do (session/put! :username username) (str true))
+        (str false)))
+    (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
 ;;注销
 (defn logout [request]
   (session/remove! :username))
