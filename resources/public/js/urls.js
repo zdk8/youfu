@@ -1,0 +1,135 @@
+/**
+ * Created with IntelliJ IDEA.
+ * User: admin
+ * Date: 7/28/14
+ * Time: 10:11 AM
+ * To change this template use File | Settings | File Templates.
+ */
+var urls=[
+
+    {name:"pensionweb@DoctorInfo",url:[
+        {c:'pension/adddoctor'},
+        {r:'pension/getdoctorinfo'},
+        {u:'pension/updatedoctorbyid'},
+        {d:'pension/deldoctorbyid'},
+        {mr:'pension/getdoctorbymid'}
+    ]},
+
+    {name:"pensionweb@MedicalInstitutionInfo",url:[
+        {c:'pension/addmbhealthbycard'},
+        {r:''},
+        {u:'pension/updatedoctorbyid'},
+        {d:''},
+        {mr:'pension/getallmdclsinfo'}
+    ]},
+    {name:"pensionweb@FamilyInfo",url:[
+        {c:'pension/addfamilyinfos'},
+        {r:'pension/selectfamilyinfosbykey'},
+        {u:'pension/updatefamilyinfosbykey'},
+        {d:'pension/delfamilybyid'},
+        {mr:'pension/getfamilyinfos'},
+        {addmem:'pension/addfamilymembs'}
+    ]},
+    {name:"pensionweb@FmlMemInfo",url:[
+        {c:'pension/addfamilymembers'},
+        {r:'pension/findfmmembycard'},
+        {u:'pension/updatefmmemb'},
+        {d:'pension/delfmmembycid'},
+        {mr:'pension/findallfmmembycond'},
+        {mrbyfamilyid:'pension/findfmmembyid'}
+    ]},
+    {name:"pensionweb@FmlMemHealthInfo",url:[
+        {c:'pension/addmbhealthbycard'},
+        {r:'pension/getmbhealthbycard'},
+        {u:'pension/updatembhealthbycard'},
+        {d:''},
+        {mr:'pension/findallfmmembycond'},
+        {mrbyfamilyid:'pension/findfmmembyid'}
+    ]},
+    {name:"pensionweb@ParameterMng",url:[
+        {c:'pension/addhealthparams'},
+        {r:''},
+        {u:'pension/updatehealthparams'},
+        {d:'pension/delhealthparams'},
+        {mr:'pension/gethealthparams'}
+    ]},
+    {name:"pensionweb@PensionService",url:[
+        {c:'pension/addmbserverbycid'},
+        {r:''},
+        {u:'pension/updatembserverbyid'},
+        {d:'pension/delmbserverbyid'},
+        {mr:'pension/getmbserverbycid'}
+    ]},
+    {name:"pensionweb@Support",url:[
+        {c:'pension/adddstinfos'},
+        {r:''},
+        {u:'pension/updatedstinfos'},
+        {d:'pension/deldstinfobyid'},
+        {mr:'pension/getalldstinfos'}
+    ]},
+    {name:"followup@BloodSugar",url:[
+        {c:'pension/addbsflup'},
+        {r:'pension/getbsflupbyid'},
+        {u:'pension/updatebsflupbyid'},
+        {d:'pension/delbsflupbyid'},
+        {mr:'pension/getallbsflup'}
+    ]},
+    {name:"followup@Hypertension",url:[
+        {c:'pension/addhptsflup'},
+        {r:'pension/gethptsflupbyid'},
+        {u:'pension/updatehptsflupbyid'},
+        {d:'pension/delhptsflupbyid'},
+        {mr:'pension/getallhptsflup'}
+    ]},
+    {name:"pensionweb@HealthExaminationInfo",url:[
+        {c:'pension/addhexambycid'},
+        {r:'pension/gethexambyid'},
+        {u:'pension/updatehexambyid'},
+        {d:'pension/delhexambyid'},
+        {mr:'pension/getallhexam'}
+    ]},
+    {name:"pensionweb@IntensiveCare",url:[
+        {c:''},
+        {r:''},
+        {u:''},
+        {d:''},
+        {mr:''},
+        {mrzz:'pension/getzzthbyid'},
+        {mrbldo:'pension/getbobytime'},
+        {mrblds:'pension/getbsbytime'},
+        {mrbldp:'pension/getbpbytime'}
+    ]},
+    {name:"pensionweb@Machine",url:[
+        {c:'pension/addmteqmt'},
+        {r:'pension/getmteqmtbyid'},
+        {u:'pension/updatemteqmtbyid'},
+        {d:'pension/delmteqmtbyid'},
+        {mr:'pension/getallmteqmt'}
+
+    ]},
+    {name:"manager@CodeMaintenance@combo",url:[
+        {c:'savecombo'},
+        {r:'getcombobypr'},
+        {u:'savecombo'},
+        {d:''},
+        {mr:'getcombo'}
+
+    ]},,
+    {name:"manager@CodeMaintenance@combodt",url:[
+        {c:'savecombodt'},
+        {r:'getcombodtbypr'},
+        {u:'savecombodt'},
+        {d:'deletecombodt'},
+        {mr:'getcombodt'}
+
+    ]},
+    //地名系统
+    {name:"dmxt@DanWei",url:[
+        {c:'civil/adddanwei'},
+        {r:''},
+        {u:''},
+        {d:''},
+        {mr:'civil/getdanweibycond'}
+
+    ]}
+]

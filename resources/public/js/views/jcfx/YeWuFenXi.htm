@@ -1,0 +1,124 @@
+<div style="position: absolute;width: 100%;height: 100%;">
+    <div style="padding: 6px;padding-bottom: 2px">
+        <div class="highcharstoolbar">&nbsp;&nbsp;统计条件</div>
+        <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 2px;">
+            <table cellspacing="0" cellpadding="0" style="text-align: right;">
+                <tr>
+                    <td class="formtdtext"><label class="text-align text-overflow">行政区划</label>
+                    </td>
+                    <td>
+                        <input class="easyui-combotree" opt="divisiontree" data-options="width:189">
+                    </td>
+
+                    <td class="formtdtext"><label class="text-align text-overflow">业务类型</label>
+                    </td>
+                    <td>
+                        <input class="easyui-combotree" opt="billtype" data-options="width:189">
+                    </td>
+
+                    <td class="formtdtext"><label class="text-align text-overflow">业务状态</label>
+                    </td>
+                    <td>
+                        <input class="easyui-combobox" opt="billstatus"  style="width: 189px;"
+                                    data-options="
+                                    loader: cj.getLoader('billstatus'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text',
+                                    panelHeight:'auto',
+                                    value:'all'">
+                    </td>
+                    <td style="position:relative;width: 15%"></td>
+                </tr>
+                <tr>
+                    <td class="formtdtext"><label class="text-align text-overflow">时间方式</label>
+                    </td>
+                    <td>
+                        <input class="easyui-combobox" opt="dateway"  style="width: 189px;"
+                                    data-options="
+                                    loader: cj.getLoader('dateway'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text',
+                                    panelHeight:'auto',
+                                    value:'yyyy'">
+                    </td>
+                    <td class="formtdtext"><label class="text-align text-overflow">时间</label>
+                    </td>
+                    <td>
+                        <span opt="datemenu">
+                            <span opt="dateall1">
+                                <input class="easyui-datebox" data-options="width:189,disabled:true" opt="shijian">
+                            </span>
+                            <span opt="dateall2" style="display: none">
+                                <input class="easyui-datebox" data-options="width:87" opt="shijian1">到
+                                <input class="easyui-datebox" data-options="width:87" opt="shijian2">
+                            </span>
+                        </span>
+                    </td>
+                    <td style="padding-right: 10px;padding-top: 4px;" colspan="3">
+                        <input class="highcharstoolbarbutton" type="button" opt="tongji" value="统计分析">
+                    </td>
+                </tr>
+            </table>
+            <!--<div style="float: right;">
+                <input class="highcharstoolbarbutton" type="button" opt="tongji" value="统计" action="changebutton">
+            </div>-->
+        </div>
+    </div>
+    <div style="padding: 6px;padding-top: 2px">
+        <span style="position:absolute;height:466px;width:50%;float: left">
+            <table opt="datatuxing" class="easyui-datagrid"
+                   data-options="
+                   fit:true,
+                   fitColumns:true,
+                   method:'post',
+                   singleSelect:true,
+                   loadMsg:'',
+                   striped:true">
+                <thead>
+                    <tr>
+                        <th data-options="field:'tname',align:'left',width:613">
+                            <label style="color:rgba(5,8,11,0.84);font-weight:bold">时间</label>
+                        </th>
+                        <th data-options="field:'tsum',align:'left',width:200">
+                            <label style="color:rgba(5,8,11,0.84);font-weight:bold">数量</label>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </span>
+        <span style="position:relative;width:48%;height:100%;float: right;border: 1px solid rgba(128, 176, 79, 0.12);">
+            <div>
+                <div class="highcharstoolbar">&nbsp;&nbsp;饼状图统计</div>
+                <div opt="containerPie" style="height: 250px"></div>
+            </div>
+            <div>
+                <div class="highcharstoolbar">&nbsp;&nbsp;柱形图统计</div>
+                <div opt="containerColumn" style="height:250px"></div>
+            </div>
+            <div>
+                <div class="highcharstoolbar">&nbsp;&nbsp;曲线图统计</div>
+                <div opt="containerLine" style="height:250px"></div>
+            </div>
+        </span>
+    </div>
+</div>
+<!--<div class="easyui-tabs" opt="tabs" data-options="fit:true">
+    <div title='统计图(饼)' opt="containerPie" data-options="fit:true"></div>
+    <div title='统计图(柱)' opt="containerColumn" data-options="fit:true"></div>
+    <div title='统计图(曲线)' opt="containerLine" data-options="fit:true"></div>
+</div>-->
+
+<!--<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'east',title:'East'" style="width:500px;height: 1500px">
+        <div class="easyui-tabs" opt="tabs" data-options="fit:true">
+            <div title='统计图(饼)' opt="containerPie" data-options="fit:true"></div>
+            <div title='统计图(柱)' opt="containerColumn" data-options="fit:true"></div>
+            <div title='统计图(曲线)' opt="containerLine" data-options="fit:true"></div>
+        </div>
+    </div>
+    <div data-options="region:'west',title:'West'" style="width:500px;height: 1500px">
+
+    </div>
+</div>-->

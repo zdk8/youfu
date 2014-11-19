@@ -1,0 +1,94 @@
+<div class="newRadio intelligent">
+    <table>
+        <!--<caption>查询对话框</caption>-->
+        <tr>
+            <td style="width:65px;">姓名</td>
+            <td><input></td>
+            <td style="width: 10px"></td>
+            <td style="width:65px;">身份证号</td>
+            <td><input></td>
+        </tr>
+        <tr>
+            <td>申请类别</td>
+            <td colspan="4"><input></td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td>
+                <input class="easyui-combobox" data-options="
+                    valueField: 'label',
+                    textField: 'value',
+                    editable:false,
+                    data: [{
+                        label: 'java',
+                        value: 'Java'
+                    },{
+                        label: 'perl',
+                        value: 'Perl'
+                    },{
+                        label: 'ruby',
+                        value: 'Ruby'
+                    }]" />
+            </td>
+            <td></td>
+            <td>文化成度</td>
+            <td>
+                <input>
+            </td>
+        </tr>
+        <tr>
+            <td>婚姻状况</td>
+            <td><input></td>
+            <td></td>
+            <td>人员类别</td>
+            <td><input></td>
+        </tr>
+        <tr>
+            <td>是否享受</td>
+            <td><input></td>
+            <td></td>
+            <td>职业状况</td>
+            <td><input></td>
+        </tr>
+        <tr>
+            <td>市</td>
+            <td><input></td>
+            <td></td>
+            <td>区(县)</td>
+            <td><input></td>
+        </tr>
+        <tr>
+            <td>街道(乡镇)</td>
+            <td><input></td>
+            <td></td>
+            <td>社区(村)</td>
+            <td><input></td>
+        </tr>
+        <tr>
+            <td>审批状态</td>
+            <td colspan="4">
+                <input type="radio" name="test11" value="1"/><label>未提交</label>
+                <input type="radio" name="test11" value="2"/><label>审批中</label>
+                <input type="radio" name="test11" value="1"/><label>退回</label>
+                <input type="radio" name="test11" value="2"/><label>注销</label>
+                <input type="radio" name="test11" value="1"/><label>已审批</label>
+                <input type="radio" name="test11" value="2"/><label>审批终止</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>审批状态</td>
+            <td colspan="4">
+                <input type="radio" name="test11" value="1"/><label>未享受</label>
+                <input type="radio" name="test11" value="2"/><label>已退出享受</label>
+                <input type="radio" name="test11" value="1"/><label>已享受</label>
+                <input type="radio" name="test11" value="2"/><label>全部</label>
+            </td>
+        </tr>
+    </table>
+
+    <div style="width: 150px;margin: 25px auto">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true">查询</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-close" plain="true">关闭</a>
+    </div>
+</div>

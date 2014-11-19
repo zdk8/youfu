@@ -1,0 +1,104 @@
+<!--地名数据查询-->
+<table class="easyui-datagrid" opt="placeDataQuery" data-options="
+               method:'post',
+               toolbar:'#tb1',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true,
+               loadMsg:''">
+    <thead>
+    <tr>
+        <th data-options="field:'biaozhunmingcheng',width:220,align:'center'">标准名称</th>
+        <th data-options="field:'romepinxie',width:220,align:'center'">罗马字母拼写</th>
+        <th data-options="field:'placetype',width:220,align:'center'">地名类型</th>
+        <th data-options="field:'enum_name',width:220,align:'center'">行政区划</th>
+        <th data-options="field:'dengjishijian',width:220,align:'center'">登记时间</th>
+    </tr>
+    </thead>
+</table>
+
+<div style="padding-bottom: 10px;" id="tb1">
+    <table cellspacing="0" cellpadding="0" style="text-align: right;padding-top: 2px">
+        <tr>
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="place_checkbox1" name="divisiontree" checked onclick="return false;"/>
+                        <label for="place_checkbox1"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext">
+                <label class="text-align text-overflow">行政区划</label>
+            </td>
+            <td>
+            <input class="easyui-combotree" opt="divisiontree" data-options="width:189">
+            </td>
+
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="place_checkbox2" name="placetype"/>
+                        <label for="place_checkbox2"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext"><label class="text-align text-overflow">地名类型</label>
+            </td>
+            <td>
+                <input class="easyui-combotree" opt="placetype" data-options="width:189">
+            </td>
+
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="place_checkbox5" name="datastate"/>
+                        <label for="place_checkbox5"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext"><label class="text-align text-overflow">数据库</label>
+            </td>
+            <td>
+                <select class="easyui-combobox" opt="datastate" style="width:170px;">
+                    <option value="">--请选择--</option>
+                    <option value="2">正式库</option>
+                    <option value="3">历史库</option>
+                </select>
+            </td>
+            <td style="position:relative;width: 15%"></td>
+        </tr>
+        <tr>
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="place_checkbox3" name="biaozhunmingcheng"/>
+                        <label for="place_checkbox3"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext"><label class="text-align text-overflow">标准名称</label>
+            </td>
+            <td>
+            <input type="text" opt="biaozhunmingcheng"
+                            style="width: 186px;height: 17px;border: 1px solid  rgba(94,128,63,0.21)">
+            </td>
+
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="place_checkbox4" name="romepinxie"/>
+                        <label for="place_checkbox4"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext"><label class="text-align text-overflow">罗马拼音</label>
+            </td>
+            <td>
+            <input type="text" opt="romepinxie"
+                            style="width: 186px;height: 17px;border: 1px solid  rgba(94,128,63,0.21)">
+            </td>
+
+            <td style="padding-right: 5px;padding-top: 15px;" colspan="4">
+                <input class="highcharstoolbarbutton" type="button" opt="query" value="查询">
+                <!--<input class="highcharstoolbarbutton" type="button" opt="exportexl" value="导出Excel">
+                <input class="highcharstoolbarbutton" type="button" opt="refresh" value="刷新">-->
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,88 @@
+<div class="easyui-layout"  data-options="fit:true">
+   <!-- <div data-options="region:'north'" style="height:50px"></div>
+    <div data-options="region:'south'" style="height:50px;"></div>-->
+    <div data-options="region:'east'" style="width:100px;"></div>
+    <div data-options="region:'center'" style="padding:20px" data-options="fit:true">
+        <form method="post">
+        <div class="weboxbuttons"><ul></ul></div>
+        <input type="hidden" name="functionid">
+            <div>
+                <table class="formtable">
+                    <tr>
+                        <td class="formtdtext">地址:</td>
+                        <td colspan="3"><input name="location" size="70" data-options="required:true"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="formtdtext">中文名:</td>
+                        <td><input type="text" name="title"></td>
+                        <td class="formtdtext">父节点:</td>
+                        <td><input type="text" name="parent"></td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext">序号:</td>
+                        <td><input class="easyui-validatebox"  type="text" name="orderno"></td>
+                        <td class="formtdtext">节点类型:</td>
+                        <td><select name="nodetype">
+                            <option value="0">叶子</option>
+                            <option value="1">节点</option>
+                            <option value="2">按钮</option>
+                        </select>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="formtdtext">功能类型:</td>
+                        <td>
+                            <select name="type">
+                                <option value="1">组件</option>
+                                <option value="0">链接(iframe/url)</option>
+                            </select>
+                        </td>
+                        <td class="formtdtext">描述:</td>
+                        <td><input class="easyui-validatebox" type="text"
+                                   name="description" data-options="required:true" value="描述"></td>
+                    </tr>
+
+                    <tr  style="display: none">
+                        <td class="formtdtext">是否日志:</td>
+                        <td><input  type="text" name="log" value="1"></td>
+                        <td class="formtdtext">开发者:</td>
+                        <td><input  type="text" name="developer" value="1" ></td>
+
+                    </tr>
+                    <tr  style="display: none">
+                        <td class="formtdtext">审核标志:</td>
+                        <td><input class="easyui-validatebox"  type="text"  name="auflag"  value="1"></td>
+                        <td class="formtdtext">回退:</td>
+                        <td><input class="easyui-validatebox"  type="text"  name="rbflag"  value="1"></td>
+
+
+                    </tr>
+                    <tr  style="display: none">
+                        <td class="formtdtext">参数1:</td>
+                        <td><input type="text" name="param1" value="1"></td>
+                        <td class="formtdtext">参数2:</td>
+                        <td><input type="text" name="param2" value="1"></td>
+
+
+                    </tr>
+                   <!-- <tr>
+                        <td class="formtdtext">创建时间:</td>
+                        <td><input type="text" name="createdate"></td>
+                        <td class="formtdtext">拥有者:</td>
+                        <td><input type="text" name="owner"></td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext">业务摘要:</td>
+                        <td colspan="3"><textarea name="bsdigest" style="height: 100px;width: 90%;"></textarea></td>
+
+                    </tr>-->
+                </table>
+            </div>
+        </form>
+    </div>
+    <div data-options="region:'west',lines:true" style="width:300px;">
+        <ul id="functiontree"></ul>
+    </div>
+</div>

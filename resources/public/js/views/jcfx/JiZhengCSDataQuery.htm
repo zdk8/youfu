@@ -1,0 +1,46 @@
+<!--基政城市数据查询-->
+<table class="easyui-datagrid" opt="jizhengcsDataQuery" data-options="
+               method:'post',
+               toolbar:'#tb_jizhengcsdataquery',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true,
+               loadMsg:''">
+    <thead>
+    <tr>
+        <th data-options="field:'enum_name',width:220,align:'center'">行政区划</th>
+        <th data-options="field:'districtid',width:220,align:'center'">区划代码值</th>
+        <th data-options="field:'sq_name',width:220,align:'center'">社区名称</th>
+    </tr>
+    </thead>
+</table>
+
+<div style="padding-bottom: 10px;" id="tb_jizhengcsdataquery">
+    <table cellspacing="0" cellpadding="0" style="text-align: right;padding-top: 2px">
+        <tr>
+            <td class="formtdtext">
+                <label class="text-align text-overflow">行政区划</label>
+            </td>
+            <td>
+            <input class="easyui-combotree" opt="divisiontree" data-options="width:189">
+            </td>
+
+            <td class="formtdtext"><label class="text-align text-overflow">社区名称</label>
+            </td>
+            <td>
+                <input type="text" opt="sq_name"
+                       style="width: 186px;height: 17px;border: 1px solid  rgba(94,128,63,0.21)">
+            </td>
+
+            <td style="padding-right: 5px;padding-top: 15px;width:40%;position: relative; ">
+                <input class="highcharstoolbarbutton" type="button" opt="query" value="查询">
+            </td>
+
+        </tr>
+    </table>
+</div>

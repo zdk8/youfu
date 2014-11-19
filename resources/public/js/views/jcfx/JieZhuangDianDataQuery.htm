@@ -1,0 +1,88 @@
+<!--界桩点查询-->
+<table class="easyui-datagrid" opt="placeDataQuery" data-options="
+               method:'post',
+               toolbar:'#tb4',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true,
+               loadMsg:''">
+    <thead>
+    <tr>
+        <th data-options="field:'jz_mingcheng',width:220,align:'center'">界桩名称</th>
+        <th data-options="field:'jz_id',width:220,align:'center'">界桩代码</th>
+        <th data-options="field:'jz_jiezhuangweizhi',width:220,align:'center'">界桩位置</th>
+        <th data-options="field:'jx_id',width:220,align:'center'">界线代码</th>
+    </tr>
+    </thead>
+</table>
+
+<div style="padding-bottom: 10px;" id="tb4">
+    <table cellspacing="0" cellpadding="0" style="text-align: right;padding-top: 2px">
+        <tr>
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="jzd_checkbox1" name="jz_mingcheng"/>
+                        <label for="jzd_checkbox1"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext">
+                <label class="text-align text-overflow">界桩名称</label>
+            </td>
+            <td>
+            <input type="text" opt="jz_mingcheng" style="width: 186px;height: 17px;border: 1px solid  rgba(94,128,63,0.21)">
+            </td>
+
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="jzd_checkbox2" name="jz_id"/>
+                        <label for="jzd_checkbox2"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext"><label class="text-align text-overflow">界桩代码</label>
+            </td>
+            <td>
+                <input type="text" opt="jz_id" style="width: 186px;height: 17px;border: 1px solid  rgba(94,128,63,0.21)">
+            </td>
+
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="jzd_checkbox3" name="jz_jiezhuangweizhi"/>
+                        <label for="jzd_checkbox3"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext"><label class="text-align text-overflow">界桩位置</label>
+            </td>
+            <td>
+                <input type="text" opt="jz_jiezhuangweizhi"
+                       style="width: 186px;height: 17px;border: 1px solid  rgba(94,128,63,0.21)">
+            </td>
+
+            <td style="position:relative;width: 10%"></td>
+        </tr>
+        <tr>
+            <!--<td class="formtdtext">
+                <span class="checkbox">
+                        <input type="checkbox" value="None" id="jzd_checkbox4" name="jx_id"/>
+                        <label for="jzd_checkbox4"></label>
+                </span>
+            </td>-->
+            <td class="formtdtext"><label class="text-align text-overflow">界线代码</label>
+            </td>
+            <td>
+            <input type="text" opt="jx_id"
+                            style="width: 186px;height: 17px;border: 1px solid  rgba(94,128,63,0.21)">
+            </td>
+
+            <td style="padding-right: 5px;padding-top: 15px;" colspan="5">
+                <input class="highcharstoolbarbutton" type="button" opt="query" value="查询">
+                <!--<input class="highcharstoolbarbutton" type="button" opt="exportexl" value="导出Excel">
+                <input class="highcharstoolbarbutton" type="button" opt="refresh" value="刷新">-->
+            </td>
+        </tr>
+    </table>
+</div>

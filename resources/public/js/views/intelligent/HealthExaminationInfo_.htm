@@ -1,0 +1,34 @@
+<form method="post">
+    <div class="newRadio intelligent">
+        <table>
+            <!--<caption>查询对话框</caption>-->
+            <tr>
+                <td>身份证号码</td>
+                <td><input name="sys_micard" operate="like"></td>
+                <td style="width: 10px"></td>
+                <td>检查结果  </td>
+                <td><input class="easyui-combobox" name="sys_herinspection" operate="eq"
+                           data-options=" data:cj.getEnum('examjg'), editable:false, valueField:'id', textField:'text' ">
+            </tr>
+            <tr>
+                <td>主检医生 </td>
+                <td>
+                    <input name="sys_hedname" operate="like">
+                </td>
+
+                <td></td>
+                <td>血型</td>
+
+                <td>
+                    <input class="easyui-combobox" name="to_hebtype" operate="eq"
+                           data-options=" data:cj.getEnum('bloodtype'), editable:false, valueField:'id', textField:'text' ">
+                </td>
+            </tr>
+
+        </table>
+        <div style="width: 150px;margin: 5px auto">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-search" action="search" plain="true">查询</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-close"  action="close" plain="true">关闭</a>
+        </div>
+    </div>
+</form>
