@@ -56,11 +56,11 @@ define(function(){
 
 
         require(['commonfuncs/UpdateItemNum','commonfuncs/AjaxForm'],function(updateitem,ajaxform){
-            $('#welcomename').text("欢迎您:"+displayname+'('+dvname+')');
-            updateitem.updateitemnum($('#onlinenums'),onlinenums,"(",")");
+//            $('#welcomename').text("欢迎您:"+displayname+'('+dvname+')');
+//            updateitem.updateitemnum($('#onlinenums'),onlinenums,"(",")");
             var params = {
                 //roleid:roleid,
-                userid:userid,
+//                userid:userid,
                 //divisionpath:divisionpath,
                 type:'count'
             };

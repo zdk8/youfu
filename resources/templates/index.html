@@ -1,21 +1,23 @@
 <!DOCTYPE html>
+{% include "templates/home.html" %}
 <html>
   <head>
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>民政养老救助系统</title>
-      <link rel="stylesheet" type="text/css" href="css/index.css">
-      <link rel="stylesheet" type="text/css" href="img/css/home.css">
-      <script type="text/javascript" src="js/extLocation.js"></script>
-      <script type="text/javascript"  src="js/jquery-1.8.3.min.js"></script>
-      <script>
-          document.write('<link rel="stylesheet" type="text/css" id="swicth-style" href="'+extEasyui+
-                  'themes/default/easyui.css"><\/>');
-          document.write('<script type="text/javascript"  src="'+extEasyui+
-                  'jquery.easyui.min.js"><\/script>');
-          document.write('<script type="text/javascript"  src="'+extEasyui+
-                  'locale/easyui-lang-zh_CN.js"><\/script>');
-      </script>
-      <script type="text/javascript">
+      <!--<script type="text/javascript">
+          function addTab(title, url){
+              if ($('#tabs').tabs('exists', title)){
+                  $('#tabs').tabs('select', title);
+              } else {
+                  var content = '<iframe scrolling="no" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
+                  $('#tabs').tabs('add',{
+                      title:title,
+                      content:content,
+                      closable:true
+                  });
+                  $('#tabs').tabs('close','主页');
+              }
+          }
           $(document).ready(function() {
               var name = $("#user").val();
               $.ajax({
@@ -56,7 +58,7 @@
                   }
               });
           });
-      </script>
+      </script>-->
   </head>
   <body class="easyui-layout" id="mainlayoutpanel" border="false" >
     <div region="north" border="false" class="cs-north" style="overflow:hidden">
@@ -101,19 +103,6 @@
       var context = "{{servlet-context}}";
     </script>
     <script type="text/javascript">
-        function addTab(title, url){
-            if ($('#tabs').tabs('exists', title)){
-                $('#tabs').tabs('select', title);
-            } else {
-                var content = '<iframe scrolling="no" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
-                $('#tabs').tabs('add',{
-                    title:title,
-                    content:content,
-                    closable:true
-                });
-                $('#tabs').tabs('close','主页');
-            }
-        }
         /*注销*/
         $('[opt=logout]').click(function(){
             $.ajax({
@@ -130,4 +119,5 @@
     </script>
   </body>
 </html>
+
 

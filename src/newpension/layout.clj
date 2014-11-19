@@ -6,7 +6,6 @@
             [environ.core :refer [env]]))
 
 (def template-path "templates/")
-(def public-path "public/")
 
 (deftype RenderableTemplate [template params]
   Renderable
@@ -28,25 +27,4 @@
 
 (defn render [template & [params]]
   (RenderableTemplate. template params))
-
-(deftype RenderablePublic [template params]
-  Renderable
-  (render [this request]
-    (content-type
-      (->> (assoc params
-             (keyword (s/replace template #".html" "-selected")) "active"
-             :dev (env :dev)
-             :servlet-context
-             (if-let [context (:servlet-context request)]
-               ;; If we're not inside a serlvet environment (for
-               ;; example when using mock requests), then
-               ;; .getContextPath might not exist
-               (try (.getContextPath context)
-                 (catch IllegalArgumentException _ context))))
-        (parser/render-file (str public-path template))
-        response)
-      "text/html; charset=utf-8")))
-
-(defn render-public [template & [params]]
-  (RenderablePublic. template params))
 

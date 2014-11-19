@@ -76,7 +76,7 @@ var cj=(function(){
     }
 
     var getLoader = function(type,param,success,error){
-        return function(param,success,error){
+        /*return function(param,success,error){
             param.q="10000";
             $.ajax({
                 url: 'auth/getenumbytype',
@@ -101,10 +101,10 @@ var cj=(function(){
                     error.apply(this, arguments);
                 }
             });
-        }
+        }*/
     }
 
-    var getUrl=function(filepath,action){
+    var getUrl=function(filepath,action,costomPreFixUrl){
         var u=filepath.replace(/\//g,'@');
         var myu=indexOf(urls,'name',u);
         var a=myu.url;
@@ -112,7 +112,7 @@ var cj=(function(){
             for(var p in a[i]){
 
                 if(p==action){
-                    return preFixUrl+a[i][p]
+                    return (costomPreFixUrl||preFixUrl)+a[i][p]
                 }
             }
         }
@@ -121,7 +121,26 @@ var cj=(function(){
 //***************************
 
     var singleFun=function(){
+        /*if(cbdata){
+            var d=cbdata;
+            Enums= d.rows
+            cjEnum= d.rows;
+            return Enums;  //一次性全部加载过来
+        }
         $.ajax({
+            url:'jsondata/cb.json',
+            type:'post',
+            data:{searchtype:'no1'},
+            success:function(res){
+                var d = eval('(' + res + ')');
+                if (!!d && (d.success == true || d.success == 'true')) {
+                    Enums= d.rows
+                    cjEnum= d.rows;
+                    return Enums;  //一次性全部加载过来
+                }
+            }
+        }) */
+        /*$.ajax({
             url:'auth/getenumbytype',
             dataType: 'jsonp',
             data:{skeyword:'',type:''},
@@ -143,7 +162,7 @@ var cj=(function(){
                 Enums= obj;
                 cjEnum= obj;
             }
-        })
+        })*/
     }
     window.setTimeout(singleFun,1000);
 
@@ -286,7 +305,8 @@ var cj=(function(){
             $.ajax({
                 url:url,data:data,type:atype,success:success
             })
-        },getLoader:getLoader
+        },getLoader:getLoader,
+        dataGridLoadMsg:function(){return ''}
     }
 
 

@@ -1,5 +1,5 @@
 ﻿serverUrl="http://112.124.50.195:8080/"
-serverUrl="http://127.168.2.5/"
+//serverUrl="http://127.168.2.5/"
 /*var mysessionid="nosessionid";
 if(sessionid){
     mysessionid=sessionid;
@@ -29,7 +29,7 @@ imgnoperson="img/noperson.gif";
 var svalidatesys_micard=preFixUrl+'pension/checkmicard';
 
 var defaultPage = "dmxt.PlaceAdd";
- //defaultPage = "dmxt.division";
+ defaultPage = "pension.YangLaoJGManagement";
 //defaultPage=undefined;
 var onlyPage=!true;
 //select t.*, t.rowid from T_ENUMS t WHERE t.ENUM_GROUP_GUID='759AB90C-E2BC-E210-BDCC-B8EB0793557E' --and enum_name like '交%'
