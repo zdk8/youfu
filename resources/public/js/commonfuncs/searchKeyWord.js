@@ -13,7 +13,7 @@ define(function(){
         var obj=[
             {name:arr[0],operate:'like',value:keyword,logic:'and'}
         ]
-        for(var i in additionalCond){//如果有附加条件
+        for(var i in additionalCond){
             obj.push({name:additionalCond[i].name,operate:'=',value:additionalCond[i].value,logic:'and'})
         }
         localDataGrid.datagrid('load',{

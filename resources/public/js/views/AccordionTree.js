@@ -1,5 +1,35 @@
 define(function () {
 
+    function f(node){
+        var value=node.value;
+        var htmlfile, jsfile;
+        var nodelocaltion=node.location;
+        if(nodelocaltion){
+            var widget=nodelocaltion.replace(/\./g,'/');
+            htmlfile='text!views/'+widget+'.htm';
+            jsfile='views/'+widget;
+        }
+        var title=node.text;
+        require(['commonfuncs/TreeClickEvent'],function(TreeClickEvent){
+            if(node.type=='1'){ //组件
+                TreeClickEvent.ShowContent({
+                    htmfile:htmlfile,
+                    jsfile:jsfile,
+                    title:title,
+                    location:nodelocaltion,
+                    functionid:node.functionid,
+                    readonly:false,
+                    viewfolder:'views',
+                    currentfolder:'views/'+nodelocaltion.substr(0,nodelocaltion.lastIndexOf('.')).replace('.','/')
+                });
+            }else if(node.type=='0'){//url
+                //console.log(node)
+                TreeClickEvent.ShowIframe(value
+                    //+'&functionid='+node.functionid
+                    ,jsfile,title);
+            }
+        });
+    }
     var a = {
         render: function (panel) {
             $(panel).children('.easyui-tree').tree({
@@ -13,10 +43,8 @@ define(function () {
                     if (isexist) {
                         tabs.tabs('select', title);
                     } else {
-                        require(['views/OpenPage'],function(js){
-                            js.open(node);
-                        })
-                        //f(node)
+                        //alert(node.text)
+                        f(node)
                     }
                 },
                 onBeforeLoad: function (node, param) {

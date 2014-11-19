@@ -16,8 +16,6 @@ define(function(){
 
 
     var cfg=function(config){
-        console.log(JSON.stringify(config.cparam));
-        console.log(JSON.stringify(config.uparam));
         var local=config.local;
 
         //初始化checkbox和下方的工具条
@@ -38,39 +36,34 @@ define(function(){
 
 
         //表单和提交按钮
-        var formexp=config.form||local.find('[opt=pensionform]');
+        var fromexp=config.from||local.find('[opt=pensionform]');
         var submitbtnexp=config.submitbtn||local.find('a[opt=pensionsubmit]');
-        var url='',getonerecordurl='';
+        var url='';
 
         //根据文件路径和要进行的操作来获得后台对应的接口url
         if(config.filepath){
-            url=cj.getUrl(config.filepath,config.act,config.costomPreFixUrl);
-            getonerecordurl=cj.getUrl(config.filepath,'r',config.costomPreFixUrl);
+            url=cj.getUrl(config.filepath,config.act);
         }
+
         //根据动作来作一些细节上的调整
         if(config.act=='c'){
             $(submitbtnexp).bind('click',function(){
-                $(formexp).form('submit',{
+                $(fromexp).form('submit',{
                     url:url,
                     onSubmit:function(param){
                         var lparam=config.cparam;
-                        console.log(config.cparam)
                         for(var p in lparam){
                             var $p=local.find('input[name='+p+']');
                             var pval=$p?$p.val():null;
-                            if(pval){//如果页面上有这个元素则以页面上元素为准
+                            if(pval){
                                 continue;
                             }
-                            param[p]=lparam[p];
-
+                            param[p]=lparam[p]
                         }
                         if(config.onCreateSubmit){
                             config.onCreateSubmit(local,param)
                         }
-                        var isValid = $(formexp).form('validate');
-                        if(!isValid){
-                            console.log("form is not validated");
-                        }
+                        var isValid = $(fromexp).form('validate');
                         return isValid;
                     },
                     success:function(data){
@@ -94,17 +87,17 @@ define(function(){
             })
         }else if(config.act=='u'){
              cj.ajaxdata(
-                 getonerecordurl,
+                 cj.getUrl(config.filepath,'r'),
                  config.data,
                  function(res){
-                     $res=res;
+                     $res= $.evalJSON(res);
                      if(config.onAjaxDataFn){
                          config.onAjaxDataFn(res)
                      }
                      var formobj=$res[0];
-                     $(formexp).form('load', formobj);
+                     $(fromexp).form('load', formobj);
                      $(submitbtnexp).bind('click',function(){
-                         $(formexp).form('submit',{
+                         $(fromexp).form('submit',{
                              url:url,
                              onSubmit:function(param){
                                  var lparam=config.uparam;
@@ -119,7 +112,7 @@ define(function(){
                                  if(config.onUpdateSubmit){
                                      config.onUpdateSubmit(local,param)
                                  }
-                                 var isValid = $(formexp).form('validate');
+                                 var isValid = $(fromexp).form('validate');
                                  return isValid;
                              },
                              success:function(data){
@@ -147,7 +140,7 @@ define(function(){
         }else if(config.act=='v'){
             $(submitbtnexp).hide();
             cj.ajaxdata(
-                getonerecordurl,
+                cj.getUrl(config.filepath,'r'),
                 config.data,
                 function(res){
                     $res= $.evalJSON(res);
@@ -155,7 +148,7 @@ define(function(){
                         config.onAjaxDataFn(res)
                     }
                     var formobj=$res[0];
-                    $(formexp).form('load', formobj);
+                    $(fromexp).form('load', formobj);
                     local.find('input').attr('disabled',true);
                 }
             )

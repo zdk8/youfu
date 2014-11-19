@@ -4,6 +4,7 @@
             [newpension.util :as util]
             [newpension.controller.old :as old]
             [newpension.controller.need :as need]
+            [newpension.controller.genHtmlCode :as gen]
             [newpension.controller.money :as money]))
 
 (defn home-page []
@@ -30,8 +31,10 @@
 
 (defn addneed-page []
   (layout/render "addneed.html"))
-
+(defn dm-page []
+  (layout/render "dm.html"))
 (defroutes home-routes
+  (GET "/dm" [] (dm-page))
   (GET "/" request (old/login request)) ;;登录页面
   (GET "/index" request (old/login request))  ;;退出后跳到登录页面
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
@@ -84,4 +87,13 @@
   (POST "/sel-grantmoneyid" [] (money/sel-grantmoneyid )) ;;查询资金发放表主键
   (POST "/get-needsid" [] (money/get-needsid )) ;;取出需求评估信息表主键
   (POST "/del-grantmoney" [bsnyue] (money/del-grantmoney bsnyue))  ;;资金发放记录删除
+
+
+
+  (GET "/menutree" req (gen/get-user-menutree req))
+  (POST "/menutree" req (gen/get-user-menutree req))
+  (GET "/getFunctionById" [node] (gen/get-function-by-id node))
+  (POST "/saveFunction" req (gen/create-function req))
+  (GET "/auth/getenumbytype" [type  callback]
+    (gen/getenumbytype type  callback))
   )

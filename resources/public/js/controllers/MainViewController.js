@@ -1,14 +1,12 @@
 /**
  * Created by jack on 13-12-31.
  */
-define(['commonfuncs/LoadingMask','commonfuncs/TabRightClick','commonfuncs/FullCalendar','commonfuncs/validate/Init'],
-    function(LoadingMask,TabRightClick,FullCalendar,validateInit){
-
+define(['views/MainTree','commonfuncs/LoadingMask','commonfuncs/TabRightClick','commonfuncs/FullCalendar','commonfuncs/validate/Init'],
+    function(MainTree,LoadingMask,TabRightClick,FullCalendar,validateInit){
 
     $('#westpanel').prev().addClass('yewudaohang-panel-header');
         //设置左边树的头部样式
 
-    console.log($('#menu_pension'))
     function start(){
         addAccordion();
         //TabRightClick.init();
@@ -58,7 +56,6 @@ define(['commonfuncs/LoadingMask','commonfuncs/TabRightClick','commonfuncs/FullC
 
     }
 
-        //TabRightClick.init();
 
     return {
         start:start

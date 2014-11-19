@@ -1,0 +1,156 @@
+<table class="easyui-datagrid-noauto"
+       data-options="
+               method:'post',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+              pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true">
+    <thead>
+    <tr>
+        <th data-options="field:'ro',width:120,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
+                str=$(str).append('<a action=&quot;delete&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-logout-pl16&quot;>删除</span></span></a>');
+                return str.html();
+            }">操作</th>
+        <th data-options="field:'id',align:'center'">ID</th>
+        <th data-options="field:'workid',align:'center'">WORKID</th>
+        <th data-options="field:'placecommon_id',align:'center'">地名代码</th>
+        <th data-options="field:'leixing',align:'center'">类型</th>
+        <th data-options="field:'suoshuhangye',align:'center'">所属行业</th>
+        <th data-options="field:'dizhi',align:'center'">地址</th>
+        <th data-options="field:'farendaibiao',align:'center'">法人代表</th>
+        <th data-options="field:'dianhuaquhao',align:'center'">电话区号</th>
+        <th data-options="field:'dianhua',align:'center'">电话</th>
+        <th data-options="field:'youzhengbianma',align:'center'">邮政编码</th>
+        <th data-options="field:'yewufanwei',align:'center'">业务范围</th>
+        <th data-options="field:'zhigongrenshu',align:'center'">职工人数</th>
+        <th data-options="field:'danweiwangzhi',align:'center'">单位网址</th>
+        <th data-options="field:'wangluomenpai',align:'center'">网络门牌</th>
+        <th data-options="field:'sys_meustate',width:80,align:'center',formatter:cj.enumFormatter('meustate')">使用状态</th>
+        <th data-options="field:'sys_medate',width:100,align:'center',formatter:cj.dateFormatter('yyyy-MM-dd')">出厂时间</th>
+        <th data-options="field:'sys_mesdate',width:100,align:'center',formatter:cj.dateFormatter('yyyy-MM-dd')">出售时间</th>
+    </tr>
+
+    </thead>
+</table>
+
+
+<div tb>
+    <table cellspacing="0" cellpadding="0" style="float: right">
+        <tr>
+
+            <td><label class="gray7">搜索条件:</label></td>
+
+            <td style="width: 210px;text-align: right">
+                <input class="easyui-searchbox" data-options="prompt:'设备编号',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+
+            <td>
+                <span class="searchbtn" >&nbsp;</span>
+            </td>
+
+            <td>
+                <div class="datagrid-btn-separator"></div>
+            </td>
+            <td>
+                <a href="#" class="easyui-linkbutton" action="add" iconCls="icon-add" plain="true" selected="true">新增</a>
+            </td>
+            <td>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" action="intelligentsearch" plain="true">高级搜索</a>
+            </td>
+            <td>
+                <a href="#" action="testpopwin">测试弹出层</a>
+            </td>
+            <td>
+                <input class="easyui-combobox" name="tph_msmoking_yn"  style="width: 150px;"
+                       data-options=" loader: cj.getLoader('shifu'),editable:false"
+                        >
+            </td>
+            <td>
+                <input class="easyui-combobox" name="tph_msmoking_yn2"  style="width: 150px;"
+                       data-options=" loader: cj.getLoader('shifu'), editable:false"
+                        >
+            </td>
+        </tr>
+        <tr>
+
+            <td><label class="gray7">搜索条件:</label></td>
+
+            <td style="width: 210px;text-align: right">
+                <input class="easyui-searchbox" data-options="prompt:'设备编号',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+
+            <td>
+                <span class="searchbtn" >&nbsp;</span>
+            </td>
+
+            <td>
+                <div class="datagrid-btn-separator"></div>
+            </td>
+            <td>
+                <a href="#" class="easyui-linkbutton" action="add" iconCls="icon-add" plain="true" selected="true">新增</a>
+            </td>
+            <td>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" action="intelligentsearch" plain="true">高级搜索</a>
+            </td>
+            <td>
+                <a href="#" action="testpopwin">测试弹出层</a>
+            </td>
+            <td>
+                <input class="easyui-combobox" name="tph_msmoking_yn"  style="width: 150px;"
+                       data-options=" loader: cj.getLoader('shifu'),editable:false"
+                        >
+            </td>
+            <td>
+                <input class="easyui-combobox" name="tph_msmoking_yn2"  style="width: 150px;"
+                       data-options=" loader: cj.getLoader('shifu'), editable:false"
+                        >
+            </td>
+        </tr>
+        <tr>
+
+            <td><label class="gray7">搜索条件:</label></td>
+
+            <td style="width: 210px;text-align: right">
+                <input class="easyui-searchbox" data-options="prompt:'设备编号',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+
+            <td>
+                <span class="searchbtn" >&nbsp;</span>
+            </td>
+
+            <td>
+                <div class="datagrid-btn-separator"></div>
+            </td>
+            <td>
+                <a href="#" class="easyui-linkbutton" action="add" iconCls="icon-add" plain="true" selected="true">新增</a>
+            </td>
+            <td>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" action="intelligentsearch" plain="true">高级搜索</a>
+            </td>
+            <td>
+                <a href="#" action="testpopwin">测试弹出层</a>
+            </td>
+            <td>
+                <input class="easyui-combobox" name="tph_msmoking_yn"  style="width: 150px;"
+                       data-options=" loader: cj.getLoader('shifu'),editable:false"
+                        >
+            </td>
+            <td>
+                <input class="easyui-combobox" name="tph_msmoking_yn2"  style="width: 150px;"
+                       data-options=" loader: cj.getLoader('shifu'), editable:false"
+                        >
+            </td>
+        </tr>
+    </table>
+    <div class="clear"></div>
+</div>

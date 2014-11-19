@@ -107,22 +107,6 @@ var urls=[
         {mr:'pension/getallmteqmt'}
 
     ]},
-    {name:"manager@CodeMaintenance@combo",url:[
-        {c:'savecombo'},
-        {r:'getcombobypr'},
-        {u:'savecombo'},
-        {d:''},
-        {mr:'getcombo'}
-
-    ]},,
-    {name:"manager@CodeMaintenance@combodt",url:[
-        {c:'savecombodt'},
-        {r:'getcombodtbypr'},
-        {u:'savecombodt'},
-        {d:'deletecombodt'},
-        {mr:'getcombodt'}
-
-    ]},
     //地名系统
     {name:"dmxt@DanWei",url:[
         {c:'civil/adddanwei'},

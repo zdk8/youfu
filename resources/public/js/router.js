@@ -3,11 +3,9 @@
  */
 define(function(){
 
-    var routes = [{hash:'#menu_jcfx', controller:'MainViewController_JCFX'},
-        {hash:'#menu_qxgl',  controller:'ManagerController'},
-        {hash:'#menu_pension',  controller:'MainViewController'}
-    ];
-    var defaultRoute = '#menu_jcfx';
+    var routes = [{hash:'#menu_pension', controller:'MainViewController'},
+        {hash:'#menu_qxgl',  controller:'ManagerController'}];
+    var defaultRoute = '#menu_pension';
     //var defaultRoute ='';
     var currentHash = '';
 

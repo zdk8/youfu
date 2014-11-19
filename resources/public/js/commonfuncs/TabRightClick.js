@@ -55,7 +55,7 @@ define(function(){
     })();
     var init=function(){
         $('#tabs').tabs({
-            onContextMenu_222:function(e, title,index){
+            onContextMenu:function(e, title,index){
                 e.preventDefault();
                 if(title==mainPage){
                     return;
@@ -64,13 +64,16 @@ define(function(){
                 $('#mm').menu('show', { left: e.pageX, top: e.pageY });
                 $('#mm').data("currtab",title);
             },
-            onAdd:function(title,index){
-                console.log(new Date().toDateString());
-                console.log($(this).find('iframe').length)
-                console.log($('#tabs').tabs('getTab',title).find('iframe').length)
-                $('iframe').iframeAutoHeight({debug: true});
+            onAdd:function(){
+                /*if(!loadValidated){
+                    require(['commonfuncs/validate/Init'],function(Init){
+                        new Init();
+                        loadValidated=true;
+                    })
+                }*/
+
             },
-            onBeforeClose_222:function(title,index){
+            onBeforeClose:function(title,index){
                 var local=$('#tabs').tabs('getTab',title);
                 $(local).trigger('closefn');
             }

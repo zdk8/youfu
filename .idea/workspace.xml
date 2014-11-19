@@ -2,149 +2,282 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/AccordionTree.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/AddressesDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/AddressesDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/BirthGender.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/Blank.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/intelligent/BloodSugar_.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/CmWindow.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/CmWindow.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/manager/CodeMaintenance.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/manager/CodeMaintenance.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/CommToolBar.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/CuRecord.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/CuTable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/intelligent/DailyMonitoring.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ExcelExport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/intelligent/FamilyInfo_.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/FilterGridrow.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/intelligent/FmlMemInfo_.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/FormAdd.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/FullCalendar.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/manager/Function.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/manager/Function.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/GetFormData.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/intelligent/HealthExaminationInfo_.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/Htmldb.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/intelligent/Hypertension_.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/validate/Init.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/IsScroll.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiCengZhengQuanTongJi.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiCengZhengQuanTongJi.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiCengZhengQuanTongJiDlg.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiCengZhengQuanTongJiDlg.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiZhengCSDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiZhengCSDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiZhengCWHDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiZhengCWHDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiZhengJJHZSDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiZhengJJHZSDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiZhengYNCDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JiZhengYNCDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JieXianDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JieXianDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JieZhuangDianDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/JieZhuangDianDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/LoadFromData.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/LoadingMask.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/LookupItemName.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/intelligent/Machine_.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/controllers/MainViewController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/controllers/ManagerController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/intelligent/MedicalInstitutionInfo_.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanJJHDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanJJHDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanMFDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanMFDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanSTDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanSTDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanYeWuFenXi.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanYeWuFenXi.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanYeWuFenXiDlg.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/MinGuanYeWuFenXiDlg.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/NavMenu2ClickEvent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/PasswordManager.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/PasswordManager.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/PersonidValidator.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/PlaceDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/PlaceDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/PropertyCheck.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/SheGongDataQuery.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/SheGongDataQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/SheGongTongJi.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/SheGongTongJi.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/SheGongTongJiDlg.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/SheGongTongJiDlg.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ShowBirthDay.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/StatisticsGridCommon.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/TabRightClick.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/TestA.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/TestA.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/TestC.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/TestC.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/TestD.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/TestD.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/YeWuFenXi.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/YeWuFenXi.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/YeWuFenXiDlg.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/YeWuFenXiDlg.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/a.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/a.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/jcfx/a.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/cj.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/crudForm.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/division.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/templates/dm.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/highcharts/drilldown.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/enc-base64-min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/validate/exists.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/highcharts/exporting.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/extLocation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/genFieldTemplate.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/highcharts/highcharts-3d.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/highcharts/highcharts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/validate/identityid.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/initFuncs.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/intelligentsearch.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/validate/ispostalcode.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/validate/istelormobil.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/jQuery.Hz2Py-min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/jQuery.HzSd-min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/jquery-1.8.0.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/jquery.json-2.4.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/json.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/layoutinit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/loadAmi.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/mainapp.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/mainappiframe.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/validate/maxLength.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/md5.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/md5.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/menu_jcfx.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/navigation/menu_pension.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/navigation/menu_qxgl.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/validate/method_datagrid_editCell.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/validate/minLength.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/ckpop/popDailySupport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/ckpop/popDailySupportQuery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ext/popwin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ext/popwin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/require.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/router.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/searchKeyWord.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/highcharts/setOptions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/text.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/treegridtip.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/urls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/pop/xt_combo.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/pop/xt_combo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/pop/xt_combodt.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/pop/xt_combodt.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/application_view_detail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/application_view_tile.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/roundbox/bl.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/roundbox/br.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/button1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/button2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/cancel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/cnzz.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/cog_edit.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/cross.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/floatback.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/footer_bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/formtoolbarbackground.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/user/group.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/head.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/head_tmp.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/header.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/nav.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/nav_li_28.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/nav_li_30.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/nav_li_30_l.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/nav_li_30_r.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/roundbox/nt.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/opbtnbg2l.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/opbtnbg2lnm.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/opbtnbg2r.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/opbtnbg2rnm.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/opbtnbgl.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/opbtnbgr.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/popwindowclosebackground.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/popwindowtitlebackground.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/qingkong.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/searchorange.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/searchwhite.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/tablehead.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/tabletitle.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/roundbox/tl.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension01/tool-sprites-dark.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/roundbox/tr.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/user/user.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/user/user_add.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/user/user_delete.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/AjaxForm.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/followup/BloodSugar.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/followup/BloodSugar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/followup/BloodSugarQuery.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/followup/BloodSugarQuery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/BusinessGridCommon.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvent.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/DanWei.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/DanWei.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/DanWei2.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/DanWeiQuery.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/DanWeiQuery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/followup/Hypertension.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/followup/Hypertension.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/followup/HypertensionQuery.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/followup/HypertensionQuery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/MainTree.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/PensionwebUrlMng.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PlaceAdd.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PlaceAdd.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PlaceCommon.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PlaceCommon.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PlaceDataMaintQuery.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PlaceDataMaintQuery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PlaceNoUse.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PrePlaceAdd.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/PrePlaceAdd.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/SuoZaiZhengQuA.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/SuoZaiZhengQuB.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/trendchart/Test.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/trendchart/Test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/trendchart/Test.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent3.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/TypeTableMap.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/UpdateItemNum.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/Upload.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/Upload.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/trendchart/XueYYT.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/trendchart/XueYYT.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/trendchart/XueYang.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/trendchart/XueYang.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_alter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_cancel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_cancelapproval.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_cancelsend.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_change.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_check.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_del.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_logout.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_print.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_process.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_save.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_saveapplychange.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_saveapplylogout.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_send.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_signature.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/appformsubmit_unsignature.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/bdjj.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/bingchuan.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/caoyuan.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/cbdk.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/ctht.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/cztcc.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/danwei.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/daoyu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/diba.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/dipian.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/division.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/dmxt/division.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/dongxue.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/dukou.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/css/easyuioverwrite.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/fadianzhan.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/fangwu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/css/formtable02.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/gaoyuan.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/gctyc.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/gebi.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/newpension/models/gen.clj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/newpension/controller/genHtmlCode.clj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/gonglu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/gyfjq.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/gyqkfq.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/haiwan.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/haixia.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/haiyang.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/hangkonggang.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/hedaohudao.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/heliu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/hupo.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/html/iframeAutoHeight.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/jiexiang.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/jing.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/jndyz.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/jumindian.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/kuangqu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/lvzhou.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/mainapp2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/mainapp4.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/myqka.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/nlmyq.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ButtonsEvents/propertycheck_all.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/pubu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/pypd.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/qiaoliang.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/quan.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/qundao.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/qupian.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/qzzzzz.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/shamo.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/shanfeng.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/shenlin.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/shuiku.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/shuiqu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/skga.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/smql.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/suidao.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/sygk.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/tielu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/ttbt.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/ttha.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/xiagu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/xingzhengquhua.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/xuhongqu.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/zhaoze.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/placetype/zrbhq.htm" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\img\qinkong.gif" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\highcharts\drilldown.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\highcharts\exporting.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\highcharts\highcharts-3d.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\highcharts\highcharts.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\highcharts\setOptions.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jQuery.Hz2Py-min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jQuery.HzSd-min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jquery-1.8.3.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\external\jquery\jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_diagonals-thick_18_b81900_40x40.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_diagonals-thick_20_666666_40x40.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_flat_10_000000_40x100.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_glass_100_f6f6f6_1x400.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_glass_100_fdf5ce_1x400.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_glass_65_ffffff_1x400.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_gloss-wave_35_f6a828_500x100.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-icons_222222_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-icons_228ef1_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-icons_ef8c08_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-icons_ffd27a_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\images\ui-icons_ffffff_256x240.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\index.html" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\jquery-ui.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\jquery-ui.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\jquery-ui.min.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\jquery-ui.min.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\jquery-ui.structure.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\jquery-ui.structure.min.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\jquery-ui.theme.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin\jquery-ui-1.11.1.custom\jquery-ui.theme.min.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\mainappiframe.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\AddressesDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\AddressesDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiCengZhengQuanTongJi.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiCengZhengQuanTongJi.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiCengZhengQuanTongJiDlg.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiCengZhengQuanTongJiDlg.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiZhengCSDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiZhengCSDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiZhengCWHDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiZhengCWHDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiZhengJJHZSDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiZhengJJHZSDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiZhengYNCDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JiZhengYNCDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JieXianDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JieXianDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JieZhuangDianDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\JieZhuangDianDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanJJHDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanJJHDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanMFDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanMFDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanSTDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanSTDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanYeWuFenXi.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanYeWuFenXi.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanYeWuFenXiDlg.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\MinGuanYeWuFenXiDlg.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\PasswordManager.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\PasswordManager.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\PlaceDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\PlaceDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\SheGongDataQuery.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\SheGongDataQuery.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\SheGongTongJi.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\SheGongTongJi.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\SheGongTongJiDlg.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\SheGongTongJiDlg.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\TestA.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\TestA.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\TestC.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\TestC.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\TestD.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\TestD.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\YeWuFenXi.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\YeWuFenXi.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\YeWuFenXiDlg.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\YeWuFenXiDlg.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\a.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\a.html" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\jcfx\a.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\manager\CodeMaintenance.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\manager\CodeMaintenance.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\menu_jcfx.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\pop\xt_combo.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\pop\xt_combo.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\pop\xt_combodt.htm" afterPath="" />
+      <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\resources\public\js\views\pop\xt_combodt.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/AccordionTree.js" afterPath="$PROJECT_DIR$/resources/public/js/views/AccordionTree.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/commonfuncs/CuRecord.js" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/CuRecord.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/manager/Function.htm" afterPath="$PROJECT_DIR$/resources/public/js/views/manager/Function.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/controllers/MainViewController.js" afterPath="$PROJECT_DIR$/resources/public/js/controllers/MainViewController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/commonfuncs/TabRightClick.js" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/TabRightClick.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/cj.js" afterPath="$PROJECT_DIR$/resources/public/js/cj.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/templates/dm.html" afterPath="$PROJECT_DIR$/resources/templates/dm.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/extLocation.js" afterPath="$PROJECT_DIR$/resources/public/js/extLocation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/routes/home.clj" afterPath="$PROJECT_DIR$/src/newpension/routes/home.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/img/css/home.css" afterPath="$PROJECT_DIR$/resources/public/img/css/home.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/img/css/icon.css" afterPath="$PROJECT_DIR$/resources/public/img/css/icon.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/router.js" afterPath="$PROJECT_DIR$/resources/public/js/router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/commonfuncs/searchKeyWord.js" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/searchKeyWord.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/urls.js" afterPath="$PROJECT_DIR$/resources/public/js/urls.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
@@ -217,71 +350,101 @@
       <file leaf-file-name="home.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="817" max-vertical-offset="1767">
-              <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1395" max-vertical-offset="1995">
+              <caret line="97" column="8" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/templates/base.html">
+      <file leaf-file-name="genHtmlCode.clj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/controller/genHtmlCode.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.071429" vertical-offset="1701" max-vertical-offset="2527">
-              <caret line="97" column="49" selection-start-line="97" selection-start-column="49" selection-end-line="97" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="268" max-vertical-offset="912">
+              <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="popwin.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/ext/popwin.js">
+      <file leaf-file-name="win.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2090">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="1786">
+              <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TreeClickEvent.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.053380784" vertical-offset="1281" max-vertical-offset="2071">
+              <caret line="69" column="81" selection-start-line="69" selection-start-column="81" selection-end-line="69" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dm.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/templates/dm.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.642858" vertical-offset="1062" max-vertical-offset="1634">
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gen.clj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/models/gen.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="969">
+              <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db.clj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9671">
+              <caret line="0" column="21" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="money.clj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/controller/money.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
+              <caret line="4" column="30" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="router.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/public/js/router.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="798">
+              <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
               <folding>
-                <marker date="1415753216667" expanded="false" signature="841:854" placeholder="..." />
-                <marker date="1415753216667" expanded="false" signature="888:894" placeholder="..." />
+                <marker date="1408670345999" expanded="true" signature="57:1010" placeholder="{...}" />
+                <marker date="1408670345999" expanded="true" signature="77:196" placeholder="[...]" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dm.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/templates/dm.html">
+      <file leaf-file-name="cj.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/public/js/cj.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1786">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="iframeAutoHeight.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/html/iframeAutoHeight.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="532">
-              <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="easyui-form.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/jqueryplugin/easyui-form.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="665">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="handler.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/newpension/handler.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="727" max-vertical-offset="1311">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2202" max-vertical-offset="7163">
+              <caret line="124" column="35" selection-start-line="124" selection-start-column="22" selection-end-line="124" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -314,7 +477,6 @@
         <option value="$PROJECT_DIR$/resources/templates/log.html" />
         <option value="$PROJECT_DIR$/resources/templates/old.html" />
         <option value="$PROJECT_DIR$/resources/public/css/index.css" />
-        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
         <option value="$PROJECT_DIR$/src/newpension/models/db.clj" />
         <option value="$PROJECT_DIR$/resources/templates/need.html" />
         <option value="$PROJECT_DIR$/resources/templates/addneed.html" />
@@ -323,6 +485,14 @@
         <option value="$PROJECT_DIR$/resources/templates/addold.html" />
         <option value="$PROJECT_DIR$/resources/public/html/iframeAutoHeight.html" />
         <option value="$PROJECT_DIR$/resources/templates/base.html" />
+        <option value="$PROJECT_DIR$/resources/public/js/router.js" />
+        <option value="$PROJECT_DIR$/resources/public/js/cj.js" />
+        <option value="$PROJECT_DIR$/src/newpension/models/gen.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/controller/genHtmlCode.clj" />
+        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js" />
+        <option value="$PROJECT_DIR$/resources/templates/dm.html" />
+        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js" />
       </list>
     </option>
   </component>
@@ -415,15 +585,15 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dmxt_svn" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin" />
+      <recent name="D:\Administrator\IdeaProjects\newpension\src\newpension\models" />
+      <recent name="D:\Administrator\IdeaProjects\newpension\src\newpension\controller" />
+      <recent name="D:\Administrator\IdeaProjects\newpension\resources\public\js\commonfuncs" />
       <recent name="D:\Administrator\IdeaProjects\newpension\resources\templates" />
-      <recent name="D:\Administrator\IdeaProjects\newpension\resources\public\js" />
-      <recent name="F:\clojure\newpension\resources\public\js" />
-      <recent name="F:\clojure\newpension\resources\templates" />
-      <recent name="F:\clojure\newpension\resources\public\img" />
     </key>
   </component>
   <component name="RunManager">
@@ -657,22 +827,8 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  <component name="SvnConfiguration" myUseAcceleration="nothing">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -682,7 +838,7 @@
       <updated>1408077833182</updated>
       <workItem from="1416186472025" duration="5052000" />
       <workItem from="1416271808436" duration="1453000" />
-      <workItem from="1416358209566" duration="416000" />
+      <workItem from="1416358209566" duration="7719000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1408084702298</created>
@@ -800,11 +956,15 @@
       <created>1416272086584</created>
       <updated>1416272086584</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="add jquery plugin">
+      <created>1416358713650</created>
+      <updated>1416358713650</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6921000" />
+    <option name="totallyTimeSpent" value="14224000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
@@ -815,6 +975,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -822,7 +983,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59965926" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.725938" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7250409" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32733223" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -835,8 +997,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32733223" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -882,14 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1701" max-vertical-offset="2527">
-          <caret line="97" column="49" selection-start-line="97" selection-start-column="49" selection-end-line="97" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/html/iframeAutoHeight.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="532">
@@ -922,14 +1074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1686" max-vertical-offset="2242">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/html/iframeAutoHeight.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="532">
@@ -958,14 +1102,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1767">
           <caret line="44" column="16" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="418" max-vertical-offset="2242">
-          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1006,6 +1142,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5738" max-vertical-offset="9481">
           <caret line="302" column="0" selection-start-line="302" selection-start-column="0" selection-end-line="302" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1013,13 +1150,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3097">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/money.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="1" column="35" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1082,13 +1212,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5738" max-vertical-offset="9481">
-          <caret line="302" column="0" selection-start-line="302" selection-start-column="0" selection-end-line="302" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/need.clj">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="2698">
@@ -1129,45 +1252,128 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="817" max-vertical-offset="1767">
-          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/html/iframeAutoHeight.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="532">
-          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.071429" vertical-offset="1701" max-vertical-offset="2527">
-          <caret line="97" column="49" selection-start-line="97" selection-start-column="49" selection-end-line="97" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/ext/popwin.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2090">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1415753216667" expanded="false" signature="841:854" placeholder="..." />
-            <marker date="1415753216667" expanded="false" signature="888:894" placeholder="..." />
+            <marker date="1408670345254" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1408670345254" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/html/iframeAutoHeight.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68345326" vertical-offset="0" max-vertical-offset="556">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/layoutinit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1070" max-vertical-offset="3325">
+          <caret line="57" column="30" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/AjaxForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3838">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="798">
+          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+          <folding>
+            <marker date="1408670345999" expanded="true" signature="57:1010" placeholder="{...}" />
+            <marker date="1408670345999" expanded="true" signature="77:196" placeholder="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/money.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="9671">
+          <caret line="0" column="21" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/cj.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2202" max-vertical-offset="7163">
+          <caret line="124" column="35" selection-start-line="124" selection-start-column="22" selection-end-line="124" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/models/gen.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="969">
+          <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1395" max-vertical-offset="1995">
+          <caret line="97" column="8" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/genHtmlCode.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="268" max-vertical-offset="912">
+          <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="1786">
+          <caret line="62" column="40" selection-start-line="62" selection-start-column="40" selection-end-line="62" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/jqueryplugin/jquery.iframe-auto-height.plugin.1.9.5.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03460838" vertical-offset="0" max-vertical-offset="549">
+          <caret line="6" column="56" selection-start-line="6" selection-start-column="56" selection-end-line="6" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/templates/dm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1786">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-13.642858" vertical-offset="1062" max-vertical-offset="1634">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.053380784" vertical-offset="1281" max-vertical-offset="2071">
+          <caret line="69" column="81" selection-start-line="69" selection-start-column="81" selection-end-line="69" selection-end-column="81" />
           <folding />
         </state>
       </provider>

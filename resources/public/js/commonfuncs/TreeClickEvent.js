@@ -65,13 +65,11 @@ define(function(){
                     mainTab.tabs('select', title);
                     return;
                 }
-                var iframeurl='/getiframes?pagename='+value+'&pagetitle='+title;
-                var localtab=mainTab.tabs('add', {
+                mainTab.tabs('add', {
                     title: title,
-                    content: '<iframe src="' + iframeurl + '" width="100%" height="90%"  frameborder="0"></iframe>',
+                    content: '<iframe src="' + value + '" width="100%" height="99%" frameborder="0"></iframe>',
                     closable: true
                 });
-                $(localtab).find('iframe').iframeAutoHeight({debug: true});
             };
             require_render();
         },
