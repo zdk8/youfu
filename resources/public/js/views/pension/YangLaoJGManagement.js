@@ -14,8 +14,8 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加养老机构',
-                        width:400,
-                        height:400,
+                        width:350,
+                        height:200,
                         html:htmfile,
                         buttons:[
                             {text:'取消',handler:function(html,parent){
