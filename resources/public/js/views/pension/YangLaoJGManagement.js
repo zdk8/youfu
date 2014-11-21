@@ -10,7 +10,32 @@ define(function(){
                 href: 'YangLaoJGDlg',
                 modal: true
             });*/
-            console.log(111)
+            require(['commonfuncs/popwin/win','text!views/pension/YangLaoJGDlg.htm','views/pension/YangLaoJGDlg'],
+                function(win,htmfile,jsfile){
+                    win.render({
+                        title:'添加养老机构',
+                        width:400,
+                        height:400,
+                        html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},
+                            {text:'保存',handler:function(html,parent){ }}
+                        ],
+                        renderHtml:function(local,submitbtn,parent){
+                            jsfile.render(local,{
+                                submitbtn:submitbtn,
+                                act:'c',
+                                parent:parent,
+                                onCreateSuccess:function(data){
+                                    parent.trigger('close');
+                                }
+                            })
+                        }
+                    })
+                }
+            )
         })
     }
 
