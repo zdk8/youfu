@@ -10,21 +10,12 @@ define(function(){
 
 
         local.find('[opt=addyljg]').click(function(){
-            /*local.find('[opt=addjg]').dialog({
-                title: '添加养老机构',
-                width: 400,
-                height: 400,
-                closed: false,
-                cache: false,
-                href: 'YangLaoJGDlg',
-                modal: true
-            });*/
             require(['commonfuncs/popwin/win','text!views/pension/YangLaoJGDlg.htm','views/pension/YangLaoJGDlg'],
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加养老机构',
                         width:350,
-                        height:300,
+                        height:385,
                         html:htmfile,
                         /*buttons:[
                             {text:'取消',handler:function(html,parent){
