@@ -36,10 +36,10 @@
        {username :username} result
        {userid :userid} result]
       (if result
-        (do (session/put! :user_id userid) (layout/render "index.html" (session/put! :username username)))
+        (do (session/put! :user_id userid) (layout/render "dm.html" (session/put! :username username)))
         (layout/render "login.html"))
       (if (session/get :username)
-        (layout/render "index.html" {:username (session/get :username)})
+        (layout/render "dm.html" {:username (session/get :username)})
         (layout/render "login.html")))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
 (defn loginbtn [request]

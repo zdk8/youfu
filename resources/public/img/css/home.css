@@ -15,94 +15,39 @@ body {
 }
 
 #header {
-    background-image: url(../head_tmp.png);
+    background-image: url(../head.jpg);
     position: absolute;
     width:100%;
-    height: 95px;
+    height: 90px;
     z-index: 9;
+    border-bottom: 1px solid #808080;
 }
-
-#nav_menu{
-    background: url(../pension01/nav.png);
-    border-bottom: 1px solid #fd8e01;
-    height: 30px;
-    line-height: 30px;
-}
-#nav_menu ul{
-    float: right;
-    list-style:none;
-    padding: 0;
-    padding-right: 50px;
-    margin: 0 0 0 0;
-}
-.clear{
-    clear: both;
-}
-#nav_menu li{
-    float:left;
-    margin-top: 4px;
-}
-#nav_menu li a {
-    float:left;
+.cs-north-logo {
+    height: 40px;
+    margin: 15px 0px 0px 5px;
+    display: inline-block;
+    color: #000000;
+    font-size: 22px;
     font-weight: bold;
-    color: #ffffff;
-    line-height: 28px;
-    padding-left: 12px;
-    cursor:pointer;
+    text-decoration: none;
 }
-/***********************/
-
-
-#nav_menu li a span {
-    float:left;
-    font-size: 13px;
-    padding-right: 24px;
-    padding-left: 12px;
-}
-#nav_menu li.current a {
-    color: #444444;
-    background:url(../pension01/nav_li_30_l.png) no-repeat left top;
-}
-#nav_menu li.current a span {
-    background:url(../pension01/nav_li_30_r.png) no-repeat right top;
-}
-
-/***********************/
-
-
-
-#nav_menu_2 a {
-    float:right;
-    color:#444444;
-    padding-left: 20px;
-    cursor:pointer;
-}
-#nav_menu_2 a:hover{
-    color: #fe6700;
-}
-#nav_menu_2{
+#headnavul {
+    float: left;
     padding: 0;
-    height: 25px;
-    line-height: 25px;
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d2d2d2;
-}
-#nav_menu_2 ul,#nav_menu_2 li{
-    margin: 0;
-    padding: 0;
-}
-#nav_menu_2 ul{
-    margin-right: 10%;
-}
-#nav_menu_2 li{
-    list-style:none;
-    float:right;
-    margin-right: 24px;
-}
-#nav_menu_2 li.current a{
-    color: #fe6700;
-}
+    position: absolute;
 
+    margin-top:10px;
+    margin-left: 500px;
+    list-style: none outside none;
+}
+#headnavul .li-skinitem {
+    float: left;
+    font-size: 12px;
+    /* line-height: 30px; */
+    margin-left: 10px;
+    margin-bottom: 0px;
+    text-align: center;
+}
 #login_area{
    margin-top: 18px;
    height: 25px;
