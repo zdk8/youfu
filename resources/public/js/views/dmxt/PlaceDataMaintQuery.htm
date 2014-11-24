@@ -1,0 +1,105 @@
+<table class="easyui-datagrid" id="placeData" opt="placeData" data-options="
+               method:'post',
+               toolbar:'#tb',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true">
+    <thead>
+        <tr>
+            <th data-options="field:'biaozhunmingcheng',width:220,align:'center'">标准名称</th>
+            <th data-options="field:'hanyu',width:220,align:'center'">汉语拼音</th>
+            <th data-options="field:'diming',width:220,align:'center'">地名类型</th>
+            <th data-options="field:'xingzheng',width:220,align:'center'">行政区划</th>
+            <!--<th data-options="field:'caozuo',width:250">操作</th>-->
+            <th data-options="field:'ro',width:270,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;update&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
+                str=$(str).append('<a action=&quot;delete&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-logout-pl16&quot;>删除</span></span></a>');
+                return str.html();
+            }">操作</th>
+        </tr>
+    </thead>
+</table>
+
+<div style="padding-bottom: 13px;" id="tb">
+    <table cellspacing="0" cellpadding="0" style="text-align: right;padding-top: 2px">
+        <tr>
+            <td style="padding-right: 70px;padding-left: 50px">
+                    <span class="checkbox">
+                        <input type="checkbox" value="None" id="checkbox1" name="check" checked />
+                        <label for="checkbox1"></label>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                行政区划:<input class="easyui-combotree" opt="divisiontree" data-options="width:185">
+            </td>
+            <td style="padding-right: 70px">
+                    <span class="checkbox">
+                        <input type="checkbox" value="None" id="checkbox2" name="noname"/>
+                        <label for="checkbox2"></label>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                标准名称:<input type="text" opt="noname">
+            </td>
+            <td>
+                    <span class="checkbox">
+                        <input type="checkbox" value="None" id="checkbox3" name="romepinxie" />
+                        <label for="checkbox3"></label>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                罗马拼音:<input type="text" opt="romepinxie">
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-right: 70px;padding-left: 50px">
+                    <span class="checkbox">
+                        <input type="checkbox" value="None" id="checkbox4" name="placetype"/>
+                        <label for="checkbox4"></label>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                地名类型:<input class="easyui-combotree" opt="placetype" data-options="width:185">
+            </td>
+            <td style="padding-right: 70px">
+                    <span class="checkbox">
+                        <input type="checkbox" value="None" id="checkbox5" name="dengjidanwei"/>
+                        <label for="checkbox5"></label>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                登记单位:<input type="text" height="50" opt="dengjidanwei">
+            </td>
+            <td>
+                    <span class="checkbox">
+                        <input type="checkbox" value="None" id="checkbox6" name="dengjiren"/>
+                        <label for="checkbox6"></label>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                登&nbsp;记&nbsp;&nbsp;人:<input type="text" opt="dengjiren">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: left;padding-left: 50px">
+                    <span class="checkbox">
+                        <input type="checkbox" value="None" id="checkbox7" name="dengjishijian"/>
+                        <label for="checkbox7"></label>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                登记时间:<input class="easyui-datebox" data-options="width:85" opt="dengjishijian">到
+                <input class="easyui-datebox" data-options="width:85" opt="dengjishijian">
+            </td>
+            <td>
+                   <span class="checkbox">
+                        <input type="checkbox" value="None" id="checkbox8" name="shujuku"/>
+                        <label for="checkbox8"></label>
+                    </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                数&nbsp;&nbsp;据&nbsp;&nbsp;库:<input class="easyui-combobox" opt="shujuku">
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <br>
+    <label style="color: rgba(21,17,12,0.56)">请选择排序方式：</label>
+    <div style="float: right">
+        <input class="button" type="button" value="查询" opt="queryPlace" action="changebutton">
+        <input class="button" type="button" value="新增地名" opt="addPlace" action="changebutton">
+        <input class="button" type="button" value="导出Excel" action="changebutton">
+        <input class="button" type="button" value="刷新" opt="refresh" action="changebutton">
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<table class="easyui-datagrid-noauto"
+       data-options="
+               method:'post',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+              pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true">
+    <thead data-options="frozen:true">
+    <tr>
+
+
+        <th data-options="field:'ro',width:120,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
+                str=$(str).append('<a action=&quot;logout&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-logout-pl16&quot;>注销</span></span></a>');
+
+                return str.html();
+            }">操作</th>
+
+        <th data-options="field:'sys_micard',width:200,align:'center'">身份证号码</th>
+        <th data-options="field:'sys_hfperson'">随访人姓名</th>
+
+    </tr>
+    <thead>
+
+
+        <th data-options="field:'sys_hfdate',width:120,align:'center',formatter:cj.dateFormatter()">随访时间</th>
+        <th data-options="field:'sys_hfffdate',width:120,align:'center',formatter:cj.dateFormatter()">填表时间</th>
+        <th data-options="field:'pe_hfspressure_one',width:80,align:'center',">收缩压1</th>
+        <th data-options="field:'pe_hfdpressure_one',width:80,align:'center',">舒张压1</th>
+        <th data-options="field:'pe_hfspressure_two',width:80,align:'center',">收缩压2</th>
+        <th data-options="field:'pe_hfdpressure_two',width:80,align:'center',">舒张压2</th>
+        <th data-options="field:'pe_hfspressure_thr',width:80,align:'center',">收缩压3</th>
+        <th data-options="field:'pe_hfdpressure_thr',width:80,align:'center',">舒张压3</th>
+        <!--<th data-options="field:'pe_hfdpressure_ave',width:80,align:'center',">舒张压均值</th>
+        <th data-options="field:'pe_hfspressure_ave',width:80,align:'center',">收缩压均值</th>
+        <th data-options="field:'pe_hfplv',width:80,align:'center',">高血压分级</th>
+        <th data-options="field:'pe_hfweight',width:80,align:'center',">体重</th>
+        <th data-options="field:'pe_hfheight',width:80,align:'center',">身高</th>
+        <th data-options="field:'le_hftcholesterol',width:80,align:'center',">总胆固醇</th>
+        <th data-options="field:'le_hfchdl',width:80,align:'center',">高密度脂蛋白胆固醇</th>
+         <th data-options="field:'le_hfcldl'">低密度脂蛋白胆固醇</th>
+         <th data-options="field:'le_hffbsugar'">空腹血糖</th>
+         <th data-options="field:'le_hfppbsugar'">餐后血糖</th>
+         <th data-options="field:'le_hfpfibrinogen'">血浆纤维蛋白原</th>
+         <th data-options="field:'le_hfproteinuria'">蛋白尿</th>
+         <th data-options="field:'le_hfscreatinine'">血肌酐浓度</th>
+         <th data-options="field:'le_hffundus'">眼底</th>
+         <th data-options="field:'le_hflvhypertrophy'">左心室肥厚</th>
+         <th data-options="field:'le_hfaplaque'">动脉粥样斑块</th>
+         <th data-options="field:'lh_hfsmoke'">吸烟</th>
+         <th data-options="field:'lh_hfoverweight'">超重</th>
+         <th data-options="field:'lh_hfdwine'">饮酒</th>
+         <th data-options="field:'lh_hfcsalt'">盐量</th>
+         <th data-options="field:'lh_hfnervousness'">紧张心理</th>
+         <th data-options="field:'lh_hflcpdiet'">低钙蛋白饮食</th>
+         <th data-options="field:'lh_hfpactivity'">体力活动</th>
+         <th data-options="field:'lh_hfhconsciousness'">健康意识</th>
+         <th data-options="field:'lh_hfhcontrol'">高血压防治</th>
+         <th data-options="field:'ts_hfbpmedications'">现用降压药物</th>
+         <th data-options="field:'ts_hflweight'">减重</th>
+         <th data-options="field:'ts_hfsdgiveup'">戒烟、限酒</th>
+         <th data-options="field:'ts_hfdsalt'">膳食限盐</th>
+         <th data-options="field:'ts_hfksports'">增加保持适量运动</th>
+         <th data-options="field:'ts_hfrdfat'">减少膳食脂肪</th>
+         <th data-options="field:'ts_hfkoattitude'">保持乐观心态</th>
+         <th data-options="field:'ts_hfecapability'">提高应急能力</th>
+         <th data-options="field:'ts_hfother'">其他</th>
+         <th data-options="field:'ot_hfflupdate'">下次随访时间</th>
+         <th data-options="field:'tos_hffields'">备用字段</th>-->
+    </tr>
+    </thead>
+</table>
+
+<div tb>
+    <table cellspacing="0" cellpadding="0" style="float: right">
+        <tr>
+
+            <td><label class="gray7">搜索条件:</label></td>
+
+            <td style="width: 210px;text-align: right">
+                <input class="easyui-searchbox" data-options="prompt:'身份证号码 ',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+
+            <td>
+                <span class="searchbtn" >&nbsp;</span>
+            </td>
+
+            <td>
+                <div class="datagrid-btn-separator"></div>
+            </td>
+            <td>
+                <a href="#" class="easyui-linkbutton" action="add" iconCls="icon-add" plain="true" selected="true">新增</a>
+            </td>
+            <td>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-search" action="intelligentsearch" plain="true">高级搜索</a>
+            </td>
+        </tr>
+    </table>
+    <div class="clear"></div>
+</div>
+
+
+
+
+
+

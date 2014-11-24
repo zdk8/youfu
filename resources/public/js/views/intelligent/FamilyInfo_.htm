@@ -1,0 +1,40 @@
+<form method="post">
+<div class="newRadio intelligent">
+    <table>
+        <!--<caption>查询对话框</caption>-->
+        <tr>
+            <td>户主 </td>
+            <td><input name="sys_fmaster" operate="like"></td>
+            <td style="width: 10px"></td>
+            <td>责任医生 </td>
+            <td><input name="sys_fdoctor" operate="like"></td>
+        </tr>
+        <tr>
+            <td>家庭详细地址 </td>
+            <td>
+                <input name="sys_faddress" operate="eq">
+            </td>
+
+            <td></td>
+            <td>家庭电话</td>
+
+            <td>
+                <input name="sys_fphone" operate="eq">
+            </td>
+        </tr>
+        <tr>
+            <td>开始时间</td>
+            <td><input class="easyui-datebox" name="sys_fcadate" operate="eq"></td>
+            <td></td>
+            <td>结束时间</td>
+            <td><input class="easyui-datebox" name="sys_fcadate"  operate="eq"></td>
+        </tr>
+
+
+    </table>
+    <div style="width: 150px;margin: 5px auto">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" action="search" plain="true">查询</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-close"  action="close" plain="true">关闭</a>
+    </div>
+</div>
+</form>

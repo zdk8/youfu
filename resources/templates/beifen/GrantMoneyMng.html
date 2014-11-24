@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript"  src="http://112.124.50.195:8080/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"  src="http://112.124.50.195:8080/easyui/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" type="text/css"  href="http://112.124.50.195:8080/easyui/themes/default/easyui.css">
+    <style>
+        html,body{
+            height: 100%;
+            border: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="businesstb" style="padding:5px;height:auto;vertical-align: middle;">
+    时间:
+    <a>
+        <input class="easyui-datebox bgdate" style="width:90px">至
+        <input class="easyui-datebox eddate" style="width:90px">
+    </a>
+    <a><input placeholder="身份证或姓名"></a>
+    <a id="refreshid"><span class="icon-search" >&nbsp;&nbsp;&nbsp;&nbsp;</span>刷新</a>
+    <a><span class="icon-search" >&nbsp;&nbsp;&nbsp;&nbsp;</span>搜索</a>
+    <a><span class="icon-search" >&nbsp;&nbsp;&nbsp;&nbsp;</span>高级搜索</a>
+    <a class="newgrant"><span class="icon-add " >&nbsp;&nbsp;&nbsp;&nbsp;</span>新增</a>
+</div>-->
+<table class="easyui-datagrid"   id="grantmoneyid"
+       data-options="
+               method:'get',
+               fit:true,
+               border:true,
+               singleSelect:true,
+               pagination:true
+               "
+        >
+    <thead data-options="frozen:true">
+    <tr>
+        <!--<th rowspan="2" data-options="field:'ro',width:80,align:'center',
+        formatter:format
+            ">操作</th>-->
+        <th rowspan="2" data-options="field:'pg_id'">评估序号</th>
+        <!--<th rowspan="2" data-options="field:'active', formatter:cj.enumFormatter('active') ">有效</th>-->
+        <th rowspan="2" data-options="field:'name'">姓名</th>
+        <th rowspan="2" data-options="field:'identityid'">身份证号码</th>
+        <th rowspan="2" data-options="field:'bsnyue'">业务期</th>
+        <th rowspan="2" data-options="field:'money'">金额(/元)</th>
+    </tr>
+    </thead>
+    <thead>
+    <tr>
+        <th colspan="4">基本信息</th>
+        <th colspan="7">生活方面</th>
+    </tr>
+    <tr>
+        <th data-options="field:'birthd'">出生日期</th>
+        <th data-options="field:'gender'">性别</th>      <!--,formatter:cj.enumFormatter('gender')-->
+        <th data-options="field:'age'">年龄</th>
+        <th data-options="field:'nation'">民族</th> <!--,formatter:cj.enumFormatter('nation')-->
+        <th data-options="field:'sh_jings'">生活-进食</th>
+        <th data-options="field:'sh_yid'">移动</th>
+        <th data-options="field:'sh_weis'">个人卫生</th>
+        <th data-options="field:'sh_ruc'">入厕</th>
+        <th data-options="field:'sh_xiz'">洗澡</th>
+        <th data-options="field:'sh_xingz'">行走于平地上</th>
+        <th data-options="field:'sh_lout'">上下楼梯</th>
+    </tr>
+    </thead>
+</table>
+<div style="display: none">
+    <input id="opepg_id" type="text" value="121231">
+</div>
+
+<script>
+    /*function format()
+    {
+        var str='<div></div>';
+        str=$(str).append('<a onclick="editgrant();">变更    </a>');
+        str=$(str).append('<a onclick="logoutgrant();">注销</a>');
+        return str.html();
+    }*/
+    //变更
+    /*function editgrant(){
+        var row = $("#grantmoneyid").datagrid('getSelected');
+        console.log(row.pg_id)
+        *//*if (jq('#tabs').tabs('exists', '变更'))
+            jq('#tabs').tabs('select', '变更');
+        else {
+//                    var content = '<iframe scrolling="auto" frameborder="0"  src="'+"search?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+            jq('#tabs').tabs('add',{
+                title:'变更',
+                content:row,
+//                href:'test',
+                closable:true
+            });
+        }*//*
+    }
+    //注销
+    function logoutgrant(){
+        if (jq('#tabs').tabs('exists', '注销'))
+            jq('#tabs').tabs('select', '注销');
+        else {
+//                    var content = '<iframe scrolling="auto" frameborder="0"  src="'+"search?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+            jq('#tabs').tabs('add',{
+                title:'注销',
+//                        content:content,
+                href:'test',
+                closable:true
+            });
+        }
+    }*/
+
+
+
+    var jq = top.jQuery;
+    function myformatter(date){
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        var d = date.getDate();
+        var hour=date.getHours();
+        var minute=date.getMinutes();
+        var second=date.getSeconds();
+        return y+'/'+(m<10?('0'+m):m)+'/'+(d<10?('0'+d):d)+" "+
+                (hour<10?('0'+hour):hour)+":"+(minute<10?('0'+minute):minute)+":"+(second<10?('0'+second):second);
+    }
+
+    var grantmoney_key = 0;
+    //加载已享受资金发放人员
+    function lazgrantoldready(){
+        $("#grantmoneyid").datagrid({
+            url:'get-grantmoney',
+            onLoadSuccess:function(data){
+            },
+            onDblClickRow:function(rowindex,rowdata){
+                var selected = $('#grantmoneyid').datagrid('getSelected');
+                if (selected){
+                    var post = $("#grantmoneyid").datagrid("getSelected").name;
+                    var id = $("#grantmoneyid").datagrid("getSelected").pg_id;
+                    var jq = top.jQuery;
+                    if (jq('#tabs').tabs('exists', post+'评估信息'))
+                        jq('#tabs').tabs('select', post+'评估信息');
+                    else {
+                        var content = '<iframe scrolling="auto" frameborder="0"  src="'+"tneed?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+                        jq('#tabs').tabs('add',{
+                            title:post+'评估信息',
+                            content:content,
+                            closable:true
+                        });
+                    }
+                }
+            },
+            toolbar:[{
+                text:'搜索',
+                iconCls:'icon-search',
+                handler:function(){
+                    searchDig()
+                }
+            },{
+                text:'新增',
+                iconCls:'icon-add',
+                handler:function(){
+                    grantMoneyDig();
+                }
+            },{
+                text:'刷新',
+                iconCls:'icon-search',
+                handler:function(){
+                    lazgrantoldready();
+                }
+            }
+            ]
+        });
+    }
+
+    $(document).ready(function(){
+        lazgrantoldready();
+        //查询资金发放表主键
+        $.post(
+                'sel-grantmoneyid',
+                function(data){
+                    grantmoney_key = parseInt(data);
+                }
+        );
+    });
+
+    //加载可以发放人员
+    function lazgrantold(bsnyue){
+        jq("#newgrantwinid").datagrid({
+            url:'get-cangrantmoney?bsnyue='+bsnyue
+        });
+    }
+
+    //资金发放面板
+    function grantMoneyDig(){
+        jq("#grantMoneyDig").dialog({
+            title:"资金发放",
+            width:600,
+            height:450,
+            closed:false,
+            modal:true,
+            href:'addnewgrantwin',
+            buttons:[{
+                text:"资金发放",
+                handler:function(){
+                    var rows = jq("#newgrantwinid").datagrid("getSelections");
+                    if(rows.length > 0){
+                        for(r=0;r<rows.length;r++){
+                            var oldpg_id = rows[r].pg_id;
+                            var oldmoney = jq("#money").val();
+                            $.post(
+                                    'insert-grantmoney',
+                                    {
+                                        grantid:grantmoney_key++,
+                                        bsnyue:jq("#bsnyue").val(),
+                                        pg_id:oldpg_id,
+                                        money:oldmoney
+                                    },
+                                    function(data){
+                                        lazgrantold(jq("#bsnyue").val())
+                                        lazgrantoldready();
+                                    }
+                            )
+                        }
+                    }
+
+                }
+            },{
+                text:"重新发放",
+                handler:function(){
+                    $.post(
+                            'del-grantmoney',
+                            {
+                                bsnyue:jq("#bsnyue").val()
+                            },
+                            function(data){
+                                if(data >= 1){
+                                    lazgrantold(jq("#bsnyue").val());
+                                    lazgrantoldready();
+                                }
+                            }
+                    )
+                }
+            },{
+                text:"取消",
+                handler:function(){jq("#grantMoneyDig").dialog("close")}
+            }]
+        });
+    }
+    //搜索面板
+    function searchDig(){
+        jq("#searchDig").dialog({
+            title:"搜索",
+            width:210,
+            height:200,
+            closed:false,
+            href:"searchGrant",
+            buttons:[{
+                    text:"确定",
+                    width:50,
+                    handler:function(){
+                        var searchnameid = jq("#searchnameid").val();
+                        var searchidentityid = jq("#searchidentityid").val();
+                        var searchbsnyueid = jq("#searchbsnyueid").val();
+                        $.post(
+                                'get-grantmoneyByEle',
+                                {
+                                    name:searchnameid != "" ? searchnameid:"0",
+                                    identityid:searchidentityid != "" ? searchidentityid:"0",
+                                    bsnyue:searchbsnyueid != "" ? searchbsnyueid:"0"
+                                },
+                                function(data){
+                                    $("#grantmoneyid").datagrid('loadData',data)
+                                }
+                        )
+                    }
+                },{
+                    text:"取消",
+                    width:50,
+                    handler:function(){jq("#searchDig").dialog("close")}
+                }
+            ]
+        })
+    }
+
+    var logout=function(option,row){
+        console.log(row)
+        /*cj.showContent({
+            url:'lr.do?model=pension.EvaluateLrInfo&eventName=queryById',
+            title:'注销',
+            htmfile:'text!views/pension/EvaluateLrInfoLogout.htm',
+            jsfile:'views/pension/EvaluateLrInfoLogout',
+            location:'pension.EvaluateLrInfoLogout',
+            functionid:'P6IyVH34P1sgn7VzU4q8',
+            tprkey:row.pg_id
+        })*/
+    }
+</script>
+</body>

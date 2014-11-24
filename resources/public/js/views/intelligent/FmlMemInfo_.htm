@@ -1,0 +1,52 @@
+<form method="post">
+<div class="newRadio intelligent">
+    <table>
+        <!--<caption>查询对话框</caption>-->
+        <tr>
+            <td>姓名</td>
+            <td><input name="sys_mname" operate="like"></td>
+            <td style="width: 10px"></td>
+            <td>身份证号</td>
+            <td><input name="sys_micard" operate="like"></td>
+        </tr>
+        <tr>
+            <td>文化成度</td>
+            <td>
+                <input  class="easyui-combobox" name="sys_mcdegree" operate="eq"
+                        data-options=" data:cj.getEnum('culture'), editable:false, valueField:'id', textField:'text' ">
+            </td>
+
+            <td></td>
+            <td>性别</td>
+
+            <td>
+                <input  class="easyui-combobox" name="sys_mgender" operate="eq"
+                        data-options=" data:cj.getEnum('gender'), editable:false, valueField:'id', textField:'text' ">
+            </td>
+        </tr>
+        <tr>
+            <td>婚姻状况</td>
+            <td><input class="easyui-combobox" name="sys_mmarriage" operate="eq"
+                       data-options=" data:cj.getEnum('marriage'), editable:false, valueField:'id', textField:'text' "
+                    ></td>
+            <td></td>
+            <td>民族</td>
+            <td><input class="easyui-combobox" name="sys_mnation"  operate="eq"
+                       data-options=" data:cj.getEnum('nation'), editable:false, valueField:'id', textField:'text' "></td>
+        </tr>
+        <tr>
+            <td>是否特护对象</td>
+            <td><input class="easyui-combobox" name="sys_msnursing_yn" operate="eq"
+                       data-options=" data:cj.getEnum('msnursing_yn'), editable:false, valueField:'id', textField:'text' "></td>
+            <td></td>
+            <td>籍贯</td>
+            <td><input name="sys_mnplace" operate="like"></td>
+        </tr>
+
+    </table>
+    <div style="width: 150px;margin: 5px auto">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" action="search" plain="true">查询</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-close"  action="close" plain="true">关闭</a>
+    </div>
+</div>
+</form>

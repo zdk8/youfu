@@ -1,0 +1,78 @@
+div.form-cmp-wrapper,table.formtable02{
+    width: 910px;
+    margin: 0 auto;
+}
+table.formtable02 td{
+    width: 131px;
+    position: relative;
+}
+table.formtable02 td.formtdtext{
+    margin: 0;
+    line-height: 30px;
+    width: 85px;
+    text-align: right;
+}
+
+table.formtable02 td input,table.formtable02 td textarea{
+    width: 128px;
+    height: 22px;
+    border: 1px solid #c0c0c0;
+    float: left;
+}
+
+table.formtable02 input.lenmorethan2col{
+    width: 357px;
+}
+table.formtable02 textarea.lenmorethan2col{
+    width: 350px;
+}
+table.formtable02 .lenmorethan2row{
+    height: 50px;
+}
+table.formtable02 .lenmorethan3row{
+    height: 75px;
+}
+
+.text-overflow {
+    display:block;/*内联对象需加*/
+    width:80px;
+    font-size: 10px;
+    word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    float: left;
+    line-height: 30px;
+}
+.text-align{
+    text-align: right;
+}
+.existbr{
+    line-height: 20px;
+}
+div.form-cmp-wrapper .combo{
+    border-color: #c0c0c0;
+}
+.inputcmpcolor{
+    border-color: #c0c0c0;
+}
+.formside{
+    margin-right: 20px;
+    text-align: right;
+}
+
+.measurementunit,.required{
+    position: absolute;
+    bottom: 2px;
+    font-size:5px;
+    color: #808080;
+    width: 50px;
+    word-break:keep-all;/* 不换行 */
+    white-space:nowrap;/* 不换行 */
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+.required{
+    color: red;
+}
+

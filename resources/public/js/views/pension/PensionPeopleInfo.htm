@@ -1,0 +1,1139 @@
+
+
+<style>
+        /*屏蔽错误提示图标*/
+    .validatebox-invalid {
+        background-image: url('');
+    }
+</style>
+<script type="text/javascript">
+var queryflag = 0;   //存放查询出的家庭成员数据条数
+/*加载家庭成员列表*/
+function famillylist(lr_id){
+    var familrelfields = $("#familymembersgrid1").datagrid("getColumnFields");  //获取全部元素的字段名
+    $.post(
+            'get-oldsocrel',
+            {
+                lr_id:lr_id
+            },
+            function(data){
+                var addflag = 0;
+                if(data.length >0){
+                    for(i=0;i<data.length;i++){
+                        $("#familymembersgrid1").datagrid('appendRow', {name: "", relationship: ""});
+                        var editIndex = $("#familymembersgrid1").datagrid('getRows').length-1;
+                        $("#familymembersgrid1").datagrid('selectRow', editIndex)
+                                .datagrid('beginEdit', editIndex);
+                        addflag+=1;
+                        queryflag+=1;
+                    }
+                }
+                if(addflag > 0){
+                    for(d=0;d<data.length;d++){
+                        var obj = data[d];
+                        for(var key in obj){
+                            var value = obj[key];
+                            var data1 =  $("#familymembersgrid1").datagrid('getEditor',{index:d,field:key});
+                            if(data1.type == "combobox"){
+                                $(data1.target).combobox("setValue",value);
+                            }else{
+                                $(data1.target).val(value);
+                            }
+                        }
+                    }
+                }
+            });
+}
+/*加载下拉列表*/
+var cj={
+    getLoader:function(type,param,success,error)
+    {
+        return function(param,success,error){
+            $.ajax({
+                url:'get-inputlist',
+                data:{aaa100:type},
+                success:function(data){
+                    var items = $.map(data.msg, function(item){
+                        return {
+                            id: item.aaa102,
+                            text: item.aaa103
+                        };
+                    });
+                    success(items)
+                },
+                error: function(){
+                    error.apply(this, arguments);
+                }
+            })
+        }
+    }
+};
+var flag = 0; //记录数据条数
+$(document).ready(function(local,parameters,res){
+    /*家庭成员列表添加*/
+    $("#newfamilymemeraddid").click(function(){
+        flag +=1;
+//        queryflag+=1;
+        $("#familymembersgrid1").datagrid('appendRow', {name: "", relationship: ""});
+        var editIndex = $("#familymembersgrid1").datagrid('getRows').length-1;
+        $("#familymembersgrid1").datagrid('selectRow', editIndex)
+                .datagrid('beginEdit', editIndex);
+    });
+    /*家庭成员列表删除*/
+    $("#delfamilymemerid").click(function(){
+        flag -=1;
+        var selectrow= $("#familymembersgrid1").datagrid('getSelected');
+        var index=$("#familymembersgrid1").datagrid('getRowIndex',selectrow);
+        //删除家庭成员表
+        var datach  =  $("#familymembersgrid1").datagrid('getEditor',{index:index,field:'lrgx_id'});
+        var lrgxid = $(datach.target).val();
+        if(lrgxid != ""){
+            $.post(
+                    'dele-oldsorel',
+                    {
+                        lrgx_id:lrgxid
+                    },
+                    function(data){
+                        console.log(data)
+                    }
+            )
+            flag+=1;
+        }
+        //删除显示在界面上的行
+        $("#familymembersgrid1").datagrid('deleteRow', index);
+        queryflag-=1;
+    });
+    /*加载地区树*/
+    var divisiontree = $(':input[opt=divisiontree]') ;
+    divisiontree.combotree({
+        url:'get-divisionlist?dvhigh=330000',
+        method: 'get',
+        onBeforeExpand: function (node) {
+            divisiontree.combotree("tree").tree("options").url
+                    ="get-divisionlist?dvhigh=" + node.parentid;
+        },
+        onHidePanel: function () {
+            divisiontree.combotree('setValue',
+                    divisiontree.combotree('tree').tree('getSelected').divisionpath);
+        }
+    });
+    /*根据身份证获取基本信息*/
+    $("#identityid").change(function(){
+        var val = $("#identityid").val();
+        var sex;
+        var birthdayValue;
+        var age;
+        var sexcode;
+        if (15 == val.length) { //15位身份证号码
+            birthdayValue = val.charAt(6) + val.charAt(7);
+            if (parseInt(birthdayValue) < 10) {
+                birthdayValue = '20' + birthdayValue;
+            }
+            else {
+                birthdayValue = '19' + birthdayValue;
+            }
+            age = Date.getFullYear()-parseInt(birthdayValue); //年龄
+            birthdayValue = birthdayValue + '-' + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11);
+            if (parseInt(val.charAt(14) / 2) * 2 != val.charAt(14)) {
+                sex = '男';
+                sexcode = '1';
+            }
+            else{
+                sex = '女';
+                sexcode = '0';
+            }
+
+        }
+        if (18 == val.length) { //18位身份证号码
+            birthdayValue = val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11)
+
+                    + '-' + val.charAt(12) + val.charAt(13);
+            if (parseInt(val.charAt(16) / 2) * 2 != val.charAt(16)){
+                sex = '男';
+                sexcode = '1';
+            }
+            else{
+                sex = '女';
+                sexcode = '0';
+            }
+            age =(new Date()).getFullYear()-parseInt((val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9)));
+        }
+        $('#birthd').datebox('setValue',birthdayValue) ;
+        $('#gender').combobox('setValue',sexcode) ;
+        $('#age').val(age);
+    });
+})
+var obj;
+$(document).ready(function(){
+    var jq = top.jQuery;
+    $("#loginname").val(jq("#login").val());
+    $("#dvcode").val(jq("#code").val());
+    $("#username").val(jq("#user").val());
+//    var obj;
+    if($("#t3").text())
+        obj = eval('('+$("#t3").text()+')');
+    $("#operator_date").datebox("setValue",myformatter(new Date())); //填充当前时间
+    /*填充表单*/
+    for(var key in obj ){
+        var name = key;
+        var value = obj[key];
+        if($("#"+name).hasClass("easyui-combobox"))
+            $("#"+name).combobox("setValue",value);
+        else if($("#"+name).hasClass("easyui-datebox"))
+            $("#"+name).datebox("setValue", value);
+        else if($("#"+name).hasClass("easyui-combotree")){
+            $("#"+name).combotree("setValue", value);
+        }else if(value){
+            $("[name = "+name+"]:checkbox").click();
+            $("#"+name).val(value);
+        }
+    }
+    var oldname = $("#name").val();
+    /*加载家庭成员关系*/
+    if(obj["lr_id"] != ""){
+        famillylist(obj["lr_id"]);
+    }
+    var status = $("#status").val();
+    /*修改操作*/
+    $("#update").click(function(){
+        $('#ff').form({
+            success:function(){
+                alert("操作成功！");
+                //修改家庭成员信息
+                editFimalyCel();
+                var str = $("#name").val();
+                var jq = top.jQuery;
+                jq('#tabs').tabs('close', str+'详细信息');
+            }
+        });
+        if (status == "自由"|| status == "驳回"){
+            var returnVal = window.confirm("是否修改？", "标题");
+            if(returnVal){
+                $("form").submit();
+            }
+        }else
+            alert("该信息还在审核中，不能修改！");
+    });
+    if (status == "驳回")
+        $("#delete").show();
+    /*删除操作*/
+    $("#delete").click(function(){
+        $('#ff').form({
+            success:function(){
+                alert("操作成功！");
+                var str = $("#name").val();
+                var jq = top.jQuery;
+                jq('#tabs').tabs('close', str+'详细信息');
+            }
+        });
+        var id = $("#lr_id").val();
+        alert("id:"+id);
+        var returnVal = window.confirm("是否删除？", "标题");
+        if(returnVal){
+            $("form").attr("action","{{servlet-context}}/deleteold");
+            $("form").submit();
+        }
+    });
+
+});
+/*新增选项卡*/
+function addTab(title, url){
+    var jq = top.jQuery;
+    if (jq('#tabs').tabs('exists', title)){
+        jq('#tabs').tabs('select', title);
+    } else {
+        var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+        jq('#tabs').tabs('add',{
+            title:title,
+            content:content,
+            closable:true
+        });
+    }
+};
+/*新增操作*/
+function add(title){
+    $('#fs').form({
+        success:function(){
+            alert("操作成功！");
+            //添加家庭成员信息
+            addFimalyCel(flag,0,"insert-oldsocrel");
+            var jq = top.jQuery;
+            jq('#tabs').tabs('close', '老年基本信息录入');
+        }
+    });
+//            alert(title);
+    var returnVal = window.confirm("是否新增？", "标题");
+    if(returnVal){
+        $("form").submit();
+    }
+};
+/*身份证校验*/
+$.extend($.fn.validatebox.defaults.rules, {
+    identityid: {
+        validator: function (code) {
+            var city = {11: "北京", 12: "天津", 13: "河北", 14: "山西", 15: "内蒙古", 21: "辽宁", 22: "吉林", 23: "黑龙江 ", 31: "上海", 32: "江苏", 33: "浙江", 34: "安徽", 35: "福建", 36: "江西", 37: "山东", 41: "河南", 42: "湖北 ", 43: "湖南", 44: "广东", 45: "广西", 46: "海南", 50: "重庆", 51: "四川", 52: "贵州", 53: "云南", 54: "西藏 ", 61: "陕西", 62: "甘肃", 63: "青海", 64: "宁夏", 65: "新疆", 71: "台湾", 81: "香港", 82: "澳门", 91: "国外 "};
+            var tip = "";
+            var pass = true;
+
+            if (!code || !/^\d{6}((18)|(19)|(20))\d{2}((0[1-9])|(1[012]))((0[1-9])|([12]\d)|(3[01]))\d{3}(\d|X)$/i.test(code)) {
+                tip = "身份证号格式错误";
+                pass = false;
+            }
+
+            else if (!city[code.substr(0, 2)]) {
+                tip = "地址编码错误";
+                pass = false;
+            }
+            else {
+                //18位身份证需要验证最后一位校验位
+                if (code.length == 18) {
+                    code = code.split('');
+                    //∑(ai×Wi)(mod 11)
+                    //加权因子
+                    var factor = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ];
+                    //校验位
+                    var parity = [ 1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2 ];
+                    var sum = 0;
+                    var ai = 0;
+                    var wi = 0;
+                    for (var i = 0; i < 17; i++) {
+                        ai = code[i];
+                        wi = factor[i];
+                        sum += ai * wi;
+                    }
+                    var last = parity[sum % 11];
+                    if (parity[sum % 11] != code[17]) {
+                        tip = "校验位错误";
+                        pass = false;
+                    }
+                }
+            }
+            return pass;
+        },
+        message: '身份证不合法,请确认身份证是否正确输入!'
+    }
+});
+</script>
+</head>
+<body>
+<p id="t3" hidden="true">{{old}}</p>
+<div  class="easyui-panel newRadio" opt="pensioneditformpanel"
+      style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
+      data-options="fit:true,border:false">
+{% if old %}
+<form opt="pensionform" method="post" action="{{servlet-context}}/updateold" id="ff">
+{% else %}
+<form opt="pensionform" method="post" action="{{servlet-context}}/saveold" id="fs">
+{% endif %}
+<fieldset style="width: 900px;margin: 0px auto">
+    <legend>老年人基本信息</legend>
+    <div style="width: 900px;position: relative;margin: 0px auto" region="center">
+        <input type="hidden" name="lr_id" id="lr_id">
+        <table class="formtable" style="width: 900px">
+            <tr>
+                <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
+                <td colspan="5">
+                    <input class="easyui-combotree"  opt="divisiontree" data-options="required:true, valueField:'divisionpath'"
+                           style="width: 300px;"  name="districtid" id="districtid">
+                </td>
+                <td rowspan="4" colspan="2" style="text-align: center">
+                    <img name="pensionimgpath" src="img/noperson.gif" value="" opt="personimg" alt="用户照片" width="150px" height="120px">
+                    <input name ="pensionimgpath" type="hidden">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext" style="width: 100px">姓名<span style="color: red">*</span></td>
+                <td><input class="easyui-validatebox" name="name" data-options="required:true" id="name"></td>
+                <td class="formtdtext">身份证<span style="color: red">*</span></td>
+                <td><input opt="identityid" name="identityid" class="easyui-validatebox" data-options="required:true,invalidMessage:'请输入正确的身份证号',validType:'identityid'" id="identityid"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">性别</td>
+                <td>
+                    <input opt="sex" class="easyui-combobox lazy-combobox" id="gender"
+                           name="gender"
+                           data-options="
+                                loader:cj.getLoader('gender'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+            ">
+                </td>
+                <td class="formtdtext">年龄</td>
+                <td><input opt="age" class="easyui-validatebox,field:'age'" name="age" id="age"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">出生年月</td>
+                <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd"></td>
+                <td class="formtdtext">民族</td>
+                <td>
+                    <input class="easyui-combobox" id="nation"
+                           name="nation"
+                           data-options="
+                                loader: cj.getLoader('NATION'),
+                                mode: 'remote',
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+            "> </td>
+            </tr>
+        </table>
+        <table class="formtable" style="width: 900px">
+            <tr>
+                <td class="formtdtext">家庭住址<span style="color: red">*</span></td>
+                <td colspan="3"><input class="easyui-validatebox" name="address" data-options="required:true" style="width: 300px" id="address"></td>
+                <td class="formtdtext">人员类型<span style="color: red">*</span></td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox" id="type"
+                           name="type"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('oldtype'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text',
+                                required:true
+            ">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">户籍地<span style="color: red">*</span></td>
+                <td colspan="5"><input class="easyui-validatebox" name="registration" data-options="required:true" style="width: 300px" id="registration"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">居住环境<span style="color: red">*</span></td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="live"
+                           id="live"
+                           style="width: 100px"
+                           data-options="
+                                required:true,
+                                loader:cj.getLoader('liveplace'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">婚姻状况<span style="color: red">*</span></td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox" id="marriage"
+                           name="marriage"
+                           style="width: 100px"
+                           data-options="
+                                required:true,
+                                loader:cj.getLoader('marriage'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">家庭经济条件<span style="color: red">*</span></td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox" id="economy"
+                           name="economy"
+                           style="width: auto"
+                           data-options="
+                                required:true,
+                                loader:cj.getLoader('economy'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">曾从事职业</td>
+                <td><input class="easyui-validatebox" name="vocation"></td>
+                <td class="formtdtext">文化程度<span style="color: red">*</span></td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox" id="culture"
+                           name="culture"
+                           style="width: 100px"
+                           data-options="
+                                required:true,
+                                loader:cj.getLoader('culture'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">手机号码</td>
+                <td><input class="easyui-validatebox" name="mobilephone" id="mobiephone"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">退休工资</td>
+                <td><input class="easyui-validatebox" name="retirewage" id="retirewage"></td>
+                <td class="formtdtext">住宅电话</td>
+                <td><input class="easyui-validatebox" name="telephone" id="telephone"></td>
+                <td class="formtdtext">老人呼叫机</td>
+                <td><input class="easyui-validate" name="hjj_hjj" id="hjj_hjj"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">呼叫机种类</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox" id="hjj_kind"
+                           name="hjj_kind"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('hjjkind'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">呼叫机类型</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="hjj_type"
+                           id="hjj_type"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('hjjtype'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">呼叫手机号</td>
+                <td><input class="easyui-validatebox" name="hjj_phone"></td>
+            </tr>
+
+        </table>
+    </div>
+</fieldset>
+
+<!--享受服务类型-->
+<fieldset style="width: 900px;margin: 0px auto">
+    <legend>享受服务类型</legend>
+    <div opt="lrxsfwlx">
+        <input name="fwlx_jjyl" id="fwlx_jjyl" type="checkbox" value="100" /><!--<label>-->居家养老服务 <!--</label>-->
+        <input name="fwlx_fwj" id="fwlx_fwj" type="checkbox" value="100" /><!--<label>-->服务卷 <!--</label>-->
+        <input name="fwlx_mftj" id="fwlx_mftj" type="checkbox" value="100" /><!--<label>-->免费体检 <!--</label>-->
+        <input name="fwlx_dylnb" id="fwlx_dylnb" type="checkbox" value="100" /><!--<label>-->订阅老年报 <!--</label>-->
+        <input name="fwlx_jgyl" id="fwlx_jgyl" type="checkbox" value="100" /><!--<label>-->机构养老 <!--</label>-->
+        <input name="fwlx_tyfw" id="fwlx_tyfw" type="checkbox" value="100" /><!--<label>-->体验服务 <!--</label>-->
+        <input name="fwlx_hjj" id="fwlx_hjj" type="checkbox" value="100" /><!--<label>-->呼叫机 <!--</label>-->
+        <input name="fwlx_qt" id="fwlx_qt" type="checkbox" value="100" /><!--<label>-->其他 <!--</label>-->
+    </div>
+</fieldset>
+
+<!--居住信息-->
+<fieldset style="width: 900px;margin: 0px auto">
+    <legend>居住信息</legend>
+    <div>
+        <table class="formtable" style="width: 900px">
+            <tr>
+                <td class="formtdtext">邻居一姓名</td>
+                <td><input class="easyui-validatebox" name="jz_yixingm" id="jz_yixingm"></td>
+                <td class="formtdtext">邻居一位置</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jz_yiweiz"
+                           id="jz_yiweiz"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('neighborposition'),
+                                method:'get' ,
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">邻居一电话</td>
+                <td><input class="easyui-validatebox" name="jz_yidianh" id="jz_yidianh"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">邻居二姓名</td>
+                <td><input class="easyui-validatebox" name="jz_erxingm" id="jz_erxingm"></td>
+                <td class="formtdtext">邻居二位置</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jz_erweiz"
+                           id="jz_erweiz"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('neighborposition'),
+                                method:'get' ,
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">邻居二电话</td>
+                <td><input class="easyui-validatebox" name="jz_erdianh" id="jz_erdianh"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">物业名称</td>
+                <td><input class="easyui-validatebox" name="jz_wuy" id="jz_wuy"></td>
+                <td class="formtdtext">门卫电话</td>
+                <td><input class="easyui-validatebox" name="jz_menwdh" id="jz_menwdh"></td>
+                <td class="formtdtext">值班电话</td>
+                <td><input class="easyui-validatebox" name="jz_zhibdh" id="jz_zhibdh"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">社区卫生院名称</td>
+                <td><input class="easyui-validatebox" name="jz_sheqyy" id="jz_sheqyy"></td>
+                <td class="formtdtext">责任医生</td>
+                <td><input class="easyui-validatebox" name="jz_yis" id="jz_yis"></td>
+                <td class="formtdtext">联系电话</td>
+                <td><input class="easyui-validatebox" name="jz_lxdh" id="jz_lxdh"></td>
+            </tr>
+        </table>
+    </div>
+</fieldset>
+
+<!--健康信息-->
+<fieldset style="width: 900px;margin: 0px auto">
+    <legend>健康信息</legend>
+    <div>
+        <table class="formtable" style="width: 900px">
+            <tr>
+                <td class="formtdtext">血型</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_xuex"
+                           id="jk_xuex"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('bloodtype'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">血压</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_xuey"
+                           id="jk_xuey"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('bloodpressure'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">起搏器情况</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_qibq"
+                           id="jk_qibq"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('pacemaker'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">过敏史</td>
+                <td><input class="easyui-validatebox" name="jk_gms" id="jk_gms"></td>
+                <td class="formtdtext">视力情况</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_shil"
+                           id="jk_shil"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('eyesight'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">听力情况</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_tingl"
+                           id="jk_tingl"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('hearing'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">活动能力</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_huod"
+                           id="jk_huod"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('activity'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">出行方式</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_chux"
+                           id="jk_chux"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('goout'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">记忆力情况</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_jiyl"
+                           id="jk_jiyl"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('memory'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">穿脱衣服</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_chuany"
+                           id="jk_chuany"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('dress'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">定向能力</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_dingx"
+                           id="jk_dingx"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('direction'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+                <td class="formtdtext">洗澡情况</td>
+                <td>
+                    <input class="easyui-combobox lazy-combobox"
+                           name="jk_xiz"
+                           id="jk_xiz"
+                           style="width: 100px"
+                           data-options="
+                                loader:cj.getLoader('bathe'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">日常卫生</td>                   <!--document.getElementById('shutou').checked=true-->
+                <td opt="lrrcws" colspan="5">
+                    <input opt="shutou" name="jk_rcws_st" id="jk_rcws_st" type="checkbox" value="110" /><!--<label>-->自己梳头 <!--</label>-->
+                    <input opt="xinian" name="jk_rcws_xl" id="jk_rcws_xl" type="checkbox" value="110" /><!--<label>-->自己洗脸 <!--</label>-->
+                    <input opt="xitou" name="jk_rcws_xt" id="jk_rcws_xt" type="checkbox" value="110" /> <!--<label>-->自己洗头 <!--</label>-->
+                    <input opt="shuaya" name="jk_rcws_sy" id="jk_rcws_sy" type="checkbox" value="110" /><!--<label>-->自己刷牙 <!--</label>-->
+                    <input opt="xijiao"  name="jk_rcws_xj" id="jk_rcws_xj" type="checkbox" value="110" /><!--<label>-->自己洗脚 <!--</label>-->
+                    <input opt="tixu" name="jk_rcws_tx" id="jk_rcws_tx" type="checkbox" value="110" /><!--<label>-->自己剃须 <!--</label>-->
+                    <input opt="xiuzhijia" name="jk_rcws_xzj" id="jk_rcws_xzj" type="checkbox" value="110" /><!--<label>-->自己修指甲 <!--</label>-->
+                    <input opt="xiyi" name="jk_rcws_xy" id="jk_rcws_xy" type="checkbox" value="110" /><!--<label>-->自己洗衣 <!--</label>-->
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">病史情况</td>
+                <td opt="lrbsqk" colspan="5">
+                    <input name="jk_bs_gaoxy" id="jk_bs_gaoxy" type="checkbox" value="111" /><!--<label>-->高血压 <!--</label>-->
+                    <input name="jk_bs_tangnb" id="jk_bs_tangnb" type="checkbox" value="111" /><!--<label>-->糖尿病 <!--</label>-->
+                    <input name="jk_bs_fengs" id="jk_bs_fengs" type="checkbox" value="111" /><!--<label>-->风湿病 <!--</label>-->
+                    <input name="jk_bs_xinzb" id="jk_bs_xinzb" type="checkbox" value="111" /><!--<label>-->心脏病 <!--</label>-->
+                    <input name="jk_bs_chid" id="jk_bs_chid" type="checkbox" value="111" /><!--<label>-->老年痴呆 <!--</label>-->
+                    <input name="jk_bs_guz" id="jk_bs_guz" type="checkbox" value="111" /><!--<label>-->扭伤骨折 <!--</label>-->
+                    <input name="jk_bs_qit" id="jk_bs_qit" type="checkbox" value="111" /><!--<label>-->其他 <!--</label>-->
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">主要疾病</td>
+                <td colspan="5">
+                    <textarea name="jk_jib" id="jk_jib"  style="height:60px;width: 90%"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</fieldset>
+
+<!--爱好及活动需求-->
+<fieldset style="width: 900px;margin: 0px auto">
+    <legend>爱好及活动需求</legend>
+    <div>
+        <table class="formtable" style="width: 900px">
+            <tr>
+                <td class="formtdtext">性格特征</td>
+                <td colspan="5">
+                    <textarea name="xq_tez" id="xq_tez" style="height:60px;width: 90%"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">兴趣爱好</td>
+                <td colspan="5">
+                    <textarea name="xq_aih" id="xq_aih" style="height:60px;width: 90%"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">特长</td>
+                <td><input class="easyui-validatebox" name="xq_tec" id="xq_tec"></td>
+                <td class="formtdtext">社会活动</td>
+                <td colspan="3"><input class="easyui-validatebox" name="xq_huod" style="width: 80%" id="xq_huod"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">参加社团</td>
+                <td><input class="easyui-validatebox" name="xq_canjiast" id="xq_canjiast"></td>
+                <td class="formtdtext">担当角色</td>
+                <td colspan="3"><input class="easyui-validatebox" name="xq_jiaos" style="width: 80%" id="xq_jiaos" ></td>
+            </tr>
+        </table>
+    </div>
+</fieldset>
+
+<!--家庭成员-->
+<fieldset style="width: 900px;margin: 0px auto">
+    <div opt="familymembersdiv">
+        <table class="easyui-datagrid" title="家庭成员列表" opt="familymembersgrid" id="familymembersgrid1" style="width: 900px"
+               data-options="rownumbers:true,toolbar:'#pensionmembertb',singleSelect:true,showFooter:true">
+
+            <thead data-options="frozen:true">
+            <tr>
+                <th data-options="field:'bottom',width:40,align:'center',editor:'icon-remove'">
+                    <a data-options="plain:true">选择</a>
+                </th>
+            </tr>
+            </thead>
+            <thead>
+            <tr>
+                <th class="lazy-combobox" data-options="field:'guanx',align:'center',width:100,editor:{
+                 type:'combobox',
+                 options:{
+                    required:true,
+                    loader:cj.getLoader('relation'),
+                    method:'get' ,
+                    editable:false,
+                    width:60,
+                    valueField: 'id',
+                    textField: 'text'
+                 }
+                 }">
+                    关系<span style="color: red">*</span>
+                </th>
+                <th data-options="required:true,field:'gx_name',width:90,align:'center',editor:{
+                    type:'validatebox',
+                    options:{required:true}
+                   } ">姓名<span style="color: red">*</span></th>
+                <th opt="gxidentityid" data-options="field:'gx_identityid',width:150,align:'center',editor:{
+                            type:'validatebox',
+                            options:{
+                                required:true,
+                                invalidMessage:'请输入正确的身份证号',
+                                validType:'identityid'
+                            }
+                        }">身份证号<span style="color: red">*</span></th>
+                <th class="lazy-combobox" data-options="field:'gx_gender',align:'center',width:60,editor:{
+							type:'combobox',
+							options:{
+							    required:true,
+                                loader:cj.getLoader('gender'),
+                                method:'get' ,
+                                editable:false,
+                                width:60,
+                                valueField: 'id',
+                                textField: 'text'
+							}
+						}">性别<span style="color: red">*</span></th>
+                <th data-options="field:'gx_birth',width:90,align:'center',editor:'text'">出生日期</th>
+                <th  data-options="field:'gx_telephone',width:160,align:'center',editor:'text'">宅电</th>
+                <th data-options="field:'gx_mobilephone',width:160,align:'center',editor:'text'">手机</th>
+                <th  data-options="field:'gx_economy',width:100,align:'center',editor:'text'">月收入</th>
+                <th class="lazy-combobox" data-options="field:'gx_culture',align:'center',width:60,editor:{
+							type:'combobox',
+							options:{
+                               loader:cj.getLoader('culture'),
+                                method:'get' ,
+                                editable:false,
+                                width:60,
+                                valueField: 'id',
+                                textField: 'text'
+							}
+						}">文化程度</th>
+                <th  data-options="field:'gx_registration',width:100,align:'center',editor:'text'">籍贯</th>
+                <!--<th  data-options="field:'gx_nation',width:100,align:'center',editor:'text'">-->
+                <th class="lazy-combobox" data-options="field:'gx_nation',align:'center',width:60,editor:{
+							type:'combobox',
+							options:{
+                                loader:cj.getLoader('NATION'),
+                                method:'get' ,
+                                editable:false,
+                                width:60,
+                                valueField: 'id',
+                                textField: 'text'
+							}
+						}">民族</th>
+                <th  data-options="field:'gx_work',width:100,align:'center',editor:'text'">工作地点</th>
+
+                <th data-options="field:'prseno',width:160,align:'center',editor:'text',hidden:true">prseno</th>
+                <th data-options="field:'lrgx_id',width:160,align:'center',editor:'text',hidden:true">lrgx_id</th>
+                <th data-options="field:'lr_id',width:160,align:'center',editor:'text',hidden:true">lr_id</th>
+            </tr>
+            </thead>
+        </table>
+        <div opt="familymembertb" style="height:auto">
+            <a opt="newfamilymemeradd_btn" id="newfamilymemeraddid" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+            <a opt="delfamilymemer_btn" id="delfamilymemerid" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+        </div>
+    </div>
+</fieldset>
+
+<div style="width: 900px;margin: 0px auto">
+    <table style="width: 900px">
+        <tr>
+            <td style="text-align: left">
+                <table style="width: 450px">
+                    <tr>
+                        <td class="formtdtext" style="text-align: right;width: 70px">制单日期:</td>
+                        <td style="width: 100;text-align: left" >
+                            <input class="easyui-datebox" opt="setdaytime" name="operator_date" data-options="formatter:myformatter,parser:myparser" id="operator_date">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="text-align: right">
+                <table style="text-align: right;width: 450px">
+                    <tr style="text-align: right">
+                        <!-- <td class="formtdtext" style="width: 70px">制单人:</td>-->
+
+                        <td style="width: 100px" >制单人:<input class="easyui-validatebox" name="operators" readonly="true" id="username"></td>
+                        {% if old %}
+                        <td style="width: 100px" >原制单人:<input class="easyui-validatebox" id="operators" readonly="true"></td>
+                        {% endif %}
+                    </tr>
+                </table>
+            </td>
+
+
+        </tr>
+    </table>
+    <input type="hidden" name="status" value="自由" id="status">
+    <input type="hidden" name="loginname" id="loginname">
+    <input type="hidden" name="dvcode" id="dvcode">
+    <!--<input type="hidden" name="username" id="username">-->
+</div>
+<div opt="pensionbutton" style="width: 900px;text-align: center;margin: 0px auto">
+    {% if old %}
+    <input type="button" value="修改" id="update">
+    <input type="button" value="删除" hidden="true" id="delete">
+    {% else %}
+    <input type="button" value="保存"  onclick="add('nice')">
+    {% endif %}
+    <input type="button" value="操作日志" onclick="addTab('录入操作日志','logs?functionid=mHLcDiwTflgEshNKIiOV')">
+</div>
+<div style="display: none">
+    <input id="lrgx_id_rel" type="text">
+    <input id="lr_id_rel" type="text">
+    <input id="guanx_rel" type="text">
+    <input id="gx_name_rel" type="text">
+    <input id="gx_identityid_rel" type="text" >
+    <input id="gx_gender_rel" type="text">
+    <input id="gx_birth_rel" type="text">
+    <input id="gx_telephone_rel" type="text">
+    <input id="gx_mobilephone_rel" type="text">
+    <input id="gx_economy_rel" type="text">
+    <input id="gx_culture_rel" type="text">
+    <input id="gx_registration_rel" type="text">
+    <input id="gx_nation_rel" type="text">
+    <input id="gx_work_rel" type="text">
+</div>
+
+</form>
+</form>
+</div>
+<script>
+    /*新增家庭成员信息*/
+    var familly_key = 0;      //存放家庭成员信息表主键
+    $.post(
+            'oldsocrelkey',
+            function(data){
+                familly_key = parseInt(data);
+            }
+    );
+    function addFimalyCel(addfalg,editflag,func){
+        var familrelfields = $("#familymembersgrid1").datagrid("getColumnFields");  //获取全部元素的字段名
+        var famildata_all = new Array();   //存放新增数据条
+        //若有新增数据
+        if(addfalg>0){
+            for(i=0;i<addfalg;i++){
+                var datach = "data"+i;
+                var famildata = new Array();    //存放新增数据
+                for(j=0;j<familrelfields.length;j++){
+                    datach  =  $("#familymembersgrid1").datagrid('getEditor',{index:i,field:familrelfields[j]});
+                    if(datach.type == "combobox"){
+                        famildata.push($(datach.target).combobox('getValue'));
+                    }else{
+                        famildata.push($(datach.target).val());
+                    }
+                }
+                famildata_all.push(famildata);
+            }
+        }
+        if(editflag > 0){
+            for(i=queryflag;i<editflag+queryflag;i++){
+                var datach = "data"+i;
+                var famildata = new Array();    //存放新增数据
+                for(j=0;j<familrelfields.length;j++){
+                    datach  =  $("#familymembersgrid1").datagrid('getEditor',{index:i,field:familrelfields[j]});
+                    if(datach.type == "combobox"){
+                        famildata.push($(datach.target).combobox('getValue'));
+                    }else{
+                        famildata.push($(datach.target).val());
+                    }
+                }
+                famildata_all.push(famildata);
+            }
+        }
+        //数据条不为空
+        if(famildata_all.length > 0){
+            for(a=0;a<famildata_all.length;a++){
+                var famildata_all_child = famildata_all[a];   //取出每条数据
+                for(b=0;b<famildata_all_child.length;b++){
+                    $("#"+familrelfields[b]+"_rel").val(famildata_all_child[b]);  //将值设置到上面定义的div中
+                }
+                //若为修改，则将主表主键取出
+                if(func == "editadd-oldsocrel"){
+                    $("#lr_id_rel").val(obj["lr_id"]);
+                }
+                $.post(
+                        func,
+                        {
+                            lrgx_id:familly_key++,
+                            lr_id:$("#lr_id_rel").val(),
+                            guanx:$("#guanx_rel").val(),
+                            gx_name:$("#gx_name_rel").val(),
+                            gx_identityid:$("#gx_identityid_rel").val(),
+                            gx_gender:$("#gx_gender_rel").val(),
+                            gx_birth:$("#gx_birth_rel").val(),
+                            gx_telephone:$("#gx_telephone_rel").val(),
+                            gx_mobilephone:$("#gx_mobilephone_rel").val(),
+                            gx_economy:$("#gx_economy_rel").val(),
+                            gx_culture:$("#gx_culture_rel").val(),
+                            gx_registration:$("#gx_registration_rel").val(),
+                            gx_nation:$("#gx_nation_rel").val(),
+                            gx_work:$("#gx_work_rel").val()
+                        },
+                        function(data){
+                            console.log("editadd:"+data)
+                        }
+                );
+            }
+        }
+    }
+    /*修改家庭成员信息*/
+    function editFimalyCel(){
+        console.log("queryflag:"+queryflag);
+        console.log("flag:"+flag);
+
+        var familrelfields = $("#familymembersgrid1").datagrid("getColumnFields");  //获取全部元素的字段名
+        var famildata_all = new Array();   //存放已有或修改后数据条
+        //数据库已有家庭成员数据条数
+        if(queryflag>0){
+            for(i=0;i<queryflag;i++){
+                var datach = "data"+i;
+                var famildata = new Array();    //存放已有或修改后数据
+                for(j=0;j<familrelfields.length;j++){
+                    datach  =  $("#familymembersgrid1").datagrid('getEditor',{index:i,field:familrelfields[j]});
+                    if(datach.type == "combobox"){
+                        famildata.push($(datach.target).combobox('getValue'));
+                    }else{
+                        famildata.push($(datach.target).val());
+                    }
+                }
+                famildata_all.push(famildata);
+            }
+        }
+        //数据条不为空
+        if(famildata_all.length > 0){
+            for(a=0;a<famildata_all.length;a++){
+                var famildata_all_child = famildata_all[a];   //取出每条数据
+                for(b=0;b<famildata_all_child.length;b++){
+                    $("#"+familrelfields[b]+"_rel").val(famildata_all_child[b]);  //将值设置到上面定义的div中
+                }
+                $.post(
+                        'update-oldsorel',
+                        {
+                            lrgx_id:$("#lrgx_id_rel").val(),
+                            lr_id:$("#lr_id_rel").val(),
+                            guanx:$("#guanx_rel").val(),
+                            gx_name:$("#gx_name_rel").val(),
+                            gx_identityid:$("#gx_identityid_rel").val(),
+                            gx_gender:$("#gx_gender_rel").val(),
+                            gx_birth:$("#gx_birth_rel").val(),
+                            gx_telephone:$("#gx_telephone_rel").val(),
+                            gx_mobilephone:$("#gx_mobilephone_rel").val(),
+                            gx_economy:$("#gx_economy_rel").val(),
+                            gx_culture:$("#gx_culture_rel").val(),
+                            gx_registration:$("#gx_registration_rel").val(),
+                            gx_nation:$("#gx_nation_rel").val(),
+                            gx_work:$("#gx_work_rel").val()
+                        },
+                        function(data){
+                            console.log(data)
+                            if(data == "true"){
+                                /*$.messager.alert("提示","修改成功!");
+                                 }else{
+                                 $.messager.alert("提示","修改失败!");
+                                 }*/
+                            }
+                        }
+                );
+            }
+        }
+        /*若有再次新增的数据则调用新增方法*/
+        if(flag > 0){
+//            alert("ok")
+            addFimalyCel(0,flag,"editadd-oldsocrel");
+        }
+    }
+
+</script>
+<script type="text/javascript">
+    function myformatter(date){
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        var d = date.getDate();
+        return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+    }
+    function myparser(s){
+        if (!s) return new Date();
+        var ss = (s.split('-'));
+        var y = parseInt(ss[0],10);
+        var m = parseInt(ss[1],10);
+        var d = parseInt(ss[2],10);
+        if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+            return new Date(y,m-1,d);
+        } else {
+            return new Date();
+        }
+    }
+
+</script>
+

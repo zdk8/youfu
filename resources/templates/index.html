@@ -1,14 +1,23 @@
 <!DOCTYPE html>
+{% include "templates/home.html" %}
 <html>
   <head>
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>民政养老救助系统</title>
-      <link rel="stylesheet" type="text/css" href="css/index.css">
-      <script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery-1.8.0.min.js"></script>
-      <script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
-      <script type="text/javascript"  src="http://www.jeasyui.com/easyui/locale/easyui-lang-zh_CN.js"></script>
-      <link rel="stylesheet" type="text/css"  href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
-      <script type="text/javascript">
+      <!--<script type="text/javascript">
+          function addTab(title, url){
+              if ($('#tabs').tabs('exists', title)){
+                  $('#tabs').tabs('select', title);
+              } else {
+                  var content = '<iframe scrolling="no" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
+                  $('#tabs').tabs('add',{
+                      title:title,
+                      content:content,
+                      closable:true
+                  });
+                  $('#tabs').tabs('close','主页');
+              }
+          }
           $(document).ready(function() {
               var name = $("#user").val();
               $.ajax({
@@ -20,7 +29,7 @@
                               $('#accord').accordion('add',{
                                   title: n.title,
                                   selected: false,
-                                  height:465,
+                                  height:400,
                                   content:'<ul name="'+n.title+'"'+'id="'+ n.id+'"></ul>'
                               });
                           }
@@ -40,6 +49,8 @@
                                       = '/func?username='+name+'&functionid='+node.id
                           },
                           onClick:function(node){
+                              console.log(node.title)
+                              console.log(node.urlpath)
                               if(node.nodetype ==0)
                                   addTab(node.title,node.urlpath);
                           }
@@ -47,9 +58,9 @@
                   }
               });
           });
-      </script>
+      </script>-->
   </head>
-    <body class="easyui-layout" id="mainlayoutpanel" border="false" >
+  <body class="easyui-layout" id="mainlayoutpanel" border="false" >
     <div region="north" border="false" class="cs-north" style="overflow:hidden">
         <div class="cs-north-bg">
             <div class="cs-north-logo"></div>
@@ -58,7 +69,9 @@
                 <li class="li-skinitem"><img src="img/head/2.png"/><a id="domneedtodocount" style="cursor:pointer">待办业务(55)</a></li>
                 <li class="li-skinitem"><img src="img/head/4.png"/><a id="onlinenums">在线人数(1)</a></li>
                 <li class="li-skinitem"><img src="img/head/5.png"/><a id="domshowalterpwd">重设密码</a></li>
-                <li class="li-skinitem"><img src="img/head/7.png"/> <a id="domlogout" style="text-decoration: none;cursor:pointer" href="/">退出</a></li>
+                <li class="li-skinitem"><img src="img/head/7.png"/>
+                    <a opt="logout" style="text-decoration: none;cursor:pointer" href="/">退出</a>
+                </li>
                 <li class="li-skinitem"><span id="currentDate"></span></li>
             </ul>
             <input type="hidden" name="loginname" id="login" value={{loginname}}>
@@ -66,7 +79,7 @@
             <input type="hidden" name="username" id="user" value={{username}}>
         </div>
     </div>
-    <div region="west" id="westpanel" border="true" split="true" title="业务导航" class="cs-west" style="border-right: 0">
+    <div region="west" id="westpanel" split="true" title="业务导航" class="cs-west" style="border-right: 0">
         <div id="menu_pension" fit="true" border="false">
             <div class="easyui-accordion" id="accord" >
             </div>
@@ -80,33 +93,31 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!--存放资金发放对话框-->
     <div id="grantMoneyDig"></div>
     <div id="searchDig"></div>
 
-    </body>
+  </body>
     <script type="text/javascript">
       var context = "{{servlet-context}}";
     </script>
     <script type="text/javascript">
-        function addTab(title, url){
-            if ($('#tabs').tabs('exists', title)){
-                $('#tabs').tabs('select', title);
-            } else {
-                var content = '<iframe scrolling="no" frameborder="0" src="'+url+'" style="width:100%;height:100%;"></iframe>';
-                $('#tabs').tabs('add',{
-                    title:title,
-                    content:content,
-                    closable:true
-                });
-                $('#tabs').tabs('close','主页');
-            }
-        }
+        /*注销*/
+        $('[opt=logout]').click(function(){
+            $.ajax({
+                url:'logout',
+                type:'post',
+                success:function(data){
+                    document.location.href="index"
+                    /*var opened=window.open('about:blank','_self');
+                    opened.opener=null;
+                    opened.close();*/
+                }
+            })
+        })
     </script>
-    {% block page-scripts %}
-    {% endblock %}
   </body>
 </html>
+
 

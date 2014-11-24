@@ -5,6 +5,8 @@
   (:require [newpension.models.db :as db]
             [noir.response :as resp]
             [newpension.layout :as layout]
+            [noir.session :as session]
+            [clojure.data.json :as json]
             ))
 
 (def oldinfo [:jk_qibq :xq_aih :jk_jiyl :address :hjj_hjj :jz_erdianh :jz_lxdh :age :status :jk_gms :culture
@@ -24,32 +26,38 @@
 (def oldlrid [:lr_id])
 
 ;;用户登录
-(defn login [name pwd]
-  (if (= name "")
-    (if (= pwd "")                        ;;用户名和密码输入空值的情况
-      (layout/render
-        "login.html"
-        {:loginmsg "用户名和密码不能为空"})
-      (layout/render
-        "login.html"
-        {:loginmsg "用户名不能为空"}))
-    (if (= pwd "")                        ;;用户名不输入空值，密码为空值
-      (layout/render
-        "login.html"
-        {:loginmsg "密码不能为空"})
-      (if (= (db/get-user name) nil)      ;;根据输入的用户名查询用户表
-        (layout/render
-          "login.html"
-          {:loginmsg "用户不存在"})
-        (if (= (db/get-user name pwd) nil)  ;;判断输入的密码是否正确
-          (layout/render
-            "login.html"
-            {:loginmsg "密码输入错误"})
-          (layout/render
-            "base.html"
-            {:loginname (:loginname (db/get-user name pwd))
-             :dvcode (:regionid (db/get-user name pwd))
-             :username (:username (db/get-user name pwd))}))))))
+(defn login [request]
+  (try
+    (let
+      [{params :params} request
+       {loginname :username} params
+       {passwd :password} params
+       result (db/get-user loginname passwd)
+       {username :username} result
+       {userid :userid} result]
+      (if result
+        (do (session/put! :user_id userid) (layout/render "dm.html" (session/put! :username username)))
+        (layout/render "login.html"))
+      (if (session/get :username)
+        (layout/render "dm.html" {:username (session/get :username)})
+        (layout/render "login.html")))
+    (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
+(defn loginbtn [request]
+  (try
+    (let
+      [{params :params} request
+       {loginname :username} params
+       {passwd :password} params
+       result (db/get-user loginname passwd)
+       {username :username} result
+       {userid :userid} result]
+      (if result
+        (do (session/put! :username username) (str true))
+        (str false)))
+    (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
+;;注销
+(defn logout [request]
+  (session/remove! :username))
 
 ;;查询所有养老信息
 (defn get-olds

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>民政养老救助系统</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <script type="text/javascript" src="js/extLocation.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+    <link rel="Stylesheet" type="text/css" href="img/css/home.css">
+
+    <script type="text/javascript">
+        /*session全局变量*/
+        var onlinenums=0;
+        var userid='jjkeKGS16yEyKBF5fEq3';
+        var username="hhh";
+        var displayname=username;
+        var regionid=330106002;
+        var dvname='北山街道';
+    </script>
+
+</head>
+<body>
+<div id="header">
+    <div class="cs-north-logo"></div>
+    <ul id="headnavul">
+        <li class="li-skinitem" ><img src="img/head/1.png"/><a id="welcomename">欢迎您:{{username}}</a></li>
+        <li class="li-skinitem"><img src="img/head/2.png"/><a id="domneedtodocount" style="cursor:pointer">待办业务(55)</a></li>
+        <li class="li-skinitem"><img src="img/head/4.png"/><a id="onlinenums">在线人数(1)</a></li>
+        <li class="li-skinitem"><img src="img/head/5.png"/><a id="domshowalterpwd">重设密码</a></li>
+        <li class="li-skinitem"><img src="img/head/7.png"/>
+            <a opt="logout" style="text-decoration: none;cursor:pointer" href="/">退出</a>
+        </li>
+        <li class="li-skinitem"><span id="currentDate"></span></li>
+    </ul>
+</div>
+<div class="easyui-layout" data-options="fit:true,border:false">
+    <div data-options="region:'north',border:false" style="height:91px;background:#B3DFDA;padding:0">
+    </div>
+    <div region="west" id="westpanel" border="false" split="true" title="业务导航" class="cs-west">
+        <div id="menu_pension" fit="true" border="false">
+        </div>
+    </div>
+    <div id="mainPanle" region="center" border="false">
+        <div id="tabs" class="easyui-tabs"   fit="true" border="false" >
+            <div title="主页" class="indexbackground_2">
+                <div class="cs-home-remark">
+                    <h3 style="font-family: 'courier new'">欢迎使用民政养老救助系统</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script>
+
+    document.write('<link rel="stylesheet" type="text/css" id="swicth-style" href="'+extEasyui+
+            'themes/default/easyui.css"><\/>');
+    document.write('<script type="text/javascript"  src="'+extEasyui+
+            'jquery.easyui.min.js"><\/script>');
+    document.write('<script type="text/javascript"  src="'+extEasyui+
+            'locale/easyui-lang-zh_CN.js"><\/script>');
+
+
+</script>
+<link rel="Stylesheet" type="text/css" href="img/css/home.css">
+<script type="text/javascript" src="js/commonfuncs/jquery.json-2.4.js"></script>
+<script type="text/javascript" src="js/require.js" data-main="js/mainapp"></script>
+<script type="text/javascript" src="js/jqueryplugin/jquery.iframe-auto-height.plugin.1.9.5.min.js"></script>
+
+<script src="js/urls.js"></script>
+<script src="js/cj.js"></script>
+<script type="text/javascript">
+    /*注销*/
+    $('[opt=logout]').click(function(){
+        $.ajax({
+            url:'logout',
+            type:'post',
+            success:function(data){
+                document.location.href="index"
+                /*var opened=window.open('about:blank','_self');
+                 opened.opener=null;
+                 opened.close();*/
+            }
+        })
+    })
+</script>

@@ -11,12 +11,14 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#need").datagrid({
+            url:'needs',
+            type:'post',
             onDblClickRow: function(){
                 var selected = $('#need').datagrid('getSelected');
                 if (selected){
                     var post = $("#need").datagrid("getSelected").name;
                     var id = $("#need").datagrid("getSelected").pg_id;
-                    alert("ok"+post+"id:"+id);
+//                    alert("ok"+post+"id:"+id);
                     var jq = top.jQuery;
                     if (jq('#tabs').tabs('exists', post+'评估信息'))
                         jq('#tabs').tabs('select', post+'评估信息');
@@ -85,8 +87,8 @@
                method:'get',
                toolbar:'.tb',
                border:false,
-                url:'/needs',
                singleSelect:true,
+               loadMsg:'',
                pagination:true">
     <thead data-options="frozen:true">
     <tr>
