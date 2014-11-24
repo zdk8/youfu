@@ -31,7 +31,7 @@ define(function(){
         result.find('.pop-win-north-close').bind('click',removeWebox);
         result.bind('close', removeWebox);
 
-        result.find('.pop-win-north-title').html(option['title']);
+        result.find('.pop-win-north-title').html(option['title']).width(option['width']-50);//设置标题名并设置宽度
         var $html=$(option['htmlcontent']);
         result.find('.htmlcontent').html($html);
 

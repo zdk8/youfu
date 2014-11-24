@@ -1,6 +1,7 @@
 @import url("icon.css");
 @import url("easyuioverwrite.css");
 @import url("formtable02.css");
+@import url("dialog01.css");
 html, body {
     font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
     color: black;
@@ -20,7 +21,7 @@ body {
     width:100%;
     height: 90px;
     z-index: 9;
-    border-bottom: 1px solid #367ABB;
+    border-bottom: 1px solid #808080;
 }
 .cs-north-logo {
     height: 40px;
@@ -48,32 +49,11 @@ body {
     margin-bottom: 0px;
     text-align: center;
 }
-#login_area{
-   margin-top: 18px;
-   height: 25px;
-   line-height: 25px;
-   padding-left: 30px;
-   padding-right: 50px;
-}
-#login_area a{
-    color: #000000;
-    margin: 0 4px 0 4px;
-}
-#footer {
-    background-image: url(../pension01/footer_bg.png);
-    background-repeat: repeat-x;
-    line-height: 33px;
-}
 
-#footer div{
-    margin: 0 auto;
-    width: 480px;
-}
-#footer  a{
-    color: #FFFFFF;
-    margin: 0px;
-    padding-right: 10px; /* 设置块的属性 */
-    padding-left: 10px;
+
+
+.clear{
+    clear: both;
 }
 
 .separate{
@@ -483,6 +463,9 @@ input:disabled{
 
 
 #mainPanle{
+    padding-bottom: 5px;
+    padding-top: 5px;
+    background:url(../../img/bg-gray.gif) repeat;
     border-left: 1px solid #4b91e5;
     /*border-width:5px 3px 5px;
     border-style:solid;*/
@@ -511,7 +494,6 @@ input:disabled{
     background: url(../../img/popwindowclosebackground.png) no-repeat;
     width: 20px;
     height: 30px;
-    cursor: pointer;
 }
 
 .background {
@@ -531,7 +513,6 @@ input:disabled{
     border: solid 1px chartreuse;
     background: rgba(10, 10, 10, 0.5);
 }
-/* 所有class为menu的div中的ul样式 */
 div.weboxbuttons ul
 {
     margin: 0;
@@ -539,37 +520,26 @@ div.weboxbuttons ul
     padding-top: 5px;
     text-align: center;
     list-style-type: none;
-    background-color: #F6F6F6;
-    border-top: 1px solid #DADEE5;
 }
 div.weboxbuttons ul li
 {
     margin-left: 5px;
+    border: 1px dotted #808080;
     display:inline;
     list-style-type:none;
 }
 /* 所有class为weboxbuttons的div中的ul中的a样式(包括尚未点击的和点击过的样式) */
 div.weboxbuttons ul li a, div.weboxbuttons ul li a:visited
 {
+    border: 1px #4e667d solid;
     text-decoration: none;
     white-space: nowrap;
-    cursor: pointer;
-    background-color:#F6F6F6;
-    color: #333;
-    border: 1px solid #999;
-    text-shadow: 0px 1px 1px rgba(255, 255, 255, 1);
-    transition: box-shadow linear .2s;
 }
 div.weboxbuttons ul li a:hover
 {
     background-color: #bfcbd6;
     color: red;
     text-decoration: none;
-    color: #FFF;
-    border: 1px solid #1c6a9e;
-    background: #2288cc;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33bbee', endColorstr='#2288cc');
-    text-shadow: -1px -1px 1px #1c6a9e;
 }
 div.weboxbuttons ul li a:active
 {
@@ -657,20 +627,10 @@ div.weboxbuttons ul li a:active
     text-align: left;
 }
 
-/*按钮样式*/
-.buttoncss {
-    border: 1px solid rgba(128, 176, 79, 0.12);
-    display: inline-block;
-    text-align: center;
-    outline: none;
-    cursor: pointer;
-    /*width:90px;*/
-    height: 25px;
-    font-weight: bold;
-    background:url(../../img/btnimg.jpg);
-}
-.buttoncss:active {
-    position: relative;
-    top: 1px;
+/*打开文件按钮样式*/
+#openfile_id{
+    position:absolute; z-index:12;width: 20px;
+    filter:alpha(opacity:0);
+    opacity:0;
 }
 

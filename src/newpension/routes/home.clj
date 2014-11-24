@@ -92,10 +92,5 @@
 
 
 
-  (GET "/menutree" req (gen/get-user-menutree req))
-  (POST "/menutree" req (gen/get-user-menutree req))
-  (GET "/getFunctionById" [node] (gen/get-function-by-id node))
-  (POST "/saveFunction" req (gen/create-function req))
-  (GET "/auth/getenumbytype" [type  callback]
-    (gen/getenumbytype type  callback))
+
   )
