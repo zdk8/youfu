@@ -1,16 +1,22 @@
 <fieldset style="width: 300px;margin: 0px auto" >
     <div style="width: 300px;position: relative;margin: 0px auto" region="center">
-        <table class="formtable" style="width:300px">
+        <form opt="yljgdlg" method="post">
+            <table class="formtable" style="width:300px">
             <tr>
-                <td class="formtdtext"  style="width: 100px">机构名称<span style="color: red">*</span></td>
+                <td class="formtdtext"  style="width: 70px">机构名称<span style="color: red">*</span></td>
                 <td>
                     <input opt="identityid" name="identityid" class="easyui-validatebox">
                 </td>
             </tr>
             <tr>
-                <td class="formtdtext" style="width: 100px">登记性质<span style="color: red">*</span></td>
+                <td class="formtdtext" style="width: 70px">登记性质<span style="color: red">*</span></td>
                 <td>
-                    <input class="easyui-validatebox" name="name" data-options="required:true">
+                    <!--<input class="easyui-validatebox" name="name" data-options="required:true">-->
+                    <select class="easyui-combobox" opt="shujuku" style="width:151px;">
+                        <option value="none">事业登记</option>
+                        <option value="正式库">民非登记</option>
+                        <option value="历史库">工商登记</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -61,6 +67,10 @@
                 </td>
             </tr>
         </table>
-
+        </form>
+    </div>
+    <div class="weboxbuttons" style="height:25px;float: right;padding-top: 2px;" >
+        <input class="buttoncss" opt="determine" type="button" value="确定"  style="color:#ffffff;">
+        <input class="buttoncss" opt="cancle" type="button" value="取消"  style="color:#ffffff;">
     </div>
 </fieldset>

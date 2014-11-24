@@ -1,0 +1,35 @@
+<!--工作人员管理-->
+<table class="easyui-datagrid" opt="yanlaojgmanagement" data-options="
+               method:'post',
+               toolbar:'#tb_rzrygl',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true,
+               loadMsg:''">
+    <thead>
+    <tr>
+        <th data-options="field:'enum_name',width:220,align:'center'">机构名称</th>
+        <th data-options="field:'cqr',width:220,align:'center'">联系电话</th>
+        <th data-options="field:'doorplate',width:220,align:'center'">联系人</th>
+        <th data-options="field:'plate_num',width:220,align:'center'">联系地址</th>
+        <th data-options="field:'dengjishijian',width:220,align:'center'">公交线路</th>
+        <th data-options="field:'ro',width:120,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
+                str=$(str).append('<a action=&quot;delete&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-logout-pl16&quot;>删除</span></span></a>');
+                return str.html();
+            }">操作</th>
+    </tr>
+    </thead>
+</table>
+<div id="tb_rzrygl" style="padding: 5px;padding-bottom:2px;background-color: #ffffff">
+    <input class="buttoncss" opt="addrzry" type="button" value="添加入住人员"  style="color:#ffffff;">
+    <hr style="color: rgba(183,176,162,0.20);border-color: #FAF2F2;border: 1px dashed;"/>
+</div>
+

@@ -17,7 +17,7 @@
                     if (selected){
                         var post = $("#tt").datagrid("getSelected").name;
                         var id = $("#tt").datagrid("getSelected").lr_id;
-                        alert("ok"+post+"id:"+id);
+//                        alert("ok"+post+"id:"+id);
                         var jq = top.jQuery;
                         if (jq('#tabs').tabs('exists', post+'详细信息'))
                             jq('#tabs').tabs('select', post+'详细信息');
@@ -50,6 +50,7 @@
                rownumbers:true,
                fit:true,
                singleSelect:true,
+               loadMsg:'',
                pagination:true">
     <thead>
     <tr>
@@ -66,7 +67,7 @@
 
 <div class="tb">
     <form >
-    <input name="name" class="easyui-validatebox" id="name">
+    姓名：<input name="name" class="easyui-validatebox" id="name">
     <input type="button" value="查询" id="search">
     </form>
 </div>
