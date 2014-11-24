@@ -72,7 +72,7 @@
   (POST "/update-oldsorel" reuqest (old/update-oldsorel reuqest))    ;;修改养老家庭成员信息
   (POST "/oldsocrelkey" [] (old/oldsocrelkey))    ;;家庭成员信息表主键
   (POST "/dele-oldsorel" [lrgx_id] (old/dele-oldsorel lrgx_id))   ;;删除家庭成员关系表
-;  (GET "/needs" [] (need/get-needs))             ;;人员评估信息查询
+  (GET "/needs" [] (need/get-needs))             ;;人员评估信息查询
   (POST "/needs" [] (need/get-needs))             ;;人员评估信息查询
   (GET "/tneed" [id] (need/tneed id))
   (GET "/searchneed" [id] (need/get-need id))                  ;;根据主键查询人员评估信息
@@ -101,4 +101,7 @@
   (POST "/saveFunction" req (gen/create-function req))
   (GET "/auth/getenumbytype" [type  callback]
     (gen/getenumbytype type  callback))
+
+  (POST "/queryyljg" [] (old/get-yljg) )
+;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
   )

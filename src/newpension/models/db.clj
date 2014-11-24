@@ -93,12 +93,6 @@
   (has-one needs {:fk :pg_id})
   (database dboracle))
 
-;;机构表
-(defentity t_pensiondepartment
-  (pk :id)
-  (table :t_pensiondepartment)
-  (database dboracle))
-
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -509,6 +503,10 @@
     (where {:bsnyue bsnyue})))
 
 
-(defn add-depart [filter-fields]
-  (insert t_pensiondepartment
-    (values filter-fields)))
+;###########################
+(defentity t_mpensionagence
+;  (pk :userid)
+  (table :t_mpensionagence)
+  (database dboracle))
+(defn get-yljg []
+  (select t_mpensionagence))
