@@ -14,7 +14,7 @@ define(function(){
             $('.background').fadeTo('slow',0.5);
         };
         var removeWebox=function(){
-            result.fadeOut("slow",function(){
+            result.fadeOut(500,function(){
                 $(this).remove();
             });
 

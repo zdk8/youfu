@@ -536,43 +536,37 @@ input:disabled{
 /* 所有class为menu的div中的ul样式 */
 div.weboxbuttons ul
 {
-    list-style:none; /* 去掉ul前面的符号 */
-    margin: 0px; /* 与外界元素的距离为0 */
-    padding: 0px; /* 与内部元素的距离为0 */
-    width: auto; /* 宽度根据元素内容调整 */
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+    text-align: center;
+    list-style-type: none;
 }
-/* 所有class为weboxbuttons的div中的ul中的li样式 */
 div.weboxbuttons ul li
 {
-    float:left; /* 向左漂移，将竖排变为横排 */
-    margin: 2px;
+    margin-left: 5px;
     border: 1px dotted #808080;
+    display:inline;
+    list-style-type:none;
 }
 /* 所有class为weboxbuttons的div中的ul中的a样式(包括尚未点击的和点击过的样式) */
 div.weboxbuttons ul li a, div.weboxbuttons ul li a:visited
 {
-    /*background-color: #465c71;  背景色 */
-    border: 1px #4e667d solid; /* 边框 */
-    /* color: #dde4ec; 文字颜色 */
-    display: block; /* 此元素将显示为块级元素，此元素前后会带有换行符 */
-    line-height: 1.35em; /* 行高 */
-    /*padding: 4px 20px;  内部填充的距离 */
-    text-decoration: none; /* 不显示超链接下划线 */
-    white-space: nowrap; /* 对于文本内的空白处，不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。 */
+    border: 1px #4e667d solid;
+    text-decoration: none;
+    white-space: nowrap;
 }
-/* 所有class为weboxbuttons的div中的ul中的a样式(鼠标移动到元素中的样式) */
 div.weboxbuttons ul li a:hover
 {
-    background-color: #bfcbd6; /* 背景色 */
-    color: red; /* 文字颜色 */
-    text-decoration: none; /* 不显示超链接下划线 */
+    background-color: #bfcbd6;
+    color: red;
+    text-decoration: none;
 }
-/* 所有class为weboxbuttons的div中的ul中的a样式(鼠标点击元素时的样式) */
 div.weboxbuttons ul li a:active
 {
-    background-color: #465c71; /* 背景色 */
-    color: #cfdbe6; /* 文字颜色 */
-    text-decoration: none; /* 不显示超链接下划线 */
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
 }
 
 
