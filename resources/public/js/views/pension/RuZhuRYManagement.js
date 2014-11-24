@@ -1,15 +1,6 @@
 define(function(){
     var render = function(local,option){
-        /*var yljggl = local.find('[opt=yljggl]');        //养老机构管理
-        yljggl.bind('click',function(){
-            require(['text!views/pension/YangLaoJGgl.htm','views/pension/YangLaoJGgl'],function(htmfile,jsfile){
-                local.find('[opt=ylcenter]').append(htmfile)
-            })
-
-        });*/
-
-
-        local.find('[opt=addyljg]').click(function(){
+        local.find('[opt=addrzry]').click(function(){
             /*local.find('[opt=addjg]').dialog({
                 title: '添加养老机构',
                 width: 400,
@@ -22,22 +13,16 @@ define(function(){
             require(['commonfuncs/popwin/win','text!views/pension/YangLaoJGDlg.htm','views/pension/YangLaoJGDlg'],
                 function(win,htmfile,jsfile){
                     win.render({
-                        title:'添加养老机构',
+                        title:'添加入住人员',
                         width:350,
-                        height:300,
+                        height:200,
                         html:htmfile,
-                        /*buttons:[
+                        buttons:[
                             {text:'取消',handler:function(html,parent){
                                 parent.trigger('close');
                             }},
-                            {
-                                text:'保存1',
-                                handler:function(html,parent){
-//                                    local.find(html+'[opt=yljgdlg]')
-                                    console.log(local.find(html+'[opt=yljgdlg]'))
-                                }
-                            }
-                        ],*/
+                            {text:'保存',handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,

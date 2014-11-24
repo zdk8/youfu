@@ -24,20 +24,14 @@ define(function(){
                     win.render({
                         title:'添加养老机构',
                         width:350,
-                        height:300,
+                        height:200,
                         html:htmfile,
-                        /*buttons:[
+                        buttons:[
                             {text:'取消',handler:function(html,parent){
                                 parent.trigger('close');
                             }},
-                            {
-                                text:'保存1',
-                                handler:function(html,parent){
-//                                    local.find(html+'[opt=yljgdlg]')
-                                    console.log(local.find(html+'[opt=yljgdlg]'))
-                                }
-                            }
-                        ],*/
+                            {text:'保存',handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,

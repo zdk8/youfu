@@ -1,22 +1,50 @@
-<!--资金发放-->
-<style>
-    html,body{
-        height: 100%;
-        border: 0;
-        padding: 0;
-    }
-</style>
-<table class="easyui-datagrid"   id="grantmoneyid" opt="grantmoneymnggrid"
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript"  src="http://112.124.50.195:8080/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"  src="http://112.124.50.195:8080/easyui/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" type="text/css"  href="http://112.124.50.195:8080/easyui/themes/default/easyui.css">
+    <style>
+        html,body{
+            height: 100%;
+            border: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="businesstb" style="padding:5px;height:auto;vertical-align: middle;">
+    时间:
+    <a>
+        <input class="easyui-datebox bgdate" style="width:90px">至
+        <input class="easyui-datebox eddate" style="width:90px">
+    </a>
+    <a><input placeholder="身份证或姓名"></a>
+    <a id="refreshid"><span class="icon-search" >&nbsp;&nbsp;&nbsp;&nbsp;</span>刷新</a>
+    <a><span class="icon-search" >&nbsp;&nbsp;&nbsp;&nbsp;</span>搜索</a>
+    <a><span class="icon-search" >&nbsp;&nbsp;&nbsp;&nbsp;</span>高级搜索</a>
+    <a class="newgrant"><span class="icon-add " >&nbsp;&nbsp;&nbsp;&nbsp;</span>新增</a>
+</div>-->
+<table class="easyui-datagrid"   id="grantmoneyid"
        data-options="
                method:'get',
                fit:true,
                border:true,
                singleSelect:true,
-               loadMsg:'',
-               pagination:true">
+               pagination:true
+               "
+        >
     <thead data-options="frozen:true">
     <tr>
+        <!--<th rowspan="2" data-options="field:'ro',width:80,align:'center',
+        formatter:format
+            ">操作</th>-->
         <th rowspan="2" data-options="field:'pg_id'">评估序号</th>
+        <!--<th rowspan="2" data-options="field:'active', formatter:cj.enumFormatter('active') ">有效</th>-->
         <th rowspan="2" data-options="field:'name'">姓名</th>
         <th rowspan="2" data-options="field:'identityid'">身份证号码</th>
         <th rowspan="2" data-options="field:'bsnyue'">业务期</th>
@@ -48,6 +76,46 @@
 </div>
 
 <script>
+    /*function format()
+    {
+        var str='<div></div>';
+        str=$(str).append('<a onclick="editgrant();">变更    </a>');
+        str=$(str).append('<a onclick="logoutgrant();">注销</a>');
+        return str.html();
+    }*/
+    //变更
+    /*function editgrant(){
+        var row = $("#grantmoneyid").datagrid('getSelected');
+        console.log(row.pg_id)
+        *//*if (jq('#tabs').tabs('exists', '变更'))
+            jq('#tabs').tabs('select', '变更');
+        else {
+//                    var content = '<iframe scrolling="auto" frameborder="0"  src="'+"search?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+            jq('#tabs').tabs('add',{
+                title:'变更',
+                content:row,
+//                href:'test',
+                closable:true
+            });
+        }*//*
+    }
+    //注销
+    function logoutgrant(){
+        if (jq('#tabs').tabs('exists', '注销'))
+            jq('#tabs').tabs('select', '注销');
+        else {
+//                    var content = '<iframe scrolling="auto" frameborder="0"  src="'+"search?id=" + id+'" style="width:100%;height:100%;"></iframe>';
+            jq('#tabs').tabs('add',{
+                title:'注销',
+//                        content:content,
+                href:'test',
+                closable:true
+            });
+        }
+    }*/
+
+
+
     var jq = top.jQuery;
     function myformatter(date){
         var y = date.getFullYear();
@@ -231,4 +299,4 @@
         })*/
     }
 </script>
-
+</body>
