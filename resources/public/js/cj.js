@@ -76,7 +76,7 @@ var cj=(function(){
     }
 
     var getLoader = function(type,param,success,error){
-        /*return function(param,success,error){
+        return function(param,success,error){
             param.q="10000";
             $.ajax({
                 url: 'auth/getenumbytype',
@@ -101,7 +101,7 @@ var cj=(function(){
                     error.apply(this, arguments);
                 }
             });
-        }*/
+        }
     }
 
     var getUrl=function(filepath,action,costomPreFixUrl){

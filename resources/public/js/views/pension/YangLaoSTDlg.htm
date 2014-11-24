@@ -1,72 +1,76 @@
 <fieldset style="width: 300px;margin: 0px auto" >
     <div style="width: 300px;position: relative;margin: 0px auto" region="center">
-        <form opt="yljgdlg" method="post">
+        <form opt="ylstdlg" method="post">
             <table class="formtable" style="width:300px">
-            <tr>
-                <td class="formtdtext"  style="width: 70px">机构名称<span style="color: red">*</span></td>
-                <td>
-                    <input opt="identityid" name="identityid" class="easyui-validatebox">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext" style="width: 70px">登记性质<span style="color: red">*</span></td>
-                <td>
-                    <!--<input class="easyui-validatebox" name="name" data-options="required:true">-->
-                    <select class="easyui-combobox" opt="shujuku" style="width:151px;">
-                        <option value="none">事业登记</option>
-                        <option value="正式库">民非登记</option>
-                        <option value="历史库">工商登记</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">联系电话<span style="color: red">*</span></td>
-                <td>
-                    <input opt="identityid" name="identityid" class="easyui-validatebox">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">联系人</td>
-                <td>
-                    <input opt="age" class="easyui-validatebox" name="age">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">联系地址</td>
-                <td>
-                    <input opt="age" class="easyui-validatebox" name="age">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">公交线路</td>
-                <td>
-                    <input opt="birthdate" class="easyui-validatebox" name="birthd">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">地图经纬度</td>
-                <td>
-                    <input opt="birthdate" class="easyui-validatebox" name="birthd">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">核定床位</td>
-                <td>
-                    <input opt="birthdate" class="easyui-validatebox" name="birthd">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">实际床位</td>
-                <td>
-                    <input opt="birthdate" class="easyui-validatebox" name="birthd">
-                </td>
-            </tr>
+                <tr>
+                    <td class="formtdtext"  style="width: 70px">机构名称<span style="color: red">*</span></td>
+                    <td>
+                        <input name="departname" class="easyui-validatebox">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext" style="width: 70px">登记性质<span style="color: red">*</span></td>
+                    <td>
+                        <input class="easyui-combobox lazy-combobox"
+                               name="register"
+                               style="width: 151px"
+                               data-options="
+                                required:true,
+                                loader:cj.getLoader('ylregister'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">联系电话<span style="color: red">*</span></td>
+                    <td>
+                        <input name="telephone" class="easyui-validatebox">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">联系人</td>
+                    <td>
+                        <input class="easyui-validatebox" name="telephone">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">联系地址</td>
+                    <td>
+                        <input class="easyui-validatebox" name="address">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">公交线路</td>
+                    <td>
+                        <input class="easyui-validatebox" name="busline">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">地图经纬度</td>
+                    <td>
+                        <input class="easyui-validatebox" name="coordinates">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">核定床位</td>
+                    <td>
+                        <input class="easyui-validatebox" name="approvedbed">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">实际床位</td>
+                    <td>
+                        <input class="easyui-validatebox" name="actualbed">
+                    </td>
+                </tr>
                 <td class="formtdtext">年末入住数</td>
                 <td>
-                    <input opt="birthdate" class="easyui-validatebox" name="birthd">
+                    <input class="easyui-validatebox" name="livenumber">
                 </td>
-            </tr>
-        </table>
+                </tr>
+            </table>
         </form>
     </div>
     <div class="weboxbuttons" style="height:25px;float: right;padding-top: 2px;" >
