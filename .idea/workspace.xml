@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/templates/addold.html" afterPath="$PROJECT_DIR$/resources/templates/addold.html" />
-    </list>
-    <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/newpension/common/common.clj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/newpension/controller/department.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/models/db.clj" afterPath="$PROJECT_DIR$/src/newpension/models/db.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/routes/home.clj" afterPath="$PROJECT_DIR$/src/newpension/routes/home.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
+    <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
     <ignored path="newpension.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409044057413" ignored="false" />
+    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416791524978" ignored="false" />
     <file path="F:/Users/asus/IdeaProjects/newpension/.idea/workspace.xml" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408083941251" ignored="false" />
     <file path="/schema.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408090429023" ignored="false" />
-    <file path="/db.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409041851082" ignored="false" />
+    <file path="/db.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416817896044" ignored="false" />
     <file path="F:/Users/asus/IdeaProjects/hello/res/values/strings.xml" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408093640707" ignored="false" />
     <file path="F:/Users/asus/IdeaProjects/hello/AndroidManifest.xml" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408093640707" ignored="false" />
     <file path="F:/Users/asus/IdeaProjects/hello/res/layout/main.xml" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408094743097" ignored="false" />
@@ -20,9 +23,9 @@
     <file path="F:/Users/asus/IdeaProjects/hello/src/com/example/hello/MyActivity.java" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408093642231" ignored="false" />
     <file path="F:/Users/asus/IdeaProjects/hello/gen/com/example/hello/BuildConfig.java" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408093721265" ignored="false" />
     <file path="$PROJECT_DIR$/../pension/src/pension/handler.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408095265115" ignored="false" />
-    <file path="/home.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409039006222" ignored="false" />
+    <file path="/home.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416815467312" ignored="false" />
     <file path="/old.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409037756867" ignored="false" />
-    <file path="/Clojure REPL" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409041496037" ignored="false" />
+    <file path="/Clojure REPL" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416294184766" ignored="false" />
     <file path="/audit.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408414989812" ignored="false" />
     <file path="/old.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408418721232" ignored="false" />
     <file path="/log.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408498163544" ignored="false" />
@@ -34,10 +37,11 @@
     <file path="/base.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409024429228" ignored="false" />
     <file path="/need.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409042244064" ignored="false" />
     <file path="/t1.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408952494029" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408960789986" ignored="false" />
     <file path="/money.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1408958404517" ignored="false" />
     <file path="/need.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409042566577" ignored="false" />
     <file path="/addneed.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1409042396983" ignored="false" />
+    <file path="/department.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416817777888" ignored="false" />
+    <file path="/common.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416816868146" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,104 +107,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="home.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+      <file leaf-file-name="common.clj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/common/common.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="16" selection-start="1232" selection-end="1232" vertical-scroll-proportion="0.0">
+            <state line="31" column="101" selection-start="1333" selection-end="1333" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/templates/base.html">
+      <file leaf-file-name="department.clj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="45" selection-start="1231" selection-end="1231" vertical-scroll-proportion="-0.6785714">
+            <state line="4" column="39" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addneed.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/templates/addneed.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="732" column="93" selection-start="39531" selection-end="39531" vertical-scroll-proportion="-5.018868">
-              <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="tag#fieldset#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-                <element signature="n#style#0;n#span#0;n#li#0;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#1;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#2;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#3;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#4;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#5;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#6;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#7;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#8;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#9;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#10;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#11;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#12;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#13;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#15;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#16;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#17;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#18;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#19;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#20;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#21;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#22;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#23;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#25;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#26;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#27;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addold.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/templates/addold.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="117" selection-start="4613" selection-end="4613" vertical-scroll-proportion="0.44785276">
-              <folding>
-                <element signature="n#style#0;n#fieldset#0;n#form#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="old.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="41" selection-start="7555" selection-end="7555" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="need.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/newpension/controller/need.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="3" selection-start="507" selection-end="507" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db.clj" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="db.clj" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="302" column="17" selection-start="8688" selection-end="8688" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="need.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/templates/need.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="90" selection-start="1266" selection-end="1266" vertical-scroll-proportion="-10.857142">
+            <state line="99" column="169" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.75">
               <folding />
             </state>
           </provider>
@@ -225,8 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/newpension/models/schema.clj" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/resources/public/test/t1.html" />
         <option value="$PROJECT_DIR$/src/newpension/controller/money.clj" />
         <option value="$PROJECT_DIR$/resources/templates/audit.html" />
@@ -234,21 +160,23 @@
         <option value="$PROJECT_DIR$/resources/templates/old.html" />
         <option value="$PROJECT_DIR$/resources/templates/base.html" />
         <option value="$PROJECT_DIR$/resources/public/css/index.css" />
-        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/models/db.clj" />
         <option value="$PROJECT_DIR$/resources/templates/need.html" />
         <option value="$PROJECT_DIR$/resources/templates/addneed.html" />
-        <option value="$PROJECT_DIR$/src/newpension/controller/need.clj" />
         <option value="$PROJECT_DIR$/src/newpension/controller/old.clj" />
         <option value="$PROJECT_DIR$/resources/templates/addold.html" />
+        <option value="$PROJECT_DIR$/src/newpension/controller/need.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/common/common.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/controller/department.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/models/db.clj" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1296" />
+    <option name="height" value="776" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -279,6 +207,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -333,51 +262,29 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newpension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newpension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newpension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -415,20 +322,22 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Project" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="135" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="153" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="155" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../jcfx/jcfxserver" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="165" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="830" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="837" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="830" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="159" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="146" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -439,24 +348,25 @@
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="settings.github" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Clojure" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\hvit\newpension\newpension\src\newpension\common" />
+      <recent name="D:\hvit\newpension\newpension\src\newpension\controller" />
       <recent name="F:\clojure\newpension\resources\public\js" />
       <recent name="F:\clojure\newpension\resources\templates" />
       <recent name="F:\clojure\newpension\resources\public\img" />
-      <recent name="F:\clojure\newpension\resources\public" />
-      <recent name="F:\clojure\newpension\resources\public\css" />
     </key>
   </component>
   <component name="RunManager">
@@ -714,7 +624,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4787053" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -728,19 +638,24 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24020442" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32879046" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15757576" sideWeight="0.6712095" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33560476" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15746753" sideWeight="0.6515397" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3484603" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -817,32 +732,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/money.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="35" selection-start="55" selection-end="55" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/log.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="107" selection-start="612" selection-end="612" vertical-scroll-proportion="0.32142857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/old.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="9" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.71428573">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/templates/audit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="107" selection-start="612" selection-end="612" vertical-scroll-proportion="-0.21428572">
@@ -859,105 +748,184 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="45" selection-start="1231" selection-end="1231" vertical-scroll-proportion="-0.6785714">
+        <state line="22" column="45" selection-start="1230" selection-end="1230" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/resources/html5-schema/web-forms.rnc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="521" column="23" selection-start="11343" selection-end="11343" vertical-scroll-proportion="0.33214286">
-          <folding />
-        </state>
+        <state line="521" column="23" selection-start="11343" selection-end="11343" vertical-scroll-proportion="0.33214286" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/templates/addneed.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="732" column="93" selection-start="39531" selection-end="39531" vertical-scroll-proportion="-5.018868">
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="tag#fieldset#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#li#0;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#1;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#2;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#3;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#4;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#5;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#6;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#7;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#8;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#9;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#10;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#11;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#12;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#13;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#15;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#16;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#17;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#18;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#19;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#20;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#21;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#22;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#23;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#25;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#26;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#27;n#ol#0;n#td#3;n#tr#1;n#table#0;n#fieldset#8;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state line="732" column="93" selection-start="35843" selection-end="35843" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="23" selection-start="560" selection-end="560" vertical-scroll-proportion="0.61071426">
-          <folding />
-        </state>
+        <state line="31" column="23" selection-start="560" selection-end="560" vertical-scroll-proportion="0.61071426" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/templates/need.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="90" selection-start="1266" selection-end="1266" vertical-scroll-proportion="-10.857142">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="17" selection-start="8688" selection-end="8688" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/need.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="3" selection-start="507" selection-end="507" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="41" selection-start="7555" selection-end="7555" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="16" selection-start="1232" selection-end="1232" vertical-scroll-proportion="0.0">
+        <state line="27" column="90" selection-start="1514" selection-end="1514" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/templates/addold.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="117" selection-start="4613" selection-end="4613" vertical-scroll-proportion="0.44785276">
-          <folding>
-            <element signature="n#style#0;n#fieldset#0;n#form#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state line="123" column="117" selection-start="4613" selection-end="4613" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/money.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="56" selection-start="1352" selection-end="1352" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/models/schema.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="105" selection-start="369" selection-end="369" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="229" column="0" selection-start="10610" selection-end="10610" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/need.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="93" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="61" selection-start="4662" selection-end="4662" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/common/common.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="101" selection-start="1333" selection-end="1333" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="39" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="169" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.75">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>newpension</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7 (1)</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 
