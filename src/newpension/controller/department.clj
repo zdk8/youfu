@@ -12,7 +12,7 @@
 (defn add-department [request]
   (let [{params :params}request
         filter-fields (select-keys params depart)]
-    (db/add-depart (common/time-before-insert   filter-fields "runtime"))
+    (db/add-depart (common/timefmt-bef-insert   filter-fields "runtime"))
     (resp/json {:success true :message "add success"})))
 
 (defn getall-department [request]
