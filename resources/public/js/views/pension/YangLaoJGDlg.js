@@ -28,6 +28,7 @@ define(function(){
                         if(data.success){
                             alert("添加成功！");
                             params.option.parent.trigger('close');
+                            params.option.refresh.trigger('click'); //刷新
                         }else{
                             alert("添加失败！")
                         }
@@ -35,9 +36,17 @@ define(function(){
                 });
             }else if(params.actiontype == "update"){     //修改
                 params.yljgdlg.form('submit',{
-                    url:'aaaa',
+                    url:'pension/updatedepartmentbyid',
+                    dataType:"json",
                     success:function(data){
-                        console.log(data)
+                        var data = eval('(' + data + ')');
+                        if(data.success){
+                            alert("修改成功！");
+                            params.option.parent.trigger('close');
+                            params.option.refresh.trigger('click'); //刷新
+                        }else{
+                            alert("修改失败！")
+                        }
                     }
                 });
             }
