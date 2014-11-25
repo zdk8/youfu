@@ -510,12 +510,12 @@
 
 
 ;###########################
-(defentity t_mpensionagence
+(defentity t_pensiondepartment
 ;  (pk :userid)
-  (table :t_mpensionagence)
+  (table :t_pensiondepartment)
   (database dboracle))
 (defn get-yljg []
-  (select t_mpensionagence))
+  (select t_pensiondepartment))
 
 
 (defn add-depart [filter-fields]
