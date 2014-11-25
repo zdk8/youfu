@@ -6,7 +6,7 @@ define(function(){
         yljjgl.datagrid({
             url:'pension/getalldepartment',
             queryParams:{
-                type:'jujia'
+                deptype:'jujia'
             },
             type:'post',
             onLoadSuccess:function(data){

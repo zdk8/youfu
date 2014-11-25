@@ -6,7 +6,7 @@ define(function(){
         yljggl.datagrid({
             url:'pension/getalldepartment',
             queryParams:{
-                type:'jigou'
+                deptype:'jigou'
             },
             type:'post',
             onLoadSuccess:function(data){

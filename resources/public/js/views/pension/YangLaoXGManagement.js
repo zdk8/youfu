@@ -6,7 +6,7 @@ define(function(){
         ylxggl.datagrid({
             url:'pension/getalldepartment',
             queryParams:{
-                type:'xingguang'
+                deptype:'xingguang'
             },
             type:'post',
             onLoadSuccess:function(data){
