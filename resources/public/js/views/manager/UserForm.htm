@@ -1,0 +1,48 @@
+<div class="d-content" style="max-height: 579px; overflow: auto; height: auto;">
+    <div class="dialog_content">
+        <form method="post">
+            <input type="hidden" name="userid">
+            <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+                <tbody>
+                <tr>
+                    <th width="80">用户名称 :</th>
+                    <td><input type="text" name="username" id="name" class="input-text" >
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>登录名 :</th>
+                    <td><input type="text" name="loginname" class="input-text"></td>
+                </tr>
+                <tr>
+                    <th>密码 :</th>
+                    <td><input type="password" name="passwd" class="input-text"></td>
+                </tr>
+                <tr>
+                    <th>是否有效 :</th>
+                    <td>
+                        <select name="useful">
+                            <option value="0">无效</option>
+                            <option value="1" selected="selected">有效</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>区域代码 :</th>
+                    <td><input type="text" name="regionid" class="input-text" >
+                        <div opt="tip" name="totalname" style="display: inline"> 请先选择地区再添加用户</div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th>描述 :</th>
+                    <td><input type="text" name="description" class="input-text" size="50"></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

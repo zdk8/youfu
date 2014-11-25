@@ -89,14 +89,40 @@ define(function(){
             $functiontree=$('#functiontree').tree({
                 checkbox:true,
                 url:'menutree',
+                animate:true,
+                dnd:true,
                 onClick:function(node){
                     funObj=node;
-                    myNode=node;
                     if(node.leaf){
                         //设置按钮
                         //local.find('li').has(":contains('添加新节点')").disable()
                     }
                     local.find('form').form('load','getFunctionById?node='+node.functionid);
+                },onDragEnter:function(target, source) {
+                    var $targetNode = $functiontree.tree('getNode', target);
+                    return $targetNode.nodetype=="1";
+                },onStopDrag:function(node) {
+                    var $p = $functiontree.tree('getParent', node.target);
+                    if($p) {
+                        $.post("saveFunction",
+                            {functionid:node.functionid,parent:$p.functionid},
+                            function(result){
+                                /*local.find('a[opt=log]').html('操作成功').show(100,function(){
+                                    $(this).hide(5000);
+                                });*/
+                        });
+                    }else{
+                        console.log(node.title + "没有父结点");
+                        $.post("saveFunction",
+                            {functionid:node.functionid,parent:$functiontree.tree('getRoot').parent},
+                            function(result){
+                                /*local.find('a[opt=log]').html('操作成功').show(100,function(){
+                                    $(this).hide(5000);
+                                });*/
+                            });
+                    }
+
+
                 }
             });
 
