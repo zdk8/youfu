@@ -60,7 +60,7 @@
   (let[{params :params}request
        {identityid :identityid}params
        opdate (get-oldpeople identityid)]
-    (if (> (count opdate) 0)  (resp/json {:opdate opdate :message "数据存在"})  (resp/json {:message "数据不存在"}))
+    (if (> (count opdate) 0)  (resp/json {:opdate opdate :message true})  (resp/json {:message false}))
     ))
 
 (defn add-oldpeople-depart [request]
