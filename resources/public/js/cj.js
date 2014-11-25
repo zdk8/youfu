@@ -79,7 +79,7 @@ var cj=(function(){
         return function(param,success,error){
             param.q="10000";
             $.ajax({
-                url: 'auth/getenumbytype',
+                url: 'getenumbytype',
                 dataType: 'jsonp',
                 data: {
                     type:type
