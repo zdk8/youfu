@@ -28,6 +28,7 @@ define(function(){
                         if(data.success){
                             alert("添加成功！");
                             params.option.parent.trigger('close');
+                            params.option.refresh.trigger('click'); //刷新
                         }else{
                             alert("添加失败！")
                         }

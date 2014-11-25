@@ -29,7 +29,7 @@
       totalsql  (str "select count(*) as sum  from t_pensiondepartment where TYPE = '" type"'")
       total (get (first(db/get-total totalsql)) :sum)
        ]
-    (resp/json {total :total :rows results})))
+    (resp/json {:total total :rows results})))
 
 (defn get-departbyid [request]
   (let[{params :params}request
