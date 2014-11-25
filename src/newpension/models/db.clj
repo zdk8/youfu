@@ -523,6 +523,10 @@
   (insert t_pensiondepartment
     (values filter-fields)))
 
+(defn get-departbyid [id]
+  (select t_pensiondepartment
+    (where {:id id})))
+
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM
 (SELECT A.*, ROWNUM RN FROM

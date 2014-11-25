@@ -24,9 +24,14 @@
        p  (read-string page)
        start  (inc(* r (dec p)))
        end (* r p)
-      sql (str "select * from t_pensiondepartment WHERE TYPE = " type "")
+      sql (str "select * from t_pensiondepartment WHERE TYPE = '" type "'")
        results (db/getall-results start end sql)
-      totalsql  (str "select count(*) as sum  from t_pensiondepartment where TYPE = " type)
+      totalsql  (str "select count(*) as sum  from t_pensiondepartment where TYPE = '" type"'")
       total (get (first(db/get-total totalsql)) :sum)
        ]
     (resp/json {total :total :rows results})))
+
+(defn get-departbyid [request]
+  (let[{params :params}request
+       {id :id}params]
+    (resp/json (db/get-departbyid id))))

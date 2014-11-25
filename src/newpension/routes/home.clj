@@ -93,6 +93,7 @@
   ;;###############养老服务资源###################
   (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
   (POST "/pension/getalldepartment" request (depart/getall-department request))       ;;查询全部
+  (POST "/pension/getdepartmentbyid" request (depart/get-departbyid request))          ;;根据id查找机构数据
 
 
 
