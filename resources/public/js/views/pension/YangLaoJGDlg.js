@@ -6,9 +6,9 @@ define(function(){
 
         if(actiontype == "update"){                     //编辑
             yljgdlg.form('load', option.data);
-            determinefunc({determine:determine,yljgdlg:yljgdlg,actiontype:actiontype})
+            determinefunc({determine:determine,yljgdlg:yljgdlg,actiontype:actiontype,option:option})
         }else if(actiontype == "add"){                  //新增
-            console.log("add")
+            determinefunc({determine:determine,yljgdlg:yljgdlg,actiontype:actiontype,option:option})
         }
 
         /*取消*/
@@ -21,9 +21,16 @@ define(function(){
         params.determine.click(function(){
             if(params.actiontype == "add"){         //新增
                 params.yljgdlg.form('submit',{
-                    url:'aaaa',
+                    url:'pension/adddepartment',
+                    dataType:"json",
                     success:function(data){
-                        console.log(data)
+                        var data = eval('(' + data + ')');
+                        if(data.success){
+                            alert("添加成功！");
+                            params.option.parent.trigger('close');
+                        }else{
+                            alert("添加失败！")
+                        }
                     }
                 });
             }else if(params.actiontype == "update"){     //修改
@@ -40,6 +47,5 @@ define(function(){
     return {
         render:render
     }
-
 
 })

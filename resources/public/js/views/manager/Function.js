@@ -4,7 +4,21 @@
 
 
 define(function(){
-    var funObj;
+    var funObj,$functiontree,lastClickNode;
+
+
+    var refresh=function(){
+
+
+        if($functiontree.tree('getParent',funObj.target)){
+            var parentTarget=$functiontree.tree('getParent',funObj.target).target;
+            $functiontree.tree('expand', parentTarget);
+            $functiontree.tree('reload', parentTarget);
+        }else{
+            $functiontree.tree('expand', funObj.target);
+        }
+    }
+
     var buttons=[{
         text:'保存',
         iconCls:'icon-save',
@@ -20,7 +34,7 @@ define(function(){
                     return isValid;	// return false will stop the form submission
                 },
                 success: function(res){
-                    $.messager.progress('close');	// hide progress bar while submit successfully
+                    refresh();
                 }
             });
         }
@@ -33,7 +47,7 @@ define(function(){
                     type: "POST",
                     data: { functionid : funObj.functionid },
                     url:'delFunctionById',
-                    success:function(){$.messager.alert('提示','操作成功!','info');}
+                    success:function(){refresh();}
                 }
             )
         }
@@ -72,11 +86,12 @@ define(function(){
                     }
                 })(i));
             }
-            $('#functiontree').tree({
+            $functiontree=$('#functiontree').tree({
                 checkbox:true,
                 url:'menutree',
                 onClick:function(node){
                     funObj=node;
+                    myNode=node;
                     if(node.leaf){
                         //设置按钮
                         //local.find('li').has(":contains('添加新节点')").disable()
@@ -85,6 +100,16 @@ define(function(){
                 }
             });
 
+
+            local.find('a[opt=expandAll]').bind('click',function(){
+                $functiontree.tree('expandAll');
+            })
+            local.find('a[opt=collapseAll]').bind('click',function(){
+                $functiontree.tree('collapseAll');
+            })
+            local.find('a[opt=refresh]').bind('click',function(){
+                alert('noaction');
+            })
 
         }
     }

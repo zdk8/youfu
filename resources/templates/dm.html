@@ -89,4 +89,12 @@
             }
         })
     })
+    $(document).keyup(function(event){//弹出层注册ESC按键事件
+        switch(event.keyCode) {
+            case 27:
+                $('.webox').parent('div[id]').last().trigger('close');
+
+        }
+    });
+
 </script>

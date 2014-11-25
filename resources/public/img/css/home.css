@@ -1,6 +1,7 @@
 @import url("icon.css");
 @import url("easyuioverwrite.css");
 @import url("formtable02.css");
+@import url("dialog01.css");
 html, body {
     font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
     color: black;
@@ -48,32 +49,11 @@ body {
     margin-bottom: 0px;
     text-align: center;
 }
-#login_area{
-   margin-top: 18px;
-   height: 25px;
-   line-height: 25px;
-   padding-left: 30px;
-   padding-right: 50px;
-}
-#login_area a{
-    color: #000000;
-    margin: 0 4px 0 4px;
-}
-#footer {
-    background-image: url(../pension01/footer_bg.png);
-    background-repeat: repeat-x;
-    line-height: 33px;
-}
 
-#footer div{
-    margin: 0 auto;
-    width: 480px;
-}
-#footer  a{
-    color: #FFFFFF;
-    margin: 0px;
-    padding-right: 10px; /* 设置块的属性 */
-    padding-left: 10px;
+
+
+.clear{
+    clear: both;
 }
 
 .separate{
@@ -533,7 +513,6 @@ input:disabled{
     border: solid 1px chartreuse;
     background: rgba(10, 10, 10, 0.5);
 }
-/* 所有class为menu的div中的ul样式 */
 div.weboxbuttons ul
 {
     margin: 0;
@@ -648,20 +627,10 @@ div.weboxbuttons ul li a:active
     text-align: left;
 }
 
-/*按钮样式*/
-.buttoncss {
-    border: 1px solid rgba(128, 176, 79, 0.12);
-    display: inline-block;
-    text-align: center;
-    outline: none;
-    cursor: pointer;
-    /*width:90px;*/
-    height: 25px;
-    font-weight: bold;
-    background:url(../../img/btnimg.jpg);
-}
-.buttoncss:active {
-    position: relative;
-    top: 1px;
+/*打开文件按钮样式*/
+#openfile_id{
+    position:absolute; z-index:12;width: 20px;
+    filter:alpha(opacity:0);
+    opacity:0;
 }
 

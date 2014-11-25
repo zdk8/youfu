@@ -1,0 +1,112 @@
+<div class="easyui-layout"  data-options="fit:true">
+    <div opt="combodt" data-options="region:'center'">
+
+        <table class="easyui-datagrid-noauto"
+               data-options="
+               method:'post',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+              pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true">
+            <thead>
+            <tr>
+                <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
+                str=$(str).append('<a action=&quot;logout&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-logout-pl16&quot;>注销</span></span></a>');
+                return str.html();
+            }">操作</th>
+                <th data-options="field:'aaa100',width:100,align:'center'">代码类别</th>
+                <th data-options="field:'aaa102',width:100,align:'center'">代码值</th>
+                <th data-options="field:'aaa103',width:100,align:'center'">代码名称</th>
+            </tr>
+            </thead>
+        </table>
+
+        <div tb>
+            <span opt="text"></span>
+            <span opt="value"></span>
+            <table cellspacing="0" cellpadding="0" style="float: right">
+                <tr>
+
+                    <td><label class="gray7">搜索条件:</label></td>
+
+                    <td style="width: 210px;text-align: right">
+                        <input class="easyui-searchbox" data-options="prompt:'名称',iconCls:'icon-log'"
+                               type="keyword" style="width:200px" >
+                    </td>
+
+                    <td>
+                        <span class="searchbtn" >&nbsp;</span>
+                    </td>
+
+                    <td>
+                        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" action="add">添加</a>
+                    </td>
+                </tr>
+            </table>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+    <div opt="combo" data-options="region:'west',lines:true" style="width:500px;">
+        <table class="easyui-datagrid-noauto"
+               data-options="
+               method:'post',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+              pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true">
+            <thead>
+            <tr>
+                <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
+                return str.html();
+            }">操作</th>
+                <th data-options="field:'aaa100',width:100,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;codetype&quot;>'+value+'</a>');
+                return str.html();
+            }">代码类别</th>
+                <th data-options="field:'aaa101',width:100,align:'center'">类别名称</th>
+                <th data-options="field:'aaa104',width:100,align:'center'">可维护标志</th>
+            </tr>
+            </thead>
+        </table>
+
+        <div tb>
+            <table cellspacing="0" cellpadding="0" style="float: right">
+                <tr>
+
+                    <td><label class="gray7">搜索条件:</label></td>
+
+                    <td style="width: 210px;text-align: right">
+                        <input class="easyui-searchbox" data-options="prompt:'类别名称',iconCls:'icon-log'"
+                               type="keyword" style="width:200px" >
+                    </td>
+
+                    <td>
+                        <span class="searchbtn" >&nbsp;</span>
+                    </td>
+
+                    <td>
+                        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" action="add">添加</a>
+                    </td>
+                </tr>
+            </table>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>

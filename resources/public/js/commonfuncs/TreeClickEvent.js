@@ -41,20 +41,20 @@ define(function(){
                     }
                 }
 
-                    localtab.find('div[opt=pensionbutton]').append(
-                        '<a opt="close" class="easyui-linkbutton" data-options="iconCls:\'icon-remove\'">close</a>');
+                localtab.find('div[opt=pensionbutton]').append(
+                    '<a opt="close" class="easyui-linkbutton" data-options="iconCls:\'icon-remove\'">close</a>');
 
-                    $.parser.parse(localtab.find('div[opt=pensionbutton]').parent())
-                    var closeCurrent=function(){
-                        mainTab.tabs('close',option.title)
-                    }
-                    localtab.find('div[opt=pensionbutton] a[opt=close]').bind('click',closeCurrent);
-                    localtab.bind('close',closeCurrent);
+                $.parser.parse(localtab.find('div[opt=pensionbutton]').parent())
+                var closeCurrent=function(){
+                    mainTab.tabs('close',option.title)
+                }
+                localtab.find('div[opt=pensionbutton] a[opt=close]').bind('click',closeCurrent);
+                localtab.bind('close',closeCurrent);
 
-                    require(['commonfuncs/genFieldTemplate'],function(js){
-                        js.render(localtab);
+                require(['commonfuncs/genFieldTemplate'],function(js){
+                    js.render(localtab);
 
-                    })
+                })
 
 
             })
@@ -67,7 +67,7 @@ define(function(){
                 }
                 mainTab.tabs('add', {
                     title: title,
-                    content: '<iframe src="' + value + '" width="100%" height="99%" frameborder="0"></iframe>',
+                    content: '<iframe src="' + value + '" width="100%" height="100%" frameborder="0"></iframe>',
                     closable: true
                 });
             };

@@ -90,18 +90,13 @@
   (POST "/sel-grantmoneyid" [] (money/sel-grantmoneyid )) ;;查询资金发放表主键
   (POST "/get-needsid" [] (money/get-needsid )) ;;取出需求评估信息表主键
   (POST "/del-grantmoney" [bsnyue] (money/del-grantmoney bsnyue))  ;;资金发放记录删除
-
+  ;;###############养老服务资源###################
   (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
   (POST "/pension/getalldepartment" request (depart/getall-department request))       ;;查询全部
 
 
 
-  (GET "/menutree" req (gen/get-user-menutree req))
-  (POST "/menutree" req (gen/get-user-menutree req))
-  (GET "/getFunctionById" [node] (gen/get-function-by-id node))
-  (POST "/saveFunction" req (gen/create-function req))
-  (GET "/auth/getenumbytype" [type  callback]
-    (gen/getenumbytype type  callback))
+
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
