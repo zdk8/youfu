@@ -20,13 +20,12 @@ define(function(){
                         (function(index){
                             var record=rows[index];
                             $(btns_arr[j][i]).click(function(){
-                                /*修改*/
-                                if($(this).attr("action") == "update"){
+                                var action = $(this).attr("action");
+                                if(action == "update"){                     //修改
 //                                    console.log(record.departname)
-                                    console.log(record)
                                     var data = record;
                                     var departname = record.departname;         //机构名称
-                                    updateylxgFun(local,departname,data)                //修改养老机构
+                                    updateylxgFun(local,departname,data,refresh)                //修改养老机构
                                     /*cj.showContent({
                                      title:record.biaozhunmingcheng+'修改',
                                      htmfile:'text!views/dmxt/PlaceCommon.htm',
@@ -39,24 +38,23 @@ define(function(){
                                      headname:record.leibiemingcheng*//*
                                      }
                                      })*/
-                                }
-                                /*删除*/
-                                if($(this).attr("action") == "delete"){
-//                                        console.log(record.id)
-                                    /*$.post(
-                                     '',
-                                     {
-                                     id:record.id,
-                                     tablename:wholename
-                                     },
-                                     function(data){
-                                     var data = eval('(' + data + ')');
-                                     if(data.success){
-                                     alert("删除成功")
-                                     //                                                loaddate();
-                                     }
-                                     }
-                                     )*/
+                                }else if(action == "delete"){                       //删除
+                                    $.ajax({
+                                        url:'pension/deletedepartmentbyid',
+                                        type:'post',
+                                        data:{
+                                            id:record.id
+                                        },
+                                        success:function(data){
+                                            var data = eval('(' + data + ')');
+                                            console.log(data)
+                                            if(data.success){
+                                                alert("删除成功")
+                                            }
+                                        },
+                                        dataType:'json'
+                                    })
+                                    refresh.trigger('click')
                                 }
                             });
                         })(i)
@@ -112,7 +110,7 @@ define(function(){
         })
     }
     /*修改养老机构*/
-    var updateylxgFun = function(local,departname,data){
+    var updateylxgFun = function(local,departname,data,refresh){
         require(['commonfuncs/popwin/win','text!views/pension/YangLaoXGDlg.htm','views/pension/YangLaoXGDlg'],
             function(win,htmfile,jsfile){
                 win.render({
@@ -125,6 +123,7 @@ define(function(){
                             submitbtn:submitbtn,
                             act:'c',
                             parent:parent,
+                            refresh:refresh,         //刷新按钮
                             actiontype:'update',       //操作方式
                             data:data,                   //填充数据
                             onCreateSuccess:function(data){
