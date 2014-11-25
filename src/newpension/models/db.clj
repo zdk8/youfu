@@ -527,6 +527,15 @@
   (select t_pensiondepartment
     (where {:id id})))
 
+(defn update-departbyid [filter-fields id]
+  (update t_pensiondepartment
+    (set-fields filter-fields)
+    (where {:id id})))
+
+(defn delete-departbyid [id]
+  (delete t_pensiondepartment
+    (where {:id id})))
+
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM
 (SELECT A.*, ROWNUM RN FROM

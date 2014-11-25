@@ -94,6 +94,8 @@
   (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
   (POST "/pension/getalldepartment" request (depart/getall-department request))       ;;查询全部
   (POST "/pension/getdepartmentbyid" request (depart/get-departbyid request))          ;;根据id查找机构数据
+  (POST "/pension/updatedepartmentbyid" request (depart/update-departbyid request))     ;;更新机构
+  (POST "/pension/deletedepartmentbyid" request (depart/delete-departbyid request))          ;;删除机构
 
 
 

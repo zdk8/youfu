@@ -35,3 +35,16 @@
   (let[{params :params}request
        {id :id}params]
     (resp/json (db/get-departbyid id))))
+
+(defn update-departbyid [request]
+  (let[{params :params}request
+       filter-fields (select-keys params depart)
+       {id :id}params]
+    (db/update-departbyid filter-fields id)
+    (resp/json {:success true :message "update success"})))
+
+(defn delete-departbyid [request]
+  (let[{params :params}request
+       {id :id}params]
+    (db/delete-departbyid id)
+    (resp/json {:success true :message "update success"})))
