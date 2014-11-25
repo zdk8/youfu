@@ -48,3 +48,6 @@
   (let [df   (new SimpleDateFormat "yyyy-MM-dd HH:mm:ss")
         timekey (keyword timefield)]
     (if orderdata (conj orderdata {timekey (.format df (timekey  orderdata))}){})))
+
+(defn get-nowtime []                          "获取当前系统时间"
+  (new Timestamp (System/currentTimeMillis)))

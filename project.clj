@@ -12,7 +12,8 @@
                  [im.chit/cronj "1.0.1"]
                  [noir-exception "0.2.2"]
                  [com.oracle/ojdbc6 "11.2.0.3"]
-                 [korma "0.3.1"]]
+                 [korma "0.3.1"]
+                 [hvitmiddleware "0.1.6"]]
 
   :repl-options {:init-ns newpension.repl}
   :jvm-opts ["-Dfile.encoding=utf8"]

@@ -92,6 +92,12 @@
   (POST "/del-grantmoney" [bsnyue] (money/del-grantmoney bsnyue))  ;;资金发放记录删除
   ;;###############养老服务资源###################
   (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
+  (POST "/pension/getalldepartment" request (depart/getall-department request))       ;;查询全部
+  (POST "/pension/getdepartmentbyid" request (depart/get-departbyid request))          ;;根据id查找机构数据
+  (POST "/pension/updatedepartmentbyid" request (depart/update-departbyid request))     ;;更新机构
+  (POST "/pension/deletedepartmentbyid" request (depart/delete-departbyid request))          ;;删除机构
+  (POST "/pension/checkidentityid" request (depart/checkidentityid request))
+  (POST "/pension/addoldpeopledepart" request (depart/add-oldpeople-depart request))
 
 
 

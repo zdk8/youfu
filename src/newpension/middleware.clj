@@ -2,6 +2,7 @@
   (:require [taoensso.timbre :as timbre]
             [selmer.parser :as parser]
             [environ.core :refer [env]]
+            [hvitmiddleware.core :as hvitmd]
             [selmer.middleware :refer [wrap-error-page]]
             [noir-exception.core
               :refer [wrap-internal-error wrap-exceptions]]))
