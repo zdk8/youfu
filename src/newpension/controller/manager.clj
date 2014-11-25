@@ -19,10 +19,47 @@
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )
   )
+(defn get-grant-menutree [req]
+  (let [{params :params}req
+        node (get params :node)
+        roleid (get params :roleid)
+        id (get params :id)
+        ni (if node node id)
+        results (if ni (basemd/grantmenutree roleid ni) (basemd/grantmenutree roleid "businessmenu"))]
+    (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
+    )
+  )
+(defn save-grant [req]
+  (let [{params :params}req
+        node (get params :node)
+        roleid (get params :roleid)
+        ids (get params :functionids)]
+    (basemd/save-grant roleid ids)
+    (resp/json {:success true})
+    )
+  )
+
+
+(defn get-divisiontree [req]
+  (let [{params :params}req
+        node (get params :node)
+        id (get params :id)
+        ni (if node node id)
+        results (if ni (basemd/divisiontree ni) (basemd/divisiontree "330000"))]
+    (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
+    )
+  )
 
 
 (defn get-function-by-id [id]
   (let [results (first (basemd/get-function-by-id id))]
+    (resp/json results)))
+
+(defn get-user-by-regionid [id]
+  (let [results (basemd/get-user-by-regionid id)]
+    (resp/json results)))
+(defn get-user-by-id [id]
+  (let [results (first (basemd/get-user-by-id id))]
     (resp/json results)))
 
 (defn del-function-by-id [id]
@@ -86,3 +123,36 @@
     )
 
   )
+(defn create-user [req]
+  (let [{params :params} req
+        {flag :flag} params
+        {userid :userid} params
+        params2 (dissoc params :flag)
+        results (if (= flag "-1") (basemd/create-user params2) (basemd/update-user params userid))
+        ]
+    (resp/json {:success true})))
+(defn del-user-by-id [id]
+  (basemd/delete-user id)
+  (resp/json {:success true})
+  )
+
+
+;;角色
+(defn get-role [id]
+  (let [results (basemd/get-role id)]
+    (resp/json results)))
+(defn create-role [req]
+  (let [{params :params} req
+        {flag :flag} params
+        {roleid :roleid} params
+        params2 (dissoc params :flag)
+        results (if (= flag "-1") (basemd/create-role params2) (basemd/update-role params roleid))
+        ]
+    (resp/json {:success true})))
+(defn del-role-by-id [id]
+  (basemd/delete-role id)
+  (resp/json {:success true})
+  )
+(defn get-role-by-id [id]
+  (let [results (first (basemd/get-role-by-id id))]
+    (resp/json results)))
