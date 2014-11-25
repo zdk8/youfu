@@ -27,5 +27,22 @@
   (POST "/delFunctionById" [functionid] (myctrl/del-function-by-id functionid))
   (POST "/saveFunction" req (myctrl/create-function req))
 
+  ;;用户维护
+  (GET "/getdivisiontree" req (myctrl/get-divisiontree req))
+  (POST "/getdivisiontree" req (myctrl/get-divisiontree req))
+  (POST "/getuserbyregionid" [node] (myctrl/get-user-by-regionid node))
+  (GET "/getuserbyid" [id] (myctrl/get-user-by-id id))
+  (POST "/getuserbyid" [id] (myctrl/get-user-by-id id))
+  (POST "/deluserbyid" [id] (myctrl/del-user-by-id id))
+  (POST "/saveuser" req (myctrl/create-user req))
 
+  ;;角色维护
+  (POST "/getrole" [node] (myctrl/get-role node))
+  (POST "/saverole" req (myctrl/create-role req))
+  (POST "/getrolebyid" [id] (myctrl/get-role-by-id id))
+  (POST "/delrolebyid" [id] (myctrl/del-role-by-id id))
+  (GET "/grantmenutree" req (myctrl/get-grant-menutree req))
+  (POST "/grantmenutree" req (myctrl/get-grant-menutree req))
+  (GET "/savegrant" req (myctrl/save-grant req))
+  (POST "/savegrant" req (myctrl/save-grant req))
   )
