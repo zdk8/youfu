@@ -56,6 +56,13 @@
 (defn get-oldpeople [identityid]
   (db/get-oldpeople identityid))
 
+(defn checkidentityid [request]
+  (let[{params :params}request
+       {identityid :identityid}params
+       opdate (get-oldpeople identityid)]
+    (if (> (count opdate) 0)  (resp/json {:opdate opdate :message "数据存在"})  (resp/json {:message "数据不存在"}))
+    ))
+
 (defn add-oldpeople-depart [request]
   (let [{params :params}request
         {identityid :identityid}params
