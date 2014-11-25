@@ -8,7 +8,7 @@
                [noir.response :as resp]
                [newpension.layout :as layout]))
 
-(def depart [:departname :districtid :type :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
+(def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
 (def deppeople [:id :name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy])
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
 
