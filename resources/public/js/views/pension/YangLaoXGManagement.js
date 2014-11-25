@@ -1,10 +1,13 @@
 define(function(){
     var render = function(local,option){
-        addylxgFun(local);                     //添加养老机构
         var ylxggl = local.find('[opt=yanlaoxgmanagement]');        //养老机构管理
         var refresh = local.find('[opt=refresh]');        //刷新
+        addylxgFun(local,refresh);                     //添加养老机构
         ylxggl.datagrid({
-            url:'queryyljg',
+            url:'pension/getalldepartment',
+            queryParams:{
+                type:'xingguang'
+            },
             type:'post',
             onLoadSuccess:function(data){
                 console.log(data)
@@ -70,7 +73,7 @@ define(function(){
     }
 
     /*添加养老机构*/
-    var addylxgFun = function(local){
+    var addylxgFun = function(local,refresh){
         local.find('[opt=addylxg]').click(function(){
             require(['commonfuncs/popwin/win','text!views/pension/YangLaoXGDlg.htm','views/pension/YangLaoXGDlg'],
                 function(win,htmfile,jsfile){
@@ -96,6 +99,7 @@ define(function(){
                                 submitbtn:submitbtn,
                                 act:'c',
                                 parent:parent,
+                                refresh:refresh,         //刷新按钮
                                 actiontype:'add',       //操作方式
                                 onCreateSuccess:function(data){
                                     parent.trigger('close');
@@ -116,18 +120,6 @@ define(function(){
                     width:350,
                     height:385,
                     html:htmfile,
-                    /*buttons:[
-                     {text:'取消',handler:function(html,parent){
-                     parent.trigger('close');
-                     }},
-                     {
-                     text:'保存1',
-                     handler:function(html,parent){
-                     //                                    local.find(html+'[opt=yljgdlg]')
-                     console.log(local.find(html+'[opt=yljgdlg]'))
-                     }
-                     }
-                     ],*/
                     renderHtml:function(local,submitbtn,parent){
                         jsfile.render(local,{
                             submitbtn:submitbtn,

@@ -1,10 +1,13 @@
 define(function(){
     var render = function(local,option){
-        addyljgFun(local);                     //添加养老机构
         var yljggl = local.find('[opt=yanlaojgmanagement]');        //养老机构管理
         var refresh = local.find('[opt=refresh]');        //刷新
+        addyljgFun(local,refresh);                     //添加养老机构
         yljggl.datagrid({
-            url:'queryyljg',
+            url:'pension/getalldepartment',
+            queryParams:{
+                type:'jigou'
+            },
             type:'post',
             onLoadSuccess:function(data){
                 console.log(data)
@@ -39,7 +42,7 @@ define(function(){
                                 }
                                 /*删除*/
                                 if($(this).attr("action") == "delete"){
-//                                        console.log(record.id)
+                                        console.log(record.id)
                                     /*$.post(
                                         '',
                                         {
@@ -62,7 +65,6 @@ define(function(){
             }
         })
         refresh.click(function(){
-            console.log("refresh")
             yljggl.datagrid('reload');
         })
 
@@ -70,7 +72,7 @@ define(function(){
     }
 
     /*添加养老机构*/
-    var addyljgFun = function(local){
+    var addyljgFun = function(local,refresh){
         local.find('[opt=addyljg]').click(function(){
             require(['commonfuncs/popwin/win','text!views/pension/YangLaoJGDlg.htm','views/pension/YangLaoJGDlg'],
                 function(win,htmfile,jsfile){
@@ -96,6 +98,7 @@ define(function(){
                                 submitbtn:submitbtn,
                                 act:'c',
                                 parent:parent,
+                                refresh:refresh,         //刷新按钮
                                 actiontype:'add',       //操作方式
                                 onCreateSuccess:function(data){
                                     parent.trigger('close');
