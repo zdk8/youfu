@@ -3,6 +3,7 @@
         [korma.db :only [defdb with-db]])
   (:import (java.sql Timestamp))
   (:require [newpension.models.schema :as schema]
+               [hvitmiddleware.core :as hvitmd]
             ))
 
 (defdb dboracle schema/db-oracle)
@@ -518,6 +519,32 @@
   (select t_mpensionagence))
 
 
-(defn add-depart [filter-fields]
+(defn add-depart [filter-fields]                 "增加机构"
   (insert t_pensiondepartment
     (values filter-fields)))
+
+(defn getall-results [start end sql]
+  (let [sql (str "SELECT * FROM
+(SELECT A.*, ROWNUM RN FROM
+("sql") A
+  WHERE ROWNUM <= " end ")
+ WHERE RN >= " start)]
+    (exec-raw [sql []] :results)))
+
+(defn get-total[totalsql]
+  (exec-raw [totalsql []] :results))
+
+
+
+
+
+;;分页
+(defn gettarget [start end table fields key conditions]        "查找当前页数据"
+  (with-db dboracle
+    (exec-raw [(hvitmd/create-oraclequery-paging {:table table :properties fields :predicate conditions :order [key] :from start :max end}) []] :results)))
+
+(defn getcond-total [tablename conditions]              "根据条件查找总数"
+  (with-db dboracle
+    (exec-raw [(hvitmd/get-oraclequery-total {:table tablename :predicate conditions}) []] :results)))
+
+

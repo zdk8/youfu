@@ -92,6 +92,7 @@
   (POST "/del-grantmoney" [bsnyue] (money/del-grantmoney bsnyue))  ;;资金发放记录删除
 
   (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
+  (POST "/pension/getalldepartment" request (depart/getall-department request))       ;;查询全部
 
 
 
