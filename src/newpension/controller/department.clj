@@ -4,10 +4,14 @@
         [korma.db :only [oracle]])
   (:require [newpension.models.db :as db]
                [newpension.common.common :as common]
+               [newpension.controller.old :as old]
                [noir.response :as resp]
                [newpension.layout :as layout]))
 
 (def depart [:departname :districtid :type :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
+(def deppeople [:id :name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy])
+(def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
+
 
 (defn add-department [request]
   (let [{params :params}request
@@ -47,4 +51,17 @@
   (let[{params :params}request
        {id :id}params]
     (db/delete-departbyid id)
-    (resp/json {:success true :message "update success"})))
+    (resp/json {:success true :message "delete success"})))
+
+(defn get-oldpeople [identityid]
+  (db/get-oldpeople identityid))
+
+(defn add-oldpeople-depart [request]
+  (let [{params :params}request
+        {identityid :identityid}params
+        checkop (get-oldpeople identityid)
+        nowtime (common/get-nowtime)
+        opddate (select-keys params deppeople)]
+    (if (> (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request))  )
+    (db/add-oldpeopledep opddate)
+    (resp/json {:success true :message "add success"})))

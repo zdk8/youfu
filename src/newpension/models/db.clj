@@ -94,10 +94,16 @@
   (has-one needs {:fk :pg_id})
   (database dboracle))
 
-;;资金发放表
+;;养老机构表
 (defentity t_pensiondepartment
   (pk :id)
   (table :t_pensiondepartment)
+  (database dboracle))
+
+;;入住机构表
+(defentity t_oldpeopledep
+  (pk :id)
+  (table :t_oldpeopledep)
   (database dboracle))
 
  ;;数据库操作函数
@@ -536,6 +542,15 @@
   (delete t_pensiondepartment
     (where {:id id})))
 
+
+(defn get-oldpeople [identityid]
+  (select olds
+    (where {:identityid identityid})))
+
+(defn add-oldpeopledep [opddate]
+  (insert t_oldpeopledep
+    (values opddate)))
+
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM
 (SELECT A.*, ROWNUM RN FROM
@@ -546,6 +561,8 @@
 
 (defn get-total[totalsql]
   (exec-raw [totalsql []] :results))
+
+
 
 
 
