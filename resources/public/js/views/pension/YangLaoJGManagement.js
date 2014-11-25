@@ -13,8 +13,9 @@ define(function(){
                 console.log(data)
                 var updates = local.find('[action=update]');           //修改
                 var del = local.find('[action=delete]');                //删除
+                var addrzry = local.find('[action=addrzry]');                //添加入住人员
                 var rows=data.rows;
-                var btns_arr=[updates,del];
+                var btns_arr=[updates,del,addrzry];
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -55,6 +56,10 @@ define(function(){
                                         dataType:'json'
                                     })
                                     refresh.trigger('click')
+                                }else if(action == "addrzry"){              //添加入住人员
+                                    var data = record;
+                                    var departname = record.departname;         //机构名称
+                                    addrzryFun(local,departname,data,refresh)                //添加入住人员
                                 }
                             });
                         })(i)
@@ -133,6 +138,32 @@ define(function(){
                     })
                 }
             )
+    }
+    /*添加入住人员*/
+    var addrzryFun = function(local,departname,data,refresh){
+        require(['commonfuncs/popwin/win','text!views/pension/RuZhuRYDlg.htm','views/pension/RuZhuRYDlg'],
+            function(win,htmfile,jsfile){
+                win.render({
+                    title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">添加入住人员-'+departname+'</label>',
+                    width:660,
+                    height:308,
+                    html:htmfile,
+                    renderHtml:function(local,submitbtn,parent){
+                        jsfile.render(local,{
+                            submitbtn:submitbtn,
+                            act:'c',
+                            parent:parent,
+                            refresh:refresh,         //刷新按钮
+                            actiontype:'addrzry',       //操作方式
+                            data:data,                   //填充数据
+                            onCreateSuccess:function(data){
+                                parent.trigger('close');
+                            }
+                        })
+                    }
+                })
+            }
+        )
     }
 
 
