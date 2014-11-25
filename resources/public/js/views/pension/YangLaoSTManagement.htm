@@ -1,5 +1,5 @@
 <!--养老食堂管理-->
-<table class="easyui-datagrid" opt="yanlaostmanagement" data-options="
+<table opt="yanlaostmanagement" data-options="
                method:'post',
                toolbar:'#tb_stgl',
                fit:true,
@@ -13,11 +13,11 @@
                loadMsg:''">
     <thead>
     <tr>
-        <th data-options="field:'enum_name',width:220,align:'center'">机构名称</th>
-        <th data-options="field:'cqr',width:220,align:'center'">联系电话</th>
-        <th data-options="field:'doorplate',width:220,align:'center'">联系人</th>
-        <th data-options="field:'plate_num',width:220,align:'center'">联系地址</th>
-        <th data-options="field:'dengjishijian',width:220,align:'center'">公交线路</th>
+        <th data-options="field:'departname',width:220,align:'center'">机构名称</th>
+        <th data-options="field:'telephone',width:220,align:'center'">联系电话</th>
+        <th data-options="field:'people',width:220,align:'center'">联系人</th>
+        <th data-options="field:'address',width:220,align:'center'">联系地址</th>
+        <th data-options="field:'busline',width:220,align:'center'">公交线路</th>
         <th data-options="field:'ro',width:120,align:'center',formatter:function(value,rowData,rowIndex)
             {
                 var str='<div></div>';
@@ -29,7 +29,10 @@
     </thead>
 </table>
 <div id="tb_stgl" style="padding: 5px;padding-bottom:2px;background-color: #ffffff">
-    <input class="buttoncss" opt="addylst" type="button" value="添加老年人食堂"  style="color:#ffffff;">
+    <div>
+        <input class="buttoncss" opt="addylst" type="button" value="添加老年人食堂"  style="color:#ffffff;">
+        <input class="buttoncss" opt="refresh" type="button" value="刷新"  style="color:#ffffff;float: right">
+    </div>
     <hr style="color: rgba(183,176,162,0.20);border-color: #FAF2F2;border: 1px dashed;"/>
 </div>
 

@@ -274,4 +274,9 @@
 (defn get-oldsocrel [lr_id]
   (resp/json (db/get-oldsocrel lr_id)))
 
+(defn get-yljg []
+;  (exec-raw ["SELECT * FROM t_mpensionagence"] :results)
+  (resp/json (db/get-yljg))
+  )
+
 

@@ -5,7 +5,8 @@
             [newpension.controller.old :as old]
             [newpension.controller.need :as need]
             [newpension.controller.genHtmlCode :as gen]
-            [newpension.controller.money :as money]))
+            [newpension.controller.money :as money]
+            [newpension.controller.department :as depart]))
 
 (defn home-page []
   (layout/render
@@ -71,7 +72,7 @@
   (POST "/update-oldsorel" reuqest (old/update-oldsorel reuqest))    ;;修改养老家庭成员信息
   (POST "/oldsocrelkey" [] (old/oldsocrelkey))    ;;家庭成员信息表主键
   (POST "/dele-oldsorel" [lrgx_id] (old/dele-oldsorel lrgx_id))   ;;删除家庭成员关系表
-;  (GET "/needs" [] (need/get-needs))             ;;人员评估信息查询
+  (GET "/needs" [] (need/get-needs))             ;;人员评估信息查询
   (POST "/needs" [] (need/get-needs))             ;;人员评估信息查询
   (GET "/tneed" [id] (need/tneed id))
   (GET "/searchneed" [id] (need/get-need id))                  ;;根据主键查询人员评估信息
@@ -89,8 +90,13 @@
   (POST "/sel-grantmoneyid" [] (money/sel-grantmoneyid )) ;;查询资金发放表主键
   (POST "/get-needsid" [] (money/get-needsid )) ;;取出需求评估信息表主键
   (POST "/del-grantmoney" [bsnyue] (money/del-grantmoney bsnyue))  ;;资金发放记录删除
+  ;;###############养老服务资源###################
+  (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
 
 
 
 
+
+  (POST "/queryyljg" [] (old/get-yljg) )
+;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
   )
