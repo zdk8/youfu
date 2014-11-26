@@ -88,7 +88,7 @@ define(function(){
             }
             $functiontree=local.find('[opt=functiontree]').tree({
                 checkbox:true,
-                url:'menutree',
+                url:'allmenutree',
                 animate:true,
                 dnd:true,
                 onClick:function(node){

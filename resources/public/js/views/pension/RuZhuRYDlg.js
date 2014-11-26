@@ -1,5 +1,6 @@
 define(function(){
     function render(local,option){
+        getdivision(local);                 //加载行政区划
         var rzrydlg = local.find('[opt=rzrydlg]');      //表单
         var determine = local.find('[opt=determine]');      //确定按钮
         var actiontype = option.actiontype;             //操作方式
@@ -81,6 +82,32 @@ define(function(){
             }
         });
     }
+    /*行政区划的树结构*/
+    var getdivision = function(local){
+        var divisiontree = local.find('[opt=districtid]');
+        divisiontree.combotree({
+            panelHeight:300,
+            url:'getdivisiontree',
+            method: 'get',
+            onLoadSuccess:function(load,data){
+                /*if(!this.firstloaded){
+                    divisiontree.combotree('setValue', data[0].id)
+                        .combotree('setText', data[0].text);
+                    this.firstloaded=true;
+                }*/
+            },
+            onBeforeExpand: function (node) {
+                divisiontree.combotree("tree").tree("options").url
+                    = 'getdivisiontree?dvhigh=' + node.id;
+            },
+            onHidePanel: function () {
+                divisiontree.combotree('setValue',
+                        divisiontree.combotree('tree').tree('getSelected').id)
+                    .combobox('setText',
+                        divisiontree.combotree('tree').tree('getSelected').text);
+            }
+        });
+    }
     /*进度框*/
     function showProcess(isShow, title, msg) {
         if (!isShow) {
@@ -92,6 +119,7 @@ define(function(){
             msg: msg
         });
     }
+
     /*确定按钮*/
     var determinefunc = function(params){
         params.determine.click(function(e){

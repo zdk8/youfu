@@ -14,10 +14,13 @@
   (with-db dboracle
     (exec-raw [(str "select lower(aaa100) enumeratetype,aaa102 enumeratevalue,aaa103 enumeratelabel from xt_combodt where lower(aaa100) like '" keyword "%'") []] :results)))
 
+(defn allmenutree [node]
+  (with-db dboracle
+    (exec-raw ["select t.*,t.functionid id,t.title text,t.location value,(select (decode(count(1),0,'true','false')) from xt_function where parent=t.functionid) leaf  from xt_function t where t.parent=?" [node]] :results) ))
 
 (defn menutree [loginname node]
   (with-db dboracle
-    (exec-raw ["select m.*,m.functionid id,m.title text,m.location,(select (decode(count(1),0,'true','false')) from xt_function where parent=m.functionid) leaf from
+    (exec-raw ["select m.*,m.functionid id,m.title text,m.location value,(select (decode(count(1),0,'true','false')) from xt_function where parent=m.functionid) leaf from
     (select distinct(t.functionid) functionid from xt_function t
      ,xt_user u,xt_rolefunc rf,xt_roleuser ru where ru.roleid=rf.roleid and rf.functionid=t.functionid and ru.userid=u.userid and u.loginname=? and t.parent=?) n,
      xt_function m where m.functionid=n.functionid" [loginname node]] :results) ))

@@ -9,6 +9,9 @@
 (defroutes manager-routes
   (GET "/menutree" req (myctrl/get-user-menutree req))
   (POST "/menutree" req (myctrl/get-user-menutree req))
+  (GET "/allmenutree" req (myctrl/get-all-user-menutree req))
+  (POST "/allmenutree" req (myctrl/get-all-user-menutree req))
+
   (GET "/getFunctionById" [node] (myctrl/get-function-by-id node))
   (POST "/saveFunction" req (myctrl/create-function req))
   (GET "/getenumbytype" [type  callback]

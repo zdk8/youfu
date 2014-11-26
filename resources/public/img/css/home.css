@@ -196,16 +196,6 @@ span.error,a.error{
 }
 
 
-.window {
-    background-color: #3892d3;
-
-    background: -moz-linear-gradient(top,#EFF5FF 0,#E0ECFF 20%);
-    background: -o-linear-gradient(top,#EFF5FF 0,#E0ECFF 20%);
-    background: linear-gradient(to bottom,#EFF5FF 0,#E0ECFF 20%);
-    background: #3892d3;
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#E0ECFF,GradientType=0);
-}
 
 .panel-title{
     padding-left: 1em;

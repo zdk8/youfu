@@ -48,7 +48,7 @@ span.error,a.error{
     background:url('../../img/tablehead.png') repeat;
 }
 
-.window {
+/*.window {
     background-color: #3892d3;
 
     background: -moz-linear-gradient(top,#EFF5FF 0,#E0ECFF 20%);
@@ -57,7 +57,7 @@ span.error,a.error{
     background: #3892d3;
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#E0ECFF,GradientType=0);
-}
+}*/
 
 .panel-title{
     padding-left: 1em;
