@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/models/db.clj" afterPath="$PROJECT_DIR$/src/newpension/models/db.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/controller/department.clj" afterPath="$PROJECT_DIR$/src/newpension/controller/department.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
     <ignored path="newpension.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416965947549" ignored="false" />
+    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416966073864" ignored="false" />
     <file path="/home.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416906591991" ignored="false" />
-    <file path="/db.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416906033433" ignored="false" />
-    <file path="/department.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416965821177" ignored="false" />
+    <file path="/db.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416967666912" ignored="false" />
+    <file path="/department.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416968294655" ignored="false" />
     <file path="/common.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416903052282" ignored="false" />
     <file path="/Clojure REPL" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416965914381" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,11 +22,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
-  <component name="Commander">
-    <leftPanel />
-    <rightPanel />
-    <splitter proportion="0.5" />
-  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -81,7 +78,7 @@
       <file leaf-file-name="home.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="60" selection-start="5616" selection-end="5616" vertical-scroll-proportion="0.0">
+            <state line="99" column="60" selection-start="5649" selection-end="5649" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -99,7 +96,7 @@
       <file leaf-file-name="department.clj" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="132" selection-start="2970" selection-end="2970" vertical-scroll-proportion="0.75317603">
+            <state line="79" column="37" selection-start="3362" selection-end="3362" vertical-scroll-proportion="0.8251928">
               <folding />
             </state>
           </provider>
@@ -164,7 +161,7 @@
       <file leaf-file-name="db.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="550" column="85" selection-start="15680" selection-end="15680" vertical-scroll-proportion="0.0">
+            <state line="552" column="47" selection-start="15758" selection-end="15758" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -202,8 +199,8 @@
         <option value="$PROJECT_DIR$/src/newpension/middleware.clj" />
         <option value="$PROJECT_DIR$/project.clj" />
         <option value="$PROJECT_DIR$/src/newpension/common/common.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/models/db.clj" />
         <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/models/db.clj" />
         <option value="$PROJECT_DIR$/src/newpension/controller/department.clj" />
       </list>
     </option>
@@ -404,15 +401,6 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Administrator\IdeaProjects\newpension\resources\public\js\jqueryplugin" />
-      <recent name="D:\Administrator\IdeaProjects\newpension\src\newpension\models" />
-      <recent name="D:\Administrator\IdeaProjects\newpension\src\newpension\controller" />
-      <recent name="D:\Administrator\IdeaProjects\newpension\resources\public\js\commonfuncs" />
-      <recent name="D:\Administrator\IdeaProjects\newpension\resources\templates" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
@@ -629,9 +617,6 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SvnConfiguration" myUseAcceleration="nothing">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="" />
@@ -831,11 +816,12 @@
       <created>1416965957131</created>
       <updated>1416965957131</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="odp add deptypexml2">
+      <created>1416966077015</created>
+      <updated>1416966077015</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22106000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
@@ -851,7 +837,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26418152" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26375404" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26256078" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32733223" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -859,7 +845,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.66450566" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.7374392" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33549434" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -872,14 +858,6 @@
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USER_GROUPS">
-      <collection />
-    </option>
-    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-      <collection />
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -923,7 +901,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="odp add deptypexml" />
+    <option name="LAST_COMMIT_MESSAGE" value="odp add deptypexml2" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -957,13 +935,10 @@
     <MESSAGE value="odp add c" />
     <MESSAGE value="odp add deptype" />
     <MESSAGE value="odp add deptypexml" />
+    <MESSAGE value="odp add deptypexml2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
-  </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js">
@@ -1042,13 +1017,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="550" column="85" selection-start="15680" selection-end="15680" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/routes/manager.clj">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1058,14 +1026,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="60" selection-start="5616" selection-end="5616" vertical-scroll-proportion="0.0">
+        <state line="99" column="60" selection-start="5649" selection-end="5649" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="552" column="47" selection-start="15758" selection-end="15758" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="132" selection-start="2970" selection-end="2970" vertical-scroll-proportion="0.75317603">
+        <state line="79" column="37" selection-start="3362" selection-end="3362" vertical-scroll-proportion="0.8251928">
           <folding />
         </state>
       </provider>

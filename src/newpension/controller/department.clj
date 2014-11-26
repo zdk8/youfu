@@ -63,13 +63,18 @@
     (if (> (count opdate) 0)  (resp/json {:opdate opdate :message true})  (resp/json {:message false}))
     ))
 
+(defn get-oldpeopledep [identityid]
+  (db/get-oldpeopledep identityid))
+
 (defn add-oldpeople-depart [request]
   (let [{params :params}request
         {identityid :identityid}params
         checkop (get-oldpeople identityid)
+       checkopdep (get-depoldpeople identityid)
         nowtime (common/get-nowtime)
         opddate (conj (select-keys params deppeople) {:checkintime nowtime})]
     (println "DDDDDDD"  (select-keys params deppeople))
-    (if (<= (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request))  )
-    (db/add-oldpeopledep opddate)
-    (resp/json {:success true :message "add success"})))
+    (if (<= (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request)))                 ;判断老年表是否存在，不存在添加数据到老年表
+    (if (> (count checkopdep) 0)  (resp/json {:success false :message "user already checkin"})                              ;判断是否已经入住了
+      (do (db/add-oldpeopledep opddate) (resp/json {:success true :message "checkin success"})))
+))
