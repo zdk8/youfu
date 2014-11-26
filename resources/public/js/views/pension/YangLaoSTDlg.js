@@ -6,9 +6,9 @@ define(function(){
 
         if(actiontype == "update"){                     //编辑
             ylstdlg.form('load', option.data);
-            determinefunc({determine:determine,ylstdlg:ylstdlg,actiontype:actiontype})
+            determinefunc({determine:determine,ylstdlg:ylstdlg,actiontype:actiontype,option:option})
         }else if(actiontype == "add"){                  //新增
-            console.log("add")
+            determinefunc({determine:determine,ylstdlg:ylstdlg,actiontype:actiontype,option:option})
         }
 
         /*取消*/
@@ -21,9 +21,17 @@ define(function(){
         params.determine.click(function(){
             if(params.actiontype == "add"){         //新增
                 params.ylstdlg.form('submit',{
-                    url:'aaaa',
+                    url:'pension/addcanteen',
+                    dataType:"json",
                     success:function(data){
-                        console.log(data)
+                        var data = eval('(' + data + ')');
+                        if(data.success){
+                            alert("添加成功！");
+                            params.option.parent.trigger('close');
+                            params.option.refresh.trigger('click'); //刷新
+                        }else{
+                            alert("添加失败！")
+                        }
                     }
                 });
             }else if(params.actiontype == "update"){     //修改
