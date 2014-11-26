@@ -90,11 +90,11 @@ define(function(){
             url:'getdivisiontree',
             method: 'get',
             onLoadSuccess:function(load,data){
-                if(!this.firstloaded){
+                /*if(!this.firstloaded){
                     divisiontree.combotree('setValue', data[0].id)
                         .combotree('setText', data[0].text);
                     this.firstloaded=true;
-                }
+                }*/
             },
             onBeforeExpand: function (node) {
                 divisiontree.combotree("tree").tree("options").url

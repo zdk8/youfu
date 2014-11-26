@@ -11,7 +11,7 @@
                         <input class="easyui-validatebox" name="identityid">
                     </td>
 
-                    <td class="formtdtext">老人姓名<span style="color: red">*</span></td>
+                    <td class="formtdtext">老人姓名</td>
                     <td>
                         <input name="name" class="easyui-validatebox">
                     </td>
@@ -33,7 +33,7 @@
                         <input class="easyui-validatebox" name="address">
                     </td>
 
-                    <td class="formtdtext"  style="width: 70px">户籍地<span style="color: red">*</span></td>
+                    <td class="formtdtext"  style="width: 70px">户籍地
                     <td>
                         <input name="registration" class="easyui-validatebox">
                     </td>
@@ -41,29 +41,69 @@
                 <tr>
                     <td class="formtdtext">人员类别</td>
                     <td>
-                        <input class="easyui-validatebox" name="type">
+                        <input class="easyui-combobox lazy-combobox"
+                               name="type"
+                               style="width: 151px"
+                               data-options="
+                                loader:cj.getLoader('oldtype'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
                     </td>
 
                     <td class="formtdtext">婚姻状况</td>
                     <td>
-                        <input class="easyui-validatebox" name="marriage">
+                        <input class="easyui-combobox lazy-combobox"
+                               name="marriage"
+                               style="width: 151px"
+                               data-options="
+                                loader:cj.getLoader('marriage'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
                     </td>
                 </tr>
                 <tr>
                     <td class="formtdtext">文化程度</td>
                     <td>
-                        <input class="easyui-validatebox" name="culture">
+                        <input class="easyui-combobox lazy-combobox"
+                               name="culture"
+                               style="width: 151px"
+                               data-options="
+                                loader:cj.getLoader('culture'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
                     </td>
 
                     <td class="formtdtext">家庭经济条件</td>
                     <td>
-                        <input class="easyui-validatebox" name="economy">
+                        <input class="easyui-combobox lazy-combobox"
+                               name="economy"
+                               style="width: 151px"
+                               data-options="
+                                loader:cj.getLoader('economy'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
                     </td>
                 </tr>
                 <tr>
                     <td class="formtdtext">居住环境</td>
                     <td>
-                        <input class="easyui-validatebox" name="live">
+                        <input class="easyui-combobox lazy-combobox"
+                               name="live"
+                               style="width: 151px"
+                               data-options="
+                                loader:cj.getLoader('liveplace'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
                     </td>
 
                     <td class="formtdtext">是否需要护理</td>         <!--required:true,-->
