@@ -78,3 +78,17 @@
     (if (> (count checkopdep) 0)  (resp/json {:success false :message "user already checkin"})                              ;判断是否已经入住了
       (do (db/add-oldpeopledep opddate) (resp/json {:success true :message "checkin success"})))
 ))
+
+(defn getall-oldpeople-depart [request]
+  (let[{params :params}request
+       {page :page}params
+       {rows :rows}params
+       r   (read-string rows)
+       p  (read-string page)
+       start  (inc(* r (dec p)))
+       end (* r p)
+       sql (str "select * from t_oldpeopledep WHERE checkouttime is null")
+       results (db/getall-results start end sql)
+       totalsql  (str "select count(*) as sum  from t_oldpeopledep where checkouttime is null")
+       total (get (first(db/get-total totalsql)) :sum)]
+    (resp/json {:total total :rows results})))
