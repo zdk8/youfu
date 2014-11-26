@@ -106,6 +106,12 @@
   (table :t_oldpeopledep)
   (database dboracle))
 
+;;食堂
+(defentity t_mcanteen
+  (pk :id)
+  (table :t_mcanteen)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -555,6 +561,10 @@
 (defn add-oldpeopledep [opddate]
   (insert t_oldpeopledep
     (values opddate)))
+
+(defn add-canteen [canteendate]
+  (insert t_mcanteen
+    (values canteendate)))
 
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM

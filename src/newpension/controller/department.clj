@@ -11,6 +11,7 @@
 (def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
 (def deppeople [:id :name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy])
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
+(def canteen [:departname :register :telephone :people :address :busline :coordinates :buildarea :function :runtime :avgnumber])
 
 
 (defn add-department [request]
@@ -92,3 +93,22 @@
        totalsql  (str "select count(*) as sum  from t_oldpeopledep where checkouttime is null")
        total (get (first(db/get-total totalsql)) :sum)]
     (resp/json {:total total :rows (common/timefmt-bef-list results "checkintime")})))
+
+(defn add-canteen  [request]
+  (let[{params :params}request
+       canteendate (select-keys params canteen)]
+    (db/add-canteen (common/timefmt-bef-insert canteendate "runtime"))))
+
+(defn getall-canteen  [request]
+  (let[{params :params}request
+       {page :page}params
+       {rows :rows}params
+       r   (read-string rows)
+       p  (read-string page)
+       start  (inc(* r (dec p)))
+       end (* r p)
+       sql (str "select * from t_mcanteen")
+       results (db/getall-results start end sql)
+       totalsql  (str "select count(*) as sum  from t_mcanteen")
+       total (get (first(db/get-total totalsql)) :sum)]
+    (resp/json {:total total :rows (common/timefmt-bef-list results "runtime")})))

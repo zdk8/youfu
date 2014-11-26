@@ -99,6 +99,8 @@
   (POST "/pension/checkidentityid" request (depart/checkidentityid request))              ;;根据身份证从老年表中查询老年人信息
   (POST "/pension/addoldpeopledepart" request (depart/add-oldpeople-depart request))     ;;添加入住人员
   (POST "/pension/getalloldpeopledepart" request (depart/getall-oldpeople-depart request))          ;;获取现入住机构的老人
+  (POST "/pension/addcanteen" request (depart/add-canteen  request))                         ;;食堂添加
+  (POST "/pension/getallcanteen" request (depart/getall-canteen  request))                      ;;食堂查询
 
 
 
