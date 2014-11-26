@@ -550,7 +550,7 @@
 (defn get-oldpeopledep [identityid]
   (select t_oldpeopledep
     (where{:identityid identityid})
-    (where (not= :checkouttime nil))))
+    (where (= :checkouttime nil))))
 
 (defn add-oldpeopledep [opddate]
   (insert t_oldpeopledep
