@@ -1,0 +1,100 @@
+<fieldset style="width: 600px;margin: 0px auto;" >
+    <div style="width: 600px;position: relative;margin: 0px auto" region="center">
+        <form opt="rzrydlg" method="post">
+            <input hidden="true" name="deptype" value="jigou">
+            <input hidden="true" name="id">
+            <input hidden="true" name="departname">         <!--机构名称-->
+            <table class="formtable" style="width:600px">
+                <tr>
+                    <td class="formtdtext">身份证</td>
+                    <td>
+                        <input class="easyui-validatebox" name="identityid">
+                    </td>
+
+                    <td class="formtdtext">老人姓名<span style="color: red">*</span></td>
+                    <td>
+                        <input name="name" class="easyui-validatebox">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">老人年龄</td>
+                    <td>
+                        <input class="easyui-validatebox" name="age">
+                    </td>
+
+                    <td class="formtdtext"  style="width: 70px">行政区划<span style="color: red">*</span></td>
+                    <td>
+                        <input name="districtid" class="easyui-validatebox">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">家庭住址</td>
+                    <td>
+                        <input class="easyui-validatebox" name="address">
+                    </td>
+
+                    <td class="formtdtext"  style="width: 70px">户籍地<span style="color: red">*</span></td>
+                    <td>
+                        <input name="registration" class="easyui-validatebox">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">人员类别</td>
+                    <td>
+                        <input class="easyui-validatebox" name="type">
+                    </td>
+
+                    <td class="formtdtext">婚姻状况</td>
+                    <td>
+                        <input class="easyui-validatebox" name="marriage">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">文化程度</td>
+                    <td>
+                        <input class="easyui-validatebox" name="culture">
+                    </td>
+
+                    <td class="formtdtext">家庭经济条件</td>
+                    <td>
+                        <input class="easyui-validatebox" name="economy">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">居住环境</td>
+                    <td>
+                        <input class="easyui-validatebox" name="live">
+                    </td>
+
+                    <td class="formtdtext">是否需要护理</td>         <!--required:true,-->
+                    <td>
+                        <input class="easyui-combobox lazy-combobox"
+                               name="neednurse"
+                               style="width: 151px"
+                               data-options="
+                                loader:cj.getLoader('yesorno'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">入住时间</td>
+                    <td>
+                        <input class="easyui-datebox" name="checkintime">
+                    </td>
+
+                    <td class="formtdtext">离开时间</td>
+                    <td>
+                        <input class="easyui-datebox" name="checkouttime">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="weboxbuttons" style="height:25px;float: right;padding-top: 2px;" >
+        <input class="buttoncss" opt="determine" type="button" value="确定">
+        <input class="buttoncss" opt="cancle" type="button" value="取消">
+    </div>
+</fieldset>
