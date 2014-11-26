@@ -21,16 +21,16 @@
 
 (defn getall-department [request]
   (let[{params :params}request
-       {type :type}params
+       {deptype :deptype}params
        {page :page}params
        {rows :rows}params
        r   (read-string rows)
        p  (read-string page)
        start  (inc(* r (dec p)))
        end (* r p)
-      sql (str "select * from t_pensiondepartment WHERE TYPE = '" type "'")
+      sql (str "select * from t_pensiondepartment WHERE DEPTYPE = '" deptype "'")
        results (db/getall-results start end sql)
-      totalsql  (str "select count(*) as sum  from t_pensiondepartment where TYPE = '" type"'")
+      totalsql  (str "select count(*) as sum  from t_pensiondepartment where DEPTYPE = '" deptype"'")
       total (get (first(db/get-total totalsql)) :sum)
        ]
     (resp/json {:total total :rows results})))
