@@ -70,7 +70,7 @@
   (let [{params :params}request
         {identityid :identityid}params
         checkop (get-oldpeople identityid)
-       checkopdep (get-depoldpeople identityid)
+       checkopdep (get-oldpeopledep identityid)
         nowtime (common/get-nowtime)
         opddate (conj (select-keys params deppeople) {:checkintime nowtime})]
     (println "DDDDDDD"  (select-keys params deppeople))
