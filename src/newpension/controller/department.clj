@@ -70,6 +70,6 @@
         nowtime (common/get-nowtime)
         opddate (conj (select-keys params deppeople) {:checkintime nowtime})]
     (println "DDDDDDD"  (select-keys params deppeople))
-    (if (> (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request))  )
+    (if (<= (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request))  )
     (db/add-oldpeopledep opddate)
     (resp/json {:success true :message "add success"})))
