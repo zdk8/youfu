@@ -96,9 +96,9 @@
   (POST "/pension/getdepartmentbyid" request (depart/get-departbyid request))          ;;根据id查找机构数据
   (POST "/pension/updatedepartmentbyid" request (depart/update-departbyid request))     ;;更新机构
   (POST "/pension/deletedepartmentbyid" request (depart/delete-departbyid request))          ;;删除机构
-  (POST "/pension/checkidentityid" request (depart/checkidentityid request))
-  (POST "/pension/addoldpeopledepart" request (depart/add-oldpeople-depart request))
-
+  (POST "/pension/checkidentityid" request (depart/checkidentityid request))              ;;根据身份证从老年表中查询老年人信息
+  (POST "/pension/addoldpeopledepart" request (depart/add-oldpeople-depart request))     ;;添加入住人员
+  (POST "/pension/getalloldpeopledepart" request (depart/getall-oldpeople-depart request))          ;;获取现入住机构的老人
 
 
 

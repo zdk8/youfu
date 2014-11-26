@@ -21,16 +21,16 @@
 
 (defn getall-department [request]
   (let[{params :params}request
-       {type :type}params
+       {deptype :deptype}params
        {page :page}params
        {rows :rows}params
        r   (read-string rows)
        p  (read-string page)
        start  (inc(* r (dec p)))
        end (* r p)
-      sql (str "select * from t_pensiondepartment WHERE TYPE = '" type "'")
+      sql (str "select * from t_pensiondepartment WHERE DEPTYPE = '" deptype "'")
        results (db/getall-results start end sql)
-      totalsql  (str "select count(*) as sum  from t_pensiondepartment where TYPE = '" type"'")
+      totalsql  (str "select count(*) as sum  from t_pensiondepartment where DEPTYPE = '" deptype"'")
       total (get (first(db/get-total totalsql)) :sum)
        ]
     (resp/json {:total total :rows results})))
@@ -63,12 +63,32 @@
     (if (> (count opdate) 0)  (resp/json {:opdate opdate :message true})  (resp/json {:message false}))
     ))
 
+(defn get-oldpeopledep [identityid]
+  (db/get-oldpeopledep identityid))
+
 (defn add-oldpeople-depart [request]
   (let [{params :params}request
         {identityid :identityid}params
         checkop (get-oldpeople identityid)
+       checkopdep (get-oldpeopledep identityid)
         nowtime (common/get-nowtime)
-        opddate (select-keys params deppeople)]
-    (if (> (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request))  )
-    (db/add-oldpeopledep opddate)
-    (resp/json {:success true :message "add success"})))
+        opddate (conj (select-keys params deppeople) {:checkintime nowtime})]
+    (println "DDDDDDD"  (select-keys params deppeople))
+    (if (<= (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request)))                 ;判断老年表是否存在，不存在添加数据到老年表
+    (if (> (count checkopdep) 0)  (resp/json {:success false :message "user already checkin"})                              ;判断是否已经入住了
+      (do (db/add-oldpeopledep opddate) (resp/json {:success true :message "checkin success"})))
+))
+
+(defn getall-oldpeople-depart [request]
+  (let[{params :params}request
+       {page :page}params
+       {rows :rows}params
+       r   (read-string rows)
+       p  (read-string page)
+       start  (inc(* r (dec p)))
+       end (* r p)
+       sql (str "select * from t_oldpeopledep WHERE checkouttime is null")
+       results (db/getall-results start end sql)
+       totalsql  (str "select count(*) as sum  from t_oldpeopledep where checkouttime is null")
+       total (get (first(db/get-total totalsql)) :sum)]
+    (resp/json {:total total :rows (common/timefmt-bef-list results "checkintime")})))
