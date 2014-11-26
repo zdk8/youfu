@@ -97,7 +97,8 @@
 (defn add-canteen  [request]
   (let[{params :params}request
        canteendate (select-keys params canteen)]
-    (db/add-canteen (common/timefmt-bef-insert canteendate "runtime"))))
+    (db/add-canteen (common/timefmt-bef-insert canteendate "runtime"))
+    (resp/json {:success true :message "add canteen success"})))
 
 (defn getall-canteen  [request]
   (let[{params :params}request
