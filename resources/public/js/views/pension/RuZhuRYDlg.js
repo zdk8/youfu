@@ -63,6 +63,7 @@ define(function(){
             if(birthdayValue == "" || birthdayValue == null){
                 alert("请输入正确的身份证!")
             }else{
+                /*根据身份证从老年人表中带出老年人信息*/
                 $.ajax({
                     url:'pension/checkidentityid',
                     type:'post',
@@ -80,22 +81,53 @@ define(function(){
             }
         });
     }
+    /*进度框*/
+    function showProcess(isShow, title, msg) {
+        if (!isShow) {
+            $.messager.progress('close');
+            return;
+        }
+        var win = $.messager.progress({
+            title: title,
+            msg: msg
+        });
+    }
     /*确定按钮*/
     var determinefunc = function(params){
-        params.determine.click(function(){
+        params.determine.click(function(e){
             if(params.actiontype == "addrzry"){         //新增入住人员
                 params.rzrydlg.form('submit',{
                     url:'pension/addoldpeopledepart',
                     dataType:"json",
+                    onSubmit: function () {
+                        var flag = $(this).form('validate');
+                        if (flag) {
+                            showProcess(true, '温馨提示', '正在提交数据...');
+                        }
+                        return flag
+                    },
                     success:function(data){
+                        showProcess(false);
                         var data = eval('(' + data + ')');
+//                        console.log(data)
                         if(data.success){
-                            alert("添加成功！");
+                            alert("成功添加入住人员！");
+//                            $.messager.progress('close');
+//                            $.messager.alert('消息提示','成功添加入住人员！');
                             params.option.parent.trigger('close');
                             params.option.refresh.trigger('click'); //刷新
                         }else{
-                            alert("添加失败！")
+                            $.messager.show({
+                                title:'温馨提示',
+                                msg:'添加失败！老人已入住',
+                                timeout:3000,
+                                showType:'slide'
+                            });
                         }
+                    },
+                    onLoadError: function () {
+                        showProcess(false);
+                        $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
                     }
                 });
             }else if(params.actiontype == "update"){     //修改
