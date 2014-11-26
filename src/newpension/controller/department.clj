@@ -113,3 +113,16 @@
        totalsql  (str "select count(*) as sum  from t_mcanteen")
        total (get (first(db/get-total totalsql)) :sum)]
     (resp/json {:total total :rows (common/timefmt-bef-list results "runtime")})))
+
+(defn update-canteen  [request]
+  (let[{params :params}request
+       {id :id}params
+       canteendate (select-keys params canteen)]
+    (db/update-canteen (common/timefmt-bef-insert canteendate "runtime") id)
+    (resp/json {:success true :message "update canteen success"})))
+
+(defn delete-canteen [request]
+  (let[{params :params}request
+       {id :id}params]
+    (db/delete-canteen id)
+    (resp/json {:success true :message "delete canteen success"}) ))

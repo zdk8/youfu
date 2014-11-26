@@ -101,7 +101,8 @@
   (POST "/pension/getalloldpeopledepart" request (depart/getall-oldpeople-depart request))          ;;获取现入住机构的老人
   (POST "/pension/addcanteen" request (depart/add-canteen  request))                         ;;食堂添加
   (POST "/pension/getallcanteen" request (depart/getall-canteen  request))                      ;;食堂查询
-
+  (POST "/pension/updatecanteen" request (depart/update-canteen  request))                      ;;食堂修改
+  (POST "/pension/deletecanteen" request (depart/delete-canteen  request))                       ;;删除食堂
 
 
 

@@ -566,6 +566,15 @@
   (insert t_mcanteen
     (values canteendate)))
 
+(defn update-canteen [canteendate id]
+  (update t_mcanteen
+    (set-fields canteendate)
+    (where {:id id})))
+
+(defn delete-canteen [id]
+  (delete t_mcanteen
+    (where {:id id})))
+
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM
 (SELECT A.*, ROWNUM RN FROM
