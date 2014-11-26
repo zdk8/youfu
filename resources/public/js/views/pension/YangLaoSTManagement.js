@@ -1,10 +1,10 @@
 define(function(){
     var render = function(local,option){
-        addylstFun(local);                     //添加养老机构
-        var ylstgl = local.find('[opt=yanlaostmanagement]');        //养老机构管理
+        var ylstgl = local.find('[opt=yanlaostmanagement]');        //养老食堂管理
         var refresh = local.find('[opt=refresh]');        //刷新
+        addylstFun(local,refresh);                     //添加老年食堂
         ylstgl.datagrid({
-            url:'queryyljg',
+            url:'pension/getallcanteen',
             type:'post',
             onLoadSuccess:function(data){
                 console.log(data)
@@ -23,7 +23,7 @@ define(function(){
                                     console.log(record)
                                     var data = record;
                                     var departname = record.departname;         //机构名称
-                                    updateylstFun(local,departname,data)                //修改养老机构
+                                    updateylstFun(local,departname,data,refresh)                //修改养老机构
                                     /*cj.showContent({
                                      title:record.biaozhunmingcheng+'修改',
                                      htmfile:'text!views/dmxt/PlaceCommon.htm',
@@ -39,21 +39,22 @@ define(function(){
                                 }
                                 /*删除*/
                                 if($(this).attr("action") == "delete"){
-//                                        console.log(record.id)
-                                    /*$.post(
-                                     '',
-                                     {
-                                     id:record.id,
-                                     tablename:wholename
-                                     },
-                                     function(data){
-                                     var data = eval('(' + data + ')');
-                                     if(data.success){
-                                     alert("删除成功")
-                                     //                                                loaddate();
-                                     }
-                                     }
-                                     )*/
+                                    $.ajax({
+                                        url:'pension/deletecanteen',
+                                        type:'post',
+                                        data:{
+                                            id:record.id
+                                        },
+                                        success:function(data){
+                                            var data = eval('(' + data + ')');
+                                            console.log(data)
+                                            if(data.success){
+                                                alert("删除成功")
+                                            }
+                                        },
+                                        dataType:'json'
+                                    })
+                                    refresh.trigger('click')
                                 }
                             });
                         })(i)
@@ -62,40 +63,28 @@ define(function(){
             }
         })
         refresh.click(function(){
-            console.log("refresh")
             ylstgl.datagrid('reload');
         })
 
 
     }
 
-    /*添加养老机构*/
-    var addylstFun = function(local){
+    /*添加老年食堂*/
+    var addylstFun = function(local,refresh){
         local.find('[opt=addylst]').click(function(){
             require(['commonfuncs/popwin/win','text!views/pension/YangLaoSTDlg.htm','views/pension/YangLaoSTDlg'],
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加老年人食堂',
-                        width:350,
-                        height:385,
+                        width:355,
+                        height:380,
                         html:htmfile,
-                        /*buttons:[
-                         {text:'取消',handler:function(html,parent){
-                         parent.trigger('close');
-                         }},
-                         {
-                         text:'保存1',
-                         handler:function(html,parent){
-                         //                                    local.find(html+'[opt=yljgdlg]')
-                         console.log(local.find(html+'[opt=yljgdlg]'))
-                         }
-                         }
-                         ],*/
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,
                                 act:'c',
                                 parent:parent,
+                                refresh:refresh,         //刷新按钮
                                 actiontype:'add',       //操作方式
                                 onCreateSuccess:function(data){
                                     parent.trigger('close');
@@ -107,32 +96,21 @@ define(function(){
             )
         })
     }
-    /*修改养老机构*/
-    var updateylstFun = function(local,departname,data){
+    /*修改老年食堂*/
+    var updateylstFun = function(local,departname,data,refresh){
         require(['commonfuncs/popwin/win','text!views/pension/YangLaoSTDlg.htm','views/pension/YangLaoSTDlg'],
             function(win,htmfile,jsfile){
                 win.render({
                     title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
-                    width:350,
-                    height:385,
+                    width:355,
+                    height:380,
                     html:htmfile,
-                    /*buttons:[
-                     {text:'取消',handler:function(html,parent){
-                     parent.trigger('close');
-                     }},
-                     {
-                     text:'保存1',
-                     handler:function(html,parent){
-                     //                                    local.find(html+'[opt=yljgdlg]')
-                     console.log(local.find(html+'[opt=yljgdlg]'))
-                     }
-                     }
-                     ],*/
                     renderHtml:function(local,submitbtn,parent){
                         jsfile.render(local,{
                             submitbtn:submitbtn,
                             act:'c',
                             parent:parent,
+                            refresh:refresh,         //刷新按钮
                             actiontype:'update',       //操作方式
                             data:data,                   //填充数据
                             onCreateSuccess:function(data){

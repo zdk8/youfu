@@ -11,6 +11,7 @@
 (def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
 (def deppeople [:id :name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy])
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
+(def canteen [:departname :register :telephone :people :address :busline :coordinates :buildarea :function :runtime :avgnumber])
 
 
 (defn add-department [request]
@@ -92,3 +93,36 @@
        totalsql  (str "select count(*) as sum  from t_oldpeopledep where checkouttime is null")
        total (get (first(db/get-total totalsql)) :sum)]
     (resp/json {:total total :rows (common/timefmt-bef-list results "checkintime")})))
+
+(defn add-canteen  [request]
+  (let[{params :params}request
+       canteendate (select-keys params canteen)]
+    (db/add-canteen (common/timefmt-bef-insert canteendate "runtime"))
+    (resp/json {:success true :message "add canteen success"})))
+
+(defn getall-canteen  [request]
+  (let[{params :params}request
+       {page :page}params
+       {rows :rows}params
+       r   (read-string rows)
+       p  (read-string page)
+       start  (inc(* r (dec p)))
+       end (* r p)
+       sql (str "select * from t_mcanteen")
+       results (db/getall-results start end sql)
+       totalsql  (str "select count(*) as sum  from t_mcanteen")
+       total (get (first(db/get-total totalsql)) :sum)]
+    (resp/json {:total total :rows (common/timefmt-bef-list results "runtime")})))
+
+(defn update-canteen  [request]
+  (let[{params :params}request
+       {id :id}params
+       canteendate (select-keys params canteen)]
+    (db/update-canteen (common/timefmt-bef-insert canteendate "runtime") id)
+    (resp/json {:success true :message "update canteen success"})))
+
+(defn delete-canteen [request]
+  (let[{params :params}request
+       {id :id}params]
+    (db/delete-canteen id)
+    (resp/json {:success true :message "delete canteen success"}) ))
