@@ -70,6 +70,30 @@ define(function(){
                         })
                     })
             }
+            var addRole=function(record){
+                require(['commonfuncs/popwin/win','text!views/manager/Role.htm','views/manager/Role'],
+                    function(win,htmfile,jsfile){
+                        win.render({
+                            title:'添加角色信息',
+                            width:524,
+                            height:500,
+                            html:$(htmfile),
+                            buttons:[
+                                {text:'取消',handler:function(html,parent){
+                                    parent.trigger('close');
+                                }},
+                                {text:'保存',handler:function(html,parent){ }}
+                            ],
+                            renderHtml:function(poplocal,submitbtn,parent){
+                                jsfile.render(poplocal,{
+                                    submitbtn:submitbtn,
+                                    queryParams:record,
+                                    parent:parent
+                                })
+                            }
+                        })
+                    })
+            }
 
 
             var $mytree=$('#Divisiontree').tree({
@@ -100,7 +124,8 @@ define(function(){
                     onLoadSuccess:function(data){
                         var viewbtns=local.find('[action=view]');
                         var deletebtns=local.find('[action=delete]');
-                        var btns_arr=[viewbtns,deletebtns];
+                        var addrolebtns=local.find('[action=addrole]');
+                        var btns_arr=[viewbtns,deletebtns,addrolebtns];
                         var rows=data.rows;
                         for(var i=0;i<rows.length;i++){
                             for(var j=0;j<btns_arr.length;j++){
@@ -112,6 +137,8 @@ define(function(){
                                             viewUserInfo(record);
                                         }else if($(this).attr("action")=='delete'){
                                             deleteUserInfo(record);
+                                        }else if($(this).attr("action")=='addrole'){
+                                            addRole(record);
                                         }
                                     });
                                 })(i);

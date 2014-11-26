@@ -52,7 +52,7 @@
        {username :username} result
        {userid :userid} result]
       (if result
-        (do (session/put! :username username) (str true))
+        (do (session/put! :username username) (session/put! :loginname loginname) (str true))
         (str false)))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
 ;;注销

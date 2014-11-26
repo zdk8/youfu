@@ -9,10 +9,11 @@
                fitColumns:true,
               pageSize:cj.getDataGridAttr('pageSize'),
                pageList:cj.getDataGridAttr('pageList'),
-               singleSelect:true,
+               singleSelect:false,
                pagination:true">
             <thead>
             <tr>
+                <th data-options="field:'ck',checkbox:true"></th>
                 <th data-options="field:'rolename',width:100,align:'center',formatter:function(v,r,i)
             {
                 var str='<div></div>';

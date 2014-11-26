@@ -1,41 +1,46 @@
 define(function(){
     var render = function(local,option){
-        local.find('[opt=addrzry]').click(function(){
-            /*local.find('[opt=addjg]').dialog({
-                title: '添加养老机构',
-                width: 400,
-                height: 400,
-                closed: false,
-                cache: false,
-                href: 'YangLaoJGDlg',
-                modal: true
-            });*/
-            require(['commonfuncs/popwin/win','text!views/pension/YangLaoJGDlg.htm','views/pension/YangLaoJGDlg'],
-                function(win,htmfile,jsfile){
-                    win.render({
-                        title:'添加入住人员',
-                        width:350,
-                        height:200,
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},
-                            {text:'保存',handler:function(html,parent){ }}
-                        ],
-                        renderHtml:function(local,submitbtn,parent){
-                            jsfile.render(local,{
-                                submitbtn:submitbtn,
-                                act:'c',
-                                parent:parent,
-                                onCreateSuccess:function(data){
-                                    parent.trigger('close');
+        var rzrygl = local.find('[opt=ruzhurymanagement]');        //入住人员管理
+        var refresh = local.find('[opt=refresh]');        //刷新
+        rzrygl.datagrid({
+            url:'pension/getalloldpeopledepart',
+            /*queryParams:{
+                deptype:'jigou'
+            },*/
+            type:'post',
+            onLoadSuccess:function(data){
+                console.log(data)
+               /* var updates = local.find('[action=update]');           //修改
+                var del = local.find('[action=delete]');                //删除
+                var addrzry = local.find('[action=addrzry]');                //添加入住人员*/
+                var cancellation = local.find('[action=cancellation]');     //注销入住人员
+                var rows=data.rows;
+//                var btns_arr=[updates,del,addrzry];
+                var btns_arr=[cancellation];
+                for(var i=0;i<rows.length;i++){
+                    for(var j=0;j<btns_arr.length;j++){
+                        (function(index){
+                            var record=rows[index];
+                            $(btns_arr[j][i]).click(function(){
+                                var action = $(this).attr("action");
+                                if(action == "cancellation"){             //注销
+//                                    console.log(record.departname)
+                                    var data = record;
+                                    var departname = record.departname;         //机构名称
+                                    $.messager.confirm('温馨提示', '是否注销该人员?', function(r){
+                                        if (r){
+                                            console.log(r)
+                                        }
+                                    });
                                 }
-                            })
-                        }
-                    })
+                            });
+                        })(i)
+                    }
                 }
-            )
+            }
+        })
+        refresh.click(function(){
+            rzrygl.datagrid('reload');
         })
     }
 

@@ -24,7 +24,7 @@ define(function(){
         var top=(screenHeight-option['height'])/2;
         top=top>0?top:0;
         var left=(screenWidth-option['width']+200)/2;
-        $('.webox').css({display:'block',left:left+"px",top:top+"px",height:option['height']+'px',width:option['width']+'px'});
+        result.find('.webox').css({display:'block',left:left+"px",top:top+"px",height:option['height']+'px',width:option['width']+'px'});
         result.find('.webox').layout().draggable({
             handle:result.find('.pop-win-north-title')
         });//布局并可拖拽

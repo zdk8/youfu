@@ -22,6 +22,7 @@ define(function(){
                         win.render({
                             title:'角色信息',
                             width:524,
+                            height:200,
                             html:$(htmfile).eq(0),
                             buttons:[
                                 {text:'取消',handler:function(html,parent){
@@ -71,7 +72,7 @@ define(function(){
                         win.render({
                             title:'授权信息',
                             width:524,
-                            height:600,
+                            height:500,
                             html:$(htmfile).eq(0),
                             buttons:[
                                 {text:'取消',handler:function(html,parent){
@@ -97,7 +98,8 @@ define(function(){
                 local.find('.easyui-datagrid-noauto').datagrid({
                     url:'getrole',
                     queryParams: {
-                        intelligentsp:null
+                        intelligentsp:null,
+                        userid:option.queryParams?option.queryParams.userid:null
                     },
                     onLoadSuccess:function(data){
                         var viewbtns=local.find('[action=view]');
@@ -121,6 +123,11 @@ define(function(){
                                     });
                                 })(i);
                             }
+
+                            //check
+                            if(rows[i].userid) {
+                                localDataGrid.datagrid('checkRow', i);
+                            }
                         }
                     },
                     striped:true,
@@ -131,6 +138,21 @@ define(function(){
             local.find('[opt=addrole]').bind('click',function(){
                 viewRoleInfo();
             })
+
+            if(option.submitbtn) {
+                option.submitbtn.bind('click',function(){
+                    var checkedrows=localDataGrid.datagrid('getChecked');
+                    var ids=""
+                    for(var i= 0,len=checkedrows.length;i<len;i++) {
+                        if (ids != '') ids += ',';
+                        ids += checkedrows[i].roleid;
+                    }
+                    $.post('saveroleuser', {userid:option.queryParams.userid,roleids:ids}, function (data) {
+                        option.parent.trigger('close');
+                    }, 'json');
+                })
+            }
+
         }
     }
 })

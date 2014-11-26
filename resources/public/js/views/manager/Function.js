@@ -4,7 +4,7 @@
 
 
 define(function(){
-    var funObj,$functiontree,lastClickNode;
+    var funObj,$functiontree;
 
 
     var refresh=function(){
@@ -86,7 +86,7 @@ define(function(){
                     }
                 })(i));
             }
-            $functiontree=$('#functiontree').tree({
+            $functiontree=local.find('[opt=functiontree]').tree({
                 checkbox:true,
                 url:'menutree',
                 animate:true,
