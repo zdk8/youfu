@@ -15,9 +15,12 @@
     (exec-raw [(str "select lower(aaa100) enumeratetype,aaa102 enumeratevalue,aaa103 enumeratelabel from xt_combodt where lower(aaa100) like '" keyword "%'") []] :results)))
 
 
-(defn menutree [node]
+(defn menutree [loginname node]
   (with-db dboracle
-    (exec-raw ["select t.*,t.functionid id,t.title text,t.location value,(select (decode(count(1),0,'true','false')) from xt_function where parent=t.functionid) leaf  from xt_function t where t.parent=?" [node]] :results) ))
+    (exec-raw ["select m.*,m.functionid id,m.title text,m.location,(select (decode(count(1),0,'true','false')) from xt_function where parent=m.functionid) leaf from
+    (select distinct(t.functionid) functionid from xt_function t
+     ,xt_user u,xt_rolefunc rf,xt_roleuser ru where ru.roleid=rf.roleid and rf.functionid=t.functionid and ru.userid=u.userid and u.loginname=? and t.parent=?) n,
+     xt_function m where m.functionid=n.functionid" [loginname node]] :results) ))
 
 (defn grantmenutree [roleid node]
   (with-db dboracle
@@ -60,6 +63,10 @@
   )
 
 (defentity xt_rolefunc
+  (database dboracle)
+  )
+
+(defentity xt_roleuser
   (database dboracle)
   )
 
@@ -145,6 +152,11 @@
 (defn get-role [id]
   (with-db dboracle
     (exec-raw ["select * from xt_role" []] :results)))
+(defn get-role-by-userid [userid]
+  (with-db dboracle
+    (exec-raw ["select r.*,ru.userid from xt_role r left join (select * from xt_roleuser where userid=?) ru on r.roleid=ru.roleid" [userid]] :results)))
+
+
 (defn create-role [role]
   (let [f (conj role {:roleid (strs/replace (str (java.util.UUID/randomUUID)) "-" "")}) ]
     (insert xt_role
@@ -160,8 +172,26 @@
   (with-db dboracle
     (exec-raw ["select * from xt_role where roleid=?" [id]] :results)))
 
+
+(defn my-insert-role-func [roleid ids]
+  (if (> (count ids) 0)
+    (do (insert xt_rolefunc
+          (values {:roleid roleid :functionid (first ids)}))
+      (my-insert-role-func roleid (next ids)))
+    ))
+(defn my-insert-role-user [userid ids]
+  (if (> (count ids) 0)
+    (do (insert xt_roleuser
+          (values {:userid userid :roleid (first ids)}))
+      (my-insert-role-user userid (next ids)))
+    ))
+
 (defn save-grant [roleid ids]
-  (println "****************************************************************--------------------" roleid)
   (delete xt_rolefunc
     (where {:roleid roleid}))
-  )
+  (my-insert-role-func roleid (clojure.string/split ids #",")))
+(defn save-role-user [userid ids]
+  (println "****************88888888888*************:" ids)
+  (delete xt_roleuser
+    (where {:userid userid}))
+  (my-insert-role-user userid (clojure.string/split ids #",")))

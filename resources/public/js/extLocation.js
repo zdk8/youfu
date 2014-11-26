@@ -1,4 +1,4 @@
-﻿serverUrl="http://112.124.50.195:8080/"
+﻿﻿serverUrl="http://112.124.50.195:8080/"
 //serverUrl="http://127.168.2.5/"
 /*var mysessionid="nosessionid";
 if(sessionid){
