@@ -68,7 +68,8 @@
         {identityid :identityid}params
         checkop (get-oldpeople identityid)
         nowtime (common/get-nowtime)
-        opddate (select-keys params deppeople)]
+        opddate (map #(conj % {:checkintime nowtime}) (select-keys params deppeople))]
+    (println "DDDDDDD"  opddate)
     (if (> (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request))  )
     (db/add-oldpeopledep opddate)
     (resp/json {:success true :message "add success"})))
