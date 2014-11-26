@@ -67,7 +67,7 @@ define(function(){
             local.find('a[opt=collapseAll]').bind('click',function(){
                 $functiontree.tree('collapseAll');
             })
-            local.find('a[opt=getchecked]').bind('click',function(){
+            option.submitbtn.bind('click',function(){
                 getChecked();
             })
 

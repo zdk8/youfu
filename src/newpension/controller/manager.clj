@@ -3,6 +3,7 @@
   (:require
             [newpension.models.manager :as basemd]
             [noir.response :as resp]
+            [noir.session :as session]
             [newpension.models.schema :as schema];;这里是不需要接连数据库的,仅方便而已,应该交model去操作
             )
   )
@@ -15,7 +16,9 @@
         node (get params :node)
         id (get params :id)
         ni (if node node id)
-        results (if ni (basemd/menutree ni) (basemd/menutree "businessmenu"))]
+        loginname (if (session/get :loginname) (session/get :loginname) "-1")
+        results (if ni (basemd/menutree loginname ni) (basemd/menutree loginname "businessmenu"))]
+    (println "myloginname:" loginname)
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )
   )
@@ -35,6 +38,15 @@
         roleid (get params :roleid)
         ids (get params :functionids)]
     (basemd/save-grant roleid ids)
+    (resp/json {:success true})
+    )
+  )
+(defn save-role-user [req]
+  (let [{params :params}req
+        node (get params :node)
+        userid (get params :userid)
+        ids (get params :roleids)]
+    (basemd/save-role-user userid ids)
     (resp/json {:success true})
     )
   )
@@ -138,9 +150,12 @@
 
 
 ;;角色
-(defn get-role [id]
-  (let [results (basemd/get-role id)]
+(defn get-role [req]
+  (let [{params :params} req
+        {userid :userid} params
+         results (if userid (basemd/get-role-by-userid userid) (basemd/get-role userid))]
     (resp/json results)))
+
 (defn create-role [req]
   (let [{params :params} req
         {flag :flag} params
@@ -156,3 +171,14 @@
 (defn get-role-by-id [id]
   (let [results (first (basemd/get-role-by-id id))]
     (resp/json results)))
+
+
+;;session test
+(defn my-session-put [name]
+  (session/put! :username name)
+  (session/put!  :date "2014")
+  (resp/json {:success (session/get :username)}))
+(defn my-session-get []
+  (resp/json {:success (session/get :username) :date (session/get :date) :loginname (session/get  :loginname) :username (session/get  :username)}))
+(defn my-session-remove []
+  (resp/json {:success (session/remove! :username)}))

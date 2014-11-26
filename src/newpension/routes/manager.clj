@@ -37,7 +37,7 @@
   (POST "/saveuser" req (myctrl/create-user req))
 
   ;;角色维护
-  (POST "/getrole" [node] (myctrl/get-role node))
+  (POST "/getrole" req (myctrl/get-role req))
   (POST "/saverole" req (myctrl/create-role req))
   (POST "/getrolebyid" [id] (myctrl/get-role-by-id id))
   (POST "/delrolebyid" [id] (myctrl/del-role-by-id id))
@@ -45,4 +45,11 @@
   (POST "/grantmenutree" req (myctrl/get-grant-menutree req))
   (GET "/savegrant" req (myctrl/save-grant req))
   (POST "/savegrant" req (myctrl/save-grant req))
+  (GET "/saveroleuser" req (myctrl/save-role-user req))
+  (POST "/saveroleuser" req (myctrl/save-role-user req))
+  ;;测试session
+  (context "/mysessiontest/:name" [name]
+    (GET "/put" [] (myctrl/my-session-put name))
+    (GET "/get" [] (myctrl/my-session-get))
+    (GET "/remove" [] (myctrl/my-session-remove)))
   )
