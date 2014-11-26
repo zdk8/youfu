@@ -1,10 +1,10 @@
 define(function(){
     var render = function(local,option){
-        addylstFun(local);                     //添加养老机构
-        var ylstgl = local.find('[opt=yanlaostmanagement]');        //养老机构管理
+        addylstFun(local);                     //添加老年食堂
+        var ylstgl = local.find('[opt=yanlaostmanagement]');        //养老食堂管理
         var refresh = local.find('[opt=refresh]');        //刷新
         ylstgl.datagrid({
-            url:'queryyljg',
+            url:'pension/getallcanteen',
             type:'post',
             onLoadSuccess:function(data){
                 console.log(data)
@@ -76,8 +76,8 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加老年人食堂',
-                        width:350,
-                        height:385,
+                        width:355,
+                        height:380,
                         html:htmfile,
                         /*buttons:[
                          {text:'取消',handler:function(html,parent){
