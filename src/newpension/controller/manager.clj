@@ -18,10 +18,20 @@
         ni (if node node id)
         loginname (if (session/get :loginname) (session/get :loginname) "-1")
         results (if ni (basemd/menutree loginname ni) (basemd/menutree loginname "businessmenu"))]
-    (println "myloginname:" loginname)
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )
   )
+
+(defn get-all-user-menutree [req]
+  (let [{params :params}req
+        node (get params :node)
+        id (get params :id)
+        ni (if node node id)
+        results (if ni (basemd/allmenutree  ni) (basemd/allmenutree  "businessmenu"))]
+    (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
+    )
+  )
+
 (defn get-grant-menutree [req]
   (let [{params :params}req
         node (get params :node)
