@@ -30,6 +30,8 @@ var svalidatesys_micard=preFixUrl+'pension/checkmicard';
 
 var defaultPage = "dmxt.PlaceAdd";
  defaultPage = "manager.Role";
+//defaultPage = "pension.RuZhuRYManagement";
+defaultPage = "pension.YangLaoJGManagement";
 //defaultPage=undefined;
 var onlyPage=!true;
 //select t.*, t.rowid from T_ENUMS t WHERE t.ENUM_GROUP_GUID='759AB90C-E2BC-E210-BDCC-B8EB0793557E' --and enum_name like '交%'
