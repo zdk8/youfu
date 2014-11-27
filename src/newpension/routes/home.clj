@@ -35,7 +35,8 @@
 (defn dm-page []
   (layout/render "dm.html"))
 (defroutes home-routes
-;  (GET "/dm" [] (dm-page))
+
+;  (GET "/dm" [] (dm-page));;;123456790
   (GET "/" request (old/home request)) ;;登录页面
   (GET "/index" request (old/home request))  ;;退出后跳到登录页面
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
