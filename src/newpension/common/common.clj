@@ -54,19 +54,23 @@
 
 (defn timefmt-bef-list2 [results timefield]            "列出数据之前时间类型格式化"
   (let[timekey (keyword timefield)]
+    (println "KKKKKKKKKKKK" timefield)
       (if (<(count (get results timekey)) 11)
         (time-before-list results timekey)
        (time-formatymd-before-list results timekey))))
 
 (defn timefmt-bef-list [results timefield]            "列出数据之前时间类型格式化"
+  (println "KKKKKKKKKKKK" timefield)
   (let [sdf (new SimpleDateFormat "yyyy-MM-dd HH:mm:ss")
         df   (new SimpleDateFormat "yyyy-MM-dd")
         timekey (keyword timefield)]
-    (map #(conj % {timekey (if (< (count (timekey  %))8 )
-                                              (timekey  %)
-                                              (if (< (count (timekey  %))11)
-                                                  (.format df (timekey  %))
-                                                  (.format sdf (timekey  %))))}{}) results)))
+    (println "RRRRRRRRRRRR" results)
+    (println "KKKKKKKKKKKK" timefield)
+    (map #(conj % {timekey (if (< (count (get % timekey)) 8 )
+                                  (get % timekey)
+                                  (if (< (count (get % timekey)) 11)
+                                       (.format df (get % timekey))
+                                       (.format sdf (get % timekey))))}{}) results)))
 
 
 (defn time-single-format [orderdata timefield]                        "for single date before list"
