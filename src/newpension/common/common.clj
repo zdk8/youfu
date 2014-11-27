@@ -62,7 +62,11 @@
   (let [sdf (new SimpleDateFormat "yyyy-MM-dd HH:mm:ss")
         df   (new SimpleDateFormat "yyyy-MM-dd")
         timekey (keyword timefield)]
-    (map #(conj % {timekey (if (< (count (timekey  %))11)(.format df (timekey  %)) (.format sdf (timekey  %)))}{}) results)))
+    (map #(conj % {timekey (if (< (count (timekey  %))8 )
+                                              (timekey  %)
+                                              (if (< (count (timekey  %))11)
+                                                  (.format df (timekey  %))
+                                                  (.format sdf (timekey  %))))}{}) results)))
 
 
 (defn time-single-format [orderdata timefield]                        "for single date before list"
