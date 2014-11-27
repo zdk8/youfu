@@ -224,6 +224,7 @@
 
 ;;查询满足用户和功能权限的审核信息
 (defn get-audits [functionid loginname dvcode]
+  (println "***********************************" loginname)
   (select audits
     (fields :auditid :aulevel :auflag :audesc :auendflag)                      ;;页面显示内容
     (with userlog

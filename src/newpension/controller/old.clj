@@ -44,11 +44,11 @@
        {userid :userid} result]
       (if result
         (do
-          (session/put! :username username)
-          (session/put! :loginname loginname)
+;          (session/put! :username username)
+;          (session/put! :loginname loginname)
           (session/put! :usermsg result)
 
-          (println (str "************************" (:username (session/get :usermsg)) "(" (:loginname (session/get :usermsg)) ")"))
+;          (println (str "************************" (:username (session/get :usermsg)) "(" (:loginname (session/get :usermsg)) ")"))
           (str true))
         (str false)))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
@@ -203,14 +203,14 @@
     (str "删除成功")))
 
 ;;待办业务查询
-(defn get-audits [functionid loginname dvcode page rows]
+;(defn get-audits [functionid loginname dvcode page rows]
+(defn get-audits [functionid page rows]
   (let [p (Integer/parseInt page)
         r (Integer/parseInt rows)
-;        c (+ (count (db/get-audits functionid loginname dvcode))
-;             (count (db/get-backaudits functionid loginname dvcode)))]
-         c (+ (count (db/get-audits functionid (session/get loginname) dvcode))
-             (count (db/get-backaudits functionid (session/get loginname) dvcode)))]
-    (println "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" dvcode)
+        loginname (:loginname (session/get :usermsg))
+        dvcode (:dvcode (session/get :usermsg))
+        c (+ (count (db/get-audits functionid loginname dvcode))
+             (count (db/get-backaudits functionid loginname dvcode)))]
     (if (<= (* p r) c)                              ;;分页
       (:body (resp/json {:total c :rows (subvec (into(db/get-audits functionid loginname dvcode)
                                                    (db/get-backaudits functionid loginname dvcode))
