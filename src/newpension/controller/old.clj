@@ -26,22 +26,13 @@
 (def oldlrid [:lr_id])
 
 ;;用户登录
-(defn login [request]
+(defn home [request]
   (try
-    (let
-      [{params :params} request
-       {loginname :username} params
-       {passwd :password} params
-       result (db/get-user loginname passwd)
-       {username :username} result
-       {userid :userid} result]
-      (if result
-        (do (session/put! :user_id userid) (layout/render "dm.html" (session/put! :username username)))
-        (layout/render "login.html"))
-      (if (session/get :username)
-        (layout/render "dm.html" {:username (session/get :username)})
-        (layout/render "login.html")))
+    (if (session/get :usermsg)
+      (do (layout/render "dm.html" {:username (:username (session/get :usermsg))}))
+      (do (layout/render "login.html")))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
+
 (defn loginbtn [request]
   (try
     (let
@@ -52,12 +43,20 @@
        {username :username} result
        {userid :userid} result]
       (if result
-        (do (session/put! :username username) (session/put! :loginname loginname) (str true))
+        (do
+;          (session/put! :username username)
+;          (session/put! :loginname loginname)
+          (session/put! :usermsg result)
+
+;          (println (str "************************" (:username (session/get :usermsg)) "(" (:loginname (session/get :usermsg)) ")"))
+          (str true))
         (str false)))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
 ;;注销
 (defn logout [request]
-  (session/remove! :username))
+  (println (str "########################" (:username (session/get :usermsg)) "(" (:loginname (session/get :usermsg)) ")"))
+  (session/remove! :usermsg)
+  (resp/redirect "/"))
 
 ;;查询所有养老信息
 (defn get-olds
@@ -204,9 +203,12 @@
     (str "删除成功")))
 
 ;;待办业务查询
-(defn get-audits [functionid loginname dvcode page rows]
+;(defn get-audits [functionid loginname dvcode page rows]
+(defn get-audits [functionid page rows]
   (let [p (Integer/parseInt page)
         r (Integer/parseInt rows)
+        loginname (:loginname (session/get :usermsg))
+        dvcode (:dvcode (session/get :usermsg))
         c (+ (count (db/get-audits functionid loginname dvcode))
              (count (db/get-backaudits functionid loginname dvcode)))]
     (if (<= (* p r) c)                              ;;分页

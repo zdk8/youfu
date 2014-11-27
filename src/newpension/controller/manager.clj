@@ -16,7 +16,7 @@
         node (get params :node)
         id (get params :id)
         ni (if node node id)
-        loginname (if (session/get :loginname) (session/get :loginname) "-1")
+        loginname (:loginname (session/get :usermsg))
         results (if ni (basemd/menutree loginname ni) (basemd/menutree loginname "businessmenu"))]
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )

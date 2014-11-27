@@ -124,13 +124,15 @@
 ;             (select users
 ;               (where {:loginname name})))))
 (defn get-user [name pwd]
+;  (first
+;    (select users
+;      (where {:loginname name :passwd pwd})
+;      ))
   (first
-    (select users
-;      (fields :loginname)
-      (where {:loginname name :passwd pwd})
-      )
-  )
-  )
+  (with-db dboracle
+    (exec-raw ["select * from xt_user u,division d where u.regionid=d.dvcode and u.loginname=? and u.passwd=?" [name pwd]] :results))
+    )
+    )
 
 ;;根据关键字获取该表自增主键
 (defn get-max [keywords]
@@ -222,6 +224,7 @@
 
 ;;查询满足用户和功能权限的审核信息
 (defn get-audits [functionid loginname dvcode]
+  (println "***********************************" loginname)
   (select audits
     (fields :auditid :aulevel :auflag :audesc :auendflag)                      ;;页面显示内容
     (with userlog

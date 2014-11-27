@@ -34,15 +34,8 @@
   (layout/render "addneed.html"))
 (defn dm-page []
   (layout/render "dm.html"))
-
-(defn testphoto[]
-  (layout/render "testphoto.html"))
 (defroutes home-routes
 ;  (GET "/dm" [] (dm-page))
-  (GET "/test/photo" [] (testphoto))                         ;;test photo
-  (POST "/photo/addphoto" [file] (depart/add-photo file))
-  (GET "/photo/testfun" request (depart/testfun request))
-
   (GET "/" request (old/login request)) ;;登录页面
   (GET "/index" request (old/login request))  ;;退出后跳到登录页面
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
