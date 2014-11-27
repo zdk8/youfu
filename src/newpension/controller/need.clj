@@ -133,4 +133,7 @@
       (do (db/update-active  "2" tprkey)  ;;修改评估表状态
         (db/create-userlog auopseno (str digest " "status flag) auditid functionid dvcode loginname username)      ;;新增审核日志
         (db/update-audit level "0" dvcode (str status flag) loginname auopseno "1" auditid opseno)))      ;;修改审核表
-    (layout/render "audit.html" {:funcid "RsYYAyoMAWG70Gt5GeH6" :functionid "wJhlMNIq8C20mH7Bm6tj"})))    ;;待办业务
+;    (layout/render "audit.html" {:funcid "RsYYAyoMAWG70Gt5GeH6" :functionid "wJhlMNIq8C20mH7Bm6tj"})
+    (resp/json {:success true :message "通过"})
+    ))    ;;待办业务
+;    (layout/render "audit.html" {:funcid "RsYYAyoMAWG70Gt5GeH6" :functionid "wJhlMNIq8C20mH7Bm6tj"})))    ;;待办业务
