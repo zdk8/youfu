@@ -7,7 +7,7 @@
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
     <ignored path="newpension.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417072948702" ignored="false" />
+    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417073169372" ignored="false" />
     <file path="/home.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417070986806" ignored="false" />
     <file path="/db.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1416991413762" ignored="false" />
     <file path="/department.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417072680847" ignored="false" />
@@ -76,19 +76,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="home.clj" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="home.clj" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="46" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.0">
+            <state line="39" column="2" selection-start="1119" selection-end="1119" vertical-scroll-proportion="0.5839695">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="department.clj" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="old.clj" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="165" column="89" selection-start="6883" selection-end="6888" vertical-scroll-proportion="-39.703705">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="department.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="148" selection-start="5364" selection-end="5364" vertical-scroll-proportion="0.4678261">
+            <state line="133" column="15" selection-start="5491" selection-end="5500" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -97,7 +106,7 @@
       <file leaf-file-name="db.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="223" column="0" selection-start="4731" selection-end="4731" vertical-scroll-proportion="0.0">
+            <state line="226" column="0" selection-start="4923" selection-end="4923" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -181,10 +190,10 @@
         <option value="$PROJECT_DIR$/project.clj" />
         <option value="$PROJECT_DIR$/src/newpension/models/db.clj" />
         <option value="$PROJECT_DIR$/src/newpension/models/schema.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
         <option value="$PROJECT_DIR$/resources/templates/testphoto.html" />
         <option value="$PROJECT_DIR$/src/newpension/common/common.clj" />
         <option value="$PROJECT_DIR$/src/newpension/controller/department.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
       </list>
     </option>
   </component>
@@ -367,19 +376,19 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="131" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="148" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="113" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="126" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="154" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="144" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../hvitpublic" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="159" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="843" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="824" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="158" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="145" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="136" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="814" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="763" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="147" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="135" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
@@ -881,7 +890,11 @@
       <created>1417073016545</created>
       <updated>1417073016545</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="upload">
+      <created>1417073172723</created>
+      <updated>1417073172723</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -907,7 +920,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.6650327" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.7374392" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33496732" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1036,11 +1049,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="14" selection-start="5045" selection-end="5051" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/routes/manager.clj">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -1048,7 +1056,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="223" column="0" selection-start="4731" selection-end="4731" vertical-scroll-proportion="0.0">
+        <state line="226" column="0" selection-start="4923" selection-end="4923" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1090,16 +1098,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="46" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.0">
+        <state line="133" column="15" selection-start="5491" selection-end="5500" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="148" selection-start="5364" selection-end="5364" vertical-scroll-proportion="0.4678261">
+        <state line="165" column="89" selection-start="6883" selection-end="6888" vertical-scroll-proportion="-39.703705">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="2" selection-start="1119" selection-end="1119" vertical-scroll-proportion="0.5839695">
           <folding />
         </state>
       </provider>
