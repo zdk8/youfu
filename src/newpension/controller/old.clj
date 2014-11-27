@@ -35,12 +35,13 @@
        result (db/get-user loginname passwd)
        {username :username} result
        {userid :userid} result]
-      (if result
-        (do (session/put! :user_id userid) (layout/render "dm.html" (session/put! :username username)))
-        (layout/render "login.html"))
+      (println "555555555555555555555555555" (:results (db/get-user loginname passwd)))
       (if (session/get :username)
         (layout/render "dm.html" {:username (session/get :username)})
-        (layout/render "login.html")))
+        (if result
+          (do (session/put! :user_id userid) (session/put! :loginname loginname)
+            (layout/render "dm.html" (session/put! :username username)))
+          (layout/render "login.html"))))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
 (defn loginbtn [request]
   (try
@@ -51,7 +52,9 @@
        result (db/get-user loginname passwd)
        {username :username} result
        {userid :userid} result]
+      (println "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" result)
       (if result
+;        (do (session/put! :username username) (session/put! :loginname loginname) (session/put! :loginname2 {:ttt "ooo"}) (str true))
         (do (session/put! :username username) (session/put! :loginname loginname) (str true))
         (str false)))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
@@ -207,8 +210,11 @@
 (defn get-audits [functionid loginname dvcode page rows]
   (let [p (Integer/parseInt page)
         r (Integer/parseInt rows)
-        c (+ (count (db/get-audits functionid loginname dvcode))
-             (count (db/get-backaudits functionid loginname dvcode)))]
+;        c (+ (count (db/get-audits functionid loginname dvcode))
+;             (count (db/get-backaudits functionid loginname dvcode)))]
+         c (+ (count (db/get-audits functionid (session/get loginname) dvcode))
+             (count (db/get-backaudits functionid (session/get loginname) dvcode)))]
+    (println "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" dvcode)
     (if (<= (* p r) c)                              ;;分页
       (:body (resp/json {:total c :rows (subvec (into(db/get-audits functionid loginname dvcode)
                                                    (db/get-backaudits functionid loginname dvcode))
