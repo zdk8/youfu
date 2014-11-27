@@ -34,7 +34,15 @@
   (layout/render "addneed.html"))
 (defn dm-page []
   (layout/render "dm.html"))
+
+(defn upload-page []
+  (layout/render "testphoto.html"))
+
 (defroutes home-routes
+
+  (GET "/upload" [] (upload-page))
+  (POST "/photo/addphoto" [file] (depart/add-photo file))
+
 
 ;  (GET "/dm" [] (dm-page));;;123456790
   (GET "/" request (old/home request)) ;;登录页面
