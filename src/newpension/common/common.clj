@@ -38,14 +38,11 @@
       )))
 
 (defn timefmt-bef-insert [filter-fields timefield]                "插入数据前时间类型格式化"
-
   (let [timekey (keyword timefield)]
-    (if (= (count (get filter-fields timekey)) 0)
-       filter-fields
       (if (<(count (get filter-fields timekey)) 11)
         (time-before-insert filter-fields timekey)
-        (time-formatymd-before-insert filter-fields timekey)))
-    ))
+        (time-formatymd-before-insert filter-fields timekey))))
+
 
 (defn time-formatymd-before-list [results timekey]       "time format before list"
   (let [sdf (new SimpleDateFormat "yyyy-MM-dd HH:mm:ss")]
@@ -55,13 +52,17 @@
   (let [sdf   (new SimpleDateFormat "yyyy-MM-dd")]
     (map #(conj % {timekey (if (timekey  %) (.format sdf (timekey  %)))}{}) results)))
 
-(defn timefmt-bef-list [results timefield]            "列出数据之前时间类型格式化"
+(defn timefmt-bef-list2 [results timefield]            "列出数据之前时间类型格式化"
   (let[timekey (keyword timefield)]
-    (if (= (count (get results timekey)) 11)
-      results
       (if (<(count (get results timekey)) 11)
         (time-before-list results timekey)
-        (time-formatymd-before-list results timekey)))))
+       (time-formatymd-before-list results timekey))))
+
+(defn timefmt-bef-list [results timefield]            "列出数据之前时间类型格式化"
+  (let [sdf (new SimpleDateFormat "yyyy-MM-dd HH:mm:ss")
+        df   (new SimpleDateFormat "yyyy-MM-dd")
+        timekey (keyword timefield)]
+    (map #(conj % {timekey (if (< (count (timekey  %))11)(.format df (timekey  %)) (.format sdf (timekey  %)))}{}) results)))
 
 
 (defn time-single-format [orderdata timefield]                        "for single date before list"
