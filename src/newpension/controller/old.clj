@@ -26,23 +26,13 @@
 (def oldlrid [:lr_id])
 
 ;;用户登录
-(defn login [request]
+(defn home [request]
   (try
-    (let
-      [{params :params} request
-       {loginname :username} params
-       {passwd :password} params
-       result (db/get-user loginname passwd)
-       {username :username} result
-       {userid :userid} result]
-      (println "555555555555555555555555555" (:results (db/get-user loginname passwd)))
-      (if (session/get :username)
-        (layout/render "dm.html" {:username (session/get :username)})
-        (if result
-          (do (session/put! :user_id userid) (session/put! :loginname loginname)
-            (layout/render "dm.html" (session/put! :username username)))
-          (layout/render "login.html"))))
+    (if (session/get :usermsg)
+      (do (layout/render "dm.html" {:username (:username (session/get :usermsg))}))
+      (do (layout/render "login.html")))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
+
 (defn loginbtn [request]
   (try
     (let
@@ -52,15 +42,21 @@
        result (db/get-user loginname passwd)
        {username :username} result
        {userid :userid} result]
-      (println "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" result)
       (if result
-;        (do (session/put! :username username) (session/put! :loginname loginname) (session/put! :loginname2 {:ttt "ooo"}) (str true))
-        (do (session/put! :username username) (session/put! :loginname loginname) (str true))
+        (do
+          (session/put! :username username)
+          (session/put! :loginname loginname)
+          (session/put! :usermsg result)
+
+          (println (str "************************" (:username (session/get :usermsg)) "(" (:loginname (session/get :usermsg)) ")"))
+          (str true))
         (str false)))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
 ;;注销
 (defn logout [request]
-  (session/remove! :username))
+  (println (str "########################" (:username (session/get :usermsg)) "(" (:loginname (session/get :usermsg)) ")"))
+  (session/remove! :usermsg)
+  (resp/redirect "/"))
 
 ;;查询所有养老信息
 (defn get-olds

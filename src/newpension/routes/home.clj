@@ -36,10 +36,11 @@
   (layout/render "dm.html"))
 (defroutes home-routes
 ;  (GET "/dm" [] (dm-page))
-  (GET "/" request (old/login request)) ;;登录页面
-  (GET "/index" request (old/login request))  ;;退出后跳到登录页面
+  (GET "/" request (old/home request)) ;;登录页面
+  (GET "/index" request (old/home request))  ;;退出后跳到登录页面
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
   (POST "/logout" request (old/logout request))      ;;退出登录
+  (GET "/logout" request (old/logout request))      ;;退出登录
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
   (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
   (GET "/audits" [functionid funcid] (audit-page functionid funcid))     ;;待办业务页面

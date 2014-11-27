@@ -29,7 +29,7 @@
         <li class="li-skinitem"><img src="img/head/4.png"/><a id="onlinenums">在线人数(1)</a></li>
         <li class="li-skinitem"><img src="img/head/5.png"/><a id="domshowalterpwd">重设密码</a></li>
         <li class="li-skinitem"><img src="img/head/7.png"/>
-            <a opt="logout" style="text-decoration: none;cursor:pointer" href="/">退出</a>
+            <a opt="logout" style="text-decoration: none;cursor:pointer" href="/logout">退出</a>
         </li>
         <li class="li-skinitem"><span id="currentDate"></span></li>
     </ul>
@@ -77,17 +77,21 @@
 <script src="js/cj.js"></script>
 <script type="text/javascript">
     /*注销*/
-    $('[opt=logout]').click(function(){
-        $.ajax({
+    $('[opt=logout222222]').click(function(){
+        console.log(new Date().toLocaleTimeString());
+        /*$.ajax({
             url:'logout',
-            type:'post',
             success:function(data){
-                document.location.href="index"
-                /*var opened=window.open('about:blank','_self');
+                window.setTimeout(function () {
+                    //document.location.href="/"
+                    console.log(new Date().toLocaleTimeString());
+                }, 10000);
+
+                *//*var opened=window.open('about:blank','_self');
                  opened.opener=null;
-                 opened.close();*/
+                 opened.close();*//*
             }
-        })
+        })*/
     })
     $(document).keyup(function(event){//弹出层注册ESC按键事件
         switch(event.keyCode) {
