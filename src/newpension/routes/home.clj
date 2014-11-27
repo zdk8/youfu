@@ -35,11 +35,13 @@
 (defn dm-page []
   (layout/render "dm.html"))
 (defroutes home-routes
-;  (GET "/dm" [] (dm-page))
-  (GET "/" request (old/login request)) ;;登录页面
-  (GET "/index" request (old/login request))  ;;退出后跳到登录页面
+
+;  (GET "/dm" [] (dm-page));;;123456790
+  (GET "/" request (old/home request)) ;;登录页面
+  (GET "/index" request (old/home request))  ;;退出后跳到登录页面
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
   (POST "/logout" request (old/logout request))      ;;退出登录
+  (GET "/logout" request (old/logout request))      ;;退出登录
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面
   (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
   (GET "/audits" [functionid funcid] (audit-page functionid funcid))     ;;待办业务页面
@@ -62,7 +64,8 @@
   (GET "/log" [functionid page rows] (old/get-logs functionid page rows))       ;;操作日志查询
   (POST "/updateold" request (old/update-old request))       ;;修改养老信息
   (POST "/deleteold" request (old/delete-old request))        ;;删除养老信息
-  (GET "/audit" [functionid loginname dvcode page rows] (old/get-audits functionid loginname dvcode page rows))      ;;待办业务查询
+;  (GET "/audit" [functionid loginname dvcode page rows] (old/get-audits functionid loginname dvcode page rows))      ;;待办业务查询
+  (GET "/audit" [functionid page rows] (old/get-audits functionid page rows))      ;;待办业务查询
   (POST "/checkaudit" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;养老信息待办业务操作
     (old/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
   (GET "/func" [username functionid] (old/get-funcs username functionid))
