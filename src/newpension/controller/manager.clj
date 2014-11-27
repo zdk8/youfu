@@ -4,9 +4,7 @@
             [newpension.models.manager :as basemd]
             [noir.response :as resp]
             [noir.session :as session]
-            [newpension.models.schema :as schema];;这里是不需要接连数据库的,仅方便而已,应该交model去操作
-            )
-  )
+            ))
 
 
 
@@ -27,7 +25,7 @@
         node (get params :node)
         id (get params :id)
         ni (if node node id)
-        results (if ni (basemd/allmenutree  ni) (basemd/allmenutree  "businessmenu"))]
+        results (if ni (basemd/allmenutree  ni) (basemd/allmenutree  "totalroot"))]
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )
   )
@@ -38,7 +36,7 @@
         roleid (get params :roleid)
         id (get params :id)
         ni (if node node id)
-        results (if ni (basemd/grantmenutree roleid ni) (basemd/grantmenutree roleid "businessmenu"))]
+        results (if ni (basemd/grantmenutree roleid ni) (basemd/grantmenutree roleid "totalroot"))]
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )
   )

@@ -10,7 +10,6 @@
 (defdb dboracle schema/db-oracle)
 
 (defn getenumeratebytype [keyword ]
-  (println "************\n" keyword)
   (with-db dboracle
     (exec-raw [(str "select lower(aaa100) enumeratetype,aaa102 enumeratevalue,aaa103 enumeratelabel from xt_combodt where lower(aaa100) like '" keyword "%'") []] :results)))
 
@@ -38,12 +37,10 @@
     (exec-raw ["select dvname text,dvcode value,dvcode id,dvcode,dvname,dvhigh,totalname,(decode (dvrank ,'5' ,'true' ,'false')) leaf  from division where dvhigh=?" [node]] :results) ))
 
 (defn get-function-by-id [id]
-  (println "********" "select * from xt_function where functionid=" id)
   (with-db dboracle
     (exec-raw ["select * from xt_function where functionid=?" [id]] :results)))
 
 (defn del-function-by-id [id]
-  (println "********" "del from xt_function where functionid=?" id)
   (with-db dboracle
     (exec-raw [(str "delete from xt_function where functionid='" id "'")])))
 
@@ -195,7 +192,6 @@
     (where {:roleid roleid}))
   (my-insert-role-func roleid (clojure.string/split ids #",")))
 (defn save-role-user [userid ids]
-  (println "****************88888888888*************:" ids)
   (delete xt_roleuser
     (where {:userid userid}))
   (my-insert-role-user userid (clojure.string/split ids #",")))
