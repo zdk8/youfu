@@ -178,7 +178,8 @@ $(document).ready(function(){
     var jq = top.jQuery;
     $("#loginname").val(jq("#login").val());
     $("#dvcode").val(jq("#code").val());
-    $("#username").val(jq("#user").val());
+//    $("#username").val(jq("#user").val());
+//    $("#username").val(jq("#user").val());
 //    var obj;
     if($("#t3").text())
         obj = eval('('+$("#t3").text()+')');
@@ -933,7 +934,7 @@ $.extend($.fn.validatebox.defaults.rules, {
                     <tr style="text-align: right">
                         <!-- <td class="formtdtext" style="width: 70px">制单人:</td>-->
 
-                        <td style="width: 100px" >制单人:<input class="easyui-validatebox" name="operators" readonly="true" id="username"></td>
+                        <td style="width: 100px" >制单人:<input class="easyui-validatebox" value="{{username}}" name="operators" readonly="true" id="username"></td>
                         {% if old %}
                         <td style="width: 100px" >原制单人:<input class="easyui-validatebox" id="operators" readonly="true"></td>
                         {% endif %}

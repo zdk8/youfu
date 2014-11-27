@@ -5,7 +5,11 @@
   (:require [newpension.models.db :as db]
                [newpension.common.common :as common]
                [newpension.controller.old :as old]
+               [newpension.models.schema :as schema]
                [noir.response :as resp]
+               [clj-time.local :as l]
+               [clj-time.coerce :as c]
+               [noir.io :as io]
                [newpension.layout :as layout]))
 
 (def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
@@ -126,3 +130,13 @@
        {id :id}params]
     (db/delete-canteen id)
     (resp/json {:success true :message "delete canteen success"}) ))
+
+(defn add-photo [file]
+  (let[filepath (common/uploadfile file)]
+    (resp/json {:success true :filepath filepath})))
+
+(defn testfun [request]
+  (println (l/local-now))
+  (println  (c/to-long  (l/local-now)))
+  (println (str schema/datapath "upload/"))
+  (resp/json {:result (str schema/datapath "upload/")}))

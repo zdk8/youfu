@@ -6,6 +6,7 @@
             [newpension.controller.need :as need]
             [newpension.controller.genHtmlCode :as gen]
             [newpension.controller.money :as money]
+            [noir.session :as session]
             [newpension.controller.department :as depart]))
 
 (defn home-page []
@@ -16,7 +17,7 @@
   (layout/render "update.html"))
 
 (defn addold-page []
-  (layout/render "addold.html"))
+  (layout/render "addold.html" {:username (:username (session/get :usermsg))}))
 
 (defn old-page []
   (layout/render "old.html"))
@@ -25,7 +26,7 @@
   (layout/render "log.html" {:functionid functionid}))
 
 (defn audit-page [functionid funcid]
-  (layout/render "audit.html" {:functionid functionid :funcid funcid}))
+  (layout/render "audit.html" {:functionid functionid :funcid funcid :username (:username (session/get :usermsg))}))
 
 (defn need-page []
   (layout/render "need.html"))
@@ -34,7 +35,15 @@
   (layout/render "addneed.html"))
 (defn dm-page []
   (layout/render "dm.html"))
+
+(defn upload-page []
+  (layout/render "testphoto.html"))
+
 (defroutes home-routes
+
+  (GET "/upload" [] (upload-page))
+  (POST "/photo/addphoto" [file] (depart/add-photo file))
+
 
 ;  (GET "/dm" [] (dm-page));;;123456790
   (GET "/" request (old/home request)) ;;登录页面

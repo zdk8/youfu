@@ -1,0 +1,182 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Firefox3,IE6,IE7,IE8上传图片预览</title>
+    <style type="text/css">
+        #preview_fake{ /* 该对象用于在IE下显示预览图片 */       filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);    }    #preview_size_fake{ /* 该对象只用来在IE下获得图片的原始尺寸，无其它用途 */       filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);          visibility:hidden;    }
+    </style>
+    <script type="text/javascript">
+        function add(title){
+//        alert(title);
+            var jq = top.jQuery;
+            var returnVal = window.confirm("是否新增？", "标题");
+            if(returnVal){
+                $("form").form('submit', {
+                    url:'/saveneed',
+                    onSubmit: function(){
+                    },
+                    success:function(){
+                        alert("操作成功！");
+                        jq('#tabs').tabs('close', str+'评估信息');
+                    }
+                });
+            }
+        }
+        function onUploadImgChange(sender){
+            if( !sender.value.match( /.jpg|.gif|.png|.bmp/i ) ){
+                alert('图片格式无效！');
+                return false;
+            }
+            var objPreview = document.getElementById( 'preview' );
+            var objPreviewFake = document.getElementById( 'preview_fake' );
+            var objPreviewSizeFake = document.getElementById( 'preview_size_fake' );
+            if( sender.files &&  sender.files[0] ){
+                objPreview.style.display = 'block';
+                objPreview.style.width = 'auto';
+                objPreview.style.height = 'auto';
+                //Firefox 因安全性问题已无法直接通过 input[file].value 获取完整的文件路径         //支持FF7.0以上版本的写法：
+                window.URL.createObjectUrl(sender.files[0]);
+                objPreview.src = sender.files[0].getAsDataURL();
+            }
+            else if( objPreviewFake.filters ){         //IE7, IE8因安全性问题已无法直接通过 input[file].value 获取完整的文件路径         //IE7,IE8 在设置本地图片地址: img.src 时相同环境有时无法正常显示，因此用滤镜解决此问题。
+                sender.select();
+                var imgSrc = document.selection.createRange().text;
+                objPreviewFake.filters.item(
+                        'DXImageTransform.Microsoft.AlphaImageLoader').src = imgSrc;
+                objPreviewSizeFake.filters.item(
+                        'DXImageTransform.Microsoft.AlphaImageLoader').src = imgSrc;          //alert(objPreviewSizeFake.offsetWidth+'-'+objPreviewSizeFake.offsetHeight);
+                autoSizePreview( objPreviewFake,
+                        objPreviewSizeFake.offsetWidth, objPreviewSizeFake.offsetHeight );
+                objPreview.style.display = 'none';
+            }
+        }
+        function onPreviewLoad(sender)
+        {
+            autoSizePreview( sender, sender.offsetWidth, sender.offsetHeight );
+        }
+        function autoSizePreview( objPre, originalWidth, originalHeight ){
+            var zoomParam = clacImgZoomParam( 200, 150, originalWidth, originalHeight );
+            objPre.style.width = zoomParam.width + 'px';
+            objPre.style.height = zoomParam.height + 'px';
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = { width:width, height:height };
+            if( width>maxWidth || height>maxHeight ){
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+                if( rateWidth > rateHeight ){
+                    param.width =  maxWidth;
+                    param.height = height / rateWidth;
+                }else{
+                    param.width = width / rateHeight;
+                    param.height = maxHeight;
+                }
+            }
+            return param;
+        }
+    </script>
+</head>
+<body>
+<form method="post" opt="upphoto" id="up">
+<input id="upload_img" type="file" onchange="onUploadImgChange(this)"/>
+<div id="preview_fake"> <img id="preview" onload="onPreviewLoad(this)" style="display:none"/> </div>
+<img id="preview_size_fake"/>
+<button id="tj" value="submit" onclick="add('nice')">submits</button>
+</form>
+</body>
+</html>-->
+
+<!--
+<div id="newchapterwin">
+    <form method="post" action="../auth/uploadfile">
+        <table class="formtable">
+
+            <tr>
+                <td style="width: 80px;">上传图章:</td>
+                <td style="width: 200px;">
+                    <input type="file" width="200" style="width: 200px;" name="file"  id="uploadchapter">
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+
+</div>-->
+
+<html>
+<head>
+    <title>文件上传页面</title>
+    <style>
+        .file-box{ position:relative;width:340px}
+        .txt{ height:22px; border:1px solid #cdcdcd; width:180px;}
+        .btn{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;}
+        .file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px }
+
+        #preview, .img, img
+        {
+            width:328px;
+            height:210px;
+        }
+        #preview
+        {
+            border:1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div class="file-box">
+    <form action="/photo/addphoto" method="post" enctype="multipart/form-data">
+
+
+        <div>
+            <input type='text' name='textfield' id='textfield' class='txt' />
+            <input type='button' class='btn' value='浏览...' />
+            <input type="file" name="file" class="file" id="uploadchapter" size="28"
+                   onchange="document.getElementById('textfield').value=this.value;
+               preview(this)" />
+            <input type="submit" name="submit" class="btn" value="上传" />
+
+        </div>
+        <div id="preview"></div>
+
+    </form>
+</div>
+
+
+</body>
+<script type="text/javascript">
+    function preview(file)
+    {
+        var prevDiv = document.getElementById('preview');
+        if (file.files && file.files[0])
+        {
+            var reader = new FileReader();
+            reader.onload = function(evt){
+                prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+        else
+        {
+            prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+    }
+</script>
+</html>
+<!--        <html>
+        <body>
+        <form method="post" action="/photo/addphoto" enctype="multipart/form-data">
+            <p style="width: 80px;">上传图章:</p>
+            <input type="file" width="200" style="width: 200px;" name="file"  id="uploadchapter">
+
+            <input type="submit" value="上传">
+
+        </form>
+        </body>
+        </html>-->
+

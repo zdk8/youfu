@@ -9,21 +9,16 @@
     <script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript"  src="http://www.jeasyui.com/easyui/locale/easyui-lang-zh_CN.js"></script>
     <link rel="stylesheet" type="text/css"  href="http://www.jeasyui.com/easyui/themes/default/easyui.css">-->
-
-
     <script type="text/javascript">
         var jq = top.jQuery;
-        var funcid,functionid;
-        eval("funcid='{{funcid}}'")
-        eval("functionid='{{functionid}}'")
-        console.log(funcid)
-        console.log(functionid)
         $(document).ready(function(){
             $("#loginname").val(jq("#login").val());
             $("#dvcode").val(jq("#code").val());
             $("#username").val(jq("#user").val());
-            func = functionid;
+            var func = $("#func").text();
+            console.log(func)
             $("#t2").datagrid({
+//                url:'/audit?functionid='+func+'&loginname='+jq("#login").val()+'&dvcode='+jq("#code").val(),
                 url:'/audit?functionid='+func,
                 method:'get',
                 onDblClickRow: function(){
@@ -32,6 +27,7 @@
                         var digest = $("#t2").datagrid("getSelected").digest;
                         var str = digest.split(" ")[0].replace("姓名","");
                         var id = $("#t2").datagrid("getSelected").tprkey;
+                        alert(str);
                         if(func == 'txFUV5pFpWVLv6Th4vQl'){
                             if (jq('#tabs').tabs('exists', str+'详细信息'))
                                 jq('#tabs').tabs('select', str+'详细信息');
@@ -102,12 +98,67 @@
                     }
                 }
             });
+            /*进度框*/
+            function showProcess(isShow, title, msg) {
+                if (!isShow) {
+                    $.messager.progress('close');
+                    return;
+                }
+                var win = $.messager.progress({
+                    title: title,
+                    msg: msg
+                });
+            }
             $("#check").click(function(){
-                if(func == 'txFUV5pFpWVLv6Th4vQl')
-                   $("form").submit();
+//                if(func == 'txFUV5pFpWVLv6Th4vQl')
+                if(func == 'mHLcDiwTflgEshNKIiOV')
+                {
+//                    $("form").submit();
+                    $('[opt=auditform]').form('submit',{
+                        dataType:"json",
+                        onSubmit: function () {
+                            var flag = $(this).form('validate');
+                            if (flag) {
+                                showProcess(true, '温馨提示', '正在提交数据...');
+                            }
+                            return flag
+                        },
+                        success:function(data){
+                            var data = eval('(' + data + ')');
+                             if(data.success){
+//                                 alert("添加成功！");
+                                 showProcess(false);
+                                 $("#win").window("close")
+                                 $("#t2").datagrid("reload")
+                             }else{
+                                alert("处理失败！")
+                             }
+                        }
+                    })
+                }
                 else {
-                    //$("form").attr("action","{{servlet-context}}/checkneed");
-                    $("form").submit();
+                    $("form").attr("action","{{servlet-context}}/checkneed");
+//                    $("form").submit();
+                    $('[opt=auditform]').form('submit',{
+                        dataType:"json",
+                        onSubmit: function () {
+                            var flag = $(this).form('validate');
+                            if (flag) {
+                                showProcess(true, '温馨提示', '正在提交数据...');
+                            }
+                            return flag
+                        },
+                        success:function(data){
+                            var data = eval('(' + data + ')');
+                            if(data.success){
+                                showProcess(false);
+                                $("#win").window("close")
+                                $("#t2").datagrid("reload")
+                            }else{
+                                alert("处理失败！")
+                            }
+                        }
+                    })
                 }
             })
         });
@@ -175,7 +226,8 @@
 </style>
 
 <body>
-<table id="t2" class="easyui-datagrid" title="审核信息"   style="width: auto"
+<p id="func" hidden="true">{{functionid}}</p>
+<table id="t2" style="width: auto"
        data-options="
                toolbar:'#tb',
                fit:true,
@@ -183,11 +235,12 @@
                rownumbers:true,
                pagination:true,
                pageSize:20,
+               loadMsg:'',
                pageList: [15,30,45,60]" >
     <thead>
     <tr>
-        <th data-options="field:'auditid',width:80">业务序号</th>
-        <th data-options="field:'opseno',hidden:true"></th>
+        <th data-options="field:'auditid',hidden:true">老人表主键</th>
+        <th data-options="field:'opseno',width:80">业务序号</th>
         <th data-options="field:'aulevel',width:100,align:'center',
             formatter: function(value,row,index){
                 return approvalProcess[value]
@@ -209,7 +262,7 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-log" plain="true" onclick="addTab('审核操作日志','logs?functionid={{funcid}}')">操作日志</a>
 </div>
 <div id="win" class="easyui-window" title="审核" style="width:320px;height:320px;text-align: center" closed="true">
-    <form method="post" action="{{servlet-context}}/checkaudit" id="aa">
+    <form opt="auditform" method="post" action="{{servlet-context}}/checkaudit" id="aa">
         <p>业务序号: <input id="auditid" name="auditid" readonly="true"></p>
         <p>审核级别: <input id="aulevel1" readonly="true"></p>
         <p>备&nbsp&nbsp&nbsp&nbsp注: <input id="digest" name="digest" readonly="true"></p>
@@ -220,7 +273,7 @@
         <input type="hidden" name="opseno" id="opseno">
         <input type="hidden" name="loginname" id="loginname">
         <input type="hidden" name="dvcode" id="dvcode">
-        <input type="hidden" name="username" id="username">
+        <input type="hidden" name="username" id="username" value="{{username}}">
         <input id="aulevel" name="aulevel" hidden="true"></p>
         <br>
         <input type="button" value="确定" id="check">
