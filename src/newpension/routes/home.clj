@@ -6,6 +6,7 @@
             [newpension.controller.need :as need]
             [newpension.controller.genHtmlCode :as gen]
             [newpension.controller.money :as money]
+            [noir.session :as session]
             [newpension.controller.department :as depart]))
 
 (defn home-page []
@@ -16,7 +17,7 @@
   (layout/render "update.html"))
 
 (defn addold-page []
-  (layout/render "addold.html"))
+  (layout/render "addold.html" {:username (:username (session/get :usermsg))}))
 
 (defn old-page []
   (layout/render "old.html"))
@@ -25,7 +26,7 @@
   (layout/render "log.html" {:functionid functionid}))
 
 (defn audit-page [functionid funcid]
-  (layout/render "audit.html" {:functionid functionid :funcid funcid}))
+  (layout/render "audit.html" {:functionid functionid :funcid funcid :username (:username (session/get :usermsg))}))
 
 (defn need-page []
   (layout/render "need.html"))

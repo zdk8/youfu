@@ -6,6 +6,7 @@
             [noir.response :as resp]
             [newpension.layout :as layout]
             [noir.session :as session]
+            [newpension.common.common :as common]
             [clojure.data.json :as json]
             ))
 
@@ -224,26 +225,31 @@
   (let [status (nth ["自由" "提交" "审核" "审批"] (inc (Integer/parseInt aulevel)));;得到审核字段
         level   (str (inc (Integer/parseInt aulevel)))
         auopseno (inc (:max (db/get-max "userlog")))
+        username1 (:username (session/get :usermsg))
         functionid "txFUV5pFpWVLv6Th4vQl"]
     (if (= flag "通过")
       (do (db/update-oldstatus  status tprkey)  ;;修改老人表状态
-        (db/create-userlog auopseno (str digest " "status flag) auditid functionid dvcode loginname username);;新增审核日志
+        (db/create-userlog auopseno (str digest " "status flag) auditid functionid dvcode loginname username1);;新增审核日志
         (if (= (inc (Integer/parseInt aulevel)) 3)  ;;修改审核表   (判断)
           (db/update-audit level "1" dvcode (str status flag) loginname auopseno "1" auditid opseno)
           (db/update-audit level "1" dvcode (str status flag) loginname auopseno "0" auditid opseno)))
       (do (db/update-oldstatus "驳回" tprkey)   ;;修改老人表状态为驳回
-        (db/create-userlog auopseno (str digest " "status flag) auditid functionid dvcode loginname username)      ;;新增审核日志
+        (db/create-userlog auopseno (str digest " "status flag) auditid functionid dvcode loginname username1)      ;;新增审核日志
         (db/update-audit level "0" dvcode (str status flag) loginname auopseno "1" auditid opseno)))      ;;修改审核表
-    (layout/render "audit.html" {:funcid "txFUV5pFpWVLv6Th4vQl" :functionid "mHLcDiwTflgEshNKIiOV"})))    ;;待办业务
+;    (layout/render "audit.html" {:funcid "txFUV5pFpWVLv6Th4vQl" :functionid "mHLcDiwTflgEshNKIiOV"})
+    (resp/json {:success true :message "通过"})
+    ))    ;;待办业务
+;    (layout/render "audit.html" {:funcid "txFUV5pFpWVLv6Th4vQl" :functionid "mHLcDiwTflgEshNKIiOV"})))    ;;待办业务
 
 ;;根据外键查询操作日志
 (defn get-logs [functionid page rows]
   (let [p (Integer/parseInt page)
         r (Integer/parseInt rows)
         c (count (db/get-userlogs functionid))]
+    (println "DDDDDDDDDDDDDDDDDDDD" (db/get-userlogs functionid))
     (if (<= (* p r) c)                              ;;分页
       (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) (* p r))}))
-      (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) c)})))))
+      (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid)  (* (dec p) r) c)})))))
 
 ;;折叠框转换
 (defn accordion [ad username]
