@@ -5,9 +5,23 @@
             (java.sql Timestamp))
   (:require  [noir.response :as resp]
                 [newpension.layout :as layout]
+                [newpension.models.schema :as schema]
+                [clj-time.local :as l]
+                [clj-time.coerce :as c]
+                [noir.io :as io]
                ))
 
 
+
+
+(defn uploadfile [file]
+  (let [uploadpath (str schema/datapath "upload/")
+        timenow (c/to-long  (l/local-now))
+        filename (str timenow (:filename file))
+        ]
+    (io/upload-file uploadpath  (conj file {:filename filename}))
+   {:success true :filename (:filename file) :filepath  (str "../files/" filename)}
+    ))
 
 ;时间格式化
 (defn time-formatymd-before-insert [filter-fields timekey]     "time format before insert"

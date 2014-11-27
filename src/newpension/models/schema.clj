@@ -1,5 +1,7 @@
 (ns newpension.models.schema)
 
+(def datapath (str (System/getProperty "user.dir") "/"))
+
 ;;oracle 连接
 (def db-oracle  {:classname "oracle.jdbc.OracleDriver"
                  :subprotocol "oracle"
