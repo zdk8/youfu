@@ -107,12 +107,12 @@ var cj=(function(){
     var getUrl=function(filepath,action,costomPreFixUrl){
         var u=filepath.replace(/\//g,'@');
         var myu=indexOf(urls,'name',u);
-        var a=myu.url;
+        var a=myu?myu.url:[];
         for(var i in a){
             for(var p in a[i]){
-
                 if(p==action){
-                    return (costomPreFixUrl||preFixUrl)+a[i][p]
+                    var result= (costomPreFixUrl||preFixUrl)+a[i][p];
+                    return result;
                 }
             }
         }
@@ -140,8 +140,8 @@ var cj=(function(){
                 }
             }
         }) */
-        /*$.ajax({
-            url:'auth/getenumbytype',
+        $.ajax({
+            url:'getenumbytype',
             dataType: 'jsonp',
             data:{skeyword:'',type:''},
             success: function(data){
@@ -162,7 +162,7 @@ var cj=(function(){
                 Enums= obj;
                 cjEnum= obj;
             }
-        })*/
+        })
     }
     window.setTimeout(singleFun,1000);
 

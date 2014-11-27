@@ -1,0 +1,48 @@
+<div class="easyui-layout"  data-options="fit:true">
+    <div data-options="region:'center'" data-options="fit:true">
+        <table class="easyui-datagrid-noauto"
+               data-options="
+               method:'post',
+               fit:true,
+               border:false,
+               rownumbers:true,
+               fitColumns:true,
+              pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true">
+            <thead>
+            <tr>
+                <th data-options="field:'lr_id',hidden:true" ></th>
+                <th data-options="field:'name',width:100,align:'center'">姓名</th>
+                <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
+                <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
+                <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
+                <th data-options="field:'address',width:200,align:'left'">住址</th>
+            </tr>
+            </thead>
+        </table>
+
+        <div tb>
+            <table cellspacing="0" cellpadding="0" style="float: right">
+                <tr>
+
+                    <td><label class="gray7">搜索条件:</label></td>
+
+                    <td style="width: 210px;text-align: right">
+                        <input class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
+                               type="keyword" style="width:200px" >
+                    </td>
+
+                    <td>
+                        <span class="searchbtn" >&nbsp;</span>
+                    </td>
+
+
+                </tr>
+            </table>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+</div>

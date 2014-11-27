@@ -9,15 +9,21 @@
     <script type="text/javascript"  src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript"  src="http://www.jeasyui.com/easyui/locale/easyui-lang-zh_CN.js"></script>
     <link rel="stylesheet" type="text/css"  href="http://www.jeasyui.com/easyui/themes/default/easyui.css">-->
+
+
     <script type="text/javascript">
         var jq = top.jQuery;
+        var funcid,functionid;
+        eval("funcid='{{funcid}}'")
+        eval("functionid='{{functionid}}'")
+        console.log(funcid)
+        console.log(functionid)
         $(document).ready(function(){
             $("#loginname").val(jq("#login").val());
             $("#dvcode").val(jq("#code").val());
             $("#username").val(jq("#user").val());
-            var func = $("#func").text();
+            func = functionid;
             $("#t2").datagrid({
-//                url:'/audit?functionid='+func+'&loginname='+jq("#login").val()+'&dvcode='+jq("#code").val(),
                 url:'/audit?functionid='+func,
                 method:'get',
                 onDblClickRow: function(){
@@ -26,7 +32,6 @@
                         var digest = $("#t2").datagrid("getSelected").digest;
                         var str = digest.split(" ")[0].replace("姓名","");
                         var id = $("#t2").datagrid("getSelected").tprkey;
-                        alert(str);
                         if(func == 'txFUV5pFpWVLv6Th4vQl'){
                             if (jq('#tabs').tabs('exists', str+'详细信息'))
                                 jq('#tabs').tabs('select', str+'详细信息');
@@ -101,7 +106,7 @@
                 if(func == 'txFUV5pFpWVLv6Th4vQl')
                    $("form").submit();
                 else {
-                    $("form").attr("action","{{servlet-context}}/checkneed");
+                    //$("form").attr("action","{{servlet-context}}/checkneed");
                     $("form").submit();
                 }
             })
@@ -170,7 +175,6 @@
 </style>
 
 <body>
-<p id="func" hidden="true">{{functionid}}</p>
 <table id="t2" class="easyui-datagrid" title="审核信息"   style="width: auto"
        data-options="
                toolbar:'#tb',

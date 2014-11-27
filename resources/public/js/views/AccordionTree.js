@@ -26,7 +26,7 @@ define(function () {
                 //console.log(node)
                 TreeClickEvent.ShowIframe(value
                     //+'&functionid='+node.functionid
-                    ,jsfile,title);
+                    ,jsfile,title,node.functionid);
             }
         });
     }
