@@ -59,11 +59,15 @@ define(function(){
 
             })
         },
-        ShowIframe:function(value,jsfile,title,customparam){
+        ShowIframe:function(value,jsfile,title,functionid){
             var require_render=function(){
                 if(mainTab.tabs('exists',title)){
                     mainTab.tabs('select', title);
                     return;
+                }
+                var myurl = value;
+                if(value.indexOf(functionid)==-1){
+                    myurl=value+"&="+functionid
                 }
                 mainTab.tabs('add', {
                     title: title,
