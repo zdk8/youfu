@@ -86,9 +86,9 @@
 
 (defn oldpeople-checkout [request]
   (let[{params :params}request
-       {odp_id :odp_id} params
+       {opd_id :opd_id} params
        nowtime (common/get-nowtime)]
-    (db/oldpeople-checkout odp_id nowtime)
+    (db/oldpeople-checkout opd_id nowtime)
     (resp/json {:success true :message "checkout success"})))
 
 (defn getall-oldpeople-depart [request]
