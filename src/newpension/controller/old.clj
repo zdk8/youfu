@@ -247,8 +247,8 @@
         r (Integer/parseInt rows)
         c (count (db/get-userlogs functionid))]
     (if (<= (* p r) c)                              ;;分页
-      (:body (resp/json {:total c :rows (subvec (common/timefmt-bef-list (db/get-userlogs functionid) "bstime") (* (dec p) r) (* p r))}))
-      (:body (resp/json {:total c :rows (subvec (common/timefmt-bef-list (db/get-userlogs functionid) "bstime") (* (dec p) r) c)})))))
+      (:body (resp/json {:total c :rows (subvec (common/time-formatymd-before-list (db/get-userlogs functionid) "bstime") (* (dec p) r) (* p r))}))
+      (:body (resp/json {:total c :rows (subvec (common/time-formatymd-before-list (db/get-userlogs functionid) "bstime") (* (dec p) r) c)})))))
 
 ;;折叠框转换
 (defn accordion [ad username]
