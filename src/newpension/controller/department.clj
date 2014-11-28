@@ -96,7 +96,7 @@
        results (db/getall-results start end sql)
        totalsql  (str "select count(*) as sum  from t_oldpeopledep where checkouttime is null")
        total (get (first(db/get-total totalsql)) :sum)]
-    (resp/json {:total total :rows (common/timefmt-bef-list results "checkintime")})))
+    (resp/json {:total total :rows (common/time-formatymd-before-list results "checkintime")})))
 
 (defn add-canteen  [request]
   (let[{params :params}request
@@ -116,7 +116,7 @@
        results (db/getall-results start end sql)
        totalsql  (str "select count(*) as sum  from t_mcanteen")
        total (get (first(db/get-total totalsql)) :sum)]
-    (resp/json {:total total :rows (common/timefmt-bef-list results "runtime")})))
+    (resp/json {:total total :rows (common/time-before-list results "runtime")})))
 
 (defn update-canteen  [request]
   (let[{params :params}request
