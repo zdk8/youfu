@@ -551,6 +551,11 @@
   (delete t_pensiondepartment
     (where {:dep_id dep_id})))
 
+(defn checkopd [dep_id]
+  (select t_oldpeopledep
+    (where {:dep_id dep_id})
+    (where (= :checkouttime nil))))
+
 
 (defn get-oldpeople [identityid]
   (select olds

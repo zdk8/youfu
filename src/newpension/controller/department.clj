@@ -54,9 +54,12 @@
 
 (defn delete-departbyid [request]
   (let[{params :params}request
-       {dep_id :dep_id}params]
-    (db/delete-departbyid dep_id)
-    (resp/json {:success true :message "delete success"})))
+       {dep_id :dep_id}params
+       opd (db/checkopd dep_id)]
+    (if (>(count opd) 0)
+        (resp/json {:success false :message "some old people are not checkout"})
+        (do (db/delete-departbyid dep_id)
+              (resp/json {:success true :message "delete success"})))))
 
 (defn get-oldpeople [identityid]
   (db/get-oldpeople identityid))
