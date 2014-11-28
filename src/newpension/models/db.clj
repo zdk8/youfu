@@ -565,6 +565,11 @@
   (insert t_oldpeopledep
     (values opddate)))
 
+(defn oldpeople-checkout [id nowtime]
+  (update t_oldpeopledep
+    (set-fields {:checkouttime nowtime})
+    (where {:id id})))
+
 (defn add-canteen [canteendate]
   (insert t_mcanteen
     (values canteendate)))

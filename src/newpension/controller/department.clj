@@ -84,6 +84,12 @@
       (do (db/add-oldpeopledep opddate) (resp/json {:success true :message "checkin success"})))
 ))
 
+(defn oldpeople-checkout [request]
+  (let[{params :params}request
+       {id :id} params
+       nowtime (common/get-nowtime)]
+    (db/oldpeople-checkout id nowtime)))
+
 (defn getall-oldpeople-depart [request]
   (let[{params :params}request
        {page :page}params
