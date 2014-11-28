@@ -57,7 +57,7 @@ define(function(){
     var rendercombo=function(local,option){
         var localDataGrid=
             local.find('.easyui-datagrid-noauto').datagrid({
-                url:cj.getUrl(filepathcombo,'mr','/'),
+                url:'/getcombo',//cj.getUrl(filepathcombo,'mr','/'),
                 loadMsg:cj.dataGridLoadMsg(),
                 queryParams: {
                     intelligentsp:null
@@ -128,7 +128,7 @@ define(function(){
     var rendercombodt=function(local,option){
         var localDataGrid=
             local.find('.easyui-datagrid-noauto').datagrid({
-                url_0:cj.getUrl(filepathcombodt,'mr','/'),
+                url_0:'/getcombodt',
                 queryParams: {
                     intelligentsp:null,
                     aaa100:0
