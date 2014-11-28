@@ -13,7 +13,7 @@
                [newpension.layout :as layout]))
 
 (def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
-(def deppeople [:id :name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy])
+(def deppeople [:name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy])
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
 (def canteen [:departname :register :telephone :people :address :busline :coordinates :buildarea :function :runtime :avgnumber])
 
@@ -42,19 +42,19 @@
 
 (defn get-departbyid [request]
   (let[{params :params}request
-       {id :id}params]
+       {dep_id :dep_id}params]
     (resp/json (db/get-departbyid id))))
 
 (defn update-departbyid [request]
   (let[{params :params}request
        filter-fields (select-keys params depart)
-       {id :id}params]
+       {dep_id :dep_id}params]
     (db/update-departbyid filter-fields id)
     (resp/json {:success true :message "update success"})))
 
 (defn delete-departbyid [request]
   (let[{params :params}request
-       {id :id}params]
+       {dep_id :dep_id}params]
     (db/delete-departbyid id)
     (resp/json {:success true :message "delete success"})))
 
@@ -86,7 +86,7 @@
 
 (defn oldpeople-checkout [request]
   (let[{params :params}request
-       {id :id} params
+       {odp_id :odp_id} params
        nowtime (common/get-nowtime)]
     (db/oldpeople-checkout id nowtime)
     (resp/json {:success true :message "checkout success"})))
@@ -127,14 +127,14 @@
 
 (defn update-canteen  [request]
   (let[{params :params}request
-       {id :id}params
+       {c_id :c_id}params
        canteendate (select-keys params canteen)]
     (db/update-canteen (common/timefmt-bef-insert canteendate "runtime") id)
     (resp/json {:success true :message "update canteen success"})))
 
 (defn delete-canteen [request]
   (let[{params :params}request
-       {id :id}params]
+       {c_id :c_id}params]
     (db/delete-canteen id)
     (resp/json {:success true :message "delete canteen success"}) ))
 
