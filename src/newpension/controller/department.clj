@@ -43,19 +43,19 @@
 (defn get-departbyid [request]
   (let[{params :params}request
        {dep_id :dep_id}params]
-    (resp/json (db/get-departbyid id))))
+    (resp/json (db/get-departbyid dep_id))))
 
 (defn update-departbyid [request]
   (let[{params :params}request
        filter-fields (select-keys params depart)
        {dep_id :dep_id}params]
-    (db/update-departbyid filter-fields id)
+    (db/update-departbyid filter-fields dep_id)
     (resp/json {:success true :message "update success"})))
 
 (defn delete-departbyid [request]
   (let[{params :params}request
        {dep_id :dep_id}params]
-    (db/delete-departbyid id)
+    (db/delete-departbyid dep_id)
     (resp/json {:success true :message "delete success"})))
 
 (defn get-oldpeople [identityid]
@@ -88,7 +88,7 @@
   (let[{params :params}request
        {odp_id :odp_id} params
        nowtime (common/get-nowtime)]
-    (db/oldpeople-checkout id nowtime)
+    (db/oldpeople-checkout odp_id nowtime)
     (resp/json {:success true :message "checkout success"})))
 
 (defn getall-oldpeople-depart [request]
@@ -129,13 +129,13 @@
   (let[{params :params}request
        {c_id :c_id}params
        canteendate (select-keys params canteen)]
-    (db/update-canteen (common/timefmt-bef-insert canteendate "runtime") id)
+    (db/update-canteen (common/timefmt-bef-insert canteendate "runtime") c_id)
     (resp/json {:success true :message "update canteen success"})))
 
 (defn delete-canteen [request]
   (let[{params :params}request
        {c_id :c_id}params]
-    (db/delete-canteen id)
+    (db/delete-canteen c_id)
     (resp/json {:success true :message "delete canteen success"}) ))
 
 (defn add-photo [file]
