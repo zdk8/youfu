@@ -12,7 +12,7 @@ define(function(){
             determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
         }*/
         if(actiontype == "addrzry"){                     //添加入住人员
-            rzrydlg.form('load', {departname:option.data.departname});  //填充机构名称
+            rzrydlg.form('load', {departname:option.data.departname,opd_id:option.data.dep_id});  //填充机构名称、机构id
             determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
         }
 

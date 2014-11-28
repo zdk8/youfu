@@ -7,7 +7,6 @@ define(function(){
             url:'pension/getallcanteen',
             type:'post',
             onLoadSuccess:function(data){
-                console.log(data)
                 var updates = local.find('[action=update]');           //修改
                 var del = local.find('[action=delete]');                //删除
                 var rows=data.rows;
@@ -43,11 +42,11 @@ define(function(){
                                         url:'pension/deletecanteen',
                                         type:'post',
                                         data:{
-                                            id:record.id
+                                            c_id:record.c_id
                                         },
                                         success:function(data){
                                             var data = eval('(' + data + ')');
-                                            console.log(data)
+//                                            console.log(data)
                                             if(data.success){
                                                 alert("删除成功")
                                             }

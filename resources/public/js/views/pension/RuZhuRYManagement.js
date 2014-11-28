@@ -9,7 +9,6 @@ define(function(){
             },*/
             type:'post',
             onLoadSuccess:function(data){
-                console.log(data)
                /* var updates = local.find('[action=update]');           //修改
                 var del = local.find('[action=delete]');                //删除
                 var addrzry = local.find('[action=addrzry]');                //添加入住人员*/
@@ -24,12 +23,24 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "cancellation"){             //注销
-//                                    console.log(record.departname)
-                                    var data = record;
                                     var departname = record.departname;         //机构名称
-                                    $.messager.confirm('温馨提示', '是否注销该人员?', function(r){
+                                    var testmsg = "是否注销人员【<label style='color: darkslategrey;font-weight: bold'>"+record.name+"</label>】?"
+                                    $.messager.confirm('温馨提示', testmsg, function(r){
                                         if (r){
-                                            console.log(r)
+                                            $.ajax({
+                                                url:'pension/oldpeoplecheckout',
+                                                type:'post',
+                                                data:{
+                                                    opd_id:record.opd_id
+                                                },
+                                                success:function(data){
+                                                    if(data.success){
+                                                        alert("人员注销成功")
+                                                        rzrygl.datagrid("reload")
+                                                    }
+                                                },
+                                                dataType:'json'
+                                            })
                                         }
                                     });
                                 }
