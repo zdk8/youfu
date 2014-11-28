@@ -43,7 +43,7 @@ define(function(){
                                         url:'pension/deletedepartmentbyid',
                                         type:'post',
                                         data:{
-                                            id:record.id
+                                            dep_id:record.dep_id
                                         },
                                         success:function(data){
                                             var data = eval('(' + data + ')');

@@ -13,7 +13,7 @@
                [newpension.layout :as layout]))
 
 (def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
-(def deppeople [:id :name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy])
+(def deppeople [:name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy :deptype])
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
 (def canteen [:departname :register :telephone :people :address :busline :coordinates :buildarea :function :runtime :avgnumber])
 
@@ -42,21 +42,24 @@
 
 (defn get-departbyid [request]
   (let[{params :params}request
-       {id :id}params]
-    (resp/json (db/get-departbyid id))))
+       {dep_id :dep_id}params]
+    (resp/json (db/get-departbyid dep_id))))
 
 (defn update-departbyid [request]
   (let[{params :params}request
        filter-fields (select-keys params depart)
-       {id :id}params]
-    (db/update-departbyid filter-fields id)
+       {dep_id :dep_id}params]
+    (db/update-departbyid filter-fields dep_id)
     (resp/json {:success true :message "update success"})))
 
 (defn delete-departbyid [request]
   (let[{params :params}request
-       {id :id}params]
-    (db/delete-departbyid id)
-    (resp/json {:success true :message "delete success"})))
+       {dep_id :dep_id}params
+       opd (db/checkopd dep_id)]
+    (if (>(count opd) 0)
+        (resp/json {:success false :message "some old people are not checkout"})
+        (do (db/delete-departbyid dep_id)
+              (resp/json {:success true :message "delete success"})))))
 
 (defn get-oldpeople [identityid]
   (db/get-oldpeople identityid))
@@ -83,6 +86,13 @@
     (if (> (count checkopdep) 0)  (resp/json {:success false :message "user already checkin"})                              ;判断是否已经入住了
       (do (db/add-oldpeopledep opddate) (resp/json {:success true :message "checkin success"})))
 ))
+
+(defn oldpeople-checkout [request]
+  (let[{params :params}request
+       {opd_id :opd_id} params
+       nowtime (common/get-nowtime)]
+    (db/oldpeople-checkout opd_id nowtime)
+    (resp/json {:success true :message "checkout success"})))
 
 (defn getall-oldpeople-depart [request]
   (let[{params :params}request
@@ -120,15 +130,15 @@
 
 (defn update-canteen  [request]
   (let[{params :params}request
-       {id :id}params
+       {c_id :c_id}params
        canteendate (select-keys params canteen)]
-    (db/update-canteen (common/timefmt-bef-insert canteendate "runtime") id)
+    (db/update-canteen (common/timefmt-bef-insert canteendate "runtime") c_id)
     (resp/json {:success true :message "update canteen success"})))
 
 (defn delete-canteen [request]
   (let[{params :params}request
-       {id :id}params]
-    (db/delete-canteen id)
+       {c_id :c_id}params]
+    (db/delete-canteen c_id)
     (resp/json {:success true :message "delete canteen success"}) ))
 
 (defn add-photo [file]

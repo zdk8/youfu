@@ -96,19 +96,19 @@
 
 ;;养老机构表
 (defentity t_pensiondepartment
-  (pk :id)
+  (pk :dep_id)
   (table :t_pensiondepartment)
   (database dboracle))
 
 ;;入住机构表
 (defentity t_oldpeopledep
-  (pk :id)
+  (pk :opd_id)
   (table :t_oldpeopledep)
   (database dboracle))
 
 ;;食堂
 (defentity t_mcanteen
-  (pk :id)
+  (pk :c_id)
   (table :t_mcanteen)
   (database dboracle))
 
@@ -538,18 +538,23 @@
   (insert t_pensiondepartment
     (values filter-fields)))
 
-(defn get-departbyid [id]
+(defn get-departbyid [dep_id]
   (select t_pensiondepartment
-    (where {:id id})))
+    (where {:dep_id dep_id})))
 
-(defn update-departbyid [filter-fields id]
+(defn update-departbyid [filter-fields dep_id]
   (update t_pensiondepartment
     (set-fields filter-fields)
-    (where {:id id})))
+    (where {:dep_id dep_id})))
 
-(defn delete-departbyid [id]
+(defn delete-departbyid [dep_id]
   (delete t_pensiondepartment
-    (where {:id id})))
+    (where {:dep_id dep_id})))
+
+(defn checkopd [dep_id]
+  (select t_oldpeopledep
+    (where {:dep_id dep_id})
+    (where (= :checkouttime nil))))
 
 
 (defn get-oldpeople [identityid]
@@ -565,18 +570,23 @@
   (insert t_oldpeopledep
     (values opddate)))
 
+(defn oldpeople-checkout [opd_id nowtime]
+  (update t_oldpeopledep
+    (set-fields {:checkouttime nowtime})
+    (where {:opd_id opd_id})))
+
 (defn add-canteen [canteendate]
   (insert t_mcanteen
     (values canteendate)))
 
-(defn update-canteen [canteendate id]
+(defn update-canteen [canteendate c_id]
   (update t_mcanteen
     (set-fields canteendate)
-    (where {:id id})))
+    (where {:c_id c_id})))
 
-(defn delete-canteen [id]
+(defn delete-canteen [c_id]
   (delete t_mcanteen
-    (where {:id id})))
+    (where {:c_id c_id})))
 
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM
