@@ -17,6 +17,10 @@
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
 (def canteen [:departname :register :telephone :people :address :busline :coordinates :buildarea :function :runtime :avgnumber])
 
+(def t_pensiondepartment "t_pensiondepartment")
+(def t_oldpeopledep "t_oldpeopledep")
+(def t_mcanteen "t_mcanteen")
+
 
 (defn add-department [request]
   (let [{params :params}request
@@ -27,18 +31,13 @@
 (defn getall-department [request]
   (let[{params :params}request
        {deptype :deptype}params
+       {departname :departname}params
        {page :page}params
        {rows :rows}params
-       r   (read-string rows)
-       p  (read-string page)
-       start  (inc(* r (dec p)))
-       end (* r p)
-      sql (str "select * from t_pensiondepartment WHERE DEPTYPE = '" deptype "'")
-       results (db/getall-results start end sql)
-      totalsql  (str "select count(*) as sum  from t_pensiondepartment where DEPTYPE = '" deptype"'")
-      total (get (first(db/get-total totalsql)) :sum)
+        cond (str " deptype = '" deptype "' "  (common/likecond "departname" departname))
+        getresult (common/fenye rows page t_pensiondepartment cond)
        ]
-    (resp/json {:total total :rows results})))
+    (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "runtime")})))
 
 (defn get-departbyid [request]
   (let[{params :params}request
@@ -106,19 +105,7 @@
     (db/oldpeople-checkout opd_id nowtime)
     (resp/json {:success true :message "checkout success"})))
 
-(defn getall-oldpeople-depart [request]
-  (let[{params :params}request
-       {page :page}params
-       {rows :rows}params
-       r   (read-string rows)
-       p  (read-string page)
-       start  (inc(* r (dec p)))
-       end (* r p)
-       sql (str "select * from t_oldpeopledep WHERE checkouttime is null")
-       results (db/getall-results start end sql)
-       totalsql  (str "select count(*) as sum  from t_oldpeopledep where checkouttime is null")
-       total (get (first(db/get-total totalsql)) :sum)]
-    (resp/json {:total total :rows (common/time-formatymd-before-list results "checkintime")})))
+
 
 (defn add-canteen  [request]
   (let[{params :params}request
