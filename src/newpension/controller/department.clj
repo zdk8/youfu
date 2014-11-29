@@ -118,7 +118,7 @@
        {page :page}params
        {rows :rows}params
        {departname :departname}params
-       cond (str " departname like '" departname "' ")
+       cond (str " departname like '%" departname "%' ")
        getresult (common/fenye rows page t_mcanteen cond)]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "runtime")})))
 
