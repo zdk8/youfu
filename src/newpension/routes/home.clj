@@ -35,6 +35,12 @@
   (layout/render "addneed.html"))
 (defn dm-page []
   (layout/render "dm.html"))
+(defn dm2-page []
+  (layout/render "dm2.html"))
+
+(defn dm3-page []
+  (layout/render "dm3.html"))
+
 
 (defn upload-page []
   (layout/render "testphoto.html"))
@@ -48,6 +54,8 @@
 ;  (GET "/dm" [] (dm-page));;;123456790
   (GET "/" request (old/home request)) ;;登录页面
   (GET "/index" request (old/home request))  ;;退出后跳到登录页面
+  (GET "/dm2" request (dm2-page))
+  (GET "/dm3" request (dm3-page))
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
   (POST "/logout" request (old/logout request))      ;;退出登录
   (GET "/logout" request (old/logout request))      ;;退出登录

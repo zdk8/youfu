@@ -88,21 +88,17 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加养老机构',
-                        width:350,
-                        height:385,
+                        width:700,
+                        height:258,
                         html:htmfile,
-                        /*buttons:[
+                        buttons:[
                          {text:'取消',handler:function(html,parent){
                          parent.trigger('close');
                          }},
                          {
-                         text:'保存1',
-                         handler:function(html,parent){
-                         //                                    local.find(html+'[opt=yljgdlg]')
-                         console.log(local.find(html+'[opt=yljgdlg]'))
-                         }
-                         }
-                         ],*/
+                         text:'保存',
+                         handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,

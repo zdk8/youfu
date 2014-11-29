@@ -396,8 +396,8 @@ input:disabled{
 
 
 #mainPanle{
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding-bottom: 1px;
+    padding-top: 1px;
     background:url(../../img/bg-gray.gif) repeat;
     border-left: 1px solid #4b91e5;
     /*border-width:5px 3px 5px;

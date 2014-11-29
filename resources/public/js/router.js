@@ -3,14 +3,16 @@
  */
 define(function(){
 
-    var routes = [{hash:'#menu_pension', controller:'MainViewController'},
+    var routes = [
+        {hash:'#menu_pension', controller:'MainViewController'},
+        {hash:'#menu_newpension', controller:'MainViewController_NEWPENSION'},
         {hash:'#menu_qxgl',  controller:'ManagerController'}];
     var defaultRoute = '#menu_pension';
     //var defaultRoute ='';
     var currentHash = '';
 
-    function startRouting(){
-        window.location.hash = window.location.hash || defaultRoute;
+    function startRouting(customRoute){
+        window.location.hash = window.location.hash ||customRoute|| defaultRoute;
         setInterval(hashCheck, 100);
     }
 
