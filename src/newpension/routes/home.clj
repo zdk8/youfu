@@ -75,6 +75,7 @@
   (POST "/deleteold" request (old/delete-old request))        ;;删除养老信息
 ;  (GET "/audit" [functionid loginname dvcode page rows] (old/get-audits functionid loginname dvcode page rows))      ;;待办业务查询
   (GET "/audit" [functionid page rows] (old/get-audits functionid page rows))      ;;待办业务查询
+  (POST "/audit" [functionid page rows] (old/get-audits functionid page rows))      ;;待办业务查询
   (POST "/checkaudit" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;养老信息待办业务操作
     (old/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
   (GET "/func" [username functionid] (old/get-funcs username functionid))

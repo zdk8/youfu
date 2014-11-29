@@ -1,1 +1,43 @@
-11111111111111111111
+<!--审核表-->
+<table opt="ppaudit" data-options="
+               method:'post',
+               toolbar:'#tb_ppaudit',
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true,
+               loadMsg:''">
+    <thead>
+    <tr>
+        <th data-options="field:'auditid',hidden:true">老人表主键</th>
+        <th data-options="field:'ro',width:210,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;info&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>详细信息</span></span></a>');
+                str=$(str).append('<a action=&quot;dealwith&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>处理</span></span></a>');
+                return str.html();
+            }">操作</th>
+        <th data-options="field:'aulevel',width:180,
+        formatter: function(value,row,index){
+                return approvalProcess[value]
+			}">状态</th>
+        <th data-options="field:'opseno1',width:180">流程意见</th>
+        <th data-options="field:'name',width:180">姓名</th>
+        <th data-options="field:'opseno',width:180">身份证</th>
+        <th data-options="field:'opseno',width:180">性别</th>
+        <th data-options="field:'username',width:180">办理人</th>
+        <th data-options="field:'bsnyue',width:180">业务期</th>
+        <th data-options="field:'bstime',width:230">时间</th>
+
+    </tr>
+    </thead>
+</table>
+<div id="tb_ppaudit">
+    <a opt="operationlog" class="easyui-linkbutton" iconCls="icon-log" plain="true">操作日志</a>
+</div>
+
+

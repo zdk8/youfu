@@ -392,7 +392,7 @@ $.extend($.fn.validatebox.defaults.rules, {
         <table class="formtable" style="width: 900px">
             <tr>
                 <td class="formtdtext">家庭住址<span style="color: red">*</span></td>
-                <td colspan="3"><input class="easyui-validatebox" name="address" data-options="required:true" style="width: 300px" id="address"></td>
+                <td colspan="3"><input class="easyui-validatebox" name="address" style="width: 300px" id="address"></td>
                 <td class="formtdtext">人员类型<span style="color: red">*</span></td>
                 <td>
                     <input class="easyui-combobox lazy-combobox" id="type"
@@ -402,9 +402,7 @@ $.extend($.fn.validatebox.defaults.rules, {
                                 loader:cj.getLoader('oldtype'),
                                 editable:false,
                                 valueField:'id',
-                                textField:'text',
-                                required:true
-            ">
+                                textField:'text'">
                 </td>
             </tr>
             <tr>

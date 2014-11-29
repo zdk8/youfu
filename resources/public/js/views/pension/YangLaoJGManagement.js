@@ -11,7 +11,6 @@ define(function(){
             },
             type:'post',
             onLoadSuccess:function(data){
-                console.log(data)
                 var updates = local.find('[action=update]');           //修改
                 var del = local.find('[action=delete]');                //删除
                 var addrzry = local.find('[action=addrzry]');                //添加入住人员
