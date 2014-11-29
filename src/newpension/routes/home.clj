@@ -83,6 +83,7 @@
   (POST "/deleteold" request (old/delete-old request))        ;;删除养老信息
 ;  (GET "/audit" [functionid loginname dvcode page rows] (old/get-audits functionid loginname dvcode page rows))      ;;待办业务查询
   (GET "/audit" [functionid page rows] (old/get-audits functionid page rows))      ;;待办业务查询
+  (POST "/audit" [functionid page rows] (old/get-audits functionid page rows))      ;;待办业务查询
   (POST "/checkaudit" [flag aulevel digest tprkey auditid dvcode loginname username opseno]      ;;养老信息待办业务操作
     (old/update-audit flag aulevel digest tprkey auditid dvcode loginname username opseno))
   (GET "/func" [username functionid] (old/get-funcs username functionid))
@@ -119,7 +120,7 @@
   (POST "/pension/checkidentityid" request (depart/checkidentityid request))              ;;根据身份证从老年表中查询老年人信息
   (POST "/pension/addoldpeopledepart" request (depart/add-oldpeople-depart request))     ;;添加入住人员
   (POST "/pension/oldpeoplecheckout" request (depart/oldpeople-checkout request))               ;;入住人员离开
-  (POST "/pension/getalloldpeopledepart" request (depart/getall-oldpeople-depart request))          ;;获取现入住机构的老人
+  (POST "/pension/getalloldpeopledepart" request (depart/select-opdofdepart request))          ;;获取现入住机构的老人
   (POST "/pension/addcanteen" request (depart/add-canteen  request))                         ;;食堂添加
   (POST "/pension/getallcanteen" request (depart/getall-canteen  request))                      ;;食堂查询
   (POST "/pension/updatecanteen" request (depart/update-canteen  request))                      ;;食堂修改

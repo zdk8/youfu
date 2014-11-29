@@ -2,6 +2,7 @@ define(function(){
     var render = function(local,option){
         var yljggl = local.find('[opt=yanlaojgmanagement]');        //养老机构管理
         var refresh = local.find('[opt=refresh]');        //刷新
+        var departname = local.find('[opt=departname]');        //机构名称
         addyljgFun(local,refresh);                     //添加养老机构
         yljggl.datagrid({
             url:'pension/getalldepartment',
@@ -10,7 +11,6 @@ define(function(){
             },
             type:'post',
             onLoadSuccess:function(data){
-                console.log(data)
                 var updates = local.find('[action=update]');           //修改
                 var del = local.find('[action=delete]');                //删除
                 var addrzry = local.find('[action=addrzry]');                //添加入住人员
@@ -26,21 +26,19 @@ define(function(){
 //                                    console.log(record.departname)
                                     var data = record;
                                     var departname = record.departname;         //机构名称
-                                    updateyljgFun(local,departname,data,refresh)                //修改养老机构
-                                    /*cj.showContent({
-                                        title:record.biaozhunmingcheng+'修改',
-                                        htmfile:'text!views/dmxt/PlaceCommon.htm',
-                                        jsfile:'views/dmxt/PlaceCommon',
+                                    updateyljgFun(local,departname,data,refresh)                //修改养老机构(弹出框)
+                                    /*cj.showContent({                                          //修改养老机构(tab标签)
+                                        title:record.departname+'修改',
+                                        htmfile:'text!views/pension/YangLaoJGDlg.htm',
+                                        jsfile:'views/pension/YangLaoJGDlg',
                                         queryParams:{
-                                            id:record.id,
-                                            actionType:"update"*//*,
-                                            tablename:tablename,
-                                            wholename:wholename,
-                                            headname:record.leibiemingcheng*//*
+                                            refresh:refresh,         //刷新按钮
+                                            actiontype:'update',       //操作方式
+                                            data:data                   //填充数据
                                         }
                                     })*/
                                 }else if(action == "delete"){           //删除
-                                    var testmsg = "是删除销人员【<label style='color: darkslategrey;font-weight: bold'>"+record.departname+"</label>】?"
+                                    var testmsg = "是否删除该机构【<label style='color: darkslategrey;font-weight: bold'>"+record.departname+"</label>】?"
                                     $.messager.confirm('温馨提示', testmsg, function(r){
                                         if (r){
                                             $.ajax({
@@ -75,7 +73,11 @@ define(function(){
             }
         })
         refresh.click(function(){
-            yljggl.datagrid('reload');
+//            yljggl.datagrid('reload');
+            yljggl.datagrid('load',{
+                deptype:'jigou',
+                departname:departname.val()
+            });
         })
 
 

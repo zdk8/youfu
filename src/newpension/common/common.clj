@@ -9,6 +9,7 @@
                 [clj-time.local :as l]
                 [clj-time.coerce :as c]
                 [noir.io :as io]
+                [newpension.models.db :as db]
                ))
 
 
@@ -79,3 +80,20 @@
 
 (defn get-nowtime []                          "获取当前系统时间"
   (new Timestamp (System/currentTimeMillis)))
+
+
+(defn fenye [rows page tablename cond]
+  (let[r   (read-string rows)
+       p  (read-string page)
+       start  (inc(* r (dec p)))
+       end (* r p)
+       sql (str "select * from " tablename " WHERE " cond)
+       results (db/getall-results start end sql)
+       totalsql  (str "select count(*) as sum  from " tablename " where " cond)
+       total (get (first(db/get-total totalsql)) :sum)]
+    {:total total :rows results}))
+
+(defn likecond [condname condvalue]
+  (if  (= (count (str condvalue)) 0)
+    " "
+    (str " and " condname " like '%" condvalue "%' ")))

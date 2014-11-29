@@ -2,6 +2,7 @@ define(function(){
     var render = function(local,option){
         var ylxggl = local.find('[opt=yanlaoxgmanagement]');        //养老机构管理
         var refresh = local.find('[opt=refresh]');        //刷新
+        var departname = local.find('[opt=departname]');        //机构名称
         addylxgFun(local,refresh);                     //添加养老机构
         ylxggl.datagrid({
             url:'pension/getalldepartment',
@@ -39,22 +40,26 @@ define(function(){
                                      }
                                      })*/
                                 }else if(action == "delete"){                       //删除
-                                    $.ajax({
-                                        url:'pension/deletedepartmentbyid',
-                                        type:'post',
-                                        data:{
-                                            dep_id:record.dep_id
-                                        },
-                                        success:function(data){
-                                            var data = eval('(' + data + ')');
-                                            console.log(data)
-                                            if(data.success){
-                                                alert("删除成功")
-                                            }
-                                        },
-                                        dataType:'json'
-                                    })
-                                    refresh.trigger('click')
+                                    var testmsg = "是否删除该机构【<label style='color: darkslategrey;font-weight: bold'>"+record.departname+"</label>】?"
+                                    $.messager.confirm('温馨提示', testmsg, function(r){
+                                        if (r){
+                                            $.ajax({
+                                                url:'pension/deletedepartmentbyid',
+                                                type:'post',
+                                                data:{
+                                                    dep_id:record.dep_id
+                                                },
+                                                success:function(data){
+//                                                    var data = eval('(' + data + ')');
+                                                    if(data.success){
+                                                        alert("删除成功")
+                                                        ylxggl.datagrid("reload")
+                                                    }
+                                                },
+                                                dataType:'json'
+                                            })
+                                        }
+                                    });
                                 }
                             });
                         })(i)
@@ -63,8 +68,11 @@ define(function(){
             }
         })
         refresh.click(function(){
-            console.log("refresh")
-            ylxggl.datagrid('reload');
+//            ylxggl.datagrid('reload');
+            ylxggl.datagrid('load',{
+                deptype:'xingguang',
+                departname:departname.val()
+            });
         })
 
 

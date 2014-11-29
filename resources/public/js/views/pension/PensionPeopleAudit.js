@@ -1,16 +1,76 @@
 define(function(){
     function render(local,option){
-        var layers = ["PT_SHTT","ST_DOORPLATE","PT_FLY","PT_JLY"];
-//        var _makers = [['PT_SHTT图层的点1','PT_SHTT图层的点2'],['ST_DOORPLATE图层的点1','ST_DOORPLATE图层的点1'],['PT_FLY图层的点1','PT_FLY图层的点1'],['PT_JLY图层的点1','PT_JLY图层的点1']];
-        var _makers = [[1,2],[11,22],[111,222],[1111,2222]];
-        var layers_points = []
-        for(var i=0;i<layers.length;i++){
-            var jsonstr = '{"'+layers[i]+'":'+'['+_makers[i]+']'+'}';
-            var data = $.parseJSON(jsonstr);
-            layers_points.push(data)
-        }
-        console.log(layers_points)
+       var ppaudit = local.find('[opt=ppaudit]');               //审核datagrid
+       var dealwith = local.find('[opt=dealwith]');             //处理
+       var operationlog = local.find('[opt=operationlog]');        //操作日志
 
+        ppaudit.datagrid({
+            url:"audit",
+            queryParams:{
+                functionid:'mHLcDiwTflgEshNKIiOV'
+            },
+            type:'post',
+            onLoadSuccess:function(data){
+                var info = local.find('[action=info]');           //详细信息
+                var dealwith = local.find('[action=dealwith]');           //处理
+                var rows=data.rows;
+                var btns_arr=[info,dealwith];
+                for(var i=0;i<rows.length;i++){
+                    for(var j=0;j<btns_arr.length;j++){
+                        (function(index){
+                            var record=rows[index];
+                            $(btns_arr[j][i]).click(function(){
+                                var action = $(this).attr("action");
+                                if(action == "info"){                   //详细信息
+                                    cj.showContent({                                          //修改养老机构(tab标签)
+                                         title:record.departname+'修改',
+                                         htmfile:'text!views/pension/PensionPeopleInfo.htm',
+                                         jsfile:'views/pension/PensionPeopleInfo',
+                                         queryParams:{
+                                             actiontype:'update',       //操作方式
+                                             data:record                   //填充数据
+                                        }
+                                     })
+                                }else if(action == "dealwith"){                   //处理
+                                    require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
+                                        function(win,htmfile,jsfile){
+                                            win.render({
+                                                title:'审核',
+                                                width:395,
+                                                height:315,
+                                                html:htmfile,
+                                                renderHtml:function(local,submitbtn,parent){
+                                                    jsfile.render(local,{
+                                                        submitbtn:submitbtn,
+                                                        act:'c',
+                                                        data:record,
+                                                        parent:parent,
+                                                        actiontype:'add',       //操作方式
+                                                        onCreateSuccess:function(data){
+                                                            parent.trigger('close');
+                                                        }
+                                                    })
+                                                }
+                                            })
+                                        }
+                                    )
+                                }
+                            });
+                        })(i)
+                    }
+                }
+            }
+        })
+        operationlogFunc(operationlog);             //操作日志
+
+    }
+
+
+    /*操作日志*/
+    var operationlogFunc = function(operationlog){
+        operationlog.click(function(){
+            console.log(2)
+        })
     }
 
     return {

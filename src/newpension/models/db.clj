@@ -570,6 +570,13 @@
   (insert t_oldpeopledep
     (values opddate)))
 
+(defn select-opdofdepart [name identityid departname deptype]
+  (select t_oldpeopledep
+    (where {:name [like name]
+                 :identityid [like identityid]
+                 :departname [like departname]
+                 :deptype [like deptype]})))
+
 (defn oldpeople-checkout [opd_id nowtime]
   (update t_oldpeopledep
     (set-fields {:checkouttime nowtime})

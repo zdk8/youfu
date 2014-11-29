@@ -11,7 +11,6 @@ define(function(){
         }else if(actiontype == "add"){                  //新增
             determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
         }*/
-        console.log(option.data.dep_id)
         if(actiontype == "addrzry"){                     //添加入住人员
             rzrydlg.form('load', {departname:option.data.departname,dep_id:option.data.dep_id});  //填充机构名称、机构id
             determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})

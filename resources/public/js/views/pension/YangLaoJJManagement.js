@@ -2,6 +2,7 @@ define(function(){
     var render = function(local,option){
         var yljjgl = local.find('[opt=yanlaojjmanagement]');        //居家养老设施管理
         var refresh = local.find('[opt=refresh]');        //刷新
+        var departname = local.find('[opt=departname]');        //机构名称
         addyljjFun(local,refresh);                     //添加居家养老设施
         yljjgl.datagrid({
             url:'pension/getalldepartment',
@@ -40,21 +41,26 @@ define(function(){
                                      }
                                      })*/
                                 }else if(action == "delete"){           //删除
-                                    $.ajax({
-                                        url:'pension/deletedepartmentbyid',
-                                        type:'post',
-                                        data:{
-                                            dep_id:record.dep_id
-                                        },
-                                        success:function(data){
-                                            var data = eval('(' + data + ')');
-                                            if(data.success){
-                                                alert("删除成功")
-                                            }
-                                        },
-                                        dataType:'json'
-                                    })
-                                    refresh.trigger('click')
+                                    var testmsg = "是否删除该机构【<label style='color: darkslategrey;font-weight: bold'>"+record.departname+"</label>】?"
+                                    $.messager.confirm('温馨提示', testmsg, function(r){
+                                        if (r){
+                                            $.ajax({
+                                                url:'pension/deletedepartmentbyid',
+                                                type:'post',
+                                                data:{
+                                                    dep_id:record.dep_id
+                                                },
+                                                success:function(data){
+//                                                    var data = eval('(' + data + ')');
+                                                    if(data.success){
+                                                        alert("删除成功")
+                                                        yljjgl.datagrid("reload")
+                                                    }
+                                                },
+                                                dataType:'json'
+                                            })
+                                        }
+                                    });
                                 }
                             });
                         })(i)
@@ -64,7 +70,11 @@ define(function(){
         })
 
         refresh.click(function(){
-            yljjgl.datagrid('reload');
+//            yljjgl.datagrid('reload');
+            yljjgl.datagrid('load',{
+                deptype:'jujia',
+                departname:departname.val()
+            });
         })
     }
 
