@@ -40,21 +40,29 @@ define(function(){
                                         }
                                     })*/
                                 }else if(action == "delete"){           //删除
-                                    $.ajax({
-                                        url:'pension/deletedepartmentbyid',
-                                        type:'post',
-                                        data:{
-                                            dep_id:record.dep_id
-                                        },
-                                        success:function(data){
-                                            var data = eval('(' + data + ')');
-                                            if(data.success){
-                                                alert("删除成功")
-                                            }
-                                        },
-                                        dataType:'json'
-                                    })
-                                    refresh.trigger('click')
+                                    var testmsg = "是删除销人员【<label style='color: darkslategrey;font-weight: bold'>"+record.departname+"</label>】?"
+                                    $.messager.confirm('温馨提示', testmsg, function(r){
+                                        if (r){
+                                            $.ajax({
+                                                url:'pension/deletedepartmentbyid',
+                                                type:'post',
+                                                data:{
+                                                    dep_id:record.dep_id
+                                                },
+                                                success:function(data){
+//                                            var data = eval('(' + data + ')');
+                                                    if(data.success){
+                                                        alert("删除成功")
+                                                        yljggl.datagrid("reload")
+                                                    }else{
+                                                        alert("该机构下存在入住人员，不能删除！")
+                                                    }
+                                                },
+                                                dataType:'json'
+                                            })
+                                        }
+                                    });
+//                                    refresh.trigger('click')
                                 }else if(action == "addrzry"){              //添加入住人员
                                     var data = record;
                                     var departname = record.departname;         //机构名称
