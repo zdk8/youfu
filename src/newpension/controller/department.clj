@@ -117,15 +117,10 @@
   (let[{params :params}request
        {page :page}params
        {rows :rows}params
-       r   (read-string rows)
-       p  (read-string page)
-       start  (inc(* r (dec p)))
-       end (* r p)
-       sql (str "select * from t_mcanteen")
-       results (db/getall-results start end sql)
-       totalsql  (str "select count(*) as sum  from t_mcanteen")
-       total (get (first(db/get-total totalsql)) :sum)]
-    (resp/json {:total total :rows (common/time-before-list results "runtime")})))
+       {departname :departname}params
+       cond (str " departname like '" departname "' ")
+       getresult (common/fenye rows page t_mcanteen cond)]
+    (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "runtime")})))
 
 (defn update-canteen  [request]
   (let[{params :params}request
