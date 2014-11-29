@@ -96,4 +96,4 @@
 (defn likecond [condname condvalue]
   (if  (= (count (str condvalue)) 0)
     " "
-    (str " and " condname " like " condvalue " ")))
+    (str " and " condname " like '%" condvalue "%' ")))
