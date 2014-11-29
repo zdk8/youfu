@@ -87,6 +87,14 @@
       (do (db/add-oldpeopledep opddate) (resp/json {:success true :message "checkin success"})))
 ))
 
+(defn select-opdofdepart [request]
+  (let[{params :params}request
+       {name :name}params
+       {identityid :identityid}params
+       {departname :departname}params
+       {deptype :deptype}params]
+    (db/select-opdofdepart name identityid departname deptype)))
+
 (defn oldpeople-checkout [request]
   (let[{params :params}request
        {opd_id :opd_id} params
