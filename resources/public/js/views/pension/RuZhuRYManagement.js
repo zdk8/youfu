@@ -1,12 +1,15 @@
 define(function(){
     var render = function(local,option){
         var rzrygl = local.find('[opt=ruzhurymanagement]');        //入住人员管理
-        var refresh = local.find('[opt=refresh]');        //刷新
+        var refresh = local.find('[opt=refresh]');               //刷新
+        var departname = local.find('[opt=departname]');        //机构名称
+        var name = local.find('[opt=name]');                     //姓名
+        var identityid = local.find('[opt=identityid]');        //身份证
         rzrygl.datagrid({
             url:'pension/getalloldpeopledepart',
-            /*queryParams:{
+            queryParams:{
                 deptype:'jigou'
-            },*/
+            },
             type:'post',
             onLoadSuccess:function(data){
                /* var updates = local.find('[action=update]');           //修改
@@ -51,7 +54,13 @@ define(function(){
             }
         })
         refresh.click(function(){
-            rzrygl.datagrid('reload');
+//            rzrygl.datagrid('reload');
+            rzrygl.datagrid('load',{
+                deptype:'jigou',
+                departname:departname.val(),
+                name:name.val(),
+                identityid:identityid.val()
+            });
         })
     }
 
