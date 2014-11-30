@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <!--<script type="text/javascript" src="http://192.168.2.29:8080/easyui/jquery-1.8.0.min.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+    <title></title>
+</head>
+<body>
+<form action="test/testapprove" method="post">
+    <input name="sys_micard" value="330502193712070219">
+    <!--<input name="sys_bfdate" value="2014-07-02">
+    <input name="ot_bfflupdate" value="2014-07-12">
+    <input name="sys_bfinfosid" value="82">-->
+ <!--   bstablepk (:lr_id params)
+    bstablename (:tablename params)
+    status 1
+    bstime (common/get-nowtime)
+    auuser (:auuser params)
+    audesc (:audesc params)
+    aulevel (:aulevel params)
+    auflag (:auflag params)
+    dvcode (:dvcode params)
+    sql (str "select operators from "bstablename" where lr_id = " bstablepk )    ;获取审批表中的提交人姓名
+    operators (:operators (first(db/get-total sql)))-->
+
+    <!--<input name="starttime" value="2014-07-27 23:09:33">
+    <input name="endtime" value="2014-07-27 23:57:33">-->
+
+    老人id<input name="lr_id" value="68">
+    老人表名<input name="tablename" value="t_oldpeople">
+    审核人<input name="auuser" value="ttt">
+  yijian<input name="audesc" value="zzzzzz">
+    审核结果<input name="auflag" value="通过">
+    DVCODE<input name="dvcode" value="330000">
+    <!--<input name="page" value="1">
+    <input name="rows" value="5">
+    <input name="intelligentsp" value="">
+    <input name="sys_fdoctor" value="华佗">-->
+    <!--<input name="sys_dname" value="华佗">
+    <input name="sys_dphone" value="123456">-->
+  <!--  <input name="sys_hfffdate" value="2014-06-11 01:59:01">
+    <input name="ot_hfflupdate" value="2014-06-11 12:59:01">-->
+
+    <!--<input name="sys_bdpressure" value="96">
+    <input name="sys_bspressure" value="96">  -->
+    <!--<input name="sys_mequipmentid" value="bs123">-->
+   <!-- <input name="sys_heinfoid" value="110">-->
+
+
+  <!--  血氧
+    <input name="sys_mequipmentid" value="bo120">
+    <input name="sys_bovalue" value="96.5">
+    <input name="sys_bomtime" value="2014-07-09 06:30:30">-->
+
+<!--    血糖
+    <input name="sys_mequipmentid" value="bs110">
+    <input name="sys_bsvalue" value="8.8">
+    <input name="sys_bsmtime" value="2014-07-09 06:30:30">-->
+
+<!--    血压
+    <input name="sys_mequipmentid" value="bp120">
+    <input name="sys_bdpressure" value="80">
+    <input name="sys_bspressure" value="120">
+    <input name="sys_bpmtime" value="2014-07-09 06:30:30">-->
+    <input type="submit" value="tijiao">
+</form>
+</body>
+</html>
+
+
+<script>
+    preFixUrl="proxy.jsp?urldest=http://192.168.2.5:8000/";
+    preFixUrl="";
+    var operater={};
+    operater.EQ="=";
+    operater.LIKE="like"
+    var intelligentsp=[
+        {name:'sys_mnation',operate:operater.EQ,value:'04',logic:'and'},
+        {name:'sys_mnplace',operate:operater.LIKE,value:'%浙江%',logic:'and'},
+        {name:'sys_mname',operate:operater.LIKE,value:'小%',logic:'and'}
+    ];
+
+    $(document).ready(function(){
+        $.ajax({
+            url1:preFixUrl+'pension/findallfmmemb',
+            url:preFixUrl+'pension/hseachfmmemb',
+            data:{
+                intelligentsp:JSON.stringify(intelligentsp),
+                rows:10,
+                page:1
+            },
+            type:'post',
+            success:function(res){
+                alert(res)
+            }
+        })
+    })
+</script>

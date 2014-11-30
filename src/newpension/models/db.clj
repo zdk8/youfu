@@ -112,6 +112,12 @@
   (table :t_mcanteen)
   (database dboracle))
 
+;;审核表
+(defentity approve
+  (pk :sh_id)
+  (table :approve)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -594,6 +600,27 @@
 (defn delete-canteen [c_id]
   (delete t_mcanteen
     (where {:c_id c_id})))
+
+(defn add-approve [result]
+  (insert approve
+    (values  result)))
+
+(defn update-approve [sh_id result]
+  (update approve
+    (set-fields result)
+    (where {:sh_id sh_id})))
+
+(defn update-approveby-lrid [bstablepk]                                                           "修改状态"
+  (update approve
+    (set-fields {:status 0})                                                                                    ;将状态修改成历史状态
+    (where {:bstablepk bstablepk
+                 :status 1})))
+
+(defn set-tablestatus [idname id tablename]                                                          "审核通过修改被审核表状态"
+  (update tablename
+    (set-fields {:status 1})
+    (where {(keys idname) id})))
+
 
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM

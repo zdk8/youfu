@@ -39,9 +39,13 @@
 (defn upload-page []
   (layout/render "testphoto.html"))
 
+(defn testpost-page []
+  (layout/render "testpost.html"))
+
 (defroutes home-routes
 
   (GET "/upload" [] (upload-page))
+  (GET "/testpost" [](testpost-page))
   (POST "/photo/addphoto" [file] (depart/add-photo file))
 
 
@@ -121,4 +125,6 @@
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
+
+  (POST  "/test/testapprove" request (old/add-approve1 request))
   )
