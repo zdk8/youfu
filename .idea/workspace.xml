@@ -2,18 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension03/currentDate.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension03/fanhui.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension03/icon_pinggu.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension03/icon_shujuku.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension03/icon_yanglaojigou.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension03/icon_zijinfafang.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension03/resetpassword.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js" afterPath="$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/OpenPage.js" afterPath="$PROJECT_DIR$/resources/public/js/views/OpenPage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/templates/dm3.html" afterPath="$PROJECT_DIR$/resources/templates/dm3.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/routes/home.clj" afterPath="$PROJECT_DIR$/src/newpension/routes/home.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
@@ -119,7 +107,7 @@
       <file leaf-file-name="win.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.55373406" vertical-offset="912" max-vertical-offset="1824">
+            <state vertical-scroll-proportion="2.7636364" vertical-offset="912" max-vertical-offset="1824">
               <caret line="64" column="69" selection-start-line="64" selection-start-column="69" selection-end-line="64" selection-end-column="69" />
               <folding />
             </state>
@@ -598,7 +586,7 @@
       <workItem from="1417139536642" duration="612000" />
       <workItem from="1417162419541" duration="3655000" />
       <workItem from="1417223566221" duration="24356000" />
-      <workItem from="1417307282785" duration="21566000" />
+      <workItem from="1417307282785" duration="21670000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1408084702298</created>
@@ -876,11 +864,15 @@
       <created>1417320363919</created>
       <updated>1417320363919</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="跳转实现,下一步修改header中的切换功能">
+      <created>1417331590966</created>
+      <updated>1417331590966</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50189000" />
+    <option name="totallyTimeSpent" value="50293000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
@@ -898,7 +890,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26418152" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7184943" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.7184943" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32733223" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1348,7 +1340,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55373406" vertical-offset="912" max-vertical-offset="1824">
+        <state vertical-scroll-proportion="2.7636364" vertical-offset="912" max-vertical-offset="1824">
           <caret line="64" column="69" selection-start-line="64" selection-start-column="69" selection-end-line="64" selection-end-column="69" />
           <folding />
         </state>
