@@ -58,6 +58,7 @@
 ;  (GET "/dm" [] (dm-page));;;123456790
   (GET "/" request (old/home request)) ;;登录页面
   (GET "/index" request (old/home request))  ;;退出后跳到登录页面
+  (GET "/dm" request (dm-page))
   (GET "/dm2" request (dm2-page))
   (GET "/dm3" request (dm3-page request))
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录

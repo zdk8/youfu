@@ -40,7 +40,7 @@
 (defn home [request]
   (try
     (if (session/get :usermsg)
-      (do (layout/render "dm.html" {:username (:username (session/get :usermsg))}))
+      (do (layout/render "dm2.html" {:username (:username (session/get :usermsg))}))
       (do (layout/render "login.html")))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
 
