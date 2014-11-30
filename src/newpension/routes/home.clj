@@ -130,6 +130,8 @@
   (POST "/pension/updatecanteen" request (depart/update-canteen  request))                      ;;食堂修改
   (POST "/pension/deletecanteen" request (depart/delete-canteen  request))                       ;;删除食堂
 
+  (POST "/pension/auditfunction" request (old/audit-fun request))                                  ;;审核
+
 
 
   (POST "/queryyljg" [] (old/get-yljg) )
