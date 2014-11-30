@@ -11,36 +11,43 @@ define(function(){
 //                local.find('[opt=opinion]')
             }
         }*/
+        console.log(option.data)
         var ppauditdlg = local.find('[opt=ppauditdlg]');      //表单
-        var determine = local.find('[opt=determine]');      //确定按钮
-        ppauditdlg.form('load', {aulevel:approvalProcess[option.data.aulevel]});
+        var determine = option.submitbtn;                   //确定按钮
+        ppauditdlg.form('load', {auuser:option.data.loginuser});
         /*取消*/
         local.find('[opt=cancle]').click(function(){
             option.parent.trigger('close');
         })
-        determineFunc(local);       //确定
+        determineFunc({determine:determine,ppauditdlg:ppauditdlg,data:option.data});       //确定
 
     }
 
     /*确定方法*/
-    var determineFunc = function(local){
-        local.find('[opt=determine]').click(function(){
+    var determineFunc = function(params){
+        params.determine.click(function(){
             /*for(var i=0;i<$('[name=flag]').length;i++){
                 if($('[name=flag]')[i].checked){
                     var intHot = $('[name=flag]').val();
                 }
             }*/
-            local.find('[opt=ppauditdlg]').form('submit',{
-                url:'qqqqqqq',
+            params.ppauditdlg.form('submit',{
+                url:'pension/auditfunction',
+                onSubmit: function(param){
+                    param.aulevel = params.data.aulevel;
+                    param.bstablepk = params.data.lr_id;
+                    param.bstablename = "t_oldpeople";
+                    param.operators = params.data.operators;
+                },
                 dataType:"json",
                 success:function(data){
                     var data = eval('(' + data + ')');
                     if(data.success){
-                        alert("添加成功！");
+                        alert("处理完成！");
 //                        params.option.parent.trigger('close');
 //                        params.option.refresh.trigger('click'); //刷新
                     }else{
-                        alert("添加失败！")
+                        alert("处理失败！")
                     }
                 }
             });

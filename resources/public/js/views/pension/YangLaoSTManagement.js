@@ -19,10 +19,8 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 /*修改*/
                                 if($(this).attr("action") == "update"){
-//                                    console.log(record.departname)
-                                    console.log(record)
                                     var data = record;
-                                    var departname = record.departname;         //机构名称
+                                    var departname = record.departname;                         //机构名称
                                     updateylstFun(local,departname,data,refresh)                //修改养老机构
                                     /*cj.showContent({
                                      title:record.biaozhunmingcheng+'修改',
@@ -83,9 +81,17 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加老年人食堂',
-                        width:355,
-                        height:380,
+                        width:700,
+                        height:258,
                         html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},
+                            {
+                                text:'保存',
+                                handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,
@@ -109,9 +115,17 @@ define(function(){
             function(win,htmfile,jsfile){
                 win.render({
                     title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
-                    width:355,
-                    height:380,
+                    width:700,
+                    height:258,
                     html:htmfile,
+                    buttons:[
+                        {text:'取消',handler:function(html,parent){
+                            parent.trigger('close');
+                        }},
+                        {
+                            text:'保存',
+                            handler:function(html,parent){ }}
+                    ],
                     renderHtml:function(local,submitbtn,parent){
                         jsfile.render(local,{
                             submitbtn:submitbtn,

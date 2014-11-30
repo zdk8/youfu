@@ -73,7 +73,7 @@ define(function(){
             webox({
                 height:option.height||350,
                 width:option.width||500,
-                bgvisibel:true,
+                bgvisibel:option.bgvisibel == null?true:false,
                 title:option.title||'标题',
                 htmltemplate:win,
                 htmlcontent:option.html,

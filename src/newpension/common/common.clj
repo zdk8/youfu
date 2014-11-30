@@ -87,9 +87,9 @@
        p  (read-string page)
        start  (inc(* r (dec p)))
        end (* r p)
-       sql (str "select * from " tablename " WHERE " cond)
+       sql (str "select * from " tablename cond)
        results (db/getall-results start end sql)
-       totalsql  (str "select count(*) as sum  from " tablename " where " cond)
+       totalsql  (str "select count(*) as sum  from " tablename  cond)
        total (get (first(db/get-total totalsql)) :sum)]
     {:total total :rows results}))
 

@@ -1,7 +1,7 @@
 define(function(){
     function render(local,option){
         var yljgdlg = local.find('[opt=yljgdlg]');      //表单
-        var determine = option.submitbtn;      //确定按钮
+        var determine = option.submitbtn;               //确定按钮
         var actiontype = option.actiontype;             //操作方式
         if(actiontype == "update"){                     //编辑
             yljgdlg.form('load', option.data);

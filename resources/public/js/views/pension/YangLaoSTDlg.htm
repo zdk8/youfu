@@ -1,80 +1,71 @@
-<!--<fieldset style="width: 300px;margin: 0px auto" >-->
-    <div style="width: 300px;position: relative;margin: 0px auto;padding-top: 2px" region="center">
+<div class="d-content" style="max-height: 579px; overflow: auto; height: auto;">
+    <div class="dialog_content">
         <form opt="ylstdlg" method="post">
             <input hidden="true" name="c_id">
-            <table class="formtable" style="width:300px">
+            <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+                <tbody>
                 <tr>
-                    <td class="formtdtext"  style="width: 70px">部门名称</td>
-                    <td>
-                        <input name="departname" class="easyui-validatebox">
+                    <th width="100">部门名称<span style="color: red">*</span>:</th>
+                    <td><input type="text" name="departname" class="input-text easyui-validatebox" >
+
                     </td>
-                </tr>
-                <tr>
-                    <td class="formtdtext" style="width: 70px">登记性质</td>
-                    <td>
-                        <input class="easyui-combobox lazy-combobox"
+
+                    <th>登记性质<span style="color: red">*</span>:</th>
+                    <td><input type="text"
+                               class="easyui-combobox lazy-combobox input-text"
                                name="register"
-                               style="width: 151px"
                                data-options="
+                                required:true,
                                 loader:cj.getLoader('ylregister'),
                                 editable:false,
                                 panelHeight:'auto',
                                 valueField:'id',
-                                textField:'text'">
+                                textField:'text'"></td>
+                </tr>
+                <tr>
+                    <th>联系电话<span style="color: red">*</span>:</th>
+                    <td><input type="text" name="telephone" class="input-text easyui-validatebox"></td>
+
+                    <th>联系人 :</th>
+                    <td><input type="text" name="people" class="input-text easyui-validatebox"></td>
+                </tr>
+
+                <tr>
+                    <th>联系地址 :</th>
+                    <td>
+                        <input class="easyui-validatebox input-text" name="address">
+                    </td>
+
+                    <th>公交线路 :</th>
+                    <td>
+                        <input class="easyui-validatebox input-text" name="busline">
                     </td>
                 </tr>
                 <tr>
-                    <td class="formtdtext">联系人</td>
+                    <th>地图经纬度 :</th>
                     <td>
-                        <input name="people" class="easyui-validatebox">
+                        <input class="easyui-validatebox input-text" name="coordinates">
+                    </td>
+
+                    <th>建筑面积 :</th>
+                    <td>
+                        <input class="easyui-validatebox input-text" name="buildarea">
                     </td>
                 </tr>
                 <tr>
-                    <td class="formtdtext">联系电话</td>
+                    <th>开办时间 :</th>
                     <td>
-                        <input name="telephone" class="easyui-validatebox">
+                        <input class="easyui-validatebox input-text" name="runtime">
+                    </td>
+
+                    <th>平均每年服务人数 :</th>
+                    <td>
+                        <input class="easyui-validatebox input-text" name="avgnumber">
                     </td>
                 </tr>
-                <tr>
-                    <td class="formtdtext">联系地址</td>
-                    <td>
-                        <input class="easyui-validatebox" name="address">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="formtdtext">公交线路</td>
-                    <td>
-                        <input class="easyui-validatebox" name="busline">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="formtdtext">地图经纬度</td>
-                    <td>
-                        <input class="easyui-validatebox" name="coordinates">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="formtdtext">建筑面积</td>
-                    <td>
-                        <input class="easyui-validatebox" name="buildarea">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="formtdtext">开办时间</td>
-                    <td>
-                        <input class="easyui-datebox" name="runtime">
-                    </td>
-                </tr>
-                <td class="formtdtext">平均每年服务人数</td>
-                <td>
-                    <input class="easyui-validatebox" name="avgnumber">
-                </td>
-                </tr>
+                </tbody>
             </table>
         </form>
     </div>
-    <div class="weboxbuttons" style="height:25px;float: right;padding-top: 2px;" >
-        <input class="buttoncss" opt="determine" type="button" value="确定">
-        <input class="buttoncss" opt="cancle" type="button" value="取消">
-    </div>
-<!--</fieldset>-->
+</div>
+

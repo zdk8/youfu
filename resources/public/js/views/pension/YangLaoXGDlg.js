@@ -1,7 +1,7 @@
 define(function(){
     function render(local,option){
         var ylxgdlg = local.find('[opt=ylxgdlg]');      //表单
-        var determine = local.find('[opt=determine]');      //确定按钮
+        var determine = option.submitbtn;               //确定按钮
         var actiontype = option.actiontype;             //操作方式
 
         if(actiontype == "update"){                     //编辑
