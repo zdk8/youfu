@@ -23,13 +23,14 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "info"){                                       //详细信息
-                                    cj.showContent({                                          //修改养老机构(tab标签)
-                                         title:record.departname+'详细信息',
+                                    cj.showContent({                                          //详细信息(tab标签)
+                                         title:record.name+'详细信息',
                                          htmfile:'text!views/pension/PensionPeopleInfo.htm',
                                          jsfile:'views/pension/PensionPeopleInfo',
                                          queryParams:{
                                              actiontype:'info',         //（处理）操作方式
-                                             data:record                   //填充数据
+                                             data:record,                   //填充数据
+                                             refresh:ppaudit                //刷新
                                         }
                                      })
                                 }else if(action == "dealwith"){                   //处理
@@ -51,11 +52,11 @@ define(function(){
                                                 renderHtml:function(local,submitbtn,parent){
                                                     jsfile.render(local,{
                                                         submitbtn:submitbtn,
-//                                                        submitbtn:submitbtn1,
                                                         act:'c',
+                                                        refresh:ppaudit,
                                                         data:record,
                                                         parent:parent,
-                                                        actiontype:'add',       //操作方式
+//                                                        actiontype:'add',       //操作方式
                                                         onCreateSuccess:function(data){
                                                             parent.trigger('close');
                                                         }

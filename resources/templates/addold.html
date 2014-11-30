@@ -15,6 +15,10 @@
     .validatebox-invalid {
         background-image: url('');
     }
+        fieldset{
+            width:900px;
+            margin:0 auto;
+        }
 </style>
 <script type="text/javascript">
 var queryflag = 0;   //存放查询出的家庭成员数据条数
@@ -116,7 +120,7 @@ $(document).ready(function(local,parameters,res){
     /*加载地区树*/
     var divisiontree = $(':input[opt=divisiontree]') ;
     divisiontree.combotree({
-        url:'get-divisionlist?dvhigh=330000',
+        url:'get-divisionlist?dvhigh=330424',
         method: 'get',
         onBeforeExpand: function (node) {
             divisiontree.combotree("tree").tree("options").url
@@ -327,7 +331,7 @@ $.extend($.fn.validatebox.defaults.rules, {
 </script>
 </head>
 <body>
-<p id="t3" hidden="true">{{old}}</p>
+<p id="t3" hidden="true" style="display: none;">{{old}}</p>
 <div  class="easyui-panel newRadio" opt="pensioneditformpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
