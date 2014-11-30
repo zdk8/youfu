@@ -2,6 +2,7 @@ define(function(){
     var render = function(local,option){
         var yljggl = local.find('[opt=yanlaojgmanagement]');        //养老机构管理
         var refresh = local.find('[opt=refresh]');        //刷新
+        var departname = local.find('[opt=departname]');        //机构名称
         addyljgFun(local,refresh);                     //添加养老机构
         yljggl.datagrid({
             url:'pension/getalldepartment',
@@ -10,7 +11,6 @@ define(function(){
             },
             type:'post',
             onLoadSuccess:function(data){
-                console.log(data)
                 var updates = local.find('[action=update]');           //修改
                 var del = local.find('[action=delete]');                //删除
                 var addrzry = local.find('[action=addrzry]');                //添加入住人员
@@ -23,24 +23,21 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "update"){             //修改
-//                                    console.log(record.departname)
                                     var data = record;
                                     var departname = record.departname;         //机构名称
-                                    updateyljgFun(local,departname,data,refresh)                //修改养老机构
-                                    /*cj.showContent({
-                                        title:record.biaozhunmingcheng+'修改',
-                                        htmfile:'text!views/dmxt/PlaceCommon.htm',
-                                        jsfile:'views/dmxt/PlaceCommon',
+                                    updateyljgFun(local,departname,data,refresh)                //修改养老机构(弹出框)
+                                    /*cj.showContent({                                          //修改养老机构(tab标签)
+                                        title:record.departname+'修改',
+                                        htmfile:'text!views/pension/YangLaoJGDlg.htm',
+                                        jsfile:'views/pension/YangLaoJGDlg',
                                         queryParams:{
-                                            id:record.id,
-                                            actionType:"update"*//*,
-                                            tablename:tablename,
-                                            wholename:wholename,
-                                            headname:record.leibiemingcheng*//*
+                                            refresh:refresh,         //刷新按钮
+                                            actiontype:'update',       //操作方式
+                                            data:data                   //填充数据
                                         }
                                     })*/
                                 }else if(action == "delete"){           //删除
-                                    var testmsg = "是删除销人员【<label style='color: darkslategrey;font-weight: bold'>"+record.departname+"</label>】?"
+                                    var testmsg = "是否删除该机构【<label style='color: darkslategrey;font-weight: bold'>"+record.departname+"</label>】?"
                                     $.messager.confirm('温馨提示', testmsg, function(r){
                                         if (r){
                                             $.ajax({
@@ -62,7 +59,6 @@ define(function(){
                                             })
                                         }
                                     });
-//                                    refresh.trigger('click')
                                 }else if(action == "addrzry"){              //添加入住人员
                                     var data = record;
                                     var departname = record.departname;         //机构名称
@@ -75,7 +71,10 @@ define(function(){
             }
         })
         refresh.click(function(){
-            yljggl.datagrid('reload');
+            yljggl.datagrid('load',{
+                deptype:'jigou',
+                departname:departname.val()
+            });
         })
 
 
@@ -88,21 +87,17 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加养老机构',
-                        width:350,
-                        height:385,
+                        width:700,
+                        height:258,
                         html:htmfile,
-                        /*buttons:[
+                        buttons:[
                          {text:'取消',handler:function(html,parent){
                          parent.trigger('close');
                          }},
                          {
-                         text:'保存1',
-                         handler:function(html,parent){
-                         //                                    local.find(html+'[opt=yljgdlg]')
-                         console.log(local.find(html+'[opt=yljgdlg]'))
-                         }
-                         }
-                         ],*/
+                         text:'保存',
+                         handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,
@@ -126,9 +121,17 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
-                        width:350,
-                        height:385,
+                        width:700,
+                        height:258,
                         html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},
+                            {
+                                text:'保存',
+                                handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,

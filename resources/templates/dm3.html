@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>民政养老救助系统</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <script type="text/javascript" src="js/extLocation.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+
+
+    <script type="text/javascript">
+        /*session全局变量*/
+        var onlinenums=0;
+        var userid='jjkeKGS16yEyKBF5fEq3';
+        var username="hhh";
+        var displayname=username;
+        var regionid=330106002;
+        var dvname='北山街道';
+
+    </script>
+    <style type="text/css">
+        html, body {
+            font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
+            color: black;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-size: 12px;
+            font-family: Verdana,Arial,Helvetica,sans-serif;
+            background-color: #1671b7;
+        }
+
+        #header {
+            background-image: url(img/pension03/header.png);
+            position: absolute;
+            width:100%;
+            height: 90px;
+            z-index: 9;
+        }
+        .cs-north-logo {
+            height: 60px;
+            margin: 5px 0px 0px 5px;
+            display: inline-block;
+            color: #000000;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            background: url(img/pension03/log.png) no-repeat;
+            width: 550px;
+        }
+        #headnavul {
+            float: left;
+            padding: 0;
+            position: absolute;
+            background: url(img/pension03/navbg.png) no-repeat;
+            margin-top:-16px;
+            margin-left: 500px;
+            width: 748px;
+            list-style: none outside none;
+        }
+        #headnavul .li-skinitem {
+            float: left;
+            font-size: 12px;
+            /* line-height: 30px; */
+            margin-left: 10px;
+            margin-bottom: 0px;
+            text-align: center;
+        }
+
+
+
+        .clear{
+            clear: both;
+        }
+
+        .separate{
+            color:#808080;
+        }
+
+        /******************自定义左边栏********************************/
+
+        #menu_newpension{
+            padding-top: 30px;
+        }
+        #menu_newpension ul,#menu_newpension li{
+            margin:0; padding:0; list-sytle:none;
+            display: block;/*此处设置很重要*/
+        }
+
+
+        li.jianju{
+            height: 15px;
+        }
+        li.menulevelone{
+            font-size: 14px;
+            font-weight: bolder;
+            height: 40px;
+            line-height: 40px;
+            background: url(img/pension03/menulevelone.png) no-repeat;
+        }
+
+
+        li.menulevelone>a,li.dropdown a{
+            text-decoration: none;
+            display: block;
+            color: #82d0fd;
+            padding-left: 50px;
+        }
+        li.menulevelone>a{
+            color: #eeecf7;
+        }
+
+        li.dropdown li{
+            height: 46px;
+            line-height: 46px;
+        }
+        #menu_newpension .menuselected{
+            color: #ffffff;
+            font-weight: bolder;
+            height: 46px;
+            line-height: 46px;
+            background: url(img/pension03/menuleveltwo.png) no-repeat;
+        }
+        #menu_newpension .menulevelone-selected{
+            color: #e0b542;
+        }
+        .menulevelone{
+            cursor: pointer;
+        }
+        li.dropdown a.dropdown-li-a-hover{
+            color: #e0b542;
+            cursor: pointer;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div id="header">
+    <div class="cs-north-logo"></div>
+    <ul id="headnavul">
+        <li class="li-skinitem" style="margin-left: 50px;"><img src="img/head/1.png"/><a id="welcomename">欢迎您:{{username}}</a></li>
+        <li class="li-skinitem"><img src="img/head/2.png"/><a id="domneedtodocount" style="cursor:pointer">待办业务(55)</a></li>
+        <li class="li-skinitem"><img src="img/head/4.png"/><a id="onlinenums">在线人数(1)</a></li>
+        <li class="li-skinitem"><img src="img/head/5.png"/><a id="domshowalterpwd">重设密码</a></li>
+        <li class="li-skinitem"><img src="img/head/7.png"/>
+            <a opt="logout" style="text-decoration: none;cursor:pointer" href="/logout">退出</a>
+        </li>
+        <li class="li-skinitem"><span id="currentDate">2014年11月29日 星期六 农历甲午年 十月初八</span></li>
+    </ul>
+</div>
+<div class="easyui-layout" data-options="fit:true,border:false">
+    <div data-options="region:'north',border:false" style="height:91px;padding:0;background-color: #1671b7;">
+    </div>
+    <div region="west" id="westpanel" border="false" split="true"  class="cs-west"
+         style="background-color: #1671b7;"
+         collapsible="false">
+        <div id="menu_newpension" fit="true" border="false" style="display: none;">
+            <ul class="leftul">
+                <!--<li class="leftli">
+                    <ul>
+                        <li class="menulevelone"><a >地名决策分析<span></span></a></li>
+                        <li class="dropdown">
+                            <ul>
+                                <li><a  opt="1">业务分析</a></li>
+                                <li><a  opt="2">地名数据查询</a></li>
+                                <li><a  opt="3">门牌数据查询</a></li>
+                                <li><a  opt="4">界桩点查询</a></li>
+                                <li><a  opt="5">界线查询</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="jianju"></li>
+                <li class="leftli">
+                    <ul>
+                        <li class="menulevelone"><a >民管决策分析<span></span></a></li>
+                        <li class="dropdown">
+                            <ul>
+                                <li><a opt="8">民管业务分析</a></li>
+                                <li><a opt="8-1">社会团体查询</a></li>
+                                <li><a opt="8-2">民非单位查询</a></li>
+                                <li><a opt="8-3">基金会查询</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="jianju"></li>
+                <li class="leftli">
+                    <ul>
+                        <li class="menulevelone"><a >社工处决策分析<span></span></a></li>
+                        <li class="dropdown">
+                            <ul>
+                                <li><a opt="6">社会工作统计</a></li>
+                                <li><a opt="6-1">社工数据查询</a></li>
+                                &lt;!&ndash;<li><a >链接三</a></li>
+                                <li><a >链接四</a></li>&ndash;&gt;
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="jianju"></li>
+                <li class="leftli">
+                    <ul>
+                        <li class="menulevelone"><a >基政决策分析<span></span></a></li>
+                        <li class="dropdown">
+                            <ul>
+                                <li><a opt="7">基层政权统计</a></li>
+                                <li><a opt="7-1">城市社区数据查询</a></li>
+                                <li><a opt="7-2">村委会数据查询</a></li>
+                                <li><a opt="7-3">经济合作社数据查询</a></li>
+                                <li><a opt="7-4">渔农村数据查询</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>-->
+
+
+            </ul>
+        </div>
+    </div>
+    <div id="mainPanle" region="center" border="false">
+        <div id="tabs" class="easyui-tabs"   fit="true" border="false" >
+            <div title="主页" class="indexbackground_2">
+                <div class="cs-home-remark">
+                    <h3 style="font-family: 'courier new'">欢迎使用民政养老救助系统</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--存放资金发放对话框-->
+<div id="grantMoneyDig"></div>
+<div id="searchDig"></div>
+
+</body>
+</html>
+<script>
+
+    document.write('<link rel="stylesheet" type="text/css" id="swicth-style" href="'+extEasyui+
+            'themes/default/easyui.css"><\/>');
+    document.write('<script type="text/javascript"  src="'+extEasyui+
+            'jquery.easyui.min.js"><\/script>');
+    document.write('<script type="text/javascript"  src="'+extEasyui+
+            'locale/easyui-lang-zh_CN.js"><\/script>');
+
+
+</script>
+<link rel="Stylesheet" type="text/css" href="img/css/home.css">
+<script type="text/javascript" src="js/commonfuncs/jquery.json-2.4.js"></script>
+<script type="text/javascript" src="js/require.js" data-main="js/mainapp_newpension"></script>
+<script type="text/javascript" src="js/jqueryplugin/jquery.iframe-auto-height.plugin.1.9.5.min.js"></script>
+
+<script src="js/urls.js"></script>
+<script src="js/cj.js"></script>
+<script type="text/javascript">
+
+    $(document).keyup(function(event){//弹出层注册ESC按键事件
+        switch(event.keyCode) {
+            case 27:
+                $('.webox').parent('div[id]').last().trigger('close');
+
+        }
+    });
+
+    /*$('#menu_newpension li.menulevelone a').click(function (e) {
+        var dropDown = $(this).parent().next();
+        $('.dropdown').not(dropDown).slideUp('slow');
+        dropDown.slideToggle('slow');
+        e.preventDefault();
+    });*/
+
+    /*$('#menu_newpension li.menulevelone a').first().trigger('click').trigger('click');*/
+    $('#menu_newpension').fadeIn('slow');
+
+</script>

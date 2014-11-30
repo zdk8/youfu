@@ -2,6 +2,7 @@ define(function(){
     var render = function(local,option){
         var ylstgl = local.find('[opt=yanlaostmanagement]');        //养老食堂管理
         var refresh = local.find('[opt=refresh]');        //刷新
+        var departname = local.find('[opt=departname]');        //机构名称
         addylstFun(local,refresh);                     //添加老年食堂
         ylstgl.datagrid({
             url:'pension/getallcanteen',
@@ -18,10 +19,8 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 /*修改*/
                                 if($(this).attr("action") == "update"){
-//                                    console.log(record.departname)
-                                    console.log(record)
                                     var data = record;
-                                    var departname = record.departname;         //机构名称
+                                    var departname = record.departname;                         //机构名称
                                     updateylstFun(local,departname,data,refresh)                //修改养老机构
                                     /*cj.showContent({
                                      title:record.biaozhunmingcheng+'修改',
@@ -38,22 +37,26 @@ define(function(){
                                 }
                                 /*删除*/
                                 if($(this).attr("action") == "delete"){
-                                    $.ajax({
-                                        url:'pension/deletecanteen',
-                                        type:'post',
-                                        data:{
-                                            c_id:record.c_id
-                                        },
-                                        success:function(data){
-                                            var data = eval('(' + data + ')');
-//                                            console.log(data)
-                                            if(data.success){
-                                                alert("删除成功")
-                                            }
-                                        },
-                                        dataType:'json'
-                                    })
-                                    refresh.trigger('click')
+                                    var testmsg = "是否删除该机构【<label style='color: darkslategrey;font-weight: bold'>"+record.departname+"</label>】?"
+                                    $.messager.confirm('温馨提示', testmsg, function(r){
+                                        if (r){
+                                            $.ajax({
+                                                url:'pension/deletecanteen',
+                                                type:'post',
+                                                data:{
+                                                    c_id:record.c_id
+                                                },
+                                                success:function(data){
+//                                                    var data = eval('(' + data + ')');
+                                                    if(data.success){
+                                                        alert("删除成功")
+                                                        ylstgl.datagrid("reload")
+                                                    }
+                                                },
+                                                dataType:'json'
+                                            })
+                                        }
+                                    });
                                 }
                             });
                         })(i)
@@ -62,7 +65,10 @@ define(function(){
             }
         })
         refresh.click(function(){
-            ylstgl.datagrid('reload');
+//            ylstgl.datagrid('reload');
+            ylstgl.datagrid('load',{
+                departname:departname.val()
+            });
         })
 
 
@@ -75,9 +81,17 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加老年人食堂',
-                        width:355,
-                        height:380,
+                        width:700,
+                        height:258,
                         html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},
+                            {
+                                text:'保存',
+                                handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,
@@ -101,9 +115,17 @@ define(function(){
             function(win,htmfile,jsfile){
                 win.render({
                     title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
-                    width:355,
-                    height:380,
+                    width:700,
+                    height:258,
                     html:htmfile,
+                    buttons:[
+                        {text:'取消',handler:function(html,parent){
+                            parent.trigger('close');
+                        }},
+                        {
+                            text:'保存',
+                            handler:function(html,parent){ }}
+                    ],
                     renderHtml:function(local,submitbtn,parent){
                         jsfile.render(local,{
                             submitbtn:submitbtn,
