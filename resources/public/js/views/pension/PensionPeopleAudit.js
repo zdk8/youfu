@@ -24,11 +24,11 @@ define(function(){
                                 var action = $(this).attr("action");
                                 if(action == "info"){                                       //详细信息
                                     cj.showContent({                                          //修改养老机构(tab标签)
-                                         title:record.departname+'修改',
+                                         title:record.departname+'详细信息',
                                          htmfile:'text!views/pension/PensionPeopleInfo.htm',
                                          jsfile:'views/pension/PensionPeopleInfo',
                                          queryParams:{
-                                             actiontype:'update',       //操作方式
+                                             actiontype:'info',         //（处理）操作方式
                                              data:record                   //填充数据
                                         }
                                      })
