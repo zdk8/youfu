@@ -51,6 +51,7 @@ define(function(){
                                                 renderHtml:function(local,submitbtn,parent){
                                                     jsfile.render(local,{
                                                         submitbtn:submitbtn,
+//                                                        submitbtn:submitbtn1,
                                                         act:'c',
                                                         data:record,
                                                         parent:parent,

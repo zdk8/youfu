@@ -43,11 +43,11 @@ define(function(){
                 success:function(data){
                     var data = eval('(' + data + ')');
                     if(data.success){
-                        alert("添加成功！");
+                        alert("处理完成！");
 //                        params.option.parent.trigger('close');
 //                        params.option.refresh.trigger('click'); //刷新
                     }else{
-                        alert("添加失败！")
+                        alert("处理失败！")
                     }
                 }
             });
