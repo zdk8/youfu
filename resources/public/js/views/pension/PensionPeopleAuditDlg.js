@@ -11,26 +11,20 @@ define(function(){
 //                local.find('[opt=opinion]')
             }
         }*/
-        console.log(option.data)
         var ppauditdlg = local.find('[opt=ppauditdlg]');      //表单
         var determine = option.submitbtn;                   //确定按钮
-        ppauditdlg.form('load', {auuser:option.data.loginuser});
+        ppauditdlg.form('load', {auuser:option.data.loginuser,bstime:myformatter(new Date())});
         /*取消*/
         local.find('[opt=cancle]').click(function(){
             option.parent.trigger('close');
         })
-        determineFunc({determine:determine,ppauditdlg:ppauditdlg,data:option.data});       //确定
+        determineFunc({determine:determine,ppauditdlg:ppauditdlg,data:option.data,option:option});       //确定
 
     }
 
     /*确定方法*/
     var determineFunc = function(params){
         params.determine.click(function(){
-            /*for(var i=0;i<$('[name=flag]').length;i++){
-                if($('[name=flag]')[i].checked){
-                    var intHot = $('[name=flag]').val();
-                }
-            }*/
             params.ppauditdlg.form('submit',{
                 url:'pension/auditfunction',
                 onSubmit: function(param){
@@ -44,8 +38,8 @@ define(function(){
                     var data = eval('(' + data + ')');
                     if(data.success){
                         alert("处理完成！");
-//                        params.option.parent.trigger('close');
-//                        params.option.refresh.trigger('click'); //刷新
+                        params.option.parent.trigger('close');
+                        params.option.refresh.datagrid("reload"); //刷新
                     }else{
                         alert("处理失败！")
                     }

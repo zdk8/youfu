@@ -7,7 +7,7 @@
     <legend>老年人基本信息</legend>
     <div style="width: 900px;position: relative;margin: 0px auto" region="center">
         <input type="hidden" name="lr_id">
-        <table class="formtable" style="width: 900px">
+        <table class="formtable" style="width: 900px" readonly=true>
             <tr>
                 <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
                 <td colspan="5">
@@ -467,6 +467,7 @@
     </div>
 </fieldset>
 
+</form>
 <!--家庭成员-->
 <fieldset style="width: 900px;margin: 0px auto">
     <div opt="familymembersdiv">
@@ -596,28 +597,6 @@
     <input type="button" value="保存" hidden="true" opt="save">
     <input type="button" value="操作日志" hidden="true" opt="log">
 </div>
-</form>
+
 </div>
-
-<script type="text/javascript">
-    function myformatter(date){
-        var y = date.getFullYear();
-        var m = date.getMonth()+1;
-        var d = date.getDate();
-        return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-    }
-    function myparser(s){
-        if (!s) return new Date();
-        var ss = (s.split('-'));
-        var y = parseInt(ss[0],10);
-        var m = parseInt(ss[1],10);
-        var d = parseInt(ss[2],10);
-        if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
-            return new Date(y,m-1,d);
-        } else {
-            return new Date();
-        }
-    }
-
-</script>
 
