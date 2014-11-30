@@ -126,21 +126,21 @@
 
     <div class="onebtns">
         <div class="btnbg">
-            <div class="laonianrenshujuku mybtn"></div>
+            <div class="laonianrenshujuku mybtn" opt="laonianrenshujuku"></div>
         </div>
     </div>
 
     <div class="twobtns" style="width: 800px;margin-top: -120px;">
         <div class="btnbg" style="">
-            <div class="xueqiupinggu mybtn"></div>
+            <div class="xueqiupinggu mybtn" opt="xueqiupinggu"></div>
         </div>
         <div class="btnbg" style="margin-left: 20px;">
-            <div class="zijinfafang mybtn"></div>
+            <div class="zijinfafang mybtn" opt="zijinfafang"></div>
         </div>
     </div>
     <div class="onebtns" style="margin-top: -140px;">
         <div class="btnbg" >
-            <div class="yanglaojigou mybtn"></div>
+            <div class="yanglaojigou mybtn" opt="laonianrenshujuku"></div>
         </div>
     </div>
 
@@ -155,8 +155,28 @@
         },function(){
             $(this).parent().removeClass('btnhover');
         });
-
-
-        $('#currentDate').text(mycalendar.RunGLNL())
+        $('#currentDate').text(mycalendar.RunGLNL());
+        var getFunction=function(mylocation,a){
+            for(var i= 0,len= a.length;i<len;i++) {
+                if(mylocation== a[i].location) {
+                    return a[i];
+                }
+            }
+            return null;
+        }
+        $.ajax({
+            url:'menutree',
+            data:{node:'dasffffffffffffffdsdsfs'},
+            success:function(res){
+                $('.mybtn').bind('click',function(){
+                    var func = getFunction($(this).attr('opt'), res);
+                    if(func){
+                        location.href = "/dm3?id="+func.functionid+"&title="+func.title;
+                    }else{
+                        alert("找不到相应配置");
+                    }
+                })
+            }
+        })
     })
 </script>

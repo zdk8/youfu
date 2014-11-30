@@ -10,6 +10,8 @@
 
 
     <script type="text/javascript">
+        var customMenuRoot = '{{functionid}}';
+
         /*session全局变量*/
         var onlinenums=0;
         var userid='jjkeKGS16yEyKBF5fEq3';
@@ -57,7 +59,7 @@
             padding: 0;
             position: absolute;
             background: url(img/pension03/navbg.png) no-repeat;
-            margin-top:-16px;
+            margin-top:-22px;
             margin-left: 500px;
             width: 748px;
             list-style: none outside none;
@@ -68,7 +70,12 @@
             /* line-height: 30px; */
             margin-left: 10px;
             margin-bottom: 0px;
+            line-height: 30px;
+            height: 30px;
             text-align: center;
+        }
+        #headnavul .li-skinitem a{
+            padding-left: 20px;
         }
 
 
@@ -144,12 +151,16 @@
 <div id="header">
     <div class="cs-north-logo"></div>
     <ul id="headnavul">
-        <li class="li-skinitem" style="margin-left: 50px;"><img src="img/head/1.png"/><a id="welcomename">欢迎您:{{username}}</a></li>
-        <li class="li-skinitem"><img src="img/head/2.png"/><a id="domneedtodocount" style="cursor:pointer">待办业务(55)</a></li>
-        <li class="li-skinitem"><img src="img/head/4.png"/><a id="onlinenums">在线人数(1)</a></li>
-        <li class="li-skinitem"><img src="img/head/5.png"/><a id="domshowalterpwd">重设密码</a></li>
-        <li class="li-skinitem"><img src="img/head/7.png"/>
-            <a opt="logout" style="text-decoration: none;cursor:pointer" href="/logout">退出</a>
+        <li class="li-skinitem" style="margin-left: 50px;">
+            <a id="welcomename" style="background: url(img/head/1.png) no-repeat">欢迎您:{{username}}</a></li>
+        <li class="li-skinitem">
+            <a id="domneedtodocount" style="background: url(img/head/2.png) no-repeat;cursor:pointer">待办业务(55)</a></li>
+        <li class="li-skinitem">
+            <a id="onlinenums" style="background: url(img/head/4.png) no-repeat;">在线人数(1)</a></li>
+        <li class="li-skinitem">
+            <a id="domshowalterpwd" style="background: url(img/head/5.png) no-repeat">重设密码</a></li>
+        <li class="li-skinitem">
+        <a opt="logout" style="background: url(img/head/7.png) no-repeat;text-decoration: none;cursor:pointer" href="/logout">退出</a>
         </li>
         <li class="li-skinitem"><span id="currentDate">2014年11月29日 星期六 农历甲午年 十月初八</span></li>
     </ul>
@@ -277,5 +288,5 @@
 
     /*$('#menu_newpension li.menulevelone a').first().trigger('click').trigger('click');*/
     $('#menu_newpension').fadeIn('slow');
-
+    //本来在route中的代码
 </script>
