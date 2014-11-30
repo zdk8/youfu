@@ -131,6 +131,7 @@
   (POST "/pension/deletecanteen" request (depart/delete-canteen  request))                       ;;删除食堂
 
   (POST "/pension/auditfunction" request (old/audit-fun request))                                  ;;审核
+  (POST "/pension/get-auditpeople" request (old/get-auditpeople request))                     ;;获取未通过审批的老年人
 
 
 

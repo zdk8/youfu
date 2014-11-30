@@ -34,6 +34,8 @@
                         :fwlx_hjj  :fwlx_qt  :retirewage  :jk_rcws_st  :jk_rcws_xl  :jk_rcws_xt  :jk_rcws_sy  :jk_rcws_xj  :jk_rcws_tx  :jk_rcws_xzj  :jk_rcws_xy  :pensionimgpath  :prseno  :jz_lxdh  :statusnum])
 (def approve [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :operators ])
 
+(def v_oldapprove "v_oldapprove")
+
 ;;用户登录
 (defn home [request]
   (try
@@ -355,6 +357,14 @@
                  :else (set-approve2 params))                                                          ;待提交和待审核
       (set-approvefail params))                                                                            ;审核不通过
     (resp/json {:success true :message "approve success"})))
+
+
+(defn get-auditpeople [request]
+  (let[{params :params}request
+       {page :page}params
+       {rows :rows}params
+       getresult (common/fenye rows page v_oldapprove "")]
+    (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult) "bstime")})))
 
 ;;根据外键查询操作日志
 (defn get-logs [functionid page rows]
