@@ -39,7 +39,7 @@
   (layout/render "dm2.html"))
 
 (defn dm3-page [req]
-  (layout/render "dm3.html" {:functionid (:id (:params req))}))
+  (layout/render "dm3.html" {:functionid (:id (:params req)) :username (:username (session/get :usermsg))}))
 
 
 (defn upload-page []

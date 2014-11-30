@@ -37,10 +37,12 @@ define(function(){
 
 
         var submitbtn=null;
+        var mybtns=[];
         if(option.buttons&&option.buttons.length){
             var $btnarea=result.find('div.weboxbuttons ul');
             for( var i in option.buttons){
                 var $li=$('<li><a>'+option.buttons[i].text+'</a></li>');
+                mybtns.push($li);
                 $btnarea.append($li);
                 if(option.buttons[i].text=='保存'){
                     submitbtn=$li;
@@ -60,7 +62,7 @@ define(function(){
             require(['commonfuncs/genFieldTemplate'],function(js){
                 $.parser.parse($html.parent());
                 js.render($html);
-                option.renderHtml($html.parent(),submitbtn,result);
+                option.renderHtml($html.parent(),submitbtn,result,mybtns);
             })
         }
 

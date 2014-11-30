@@ -6,12 +6,12 @@
     <meta http-equiv=Content-Type content="text/html;charset=utf-8">
     <script type="text/javascript" src="js/extLocation.js"></script>
     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
-
+    <script type="text/javascript" src="js/mycalendar.js"></script>
 
 
     <script type="text/javascript">
         var customMenuRoot = '{{functionid}}';
-
+        var swapFunction;
         /*session全局变量*/
         var onlinenums=0;
         var userid='jjkeKGS16yEyKBF5fEq3';
@@ -52,7 +52,7 @@
             font-weight: bold;
             text-decoration: none;
             background: url(img/pension03/log.png) no-repeat;
-            width: 550px;
+            width: 100%;
         }
         #headnavul {
             float: left;
@@ -67,15 +67,21 @@
         #headnavul .li-skinitem {
             float: left;
             font-size: 12px;
-            /* line-height: 30px; */
-            margin-left: 10px;
+            margin-left: 50px;
             margin-bottom: 0px;
             line-height: 30px;
             height: 30px;
             text-align: center;
+            padding: 0;
         }
-        #headnavul .li-skinitem a{
-            padding-left: 20px;
+        #headnavul .li-skinitem a {
+            cursor:pointer;
+            padding-left: 30px;
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
 
@@ -144,25 +150,72 @@
         }
 
 
+        #current-user-msg{
+            margin-top: -10px;
+            font-size: 12px;
+            height: 35px;
+            line-height: 35px;
+            float: right;
+            padding: 0;
+            padding-right: 10px;
+            color: #FFFFFF;
+            font-weight: normal;
+        }
+        #current-user-msg ul{
+            list-style: none  none;
+            height: 30px;
+            line-height: 30px;
+        }
+        #current-user-msg li{
+            float: left;
+            padding-left: 20px;
+            text-align: center;
+        }
+        #current-user-msg li a{
+            cursor:pointer;
+            padding-left: 25px;
+            display: block;
+        }
+
+        .hight-color{
+            color: #ffa500;
+        }
+        .hight-color-2{
+            color: #008000;
+        }
+
+        .indexbackground_2{
+            background: url(img/pension02/bodybackground.jpg) center;
+        }
     </style>
 
 </head>
 <body>
 <div id="header">
-    <div class="cs-north-logo"></div>
+    <div class="cs-north-logo">
+        <div id="current-user-msg">
+            <ul>
+                <li><a>欢迎您:{{username}}</a></li>
+                <li><a id="currentDate" style="background: url(img/pension03/currentDate.png) center no-repeat;width: 309px;text-align: center;padding-left: 5px;">2014年11月29日 星期六 农历甲午年 十月初八</a></li>
+                <li class="li-skinitem">
+                    <a style="background: url(img/pension03/resetpassword.png) no-repeat;">修改密码</a></li>
+                <li class="li-skinitem">
+                    <a style="background: url(img/pension03/fanhui.png) no-repeat;" href="/logout">退出</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+
     <ul id="headnavul">
-        <li class="li-skinitem" style="margin-left: 50px;">
-            <a id="welcomename" style="background: url(img/head/1.png) no-repeat">欢迎您:{{username}}</a></li>
+        <li class="li-skinitem" style="margin-left: 100px;">
+            <a opt="a9DTN0LmDWT0eGTZc4St" style="background: url(img/pension03/icon_shujuku.png)  no-repeat;cursor:pointer">数据库</a></li>
         <li class="li-skinitem">
-            <a id="domneedtodocount" style="background: url(img/head/2.png) no-repeat;cursor:pointer">待办业务(55)</a></li>
+            <a opt="bR8kBGp0A6lTmPkgOFxI" style="background: url(img/pension03/icon_pinggu.png) no-repeat;">需求评估</a></li>
         <li class="li-skinitem">
-            <a id="onlinenums" style="background: url(img/head/4.png) no-repeat;">在线人数(1)</a></li>
+            <a opt="6NOpHUzyXoUhObvUHHNr" style="background: url(img/pension03/icon_yanglaojigou.png) no-repeat">养老机构</a></li>
         <li class="li-skinitem">
-            <a id="domshowalterpwd" style="background: url(img/head/5.png) no-repeat">重设密码</a></li>
-        <li class="li-skinitem">
-        <a opt="logout" style="background: url(img/head/7.png) no-repeat;text-decoration: none;cursor:pointer" href="/logout">退出</a>
+            <a opt="KqYaHUodlGekYv9sanhD" style="background: url(img/pension03/icon_zijinfafang.png) no-repeat;cursor:pointer">资金发放</a>
         </li>
-        <li class="li-skinitem"><span id="currentDate">2014年11月29日 星期六 农历甲午年 十月初八</span></li>
     </ul>
 </div>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -288,5 +341,19 @@
 
     /*$('#menu_newpension li.menulevelone a').first().trigger('click').trigger('click');*/
     $('#menu_newpension').fadeIn('slow');
+
+    $('#currentDate').text(mycalendar.RunGLNL());
+    $('#headnavul a').bind('click',function(){
+        $('#current-user-msg a,#headnavul a').removeClass('hight-color');
+        $(this).addClass('hight-color');
+        customMenuRoot = $(this).attr('opt');
+        swapFunction(true);
+    });
+    $('#current-user-msg a,#headnavul a').hover(function(){
+        $('#current-user-msg a,#headnavul a').removeClass('hight-color-2');
+        $(this).addClass('hight-color-2');
+    },function(){
+        $(this).removeClass('hight-color-2');
+    })
     //本来在route中的代码
 </script>

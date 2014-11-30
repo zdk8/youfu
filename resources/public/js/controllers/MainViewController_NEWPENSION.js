@@ -3,6 +3,7 @@
  */
 define(['commonfuncs/LoadingMask','commonfuncs/TabRightClick','commonfuncs/FullCalendar','commonfuncs/validate/Init'],
     function(LoadingMask,TabRightClick,FullCalendar,validateInit){
+
         var firstclick=false;
         var genMenulevelonehtml=function(nodes){
             var mynodes=nodes;
@@ -37,12 +38,12 @@ define(['commonfuncs/LoadingMask','commonfuncs/TabRightClick','commonfuncs/FullC
         };
 
 
-        function start(){
-            addAccordion();
+        function start(isswap){
+            addAccordion(isswap);
             //window.setTimeout(function(){$('#currentDate').text(FullCalendar.RunGLNL())},1000);
-            //new validateInit();
+            new validateInit();
         }
-        function addAccordion() {
+        function addAccordion(isswap) {
 
             var setMenuLevelTwoClickEvent=function($dropdownas){
                 //var $dropdownas=$('#menu_newpension li.dropdown a');
@@ -69,6 +70,10 @@ define(['commonfuncs/LoadingMask','commonfuncs/TabRightClick','commonfuncs/FullC
 
 
             var getAccordion = function (res) {
+                //菜单切换
+                $('#menu_newpension ul').html('');
+
+
                 var one=genMenulevelonehtml(res);
                 $('#menu_newpension .leftul').append(one);
                 $('#menu_newpension li.menulevelone a').click(function (e) {
@@ -105,7 +110,13 @@ define(['commonfuncs/LoadingMask','commonfuncs/TabRightClick','commonfuncs/FullC
                         e.preventDefault();
                     }
                  });
-                $('#menu_newpension li.menulevelone a').first().trigger('click');
+                if(!isswap){
+                    $('#menu_newpension li.menulevelone a').first().trigger('click');
+                }else{
+                    $('#menu_newpension li.menulevelone a').first().trigger('click').trigger('click');
+                }
+
+
             }
 
 
@@ -127,6 +138,7 @@ define(['commonfuncs/LoadingMask','commonfuncs/TabRightClick','commonfuncs/FullC
             $.ajax(ajaxOption);
         }
 
+        swapFunction=start;
         return {
             start:function(){
                 start();

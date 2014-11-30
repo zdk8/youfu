@@ -15,7 +15,7 @@ define(function(){
         }
         var title=node.text||node.title;
         require(['commonfuncs/TreeClickEvent'],function(TreeClickEvent){
-            if(node.true){
+            if(!node.leaf){
                 $.messager.alert(cj.defaultTitle, node.title+'('+node.functionid + ') 是目录', 'info');
             }
             if(node.type=='1'){ //组件
