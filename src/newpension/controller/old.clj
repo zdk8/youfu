@@ -280,30 +280,34 @@
 (defn add-approve1 [params]                                                                       "首次提交"
   (let[bstablepk (:bstablepk params)                                                                  ;获取被审批表的主键
        bstablename (:bstablename params)                                                           ;获取被审批表名
-       status 1                                                                                                     ;历史状态为1
+       status "1"                                                                                                     ;历史状态为1
        bstime (common/get-nowtime)                                                                ;获取审批时间
        auuser (:auuser params)                                                                             ;审批人
        audesc (:audesc params)                                                                           ;审批详细
-       aulevel 1                                                                                                   ;审批等级
+       aulevel "1"                                                                                                   ;审批等级
        auflag "提交成功"                                                                              ;审核状态
        dvcode (:dvcode params)                                                                         ;行政区划
        ;sql (str "select operators from "bstablename" where lr_id = " bstablepk )    ;获取被审批表中的提交人姓名
-       appoperators (:operators params) ]
+       appoperators (:operators params)
+       ]
     ;;(update-approveby-lrid [bstablepk])                                                          ;;将上一条数据状态改变成历史状态
     (add-approve {:bstablepk bstablepk :bstablename bstablename :status status :bstime bstime :auuser auuser :audesc audesc :aulevel aulevel :auflag auflag :appoperators appoperators}))
   (str "add success"))
 
 (defn set-approve3 [params]                                                                           "审批通过"
-  (let[appdata (select-keys params approve)
-        bstablepk (:bstablepk params)
-       idname (:idname params)
+  (let[bstablepk (:bstablepk params)
        bstablename (:bstablename params)
-      auuser (:newauuser params)
-      audesc (:newaudesc params)
-      dvcode (:newdvcode params)
-     ; sql (str "select operators from "bstablename" where lr_id = " bstablepk )    ;获取被审批表中的提交人姓名
+       idname (if (= bstablename "t_oldpeople") "lr_id")
+      auuser (:auuser params)
+      audesc (:audesc params)
+      dvcode (:dvcode params)
+      bstime (common/get-nowtime)
+      appoperators  (:operators params)
+      ; sql (str "select operators from "bstablename" where lr_id = " bstablepk )    ;获取被审批表中的提交人姓名
       operators (:operators params)
-       newappdata (conj appdata {:aulevel "3" :auflag "审核通过" :bstime (common/get-nowtime) :auuser auuser :audesc audesc :dvcode dvcode :appoperators operators})]
+       ;newappdata (conj appdata {:aulevel "3" :auflag "审批通过" :bstime (common/get-nowtime) :auuser auuser :audesc audesc :dvcode dvcode :appoperators operators})
+       newappdata  {:bstablepk bstablepk :bstablename bstablename :status "0" :bstime bstime :auuser auuser :audesc audesc :aulevel "3" :auflag "审批通过" :appoperators appoperators}
+       ]
     (update-approveby-lrid  bstablepk)                                                            ;修改审批表的状态
     (add-approve newappdata)                                                                         ;添加审核表的信息
     (update-tablestatus idname bstablepk bstablename)                                   ;修改被审批表的状态
@@ -311,15 +315,16 @@
 
 (defn set-approve2 [params]
   (let[approvedate (select-keys params approve)
-       sh_id (:sh_id params)
-      auuser (:newauuser params)
-      audesc (:newaudesc params)
+      ; sh_id (:sh_id params)
+      auuser (:auuser params)
+      audesc (:audesc params)
       bstablename (:bstablename params)
       bstablepk (:bstablepk params)
       newaulevel (str(inc(read-string (:aulevel params))))
       ;sql (str "select operators from "bstablename" where lr_id = " bstablepk )    ;获取被审批表中的提交人姓名
       appoperators (:operators params)
-      newappdata (conj approvedate {:status "1"}{:aulevel newaulevel}{:auflag "通过"}{:bstime (common/get-nowtime)}{:auuser auuser}{:audesc audesc}{:appoperators appoperators} )
+      auflag (if (= newaulevel "1") "提交成功" "审核通过")
+      newappdata (conj approvedate {:status "1"}{:aulevel newaulevel}{:auflag auflag}{:bstime (common/get-nowtime)}{:auuser auuser}{:audesc audesc}{:appoperators appoperators} )
        ]
     (update-approveby-lrid  bstablepk)                                                            ;修改审批表的状态
     (add-approve newappdata)                                                                         ;添加一条审核记录
@@ -328,8 +333,8 @@
 (defn set-approvefail [params]
   (let[;approvedate (select-keys params approve)
        ;sh_id (:sh_id params)
-       auuser (:newauuser params)
-       audesc (:newaudesc params)
+       auuser (:auuser params)
+       audesc (:audesc params)
        bstablename (:bstablename params)
        bstablepk (:bstablepk params)
       dvcode (:dvcode params)
@@ -363,8 +368,9 @@
   (let[{params :params}request
        {page :page}params
        {rows :rows}params
+       auuser  (:username (session/get :usermsg))
        getresult (common/fenye rows page v_oldapprove "")]
-    (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult) "bstime")})))
+    (resp/json {:total (:total getresult) :rows (map #(conj % {:loginuser auuser} )(common/time-formatymd-before-list (:rows getresult) "bstime"))})))
 
 ;;根据外键查询操作日志
 (defn get-logs [functionid page rows]

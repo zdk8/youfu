@@ -612,14 +612,14 @@
 
 (defn update-approveby-lrid [bstablepk]                                                           "修改状态"
   (update approve
-    (set-fields {:status 0})                                                                                    ;将状态修改成历史状态
+    (set-fields {:status "0"})                                                                                    ;将状态修改成历史状态
     (where {:bstablepk bstablepk
-                 :status 1})))
+                 :status "1"})))
 
 (defn set-tablestatus [idname id tablename]                                                          "审核通过修改被审核表状态"
   (update tablename
-    (set-fields {:status 1})
-    (where {(keys idname) id})))
+    (set-fields {:status "1"})
+    (where {(keyword idname) id})))
 
 
 (defn getall-results [start end sql]

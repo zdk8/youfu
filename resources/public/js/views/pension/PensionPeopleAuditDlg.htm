@@ -27,49 +27,41 @@
             <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
                 <tbody>
                     <tr>
-                        <th width="80">业务序号 :</th>
-                        <td width="80"><input type="text" name="username" class="input-text" >
-                        </td>
+                        <th>处理人 :</th>
+                        <td><input type="text" name="auuser" class="input-text" ></td>
                     </tr>
-
-                    <tr>
+                   <!-- <tr>
                         <th>状态 :</th>
                         <td><input type="text" name="aulevel" class="input-text"
                                    data-options="
                             formatter: function(value,row,index){
                             return approvalProcess[value]
 			        }"></td>
-                    </tr>
-                    <tr>
-                        <th>备注 :</th>
-                        <td><input type="password" name="passwd" class="input-text"></td>
-                    </tr>
+                    </tr>-->
+                    <!--<input type="text" hidden="true" name="aulevel" class="input-text">-->
+                    <!--<input type="text" class="input-text" value="{{username}}">-->
                     <tr>
                         <th>审核日期 :</th>
-                        <td><input type="password" name="passwd" class="input-text"></td>
+                        <td><input type="password" name="passwd" class="input-text easyui-datebox"></td>
                     </tr>
                     <tr>
                         <th>审核结果 :</th>
                         <td>
-                            <input  name="flag" value="通过" type="radio">通过
-                            <input  name="flag" value="不通过" type="radio">不通过
+                            <input  name="auflag" value="通过" type="radio">通过
+                            <input  name="auflag" value="不通过" type="radio">不通过
                         </td>
                     </tr>
                     <tr>
                         <td id="opinion" opt="opinion" colspan="2" >
                             <!--<textarea style="position: relative;width: 95%"></textarea>-->
-                            <textarea style="position: relative;width: 95%" onKeyDown="textdown(event)"
-                                      onKeyUp="textup()" onfocus="if(value=='限100字'){value=''}"
-                                      onblur="if (value ==''){value='限100字'}">限100字</textarea>
+                            <textarea name="audesc" style="position: relative;width: 95%" onKeyDown="textdown(event)"
+                                      onKeyUp="textup()" onfocus="if(value=='意见输入(限100字)...'){value=''}"
+                                      onblur="if (value ==''){value='意见输入(限100字)...'}">意见输入(限100字)...</textarea>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </form>
     </div>
-</div>
-<div class="weboxbuttons" style="height:25px;padding-left:40%;padding-top: 2px;position: relative">
-    <input class="buttoncss" opt="determine" type="button" value="确定">
-    <input class="buttoncss" opt="cancle" type="button" value="取消">
 </div>
 

@@ -155,9 +155,17 @@ define(function(){
             function(win,htmfile,jsfile){
                 win.render({
                     title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">添加入住人员-'+departname+'</label>',
-                    width:660,
-                    height:308,
+                    width:700,
+                    height:285,
                     html:htmfile,
+                    buttons:[
+                        {text:'取消',handler:function(html,parent){
+                            parent.trigger('close');
+                        }},
+                        {
+                            text:'保存',
+                            handler:function(html,parent){ }}
+                    ],
                     renderHtml:function(local,submitbtn,parent){
                         jsfile.render(local,{
                             submitbtn:submitbtn,

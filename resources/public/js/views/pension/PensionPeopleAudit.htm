@@ -13,7 +13,7 @@
                loadMsg:''">
     <thead>
     <tr>
-        <th data-options="field:'auditid',hidden:true">老人表主键</th>
+        <th data-options="field:'lr_id',hidden:true">老人表主键</th>
         <th data-options="field:'ro',width:210,align:'center',formatter:function(value,rowData,rowIndex)
             {
                 var str='<div></div>';
@@ -21,16 +21,24 @@
                 str=$(str).append('<a action=&quot;dealwith&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>处理</span></span></a>');
                 return str.html();
             }">操作</th>
-        <th data-options="field:'aulevel',width:180,
+        <th data-options="field:'aulevel',width:127,
         formatter: function(value,row,index){
-                return approvalProcess[value]
+                if(value == '' || value == null){
+                    return approvalProcess[4]
+                }else{
+                    return approvalProcess[value]
+                }
 			}">状态</th>
-        <th data-options="field:'opseno1',width:180">流程意见</th>
-        <th data-options="field:'name',width:180">姓名</th>
-        <th data-options="field:'opseno',width:180">身份证</th>
-        <th data-options="field:'opseno',width:180">性别</th>
-        <th data-options="field:'username',width:180">办理人</th>
-        <th data-options="field:'bsnyue',width:180">业务期</th>
+        <th data-options="field:'auflag',width:180">流程信息</th>
+        <th data-options="field:'audesc',width:180">处理意见</th>
+        <th data-options="field:'name',width:127">姓名</th>
+        <th data-options="field:'identityid',width:210">身份证</th>
+        <th data-options="field:'gender',width:74,
+        formatter: function(value,row,index){
+                return getGender[value]
+			}">性别</th>
+        <th data-options="field:'auuser',width:127">办理人</th>
+        <th data-options="field:'bsnyue',width:127">业务期</th>
         <th data-options="field:'bstime',width:230">时间</th>
 
     </tr>

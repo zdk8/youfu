@@ -1,8 +1,8 @@
 define(function(){
     function render(local,option){
-        getdivision(local);                 //加载行政区划
+        getdivision(local);                                 //加载行政区划
         var rzrydlg = local.find('[opt=rzrydlg]');      //表单
-        var determine = local.find('[opt=determine]');      //确定按钮
+        var determine = option.submitbtn                //确定按钮
         var actiontype = option.actiontype;             //操作方式
 
         /*if(actiontype == "update"){                     //编辑
@@ -108,17 +108,6 @@ define(function(){
             }
         });
     }
-    /*进度框*/
-    function showProcess(isShow, title, msg) {
-        if (!isShow) {
-            $.messager.progress('close');
-            return;
-        }
-        var win = $.messager.progress({
-            title: title,
-            msg: msg
-        });
-    }
 
     /*确定按钮*/
     var determinefunc = function(params){
@@ -130,14 +119,13 @@ define(function(){
                     onSubmit: function () {
                         var flag = $(this).form('validate');
                         if (flag) {
-                            showProcess(true, '温馨提示', '正在提交数据...');
+                            showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                         }
                         return flag
                     },
                     success:function(data){
-                        showProcess(false);
+                        showProcess(false);                                        //关闭进度框
                         var data = eval('(' + data + ')');
-//                        console.log(data)
                         if(data.success){
                             alert("成功添加入住人员！");
 //                            $.messager.progress('close');

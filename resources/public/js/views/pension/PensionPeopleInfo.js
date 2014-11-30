@@ -1,8 +1,15 @@
 define(function(){
     function render(local,option){
         var pensionform = local.find('[opt=pensionform]');      //老人信息表
-        pensionform.form('load',option.queryParams.data)        //填充form
-        console.log(option.queryParams.data)
+//        showProcess(true, '温馨提示', '数据处理中，请稍后...');   //进度框加载
+//        if(pensionform.form('load',option.queryParams.data).length > 0){
+
+//            pensionform.form('load',option.queryParams.data)             //填充form
+//            showProcess(false);
+//        }
+//        pensionform.form('load',option.queryParams.data)        //填充form
+//        console.log( pensionform.form('load',option.queryParams.data))
+
         var dealwithFunc = function(dealwith,ppaudit){
             dealwith.click(function(){
                 var data = ppaudit.datagrid("getSelected");
