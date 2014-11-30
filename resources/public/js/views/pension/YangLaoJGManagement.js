@@ -23,7 +23,6 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "update"){             //修改
-//                                    console.log(record.departname)
                                     var data = record;
                                     var departname = record.departname;         //机构名称
                                     updateyljgFun(local,departname,data,refresh)                //修改养老机构(弹出框)
@@ -60,7 +59,6 @@ define(function(){
                                             })
                                         }
                                     });
-//                                    refresh.trigger('click')
                                 }else if(action == "addrzry"){              //添加入住人员
                                     var data = record;
                                     var departname = record.departname;         //机构名称
@@ -73,7 +71,6 @@ define(function(){
             }
         })
         refresh.click(function(){
-//            yljggl.datagrid('reload');
             yljggl.datagrid('load',{
                 deptype:'jigou',
                 departname:departname.val()
@@ -124,9 +121,17 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
-                        width:350,
-                        height:385,
+                        width:700,
+                        height:258,
                         html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},
+                            {
+                                text:'保存',
+                                handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,

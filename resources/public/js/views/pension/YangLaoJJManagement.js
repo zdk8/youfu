@@ -1,9 +1,9 @@
 define(function(){
     var render = function(local,option){
         var yljjgl = local.find('[opt=yanlaojjmanagement]');        //居家养老设施管理
-        var refresh = local.find('[opt=refresh]');        //刷新
-        var departname = local.find('[opt=departname]');        //机构名称
-        addyljjFun(local,refresh);                     //添加居家养老设施
+        var refresh = local.find('[opt=refresh]');                  //刷新
+        var departname = local.find('[opt=departname]');            //机构名称
+        addyljjFun(local,refresh);                                       //添加居家养老设施
         yljjgl.datagrid({
             url:'pension/getalldepartment',
             queryParams:{
@@ -23,8 +23,6 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "update"){         //修改
-//                                    console.log(record.departname)
-                                    console.log(record)
                                     var data = record;
                                     var departname = record.departname;         //机构名称
                                     updateyljjFun(local,departname,data,refresh)        //修改居家养老服务设施
@@ -70,7 +68,6 @@ define(function(){
         })
 
         refresh.click(function(){
-//            yljjgl.datagrid('reload');
             yljjgl.datagrid('load',{
                 deptype:'jujia',
                 departname:departname.val()
@@ -85,21 +82,17 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加养老设施',
-                        width:350,
-                        height:385,
+                        width:700,
+                        height:258,
                         html:htmfile,
-                        /*buttons:[
-                         {text:'取消',handler:function(html,parent){
-                         parent.trigger('close');
-                         }},
-                         {
-                         text:'保存1',
-                         handler:function(html,parent){
-                         //                                    local.find(html+'[opt=yljgdlg]')
-                         console.log(local.find(html+'[opt=yljgdlg]'))
-                         }
-                         }
-                         ],*/
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},
+                            {
+                                text:'保存',
+                                handler:function(html,parent){ }}
+                        ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
                                 submitbtn:submitbtn,
@@ -123,9 +116,17 @@ define(function(){
             function(win,htmfile,jsfile){
                 win.render({
                     title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
-                    width:350,
-                    height:385,
+                    width:700,
+                    height:258,
                     html:htmfile,
+                    buttons:[
+                        {text:'取消',handler:function(html,parent){
+                            parent.trigger('close');
+                        }},
+                        {
+                            text:'保存',
+                            handler:function(html,parent){ }}
+                    ],
                     renderHtml:function(local,submitbtn,parent){
                         jsfile.render(local,{
                             submitbtn:submitbtn,
