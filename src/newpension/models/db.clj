@@ -161,6 +161,13 @@
          (fields :lr_id :name :gender :birthd :identityid :address)))
   ( [keyword] (select olds           ;;根据关键字模糊查询
                 (where {:name [like (str "%" (if (nil? keyword) "" keyword) "%")]}))))
+;;查询老年人信息
+(defn search-oldpeople
+  ( [] (select olds                  ;;查询所有养老信息
+         (fields :lr_id :name :gender :birthd :identityid :address :status) ) )
+    ( [name identityid] (select olds
+               (where {:name [like (str "%" (if (nil? name) "" name) "%")]})
+                          (where {:identityid [like (str "%" (if (nil? identityid) "" identityid) "%")]}))))
 
 ;;根据主键查看养老信息
 (defn get-old [id]

@@ -1,16 +1,16 @@
 define(function(){
     return {
         render:function(local,option){
-
+            var peopleinfodatarid = local.find('.easyui-datagrid-noauto');      //查询界面datagrid
             var localDataGrid;
             var refreshGrid=function() {
                 localDataGrid.datagrid('reload');
             };
 
             localDataGrid=
-                local.find('.easyui-datagrid-noauto').datagrid({
-                    url:'/old',
-                    method:'get',
+                peopleinfodatarid.datagrid({
+                    url:'old/search-oldpeople',
+                    method:'post',
                     queryParams: {
 
                     },
@@ -65,6 +65,16 @@ define(function(){
                     striped:true,
                     toolbar:local.find('div[tb]')
                 })
+
+            var name = local.find('[opt=name]');                        //姓名
+            var identityid = local.find('[opt=identityid]');        //身份证
+            /*搜索*/
+            local.find('.searchbtn').click(function(){
+                peopleinfodatarid.datagrid('load',{
+                    name:name.searchbox('getValue'),
+                    identityid:identityid.searchbox('getValue')
+                })
+            })
         }
     }
 })

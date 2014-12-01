@@ -1,15 +1,16 @@
 <div class="easyui-layout"  data-options="fit:true">
     <div data-options="region:'center'" data-options="fit:true">
-        <table class="easyui-datagrid-noauto"
+        <table class="easyui-datagrid-noauto" opt="peopleinfoquery"
                data-options="
                method:'post',
                fit:true,
                border:false,
                rownumbers:true,
                fitColumns:true,
-              pageSize:cj.getDataGridAttr('pageSize'),
+               pageSize:cj.getDataGridAttr('pageSize'),
                pageList:cj.getDataGridAttr('pageList'),
                singleSelect:true,
+               loadMsg:'',
                pagination:true">
             <thead>
             <tr>
@@ -29,15 +30,19 @@
 
                     <td><label class="gray7">搜索条件:</label></td>
 
-                    <td style="width: 210px;text-align: right">
-                        <input class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
+                    <td style="width: 200px;text-align: right">
+                        <input opt="name" class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
+                               type="keyword" style="width:200px" >
+                    </td>
+
+                    <td style="width: 200px;text-align: right">
+                        <input opt="identityid" class="easyui-searchbox" data-options="prompt:'身份证',iconCls:'icon-log'"
                                type="keyword" style="width:200px" >
                     </td>
 
                     <td>
                         <span class="searchbtn" >&nbsp;</span>
                     </td>
-
 
                 </tr>
             </table>

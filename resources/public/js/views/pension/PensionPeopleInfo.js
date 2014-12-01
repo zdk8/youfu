@@ -147,11 +147,11 @@ define(function(){
             }
             disabledForm(local);                                //禁用easyui框
             $.ajax({
-                url:"searchid",
+                url:"searchid",                                //查询老人表
                 data:{
                     id:option.queryParams.data.lr_id
                 },
-                type:"get",
+                type:"post",
                 dataType:"json",
                 success:function(data){
                     pensionform.form('load',data)        //填充主表
