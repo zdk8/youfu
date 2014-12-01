@@ -10,6 +10,6 @@ var widgetcmp=pagename.replace(/\./g,'/');
 require(['text!views/'+widgetcmp+'.htm','views/'+widgetcmp,'commonfuncs/validate/Init'],function(htm,js,validateInit){
     new validateInit();
     var localtab = $('body').append(htm);
-    $.parser.parse(localtab.find('div[opt=pensionbutton]').parent())
-    js.render(localtab,{act:'c'})
+    $.parser.parse(localtab.parent());
+    js.render(localtab, {});
 })

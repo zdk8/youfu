@@ -43,8 +43,8 @@ define(function(){
 
             /*    localtab.find('div[opt=pensionbutton]').append(
                     '<a opt="close" class="easyui-linkbutton" data-options="iconCls:\'icon-remove\'">close</a>');
-*/
-                $.parser.parse(localtab.find('div[opt=pensionbutton]').parent())
+
+                $.parser.parse(localtab.find('div[opt=pensionbutton]').parent())*/
                 var closeCurrent=function(){
                     mainTab.tabs('close',option.title)
                 }
