@@ -11,7 +11,7 @@
             <tr>
                 <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
                 <td colspan="5">
-                    <input class="easyui-combotree"  opt="divisiontree" data-options="required:true, valueField:'divisionpath'"
+                    <input class="easyui-combotree"  opt="districtid" data-options="required:true, valueField:'divisionpath'"
                            style="width: 300px;"  name="districtid">
                 </td>
                 <td rowspan="4" colspan="2" style="text-align: center">
@@ -28,7 +28,7 @@
             <tr>
                 <td class="formtdtext">性别</td>
                 <td>
-                    <input opt="sex" class="easyui-combobox lazy-combobox"
+                    <input opt="gender" class="easyui-combobox lazy-combobox"
                            name="gender"
                            data-options="
                                 loader:cj.getLoader('gender'),
@@ -46,6 +46,7 @@
                 <td class="formtdtext">民族</td>
                 <td>
                     <input class="easyui-combobox"
+                           opt="nation"
                            name="nation"
                            data-options="
                                 loader: cj.getLoader('NATION'),
@@ -63,6 +64,7 @@
                 <td class="formtdtext">人员类型</td>
                 <td>
                     <input class="easyui-combobox lazy-combobox"
+                           opt="type"
                            name="type"
                            style="width: 100px"
                            data-options="
@@ -467,11 +469,10 @@
     </div>
 </fieldset>
 
-</form>
 <!--家庭成员-->
 <fieldset style="width: 900px;margin: 0px auto">
     <div opt="familymembersdiv">
-        <table class="easyui-datagrid" title="家庭成员列表" opt="familymembersgrid" style="width: 900px"
+        <table class="easyui-datagrid" title="家庭成员列表" opt="familymembersgrid" id="familymembersgrid1" style="width: 900px"
                data-options="rownumbers:true,toolbar:'#pensionmembertb',singleSelect:true,showFooter:true">
 
             <thead data-options="frozen:true">
@@ -483,20 +484,21 @@
             </thead>
             <thead>
             <tr>
-                <th class="lazy-combobox" data-options="field:'guanx',align:'center',width:100,editor:{
-                 type:'combobox',
-                 options:{
-                    required:true,
-                    loader:cj.getLoader('relation'),
-                    method:'get' ,
-                    editable:false,
-                    width:60,
-                    valueField: 'id',
-                    textField: 'text'
-                 }
-                 }">
-                    关系<span style="color: red">*</span>
-                </th>
+                <th class="lazy-combobox"
+                    data-options="
+                    field:'guanx',
+                    align:'center',
+                    width:100,
+                    editor:{
+                         type:'combobox',
+                         options:{
+                            required:true,
+                            loader:cj.getLoader('relation'),
+                            method:'get' ,
+                            editable:false,
+                            width:60,
+                            valueField: 'id',
+                            textField: 'text'}}">关系<span style="color: red">*</span></th>
                 <th data-options="required:true,field:'gx_name',width:90,align:'center',editor:{
                     type:'validatebox',
                     options:{required:true}
@@ -590,6 +592,8 @@
         </tr>
     </table>
 </div>
+
+</form>
 <div style="width: 900px;text-align: center;margin: 0px auto">
     <input type="button" value="处理" hidden="true" opt="dealwith">
     <input type="button" value="修改" hidden="true" opt="update">
