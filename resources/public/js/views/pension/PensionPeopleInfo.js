@@ -1,11 +1,20 @@
 define(function(){
     function render(local,option){
+        var districtid = local.find('[opt=districtid]');      //行政区划
+        getdivision(districtid);
         var pensionform = local.find('[opt=pensionform]');      //老人信息主表
         var familymembersgrid = local.find('[opt=familymembersgrid]');      //老人信息子表
         var dealwith = local.find('[opt=dealwith]');            //处理按钮
 
         if(option.queryParams.actiontype == "info"){            //处理
             dealwith.show();                  //显示处理按钮
+            local.find('[opt=newfamilymemeradd_btn]').hide()   //隐藏子表新增按钮
+            local.find('[opt=delfamilymemer_btn]').hide()      //隐藏子表删除按钮
+            for(var i=0;i<pensionform[0].length;i++){             //禁用表单
+                var element = pensionform[0].elements[i];
+                element.disabled = true
+            }
+            disabledForm(local);
             $.ajax({
                 url:"searchid",                                //查询老人表
                 data:{
@@ -15,16 +24,15 @@ define(function(){
                 dataType:"json",
                 success:function(data){
                     pensionform.form('load',data)        //填充form
-//                    famillylist(option.queryParams.data.lr_id,familymembersgrid)     //填充子表
+                    famillylist(option.queryParams.data.lr_id,familymembersgrid)     //填充子表
                     dealwithFunc({dealwith:dealwith,data:option.queryParams.data,refresh:option.queryParams.refresh})
+                    showProcess(false)
                 }
             })
         }
     }
-    var queryflag = 0;   //存放查询出的家庭成员数据条数
     /*加载家庭成员列表*/
     function famillylist(lr_id,familymembersgrid){
-        var familrelfields = familymembersgrid.datagrid("getColumnFields");  //获取全部元素的字段名
         $.post(
             'get-oldsocrel',
             {
@@ -39,7 +47,6 @@ define(function(){
                         familymembersgrid.datagrid('selectRow', editIndex)
                             .datagrid('beginEdit', editIndex);
                         addflag+=1;
-                        queryflag+=1;
                     }
                 }
                 if(addflag > 0){
@@ -47,7 +54,7 @@ define(function(){
                         var obj = data[d];
                         for(var key in obj){
                             var value = obj[key];
-                            var data1 =  $("#familymembersgrid1").datagrid('getEditor',{index:d,field:key});
+                            var data1 =  familymembersgrid.datagrid('getEditor',{index:d,field:key});
                             if(data1.type == "combobox"){
                                 $(data1.target).combobox("setValue",value);
                             }else{
