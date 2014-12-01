@@ -85,6 +85,20 @@
         (:body (resp/json {:total c :rows (subvec(db/get-olds) (* (dec p) r) (* p r))}))
         (:body (resp/json {:total c :rows (subvec(db/get-olds) (* (dec p) r) c)}))))))
 
+;;根据关键字查询老人信息
+(defn search-oldpeople [request]
+    (let [{params :params} request
+          {name :name} params
+          {identityid :identityid} params
+          {page :page} params
+          {rows :rows} params
+          p (Integer/parseInt page)
+          r (Integer/parseInt rows)
+          c (count (db/search-oldpeople name identityid))]
+      (if (<= (* p r) c)                              ;;分页
+        (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) (* p r))}))
+        (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) c)})))))
+
 ;;根据关键字查询
 (defn get-oldname
   ([name page rows]

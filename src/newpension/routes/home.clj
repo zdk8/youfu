@@ -96,7 +96,7 @@
   (GET "/func" [username functionid] (old/get-funcs username functionid))
   (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))  ;;获取输入框下拉选项列表
   (GET "/get-divisionlist" [dvhigh] (old/get-divisionlist dvhigh))  ;;获取行政区划下拉选项列表
-  (POST "/get-oldsocrel" [lr_id] (old/get-oldsocrel lr_id))   ;;查询家庭成员关系表
+
   (POST "/update-oldsorel" reuqest (old/update-oldsorel reuqest))    ;;修改养老家庭成员信息
   (POST "/oldsocrelkey" [] (old/oldsocrelkey))    ;;家庭成员信息表主键
   (POST "/dele-oldsorel" [lrgx_id] (old/dele-oldsorel lrgx_id))   ;;删除家庭成员关系表
@@ -118,6 +118,10 @@
   (POST "/sel-grantmoneyid" [] (money/sel-grantmoneyid )) ;;查询资金发放表主键
   (POST "/get-needsid" [] (money/get-needsid )) ;;取出需求评估信息表主键
   (POST "/del-grantmoney" [bsnyue] (money/del-grantmoney bsnyue))  ;;资金发放记录删除
+  ;;###############养老信息录入###################
+  (POST "/old/search-oldpeople" request (old/search-oldpeople request))       ;;根据关键字模糊查询养老信息
+  (POST "/searchid" [id] (old/get-oldid id))          ;;根据主键查看养老详细信息
+  (POST "/get-oldsocrel" [lr_id] (old/get-oldsocrel lr_id))   ;;查询家庭成员关系表
   ;;###############养老服务资源###################
   (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
   (POST "/pension/getalldepartment" request (depart/getall-department request))       ;;查询全部
