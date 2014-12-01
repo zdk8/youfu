@@ -306,7 +306,21 @@ var cj=(function(){
                 url:url,data:data,type:atype,success:success
             })
         },getLoader:getLoader,
-        dataGridLoadMsg:function(){return ''}
+        dataGridLoadMsg:function(){return ''},
+
+        /**
+         * 生成工具条
+         * @param btns
+         */
+        getFormToolBar:function(btns){
+            var $btnarea=$('<div class="form-foot-btns"><ul></ul></div>');
+            var $ul = $btnarea.find('ul');
+            for( var i in btns){
+                var $li=$('<li><a>'+btns[i].text+'</a></li>');
+                $ul.append($li);
+            }
+            return $btnarea;
+        }
     }
 
 

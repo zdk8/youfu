@@ -34,22 +34,21 @@ define(function(){
 
             function getChecked(){
                 var nodes = $functiontree.tree('getChecked');
-                var s = '';
+                var s = [];
                 for(var i=0; i<nodes.length; i++){
                     if(s.indexOf(nodes[i].functionid)<0){
-                        if (s != '') s += ',';
-                        s += nodes[i].functionid;
+                        s.push(nodes[i].functionid);
                     }
                 }
                 $functiontree.tree('getChildren').forEach(function (i) {
                     if($(i.target).find('span.tree-checkbox2').size()){
-                        s+=','+i.functionid;
+                        s.push(i.functionid);
                     }
                 })
                 $.ajax(
                     {
                         type: "POST",
-                        data: { functionids : s ,roleid:currentroleid},
+                        data: { functionids : s.toString() ,roleid:currentroleid},
                         url:'savegrant',
                         success:function(res){
                             option.parent.trigger('close');

@@ -76,3 +76,46 @@ div.form-cmp-wrapper .combo{
     color: red;
 }
 
+/************表单上方或者下方的悬浮工具条***************/
+div.form-foot-btns{
+    border-top: 1px solid gainsboro;
+}
+div.form-foot-btns ul
+{
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+    text-align: center;
+    list-style-type: none;
+}
+div.form-foot-btns ul li
+{
+    margin-left: 5px;
+    border: 1px dotted #808080;
+    display:inline;
+    list-style-type:none;
+}
+/* 所有class为form-foot-btns的div中的ul中的a样式(包括尚未点击的和点击过的样式) */
+div.form-foot-btns ul li a, div.form-foot-btns ul li a:visited
+{
+    cursor: pointer;
+    border: 1px #4e667d solid;
+    text-decoration: none;
+    white-space: nowrap;
+}
+div.form-foot-btns ul li a:hover
+{
+    background-color: #bfcbd6;
+    color: red;
+    text-decoration: none;
+}
+div.form-foot-btns ul li a:active
+{
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
+}
+/*设置表单中fieldset*/
+.common-form fieldset,.common-form fieldset table{
+    width: 900px;margin: 0px auto;
+}
