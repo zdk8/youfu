@@ -13,7 +13,7 @@ define(function(){
         }*/
         var ppauditdlg = local.find('[opt=ppauditdlg]');      //表单
         var determine = option.submitbtn;                   //确定按钮
-        ppauditdlg.form('load', {auuser:option.data.loginuser,bstime:myformatter(new Date())});
+        ppauditdlg.form('load', {auuser:option.data.loginuser});     /*,bstime:myformatter(new Date())*/
         /*取消*/
         local.find('[opt=cancle]').click(function(){
             option.parent.trigger('close');
@@ -28,6 +28,7 @@ define(function(){
             params.ppauditdlg.form('submit',{
                 url:'pension/auditfunction',
                 onSubmit: function(param){
+                    param.auuser = params.data.loginuser
                     param.aulevel = params.data.aulevel;
                     param.bstablepk = params.data.lr_id;
                     param.bstablename = "t_oldpeople";
