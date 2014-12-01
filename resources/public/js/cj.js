@@ -223,6 +223,14 @@ var cj=(function(){
                 $.messager.alert(cj.defaultTitle, '操作失败!', 'info');
             }
         },
+        slideShow:function(message,title){
+            $.messager.show({
+                title:title||'温馨提示',
+                msg:message||'',
+                timeout:3000,
+                showType:'slide'
+            });
+        },
         getByteLen: function (val) {
             var len = 0;
             for (var i = 0; i < val.length; i++) {
@@ -316,7 +324,12 @@ var cj=(function(){
             var $btnarea=$('<div class="form-foot-btns"><ul></ul></div>');
             var $ul = $btnarea.find('ul');
             for( var i in btns){
-                var $li=$('<li><a>'+btns[i].text+'</a></li>');
+                var btn = btns[i];
+                var $li=$('<li><a>'+btn.text+'</a></li>');
+                var $a = $li.find('a');
+                for(var p in btn) {
+                    $a.attr(p,btn[p]);
+                }
                 $ul.append($li);
             }
             return $btnarea;

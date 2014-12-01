@@ -1,15 +1,14 @@
-<div  class="easyui-panel" opt="pensioneditformpanel" style="overflow-y: scroll;"
-      data-options="fit:true,border:false">
+<div  class="easyui-panel" opt="formcontentpanel" style="overflow-y: scroll;" data-options="fit:true,border:false">
 <form opt="pensionform" class="common-form" method="post">
 <fieldset>
     <legend>老年人基本信息</legend>
     <div>
         <input type="hidden" name="lr_id">
-        <table class="formtable"  readonly=true>
+        <table class="formtable" readonly=true>
             <tr>
                 <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
                 <td colspan="5">
-                    <input class="easyui-combotree"  opt="divisiontree" data-options="required:true, valueField:'divisionpath'"
+                    <input class="easyui-combotree"  opt="districtid" data-options="required:true, valueField:'divisionpath'"
                            style="width: 300px;"  name="districtid">
                 </td>
                 <td rowspan="4" colspan="2" style="text-align: center">
@@ -26,7 +25,7 @@
             <tr>
                 <td class="formtdtext">性别</td>
                 <td>
-                    <input opt="sex" class="easyui-combobox"
+                    <input opt="gender" class="easyui-combobox "
                            name="gender"
                            data-options="
                                 loader:cj.getLoader('gender'),
@@ -44,9 +43,10 @@
                 <td class="formtdtext">民族</td>
                 <td>
                     <input class="easyui-combobox"
+                           opt="nation"
                            name="nation"
                            data-options="
-                                loader: cj.getLoader('NATION'),
+                                loader: cj.getLoader('nation'),
                                 mode: 'remote',
                                 editable:false,
                                 valueField:'id',
@@ -54,20 +54,22 @@
             "> </td>
             </tr>
         </table>
-        <table class="formtable" style="margin-top: 10px;">
+        <table class="formtable" style="border-top:0 ">
             <tr>
                 <td class="formtdtext">家庭住址</td>
                 <td colspan="3"><input class="easyui-validatebox" name="address" style="width: 300px"></td>
                 <td class="formtdtext">人员类型</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
+                           opt="type"
                            name="type"
                            style="width: 100px"
                            data-options="
                                 loader:cj.getLoader('oldtype'),
                                 editable:false,
                                 valueField:'id',
-                                textField:'text' ">
+                                textField:'text',
+            ">
                 </td>
             </tr>
             <tr>
@@ -77,18 +79,19 @@
             <tr>
                 <td class="formtdtext">居住环境</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="live"
                            style="width: 100px"
                            data-options="
                                 loader:cj.getLoader('liveplace'),
                                 editable:false,
                                 valueField:'id',
-                                textField:'text' ">
+                                textField:'text'
+                     ">
                 </td>
                 <td class="formtdtext">婚姻状况</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="marriage"
                            style="width: 100px"
                            data-options="
@@ -100,7 +103,7 @@
                 </td>
                 <td class="formtdtext">家庭经济条件</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="economy"
                            style="width: auto"
                            data-options="
@@ -116,7 +119,7 @@
                 <td><input class="easyui-validatebox" name="vocation"></td>
                 <td class="formtdtext">文化程度</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="culture"
                            style="width: 100px"
                            data-options="
@@ -140,7 +143,7 @@
             <tr>
                 <td class="formtdtext">呼叫机种类</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="hjj_kind"
                            style="width: 100px"
                            data-options="
@@ -152,7 +155,7 @@
                 </td>
                 <td class="formtdtext">呼叫机类型</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="hjj_type"
                            style="width: 100px"
                            data-options="
@@ -195,7 +198,7 @@
                 <td><input class="easyui-validatebox" name="jz_yixingm"></td>
                 <td class="formtdtext">邻居一位置</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jz_yiweiz"
                            style="width: 100px"
                            data-options="
@@ -214,7 +217,7 @@
                 <td><input class="easyui-validatebox" name="jz_erxingm"></td>
                 <td class="formtdtext">邻居二位置</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jz_erweiz"
                            style="width: 100px"
                            data-options="
@@ -249,14 +252,14 @@
 </fieldset>
 
 <!--健康信息-->
-<fieldset style="width: 900px;margin: 0px auto">
+<fieldset>
     <legend>健康信息</legend>
     <div>
         <table class="formtable" style="width: 900px">
             <tr>
                 <td class="formtdtext">血型</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_xuex"
                            style="width: 100px"
                            data-options="
@@ -268,7 +271,7 @@
                 </td>
                 <td class="formtdtext">血压</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_xuey"
                            style="width: 100px"
                            data-options="
@@ -280,7 +283,7 @@
                 </td>
                 <td class="formtdtext">起搏器情况</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_qibq"
                            style="width: 100px"
                            data-options="
@@ -296,7 +299,7 @@
                 <td><input class="easyui-validatebox" name="jk_gms"></td>
                 <td class="formtdtext">视力情况</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_shil"
                            style="width: 100px"
                            data-options="
@@ -308,7 +311,7 @@
                 </td>
                 <td class="formtdtext">听力情况</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_tingl"
                            style="width: 100px"
                            data-options="
@@ -322,7 +325,7 @@
             <tr>
                 <td class="formtdtext">活动能力</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_huod"
                            style="width: 100px"
                            data-options="
@@ -334,7 +337,7 @@
                 </td>
                 <td class="formtdtext">出行方式</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_chux"
                            style="width: 100px"
                            data-options="
@@ -346,7 +349,7 @@
                 </td>
                 <td class="formtdtext">记忆力情况</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_jiyl"
                            style="width: 100px"
                            data-options="
@@ -360,7 +363,7 @@
             <tr>
                 <td class="formtdtext">穿脱衣服</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_chuany"
                            style="width: 100px"
                            data-options="
@@ -372,7 +375,7 @@
                 </td>
                 <td class="formtdtext">定向能力</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_dingx"
                            style="width: 100px"
                            data-options="
@@ -384,7 +387,7 @@
                 </td>
                 <td class="formtdtext">洗澡情况</td>
                 <td>
-                    <input class="easyui-combobox"
+                    <input class="easyui-combobox "
                            name="jk_xiz"
                            style="width: 100px"
                            data-options="
@@ -431,7 +434,7 @@
 </fieldset>
 
 <!--爱好及活动需求-->
-<fieldset style="width: 900px;margin: 0px auto">
+<fieldset>
     <legend>爱好及活动需求</legend>
     <div>
         <table class="formtable" style="width: 900px">
@@ -463,11 +466,11 @@
     </div>
 </fieldset>
 
-</form>
 <!--家庭成员-->
 <fieldset style="width: 900px;margin: 0px auto">
+    <legend>家庭成员列表</legend>
     <div opt="familymembersdiv">
-        <table class="easyui-datagrid" title="家庭成员列表" opt="familymembersgrid" style="width: 900px"
+        <table class="easyui-datagrid"  opt="familymembersgrid" id="familymembersgrid1" style="width: 900px"
                data-options="rownumbers:true,toolbar:'#pensionmembertb',singleSelect:true,showFooter:true">
 
             <thead data-options="frozen:true">
@@ -479,20 +482,21 @@
             </thead>
             <thead>
             <tr>
-                <th data-options="field:'guanx',align:'center',width:100,editor:{
-                 type:'combobox',
-                 options:{
-                    required:true,
-                    loader:cj.getLoader('relation'),
-                    method:'get' ,
-                    editable:false,
-                    width:60,
-                    valueField: 'id',
-                    textField: 'text'
-                 }
-                 }">
-                    关系<span style="color: red">*</span>
-                </th>
+                <th class=""
+                    data-options="
+                    field:'guanx',
+                    align:'center',
+                    width:100,
+                    editor:{
+                         type:'combobox',
+                         options:{
+                            required:true,
+                            loader:cj.getLoader('relation'),
+                            method:'get' ,
+                            editable:false,
+                            width:60,
+                            valueField: 'id',
+                            textField: 'text'}}">关系<span style="color: red">*</span></th>
                 <th data-options="required:true,field:'gx_name',width:90,align:'center',editor:{
                     type:'validatebox',
                     options:{required:true}
@@ -505,7 +509,7 @@
                                 validType:'identityid'
                             }
                         }">身份证号<span style="color: red">*</span></th>
-                <th data-options="field:'gx_gender',align:'center',width:60,editor:{
+                <th class="" data-options="field:'gx_gender',align:'center',width:60,editor:{
 							type:'combobox',
 							options:{
 							    required:true,
@@ -521,7 +525,7 @@
                 <th  data-options="field:'gx_telephone',width:160,align:'center',editor:'text'">宅电</th>
                 <th data-options="field:'gx_mobilephone',width:160,align:'center',editor:'text'">手机</th>
                 <th  data-options="field:'gx_economy',width:100,align:'center',editor:'text'">月收入</th>
-                <th data-options="field:'gx_culture',align:'center',width:60,editor:{
+                <th class="" data-options="field:'gx_culture',align:'center',width:60,editor:{
 							type:'combobox',
 							options:{
                                loader:cj.getLoader('culture'),
@@ -533,7 +537,8 @@
 							}
 						}">文化程度</th>
                 <th  data-options="field:'gx_registration',width:100,align:'center',editor:'text'">籍贯</th>
-                <th data-options="field:'gx_nation',align:'center',width:60,editor:{
+                <!--<th  data-options="field:'gx_nation',width:100,align:'center',editor:'text'">-->
+                <th class="" data-options="field:'gx_nation',align:'center',width:60,editor:{
 							type:'combobox',
 							options:{
                                 loader:cj.getLoader('NATION'),
@@ -585,13 +590,15 @@
         </tr>
     </table>
 </div>
-<div style="width: 900px;text-align: center;margin: 0px auto">
+
+</form>
+<!--<div style="width: 900px;text-align: center;margin: 0px auto">
     <input type="button" value="处理" hidden="true" opt="dealwith">
     <input type="button" value="修改" hidden="true" opt="update">
     <input type="button" value="删除" hidden="true" opt="delete">
     <input type="button" value="保存" hidden="true" opt="save">
     <input type="button" value="操作日志" hidden="true" opt="log">
-</div>
+</div>-->
 
 </div>
 
