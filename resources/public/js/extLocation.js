@@ -1,5 +1,5 @@
-﻿serverUrl="http://112.124.50.195:8080/"
-//serverUrl="http://127.168.2.5/"
+﻿serverUrl="http://10.40.190.20:8089/"
+serverUrl="http://192.168.2.6/"
 /*var mysessionid="nosessionid";
 if(sessionid){
     mysessionid=sessionid;
@@ -10,8 +10,8 @@ preFixUrl="auth/proxy?";
 var urldest="urldest=http://192.168.2.2:8080/"
 //urldest="urldest=http://112.124.50.195:8080/pensionwebbg/";
 
-if(document.URL.indexOf('112.124')>0){
-    serverUrl="http://112.124.50.195:8080/";
+if(document.URL.indexOf('10.40.190')>0){
+    serverUrl="http://10.40.190.20:8089/";
     urldest="urldest=http://112.124.50.195:8080/pensionwebbg/";
 }
 if(document.URL.indexOf('localhost')>0){

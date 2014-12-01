@@ -62,6 +62,8 @@
   (GET "/dm2" request (dm2-page))
   (GET "/dm3" request (dm3-page request))
   (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
+  (GET "/loginbtn2" request (old/loginbtn2 request))  ;;用户登录
+  (POST "/loginbtn2" request (old/loginbtn2 request))  ;;用户登录
   (POST "/logout" request (old/logout request))      ;;退出登录
   (GET "/logout" request (old/logout request))      ;;退出登录
   (GET "/addold" [] (addold-page))   ;;养老信息录入页面

@@ -63,6 +63,12 @@
           (str true))
         (str false)))
     (catch Exception e (layout/render "login.html" {:loginmsg "服务器连接不上！"}))))
+
+(defn loginbtn2 [request]
+  (if (= (loginbtn request) "true")
+    (resp/redirect "/")
+    (layout/render "login.html" {:loginmsg "用户名或密码错误！"})
+    ))
 ;;注销
 (defn logout [request]
   (println (str "########################" (:username (session/get :usermsg)) "(" (:loginname (session/get :usermsg)) ")"))
