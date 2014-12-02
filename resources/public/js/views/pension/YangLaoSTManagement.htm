@@ -8,7 +8,7 @@
                rownumbers:true,
                pageSize:cj.getDataGridAttr('pageSize'),
                pageList:cj.getDataGridAttr('pageList'),
-               singleSelect:true,
+               singleSelect:false,
                pagination:true,
                loadMsg:''">
     <thead>
@@ -31,12 +31,33 @@
     </tr>
     </thead>
 </table>
-<div id="tb_stgl" style="padding: 5px;padding-bottom:2px;background-color: #ffffff">
-    <div>
+<div id="tb_stgl">
+    <!--<div>
         机构名称:<input type="text" opt="departname">
         <input class="buttoncss" opt="refresh" type="button" value="查询">
         <input class="buttoncss" opt="addylst" type="button" value="添加老年人食堂">
-    </div>
-    <hr style="color: rgba(183,176,162,0.20);border-color: #FAF2F2;border: 1px dashed;"/>
+    </div>-->
+    <table cellspacing="0" cellpadding="0" style="float: right;">
+        <tr>
+
+            <td>
+                <input class="buttoncss" opt="addylst" type="button" value="添加老年人食堂">
+            </td>
+
+            <td><label class="gray7">搜索条件:</label></td>
+
+            <td style="width: 200px;text-align: right">
+                <input opt="departname" class="easyui-searchbox" data-options="prompt:'机构名称',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+
+            <td>
+                <span class="searchbtn" opt="refresh">&nbsp;</span>
+            </td>
+
+        </tr>
+    </table>
+    <div class="clear"></div>
+    <!--<hr style="color: rgba(183,176,162,0.20);border-color: #FAF2F2;border: 1px dashed;"/>-->
 </div>
 

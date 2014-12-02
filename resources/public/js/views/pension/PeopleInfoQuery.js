@@ -1,16 +1,16 @@
 define(function(){
     return {
         render:function(local,option){
-
+            var peopleinfodatarid = local.find('.easyui-datagrid-noauto');      //查询界面datagrid
             var localDataGrid;
             var refreshGrid=function() {
                 localDataGrid.datagrid('reload');
             };
 
             localDataGrid=
-                local.find('.easyui-datagrid-noauto').datagrid({
-                    url:'/old',
-                    method:'get',
+                peopleinfodatarid.datagrid({
+                    url:'old/search-oldpeople',
+                    method:'post',
                     queryParams: {
 
                     },
@@ -44,8 +44,18 @@ define(function(){
                                 (function(index){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
-
                                         if($(this).attr("action")=='view'){
+                                            showProcess(true, '温馨提示', '数据处理中，请稍后...');   //进度框加载
+                                            cj.showContent({                                          //详细信息(tab标签)
+                                                title:record.name+'详细信息',
+                                                htmfile:'text!views/pension/PensionPeopleInfo.htm',
+                                                jsfile:'views/pension/PensionPeopleInfo',
+                                                queryParams:{
+                                                    actiontype:'update',         //（处理）操作方式
+                                                    data:record,                   //填充数据
+                                                    refresh:peopleinfodatarid                //刷新
+                                                }
+                                            })
                                             //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='delete'){
                                             //deleteRoleInfo(record);
@@ -65,6 +75,16 @@ define(function(){
                     striped:true,
                     toolbar:local.find('div[tb]')
                 })
+
+            var name = local.find('[opt=name]');                        //姓名
+            var identityid = local.find('[opt=identityid]');        //身份证
+            /*搜索*/
+            local.find('.searchbtn').click(function(){
+                peopleinfodatarid.datagrid('load',{
+                    name:name.searchbox('getValue'),
+                    identityid:identityid.searchbox('getValue')
+                })
+            })
         }
     }
 })

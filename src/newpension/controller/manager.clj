@@ -4,10 +4,35 @@
             [newpension.models.manager :as basemd]
             [noir.response :as resp]
             [noir.session :as session]
+            [taoensso.timbre :as timbre]
             ))
 
 
 
+
+(defn get-user-menutree-str [req]
+  (let [{params :params}req
+        node (get params :node)
+        id (get params :id)
+        ni (if node node id)
+        loginname (:loginname (session/get :usermsg))
+        results (if ni (basemd/menutree loginname ni) (basemd/menutree loginname "businessmenu"))]
+    (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results)
+    )
+  )
+(defn get-function-by-id-str [req]
+  (let [{params :params} req
+        id (get params :id)
+         results (first (basemd/get-function-by-id id))]
+    (timbre/debug req)
+    (println "*******************:::::" id)
+    results))
+
+
+(defn just-a-test
+  []
+  (let [results (basemd/menutree "admin" "bR8kBGp0A6lTmPkgOFxI")]
+    (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results)))
 
 (defn get-user-menutree [req]
   (let [{params :params}req
@@ -19,6 +44,7 @@
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )
   )
+
 
 (defn get-all-user-menutree [req]
   (let [{params :params}req

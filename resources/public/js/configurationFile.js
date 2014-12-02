@@ -1,13 +1,13 @@
 ﻿approvalProcess=['打回重审','提交未审核','审核未审批','审批通过','保存未提交'];    //流程状态
 getGender=['男','女']             //性别
 /*日期时间*/
-myformatter = function(date){
+var myformatter = function(date){
     var y = date.getFullYear();
     var m = date.getMonth()+1;
     var d = date.getDate();
     return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
 }
-myparser = function(s){
+var myparser = function(s){
     if (!s) return new Date();
     var ss = (s.split('-'));
     var y = parseInt(ss[0],10);
@@ -19,8 +19,33 @@ myparser = function(s){
         return new Date();
     }
 }
+/*行政区划的树结构*/
+var getdivision = function(divisiontree){
+    divisiontree.combotree({
+        panelHeight:300,
+        url:'getdivisiontree',
+        method: 'get',
+        onLoadSuccess:function(load,data){
+            /*if(!this.firstloaded){
+             divisiontree.combotree('setValue', data[0].id)
+             .combotree('setText', data[0].text);
+             this.firstloaded=true;
+             }*/
+        },
+        onBeforeExpand: function (node) {
+            divisiontree.combotree("tree").tree("options").url
+                = 'getdivisiontree?dvhigh=' + node.id;
+        },
+        onHidePanel: function () {
+            divisiontree.combotree('setValue',
+                    divisiontree.combotree('tree').tree('getSelected').id)
+                .combobox('setText',
+                    divisiontree.combotree('tree').tree('getSelected').text);
+        }
+    });
+}
 /*进度框*/
-showProcess = function(isShow, title, msg) {
+var showProcess = function(isShow, title, msg) {
     if (!isShow) {
         $.messager.progress('close');
         return;

@@ -464,6 +464,7 @@ div.weboxbuttons ul li
 /* 所有class为weboxbuttons的div中的ul中的a样式(包括尚未点击的和点击过的样式) */
 div.weboxbuttons ul li a, div.weboxbuttons ul li a:visited
 {
+    cursor: pointer;
     border: 1px #4e667d solid;
     text-decoration: none;
     white-space: nowrap;
@@ -565,5 +566,19 @@ div.weboxbuttons ul li a:active
     position:absolute; z-index:12;width: 20px;
     filter:alpha(opacity:0);
     opacity:0;
+}
+/*easyui datagrid表头样式*/
+.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber {
+    margin: 0;
+    padding: 0 4px;
+    white-space: nowrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    height: 22px;
+    line-height: 18px;
+    font-size: 12px;
+}
+.datagrid-htable .datagrid-cell {
+    background: url('') repeat;
 }
 
