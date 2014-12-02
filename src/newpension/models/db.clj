@@ -362,6 +362,29 @@
   (select needs
     (order :pg_id :desc)))
 
+;;人员评估信息查询
+(defn search-oldassessment
+  ( [] (select needs                  ;;查询所有人员评估信息
+         (fields :pg_id :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_xingz :sh_lout :sh_chuany :sh_dab :sh_xiaob
+           :sh_zongf :sh_pingguf :sh_pingguy          ;;生活方面
+           :jj_shour :jj_fenl :jj_leix :jj_pingguf :jj_pingguy :jz_fenl :jz_zhaol :jz_pingguf :jz_pingguy      ;;经济方面
+           :nl_fenl :nl_pingguf :nl_pingguy :gx_laom :gx_youf :gx_youf_kind :gx_chunjg :gx_ganb :gx_pingguf :gx_pingguy ;;年龄和贡献
+           )
+         (with olds
+           (fields :lr_id :name :identityid :birthd :gender :age :nation))
+         (order :pg_id :desc)))
+  ( [name identityid] (select needs
+                        (fields :pg_id :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_xingz :sh_lout :sh_chuany :sh_dab :sh_xiaob
+                          :sh_zongf :sh_pingguf :sh_pingguy          ;;生活方面
+                          :jj_shour :jj_fenl :jj_leix :jj_pingguf :jj_pingguy :jz_fenl :jz_zhaol :jz_pingguf :jz_pingguy      ;;经济方面
+                          :nl_fenl :nl_pingguf :nl_pingguy :gx_laom :gx_youf :gx_youf_kind :gx_chunjg :gx_ganb :gx_pingguf :gx_pingguy ;;年龄和贡献
+                          )
+                        (with olds
+                          (fields :lr_id :name :identityid :birthd :gender :age :nation)
+                          (where {:name [like (str "%" (if (nil? name) "" name) "%")]})
+                          (where {:identityid [like (str "%" (if (nil? identityid) "" identityid) "%")]}))
+                        (order :pg_id :desc))))
+
 ;;根据主键查询评估信息
 (defn get-need [id]
   (first

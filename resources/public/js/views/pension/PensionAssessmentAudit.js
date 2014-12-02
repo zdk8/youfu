@@ -22,7 +22,7 @@ define(function(){
                             var record=rows[index];
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
-                                if(action == "info"){                                       //详细信息
+                                if(action == "info"){                                       //详细信息(处理)
                                     showProcess(true, '温馨提示', '数据处理中，请稍后...');   //进度框加载
                                     cj.showContent({                                          //详细信息(tab标签)
                                          title:record.name+'详细信息',
@@ -31,7 +31,7 @@ define(function(){
                                          queryParams:{
                                              actiontype:'info',         //（处理）操作方式
                                              data:record,                   //填充数据
-                                             refresh:ppaudit                //刷新
+                                             refresh:paaudit                //刷新
                                         }
                                      })
                                 }else if(action == "dealwith"){                   //处理
@@ -54,7 +54,7 @@ define(function(){
                                                     jsfile.render(local,{
                                                         submitbtn:submitbtn,
                                                         act:'c',
-                                                        refresh:ppaudit,
+                                                        refresh:paaudit,
                                                         data:record,
                                                         parent:parent,
 //                                                        actiontype:'add',       //操作方式

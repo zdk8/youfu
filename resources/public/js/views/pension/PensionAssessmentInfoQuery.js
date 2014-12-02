@@ -3,7 +3,7 @@ define(function(){
         var pensionassessmentquery = local.find('[opt=pensionassessmentquery]');    //人员评估datagrid
         /*加载人员评估信息*/
         pensionassessmentquery.datagrid({
-            url:'needs',
+            url:'need/search-oldassessment',
             method:'post',
             onDblClickRow: function(){
                 var selected = $('#need').datagrid('getSelected');
@@ -25,9 +25,19 @@ define(function(){
                 }
             },
             onLoadSuccess:function(data){
-                console.log(data)
+//                console.log(data)
             }
         });
+
+        var name = local.find('[opt=name]');                        //姓名
+        var identityid = local.find('[opt=identityid]');        //身份证
+        /*搜索*/
+        local.find('.searchbtn').click(function(){
+            pensionassessmentquery.datagrid('load',{
+                name:name.searchbox('getValue'),
+                identityid:identityid.searchbox('getValue')
+            })
+        })
     }
 
     return {

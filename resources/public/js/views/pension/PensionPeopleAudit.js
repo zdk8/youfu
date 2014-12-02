@@ -33,7 +33,7 @@ define(function(){
                                              data:record,                   //填充数据
                                              refresh:ppaudit                //刷新
                                         }
-                                     })
+                                    })
                                 }else if(action == "dealwith"){                   //处理
                                     require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
                                         function(win,htmfile,jsfile){

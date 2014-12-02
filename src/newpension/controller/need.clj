@@ -36,6 +36,24 @@
   (let [nd (db/get-needs)]
     (:body (resp/json {:total (count nd) :rows (map #(need %) nd)}))))
 
+;;人员评估信息查询
+(defn search-oldassessment [request]
+  (let [{params :params} request
+        {name :name} params
+        {identityid :identityid} params
+        {page :page} params
+        {rows :rows} params
+        p (Integer/parseInt page)
+        r (Integer/parseInt rows)
+        c (count (db/search-oldassessment name identityid))
+        ]
+    (println "%%%%%%%%%%%%%%%%%%" (db/search-oldassessment name identityid))
+;    )
+    (if (<= (* p r) c)                              ;;分页
+      (:body (resp/json {:total c :rows (subvec(db/search-oldassessment name identityid) (* (dec p) r) (* p r))}))
+      (:body (resp/json {:total c :rows (subvec(db/search-oldassessment name identityid) (* (dec p) r) c)}))))
+  )
+
 (defn tneed [id]
   (layout/render
     "addneed.html"
