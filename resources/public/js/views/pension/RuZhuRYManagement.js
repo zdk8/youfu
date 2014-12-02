@@ -57,9 +57,9 @@ define(function(){
 //            rzrygl.datagrid('reload');
             rzrygl.datagrid('load',{
                 deptype:'jigou',
-                departname:departname.val(),
-                name:name.val(),
-                identityid:identityid.val()
+                departname:departname.searchbox("getValue"),
+                name:name.searchbox("getValue"),
+                identityid:identityid.searchbox("getValue")
             });
         })
     }
