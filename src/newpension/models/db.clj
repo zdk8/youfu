@@ -165,11 +165,11 @@
 (defn search-oldpeople
   ( [] (select olds                  ;;查询所有养老信息
          (fields :lr_id :name :gender :birthd :identityid :address :status) )
-          (order :lr_id desc))
+          (order :lr_id :desc))
     ( [name identityid] (select olds
                (where {:name [like (str "%" (if (nil? name) "" name) "%")]})
                           (where {:identityid [like (str "%" (if (nil? identityid) "" identityid) "%")]}))
-      (order :lr_id desc)))
+      (order :lr_id :desc)))
 
 ;;根据主键查看养老信息
 (defn get-old [id]
