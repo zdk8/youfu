@@ -1,0 +1,28 @@
+<!--操作日志表-->
+<table opt="operationtable"
+       data-options="
+               fit:true,
+               fitColumns:true,
+               border:false,
+               rownumbers:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               pagination:true,
+               loadMsg:''">
+    <thead>
+    <tr>
+        <th data-options="field:'opseno',width:180">操作日志流水号</th>
+        <th data-options="field:'tprkey',width:180">业务序号</th>
+        <th data-options="field:'digest',width:127"><a>摘要</a></th>
+        <th data-options="field:'username',width:210">办理人</th>
+        <th data-options="field:'bsnyue',width:127">业务期</th>
+        <th data-options="field:'bstime',width:230">时间</th>
+        <!--<th data-options="field:'ro',width:80,align:'center'">回退</th>-->
+
+    </tr>
+    </thead>
+</table>
+
+
+

@@ -33,7 +33,7 @@ define(function(){
                                              data:record,                   //填充数据
                                              refresh:paaudit                //刷新
                                         }
-                                     })
+                                    })
                                 }else if(action == "dealwith"){                   //处理
                                     require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
                                         function(win,htmfile,jsfile){
@@ -81,7 +81,16 @@ define(function(){
     /*操作日志*/
     var operationlogFunc = function(operationlog){
         operationlog.click(function(){
-            console.log(2)
+            cj.showContent({                                          //操作日志(tab标签)
+                title:'操作日志',
+                htmfile:'text!views/pension/OperationLog.htm',
+                jsfile:'views/pension/OperationLog',
+                queryParams:{
+                    actiontype:'info'         //（处理）操作方式
+//                    data:record,                   //填充数据
+//                    refresh:paaudit                //刷新
+                }
+            })
         })
     }
 
