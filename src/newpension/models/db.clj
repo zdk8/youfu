@@ -616,7 +616,7 @@
     (where {:bstablepk bstablepk
                  :status "1"})))
 
-(defn set-tablestatus [idname id tablename]                                                          "审核通过修改被审核表状态"
+(defn set-tablestatus [idname id  tablename]                                                          "审核通过修改被审核表状态"
   (update tablename
     (set-fields {:status "1"})
     (where {(keyword idname) id})))
