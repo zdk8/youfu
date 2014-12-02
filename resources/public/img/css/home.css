@@ -567,4 +567,18 @@ div.weboxbuttons ul li a:active
     filter:alpha(opacity:0);
     opacity:0;
 }
+/*easyui datagrid表头样式*/
+.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber {
+    margin: 0;
+    padding: 0 4px;
+    white-space: nowrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    height: 22px;
+    line-height: 18px;
+    font-size: 12px;
+}
+.datagrid-htable .datagrid-cell {
+    background: url('') repeat;
+}
 

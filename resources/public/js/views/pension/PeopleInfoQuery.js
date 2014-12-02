@@ -44,8 +44,18 @@ define(function(){
                                 (function(index){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
-
                                         if($(this).attr("action")=='view'){
+                                            showProcess(true, '温馨提示', '数据处理中，请稍后...');   //进度框加载
+                                            cj.showContent({                                          //详细信息(tab标签)
+                                                title:record.name+'详细信息',
+                                                htmfile:'text!views/pension/PensionPeopleInfo.htm',
+                                                jsfile:'views/pension/PensionPeopleInfo',
+                                                queryParams:{
+                                                    actiontype:'update',         //（处理）操作方式
+                                                    data:record,                   //填充数据
+                                                    refresh:peopleinfodatarid                //刷新
+                                                }
+                                            })
                                             //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='delete'){
                                             //deleteRoleInfo(record);

@@ -15,7 +15,14 @@
             <thead>
             <tr>
                 <th data-options="field:'lr_id',hidden:true" ></th>
-                <th data-options="field:'name',width:100,align:'center'">姓名</th>
+                <!--<th data-options="field:'name',width:100,align:'center'">姓名</th>-->
+                <th data-options="field:'name',width:100,align:'center',
+                formatter:function(v,r,i)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                    return str.html();
+                }">姓名</th>
                 <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
                 <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
                 <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>

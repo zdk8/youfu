@@ -69,7 +69,7 @@ define(function(){
         refresh.click(function(){
             ylxggl.datagrid('load',{
                 deptype:'xingguang',
-                departname:departname.val()
+                departname:departname.searchbox('getValue')
             });
         })
 

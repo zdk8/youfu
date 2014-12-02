@@ -452,7 +452,6 @@ define(function(){
 
     }
 
-    /*数据处理*/
     var dealwithFunc = function(params){
         params.dealwith.click(function(){
             require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
