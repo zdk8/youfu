@@ -395,7 +395,7 @@ input:disabled{
 
 
 
-#mainPanle{
+.mainPanle{
     padding-bottom: 5px;
     padding-top: 5px;
     background:url(../../img/bg-gray.gif) repeat;
