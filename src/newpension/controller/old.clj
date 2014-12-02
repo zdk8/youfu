@@ -35,6 +35,7 @@
 (def approve [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators ])
 
 (def v_oldapprove "v_oldapprove")
+(def t_oldpeople "t_oldpeople")
 
 ;;用户登录
 (defn home [request]
@@ -92,12 +93,17 @@
           {identityid :identityid} params
           {page :page} params
           {rows :rows} params
-          p (Integer/parseInt page)
-          r (Integer/parseInt rows)
-          c (count (db/search-oldpeople name identityid))]
-      (if (<= (* p r) c)                              ;;分页
-        (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) (* p r))}))
-        (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) c)})))))
+           cond (str (common/likecond "name" name) (common/likecond "identityid" identityid))
+         order (str " order by lr_id desc")
+          getresult (common/fenye rows page t_oldpeople cond order)]
+          ;p (Integer/parseInt page)
+          ;r (Integer/parseInt rows)
+          ;c (count (db/search-oldpeople name identityid))
+      ;(if (<= (* p r) c)                              ;;分页
+       ; (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) (* p r))}))
+        ;(:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) c)})))
+      (resp/json {:total (:total getresult) :rows (:rows getresult)})
+      ))
 
 ;;根据关键字查询
 (defn get-oldname
@@ -537,7 +543,7 @@
        {page :page}params
        {rows :rows}params
        auuser  (:username (session/get :usermsg))
-       getresult (common/fenye rows page v_oldapprove " " " ")]
+       getresult (common/fenye rows page v_oldapprove "" "")]
     (resp/json {:total (:total getresult) :rows (map #(conj % {:loginuser auuser} )(common/time-formatymd-before-list (:rows getresult) "bstime"))})))
 
 ;;根据外键查询操作日志

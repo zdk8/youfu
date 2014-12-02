@@ -34,8 +34,8 @@
        {departname :departname}params
        {page :page}params
        {rows :rows}params
-        cond (str " where deptype = '" deptype "' "  (common/likecond "departname" departname))
-        getresult (common/fenye rows page t_pensiondepartment cond " ")
+        cond (str " and deptype = '" deptype "' "  (common/likecond "departname" departname))
+        getresult (common/fenye rows page t_pensiondepartment cond "")
        ]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "runtime")})))
 
@@ -94,8 +94,8 @@
        {deptype :deptype}params
        {page :page}params
        {rows :rows}params
-       cond (str " where deptype = '" deptype "' " (common/likecond "name" name) (common/likecond "identityid" identityid) (common/likecond "departname" departname) " and checkouttime is null")
-       getresult (common/fenye rows page "t_oldpeopledep" cond " ")]
+       cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname) " and checkouttime is null")
+       getresult (common/fenye rows page "t_oldpeopledep" cond "")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult) "checkintime")})))
 
 (defn oldpeople-checkout [request]
@@ -118,8 +118,8 @@
        {page :page}params
        {rows :rows}params
        {departname :departname}params
-       cond (str " where departname like '%" departname "%' ")
-       getresult (common/fenye rows page t_mcanteen cond " ")]
+       cond (str " and departname like '%" departname "%' ")
+       getresult (common/fenye rows page t_mcanteen cond "")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "runtime")})))
 
 (defn update-canteen  [request]
