@@ -7,6 +7,8 @@
             [newpension.controller.genHtmlCode :as gen]
             [newpension.controller.money :as money]
             [noir.session :as session]
+            [clojure.data.json :as json]
+            [newpension.controller.manager :as mymngctrl]
             [newpension.controller.department :as depart]))
 
 (defn home-page []
@@ -39,7 +41,12 @@
   (layout/render "dm2.html"))
 
 (defn dm3-page [req]
-  (layout/render "dm3.html" {:functionid (:id (:params req)) :username (:username (session/get :usermsg))}))
+  (layout/render "dm3.html"
+    {:functionid (:id (:params req))
+     :username (:username (session/get :usermsg))
+     :menuone (json/json-str (mymngctrl/get-function-by-id-str req) :escape-unicode false)
+     :menutwo (str (json/json-str (mymngctrl/get-user-menutree-str req) :escape-unicode false))
+     }))
 
 
 (defn upload-page []
@@ -141,13 +148,16 @@
   (POST "/pension/updatecanteen" request (depart/update-canteen  request))                      ;;食堂修改
   (POST "/pension/deletecanteen" request (depart/delete-canteen  request))                       ;;删除食堂
 
-  (POST "/pension/auditfunction" request (old/audit-fun request))                                  ;;审核
+  (POST "/pension/auditfunction" request (old/audit-fun request))                                     ;;审核
   (POST "/pension/get-auditpeople" request (old/get-auditpeople request))                     ;;获取未通过审批的老年人
+
+  (POST "/pension/evaluateoldpeople" request (old/evaluate-oldpeople request))                  ;;评估
+ ;; (POST "/pension/getassessment" request (old/get-assessment request))                             ;;获取未评估的数据
 
 
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
 
-  (POST  "/test/testapprove" request (old/add-approve1 request))
+  ;;(POST  "/test/testapprove" request (old/add-approve0 request))
   )

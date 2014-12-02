@@ -11,18 +11,6 @@
     <script type="text/javascript" src="js/mycalendar.js"></script>
 
 
-    <script type="text/javascript">
-        var customMenuRoot = '{{functionid}}';
-        var swapFunction;
-        /*session全局变量*/
-        var onlinenums=0;
-        var userid='jjkeKGS16yEyKBF5fEq3';
-        var username="hhh";
-        var displayname=username;
-        var regionid=330106002;
-        var dvname='北山街道';
-
-    </script>
     <style type="text/css">
         html, body {
             font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
@@ -231,7 +219,7 @@
     <div region="west" id="westpanel" border="false" split="true"  class="cs-west"
          style="background-color: #1671b7;"
          collapsible="false">
-        <div id="menu_newpension" fit="true" border="false" style="display: none;">
+        <div id="menu_newpension" fit="true" border="false">
             <ul class="leftul">
                 <!--<li class="leftli">
                     <ul>
@@ -299,7 +287,10 @@
         <div id="tabs" class="easyui-tabs"   fit="true" border="false" >
             <div title="主页" class="indexbackground_2">
                 <div class="cs-home-remark">
-                    <h3 style="font-family: 'courier new'">欢迎使用民政养老救助系统</h3>
+                    <h3 style="font-family: 'courier new'">
+
+                    </h3>
+
                 </div>
             </div>
         </div>
@@ -309,6 +300,8 @@
 <div id="grantMoneyDig"></div>
 <div id="searchDig"></div>
 
+<div id="mymenuone" style="display: none">{{menuone}}</div>
+<div id="mymenutwo" style="display: none">{{menutwo}}</div>
 </body>
 </html>
 <script>
@@ -322,6 +315,189 @@
 
 
 </script>
+<script>
+    var customMenuRoot = '{{functionid}}';
+    var swapFunction;
+    var mymenudata=[];
+    var leftMenuClick=function(){};
+    var swapFunction=function(){};
+    var getMenudata=function(functionid){
+        for(var i in mymenudata) {
+            if(mymenudata[i].functionid==functionid) {
+                return mymenudata[i];
+            }
+        }
+    };
+    var setMenuData=function(functionid,menuone,menutwo) {
+        var data=getMenudata(functionid);
+        if(!data){
+            mymenudata.push({
+                functionid:functionid,
+                menuone: $.isArray(menuone)?menuone[0]:menuone,
+                menutwo:menutwo
+            })
+        }else if(!data.menutwo){
+            data.menutwo = menutwo;
+        }
+    };
+    $(function(){
+        if(!mymenudata.length) {
+            setMenuData(customMenuRoot, $.evalJSON($('#mymenuone').text()), $.evalJSON($('#mymenutwo').text()));
+        }
+
+
+        var genMenulevelonehtml=function(nodes){
+            var mynodes=nodes;
+            if(!$.isArray(nodes)){
+                mynodes = [nodes];
+            }
+
+            var result=$('<ul></ul>');
+
+            for(var i=0;i<mynodes.length;i++){
+                var node = mynodes[i];
+                if(!node){
+                    continue;
+                }
+                var $li=$('<li class="leftli"> <ul> <li class="menulevelone"><a >'+node.title+'<span></span></a></li> <li class="dropdown"> </li> </ul> </li>')
+                $li.find('li.menulevelone a').data("greeting",node );
+                result.append($li);
+                result.append('<li class="jianju"></li>');
+            }
+            return result;
+        };
+
+        var genMenuleveltwohtml=function(nodes){
+            var resutl=$('<ul></ul>');
+            for(var i=0;i<nodes.length;i++){
+                var node = nodes[i];
+                var $li=$('<li><a  opt="1">'+node.title+'</a></li>');
+                $li.data("greeting",node );
+                resutl.append($li);
+            }
+            return resutl;
+        };
+
+
+        var setMenuLevelTwoClickEvent=function($dropdownas){
+            //var $dropdownas=$('#menu_newpension li.dropdown a');
+            $dropdownas.click(function(e){
+                var me = $(this);
+                var $li = $(this).parent();
+                $dropdownas.each(function(){
+                    $(this).removeClass('menuselected')
+                            .parents('.dropdown').prev().find('a').removeClass('menulevelone-selected');
+                });
+                $(this).addClass('menuselected').parents('.dropdown').prev().find('a').addClass('menulevelone-selected');
+                leftMenuClick($li);
+            }).hover(function(e){
+                $dropdownas.removeClass('dropdown-li-a-hover');
+                $(this).addClass('dropdown-li-a-hover')
+            },function(e){
+                $dropdownas.removeClass('dropdown-li-a-hover');
+            });
+        }
+
+
+        var addMenuDataTwo=function(menutwo,e){
+            var two=genMenuleveltwohtml(menutwo);
+            var dropDown = $me.parent().next();
+            dropDown.append(two);
+            $('.dropdown').not(dropDown).slideUp('slow');
+            //dropDown.slideToggle('slow');
+            setMenuLevelTwoClickEvent($(two).find('a'));
+            e.preventDefault();
+        }
+
+        function addAccordion(functionid) {
+
+
+            var menudata={};
+            if(functionid) {
+                menudata = getMenudata(functionid);
+            }else{
+                menudata = mymenudata[0];
+            }
+            var getAccordion = function (mydata) {
+                var menudata=mydata;
+                //菜单切换
+                $('#menu_newpension ul').html('');
+                var one=genMenulevelonehtml(menudata.menuone);
+                $('#menu_newpension .leftul').append(one);
+                $('#menu_newpension li.menulevelone a').click(function (e) {
+                    $me = $(this);
+                    $me.data('idClicked',true);
+
+                    //getMenudata
+                    if(!$me.data('loadChildren')){
+                        $me.data('loadChildren', true);
+                        if(menudata.menutwo){
+                            addMenuDataTwo(menudata.menutwo,e);
+                        }else{
+                            $.ajax(
+                                    {
+                                        url:'menutree',
+                                        data:{
+                                            node:$me.data('greeting').functionid
+                                        },
+                                        success:function(res){
+                                            setMenuData(functionid, menudata.menuone, res);
+                                            addMenuDataTwo(res,e);
+
+                                        }
+                                    }
+                            )
+                        }
+
+                    }else{
+                        var dropDown = $me.parent().next();
+                        $('.dropdown').not(dropDown).slideUp('slow');
+                        if(!$me.data('isClicked')){
+                            dropDown.slideToggle('slow');
+                        }
+                        e.preventDefault();
+                    }
+                });
+                $('#menu_newpension li.menulevelone a').first().trigger('click');
+
+            }
+
+
+            //加载抽屉
+            var ajaxOption;
+            var mysuccess=function(res){
+                setMenuData(functionid, res);
+                getAccordion(getMenudata(functionid));
+            };
+            if(functionid){
+                ajaxOption={
+                    url:'getFunctionById',//只加载一个目录
+                    data:{node:functionid},
+                    success:mysuccess
+                }
+            }else{
+                ajaxOption={
+                    url:'menutree',
+                    data:{node:'dasffffffffffffffdsdsfs'},//养老
+                    success:mysuccess
+                }
+            }
+            if(menudata){
+                getAccordion(menudata);
+            }else{
+                $.ajax(ajaxOption);
+            }
+
+        }
+
+        addAccordion();
+
+        swapFunction=addAccordion;
+    })
+</script>
+
+
+
 <link rel="Stylesheet" type="text/css" href="img/css/home.css">
 <script type="text/javascript" src="js/commonfuncs/jquery.json-2.4.js"></script>
 <script type="text/javascript" src="js/require.js" data-main="js/mainapp_newpension"></script>
@@ -339,22 +515,13 @@
         }
     });
 
-    /*$('#menu_newpension li.menulevelone a').click(function (e) {
-        var dropDown = $(this).parent().next();
-        $('.dropdown').not(dropDown).slideUp('slow');
-        dropDown.slideToggle('slow');
-        e.preventDefault();
-    });*/
 
-    /*$('#menu_newpension li.menulevelone a').first().trigger('click').trigger('click');*/
-    $('#menu_newpension').fadeIn('slow');
 
     $('#currentDate').text(mycalendar.RunGLNL());
     $('#headnavul a').bind('click',function(){
         $('#current-user-msg a,#headnavul a').removeClass('hight-color');
         $(this).addClass('hight-color');
-        customMenuRoot = $(this).attr('opt');
-        swapFunction(true);
+        swapFunction($(this).attr('opt'));
     });
     $('#current-user-msg a,#headnavul a').hover(function(){
         $('#current-user-msg a,#headnavul a').removeClass('hight-color-2');
