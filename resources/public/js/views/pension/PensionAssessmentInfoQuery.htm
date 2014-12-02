@@ -1,11 +1,13 @@
 <!--人员评估信息查询-->
-<table opt="pensionassessmentquery" id="need"
+<table opt="pensionassessmentquery"  id="need"
        data-options="
                fit:true,
                method:'get',
                toolbar:'#paqueryid',
                border:false,
                singleSelect:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
                loadMsg:'',
                pagination:true">
     <thead data-options="frozen:true" class="datagrid-cell-rownumber">
