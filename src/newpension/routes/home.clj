@@ -124,6 +124,8 @@
   (POST "/get-oldsocrel" [lr_id] (old/get-oldsocrel lr_id))   ;;查询家庭成员关系表
   ;;###############服务评估###################
   (POST "/need/search-oldassessment" request (need/search-oldassessment request))             ;;人员评估信息查询
+  (GET "/getoperationlog" request (old/get-operationlog request))       ;;操作日志查询
+  (POST "/getoperationlog" request (old/get-operationlog request))       ;;操作日志查询
   ;;###############养老服务资源###################
   (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
   (POST "/pension/getalldepartment" request (depart/getall-department request))       ;;查询全部

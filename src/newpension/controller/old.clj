@@ -438,6 +438,18 @@
 ;      (:body (resp/json {:total c :rows (subvec (common/time-formatymd-before-list (db/get-userlogs functionid) "bstime") (* (dec p) r) c)})))))
       (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) (* p r))}))
       (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) c)})))))
+(defn get-operationlog [request]
+  (let [{params :params} request
+        {page :page} params
+        {rows :rows} params
+        loginname (session/get :usermsg)
+        p (Integer/parseInt page)
+        r (Integer/parseInt rows)
+        c (count (db/get-operationlog loginname))]
+    (if (<= (* p r) c)                              ;;分页
+      (:body (resp/json {:total c :rows (subvec (db/get-operationlog loginname) (* (dec p) r) (* p r))}))
+      (:body (resp/json {:total c :rows (subvec (db/get-operationlog loginname) (* (dec p) r) c)}))))
+  )
 
 ;;折叠框转换
 (defn accordion [ad username]
