@@ -7,6 +7,8 @@
             [newpension.controller.genHtmlCode :as gen]
             [newpension.controller.money :as money]
             [noir.session :as session]
+            [clojure.data.json :as json]
+            [newpension.controller.manager :as mymngctrl]
             [newpension.controller.department :as depart]))
 
 (defn home-page []
@@ -39,7 +41,12 @@
   (layout/render "dm2.html"))
 
 (defn dm3-page [req]
-  (layout/render "dm3.html" {:functionid (:id (:params req)) :username (:username (session/get :usermsg))}))
+  (layout/render "dm3.html"
+    {:functionid (:id (:params req))
+     :username (:username (session/get :usermsg))
+     :menuone (json/json-str (mymngctrl/get-function-by-id-str req) :escape-unicode false)
+     :menutwo (str (json/json-str (mymngctrl/get-user-menutree-str req) :escape-unicode false))
+     }))
 
 
 (defn upload-page []

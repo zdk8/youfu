@@ -2,24 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/TestA.htm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/TestA.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/templates/iframes.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/mainappiframe.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/html/test.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/manager/Grant.js" afterPath="$PROJECT_DIR$/resources/public/js/views/manager/Grant.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.htm" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.js" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/cj.js" afterPath="$PROJECT_DIR$/resources/public/js/cj.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/extLocation.js" afterPath="$PROJECT_DIR$/resources/public/js/extLocation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/img/css/formtable02.css" afterPath="$PROJECT_DIR$/resources/public/img/css/formtable02.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/img/css/home.css" afterPath="$PROJECT_DIR$/resources/public/img/css/home.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/routes/manager.clj" afterPath="$PROJECT_DIR$/src/newpension/routes/manager.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js" afterPath="$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/templates/dm3.html" afterPath="$PROJECT_DIR$/resources/templates/dm3.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/routes/home.clj" afterPath="$PROJECT_DIR$/src/newpension/routes/home.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/controller/manager.clj" afterPath="$PROJECT_DIR$/src/newpension/controller/manager.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/middleware.clj" afterPath="$PROJECT_DIR$/src/newpension/middleware.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.clj" afterPath="$PROJECT_DIR$/project.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
     <ignored path="newpension.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +35,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties converted="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -76,7 +73,6 @@
       </breakpoint>
     </breakpoint_any>
     <breakpoint_rules converted="true" />
-    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -84,169 +80,117 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TestA.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/TestA.js">
+      <file leaf-file-name="dm3.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/templates/dm3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="646">
-              <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PensionPeopleInfo.htm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.htm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-140.17857" vertical-offset="6240" max-vertical-offset="11457">
-              <caret line="535" column="0" selection-start-line="535" selection-start-column="0" selection-end-line="535" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.29422066" vertical-offset="0" max-vertical-offset="7546">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#td#2;n#tr#1;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#2;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#5;n#tr#2;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#3;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#5;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#5;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#fieldset#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#fieldset#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#0;n#fieldset#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#table#0;n#div#0;n#fieldset#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#1;n#table#0;n#div#0;n#fieldset#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#5;n#tr#0;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#1;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#5;n#tr#1;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#2;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#5;n#tr#2;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#3;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#5;n#tr#3;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#0;n#td#1;n#tr#6;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#2;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#3;n#tr#3;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#thead#1;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#th#1;n#tr#0;n#thead#1;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#th#2;n#tr#0;n#thead#1;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#th#3;n#tr#0;n#thead#1;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#tr#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#3;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PensionPeopleInfo.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.js">
+      <file leaf-file-name="manager.clj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/routes/manager.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2033">
-              <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="910">
+              <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestA.htm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/TestA.htm">
+      <file leaf-file-name="home.clj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.071429" vertical-offset="0" max-vertical-offset="3477">
-              <caret line="6" column="45" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="2268">
+              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="middleware.clj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/middleware.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="434">
+              <caret line="11" column="24" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="project.clj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="868">
+              <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainViewController_NEWPENSION.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="602">
+              <caret line="23" column="33" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="33" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="win.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js">
+      <file leaf-file-name="manager.clj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/controller/manager.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="684" max-vertical-offset="1824">
-              <caret line="55" column="13" selection-start-line="42" selection-start-column="12" selection-end-line="55" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3136">
+              <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="win.htm" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.htm">
+      <file leaf-file-name="repl.clj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/repl.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.428571" vertical-offset="0" max-vertical-offset="399">
-              <caret line="8" column="58" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="58" />
-              <folding>
-                <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/img/css/home.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="8719" max-vertical-offset="10944">
-              <caret line="483" column="0" selection-start-line="448" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="560">
+              <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="formtable02.css" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/public/img/css/formtable02.css">
+      <file leaf-file-name="old.clj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8647687" vertical-offset="1813" max-vertical-offset="2413">
-              <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1834" max-vertical-offset="6776">
+              <caret line="69" column="42" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cj.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/cj.js">
+      <file leaf-file-name="need.clj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/newpension/controller/need.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5841" max-vertical-offset="7809">
-              <caret line="314" column="22" selection-start-line="314" selection-start-column="8" selection-end-line="314" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/html/test.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.7142856" vertical-offset="0" max-vertical-offset="950">
-              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2030">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -269,58 +213,22 @@
     </option>
   </component>
   <component name="IdeDocumentHistory">
-    <option name="changedFiles">
+    <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/templates/home.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.htm" />
-        <option value="$PROJECT_DIR$/resources/public/html/iframeAutoHeight.html" />
+        <option value="$PROJECT_DIR$/src/json.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/json.clj" />
         <option value="$PROJECT_DIR$/project.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/models/db.clj" />
-        <option value="$PROJECT_DIR$/resources/templates/testphoto.html" />
+        <option value="$PROJECT_DIR$/src/newpension/repl.clj" />
         <option value="$PROJECT_DIR$/src/newpension/middleware.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/controller/department.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/common/common.clj" />
         <option value="$PROJECT_DIR$/src/newpension/controller/manager.clj" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/GongZuoRYManagement.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/YangLaoJGDlg.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/YangLaoJGManagement.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/YangLaoJGDlg.js" />
-        <option value="$PROJECT_DIR$/resources/templates/dm.html" />
-        <option value="$PROJECT_DIR$/resources/public/img/css/home2.css" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/Main.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/RunGLNL.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/mycalendar.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/mainapp.js" />
-        <option value="$PROJECT_DIR$/resources/templates/dm2.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/OpenPage.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/router.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/mainapp_newpension.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js" />
-        <option value="$PROJECT_DIR$/resources/templates/dm3.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js" />
-        <option value="$PROJECT_DIR$/resources/templates/audit.html" />
-        <option value="$PROJECT_DIR$/resources/templates/addneed.html" />
-        <option value="$PROJECT_DIR$/resources/templates/addold.html" />
-        <option value="$PROJECT_DIR$/src/newpension/models/schema.clj" />
         <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/controller/old.clj" />
-        <option value="$PROJECT_DIR$/resources/templates/login.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/extLocation.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/manager/Grant.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.js" />
-        <option value="$PROJECT_DIR$/src/newpension/routes/manager.clj" />
-        <option value="$PROJECT_DIR$/resources/templates/iframes.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/mainappiframe.js" />
-        <option value="$PROJECT_DIR$/resources/public/html/test.html" />
-        <option value="$PROJECT_DIR$/resources/public/img/css/home.css" />
-        <option value="$PROJECT_DIR$/resources/public/js/cj.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/TestA.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/TestA.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.htm" />
-        <option value="$PROJECT_DIR$/resources/public/img/css/formtable02.css" />
+        <option value="$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js" />
+        <option value="$PROJECT_DIR$/resources/templates/dm3.html" />
       </list>
     </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -356,6 +264,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -371,249 +280,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="121" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="134" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="133" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="146" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="167" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="181" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jcfx" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="144" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="786" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="882" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="170" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="158" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="157" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="799" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="900" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="184" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="172" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
@@ -627,11 +315,12 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="settings.github" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="LayoutCode.rearrangeEntriesJavaScript" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -641,8 +330,66 @@
       <recent name="D:\Administrator\IdeaProjects\newpension\resources\public\css" />
       <recent name="D:\Administrator\IdeaProjects\newpension\resources\public\img\pension03" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Administrator\IdeaProjects\newpension\src\newpension" />
+    </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
       <module name="" />
       <setting name="vmparams" value="" />
@@ -653,44 +400,9 @@
       <setting name="launchBrowser" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
-    <configuration default="true" type="ClojureScriptRunConfiguration" factoryName="Clojure Script">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="" />
-      <setting name="repl" value="false" />
-      <setting name="main" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -721,25 +433,41 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
+    <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
+      <module name="" />
       <envs />
-      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
       <method />
     </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
@@ -798,18 +526,36 @@
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
-      <option name="BCName" value="" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="FlashPlayerDebugger.exe" />
-        </LauncherParameters>
-      </option>
-      <option name="moduleName" value="" />
-      <option name="trusted" value="true" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
@@ -831,41 +577,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
     <list size="0" />
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -881,6 +592,7 @@
       <changelist id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="" />
       <changelist id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
       <created>1408077833182</created>
+      <option name="number" value="Default" />
       <updated>1408077833182</updated>
       <workItem from="1416186472025" duration="5052000" />
       <workItem from="1416271808436" duration="1453000" />
@@ -893,343 +605,508 @@
       <workItem from="1417331738649" duration="2658000" />
       <workItem from="1417334535655" duration="7664000" />
       <workItem from="1417394897907" duration="16137000" />
+      <workItem from="1417416412073" duration="9622000" />
+      <workItem from="1417482009554" duration="2864000" />
+      <workItem from="1417491116488" duration="2239000" />
+      <workItem from="1417494965011" duration="13615000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1408084702298</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
       <updated>1408084702298</updated>
     </task>
     <task id="LOCAL-00002" summary="commit">
       <created>1408324234232</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
       <updated>1408324234232</updated>
     </task>
     <task id="LOCAL-00003" summary="commit">
       <created>1408325623438</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
       <updated>1408325623438</updated>
     </task>
     <task id="LOCAL-00004" summary="commit">
       <created>1408325796049</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
       <updated>1408325796049</updated>
     </task>
     <task id="LOCAL-00005" summary="commit">
       <created>1408325828516</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
       <updated>1408325828516</updated>
     </task>
     <task id="LOCAL-00006" summary="commit">
       <created>1408325954973</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
       <updated>1408325954973</updated>
     </task>
     <task id="LOCAL-00007" summary="commit">
       <created>1408326170433</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
       <updated>1408326170433</updated>
     </task>
     <task id="LOCAL-00008" summary="commit">
       <created>1408327013596</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
       <updated>1408327013596</updated>
     </task>
     <task id="LOCAL-00009" summary="commit">
       <created>1408327115011</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
       <updated>1408327115011</updated>
     </task>
     <task id="LOCAL-00010" summary="commit">
       <created>1408327165894</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
       <updated>1408327165894</updated>
     </task>
     <task id="LOCAL-00011" summary="commit">
       <created>1408329835383</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
       <updated>1408329835383</updated>
     </task>
     <task id="LOCAL-00012" summary="commit">
       <created>1408349124468</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
       <updated>1408349124468</updated>
     </task>
     <task id="LOCAL-00013" summary="commit">
       <created>1408419255578</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
       <updated>1408419255578</updated>
     </task>
     <task id="LOCAL-00014" summary="addold">
       <created>1408432207509</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
       <updated>1408432207509</updated>
     </task>
     <task id="LOCAL-00015" summary="commit">
       <created>1408435552819</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
       <updated>1408435552819</updated>
     </task>
     <task id="LOCAL-00016" summary="log">
       <created>1408498228442</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
       <updated>1408498228442</updated>
     </task>
     <task id="LOCAL-00017" summary="save,update,log">
       <created>1408506249996</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
       <updated>1408506249996</updated>
     </task>
     <task id="LOCAL-00018" summary="commit">
       <created>1408603427379</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
       <updated>1408603427379</updated>
     </task>
     <task id="LOCAL-00019" summary="commit">
       <created>1408691531522</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
       <updated>1408691531522</updated>
     </task>
     <task id="LOCAL-00020" summary="push">
       <created>1408691848553</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
       <updated>1408691848553</updated>
     </task>
     <task id="LOCAL-00021" summary="update">
       <created>1408956864248</created>
+      <option name="number" value="00021" />
+      <option name="project" value="LOCAL" />
       <updated>1408956864248</updated>
     </task>
     <task id="LOCAL-00022" summary="commit">
       <created>1408957777451</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
       <updated>1408957777451</updated>
     </task>
     <task id="LOCAL-00023" summary="commit">
       <created>1408958530292</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
       <updated>1408958530292</updated>
     </task>
     <task id="LOCAL-00024" summary="new">
       <created>1409021381036</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
       <updated>1409021381036</updated>
     </task>
     <task id="LOCAL-00025" summary="new">
       <created>1409023526840</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
       <updated>1409023526840</updated>
     </task>
     <task id="LOCAL-00026" summary="new">
       <created>1409035663124</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
       <updated>1409035663124</updated>
     </task>
     <task id="LOCAL-00027" summary="new">
       <created>1409035991737</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
       <updated>1409035991737</updated>
     </task>
     <task id="LOCAL-00028" summary="new">
       <created>1409043908859</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
       <updated>1409043908859</updated>
     </task>
     <task id="LOCAL-00029" summary="add jquery plugin">
       <created>1416272086584</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
       <updated>1416272086584</updated>
     </task>
     <task id="LOCAL-00030" summary="add jquery plugin">
       <created>1416358713650</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
       <updated>1416358713650</updated>
     </task>
     <task id="LOCAL-00031" summary="界面重新">
       <created>1416368600936</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
       <updated>1416368600936</updated>
     </task>
     <task id="LOCAL-00032" summary="界面重新">
       <created>1416368640158</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
       <updated>1416368640158</updated>
     </task>
     <task id="LOCAL-00033" summary="界面重新">
       <created>1416794132285</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
       <updated>1416794132285</updated>
     </task>
     <task id="LOCAL-00034" summary="depart function">
       <created>1416818848694</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
       <updated>1416818848694</updated>
     </task>
     <task id="LOCAL-00035" summary="depart function2">
       <created>1416819150032</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
       <updated>1416819150032</updated>
     </task>
     <task id="LOCAL-00036" summary="depart get all">
       <created>1416879483705</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
       <updated>1416879483705</updated>
     </task>
     <task id="LOCAL-00037" summary="depart get all other">
       <created>1416879689303</created>
+      <option name="number" value="00037" />
+      <option name="project" value="LOCAL" />
       <updated>1416879689303</updated>
     </task>
     <task id="LOCAL-00038" summary="depart get all other">
       <created>1416880651855</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
       <updated>1416880651855</updated>
     </task>
     <task id="LOCAL-00039" summary="depart update">
       <created>1416884934455</created>
+      <option name="number" value="00039" />
+      <option name="project" value="LOCAL" />
       <updated>1416884934455</updated>
     </task>
     <task id="LOCAL-00040" summary="odp add">
       <created>1416906238882</created>
+      <option name="number" value="00040" />
+      <option name="project" value="LOCAL" />
       <updated>1416906238882</updated>
     </task>
     <task id="LOCAL-00041" summary="odp add i">
       <created>1416906471824</created>
+      <option name="number" value="00041" />
+      <option name="project" value="LOCAL" />
       <updated>1416906471824</updated>
     </task>
     <task id="LOCAL-00042" summary="odp add i">
       <created>1416906632879</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
       <updated>1416906632879</updated>
     </task>
     <task id="LOCAL-00043" summary="odp add c">
       <created>1416907185593</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
       <updated>1416907185593</updated>
     </task>
     <task id="LOCAL-00044" summary="odp add c">
       <created>1416907204433</created>
+      <option name="number" value="00044" />
+      <option name="project" value="LOCAL" />
       <updated>1416907204433</updated>
     </task>
     <task id="LOCAL-00045" summary="odp add deptype">
       <created>1416908661125</created>
+      <option name="number" value="00045" />
+      <option name="project" value="LOCAL" />
       <updated>1416908661125</updated>
     </task>
     <task id="LOCAL-00046" summary="odp add deptypexml">
       <created>1416908711775</created>
+      <option name="number" value="00046" />
+      <option name="project" value="LOCAL" />
       <updated>1416908711775</updated>
     </task>
     <task id="LOCAL-00047" summary="odp add deptypexml">
       <created>1416965957131</created>
+      <option name="number" value="00047" />
+      <option name="project" value="LOCAL" />
       <updated>1416965957131</updated>
     </task>
     <task id="LOCAL-00048" summary="odp add deptypexml2">
       <created>1416966077015</created>
+      <option name="number" value="00048" />
+      <option name="project" value="LOCAL" />
       <updated>1416966077015</updated>
     </task>
     <task id="LOCAL-00049" summary="odp add deptypexml2">
       <created>1416968314165</created>
+      <option name="number" value="00049" />
+      <option name="project" value="LOCAL" />
       <updated>1416968314165</updated>
     </task>
     <task id="LOCAL-00050" summary="odp add deptypexml3">
       <created>1416968666410</created>
+      <option name="number" value="00050" />
+      <option name="project" value="LOCAL" />
       <updated>1416968666411</updated>
     </task>
     <task id="LOCAL-00051" summary="odp add deptypexml3">
       <created>1416970462667</created>
+      <option name="number" value="00051" />
+      <option name="project" value="LOCAL" />
       <updated>1416970462667</updated>
     </task>
     <task id="LOCAL-00052" summary="odp add deptypexmlg">
       <created>1416970890493</created>
+      <option name="number" value="00052" />
+      <option name="project" value="LOCAL" />
       <updated>1416970890493</updated>
     </task>
     <task id="LOCAL-00053" summary="odp add deptypexmlg2">
       <created>1416971037765</created>
+      <option name="number" value="00053" />
+      <option name="project" value="LOCAL" />
       <updated>1416971037765</updated>
     </task>
     <task id="LOCAL-00054" summary="odp add deptypexmlg3">
       <created>1416986143512</created>
+      <option name="number" value="00054" />
+      <option name="project" value="LOCAL" />
       <updated>1416986143512</updated>
     </task>
     <task id="LOCAL-00055" summary="odp add canteen">
       <created>1416989225358</created>
+      <option name="number" value="00055" />
+      <option name="project" value="LOCAL" />
       <updated>1416989225358</updated>
     </task>
     <task id="LOCAL-00056" summary="odp add canteen2">
       <created>1416990699240</created>
+      <option name="number" value="00056" />
+      <option name="project" value="LOCAL" />
       <updated>1416990699240</updated>
     </task>
     <task id="LOCAL-00057" summary="odp add canteen2">
       <created>1416991438867</created>
+      <option name="number" value="00057" />
+      <option name="project" value="LOCAL" />
       <updated>1416991438867</updated>
     </task>
     <task id="LOCAL-00058" summary="upload">
       <created>1417073016545</created>
+      <option name="number" value="00058" />
+      <option name="project" value="LOCAL" />
       <updated>1417073016545</updated>
     </task>
     <task id="LOCAL-00059" summary="upload">
       <created>1417073172723</created>
+      <option name="number" value="00059" />
+      <option name="project" value="LOCAL" />
       <updated>1417073172723</updated>
     </task>
     <task id="LOCAL-00060" summary="upload11">
       <created>1417074211215</created>
+      <option name="number" value="00060" />
+      <option name="project" value="LOCAL" />
       <updated>1417074211215</updated>
     </task>
     <task id="LOCAL-00061" summary="upload11">
       <created>1417074913291</created>
+      <option name="number" value="00061" />
+      <option name="project" value="LOCAL" />
       <updated>1417074913291</updated>
     </task>
     <task id="LOCAL-00062" summary="time format">
       <created>1417079003334</created>
+      <option name="number" value="00062" />
+      <option name="project" value="LOCAL" />
       <updated>1417079003334</updated>
     </task>
     <task id="LOCAL-00063" summary="time format">
       <created>1417079972448</created>
+      <option name="number" value="00063" />
+      <option name="project" value="LOCAL" />
       <updated>1417079972448</updated>
     </task>
     <task id="LOCAL-00064" summary="time format3">
       <created>1417080296770</created>
+      <option name="number" value="00064" />
+      <option name="project" value="LOCAL" />
       <updated>1417080296770</updated>
     </task>
     <task id="LOCAL-00065" summary="time format4">
       <created>1417138333951</created>
+      <option name="number" value="00065" />
+      <option name="project" value="LOCAL" />
       <updated>1417138333952</updated>
     </task>
     <task id="LOCAL-00066" summary="time format old">
       <created>1417138955845</created>
+      <option name="number" value="00066" />
+      <option name="project" value="LOCAL" />
       <updated>1417138955845</updated>
     </task>
     <task id="LOCAL-00067" summary="time format old">
       <created>1417168225040</created>
+      <option name="number" value="00067" />
+      <option name="project" value="LOCAL" />
       <updated>1417168225040</updated>
     </task>
     <task id="LOCAL-00068" summary="add dm3">
       <created>1417254933452</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
       <updated>1417254933452</updated>
     </task>
     <task id="LOCAL-00069" summary="跳转实现,下一步修改header中的切换功能">
       <created>1417320363919</created>
+      <option name="number" value="00069" />
+      <option name="project" value="LOCAL" />
       <updated>1417320363919</updated>
     </task>
     <task id="LOCAL-00070" summary="跳转实现,下一步修改header中的切换功能">
       <created>1417331590966</created>
+      <option name="number" value="00070" />
+      <option name="project" value="LOCAL" />
       <updated>1417331590966</updated>
     </task>
     <task id="LOCAL-00071" summary="wp">
       <created>1417334452114</created>
+      <option name="number" value="00071" />
+      <option name="project" value="LOCAL" />
       <updated>1417334452114</updated>
     </task>
     <task id="LOCAL-00072" summary="Merge branch 'master' of file://\\\192.168.2.142\e$\gitserver\newpension&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;">
       <created>1417338134338</created>
+      <option name="number" value="00072" />
+      <option name="project" value="LOCAL" />
       <updated>1417338134338</updated>
     </task>
     <task id="LOCAL-00073" summary="eeeeeeeee&#10;">
       <created>1417338244756</created>
+      <option name="number" value="00073" />
+      <option name="project" value="LOCAL" />
       <updated>1417338244756</updated>
     </task>
     <task id="LOCAL-00074" summary="修改登陆界面">
       <created>1417399616149</created>
+      <option name="number" value="00074" />
+      <option name="project" value="LOCAL" />
       <updated>1417399616149</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.htm&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.js&#10;">
+      <created>1417416963799</created>
+      <option name="number" value="00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1417416963799</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.htm&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.js&#10;">
+      <created>1417426977398</created>
+      <option name="number" value="00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1417426977398</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76752000" />
+    <option name="totallyTimeSpent" value="105092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47811994" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44189852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26418152" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22749591" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32733223" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32569557" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26418152" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31646526" sideWeight="0.7374392" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7955975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19448946" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27525622" sideWeight="0.7374392" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44189852" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1247,7 +1124,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="depart update" />
     <MESSAGE value="odp add" />
     <MESSAGE value="odp add i" />
     <MESSAGE value="odp add c" />
@@ -1272,71 +1148,14 @@
     <MESSAGE value="Merge branch 'master' of file://\\\192.168.2.142\e$\gitserver\newpension&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;" />
     <MESSAGE value="eeeeeeeee&#10;" />
     <MESSAGE value="修改登陆界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改登陆界面" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.htm&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.js&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.htm&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.js&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/Main.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.857142" vertical-offset="0" max-vertical-offset="418">
-          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/pension02/yanglaojigou.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/FullCalendar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="4826">
-          <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/mycalendar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4864">
-          <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/md5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="475">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/mainapp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="418">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/css/home2.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10176" max-vertical-offset="10925">
-          <caret line="549" column="13" selection-start-line="549" selection-start-column="13" selection-end-line="549" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/pension03/menuleveltwo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/controllers/ManagerController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="511">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/img/pension03/navbg.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1363,7 +1182,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1385,7 +1203,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="250" max-vertical-offset="950">
           <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1403,19 +1220,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="2147">
-          <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1915" max-vertical-offset="2451">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1423,7 +1231,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="23009">
           <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1431,15 +1238,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="355" max-vertical-offset="5377">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/addold.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="11628" max-vertical-offset="22021">
-          <caret line="180" column="29" selection-start-line="180" selection-start-column="29" selection-end-line="180" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1447,7 +1245,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="437">
           <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1455,15 +1252,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6367113" vertical-offset="465" max-vertical-offset="2242">
           <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="8246">
-          <caret line="69" column="42" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1471,10 +1259,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.821428" vertical-offset="1368" max-vertical-offset="2679">
           <caret line="85" column="31" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="31" />
-          <folding>
-            <element signature="n#style#0;n#li#2;n#ul#0;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#label#1;n#li#2;n#ul#0;n#fieldset#0;n#form#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1482,15 +1266,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="312" max-vertical-offset="874">
           <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/models/manager.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="197" max-vertical-offset="3838">
-          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1498,7 +1273,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="1520">
           <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1506,7 +1280,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.428571" vertical-offset="0" max-vertical-offset="2033">
           <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="90" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1514,39 +1287,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.142858" vertical-offset="0" max-vertical-offset="513">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="19" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/manager.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="26" max-vertical-offset="3762">
-          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="114" max-vertical-offset="2869">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="627" max-vertical-offset="3477">
-          <caret line="4" column="64" selection-start-line="4" selection-start-column="52" selection-end-line="4" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/mainappiframe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1554,15 +1294,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.357143" vertical-offset="359" max-vertical-offset="1064">
           <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/manager.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="673" max-vertical-offset="1235">
-          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1570,35 +1301,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.964286" vertical-offset="2696" max-vertical-offset="3230">
           <caret line="161" column="7" selection-start-line="155" selection-start-column="4" selection-end-line="161" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/dm3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.464286" vertical-offset="3040" max-vertical-offset="7049">
-          <caret line="171" column="31" selection-start-line="171" selection-start-column="31" selection-end-line="171" selection-end-column="31" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/html/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.7142856" vertical-offset="0" max-vertical-offset="950">
+        <state vertical-scroll-proportion="0.0" vertical-offset="76" max-vertical-offset="950">
           <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.htm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.428571" vertical-offset="0" max-vertical-offset="399">
+        <state vertical-scroll-proportion="0.0" vertical-offset="152" max-vertical-offset="399">
           <caret line="8" column="58" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="58" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1606,7 +1322,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="8719" max-vertical-offset="10944">
           <caret line="483" column="0" selection-start-line="448" selection-start-column="0" selection-end-line="483" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1614,124 +1329,220 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="684" max-vertical-offset="1824">
           <caret line="55" column="13" selection-start-line="42" selection-start-column="12" selection-end-line="55" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/cj.js">
+    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleAuditDlg.htm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5841" max-vertical-offset="7809">
-          <caret line="314" column="22" selection-start-line="314" selection-start-column="8" selection-end-line="314" selection-end-column="22" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1235">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/TestA.htm">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.071429" vertical-offset="0" max-vertical-offset="3477">
-          <caret line="6" column="45" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="45" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="3477">
+          <caret line="0" column="115" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="115" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.htm">
+    <entry file="file://$PROJECT_DIR$/resources/public/img/css/formtable02.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-140.17857" vertical-offset="6240" max-vertical-offset="11457">
-          <caret line="535" column="0" selection-start-line="535" selection-start-column="0" selection-end-line="535" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#2;n#tr#1;n#table#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#2;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#5;n#tr#2;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#3;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#5;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#5;n#table#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#fieldset#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#fieldset#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#fieldset#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#table#0;n#div#0;n#fieldset#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#1;n#table#0;n#div#0;n#fieldset#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#5;n#tr#0;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#1;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#5;n#tr#1;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#2;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#5;n#tr#2;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#3;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#5;n#tr#3;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#td#1;n#tr#6;n#table#0;n#div#0;n#fieldset#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#2;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#3;n#tr#3;n#table#0;n#div#0;n#fieldset#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#thead#1;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#th#1;n#tr#0;n#thead#1;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#th#2;n#tr#0;n#thead#1;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#th#3;n#tr#0;n#thead#1;n#table#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#tr#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="1692" max-vertical-offset="2394">
+          <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/TestA.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="646">
-          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="684">
+          <caret line="21" column="59" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/formDisabled.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="562">
+          <caret line="0" column="4" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/genFieldTemplate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="836">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="684" max-vertical-offset="2147">
+          <caret line="53" column="54" selection-start-line="53" selection-start-column="38" selection-end-line="53" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/templates/addold.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.038306452" vertical-offset="4788" max-vertical-offset="22021">
+          <caret line="253" column="0" selection-start-line="253" selection-start-column="0" selection-end-line="266" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/mainappiframe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="399">
+          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8721" max-vertical-offset="11590">
+          <caret line="477" column="39" selection-start-line="477" selection-start-column="39" selection-end-line="477" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/validate/identityid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="562">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2033">
-          <caret line="17" column="44" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8303">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding>
+            <element signature="e#15335#18627#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/cj.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2856" max-vertical-offset="5936">
+          <caret line="228" column="28" selection-start-line="228" selection-start-column="28" selection-end-line="228" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/css/formtable02.css">
+    <entry file="file://$PROJECT_DIR$/src/newpension/models/manager.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8647687" vertical-offset="1813" max-vertical-offset="2413">
-          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="82" max-vertical-offset="2828">
+          <caret line="23" column="35" selection-start-line="22" selection-start-column="16" selection-end-line="25" selection-end-column="73" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/util.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="868">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1834" max-vertical-offset="6776">
+          <caret line="69" column="42" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/need.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2030">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/repl.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="560">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/routes/manager.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="910">
+          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/middleware.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="434">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/manager.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3136">
+          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="2268">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/controllers/MainViewController_NEWPENSION.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="602">
+          <caret line="23" column="33" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/templates/dm3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29422066" vertical-offset="0" max-vertical-offset="7546">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#3;n#ul#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#3;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
   </component>
 </project>
-
