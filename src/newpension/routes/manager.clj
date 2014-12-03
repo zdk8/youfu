@@ -3,6 +3,8 @@
   (:require [compojure.core :refer :all]
             [newpension.layout :as layout]
             [newpension.util :as util]
+            [noir.session :as session]
+            [clojure.data.json :as json]
             [newpension.controller.manager :as myctrl]
             ))
 
@@ -52,7 +54,9 @@
   (POST "/saveroleuser" req (myctrl/save-role-user req))
   ;;测试session
   (GET "/getiframes" [pagename pagetitle]
-    (layout/render "iframes.html" {:pagename pagename :pagetitle pagetitle}))
+    (layout/render "iframes.html" {:pagename pagename
+                                   :pagetitle pagetitle
+                                   :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)}))
   (context "/mysessiontest/:name" [name]
     (GET "/put" [] (myctrl/my-session-put name))
     (GET "/get" [] (myctrl/my-session-get))
