@@ -79,7 +79,7 @@
 (defn get-hometown [identityid]
   (let [code (subs identityid 0 6)              ;            (Integer/parseInt (subs identityid 0 6))
         jgdata (first(db/get-hometown code))]
-    (println "GGGGGGGGGGGG" jgdata)
+    ;(println "GGGGGGGGGGGG" jgdata)
     (resp/json jgdata)))
 
 
