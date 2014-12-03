@@ -140,6 +140,11 @@
     )
     )
 
+(defn get-hometown [code]
+  (select "jiguan"
+    (fields :totalname)
+    (where {:code code})))
+
 ;;根据关键字获取该表自增主键
 (defn get-max [keywords]
   (first

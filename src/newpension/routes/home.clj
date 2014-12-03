@@ -103,6 +103,7 @@
   (GET "/func" [username functionid] (old/get-funcs username functionid))
   (GET "/get-inputlist" [aaa100] (old/get-inputlist aaa100))  ;;获取输入框下拉选项列表
   (GET "/get-divisionlist" [dvhigh] (old/get-divisionlist dvhigh))  ;;获取行政区划下拉选项列表
+  (GET "/gethometown" [identityid] (old/get-hometown identityid))  ;;根据身份证查找籍贯
 
   (POST "/update-oldsorel" reuqest (old/update-oldsorel reuqest))    ;;修改养老家庭成员信息
   (POST "/oldsocrelkey" [] (old/oldsocrelkey))    ;;家庭成员信息表主键
