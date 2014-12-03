@@ -59,10 +59,51 @@ define(function(){
         local.find('[name=operators]').val(cj.getUserMsg().username);
         local.find('[opt=setdaytime]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
         local.find('[opt=getjiguan]').bind('click',function(){
-
+            $me = $(this);
+            var id=$('[opt=identityid]').val();
+            if(id) {
+                $.ajax({
+                    url:'gethometown',
+                    data:{
+                        identityid:$('[opt=identityid]').val()
+                    },success:function(res){
+                        $me.prev().val(res.totalname);
+                    }
+                })
+            }
         });
         genCheckBox(local.find('[opt=liveplace]'), 'liveplace', 'live');
         genCheckBox(local.find('[opt=hyfwjingji]'), 'hyfwjingji', 'live-nonono');
+
+
+        var $registration=local.find('[opt=registration]')
+        $registration.combotree({
+            url:'get-divisionlist?dvhigh=330424',
+            method: 'get',
+            onBeforeExpand: function (node) {
+                $registration.combotree("tree").tree("options").url
+                    ="get-divisionlist?dvhigh=" + node.parentid;
+            },
+            onHidePanel: function () {
+                $registration.combotree('setValue',
+                    $registration.combotree('tree').tree('getSelected').divisionpath);
+            }
+        });
+        var $address=local.find('[opt=address]')
+        $address.combotree({
+            url:'get-divisionlist?dvhigh=330424',
+            method: 'get',
+            onBeforeExpand: function (node) {
+                $address.combotree("tree").tree("options").url
+                    ="get-divisionlist?dvhigh=" + node.parentid;
+            },
+            onHidePanel: function () {
+                $address.combotree('setValue',
+                    $address.combotree('tree').tree('getSelected').divisionpath);
+            }
+        });
+
+
 
         if(option.queryParams && option.queryParams.actiontype == "info"){            //处理
             dealwith.show();                                        //显示处理按钮
