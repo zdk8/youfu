@@ -7,7 +7,8 @@ define(function(){
             if(myjsfile.indexOf('placetype')>-1){
                 myjsfile = 'views/Blank';
             }
-            require([option.htmfile,myjsfile],function(htm,js){
+            var mydc="?v="+new Date().getTime()
+            require([option.htmfile+mydc,myjsfile],function(htm,js){
                 var title=option.title;
                 if(mainTab.tabs('exists',title)){
                     mainTab.tabs('select', title);

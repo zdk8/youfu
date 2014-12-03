@@ -190,7 +190,7 @@
     <div class="cs-north-logo">
         <div id="current-user-msg">
             <ul>
-                <li><a>欢迎您:{{username}}</a></li>
+                <li><a>欢迎您:<span id="myusername">{{username}}</span></a></li>
                 <li><a id="currentDate" style="background: url(img/pension03/currentDate.png) center no-repeat;width: 309px;text-align: center;padding-left: 5px;">2014年11月29日 星期六 农历甲午年 十月初八</a></li>
                 <li class="li-skinitem">
                     <a style="background: url(img/pension03/resetpassword.png) no-repeat;">修改密码</a></li>
@@ -302,6 +302,7 @@
 
 <div id="mymenuone" style="display: none">{{menuone}}</div>
 <div id="mymenutwo" style="display: none">{{menutwo}}</div>
+<div id="usermsg" style="display: none">{{usermsg}}</div>
 </body>
 </html>
 <script>
@@ -316,6 +317,10 @@
 
 </script>
 <script>
+    var usermsg;
+    $(function(){
+        usermsg=$.evalJSON($('#usermsg').text());
+    })
     var customMenuRoot = '{{functionid}}';
     var swapFunction;
     var mymenudata=[];
@@ -517,9 +522,9 @@
 
 
     /*window.setTimeout(function () {
-        $('#mainPanle').addClass('mainPanle');
+        $('#mainPanle').addClass('my-mainPanel');
     }, 300);*/
-    $('#mainPanle').addClass('mainPanle');
+
 
 
     $('#currentDate').text(mycalendar.RunGLNL());
@@ -533,6 +538,10 @@
         $(this).addClass('hight-color-2');
     },function(){
         $(this).removeClass('hight-color-2');
+    })
+
+    $(function(){
+        $('#mainPanle').addClass('my-mainPanel');
     })
     //本来在route中的代码
 </script>

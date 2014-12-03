@@ -8,7 +8,7 @@
             <tr>
                 <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
                 <td colspan="5">
-                    <input class="easyui-combotree"  opt="districtid" data-options="required:true, valueField:'divisionpath'"
+                    <input opt="mydistrictid" data-options="required:true, valueField:'divisionpath'"
                            style="width: 300px;"  name="districtid">
                 </td>
                 <td rowspan="4" colspan="2" style="text-align: center">
@@ -54,7 +54,7 @@
             "> </td>
             </tr>
         </table>
-        <table class="formtable" style="border-top:0 ">
+        <table class="formtable">
             <tr>
                 <td class="formtdtext">家庭住址</td>
                 <td colspan="3"><input class="easyui-validatebox" name="address" style="width: 300px"></td>
@@ -173,26 +173,24 @@
     </div>
 </fieldset>
 
-<!--享受服务类型-->
-<fieldset style="width: 900px;margin: 0px auto">
+<fieldset>
     <legend>享受服务类型</legend>
     <div opt="lrxsfwlx">
-        <input name="fwlx_jjyl" type="checkbox" value="100" /><!--<label>-->居家养老服务 <!--</label>-->
-        <input name="fwlx_fwj" type="checkbox" value="100" /><!--<label>-->服务卷 <!--</label>-->
-        <input name="fwlx_mftj" type="checkbox" value="100" /><!--<label>-->免费体检 <!--</label>-->
-        <input name="fwlx_dylnb" type="checkbox" value="100" /><!--<label>-->订阅老年报 <!--</label>-->
-        <input name="fwlx_jgyl" type="checkbox" value="100" /><!--<label>-->机构养老 <!--</label>-->
-        <input name="fwlx_tyfw" type="checkbox" value="100" /><!--<label>-->体验服务 <!--</label>-->
-        <input name="fwlx_hjj" type="checkbox" value="100" /><!--<label>-->呼叫机 <!--</label>-->
-        <input name="fwlx_qt" type="checkbox" value="100" /><!--<label>-->其他 <!--</label>-->
+        <input name="fwlx_jjyl" type="checkbox" value="100" /> 居家养老服务
+        <input name="fwlx_fwj" type="checkbox" value="100" /> 服务卷
+        <input name="fwlx_mftj" type="checkbox" value="100" />免费体检
+        <input name="fwlx_dylnb" type="checkbox" value="100" />订阅老年报
+        <input name="fwlx_jgyl" type="checkbox" value="100" />机构养老
+        <input name="fwlx_tyfw" type="checkbox" value="100" />体验服务
+        <input name="fwlx_hjj" type="checkbox" value="100" />呼叫机
+        <input name="fwlx_qt" type="checkbox" value="100" />其他
     </div>
 </fieldset>
 
-<!--居住信息-->
-<fieldset style="width: 900px;margin: 0px auto">
+<fieldset>
     <legend>居住信息</legend>
     <div>
-        <table class="formtable" style="width: 900px">
+        <table class="formtable">
             <tr>
                 <td class="formtdtext">邻居一姓名</td>
                 <td><input class="easyui-validatebox" name="jz_yixingm"></td>
@@ -255,7 +253,7 @@
 <fieldset>
     <legend>健康信息</legend>
     <div>
-        <table class="formtable" style="width: 900px">
+        <table class="formtable">
             <tr>
                 <td class="formtdtext">血型</td>
                 <td>
@@ -399,34 +397,35 @@
                 </td>
             </tr>
             <tr>
-                <td class="formtdtext">日常卫生</td>                   <!--document.getElementById('shutou').checked=true-->
+                <td class="formtdtext">日常卫生</td>
                 <td opt="lrrcws" colspan="5">
-                    <input opt="shutou" name="jk_rcws_st" type="checkbox" value="110" /><!--<label>-->自己梳头 <!--</label>-->
-                    <input opt="xinian" name="jk_rcws_xl" type="checkbox" value="110" /><!--<label>-->自己洗脸 <!--</label>-->
-                    <input opt="xitou" name="jk_rcws_xt" type="checkbox" value="110" /> <!--<label>-->自己洗头 <!--</label>-->
-                    <input opt="shuaya" name="jk_rcws_sy" type="checkbox" value="110" /><!--<label>-->自己刷牙 <!--</label>-->
-                    <input opt="xijiao"  name="jk_rcws_xj" type="checkbox" value="110" /><!--<label>-->自己洗脚 <!--</label>-->
-                    <input opt="tixu" name="jk_rcws_tx" type="checkbox" value="110" /><!--<label>-->自己剃须 <!--</label>-->
-                    <input opt="xiuzhijia" name="jk_rcws_xzj" type="checkbox" value="110" /><!--<label>-->自己修指甲 <!--</label>-->
-                    <input opt="xiyi" name="jk_rcws_xy" type="checkbox" value="110" /><!--<label>-->自己洗衣 <!--</label>-->
+                    <input opt="shutou" name="jk_rcws_st" type="checkbox" value="110" />自己梳头
+                    <input opt="xinian" name="jk_rcws_xl" type="checkbox" value="110" /> 自己洗脸
+                    <input opt="xitou" name="jk_rcws_xt" type="checkbox" value="110" /> 自己洗头
+                    <input opt="shuaya" name="jk_rcws_sy" type="checkbox" value="110" />自己刷牙
+                    <input opt="xijiao"  name="jk_rcws_xj" type="checkbox" value="110" />自己洗脚
+                    <input opt="tixu" name="jk_rcws_tx" type="checkbox" value="110" />自己剃须
+                    <input opt="xiuzhijia" name="jk_rcws_xzj" type="checkbox" value="110" />自己修指甲
+                    <input opt="xiyi" name="jk_rcws_xy" type="checkbox" value="110" />自己洗衣
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">病史情况</td>
                 <td opt="lrbsqk" colspan="5">
-                    <input name="jk_bs_gaoxy" type="checkbox" value="111" /><!--<label>-->高血压 <!--</label>-->
-                    <input name="jk_bs_tangnb" type="checkbox" value="111" /><!--<label>-->糖尿病 <!--</label>-->
-                    <input name="jk_bs_fengs" type="checkbox" value="111" /><!--<label>-->风湿病 <!--</label>-->
-                    <input name="jk_bs_xinzb" type="checkbox" value="111" /><!--<label>-->心脏病 <!--</label>-->
-                    <input name="jk_bs_chid" type="checkbox" value="111" /><!--<label>-->老年痴呆 <!--</label>-->
-                    <input name="jk_bs_guz" type="checkbox" value="111" /><!--<label>-->扭伤骨折 <!--</label>-->
-                    <input name="jk_bs_qit" type="checkbox" value="111" /><!--<label>-->其他 <!--</label>-->
+                    <input name="jk_bs_gaoxy" type="checkbox" value="111" />高血压
+                    <input name="jk_bs_tangnb" type="checkbox" value="111" /> 糖尿病
+                    <input name="jk_bs_fengs" type="checkbox" value="111" /> 风湿病
+                    <input name="jk_bs_xinzb" type="checkbox" value="111" /> 心脏病
+                    <input name="jk_bs_chid" type="checkbox" value="111" />老年痴呆
+                    <input name="jk_bs_guz" type="checkbox" value="111" /> 扭伤骨折
+                    <input name="jk_bs_qit" type="checkbox" value="111" />其他
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">主要疾病</td>
                 <td colspan="5">
-                    <textarea name="jk_jib" style="height:60px;width: 90%"></textarea>
+                    <textarea name="jk_jib" class="easyui-validatebox" data-options="validType:['maxLength[500]']"
+                              style="height:60px;width: 90%"></textarea>
                 </td>
             </tr>
         </table>
@@ -437,37 +436,38 @@
 <fieldset>
     <legend>爱好及活动需求</legend>
     <div>
-        <table class="formtable" style="width: 900px">
+        <table class="formtable">
             <tr>
                 <td class="formtdtext">性格特征</td>
                 <td colspan="5">
-                    <textarea name="xq_tez"style="height:60px;width: 90%"></textarea>
+                    <textarea name="xq_tez" class="easyui-validatebox" data-options="validType:['maxLength[500]']"
+                              style="height:60px;width: 90%"></textarea>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">兴趣爱好</td>
                 <td colspan="5">
-                    <textarea name="xq_aih" style="height:60px;width: 90%"></textarea>
+                    <textarea name="xq_aih" class="easyui-validatebox" data-options="validType:['maxLength[500]']"
+                              style="height:60px;width: 90%"></textarea>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">特长</td>
                 <td><input class="easyui-validatebox" name="xq_tec"></td>
                 <td class="formtdtext">社会活动</td>
-                <td colspan="3"><input class="easyui-validatebox" name="xq_huod" style="width: 80%"></td>
+                <td colspan="3"><input  name="xq_huod" style="width: 80%"></td>
             </tr>
             <tr>
                 <td class="formtdtext">参加社团</td>
-                <td><input class="easyui-validatebox" name="xq_canjiast"></td>
+                <td><input  name="xq_canjiast" ></td>
                 <td class="formtdtext">担当角色</td>
-                <td colspan="3"><input class="easyui-validatebox" name="xq_jiaos" style="width: 80%" ></td>
+                <td colspan="3"><input  name="xq_jiaos" style="width: 80%" ></td>
             </tr>
         </table>
     </div>
 </fieldset>
 
-<!--家庭成员-->
-<fieldset style="width: 900px;margin: 0px auto">
+<!--<fieldset style="width: 900px;margin: 0px auto">
     <legend>家庭成员列表</legend>
     <div opt="familymembersdiv">
         <table class="easyui-datagrid"  opt="familymembersgrid" id="familymembersgrid1" style="width: 900px"
@@ -537,7 +537,7 @@
 							}
 						}">文化程度</th>
                 <th  data-options="field:'gx_registration',width:100,align:'center',editor:'text'">籍贯</th>
-                <!--<th  data-options="field:'gx_nation',width:100,align:'center',editor:'text'">-->
+                &lt;!&ndash;<th  data-options="field:'gx_nation',width:100,align:'center',editor:'text'">&ndash;&gt;
                 <th class="" data-options="field:'gx_nation',align:'center',width:60,editor:{
 							type:'combobox',
 							options:{
@@ -562,7 +562,7 @@
             <a opt="delfamilymemer_btn" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
         </div>
     </div>
-</fieldset>
+</fieldset>-->
 
 <div style="width: 900px;margin: 0px auto">
     <table style="width: 900px">
@@ -592,13 +592,5 @@
 </div>
 
 </form>
-<!--<div style="width: 900px;text-align: center;margin: 0px auto">
-    <input type="button" value="处理" hidden="true" opt="dealwith">
-    <input type="button" value="修改" hidden="true" opt="update">
-    <input type="button" value="删除" hidden="true" opt="delete">
-    <input type="button" value="保存" hidden="true" opt="save">
-    <input type="button" value="操作日志" hidden="true" opt="log">
-</div>-->
-
 </div>
 
