@@ -333,6 +333,8 @@ var cj=(function(){
                 $ul.append($li);
             }
             return $btnarea;
+        },getUserMsg:function(){
+            return usermsg;
         }
     }
 

@@ -36,7 +36,9 @@
 (defn addneed-page []
   (layout/render "addneed.html"))
 (defn dm-page []
-  (layout/render "dm.html"))
+  (layout/render "dm.html"
+    {:usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)}
+    ))
 (defn dm2-page []
   (layout/render "dm2.html"))
 
@@ -44,6 +46,7 @@
   (layout/render "dm3.html"
     {:functionid (:id (:params req))
      :username (:username (session/get :usermsg))
+     :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)
      :menuone (json/json-str (mymngctrl/get-function-by-id-str req) :escape-unicode false)
      :menutwo (str (json/json-str (mymngctrl/get-user-menutree-str req) :escape-unicode false))
      }))

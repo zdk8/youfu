@@ -4,11 +4,8 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '处理',hidden:'hidden',opt:'dealwith'},
-            {text: '修改',hidden:'hidden',opt:'update'},
-            {text: '删除',hidden:'hidden',opt:'delete'},
-            {text: '保存',hidden:'hidden',opt:'save'},
-            {text: '操作日志',hidden:'hidden',opt:'log'}
+            {text: '保存',opt:'save'},
+            {text: '操作日志',opt:'log'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -17,6 +14,31 @@ define(function(){
                 toolBar.height(toolBarHeight);
             }
         });
+    };
+    var genCheckBox=function(w,enumtype,name) {
+        $.ajax({
+            url: 'getenumbytype',
+            dataType: 'jsonp',
+            data: {
+                type:enumtype
+            },
+            success: function(data){
+                var items = $.map(data, function(item){
+                    return {
+                        id: item.enumeratevalue,
+                        text: item.enumeratelabel
+                    };
+                });
+                var result='';
+                var d = items;
+                for(var i in d) {
+                    result+='<input type="radio" name="'+name+'" value="'+d[i].id+'">'+d[i].text;
+                }
+                $(w).append(result);
+
+            }
+        });
+
     };
 
     var actionInfo=function(local,option) {
@@ -36,6 +58,51 @@ define(function(){
 
         local.find('[name=operators]').val(cj.getUserMsg().username);
         local.find('[opt=setdaytime]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
+        local.find('[opt=getjiguan]').bind('click',function(){
+            $me = $(this);
+            var id=$('[opt=identityid]').val();
+            if(id) {
+                $.ajax({
+                    url:'gethometown',
+                    data:{
+                        identityid:$('[opt=identityid]').val()
+                    },success:function(res){
+                        $me.prev().val(res.totalname);
+                    }
+                })
+            }
+        });
+        genCheckBox(local.find('[opt=liveplace]'), 'liveplace', 'live');
+        genCheckBox(local.find('[opt=hyfwjingji]'), 'hyfwjingji', 'live-nonono');
+
+
+        var $registration=local.find('[opt=registration]')
+        $registration.combotree({
+            url:'get-divisionlist?dvhigh=330424',
+            method: 'get',
+            onBeforeExpand: function (node) {
+                $registration.combotree("tree").tree("options").url
+                    ="get-divisionlist?dvhigh=" + node.parentid;
+            },
+            onHidePanel: function () {
+                $registration.combotree('setValue',
+                    $registration.combotree('tree').tree('getSelected').divisionpath);
+            }
+        });
+        var $address=local.find('[opt=address]')
+        $address.combotree({
+            url:'get-divisionlist?dvhigh=330424',
+            method: 'get',
+            onBeforeExpand: function (node) {
+                $address.combotree("tree").tree("options").url
+                    ="get-divisionlist?dvhigh=" + node.parentid;
+            },
+            onHidePanel: function () {
+                $address.combotree('setValue',
+                    $address.combotree('tree').tree('getSelected').divisionpath);
+            }
+        });
+
 
 
         if(option.queryParams && option.queryParams.actiontype == "info"){            //处理
