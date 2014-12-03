@@ -131,6 +131,8 @@
   (POST "/get-oldsocrel" [lr_id] (old/get-oldsocrel lr_id))   ;;查询家庭成员关系表
   ;;###############服务评估###################
   (POST "/need/search-oldassessment" request (need/search-oldassessment request))             ;;人员评估信息查询
+  (GET "/getoperationlog" request (old/get-operationlog request))       ;;操作日志查询
+  (POST "/getoperationlog" request (old/get-operationlog request))       ;;操作日志查询
   ;;###############养老服务资源###################
   (POST "/pension/adddepartment" request (depart/add-department request))       ;;添加机构
   (POST "/pension/getalldepartment" request (depart/getall-department request))       ;;查询全部
@@ -146,13 +148,16 @@
   (POST "/pension/updatecanteen" request (depart/update-canteen  request))                      ;;食堂修改
   (POST "/pension/deletecanteen" request (depart/delete-canteen  request))                       ;;删除食堂
 
-  (POST "/pension/auditfunction" request (old/audit-fun request))                                  ;;审核
+  (POST "/pension/auditfunction" request (old/audit-fun request))                                     ;;审核
   (POST "/pension/get-auditpeople" request (old/get-auditpeople request))                     ;;获取未通过审批的老年人
+
+  (POST "/pension/evaluateoldpeople" request (old/evaluate-oldpeople request))                  ;;评估
+ ;; (POST "/pension/getassessment" request (old/get-assessment request))                             ;;获取未评估的数据
 
 
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
 
-  (POST  "/test/testapprove" request (old/add-approve1 request))
+  ;;(POST  "/test/testapprove" request (old/add-approve0 request))
   )

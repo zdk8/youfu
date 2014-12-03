@@ -35,6 +35,7 @@
 (def approve [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators ])
 
 (def v_oldapprove "v_oldapprove")
+(def t_oldpeople "t_oldpeople")
 
 ;;用户登录
 (defn home [request]
@@ -92,12 +93,17 @@
           {identityid :identityid} params
           {page :page} params
           {rows :rows} params
-          p (Integer/parseInt page)
-          r (Integer/parseInt rows)
-          c (count (db/search-oldpeople name identityid))]
-      (if (<= (* p r) c)                              ;;分页
-        (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) (* p r))}))
-        (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) c)})))))
+           cond (str (common/likecond "name" name) (common/likecond "identityid" identityid))
+         order (str " order by lr_id desc")
+          getresult (common/fenye rows page t_oldpeople cond order)]
+          ;p (Integer/parseInt page)
+          ;r (Integer/parseInt rows)
+          ;c (count (db/search-oldpeople name identityid))
+      ;(if (<= (* p r) c)                              ;;分页
+       ; (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) (* p r))}))
+        ;(:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) c)})))
+      (resp/json {:total (:total getresult) :rows (:rows getresult)})
+      ))
 
 ;;根据关键字查询
 (defn get-oldname
@@ -160,7 +166,8 @@
 
 ;;养老信息录入，参数为养老信息录入页面提交的所有信息
 (defn create-old [request]
-  (let [{olds :params} request
+  (let [params (:params request)
+         {olds :params} request
         opseno (inc (:max (db/get-max "userlog")))        ;;获取自增主键
         digest (str "姓名" (:name (:params request))
                  " 身份证" (:identityid (:params request))
@@ -170,12 +177,16 @@
         dvcode (:dvcode (:params request))
         loginname (:loginname (:params request))
         username  (:operators (:params request))
-        auditid (inc (:max (db/get-max "audits")))]       ;;获取自增主键
+        auditid (inc (:max (db/get-max "audits")))                                                  ;;获取自增主键
+        brief (str "姓名：" (:name params) " 身份证："(:identityid params)  )
+        appdata {:bstablepk tprkey :bstablename "t_oldpeople" :status "1" :aulevel "0" :auflag "新增数据" :bstime (common/get-nowtime)
+                 :appoperators username :auuser loginname  :messagebrief brief :bstablepkname "lr_id"}]
     (db/create-old (into {} (cons (select-keys olds (vec (keys checkinfo)))    ;;新增养老信息
                               (cons [:lr_id tprkey]
                                 (select-keys olds oldinfo)))))
     (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
     (db/create-audit opseno auditid)             ;;新增对应的审核表
+    (db/add-approve appdata)                                                                           ;;将新增数据添加到审核表中
     (str "新增成功")))
 
 (defn add-oldpeople [request]
@@ -191,7 +202,8 @@
 
 ;;修改养老信息，参数为养老信息修改页面提交的所有信息
 (defn update-old [request]
-  (let [{olds :params} request
+  (let [params (:params request)
+         {olds :params} request
         opseno (inc (:max (db/get-max "userlog")))           ;;获取自增主键
         digest (str "姓名" (:name (:params request))
                  " 身份证" (:identityid (:params request))
@@ -199,7 +211,11 @@
         dvcode (:dvcode (:params request))
         loginname (:loginname (:params request))
         username (:operators (:params request))
-        auditid (:auditid (db/get-audit (:lr_id (:params request))))]       ;;根据外键查询审核表得到审核主键
+        auditid (:auditid (db/get-audit (:lr_id (:params request))))       ;;根据外键查询审核表得到审核主键
+       lr_id (:lr_id  params)
+        brief (str "姓名：" (:name params) " 身份证："(:identityid params)  )
+        appdata {:bstablepk lr_id :bstablename "t_oldpeople" :status "1" :aulevel "0" :auflag "修改数据" :bstime (common/get-nowtime)
+                 :appoperators username :auuser loginname :messagebrief brief :bstablepkname "lr_id"}]
     (db/update-old (into {} (cons (conj checkinfo (select-keys  olds (vec (keys checkinfo)))) (select-keys olds oldinfo))) (:lr_id (:params request)))      ;;修改养老信息表
     (db/create-userlog opseno                    ;;新增对应的操作日志
       (str digest " 信息修改") (:lr_id (:params request)) "mHLcDiwTflgEshNKIiOV" dvcode loginname username)
@@ -210,6 +226,8 @@
         (db/update-audit "0" "0" dvcode "驳回已处理" loginname    ;;修改对应的审核表
           (inc (:max (db/get-max "userlog"))) "0" auditid opseno))
       (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由的状态下，修改对应审核表
+    (db/update-approveby-lrid  lr_id)                                    ;;修改审核表的状态
+    (db/add-approve appdata)                                                 ;;添加新的审核表历史状态
     (str "修改成功")))
 
 ;;修改养老家庭成员信息
@@ -297,7 +315,7 @@
 
 
 
-(defn add-approve1 [params]                                                                       "首次提交"
+(defn add-approve0 [params]                                                                       "首次提交"
   (let[appdata (select-keys params approve)
         ;bstablepk (:bstablepk params)                                                                  ;获取被审批表的主键
        ;bstablename (:bstablename params)                                                           ;获取被审批表名
@@ -317,7 +335,7 @@
     newappdata
     ))
 
-(defn set-approve3 [params]                                                                           "审批通过"
+(defn set-approve2 [params]                                                                           "审批通过"
   (let[appdata (select-keys params approve)
        ; bstablepk (:bstablepk params)
       ; bstablename (:bstablename params)
@@ -334,7 +352,7 @@
        ]
     newappdata))
 
-(defn set-approve2 [params]
+(defn set-approve1 [params]
   (let[appdata (select-keys params approve)
        ; auuser (:auuser params)
       ;audesc (:audesc params)
@@ -352,6 +370,16 @@
     ;(update-approveby-lrid  bstablepk)                                                            ;修改审批表的状态
     ;(add-approve newappdata)                                                                         ;添加一条审核记录
    ; (resp/json {:success true :message "approve success"})
+    newappdata))
+
+(defn set-audit [params]
+  (let[appdata (select-keys params approve)
+       newaulevel (str(inc(read-string (:aulevel params))))
+       auflag (cond (= newaulevel "1") "提交成功"
+                (= newaulevel "2") "审核成功"
+                (= newaulevel "3") "审批成功")
+       newappdata (conj appdata {:status "1" :aulevel newaulevel :bstime (common/get-nowtime) :auflag auflag})
+       ]
     newappdata))
 
 (defn set-approvefail [params]
@@ -377,17 +405,31 @@
     ;{:bstablepk bstablepk :bstablename bstablename :status "1" :aulevel "0" :auflag auflag :bstime (common/get-nowtime) :auuser auuser :audesc audesc :dvcode dvcode :appoperators appoperators}
     newappdata))
 
+(defn set-auditfail [params]
+  (let[appdata (select-keys params approve)
+       aulevel (:aulevel params)
+       auflag (cond (= aulevel "0")   "提交不通过"
+                          (= aulevel "1")   "审核不通过"
+                          (= aulevel "2")   "审批不通过")
+       newappdata (conj appdata {:status "1" :aulevel "0" :bstime (common/get-nowtime) :auflag auflag })
+       ]
+    newappdata))
+
+
+
+
 (defn set-audit-approve0 [params]                                                                    "老人信息首次提交"
-  (let[appdata (add-approve1 params)
+  (let[appdata (add-approve0 params)
        ]
     (db/add-approve appdata)                                                                           ;添加一条审核信息
     (str "audit success")))
 
 (defn set-audit-approve2 [params]                                                                    "老人信息待审批"
   (let[idname "lr_id"
+      ;signname "status"
        bstablepk (:bstablepk params)
        bstablename (:bstablename params)
-       appdata (set-approve3 params)]
+       appdata (set-approve2 params)]
     (db/update-approveby-lrid bstablepk)                                                        ;更新上一次评估信息为历史状态
     (db/add-approve appdata)                                                                          ;添加本次评估信息记录
     (db/set-tablestatus idname bstablepk bstablename)                                        ;将老人数据的状态更改为正式数据状态
@@ -395,7 +437,7 @@
 
 (defn set-audit-approve1 [params]                                                                   "老人信息再次提交和审核"
   (let[bstablepk (:bstablepk params)
-        appdata (set-approve2 params)
+        appdata (set-approve1 params)
        ]
     (db/update-approveby-lrid bstablepk)                                                        ;更新上次评估信息的为历史状态
     (db/add-approve appdata)))                                                                        ;添加本次评估信息记录
@@ -419,13 +461,89 @@
       (set-audit-approvefail params))                                                                            ;审核不通过
     (resp/json {:success true :message "approve success"})))
 
+(defn auditsuccess [params]                                                                               "审核通过"
+  (let[bstablepk (:bstablepk params)
+       appdata (set-audit  params)
+       idname (:bstablepkname params)
+       bstablename (:bstablename params)
+       aulevel (:aulevel params)
+       ]
+    (db/update-approveby-lrid bstablepk)                                                        ;更新上次审核信息的为历史状态
+    (db/add-approve appdata)                                                                          ;添加新的审核信息
+    (if (= aulevel "3") (db/set-tablestatus idname bstablepk bstablename))        ;如果审批通过，将老人数据的状态更改为正式数据状态
+    ))
+
+(defn auditfailed [params]                                                                                  "审核不通过"
+  (let[aulevel (:aulevel params)
+       bstablepk (:bstablepk params)
+       appdata (set-auditfail params)]
+    (db/update-approveby-lrid bstablepk)                                                      ;修改审批表的状态
+    (db/add-approve appdata)                                                                        ;添加一条审核记录
+    (str "audit not pass")))
+
+(defn new-audit-fun [request]                                                                           "审核"
+  (let[params (:params request)
+       auflag (:auflag params)]
+    (if (= auflag "通过")
+        (auditsuccess params)
+        (auditfailed params))
+    (resp/json {:success true :message "audit success"})))
+
+
+(defn set-evaluate-approve0 [params]                                                               "首次评估"
+  (let[appdata (add-approve0 params)
+       ]
+    (db/add-approve appdata)                                                                           ;添加一条审核信息
+    (str "evaluate success")))
+
+(defn set-evaluate-approve2 [params]
+  (let[idname "pg_id"
+       ;signname "active"
+       bstablepk (:bstablepk params)
+       bstablename (:bstablename params)
+       appdata (set-approve2 params)]
+    (db/update-approveby-lrid bstablepk)                                                        ;更新上一次评估信息为历史状态
+    (db/add-approve appdata)                                                                          ;添加本次评估信息记录
+    (db/set-tablestatus idname bstablepk bstablename)                     ;将老人评估数据的状态更改为正式数据状态
+    (str "evaluate success")))
+
+(defn set-evaluate-approve1 [params]
+  (let[bstablepk (:bstablepk params)
+       appdata (set-approve1 params)
+       ]
+    (db/update-approveby-lrid bstablepk)                                                        ;更新上次评估信息的为历史状态
+    (db/add-approve appdata)                                                                          ;添加一条审核记录
+    (str "evaluate success")))
+
+(defn set-evaluate-approvefail [params]
+  (let[aulevel (:aulevel params)
+       bstablepk (:bstablepk params)
+       appdata (set-approvefail params)]
+    (if (not= (count aulevel) 0)  (db/update-approveby-lrid bstablepk))            ;修改审批表的状态
+    (db/add-approve appdata)                                                                         ;添加一条审核记录
+    (str "evaluate not pass")))
+
+(defn evaluate-oldpeople [request]                                                                    "评估信息审核"
+  (let[params (:params request)
+       auflag (:auflag params)
+       aulevel (:aulevel params)
+       ]
+    (if (= auflag "通过")
+      (cond (= (count aulevel) 0)   (set-evaluate-approve0 params)                   ;首次提交
+        (= aulevel "2")     (set-evaluate-approve2 params)                                  ;待审批
+        :else (set-evaluate-approve1 params))                                                    ;待提交和待审核
+      (set-evaluate-approvefail params))                                                          ;审核不通过
+    (resp/json {:success true :message "approve success"})))
+
+
+
 
 (defn get-auditpeople [request]
   (let[{params :params}request
        {page :page}params
        {rows :rows}params
        auuser  (:username (session/get :usermsg))
-       getresult (common/fenye rows page v_oldapprove "")]
+       getresult (common/fenye rows page v_oldapprove "" "")]
     (resp/json {:total (:total getresult) :rows (map #(conj % {:loginuser auuser} )(common/time-formatymd-before-list (:rows getresult) "bstime"))})))
 
 ;;根据外键查询操作日志
@@ -438,6 +556,18 @@
 ;      (:body (resp/json {:total c :rows (subvec (common/time-formatymd-before-list (db/get-userlogs functionid) "bstime") (* (dec p) r) c)})))))
       (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) (* p r))}))
       (:body (resp/json {:total c :rows (subvec (db/get-userlogs functionid) (* (dec p) r) c)})))))
+(defn get-operationlog [request]
+  (let [{params :params} request
+        {page :page} params
+        {rows :rows} params
+        loginname (session/get :usermsg)
+        p (Integer/parseInt page)
+        r (Integer/parseInt rows)
+        c (count (db/get-operationlog loginname))]
+    (if (<= (* p r) c)                              ;;分页
+      (:body (resp/json {:total c :rows (subvec (db/get-operationlog loginname) (* (dec p) r) (* p r))}))
+      (:body (resp/json {:total c :rows (subvec (db/get-operationlog loginname) (* (dec p) r) c)}))))
+  )
 
 ;;折叠框转换
 (defn accordion [ad username]

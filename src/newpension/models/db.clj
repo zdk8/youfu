@@ -164,10 +164,12 @@
 ;;查询老年人信息
 (defn search-oldpeople
   ( [] (select olds                  ;;查询所有养老信息
-         (fields :lr_id :name :gender :birthd :identityid :address :status) ) )
+         (fields :lr_id :name :gender :birthd :identityid :address :status) )
+          (order :lr_id :desc))
     ( [name identityid] (select olds
                (where {:name [like (str "%" (if (nil? name) "" name) "%")]})
-                          (where {:identityid [like (str "%" (if (nil? identityid) "" identityid) "%")]}))))
+                          (where {:identityid [like (str "%" (if (nil? identityid) "" identityid) "%")]}))
+      (order :lr_id :desc)))
 
 ;;根据主键查看养老信息
 (defn get-old [id]
@@ -228,6 +230,11 @@
   (select userlog
     (fields :opseno :digest :tprkey :username :bsnyue :bstime )
     (where {:functionid functionid})
+    (order :opseno :desc)))      ;;降序排列
+(defn get-operationlog [loginname]
+  (select userlog
+;    (fields :opseno :digest :tprkey :username :bsnyue :bstime )
+    (where {:loginname loginname})
     (order :opseno :desc)))      ;;降序排列
 
 ;;新增操作日志
@@ -646,7 +653,7 @@
     (where {:bstablepk bstablepk
                  :status "1"})))
 
-(defn set-tablestatus [idname id tablename]                                                          "审核通过修改被审核表状态"
+(defn set-tablestatus [idname id  tablename]                                                          "审核通过修改被审核表状态"
   (update tablename
     (set-fields {:status "1"})
     (where {(keyword idname) id})))
