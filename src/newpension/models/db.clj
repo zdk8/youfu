@@ -676,6 +676,10 @@
   (insert t_jjylapply
     (values applydata)))
 
+(defn get-apply-byid [jja_id]
+  (select t_jjylapply
+    (where {:jja_id jja_id})))
+
 
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM

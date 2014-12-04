@@ -159,7 +159,9 @@
   (POST "/pension/evaluateoldpeople" request (old/evaluate-oldpeople request))                  ;;评估
  ;; (POST "/pension/getassessment" request (old/get-assessment request))                             ;;获取未评估的数据
 
-  (POST "/audit/addauditapply" request (audit/add-audit-apply request))
+  (POST "/audit/addauditapply" request (audit/add-audit-apply request))                           ;;居家养老服务申请
+  (POST "/audit/getapplybyid" request (audit/get-apply-byid request))                              ;;根据id查找
+  (POST "/audit/getallapply" request (audit/getall-apply request))                                     ;;查找未处理的申请
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
