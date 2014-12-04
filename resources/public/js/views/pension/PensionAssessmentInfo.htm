@@ -3,10 +3,14 @@
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
 <form method="post" opt="mainform" id="fs">
-<fieldset style="width: 900px;margin: 0px auto;" opt="info0"><legend>用户基本信息</legend>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info0">
+    <legend>
+        <label opt="info0_shrinkage">用户基本信息</label>
+        <!--<img alt="展开或收缩" opt="info0_shrinkage" id="info0_shrinkage" src="img/search.gif"/>-->
+    </legend>
     <div>
         <input type="hidden" name="lr_id">
-        <table class="formtable">
+        <table class="formtable" opt="info0_table">
             <tr>
                 <td class="formtdtext">行政区划:</td>
                 <td colspan="3">
@@ -49,9 +53,11 @@
     </div>
 
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="info1"><legend>生活自理能力</legend>
-
-    <table class="formtable">
+<fieldset style="width: 900px;margin: 0px auto;" opt="info1">
+    <legend>
+        <label opt="info1_shrinkage">生活自理能力</label>
+    </legend>
+    <table class="formtable" opt="info1_table">
         <tbody>
         <tr style="height: 40px;">
             <td style="width: 50px;">评估事项</td>
@@ -180,8 +186,11 @@
         </tbody>
     </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="info2"><legend>生活自理能力</legend>
-    <table class="formtable">
+<fieldset style="width: 900px;margin: 0px auto;" opt="info2">
+    <legend>
+        <label opt="info2_shrinkage">生活自理能力</label>
+    </legend>
+    <table class="formtable" opt="info2_table">
         <tr>
             <td rowspan="5">经济条件</td>
             <td>分类</td>
@@ -220,8 +229,11 @@
         </tr>
     </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="info3"><legend>居住环境</legend>
-    <table class="formtable">
+<fieldset style="width: 900px;margin: 0px auto;" opt="info3">
+    <legend>
+        <label opt="info3_shrinkage">居住环境</label>
+    </legend>
+    <table class="formtable" opt="info3_table">
         <tr>
             <td rowspan="4">居住环境</td>
             <td style="text-align: center;">分类</td>
@@ -257,8 +269,11 @@
         </tr>
     </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="info4"><legend>年龄情况</legend>
-    <table class="formtable">
+<fieldset style="width: 900px;margin: 0px auto;" opt="info4">
+    <legend>
+        <label opt="info4_shrinkage">年龄情况</label>
+    </legend>
+    <table class="formtable" opt="info4_table">
         <tr>
             <td rowspan="2">年龄情况</td>
             <td>出生日期:
@@ -283,8 +298,11 @@
 
     </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="info5"><legend>特殊贡献</legend>
-    <table class="formtable">
+<fieldset style="width: 900px;margin: 0px auto;" opt="info5">
+    <legend>
+        <label opt="info5_shrinkage">特殊贡献</label>
+    </legend>
+    <table class="formtable" opt="info5_table">
         <tr>
             <td>特殊贡献</td>
             <td>
@@ -314,8 +332,11 @@
 
     </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="info6"><legend>残障情况</legend>
-    <table class="formtable">
+<fieldset style="width: 900px;margin: 0px auto;" opt="info6">
+    <legend>
+        <label opt="info6_shrinkage">残障情况</label>
+    </legend>
+    <table class="formtable" opt="info6_table">
         <tr>
             <td>视力</td>
             <td>
@@ -364,8 +385,11 @@
 
     </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="info7"><legend>住房情况</legend>
-    <table class="formtable">
+<fieldset style="width: 900px;margin: 0px auto;" opt="info7">
+    <legend>
+        <label opt="info7_shrinkage">住房情况</label>
+    </legend>
+    <table class="formtable" opt="info7_table">
         <tr>
             <td>住房情况</td>
             <td>
@@ -410,8 +434,11 @@
 
     </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="info8"><legend>重大疾病</legend>
-    <table class="formtable" >
+<fieldset style="width: 900px;margin: 0px auto;" opt="info8">
+    <legend>
+        <label opt="info8_shrinkage">重大疾病</label>
+    </legend>
+    <table class="formtable" opt="info8_table">
         <tr>
             <td>疾病名称</td>
             <td>医生诊断</td>
@@ -564,9 +591,11 @@
     </table>
 </fieldset>
 <fieldset style="width: 900px;margin: 0px auto;" opt="result1">
-    <legend>评估报告一:评估总分计算</legend>
+    <legend>
+        <label opt="result1_shrinkage">评估报告一:评估总分计算</label>
+    </legend>
     <input type="hidden" name="pg_id">
-    <table class="formtable" style="width:100%">
+    <table class="formtable" style="width:100%" opt="result1_table">
         <tr>
             <td style="width: 90px;">评估参数</td>
             <td>判断等级</td>
@@ -664,109 +693,414 @@
 
     </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="fuwuxingshijianyi">
-    <legend>服务形式建议</legend>
-    <table class="formtable" style="width:100%">
-            <tr>
-                <td colspan="2">服务建议</td>
-                <td>服务内容</td>
-                <td>需要</td>
-                <td>备注</td>
-            </tr>
-            <tr>
-                <td rowspan='17' style="width: 30px">生活照料服务</td>
-                <td rowspan='2' style="width: 100px">饮食服务</td>
-                <td>送餐</td>
-                <td>
-                    <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-                    <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
-                </td>
-                <td><textarea name="sc_beiz" style="width: 98%;height: 25px"placeholder="填写备注信息"></textarea></td>
-            </tr>
-            <tr>
-                <td>上门做餐</td>
-                <td>
-                    <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-                    <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
-                </td>
-                <td><textarea name="sc_beiz" style="width: 98%;height: 25px"placeholder="填写备注信息"></textarea></td>
-            </tr>
-            <tr>
-                <td rowspan='4'>起居服务</td>
-                <td>穿衣</td>
-            </tr>
-            <tr>
-                <td>整理衣物</td>
-            </tr>
-            <tr>
-                <td>翻身</td>
-            </tr>
-            <tr>
-                <td>如厕</td>
-            </tr>
-            <tr>
-                <td rowspan='3'>助浴服务</td>
-                <td>业务1</td>
-            </tr>
-            <tr>
-                <td>业务2</td>
-            </tr>
-            <tr>
-                <td>业务3</td>
-            </tr>
-        </table>
-    <table class="formtable" style="width:100%">
-            <!-- <tr>
-                 <td colspan="2">服务建议</td>
-                 <td>服务内容</td>
-                 <td>需要</td>
-                 <td>备注</td>
-             </tr>-->
-            <tr>
-                <td rowspan='17' style="width: 30px">生活照料服务</td>
-                <td rowspan='2' style="width: 100px">饮食服务</td>
-                <td>送餐</td>
-                <td>
-                    <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-                    <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
-                </td>
-                <td><textarea name="sc_beiz" style="width: 98%;height: 25px"placeholder="填写备注信息"></textarea></td>
-            </tr>
-            <tr>
-                <td>上门做餐</td>
-                <td>
-                    <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-                    <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
-                </td>
-                <td><textarea name="sc_beiz" style="width: 98%;height: 25px"placeholder="填写备注信息"></textarea></td>
-            </tr>
-            <tr>
-                <td rowspan='3'>起居服务</td>
-                <td>穿衣</td>
-            </tr>
-            <tr>
-                <td>业务2</td>
-            </tr>
-            <tr>
-                <td>业务3</td>
-            </tr>
-            <tr>
-                <td rowspan='3'>助浴服务</td>
-                <td>业务1</td>
-            </tr>
-            <tr>
-                <td>业务2</td>
-            </tr>
-            <tr>
-                <td>业务3</td>
-            </tr>
-        </table>
+<fieldset style="width: 900px;margin: 0px auto;" opt="result2">
+    <legend>
+        <label opt="result2_shrinkage">服务形式建议</label>
+    </legend>
+    <table class="formtable" style="width:100%" opt="result2_table">
+    <tr>
+        <td colspan="2">服务建议</td>
+        <td>服务内容</td>
+        <td>需要</td>
+        <td>备注</td>
+    </tr>
+    <!--生活照料服务-->
+    <tr>
+        <td rowspan='17' style="width: 30px;text-align: center;">生<br>活<br>照<br>料<br>服<br>务</td>
+        <td rowspan='2' style="width: 100px">饮食服务</td>
+        <td >送餐</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>上门做餐</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td rowspan='4'>起居服务</td>
+        <td>穿衣</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>整理衣物</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>翻身</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>如厕</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
 
+    <tr>
+        <td rowspan='2'>助浴服务</td>
+        <td>上门助浴</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>老年浴室助浴</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+
+    <tr>
+        <td rowspan='3'>卫生清洁</td>
+        <td>个人衣服清洁</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>床上用品清洁</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>室内卫生清洁</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+
+    <tr>
+        <td rowspan='3'>代办服务</td>
+        <td>代换煤气</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>代办手续</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>代缴费用</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+
+    <tr>
+        <td rowspan='3'>其他服务</td>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <!--医疗保健服务-->
+    <tr>
+        <td rowspan='11' style="width: 30px">医疗保健服务</td>
+        <td rowspan='2' style="width: 100px">预防保健服务</td>
+        <td>制定预防方案</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>预防知识学习</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td rowspan='4'>医疗协助服务</td>
+        <td>服药</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>陪诊</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>测量血压</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>测量体温</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td rowspan='2'>康复护理服务</td>
+        <td>康复指导</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>康复训练</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td rowspan='3'>其他服务</td>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <!--家政服务-->
+    <tr>
+        <td rowspan='6' style="width: 30px;text-align: center;">家<br>政<br>服<br>务</td>
+        <td style="width: 100px">安装维修</td>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>清洗</td>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>疏通</td>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td rowspan="3">其他服务</td>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <!--紧急救助服务-->
+    <tr>
+        <td rowspan='5' style="width: 30px;text-align: center;">紧<br>急<br>救<br>助<br>服<br>务</td>
+        <td rowspan='2' style="width: 100px">设施安装</td>
+        <td>有线呼叫器</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td>老人手机</td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td rowspan='3'>其他服务</td>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <!--其他类-->
+    <tr>
+        <td rowspan='4' style="width: 30px;text-align: center;">其<br>他<br>类</td>
+        <td rowspan='4' style="width: 100px">服务项目</td>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td style="text-align: center;">
+            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
+            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+        </td>
+        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+    </tr>
+    <!--建议服务形式-->
+    <tr>
+        <td colspan="2" style="width: 30px">建议服务形式</td>
+        <td colspan="3" style="text-align: center;">
+            <input name="fuwuxingshi" type="radio" value="1" /><label>居家养老</label>
+            <input name="fuwuxingshi" type="radio" value="2" /><label>机构养老</label>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="width: 30px">备注</td>
+        <td colspan="3" style="width: 100px">
+            <textarea name="sc_beiz" style="width: 98%;height: 25px"placeholder="填写备注信息"></textarea>
+        </td>
+    </tr>
+        </table>
 </fieldset>
-<fieldset style="width: 900px;margin: 0px auto;" opt="result2" name="result2">
-    <legend>评估报告二:评估报告确认</legend>
+<fieldset style="width: 900px;margin: 0px auto;" opt="result3" name="result3">
+    <legend>
+        <label opt="result3_shrinkage">评估报告二:评估报告确认</label>
+    </legend>
 
-    <table class="formtable">
+    <table class="formtable" opt="result3_table">
         <tr>
             <td colspan="5" style="text-align: center;">评估表基本信息</td>
         </tr>
