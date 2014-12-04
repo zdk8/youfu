@@ -118,6 +118,12 @@
   (table :approve)
   (database dboracle))
 
+;;居家服务申请表
+(defentity t_jjylapply
+  (pk :jja_id)
+  (table :t_jjylapply)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -662,6 +668,17 @@
   (update tablename
     (set-fields {:status "1"})
     (where {(keyword idname) id})))
+
+
+
+;;居家养老服务
+(defn add-apply [applydata]
+  (insert t_jjylapply
+    (values applydata)))
+
+(defn get-apply-byid [jja_id]
+  (select t_jjylapply
+    (where {:jja_id jja_id})))
 
 
 (defn getall-results [start end sql]

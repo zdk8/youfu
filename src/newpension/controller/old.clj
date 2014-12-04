@@ -109,7 +109,7 @@
       ;(if (<= (* p r) c)                              ;;分页
        ; (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) (* p r))}))
         ;(:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) c)})))
-      (resp/json {:total (:total getresult) :rows (:rows getresult)})
+      (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "birthd")})
       ))
 
 ;;根据关键字查询
@@ -190,7 +190,7 @@
                  :appoperators username :auuser loginname  :messagebrief brief :bstablepkname "lr_id"}]
     (db/create-old (into {} (cons (select-keys olds (vec (keys checkinfo)))    ;;新增养老信息
                               (cons [:lr_id tprkey]
-                                (select-keys olds oldinfo)))))
+                                (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date")))))
     (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
     (db/create-audit opseno auditid)             ;;新增对应的审核表
     (db/add-approve appdata)                                                                           ;;将新增数据添加到审核表中
