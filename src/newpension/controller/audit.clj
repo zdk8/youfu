@@ -41,6 +41,6 @@
        page (:page params)
        name (:name params)
        identityid (:identityid params)
-       cond (str " and ishandle != '1'" (common/likecond "name" name) (common/likecond "identityid" identityid))
+       cond (str " and (ishandle != '1' or ishandle is null)" (common/likecond "name" name) (common/likecond "identityid" identityid))
        getresult (common/fenye rows page t_jjylapply cond " order by jja_id ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
