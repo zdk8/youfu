@@ -9,7 +9,8 @@
             [noir.session :as session]
             [clojure.data.json :as json]
             [newpension.controller.manager :as mymngctrl]
-            [newpension.controller.department :as depart]))
+            [newpension.controller.department :as depart]
+            [newpension.controller.audit :as audit]))
 
 (defn home-page []
   (layout/render
@@ -158,7 +159,7 @@
   (POST "/pension/evaluateoldpeople" request (old/evaluate-oldpeople request))                  ;;评估
  ;; (POST "/pension/getassessment" request (old/get-assessment request))                             ;;获取未评估的数据
 
-
+  (POST "/audit/addauditapply" request (audit/add-audit-apply request))
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )

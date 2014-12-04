@@ -13,8 +13,18 @@
                [newpension.layout :as layout]))
 
 (def apply [:name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
-            :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle])
+            :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate])
+(def opofapply [:name :identityid :gender :birthd :nation :culture :marriage :live :economy :age :registration :address :telephone :mobilephone])
 
 (def t_jjylapply "t_jjylapply")
 
 
+(defn add-audit-apply [request]
+  (let[params (:params request)
+       identityid (:identityid params)
+       checkold (count (db/get-oldpeople identityid))
+       opdata (select-keys params opofapply)
+       applydata (select-keys params apply)]
+    (if (= checkold 0) (old/add-oldpeople opdata))                                           ;如果老人数据没有此数据，将其添加到老人数据库中
+    (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
+    (resp/json {:success true :message "apply success"})))
