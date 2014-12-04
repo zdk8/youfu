@@ -11,6 +11,7 @@ define(function(){
                     local:local,
                     filepath:filepath,
                     costomPreFixUrl:'/',
+                    url:'/savecombodt',
                     data:option.queryParams,
                     cparam: $.extend({flag:-1},option.queryParams),
                     uparam:option.queryParams,

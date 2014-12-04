@@ -59,7 +59,11 @@ define(function () {
             }
 
             $gender.combobox('setValue',result.gender);
-            $age.val(new Date(new Date()-new Date(result.birthdate)).getFullYear()-1970);
+            var age=new Date(new Date()-new Date(result.birthdate)).getFullYear()-1970;
+            $age.val(age);
+            if(option.callback){
+                option.callback($.extend({age:age},result));
+            }
 
         })
     }

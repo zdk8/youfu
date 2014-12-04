@@ -15,7 +15,7 @@ define(function(){
             }
         });
     };
-    var genCheckBox=function(w,enumtype,name) {
+    var genCheckBox=function(w,enumtype,name,record) {
         $.ajax({
             url: 'getenumbytype',
             dataType: 'jsonp',
@@ -32,9 +32,20 @@ define(function(){
                 var result='';
                 var d = items;
                 for(var i in d) {
-                    result+='<input type="radio" name="'+name+'" value="'+d[i].id+'">'+d[i].text;
+                    var checked='';
+                    var myrecord=record||{};
+                    if(d[i].id==myrecord[name]){
+                        checked+='checked="checked"';
+                    }
+                    result+='<input type="radio" '+checked+' name="'+name+'" value="'+d[i].id+'"><label>'+d[i].text+'</label>';
                 }
                 $(w).append(result);
+                $(w).find('input[type=radio]+label').each(function(){
+                    $(this).bind('click',function(){
+                        $(this).prev().attr("checked",'true');
+
+                    })
+                });
 
             }
         });
@@ -47,17 +58,15 @@ define(function(){
     };
 
 
-    function create(local,option){
-
+    function baseRender(local,record){
         addToolBar(local);
-        var districtid = local.find('[opt=districtid]');      //行政区划
-        getdivision(districtid);                                          //加载行政区划
-        var pensionform = local.find('[opt=pensionform]');      //老人信息主表
-        var familymembersgrid = local.find('[opt=familymembersgrid]');      //老人信息子表
-        var dealwith = local.find('[opt=dealwith]');            //处理按钮
+        var districtid = local.find('[opt=districtid]');
+        var pensionform = local.find('[opt=pensionform]');
+        var familymembersgrid = local.find('[opt=familymembersgrid]');
+        var dealwith = local.find('[opt=dealwith]');
 
         local.find('[name=operators]').val(cj.getUserMsg().username);
-        local.find('[opt=setdaytime]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
+        local.find('[opt=applydate]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
         local.find('[opt=getjiguan]').bind('click',function(){
             $me = $(this);
             var id=$('[opt=identityid]').val();
@@ -72,8 +81,13 @@ define(function(){
                 })
             }
         });
-        genCheckBox(local.find('[opt=liveplace]'), 'liveplace', 'live');
-        genCheckBox(local.find('[opt=hyfwjingji]'), 'hyfwjingji', 'live-nonono');
+        genCheckBox(local.find('[opt=liveplace]'), 'liveplace', 'live',record);
+        genCheckBox(local.find('[opt=hyfwjingji]'), 'hyfwjingji', 'economy',record);
+        genCheckBox(local.find('[opt=culture]'), 'hyculture', 'culture',record);
+        genCheckBox(local.find('[opt=marriage]'), 'marriage', 'marriage',record);
+
+
+
 
 
         var $registration=local.find('[opt=registration]')
@@ -104,6 +118,35 @@ define(function(){
         });
 
 
+        var doinitage_radio=function(age){
+            var age=age;
+            if(age<80){
+                local.find('[opt=a][name=agerange]').attr("checked",'true');
+            }else if(age>=80 && age<90){
+                local.find('[opt=b][name=agerange]').attr("checked",'true');
+            }else if(age>=90 && age<100){
+                local.find('[opt=c][name=agerange]').attr("checked",'true');
+            }else{
+                local.find('[opt=d][name=agerange]').attr("checked",'true');
+            }
+            local.find('[opt=tip_age]').text(age+'岁');
+        }
+        require(['commonfuncs/BirthGenderAge'],function(js){
+            js.render(local,{callback:function(result){
+                doinitage_radio(result.age);
+            }})
+        });
+        if(record){
+            doinitage_radio(record.age);
+        }
+
+
+    }
+
+    function create(local,option){
+
+        baseRender(local);
+
 
         if(option.queryParams && option.queryParams.actiontype == "info"){            //处理
             dealwith.show();                                        //显示处理按钮
@@ -113,7 +156,6 @@ define(function(){
                 var element = pensionform[0].elements[i];
                 element.disabled = true
             }
-            disabledForm(local);                                //禁用easyui框
             $.ajax({
                 url:"searchid",                                //查询老人表
                 data:{
@@ -128,39 +170,12 @@ define(function(){
                     showProcess(false);
                 }
             })
-        }else{
-
-
-            /*加载地区树*/
-            var divisiontree = local.find('[opt=mydistrictid]') ;
-            divisiontree.combotree({
-                url:'get-divisionlist?dvhigh=330424',
-                method: 'get',
-                onBeforeExpand: function (node) {
-                    divisiontree.combotree("tree").tree("options").url
-                        ="get-divisionlist?dvhigh=" + node.parentid;
-                },
-                onHidePanel: function () {
-                    divisiontree.combotree('setValue',
-                        divisiontree.combotree('tree').tree('getSelected').divisionpath);
-                }
-            });
-            require(['commonfuncs/BirthGenderAge'],function(js){
-                js.render(local)
-            })
-
-
-
-
-
-
-
-
-
+        }
+        else{
 
             local.find('[opt=save]').show().bind('click',function(){
                 local.find('[opt=pensionform]').form('submit', {
-                    url:'/saveold',
+                    url:'/audit/addauditapply',
                     onSubmit: function () {
                         var isValid = $(this).form('validate');
                         cj.slideShow('表单验证结果:' + isValid);
@@ -176,13 +191,32 @@ define(function(){
         }
 
     }
+    function showinfo(local,option){
+        baseRender(local, option.queryParams.data);
+        console.log(option.queryParams.data);
+        local.find('form').form('load', option.queryParams.data);
+        local.find('[opt=save]').show().bind('click',function(){
+            local.find('[opt=pensionform]').form('submit', {
+                url:'/audit/addauditapply',
+                onSubmit: function () {
+                    var isValid = $(this).form('validate');
+                    cj.slideShow('表单验证结果:' + isValid);
+                    return isValid;
+                },
+                success: function (data) {
+                    cj.slideShow('操作成功');
+                }
+            });
 
+
+        });
+    }
 
     var render=function(l,o){
         if(o.queryParams) {
             switch (o.queryParams.actiontype){
-                case 'update1':
-                    (function(){alert('hahaha')})();
+                case 'info':
+                    showinfo(l,o);
                     break;
                 case 'update':
                     actionInfo(l, o);

@@ -324,7 +324,10 @@
     var customMenuRoot = '{{functionid}}';
     var swapFunction;
     var mymenudata=[];
-    var leftMenuClick=function(){};
+    var needClick=[];
+    var leftMenuClick=function(v){
+        needClick.push(v);
+    };
     var swapFunction=function(){};
     var getMenudata=function(functionid){
         for(var i in mymenudata) {
