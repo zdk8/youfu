@@ -162,6 +162,7 @@
   (POST "/audit/addauditapply" request (audit/add-audit-apply request))                           ;;居家养老服务申请
   (POST "/audit/getapplybyid" request (audit/get-apply-byid request))                              ;;根据id查找
   (POST "/audit/getallapply" request (audit/getall-apply request))                                     ;;查找未处理的申请
+  (POST "/audit/updateapply" request (audit/update-apply request))                                    ;;更新申请
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
