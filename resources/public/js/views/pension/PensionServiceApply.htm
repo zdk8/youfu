@@ -3,7 +3,9 @@
         <fieldset>
             <legend>居家养老服务申请</legend>
             <div>
-                <input type="hidden" name="lr_id">
+                <input type="hidden" name="age" opt="age">
+                <input type="hidden" name="jja_id">
+
                 <table class="formtable">
 
                     <tr>
@@ -26,7 +28,10 @@
             ">
                         </td>
                         <td class="formtdtext">出生年月</td>
-                        <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd"></td>
+                        <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd">
+                            <span opt="tip_age"></span>
+                        </td>
+
                     </tr>
                     <tr>
 
@@ -37,24 +42,24 @@
                                    name="nation"
                                    data-options=" loader: cj.getLoader('nation'), mode: 'remote', editable:false, valueField:'id', textField:'text' "> </td>
                         <td class="formtdtext">文化程度</td>
-                        <td>
-                            <input type="radio" name="vehicle" value="Bike">文盲
+                        <td opt="culture">
+                            <!--<input type="radio" name="vehicle" value="Bike">文盲
                             <input type="radio" name="vehicle" value="Car">略识字
-                            <input type="radio" name="vehicle" value="Bike">能读字,最高学历
+                            <input type="radio" name="vehicle" value="Bike">能读字,最高学历-->
                         </td>
                     </tr>
                     <tr>
                         <td class="formtdtext">籍贯</td>
                         <td>
-                            <input name="registration" class="input-text">
+                            <input name="birthplace" class="input-text">
                             <a opt="getjiguan" style="cursor: pointer;font-size: 8px;">默认籍贯</a>
                         </td>
                         <td class="formtdtext">婚姻状况</td>
-                        <td>
-                            <input type="radio" name="marriage" value="Bike">未婚
+                        <td opt="marriage">
+                            <!--<input type="radio" name="marriage" value="Bike">未婚
                             <input type="radio" name="marriage" value="Car">已婚
                             <input type="radio" name="marriage" value="Bike">丧偶
-                            <input type="radio" name="marriage" value="Bike">离婚
+                            <input type="radio" name="marriage" value="Bike">离婚-->
                         </td>
                     </tr>
                     <tr>
@@ -83,10 +88,10 @@
 
                         <td class="formtdtext">年龄</td>
                         <td colspan="3">
-                            <input type="radio" name="agerange" value="Bike">80岁以下
-                            <input type="radio" name="agerange" value="Car">80-90岁
-                            <input type="radio" name="agerange" value="Bike">90-100岁
-                            <input type="radio" name="agerange" value="Bike">100岁以上
+                            <input type="radio" name="agerange" opt="a">80岁以下
+                            <input type="radio" name="agerange" opt="b">80-90岁
+                            <input type="radio" name="agerange" opt="c">90-100岁
+                            <input type="radio" name="agerange" opt="d">100岁以上
                         </td>
                     </tr>
                     <tr>
@@ -106,29 +111,35 @@
                     </tr>
                     <tr>
                         <td class="formtdtext" rowspan="2">邮编</td>
-                        <td rowspan="2"><input class="input-text"></td>
+                        <td rowspan="2"><input class="input-text easyui-validatebox" name="postcode"  data-options="validType:['maxLength[6]']"></td>
                         <td class="formtdtext">住宅电话</td>
-                        <td><input class="input-text" name="telephone"></td>
+                        <td><input class="input-text easyui-validatebox" name="telephone" data-options="validType:['maxLength[25]']"></td>
                     </tr>
                     <tr>
                         <td class="formtdtext">手机</td>
-                        <td><input class="input-text" name="mobilephone"></td>
+                        <td><input class="input-text easyui-validatebox" name="mobilephone" data-options="validType:['maxLength[15]']"></td>
                     </tr>
                     <tr>
                         <td class="formtdtext">代理人姓名</td>
-                        <td><input class="input-text"></td>
+                        <td><input class="input-text" name="agent"></td>
                         <td class="formtdtext">与申请人关系</td>
-                        <td><input class="input-text"></td>
+                        <td><input class="input-text" name="oprelation"></td>
                     </tr>
                     <tr>
                         <td class="formtdtext">代理人地址</td>
-                        <td colspan="3"><input class="input-text"></td>
+                        <td colspan="3"><input class="input-text" name="agentaddr"></td>
                     </tr>
                     <tr>
                         <td class="formtdtext">电话</td>
-                        <td><input class="input-text"></td>
+                        <td><input class="input-text easyui-validatebox" name="agentphone" data-options="validType:['maxLength[25]']"></td>
                         <td class="formtdtext">手机</td>
-                        <td><input class="input-text"></td>
+                        <td><input class="input-text easyui-validatebox" name="agentmobilephone" data-options="validType:['maxLength[15]']"></td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext">申请时间</td>
+                        <td><input class="input-text easyui-datebox" name="applydate" opt="applydate" data-options="formatter:myformatter,parser:myparser"></td>
+                        <td class="formtdtext"></td>
+                        <td></td>
                     </tr>
                 </table>
 

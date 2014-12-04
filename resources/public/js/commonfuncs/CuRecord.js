@@ -42,7 +42,7 @@ define(function(){
 
         //根据文件路径和要进行的操作来获得后台对应的接口url
         if(config.filepath){
-            url=cj.getUrl(config.filepath,config.act);
+            url=config.url||cj.getUrl(config.filepath,config.act);
         }
 
         //根据动作来作一些细节上的调整

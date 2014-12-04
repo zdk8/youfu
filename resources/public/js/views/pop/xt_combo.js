@@ -11,6 +11,7 @@ define(function(){
                     local:local,
                     filepath:filepath,
                     costomPreFixUrl:'/',
+                    url:'/savecombo',
                     data:option.queryParams,
                     cparam:{flag:-1},
                     uparam:option.queryParams,

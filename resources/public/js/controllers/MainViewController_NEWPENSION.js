@@ -21,10 +21,15 @@ define(['commonfuncs/LoadingMask','commonfuncs/validate/Init'],
             start:function(){
                 new validateInit();
                 require(['views/OpenPage'],function(js){
+
+
                     leftMenuClick=function($li) {
                         var node = $li.data('greeting');
                         js.open($.extend({},node,{title:node.title}))
                     };
+                    for(var i in needClick){
+                        leftMenuClick(needClick[i]);
+                    }
                 })
             }
         }
