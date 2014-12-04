@@ -120,3 +120,10 @@ span.error,a.error{
 .tabs-wrap{
     border-bottom: 1px solid #808080;
 }
+
+
+
+
+.combobox-item{
+    padding-left: 20px;
+}
