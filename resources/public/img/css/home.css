@@ -583,4 +583,26 @@ div.weboxbuttons ul li a:active
 .datagrid-htable .datagrid-cell {
     background: url('') repeat;
 }
+/*radio checkbox打钗样式*/
+.newRadio input+label {
+    padding-left: 26px;
+    background: url(../../img/form/UnCheck.png) no-repeat;
+    font-size: 13px;
+}
+.newRadio input+label.checked {
+    padding-left: 26px;
+    background: url(../../img/form/CheckIt.bmp) no-repeat;
+    color: #008800;
+}
+.newRadio input+label.over {
+    color: #0000FF;
+}
+
+.pingfen{
+    border-top:0px;
+    border-right:0px;
+    border-left:0px;
+    text-align: center;
+    border-bottom: 1px solid red;
+}
 
