@@ -28,8 +28,13 @@ define(function(){
         local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
         scoreFunc(local);                                   //评分
 
-
-
+        /*为每个label注册收缩事件*/
+        local.find('fieldset').find('legend').find('label').each(function(){
+        }).click(function(e){
+                var labelopt = $(this)[0].attributes[0].value.toString();
+                var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
+                FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+            })
 
     }
 

@@ -156,7 +156,7 @@ define(function(){
                 win.render({
                     title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">添加入住人员-'+departname+'</label>',
                     width:700,
-                    height:285,
+                    height:290,
                     html:htmfile,
                     buttons:[
                         {text:'取消',handler:function(html,parent){
