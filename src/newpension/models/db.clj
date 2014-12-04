@@ -680,6 +680,11 @@
   (select t_jjylapply
     (where {:jja_id jja_id})))
 
+(defn update-apply [applydata jja_id]
+  (update t_jjylapply
+    (set-fields applydata)
+    (where {:jja_id jja_id})))
+
 
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM
