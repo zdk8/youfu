@@ -1,0 +1,42 @@
+<!--资金发放弹出框-->
+<table opt="ppgrantmoneyissuedlg"
+       data-options="
+        method:'get',
+        toolbar:'#ppgrantmoneyissuedlgid',
+        fit:true,
+               border:false,
+               rownumbers:true,
+               fitColumns:true,
+               singleSelect:false,
+               loadMsg:'',
+               pagination:true">
+    <thead>
+        <tr>
+            <th data-options="field:'ck',checkbox:true"></th>
+            <th data-options="field:'pg_id',hidden:true"></th>
+            <th data-options="field:'name',width:101">姓名</th>
+            <th data-options="field:'identityid',width:179">户主身份证</th>
+            <th data-options="field:'money',width:93,editor:'numberbox'">金额(元)</th>
+            <!--<th data-options="field:'madeflag',width:60">到账</th>-->
+        </tr>
+    </thead>
+</table>
+<!--<input opt="money" placeholder="发放金额">-->
+
+<div id="ppgrantmoneyissuedlgid">
+    <table cellspacing="0" cellpadding="0" style="float: right">
+        <tr>
+            <td><input opt="money" style="width: 100px;float: left;" placeholder="发放金额"></td>
+            <td><label class="gray7">搜索条件:</label></td>
+            <td style="width: 200px;text-align: right">
+                <input opt="bsnyue" class="easyui-searchbox" data-options="prompt:'业务期',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+            <td>
+                <span class="searchbtn" opt="searchbtn">&nbsp;</span>
+            </td>
+
+        </tr>
+    </table>
+    <div class="clear"></div>
+</div>

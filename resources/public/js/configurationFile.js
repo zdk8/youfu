@@ -1,5 +1,5 @@
 ﻿approvalProcess=['打回重审','提交未审核','审核未审批','审批通过','保存未提交'];    //流程状态
-getGender=['男','女']             //性别
+getGender=['女','男']             //性别
 /*日期时间*/
 var myformatter = function(date){
     var y = date.getFullYear();
@@ -18,6 +18,12 @@ var myparser = function(s){
     } else {
         return new Date();
     }
+}
+/*取当前年月为业务期*/
+function formatterYM(date){
+    var y = date.getFullYear();
+    var m = date.getMonth()+1;
+    return y+''+(m<10?('0'+m):m);
 }
 /*行政区划的树结构*/
 var getdivision = function(divisiontree){

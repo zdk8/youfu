@@ -1,5 +1,6 @@
 define(function(){
-    function render(local,option){
+
+    var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
             {text: '处理',hidden:'hidden',opt:'dealwith'},
@@ -15,19 +16,17 @@ define(function(){
                 toolBar.height(toolBarHeight);
             }
         });
-        var dealwithbtn = toolBar.find('[opt=dealwith]');            //处理按钮
-        var savebtn = toolBar.find('[opt=save]');            //保存按钮
-        var deletebtn = toolBar.find('[opt=delete]');            //删除按钮
+    };
 
+    function initPage(local,option){
+        addToolBar(local);
         var districtid = local.find('[opt=districtid]');      //行政区划
         getdivision(districtid);                               //加载行政区划
 
-        dealwithbtn.show()                                     //显示处理按钮
         initRadioEvent(local);                                 //初始化radio
         loadOldByIdentityid(local);                                 //通过身份证号加载老年人
-        local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
         scoreFunc(local);                                   //评分
-
+        local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
         /*为每个label注册收缩事件*/
         local.find('fieldset').find('legend').find('label').each(function(){
         }).click(function(e){
@@ -35,7 +34,6 @@ define(function(){
                 var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
                 FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
             })
-
     }
 
     /*初始化radio,并加载radio事件*/
@@ -344,6 +342,68 @@ define(function(){
         })
         result.find('a[opt=recalculate]').bind('click',calculate)
     }
+    /*新增数据时进入*/
+    var saveFunc = function(local,option){
+        var savebtn = local.find('[opt=save]');               //保存按钮
+        savebtn.show()
+        savebtn.click(function(){
+            console.log(11)
+            console.log(local.find('[opt=mainform]'))
+            local.find('[opt=mainform]').form('submit',{
+                url:'/aaaa',
+//                type:'get',
+                dataType:"json",
+                success:function(data){
+                    var data = eval('(' + data + ')');
+                    if(data.success){
+                        alert("修改成功！");
+//                        params.option.parent.trigger('close');
+//                        params.option.refresh.trigger('click'); //刷新
+                    }else{
+                        alert("修改失败！")
+                    }
+                }
+            })
+            console.log(22)
+        })
+    }
+    /*查看详细信息并判断是否可修改(actionType=update)*/
+    var updateInfoFunc = function(local,option){
+        var updatebtn = local.find('[opt=update]');            //处理按钮
+        var deletebtn = local.find('[opt=delete]');            //删除按钮
+        updatebtn.show()
+        data = option.queryParams.data
+        local.find('form').form('load',option.queryParams.data)
+    }
+    /*处理时进入页面(actionType=info)*/
+    var dealwithInfoFunc = function(local,option){
+        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
+        dealwithbtn.show()
+        data = option.queryParams.data
+        local.find('form').form('load',option.queryParams.data)
+    }
+
+
+
+
+    var render=function(l,o){
+        initPage(l,o);                //初始化页面
+        if(o.queryParams) {
+            switch (o.queryParams.actiontype){
+                case 'info':
+                    dealwithInfoFunc(l,o);
+                    break;
+                case 'update':
+                    updateInfoFunc(l, o);
+                    break;
+                default :
+                    break;
+            }
+        }else{
+            saveFunc(l, o);
+        }
+    }
+
     return {
         render:render
     }

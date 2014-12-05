@@ -25,7 +25,38 @@ define(function(){
                 }
             },
             onLoadSuccess:function(data){
-//                console.log(data)
+                var viewbtns=local.find('[action=view]');
+                var deletebtns=local.find('[action=delete]');
+                var grantbtns=local.find('[action=grant]');
+                var btns_arr=[viewbtns,deletebtns,grantbtns];
+                var rows=data.rows;
+                for(var i=0;i<rows.length;i++){
+                    for(var j=0;j<btns_arr.length;j++){
+                        (function(index){
+                            var record=rows[index];
+//                            record=rows[index];
+                            $(btns_arr[j][i]).click(function(){
+                                if($(this).attr("action")=='view'){
+                                    cj.showContent({                                          //详细信息(tab标签)
+                                        title:record.name+'详细信息',
+                                        htmfile:'text!views/pension/PensionAssessmentInfo.htm',
+                                        jsfile:'views/pension/PensionAssessmentInfo',
+                                        queryParams:{
+                                            actiontype:'update',         //（处理）操作方式
+                                            data:record,                   //填充数据
+                                            refresh:pensionassessmentquery                //刷新
+                                        }
+                                    })
+                                    //viewRoleInfo(record);
+                                }else if($(this).attr("action")=='delete'){
+                                    //deleteRoleInfo(record);
+                                }else if($(this).attr("action")=='grant'){
+                                    //grant(record);
+                                }
+                            });
+                        })(i);
+                    }
+                }
             }
         });
 

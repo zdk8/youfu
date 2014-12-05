@@ -23,11 +23,11 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "info"){                                       //详细信息(处理)
-                                    showProcess(true, '温馨提示', '数据处理中，请稍后...');   //进度框加载
+//                                    showProcess(true, '温馨提示', '数据处理中，请稍后...');   //进度框加载
                                     cj.showContent({                                          //详细信息(tab标签)
-                                         title:record.name+'详细信息',
-                                         htmfile:'text!views/pension/PensionPeopleInfo.htm',
-                                         jsfile:'views/pension/PensionPeopleInfo',
+                                         title:record.name+'服务评估详细信息',
+                                         htmfile:'text!views/pension/PensionAssessmentInfo.htm',
+                                         jsfile:'views/pension/PensionAssessmentInfo',
                                          queryParams:{
                                              actiontype:'info',         //（处理）操作方式
                                              data:record,                   //填充数据
