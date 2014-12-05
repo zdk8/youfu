@@ -346,6 +346,26 @@ define(function(){
     var saveFunc = function(local,option){
         var savebtn = local.find('[opt=save]');               //保存按钮
         savebtn.show()
+        savebtn.click(function(){
+            console.log(11)
+            console.log(local.find('[opt=mainform]'))
+            local.find('[opt=mainform]').form('submit',{
+                url:'/aaaa',
+//                type:'get',
+                dataType:"json",
+                success:function(data){
+                    var data = eval('(' + data + ')');
+                    if(data.success){
+                        alert("修改成功！");
+//                        params.option.parent.trigger('close');
+//                        params.option.refresh.trigger('click'); //刷新
+                    }else{
+                        alert("修改失败！")
+                    }
+                }
+            })
+            console.log(22)
+        })
     }
     /*查看详细信息并判断是否可修改(actionType=update)*/
     var updateInfoFunc = function(local,option){

@@ -1,0 +1,85 @@
+<!--资金发放-->
+<table opt="ppgrantmoneyissue"
+       data-options="
+               method:'get',
+               toolbar:'#ppgrantmoneyissueid',
+               fit:true,
+               fitColumns:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               border:true,
+               singleSelect:true,
+               loadMsg:'',
+               pagination:true">
+    <thead data-options="frozen:true">
+    <tr>
+        <th rowspan="2" data-options="field:'pg_id'">评估序号</th>
+        <th rowspan="2" data-options="field:'name',width:100,
+        formatter:function(v,r,i)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                    return str.html();
+                }">姓名</th>
+        <th rowspan="2" data-options="field:'identityid',width:200">身份证号码</th>
+        <th rowspan="2" data-options="field:'bsnyue',width:100">业务期</th>
+        <th rowspan="2" data-options="field:'money',width:100">金额(/元)</th>
+    </tr>
+    </thead>
+    <thead>
+    <tr>
+        <th colspan="4">基本信息</th>
+        <th colspan="7">生活方面</th>
+    </tr>
+    <tr>
+        <th data-options="field:'birthd'">出生日期</th>
+        <th data-options="field:'gender',formatter:cj.enumFormatter('gender')">性别</th>
+        <th data-options="field:'age'">年龄</th>
+        <th data-options="field:'nation',width:90,
+        formatter:cj.enumFormatter('nation')">民族</th>
+        <th data-options="field:'sh_jings'">生活-进食</th>
+        <th data-options="field:'sh_yid'">移动</th>
+        <th data-options="field:'sh_weis'">个人卫生</th>
+        <th data-options="field:'sh_ruc'">入厕</th>
+        <th data-options="field:'sh_xiz'">洗澡</th>
+        <th data-options="field:'sh_xingz'">行走于平地上</th>
+        <th data-options="field:'sh_lout'">上下楼梯</th>
+    </tr>
+    </thead>
+</table>
+<div id="ppgrantmoneyissueid">
+    <!--<td><label class="gray7">搜索条件:</label></td>-->
+    <table cellspacing="0" cellpadding="0" style="float: right">
+        <tr>
+            <td><input opt="addgrantmoney" type="button" data-options="iconCls:icon-add" value="资金发放"></td>
+
+            <td><label class="gray7">搜索条件:</label></td>
+        <!--</tr>-->
+        <!--<tr>-->
+            <td style="width: 200px;text-align: right">
+                <input opt="name" class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+        <!--</tr>-->
+        <!--<tr>-->
+            <td style="width: 200px;text-align: right">
+                <input opt="identityid" class="easyui-searchbox" data-options="prompt:'身份证',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+        <!--</tr>-->
+        <!--<tr>-->
+            <td style="width: 200px;text-align: right">
+                <input opt="identityid" class="easyui-searchbox" data-options="prompt:'业务期',iconCls:'icon-log'"
+                       type="keyword" style="width:200px" >
+            </td>
+
+            <td>
+                <span class="searchbtn" >&nbsp;</span>
+            </td>
+
+        </tr>
+    </table>
+    <div class="clear"></div>
+</div>
+
+
