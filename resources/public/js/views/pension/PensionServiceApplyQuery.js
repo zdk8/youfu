@@ -1,14 +1,13 @@
 define(function(){
     return {
         render:function(local,option){
-            var peopleinfodatarid = local.find('.easyui-datagrid-noauto');      //查询界面datagrid
             var localDataGrid;
             var refreshGrid=function() {
                 localDataGrid.datagrid('reload');
             };
 
             localDataGrid=
-                peopleinfodatarid.datagrid({
+                local.find('.easyui-datagrid-noauto').datagrid({
                     url:'/audit/getallapply',
                     method:'post',
                     queryParams: {
@@ -55,13 +54,10 @@ define(function(){
                     toolbar:local.find('div[tb]')
                 })
 
-            var name = local.find('[opt=name]');                        //姓名
-            var identityid = local.find('[opt=identityid]');        //身份证
-            /*搜索*/
             local.find('.searchbtn').click(function(){
-                peopleinfodatarid.datagrid('load',{
-                    name:name.searchbox('getValue'),
-                    identityid:identityid.searchbox('getValue')
+                localDataGrid.datagrid('load',{
+                    name:local.find('[opt=name]').searchbox('getValue'),
+                    identityid:local.find('[opt=identityid]').searchbox('getValue')
                 })
             })
         }

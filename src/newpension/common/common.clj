@@ -21,8 +21,9 @@
         filename (str timenow (:filename file))
         ]
     (io/upload-file uploadpath  (conj file {:filename filename}))
-   {:filename  filename :filepath  (str uploadpath filename)}
+   {:filename  filename :filepath  (str "/get-file/" filename)}
     ))
+
 
 ;时间格式化
 (defn time-formatymd-before-insert [filter-fields timekey]     "time format before insert"

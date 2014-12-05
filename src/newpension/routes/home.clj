@@ -7,6 +7,7 @@
             [newpension.controller.genHtmlCode :as gen]
             [newpension.controller.money :as money]
             [noir.session :as session]
+
             [clojure.data.json :as json]
             [newpension.controller.manager :as mymngctrl]
             [newpension.controller.department :as depart]
@@ -64,6 +65,10 @@
   (GET "/upload" [] (upload-page))
   (GET "/testpost" [](testpost-page))
   (POST "/photo/addphoto" [file] (depart/add-photo file))
+  (GET "/get-file/:file-name" [file-name]
+    (depart/server-file file-name))
+  (GET "/myimage/:user-id/:file-name" [user-id file-name]
+    (depart/mytest user-id file-name))
 
 
 ;  (GET "/dm" [] (dm-page));;;123456790
