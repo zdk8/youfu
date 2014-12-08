@@ -2,7 +2,7 @@
 <div  class="easyui-panel newRadio" opt="formcontentpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
-<form method="post" opt="mainform">
+<form method="post" opt="mainform" id="fss">
 <fieldset style="width: 900px;margin: 0px auto;" opt="info0">
     <legend>
         <label opt="info0_shrinkage">用户基本信息</label>
@@ -710,241 +710,241 @@
         <td rowspan='2' style="width: 100px">饮食服务</td>
         <td >送餐</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shys_songc" type="radio" value="1"/><label>是</label>
+            <input name="shys_songc" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shys_songcbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>上门做餐</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shys_zuoc" type="radio" value="1"/><label>是</label>
+            <input name="shys_zuoc" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shys_zuocbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td rowspan='4'>起居服务</td>
         <td>穿衣</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shqj_chuangy" type="radio" value="1"/><label>是</label>
+            <input name="shqj_chuangy" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shqj_chuangybz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>整理衣物</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shqj_zhenglyw" type="radio" value="1"/><label>是</label>
+            <input name="shqj_zhenglyw" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shqj_zhenglywbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>翻身</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shqj_fans" type="radio" value="1"/><label>是</label>
+            <input name="shqj_fans" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shqj_fansbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>如厕</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shqj_ruc" type="radio" value="1"/><label>是</label>
+            <input name="shqj_ruc" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shqj_rucbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
 
     <tr>
         <td rowspan='2'>助浴服务</td>
         <td>上门助浴</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shzy_shangm" type="radio" value="1"/><label>是</label>
+            <input name="shzy_shangm" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shzy_shangmbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>老年浴室助浴</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shzy_yus" type="radio" value="1"/><label>是</label>
+            <input name="shzy_yus" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shzy_yusbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
 
     <tr>
         <td rowspan='3'>卫生清洁</td>
         <td>个人衣服清洁</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shws_yiw" type="radio" value="1"/><label>是</label>
+            <input name="shws_yiw" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shws_yiwbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>床上用品清洁</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shws_chuangs" type="radio" value="1"/><label>是</label>
+            <input name="shws_chuangs" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shws_chuangsbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>室内卫生清洁</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shws_shin" type="radio" value="1"/><label>是</label>
+            <input name="shws_shin" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shws_shinbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
 
     <tr>
         <td rowspan='3'>代办服务</td>
         <td>代换煤气</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shdb_meiq" type="radio" value="1"/><label>是</label>
+            <input name="shdb_meiq" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shdb_meiqbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>代办手续</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shdb_shoux" type="radio" value="1"/><label>是</label>
+            <input name="shdb_shoux" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shdb_shouxbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>代缴费用</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shdb_feiy" type="radio" value="1"/><label>是</label>
+            <input name="shdb_feiy" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shdb_feiybz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
 
     <tr>
         <td rowspan='3'>其他服务</td>
-        <td></td>
+        <td><input name="shqt_name1" type="text"/></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shqt_fuwu1" type="radio" value="1"/><label>是</label>
+            <input name="shqt_fuwu1" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shqt_fuwu1bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input name="shqt_name2" type="text"/></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shqt_fuwu2" type="radio" value="1"/><label>是</label>
+            <input name="shqt_fuwu2" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shqt_fuwu2bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input name="shqt_name3" type="text"/></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="shqt_fuwu3" type="radio" value="1"/><label>是</label>
+            <input name="shqt_fuwu3" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="shqt_fuwu3bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <!--医疗保健服务-->
     <tr>
-        <td rowspan='11' style="width: 30px">医疗保健服务</td>
+        <td rowspan='11' style="width: 30px">医<br>疗<br>保<br>健<br>服<br>务</td>
         <td rowspan='2' style="width: 100px">预防保健服务</td>
         <td>制定预防方案</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylbj_yufzd" type="radio" value="1"/><label>是</label>
+            <input name="ylbj_yufzd" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylbj_yufzdbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>预防知识学习</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylbj_yufzhis" type="radio" value="1"/><label>是</label>
+            <input name="ylbj_yufzhis" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylbj_yufzhisbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td rowspan='4'>医疗协助服务</td>
         <td>服药</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylxz_fuyao" type="radio" value="1"/><label>是</label>
+            <input name="ylxz_fuyao" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylxz_fuyaobz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>陪诊</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylxz_peizhen" type="radio" value="1"/><label>是</label>
+            <input name="ylxz_peizhen" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylxz_peizhenbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>测量血压</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylxz_xueyao" type="radio" value="1"/><label>是</label>
+            <input name="ylxz_xueyao" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylxz_xueyaobz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>测量体温</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylxz_tiwen" type="radio" value="1"/><label>是</label>
+            <input name="ylxz_tiwen" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylxz_tiwenbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td rowspan='2'>康复护理服务</td>
         <td>康复指导</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylkf_zhidao" type="radio" value="1"/><label>是</label>
+            <input name="ylkf_zhidao" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylkf_zhidaobz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>康复训练</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylkf_xunlian" type="radio" value="1"/><label>是</label>
+            <input name="ylkf_xunlian" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylkf_xunlianbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td rowspan='3'>其他服务</td>
-        <td></td>
+        <td><input type="text" name="ylqt_fuwu1name"/></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylqt_fuwu1" type="radio" value="1"/><label>是</label>
+            <input name="ylqt_fuwu1" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylqt_fuwu1bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="ylqt_fuwu2name"/></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylqt_fuwu2" type="radio" value="1"/><label>是</label>
+            <input name="ylqt_fuwu2" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylqt_fuwu2bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="ylqt_fuwu3name"/></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="ylqt_fuwu3" type="radio" value="1"/><label>是</label>
+            <input name="ylqt_fuwu3" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="ylqt_fuwu3bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <!--家政服务-->
     <tr>
@@ -952,53 +952,53 @@
         <td style="width: 100px">安装维修</td>
         <td></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jz_anzhweix" type="radio" value="1"/><label>是</label>
+            <input name="jz_anzhweix" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jz_anzhweixbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>清洗</td>
         <td></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jz_qingxi" type="radio" value="1"/><label>是</label>
+            <input name="jz_qingxi" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jz_qingxibz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>疏通</td>
         <td></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jz_shutong" type="radio" value="1"/><label>是</label>
+            <input name="jz_shutong" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jz_shutongbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td rowspan="3">其他服务</td>
-        <td></td>
+        <td><input type="text" name="jz_qtfuwu1name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jz_qtfuwu1" type="radio" value="1"/><label>是</label>
+            <input name="jz_qtfuwu1" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jz_qtfuwu1bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="jz_qtfuwu2name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jz_qtfuwu2" type="radio" value="1"/><label>是</label>
+            <input name="jz_qtfuwu2" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jz_qtfuwu2bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="jz_qtfuwu3name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jz_qtfuwu3" type="radio" value="1"/><label>是</label>
+            <input name="jz_qtfuwu3" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jz_qtfuwu3bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <!--紧急救助服务-->
     <tr>
@@ -1006,91 +1006,91 @@
         <td rowspan='2' style="width: 100px">设施安装</td>
         <td>有线呼叫器</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jj_hujj" type="radio" value="1"/><label>是</label>
+            <input name="jj_hujj" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jj_hujjbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td>老人手机</td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jj_shouj" type="radio" value="1"/><label>是</label>
+            <input name="jj_shouj" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jj_shoujbz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
         <td rowspan='3'>其他服务</td>
-        <td></td>
+        <td><input type="text" name="jj_qtfuwu1name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jj_qtfuwu1" type="radio" value="1"/><label>是</label>
+            <input name="jj_qtfuwu1" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jj_qtfuwu1bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="jj_qtfuwu2name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jj_qtfuwu2" type="radio" value="1"/><label>是</label>
+            <input name="jj_qtfuwu2" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jj_qtfuwu2bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="jj_qtfuwu3name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="jj_qtfuwu3" type="radio" value="1"/><label>是</label>
+            <input name="jj_qtfuwu3" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="jj_qtfuwu3bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <!--其他类-->
     <tr>
         <td rowspan='4' style="width: 30px;text-align: center;">其<br>他<br>类</td>
         <td rowspan='4' style="width: 100px">服务项目</td>
-        <td></td>
+        <td><input type="text" name="qt_fuwu1name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="qt_fuwu1" type="radio" value="1"/><label>是</label>
+            <input name="qt_fuwu1" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="qt_fuwu1bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="qt_fuwu2name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="qt_fuwu2" type="radio" value="1"/><label>是</label>
+            <input name="qt_fuwu2" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="qt_fuwu2bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="qt_fuwu3name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="qt_fuwu3" type="radio" value="1"/><label>是</label>
+            <input name="qt_fuwu3" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="qt_fuwu3bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <tr>
-        <td></td>
+        <td><input type="text" name="qt_fuwu4name"></td>
         <td style="text-align: center;">
-            <input name="fyjy_sc" type="radio" value="0"/><label>是</label>
-            <input name="fyjy_sc" type="radio" value="0"/><label>否</label>
+            <input name="qt_fuwu4" type="radio" value="1"/><label>是</label>
+            <input name="qt_fuwu4" type="radio" value="0"/><label>否</label>
         </td>
-        <td><textarea name="sc_beiz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
+        <td><textarea name="qt_fuwu4bz" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea></td>
     </tr>
     <!--建议服务形式-->
     <tr>
         <td colspan="2" style="width: 30px">建议服务形式</td>
         <td colspan="3" style="text-align: center;">
-            <input name="fuwuxingshi" type="radio" value="1" /><label>居家养老</label>
-            <input name="fuwuxingshi" type="radio" value="2" /><label>机构养老</label>
+            <input name="suggestservice" type="radio" value="1" /><label>居家养老</label>
+            <input name="suggestservice" type="radio" value="2" /><label>机构养老</label>
         </td>
     </tr>
     <tr>
         <td colspan="2" style="width: 30px">备注</td>
         <td colspan="3" style="width: 100px">
-            <textarea name="sc_beiz" style="width: 98%;height: 25px"placeholder="填写备注信息"></textarea>
+            <textarea name="servicebz" style="width: 98%;height: 25px"placeholder="填写备注信息"></textarea>
         </td>
     </tr>
         </table>
@@ -1160,10 +1160,5 @@
 
     </table>
 </fieldset>
-   <!--<input name="active" hidden="true" opt="active">-->
-<!--<div opt="needbutton" style="width: 900px;text-align: center;margin: 0px auto">
-    <input type="button" value="变更" id="update">
-    <input type="button" value="注销" id="delete">
-</div>-->
 </form>
 </div>
