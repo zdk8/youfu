@@ -197,7 +197,7 @@ define(function(){
         local.find('form').form('load', option.queryParams.data);
         local.find('[opt=save]').show().bind('click',function(){
             local.find('[opt=pensionform]').form('submit', {
-                url:'/audit/addauditapply',
+                url:'/audit/updateapply',
                 onSubmit: function () {
                     var isValid = $(this).form('validate');
                     cj.slideShow('表单验证结果:' + isValid);

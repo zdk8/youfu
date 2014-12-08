@@ -10,7 +10,10 @@
                [clj-time.local :as l]
                [clj-time.coerce :as c]
                [noir.io :as io]
-               [newpension.layout :as layout]))
+               [ring.util.response :refer [file-response]]
+               [newpension.layout :as layout])
+
+  (:import [java.io File FileInputStream FileOutputStream]))
 
 (def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
 (def deppeople [:name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy :deptype])
@@ -138,9 +141,13 @@
 (defn add-photo [file]
   (let[filepath (common/uploadfile file)]
     (resp/json {:success true :filepath filepath})))
+(defn server-file [file-name]
+  (file-response (str "upload" File/separator file-name)))
 
 (defn testfun [request]
   (println (l/local-now))
   (println  (c/to-long  (l/local-now)))
   (println (str schema/datapath "upload/"))
   (resp/json {:result (str schema/datapath "upload/")}))
+(defn mytest [id name]
+  (resp/json {:success (str id "," name)}))
