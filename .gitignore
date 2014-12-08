@@ -10,3 +10,5 @@ pom.xml
 *.log
 *.txt
 /upload
+*.xls
+*.pdf

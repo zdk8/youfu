@@ -11,7 +11,9 @@
             [clojure.data.json :as json]
             [newpension.controller.manager :as mymngctrl]
             [newpension.controller.department :as depart]
-            [newpension.controller.audit :as audit]))
+            [newpension.controller.audit :as audit]
+            [newpension.controller.report :as report]
+            ))
 
 (defn home-page []
   (layout/render
@@ -173,4 +175,13 @@
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
 
   ;;(POST  "/test/testapprove" request (old/add-approve0 request))
+
+
+  ;报表 pdf 和 excel
+  (GET "/report-pdf/:report-type" [report-type] (report/generate-report-pdf report-type));;测试用例:table :list
+  ;;/report-pdf/table-pdf
+  ;;/report-pdf/list-pdf
+  (GET "/report-xls/:report-type" [report-type] (report/generate-report-xls report-type))
+  ;;/report-xls/my-test1   调用的是java
+  ;;/report-xls/my-test2   调用的是clj-excel.core
   )
