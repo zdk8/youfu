@@ -6,7 +6,7 @@
             [clj-excel.core :as myexcel]
             [newpension.controller.zhfont :as zhfont]
             )
-  (:import [newpension.java Test XlsReport])
+  (:import [newpension.java XlsReport])
 
   )
 

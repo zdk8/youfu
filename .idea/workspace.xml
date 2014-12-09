@@ -12,7 +12,6 @@
       <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\.idea\uiDesigner.xml" afterPath="" />
       <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\.idea\vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="D:\Administrator\IdeaProjects\newpension\.idea\workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/controller/report.clj" afterPath="$PROJECT_DIR$/src/newpension/controller/report.clj" />
     </list>
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
@@ -95,20 +94,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="report.clj" pinned="false" current-in-tab="false">
+      <file leaf-file-name="report.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/report.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="1806">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.11532125" vertical-offset="42" max-vertical-offset="1806">
+              <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33676976" vertical-offset="0" max-vertical-offset="582">
+            <state vertical-scroll-proportion="-7.84" vertical-offset="0" max-vertical-offset="280">
               <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
               <folding />
             </state>
@@ -161,8 +160,8 @@
         <option value="$PROJECT_DIR$/src/newpension/models/manager.clj" />
         <option value="$PROJECT_DIR$/resources/public/js/views/pension/PensionServiceApply.htm" />
         <option value="$PROJECT_DIR$/resources/public/img/css/easyuioverwrite.css" />
-        <option value="$PROJECT_DIR$/src/newpension/controller/report.clj" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/newpension/controller/report.clj" />
       </list>
     </option>
   </component>
@@ -1058,11 +1057,17 @@
       <option name="project" value="LOCAL" />
       <updated>1417597669543</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;Conflicts:&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.htm&#10;&#9;resources/public/js/views/pension/PensionPeopleInfo.js&#10;">
+      <created>1418106322895</created>
+      <option name="number" value="00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1418106322896</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138349000" />
+    <option name="totallyTimeSpent" value="138630000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
@@ -1081,7 +1086,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7955975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.193265" sideWeight="0.7374392" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.193265" sideWeight="0.7374392" order="0" side_tool="false" content_ui="combo" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1510,18 +1515,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/report.clj">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="1806">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state vertical-scroll-proportion="-7.84" vertical-offset="0" max-vertical-offset="280">
+          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/report.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33676976" vertical-offset="0" max-vertical-offset="582">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.11532125" vertical-offset="42" max-vertical-offset="1806">
+          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
           <folding />
         </state>
       </provider>
