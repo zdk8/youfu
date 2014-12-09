@@ -14,7 +14,11 @@
                  [noir-exception "0.2.2"]
                  [com.oracle/ojdbc6 "11.2.0.3"]
                  [korma "0.3.1"]
-                 [clj-pdf "1.11.21"]
+                 ;;[clj-pdf "1.11.21"] clj-pdf依赖以下三个jar包
+                 [org.jfree/jfreechart "1.0.15"]
+                 [com.lowagie/itext "4.2.1"]
+                 [org.apache.xmlgraphics/batik-gvt "1.7"]
+
                  [org.apache.poi/poi "3.9"]
                  ;;[org.apache.poi/poi-ooxml "3.9"]  由于下载poi-ooxml及依赖jar不到的原因,暂停使用(在clj-excel.core)
                  [hvitmiddleware "0.1.6"]]

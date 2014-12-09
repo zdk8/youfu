@@ -1,4 +1,4 @@
-(ns newpension.test.clj-excel-test
+(ns newpension.test.exampleexcel
   (:use [clj-excel.core])
   (:use [clojure.test])
   (:require [clojure.java.io :as io])
