@@ -92,7 +92,7 @@
        sql (str "select * from " tablename conds order)
        results (db/getall-results start end sql)
        totalsql  (str "select count(*) as sum  from " tablename  conds)
-       total (get (first(db/get-total totalsql)) :sum)]
+       total (get (first(db/get-results-bysql totalsql)) :sum)]
     {:total total :rows results}))
 
 (defn likecond [condname condvalue]
