@@ -171,7 +171,7 @@
   (POST "/audit/getallapply" request (audit/getall-apply request))                                     ;;查找未处理的申请
   (POST "/audit/updateapply" request (audit/update-apply request))                                    ;;更新申请
   (POST "/audit/addassessmessage" request (audit/add-assessmessage request))            ;;添加居家养老评估信息
-  (POST "audit/getassessbyid" request (audit/get-assessbyid request))                                 ;;通过申请id获取评估信息
+  (POST "/audit/getassessbyid" request (audit/get-assessbyid request))                                 ;;通过申请id获取评估信息
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )

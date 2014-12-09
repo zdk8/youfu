@@ -5,13 +5,13 @@
             [clj-pdf.core :refer [pdf template]]
             [clj-excel.core :as myexcel]
             )
-  (:import [newpension.java Test XlsReport])
+  (:import [newpension.java XlsReport])
 
   )
 
 
 
-(defn my-java-test []
+#_(defn my-java-test []
   (Test/getTest))
 
 
