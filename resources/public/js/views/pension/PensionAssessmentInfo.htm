@@ -2,7 +2,7 @@
 <div  class="easyui-panel newRadio" opt="formcontentpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
-<form method="post" opt="mainform" id="fss">
+<form method="post" opt="mainform">
 <fieldset style="width: 900px;margin: 0px auto;" opt="info0">
     <legend>
         <label opt="info0_shrinkage">用户基本信息</label>
@@ -14,14 +14,14 @@
             <tr>
                 <td class="formtdtext">行政区划:</td>
                 <td colspan="3">
-                    <input name="registration" opt="districtid" data-options="idField:'dvcode', textField:'dvname'"></td>
+                    <input name="registration" style="width: 300px;" opt="districtid" data-options="idField:'dvcode', textField:'dvname'"></td>
                 <td rowspan="4" colspan="2" style="text-align: center;" >
                     <img src="img/noperson.gif" opt="personimg" alt="用户照片" height="120" width="120"></td>
             </tr>
 
             <tr>
                 <td class="formtdtext">姓名:</td>
-                <td><input class="easyui-validatebox" type="text" name="name" data-options="required:true"></td>
+                <td><input type="text" name="name" opt="name" readonly></td>
                 <td class="formtdtext">身份证<span style="color: red">*</span></td>
                 <td><input opt="identityid" name="identityid" class="easyui-validatebox"
                            data-options="required:true"></td>
@@ -34,17 +34,17 @@
 
                 </td>
                 <td class="formtdtext">出生年月:</td>
-                <td><input  name="birthd" opt="birthd" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser"></td>
+                <td><input  name="birthd" opt="birthdate" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser"></td>
 
             </tr>
 
             <tr>
                 <td class="formtdtext">民族:</td>
-                <td><input class="easyui-combobox" name="nation"
-                           data-options=" loader:cj.getLoader('NATION'), editable:false, valueField:'id', textField:'text' ">
+                <td><input class="easyui-combobox" name="nation" opt="nation"
+                           data-options=" loader:cj.getLoader('nation'), editable:false, valueField:'id', textField:'text' ">
                 </td>
                 <td class="formtdtext">文化程度:</td>
-                <td><input class="easyui-combobox" name="culture"
+                <td><input class="easyui-combobox" name="culture"  opt="culture"
                            data-options=" loader:cj.getLoader('culture'), editable:false, valueField:'id', textField:'text' ">
                 </td>
             </tr>
@@ -78,7 +78,7 @@
             <td style="width: 175px;"><input name="sh_jings" type="radio" value="10" />
                 <label>10分<br/>无法自行取食或耗费时间过长.</label>
             </td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
         <tr style="height: 40px;">
             <td >(2)<br/>移动</td>
@@ -86,7 +86,7 @@
             <td ><input name="sh_yid" type="radio" value="5" /><label>5分<br/>需要稍微的协助(例如:予以轻扶以保持平衡)或需要口头指导.</label></td>
             <td ><input name="sh_yid" type="radio" value="10" /><label>10分<br/>可自行从床上坐起来,但移位时仍需别人帮助.</label></td>
             <td ><input name="sh_yid" type="radio" value="15" /><label>15分<br/>需别人帮助方可坐起来或需别人帮助方可移位.</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
         <tr style="height: 40px;">
             <td >(3)<br/>个人卫生</td>
@@ -94,7 +94,7 @@
             <td ></td>
             <td ></td>
             <td ><input name="sh_weis" type="radio" value="5" /><label>需要别人帮助</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
         <tr>
             <td >(4)<br/>入厕</td>
@@ -102,7 +102,7 @@
             <td ></td>
             <td ><input name="sh_ruc" type="radio" value="5" /><label>需要别人帮助</label></td>
             <td ><input name="sh_ruc" type="radio" value="10" /><label>需帮助保持姿势平衡,整理衣物或使用卫生纸.使用便盆者,可自行取放,但须依赖他人清理.</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
         <tr>
             <td >(5)<br/>洗澡</td>
@@ -110,7 +110,7 @@
             <td ></td>
             <td ></td>
             <td ><input name="sh_xiz" type="radio" value="5" /><label>需要别人帮助.</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
         <tr>
             <td >(6)<br/>行走于平地上</td>
@@ -118,7 +118,7 @@
             <td ><input name="sh_xingz" type="radio" value="5" /><label>需要稍微的扶持或口头指导方可行走50米以上</label></td>
             <td ><input name="sh_xingz" type="radio" value="10" /><label>虽无法行走,但可独立操纵轮椅(包括转弯,进门,接近桌子和床沿)并可推行轮椅50米以上.</label></td>
             <td ><input name="sh_xingz" type="radio" value="15" /><label>需别人帮助推轮椅</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
         <tr>
             <td >(7)<br/>上下楼梯</td>
@@ -126,7 +126,7 @@
             <td ></td>
             <td ><input name="sh_lout" type="radio" value="5" /><label>需要稍微帮助或口头指导</label></td>
             <td ><input name="sh_lout" type="radio" value="10" /><label>无法上下楼梯</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
         <tr>
             <td >(8)<br/>穿脱衣服</td>
@@ -134,7 +134,7 @@
             <td ></td>
             <td ><input name="sh_chuany" type="radio" value="5" /><label>在别人帮助下,可完成一半以上的上述动作</label></td>
             <td ><input name="sh_chuany" type="radio" value="10" /><label>不能自行穿脱衣服</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
 
         <tr>
@@ -143,7 +143,7 @@
             <td ></td>
             <td ><input name="sh_dab" type="radio" value="5" /><label>偶有失禁(每周不超过一次)或使用塞剂时需人帮助</label></td>
             <td ><input name="sh_dab" type="radio" value="10" /><label>经常失禁,需要别人处理.</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
 
         <tr>
@@ -152,7 +152,7 @@
             <td ></td>
             <td ><input name="sh_xiaob" type="radio" value="5" /><label>偶尔会尿失禁(每周不超过一次)或尿急(无法等待便盆或无法及时赶到厕所)或需别人帮助处理尿套</label></td>
             <td ><input name="sh_xiaob" type="radio" value="10" /><label>经常失禁,需要别人处理.</label></td>
-            <td ><input size="1" class="pingfen" opt="info1pingfeng" disabled></td>
+            <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
 
         <tr>
@@ -162,7 +162,7 @@
             </td>
             <td >评估分</td>
             <td colspan="2" style="text-align: center;">
-                <input name="sh_pingguf" disabled>
+                <input name="sh_pingguf" readonly>
             </td>
         </tr>
 
@@ -609,7 +609,7 @@
                 <input name="sum_sh_jiel" type="radio" value="2" /><label>中度依赖</label>
                 <input name="sum_sh_jiel" type="radio" value="3" /><label>重度依赖</label>
             </td>
-            <td ><input size="1" class="pingfen" name="sum_sh_pingguf" disabled></td>
+            <td ><input size="1" class="pingfen" name="sum_sh_pingguf" readonly></td>
         </tr>
         <tr>
             <td>2.经济条件<br/>(0-25分)</td>
@@ -619,7 +619,7 @@
                 <input name="sum_jj_shour" type="radio" value="20" /><label>低退休工资</label>
                 <input name="sum_jj_shour" type="radio" value="25" /><label>退休工资</label>
             </td>
-            <td ><input size="1" class="pingfen" name="sum_jj_pingguf" disabled></td>
+            <td ><input size="1" class="pingfen" name="sum_jj_pingguf" readonly></td>
         </tr>
         <tr>
             <td>3.居住环境<br/>(0-25分)</td>
@@ -628,7 +628,7 @@
                 <input name="sum_jz_fenl" type="radio" value="20" /><label>空巢</label>
                 <input name="sum_jz_fenl" type="radio" value="25" /><label>与子女,亲友共住</label>
             </td>
-            <td ><input size="1" class="pingfen" name="sum_jz_pingguf" disabled></td>
+            <td ><input size="1" class="pingfen" name="sum_jz_pingguf" readonly></td>
         </tr>
         <tr>
             <td>4.年龄<br/>(0-10分)</td>
@@ -637,7 +637,7 @@
                 <input name="sum_nl_fenl" type="radio" value="5" /><label>80-90</label>
                 <input name="sum_nl_fenl" type="radio" value="10" /><label>90以上</label>
             </td>
-            <td ><input size="1" class="pingfen" name="sum_nl_pingguf" disabled></td>
+            <td ><input size="1" class="pingfen" name="sum_nl_pingguf" readonly></td>
         </tr>
         <tr>
             <td>5.特殊贡献<br/>(0-40分)</td>
@@ -647,33 +647,33 @@
                 <input name="sum_gx_chunjg" type="checkbox" value="10" /><label>纯居干</label>
                 <input name="sum_gx_ganb" type="checkbox" value="10" /><label>离休干部</label>
             </td>
-            <td ><input size="1" class="pingfen" name="sum_gx_pingguf" disabled></td>
+            <td ><input size="1" class="pingfen" name="sum_gx_pingguf" readonly></td>
         </tr>
         <tr>
             <td>6.残障情况</td>
             <td>
                 <textarea style="width: 99%;height: 50px;" opt="canzhangqingkuang" name="canzhangqingkuang"></textarea>
             </td>
-            <td ><input size="1" class="pingfen"  name="cz_pingguf" disabled></td>
+            <td ><input size="1" class="pingfen"  name="cz_pingguf" readonly></td>
         </tr>
         <tr>
             <td>7.住房情况</td>
             <td>
                 <textarea style="width: 99%;height: 50px;" opt="zhufangqingkuang" name="zhufangqingkuang"></textarea>
             </td>
-            <td ><input size="1" class="pingfen"  name="zf_pingguf" disabled></td>
+            <td ><input size="1" class="pingfen"  name="zf_pingguf" readonly></td>
         </tr>
         <tr>
             <td>8.重大疾病</td>
             <td>
                 <textarea style="width: 99%;height: 50px;" opt="zhongdajibing" name="zhongdajibing"></textarea>
             </td>
-            <td ><input size="1" class="pingfen"  name="jb_pingguf" disabled></td>
+            <td ><input size="1" class="pingfen"  name="jb_pingguf" readonly></td>
         </tr>
         <tr>
             <td>评估总分</td>
             <td style="text-align: center;">
-                <label><input name="pinggusum" size="2" class="pingfen" disabled>分</label>
+                <label><input name="pinggusum" size="2" class="pingfen" readonly>分</label>
             </td>
             <td><a opt="recalculate">计算</a></td>
         </tr>

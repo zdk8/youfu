@@ -14,6 +14,12 @@
                pagination:true">
             <thead>
             <tr>
+                <th data-options="field:'ro',width:50,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;assessment&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>评估</span></span></a>');
+                    return str.html();
+                }">操作</th>
                 <th data-options="field:'lr_id',hidden:true" ></th>
                 <!--<th data-options="field:'name',width:100,align:'center'">姓名</th>-->
                 <th data-options="field:'name',width:100,align:'center',

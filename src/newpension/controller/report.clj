@@ -4,16 +4,16 @@
             [ring.util.response :as response]
             [clj-pdf.core :refer [pdf template]]
             [clj-excel.core :as myexcel]
+            [newpension.controller.zhfont :as zhfont]
             )
-  (:import [newpension.java XlsReport])
+  (:import [newpension.java Test XlsReport])
 
   )
 
 
 
-#_(defn my-java-test []
+(defn my-java-test []
   (Test/getTest))
-
 
 (pdf
   [{:header "Wow that was easy"}
@@ -21,9 +21,10 @@
     [:chunk {:style :bold} "a bold item"]
     "another item"
     "yet another item"]
-   [:paragraph "I'm a paragraph!"]]
+   [:paragraph
+    {:style :bold :size 10 :family :halvetica :color [0 255 221] :ttf-name zhfont/stfangso }
+    "I'm a paragraph!中文222"]]
   "doc.pdf")
-;;生成pdf
 (pdf
   [{}
    (for [i (range 3)]
@@ -33,36 +34,38 @@
 
 
 (def function-template
-  (template [$functionid $location $title $parent]))
+
+  (template [$type $functionid $location $title $parent ]))
 
 (def function-template-paragraph
   (template
     [:paragraph
+     {:ttf-name zhfont/stfangso}
      [:heading  $name]
      [:chunk {:style :bold
-              :size 18
-              :family :helvetica
-              :color [0 234 123]} "occupation: "] $functionid "\n"
-     [:chunk {:styles [:bold :italic]} "place: "] $location "\n"
-     [:chunk {:color [0 0 0] :background [255 0 0]}   "country: "] $parent
+              :color [0 234 123]} "功能id: "] $functionid "\n"
+     [:chunk {:styles [:bold :italic]} "地址: "] $location "\n"
+     [:chunk {:color [0 0 0] :background [255 0 0]}   "标题: "] $title
      [:spacer]]))
 
 ;;https://github.com/yogthos/clj-pdf   手册
-;如何支持中文
+
 (defn table-report [out]
   (pdf
-    [{:header "function List"}
+    [{}
+     [:heading {:style {:size 10 :color [100 40 150] :align :left } :ttf-name zhfont/stfangso} "功能table"]
+     [:line]
      (into [:table
-            {:border false
-             :cell-border false
-             :header [{:color [0 150 150]} "functionid" "location" "tttt" "parent"]}]
+            {:border true
+             :cell-border true
+             :header [{:color [0 150 150]} "功能id" "地址" "标题" "功能父节点id"]}]
        (function-template (gen/read-functions)))]
     out))
 
 (defn list-report [out]
   (pdf
     [{}
-     [:heading {:style {:size 10 :color [100 40 150] :align :left }} "Chinese中"]
+     [:heading {:style {:size 10 :color [100 40 150] :align :left } :ttf-name zhfont/stfangso} "功能list"]
      [:line]
      [:spacer]
      (function-template-paragraph (gen/read-functions))]
