@@ -12,8 +12,6 @@
 
 
 
-(defn my-java-test []
-  (Test/getTest))
 
 (pdf
   [{:header "Wow that was easy"}
