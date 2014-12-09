@@ -12,3 +12,4 @@ pom.xml
 /upload
 *.xls
 *.pdf
+*.idea
