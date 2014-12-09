@@ -6,12 +6,14 @@
             [clj-excel.core :as myexcel]
             [newpension.controller.zhfont :as zhfont]
             )
-  (:import [newpension.java XlsReport])
+  (:import [newpension.java Test XlsReport])
 
   )
 
 
 
+(defn my-java-test []
+  (Test/getTest))
 
 (pdf
   [{:header "Wow that was easy"}

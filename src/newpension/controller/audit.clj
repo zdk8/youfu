@@ -89,4 +89,6 @@
                       left join T_JJYLASSESSMENT t  on a.jja_id=t.jja_id
                       left join T_SERVICESUGGEST s  on a.jja_id=s.jja_id")
         data (db/get-results-bysql sql)]
-    (resp/json {:success true :results data})))
+    (println "SSSSSSSSSSS"  jja_id)
+    (resp/json data)))
+
