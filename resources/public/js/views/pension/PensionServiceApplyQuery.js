@@ -15,9 +15,9 @@ define(function(){
                     },
                     onLoadSuccess:function(data){
                         var viewbtns=local.find('[action=view]');
-                        var deletebtns=local.find('[action=delete]');
+                        var assessmentbtns=local.find('[action=assessment]');
                         var grantbtns=local.find('[action=grant]');
-                        var btns_arr=[viewbtns,deletebtns,grantbtns];
+                        var btns_arr=[viewbtns,assessmentbtns,grantbtns];
                         var rows=data.rows;
                         for(var i=0;i<rows.length;i++){
                             for(var j=0;j<btns_arr.length;j++){
@@ -35,7 +35,16 @@ define(function(){
                                                 }
                                             })
                                             //viewRoleInfo(record);
-                                        }else if($(this).attr("action")=='delete'){
+                                        }else if($(this).attr("action")=='assessment'){         //评估
+                                            cj.showContent({                                          //详细信息(tab标签)
+                                                title:record.name+'详细信息',
+                                                htmfile:'text!views/pension/PensionAssessmentInfo.htm',
+                                                jsfile:'views/pension/PensionAssessmentInfo',
+                                                queryParams:{
+                                                    actiontype:'assessment',         //（处理）操作方式
+                                                    data:record
+                                                }
+                                            })
                                             //deleteRoleInfo(record);
                                         }else if($(this).attr("action")=='grant'){
                                             //grant(record);
