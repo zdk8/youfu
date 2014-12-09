@@ -82,7 +82,7 @@
     (resp/json {:success true :message "assess save success"})))
 
 (defn get-assessbyid [request]                                                                           "获取评估信息"
-  (let[params (:params params)
+  (let[params (:params request)
         jja_id (:jja_id params)
         sql (str "select a.*,t.*,s.* from
                     (SELECT * FROM T_JJYLAPPLY WHERE jja_id = " jja_id ") a
