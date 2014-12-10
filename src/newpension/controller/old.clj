@@ -550,7 +550,7 @@
        {page :page}params
        {rows :rows}params
        auuser  (:username (session/get :usermsg))
-       getresult (common/fenye rows page v_oldapprove "" " order by lr_id desc")]
+       getresult (common/fenye rows page v_oldapprove "" " order by lr_id asc")]
     (resp/json {:total (:total getresult) :rows (map #(conj % {:loginuser auuser} )(common/time-formatymd-before-list (:rows getresult) "bstime"))})))
 
 ;;根据外键查询操作日志
