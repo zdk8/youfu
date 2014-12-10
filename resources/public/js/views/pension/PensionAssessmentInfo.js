@@ -175,10 +175,56 @@ define(function(){
         savebtn.show()
         commitbtn.show()
         disabledForm(local);                                  //禁用表单
-        local.find('form').form('load',option.queryParams.data);
+        dd = option.queryParams.data
+        /*通过id查询申请人员，若有评估信息也一并加载*/
+        $.ajax({
+            url:"audit/getassessbyid",
+            type:"post",
+            data:{
+                jja_id:option.queryParams.data.jja_id
+            },
+            dataType: 'json',
+            success:function(data){
+                if(data){
+                    local.find('form').form('load',data[0]);
+                    for(var key in data[0] ){
+                        var name = key;
+                        var value = data[0][key];
+                        if($('input[name='+name+']:radio').val()){
+                            $('input[name='+name+'][type=radio][value='+value+']').attr("checked","checked");
+                            $('input[name='+name+'][type=radio][value='+value+']+label').addClass("checked");
+                        }else if($('input[name='+name+']:checkbox').val()){
+                            $('input[name='+name+'][type=checkbox][value='+value+']').attr("checked","checked");
+                            $('input[name='+name+'][type=checkbox][value='+value+']+label').addClass("checked");
+                        }
+                    }
+                    $('[opt=csrq]').datebox('setValue',$('[opt=birthdate]').datebox('getValue'));
+                    $(':input[name=sh_zongf]').attr("readonly","readonly").val(100);
+                    $(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val($(':input[name=sh_pingguf]').val());
+                    $(':input[name=sum_jj_pingguf]').attr("readonly","readonly").val($(':input[name=jj_pingguf]').val());
+                    $(':input[name=sum_jz_pingguf]').attr("readonly","readonly").val($(':input[name=jz_pingguf]').val());
+                    $(':input[name=sum_nl_pingguf]').attr("readonly","readonly").val($(':input[name=nl_pingguf]').val());
+                    $(':input[name=sum_gx_pingguf]').attr("readonly","readonly").val($(':input[name=gx_pingguf]').val());
+                    $('fieldset[opt=info1]')
+                        .find(':input[type=radio]+label').each(function(i){
+                            var radioValue=0;
+                            if($(this).prev()[0].checked){
+                                radioValue= ($(this).prev()).val();
+                                $($(this).parent().parent().children().last().children()[0]).val(radioValue);
+                            }
+                            $('fieldset[opt=info1]').find(':input[opt=info1pingfeng]').each(function(){
+                                $(this).attr("readonly","readonly");
+                            })
+                        })
+                }
+                local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
+            }
+        })
+
+        /*保存*/
         savebtn.click(function(){
             local.find('[opt=mainform]').form('submit', {
-                url:"wwwwwwww",
+                url:"audit/addassessmessage",
                 onSubmit: function(){
                 },
                 success:function(data){
