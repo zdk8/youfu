@@ -11,7 +11,9 @@
             [clojure.data.json :as json]
             [newpension.controller.manager :as mymngctrl]
             [newpension.controller.department :as depart]
-            [newpension.controller.audit :as audit]))
+            [newpension.controller.audit :as audit]
+            [newpension.controller.report :as report]
+            ))
 
 (defn home-page []
   (layout/render
@@ -168,9 +170,20 @@
   (POST "/audit/getapplybyid" request (audit/get-apply-byid request))                              ;;根据id查找
   (POST "/audit/getallapply" request (audit/getall-apply request))                                     ;;查找未处理的申请
   (POST "/audit/updateapply" request (audit/update-apply request))                                    ;;更新申请
+  (POST "/audit/addassessmessage" request (audit/add-assessmessage request))            ;;添加居家养老评估信息
+  (POST "audit/getassessbyid" request (audit/get-assessbyid request))                                 ;;通过申请id获取评估信息
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
 
   ;;(POST  "/test/testapprove" request (old/add-approve0 request))
+
+
+  ;报表 pdf 和 excel
+  (GET "/report-pdf/:report-type" [report-type] (report/generate-report-pdf report-type));;测试用例:table :list
+  ;;/report-pdf/table-pdf
+  ;;/report-pdf/list-pdf
+  (GET "/report-xls/:report-type" [report-type] (report/generate-report-xls report-type))
+  ;;/report-xls/my-test1   调用的是java
+  ;;/report-xls/my-test2   调用的是clj-excel.core
   )

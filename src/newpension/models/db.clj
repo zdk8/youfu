@@ -124,6 +124,18 @@
   (table :t_jjylapply)
   (database dboracle))
 
+;;服务评估表
+(defentity t_jjylassessment
+  (pk :pg_id)
+  (table :t_jjylassessment)
+  (database dboracle))
+
+;;服务建议表
+(defentity t_servicesuggest
+  (pk :ss_id)
+  (table :t_servicesuggest)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -685,6 +697,27 @@
     (set-fields applydata)
     (where {:jja_id jja_id})))
 
+;;评估
+(defn insert-suggest [suggestdata]
+  (insert t_servicesuggest
+    (values suggestdata)))
+
+(defn update-suggest [suggestdata ss_id]
+  (update t_servicesuggest
+    (set-fields suggestdata)
+    (where {:ss_id ss_id})))
+
+(defn insert-assess [assessdata]
+  (insert t_jjylassessment
+    (values assessdata)))
+
+(defn update-assess [assessdata pg_id]
+  (update t_jjylassessment
+    (set-fields assessdata)
+    (where {:pg_id pg_id})))
+
+
+
 
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM
@@ -694,7 +727,7 @@
  WHERE RN >= " start)]
     (exec-raw [sql []] :results)))
 
-(defn get-total[totalsql]
+(defn get-results-bysql[totalsql]
   (exec-raw [totalsql []] :results))
 
 

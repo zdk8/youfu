@@ -9,6 +9,10 @@
 
 (defdb dboracle schema/db-oracle)
 
+(defn read-functions []
+  (with-db dboracle
+    (exec-raw ["select * from xt_function"] :results)))
+
 
 (defn menutree [node]
   (with-db dboracle
