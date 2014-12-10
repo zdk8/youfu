@@ -77,6 +77,7 @@
        ss_id (:ss_id params)
        pg_id (:pg_id params)
        ]
+    (println "IIIIIIIIIIIIIIIIIIIIII"  " ss_id:" ss_id  " pg_id:" pg_id  )
     (if (= (count ss_id) 0) (db/insert-suggest suggestdata)  (db/update-suggest suggestdata ss_id))
     (if (= (count pg_id) 0) (db/insert-assess assessdata) (db/update-assess assessdata pg_id))
     (resp/json {:success true :message "assess save success"})))
@@ -89,6 +90,6 @@
                       left join T_JJYLASSESSMENT t  on a.jja_id=t.jja_id
                       left join T_SERVICESUGGEST s  on a.jja_id=s.jja_id")
         data (db/get-results-bysql sql)]
-    (println "SSSSSSSSSSS"  jja_id)
+   ; (println "SSSSSSSSSSS"  jja_id)
     (resp/json data)))
 

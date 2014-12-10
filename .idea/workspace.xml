@@ -8,18 +8,18 @@
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
     <ignored path="newpension.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418113221776" ignored="false" />
+    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418174642199" ignored="false" />
     <file path="/home.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418089116807" ignored="false" />
     <file path="/db.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418089623801" ignored="false" />
     <file path="/department.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417512505443" ignored="false" />
     <file path="/common.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418089613633" ignored="false" />
-    <file path="/Clojure REPL" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417593489091" ignored="false" />
+    <file path="/Clojure REPL" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418175012179" ignored="false" />
     <file path="/testphoto.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417071997406" ignored="false" />
     <file path="/a.dummy" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418089512379" ignored="false" />
     <file path="$PROJECT_DIR$/../../hvitpublic/src/hvit/controller/auth.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417071289952" ignored="false" />
     <file path="/old.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417659979651" ignored="false" />
     <file path="/testpost.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417247086120" ignored="false" />
-    <file path="/audit.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418105205432" ignored="false" />
+    <file path="/audit.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418175905129" ignored="false" />
     <file path="/report.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418095135807" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,37 +81,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="report.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/newpension/controller/report.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="52" selection-start="351" selection-end="351" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="middleware.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/newpension/middleware.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="2" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="examplepdf.clj" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/newpension/test/examplepdf.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="72" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="audit.clj" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/audit.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="56" selection-start="6658" selection-end="6658" vertical-scroll-proportion="1.5321739">
+            <state line="93" column="127" selection-start="7101" selection-end="7101" vertical-scroll-proportion="0.7930435">
               <folding />
             </state>
           </provider>
@@ -280,6 +253,50 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newpension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newpension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newpension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clj_pdf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newpension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="newpension" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="clj_excel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -325,14 +342,14 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="113" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="126" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="144" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="144" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="136" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="814" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="763" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="814" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="147" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="135" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -351,8 +368,8 @@
     <property name="options.lastSelected" value="settings.github" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
@@ -1003,7 +1020,15 @@
       <created>1418113238831</created>
       <updated>1418113238831</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="Merge branch 'master' of file://\\\192.168.2.142\e$\gitserver\newpension&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;">
+      <created>1418113735368</created>
+      <updated>1418113735368</updated>
+    </task>
+    <task id="LOCAL-00106" summary="1111&#10;">
+      <created>1418113811385</created>
+      <updated>1418113811385</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1021,15 +1046,14 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36790925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32576984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.63209075" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36953" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.8735818" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12641816" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -1038,6 +1062,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59870553" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32576984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1084,7 +1109,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of file://\\\192.168.2.142\e$\gitserver\newpension&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="1111&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1098,7 +1123,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="time format xxx" />
     <MESSAGE value="oldpeople checkout" />
     <MESSAGE value="id up" />
     <MESSAGE value="select opd" />
@@ -1123,35 +1147,12 @@
     <MESSAGE value="testportaa  20141209" />
     <MESSAGE value="testportaab  20141209" />
     <MESSAGE value="Merge branch 'master' of file://\\\192.168.2.142\e$\gitserver\newpension&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;" />
+    <MESSAGE value="1111&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/newpension/test/examplepdf.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="63" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/testphoto.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="110" selection-start="5203" selection-end="5203" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/need.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="80" selection-start="7401" selection-end="7401" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/genHtmlCode.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
       <provider selected="true" editor-type-id="text-editor">
         <state line="137" column="45" selection-start="6528" selection-end="6528" vertical-scroll-proportion="0.0" />
@@ -1177,11 +1178,6 @@
         <state line="15" column="35" selection-start="920" selection-end="920" vertical-scroll-proportion="-2.6785715">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="729" column="6" selection-start="21262" selection-end="21262" vertical-scroll-proportion="0.47869673" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
@@ -1215,9 +1211,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/clj_excel/test.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clj_pdf/charting.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/models/db.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="704" column="6" selection-start="20728" selection-end="20728" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clj_excel/core.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="98" selection-start="405" selection-end="405" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/clj_pdf/core.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="418" column="22" selection-start="14754" selection-end="14849" vertical-scroll-proportion="14.297787">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/audit.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="56" selection-start="6658" selection-end="6658" vertical-scroll-proportion="1.5321739">
+        <state line="93" column="127" selection-start="7101" selection-end="7101" vertical-scroll-proportion="0.7930435">
           <folding />
         </state>
       </provider>
