@@ -225,10 +225,14 @@ define(function(){
         savebtn.click(function(){
             local.find('[opt=mainform]').form('submit', {
                 url:"audit/addassessmessage",
+                dataType:'json',
                 onSubmit: function(){
                 },
                 success:function(data){
-                    console.log(data)
+                    var data = eval('(' + data + ')');
+                    if(data.success){
+                        alert('保存成功')
+                    }
                 }
             });
         })
