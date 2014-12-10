@@ -7,6 +7,7 @@ define(function(){
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '删除',hidden:'hidden',opt:'delete'},
             {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '提交',hidden:'hidden',opt:'commit'},
             {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
@@ -135,6 +136,58 @@ define(function(){
                     }
                 })
             }
+        })
+    }
+    /*新增数据时进入*/
+    var saveFunc = function(local,option){
+        var savebtn = local.find('[opt=save]');               //保存按钮
+        savebtn.show()
+        savebtn.click(function(){
+            local.find('[opt=mainform]').form('submit', {
+                url:"wwwwwwww",
+                onSubmit: function(){
+                },
+                success:function(data){
+                    console.log(data)
+                }
+            });
+        })
+    }
+    /*查看详细信息并判断是否可修改(actionType=update)*/
+    var updateInfoFunc = function(local,option){
+        var updatebtn = local.find('[opt=update]');            //处理按钮
+        var deletebtn = local.find('[opt=delete]');            //删除按钮
+        updatebtn.show()
+        data = option.queryParams.data
+        local.find('form').form('load',option.queryParams.data)
+    }
+    /*处理时进入页面(actionType=info)*/
+    var dealwithInfoFunc = function(local,option){
+        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
+        dealwithbtn.show()
+        data = option.queryParams.data
+        local.find('form').form('load',option.queryParams.data)
+    }
+    /*评估*/
+    var assessmentFunc = function(local,option){
+        var savebtn = local.find('[opt=save]');            //保存按钮
+        var commitbtn = local.find('[opt=commit]');            //提交按钮
+        savebtn.show()
+        commitbtn.show()
+        disabledForm(local);                                  //禁用表单
+        local.find('form').form('load',option.queryParams.data);
+        savebtn.click(function(){
+            local.find('[opt=mainform]').form('submit', {
+                url:"wwwwwwww",
+                onSubmit: function(){
+                },
+                success:function(data){
+                    console.log(data)
+                }
+            });
+        })
+        commitbtn.click(function(){
+            console.log('commitbtn')
         })
     }
     /*评分*/
@@ -342,39 +395,6 @@ define(function(){
         })
         result.find('a[opt=recalculate]').bind('click',calculate)
     }
-    /*新增数据时进入*/
-    var saveFunc = function(local,option){
-        var savebtn = local.find('[opt=save]');               //保存按钮
-        savebtn.show()
-        savebtn.click(function(){
-            local.find('[opt=mainform]').form('submit', {
-                url:"wwwwwwww",
-                onSubmit: function(){
-                },
-                success:function(data){
-                    console.log(data)
-                }
-            });
-        })
-    }
-    /*查看详细信息并判断是否可修改(actionType=update)*/
-    var updateInfoFunc = function(local,option){
-        var updatebtn = local.find('[opt=update]');            //处理按钮
-        var deletebtn = local.find('[opt=delete]');            //删除按钮
-        updatebtn.show()
-        data = option.queryParams.data
-        local.find('form').form('load',option.queryParams.data)
-    }
-    /*处理时进入页面(actionType=info)*/
-    var dealwithInfoFunc = function(local,option){
-        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
-        dealwithbtn.show()
-        data = option.queryParams.data
-        local.find('form').form('load',option.queryParams.data)
-    }
-
-
-
 
     var render=function(l,o){
         initPage(l,o);                //初始化页面
@@ -385,6 +405,9 @@ define(function(){
                     break;
                 case 'update':
                     updateInfoFunc(l, o);
+                    break;
+                case 'assessment':
+                    assessmentFunc(l, o);
                     break;
                 default :
                     break;
