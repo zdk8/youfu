@@ -85,9 +85,9 @@
 ;BIRTHD,APPLYDATE,STARTDATE,ENDDATE,OPERATOR_DATE
 
 (defn assess-time-format[result]
-  (common/time-before-list (common/time-before-list (common/time-before-list
   (common/time-before-list (common/time-before-list
- (common/time-before-list result "birthd") "applydate") "startdate") "enddate") "operator_date")))
+  (common/time-before-list (common/time-before-list
+ (common/time-before-list result "birthd") "applydate") "startdate") "enddate") "operator_date"))
 
 (defn get-assessbyid [request]                                                                           "获取评估信息"
   (let[params (:params request)
@@ -96,10 +96,7 @@
                     (SELECT * FROM T_JJYLAPPLY WHERE jja_id = " jja_id ") a
                       left join T_JJYLASSESSMENT t  on a.jja_id=t.jja_id
                       left join T_SERVICESUGGEST s  on a.jja_id=s.jja_id")
-        data (db/get-results-bysql sql)
-        starttime (System/currentTimeMillis)
-        timeresult    (assess-time-format data)
-        endtime (- (System/currentTimeMillis) starttime)]
-    (println "SSSSSSSSSSS"  endtime)
+        data (db/get-results-bysql sql)]
+    ;(println "SSSSSSSSSSS" starttime " , "  endtime " " chatime)
     (resp/json (assess-time-format data))))
 
