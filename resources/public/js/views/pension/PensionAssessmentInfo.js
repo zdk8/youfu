@@ -190,29 +190,29 @@ define(function(){
                     for(var key in data[0] ){
                         var name = key;
                         var value = data[0][key];
-                        if($('input[name='+name+']:radio').val()){
-                            $('input[name='+name+'][type=radio][value='+value+']').attr("checked","checked");
-                            $('input[name='+name+'][type=radio][value='+value+']+label').addClass("checked");
-                        }else if($('input[name='+name+']:checkbox').val()){
-                            $('input[name='+name+'][type=checkbox][value='+value+']').attr("checked","checked");
-                            $('input[name='+name+'][type=checkbox][value='+value+']+label').addClass("checked");
+                        if(local.find('input[name='+name+']:radio').val()){
+                            local.find('input[name='+name+'][type=radio][value='+value+']').attr("checked","checked");
+                            local.find('input[name='+name+'][type=radio][value='+value+']+label').addClass("checked");
+                        }else if(local.find('input[name='+name+']:checkbox').val()){
+                            local.find('input[name='+name+'][type=checkbox][value='+value+']').attr("checked","checked");
+                            local.find('input[name='+name+'][type=checkbox][value='+value+']+label').addClass("checked");
                         }
                     }
-                    $('[opt=csrq]').datebox('setValue',$('[opt=birthdate]').datebox('getValue'));
-                    $(':input[name=sh_zongf]').attr("readonly","readonly").val(100);
-                    $(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val($(':input[name=sh_pingguf]').val());
-                    $(':input[name=sum_jj_pingguf]').attr("readonly","readonly").val($(':input[name=jj_pingguf]').val());
-                    $(':input[name=sum_jz_pingguf]').attr("readonly","readonly").val($(':input[name=jz_pingguf]').val());
-                    $(':input[name=sum_nl_pingguf]').attr("readonly","readonly").val($(':input[name=nl_pingguf]').val());
-                    $(':input[name=sum_gx_pingguf]').attr("readonly","readonly").val($(':input[name=gx_pingguf]').val());
-                    $('fieldset[opt=info1]')
+                    local.find('[opt=csrq]').datebox('setValue',$('[opt=birthdate]').datebox('getValue'));
+                    local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100);
+                    local.find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val($(':input[name=sh_pingguf]').val());
+                    local.find(':input[name=sum_jj_pingguf]').attr("readonly","readonly").val($(':input[name=jj_pingguf]').val());
+                    local.find(':input[name=sum_jz_pingguf]').attr("readonly","readonly").val($(':input[name=jz_pingguf]').val());
+                    local.find(':input[name=sum_nl_pingguf]').attr("readonly","readonly").val($(':input[name=nl_pingguf]').val());
+                    local.find(':input[name=sum_gx_pingguf]').attr("readonly","readonly").val($(':input[name=gx_pingguf]').val());
+                    local.find('fieldset[opt=info1]')
                         .find(':input[type=radio]+label').each(function(i){
                             var radioValue=0;
                             if($(this).prev()[0].checked){
                                 radioValue= ($(this).prev()).val();
                                 $($(this).parent().parent().children().last().children()[0]).val(radioValue);
                             }
-                            $('fieldset[opt=info1]').find(':input[opt=info1pingfeng]').each(function(){
+                            local.find('fieldset[opt=info1]').find(':input[opt=info1pingfeng]').each(function(){
                                 $(this).attr("readonly","readonly");
                             })
                         })
@@ -232,6 +232,7 @@ define(function(){
                 }
             });
         })
+        /*提交*/
         commitbtn.click(function(){
             console.log('commitbtn')
         })
@@ -255,21 +256,22 @@ define(function(){
                     })
                     local.find(':input[name=sh_pingguf]').attr("readonly","readonly").val(sh_zongf)
                     local.find('fieldset[opt=result1]').find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val(sh_zongf)
+
                     local.find(':input[name=sh_jiel]+label').removeClass("checked");
                     local.find(':input[name=sh_jiel]').removeAttr("checked");
                     local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]+label').removeClass("checked");
                     local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]').removeAttr("checked");
-                    if(sh_zongf <= 25){
+                    if(sh_zongf == 0){
                         local.find(':input[name=sh_jiel]:eq(0)').attr("checked","checked");
                         local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)').attr("checked","checked");
                         local.find(':input[name=sh_jiel]:eq(0)+label').addClass("checked");
                         local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)+label').addClass("checked");
-                    }else if(sh_zongf > 25 &&sh_zongf <= 50){
+                    }else if(sh_zongf > 0 &&sh_zongf <= 10){
                         local.find(':input[name=sh_jiel]:eq(1)').attr("checked","checked");
                         local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)').attr("checked","checked");
                         local.find(':input[name=sh_jiel]:eq(1)+label').addClass("checked");
                         local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)+label').addClass("checked");
-                    }else if(sh_zongf > 50 &&sh_zongf <= 75){
+                    }else if(sh_zongf > 10 &&sh_zongf <= 50){
                         local.find(':input[name=sh_jiel]:eq(2)').attr("checked","checked");
                         local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)').attr("checked","checked");
                         local.find(':input[name=sh_jiel]:eq(2)+label').addClass("checked");
