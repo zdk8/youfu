@@ -4,8 +4,8 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '保存',opt:'save'},
-            {text: '操作日志',opt:'log'}
+            {text: '保存',opt:'save'}/*,
+            {text: '操作日志',opt:'log'}*/
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({

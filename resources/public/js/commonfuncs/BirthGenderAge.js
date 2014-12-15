@@ -41,6 +41,19 @@ define(function () {
         }
     }
 
+    function   ages(str) {
+        var   r   =   str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
+        if(r==null)return   false;
+        var   d=   new   Date(r[1],   r[3]-1,   r[4]);
+        if   (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4])
+        {
+            var   Y   =   new   Date().getFullYear();
+            return (Y-r[1]);
+        }
+    }
+
+
+
     var render=function(local,option){
         local.find('input[opt='+(option.identityid||'identityid')+']').bind('keyup',function(){
             if($(this).val().length<15){
@@ -59,7 +72,7 @@ define(function () {
             }
 
             $gender.combobox('setValue',result.gender);
-            var age=new Date(new Date()-new Date(result.birthdate)).getFullYear()-1970;
+            var age=ages(result.birthdate);
             $age.val(age);
             if(option.callback){
                 option.callback($.extend({age:age},result));
