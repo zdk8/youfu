@@ -7,6 +7,7 @@
                [newpension.controller.old :as old]
                [newpension.models.schema :as schema]
                [noir.response :as resp]
+               [noir.session :as session]
                [clj-time.local :as l]
                [clj-time.coerce :as c]
                [noir.io :as io]
@@ -100,3 +101,25 @@
     ;(println "SSSSSSSSSSS" starttime " , "  endtime " " chatime)
     (resp/json (assess-time-format data))))
 
+
+
+(defn assess-complete [request]                                                                        "评估完成"
+  (let[params (:params request)
+       bstablepk  (:jja_id params)
+       bstablename "t_jjylapply"
+       bstablepkname      "jja_id"
+       status   "1"
+       aulevel     "0"
+       auflag   "评估完成"
+       bstime      (common/get-nowtime)
+       auuser   (:username (session/get :usermsg))
+       ;AUDESC
+      ;DVCODE
+      appoperators  auuser
+      messagebrief  (str "姓名：" (:name params) ",身份证："(:identityid params) )
+      approvedata {:bstablepk bstablepk :bstablename bstablename :bstablepkname bstablepkname :status status :aulevel aulevel :auflag auflag :bstime bstime :auuser auuser :appoperators appoperators :messagebrief messagebrief}
+       ]
+    (add-assessmessage request)                                                                     ;保存评估信息
+    (db/add-approve approvedata)                                                                   ;添加到审核流程
+    (db/update-apply {:ishandle "1"} bstablepk)                                                ;更改申请表状态
+    ))
