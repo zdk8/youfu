@@ -122,4 +122,4 @@
     (add-assessmessage request)                                                                     ;保存评估信息
     (db/add-approve approvedata)                                                                   ;添加到审核流程
     (db/update-apply {:ishandle "1"} bstablepk)                                                ;更改申请表状态
-    ))
+    (resp/json {:success true :message "assess complete"})))
