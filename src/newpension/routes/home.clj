@@ -172,6 +172,10 @@
   (POST "/audit/updateapply" request (audit/update-apply request))                                    ;;更新申请
   (POST "/audit/addassessmessage" request (audit/add-assessmessage request))            ;;添加居家养老评估信息
   (POST "/audit/getassessbyid" request (audit/get-assessbyid request))                                 ;;通过申请id获取评估信息
+  (POST "/audit/assesscomplete" request (audit/assess-complete request))                                      ;;评估信息提交
+  (POST "/audit/getassessaudit" request (audit/get-assessaudit request))                               ;;获取评估审核信息
+  ;(POST "/audit/getassessauditbyid" request (audit/getassessauditbyid request))
+  (POST "/audit/assessauditsubmit" request (audit/assess-audit request))                                ;;评估信息审核
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )
