@@ -72,15 +72,12 @@ var FieldSetVisual = function(local, pTableID, pFieldSetID, pImageID )
     var objTable = local.find('[opt='+pTableID+']');
     var objFieldSet = local.find('[opt='+pFieldSetID+']');
 //            var objImage = document.getElementById( pImageID) ;
-    if(objTable.is(":hidden"))
-    {
+    if(objTable.is(":hidden")){
         objTable.show()
         var heightTable = parseInt( objTable.height())+22 ;
         objFieldSet.height(heightTable+"px");
 //            objImage.src="F:\\相册\\按钮\\searchorange.jpg" ;        //打开
-    }
-    else
-    {
+    }else{
         objTable.hide()
         objFieldSet.height("22px");
 //            objImage.src="F:\\相册\\按钮\\hengtiao.jpg" ;       //收缩

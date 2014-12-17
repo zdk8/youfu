@@ -46,7 +46,7 @@
                 </td>
                 <td class="formtdtext">文化程度:</td>
                 <td><input class="easyui-combobox" name="culture"  opt="culture"
-                           data-options=" loader:cj.getLoader('culture'), editable:false, valueField:'id', textField:'text' ">
+                               data-options=" loader:cj.getLoader('culture'), editable:false, valueField:'id', textField:'text' ">
                 </td>
             </tr>
 
@@ -65,7 +65,6 @@
             <td colspan="4" style="text-align: center;">评估内容</td>
             <td style="width: 50px;">评估分</td>
         </tr>
-
         <tr style="height: 40px;">
             <td >(1)<br/>进食</td>
             <td style="width: 175px;">
@@ -137,7 +136,6 @@
             <td ><input name="sh_chuany" type="radio" value="10" /><label>不能自行穿脱衣服</label></td>
             <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
-
         <tr>
             <td >(9)<br/>大便控制</td>
             <td ><input name="sh_dab" type="radio" value="0" /><label>无大小便失禁,并可自行使用塞剂.</label></td>
@@ -146,7 +144,6 @@
             <td ><input name="sh_dab" type="radio" value="10" /><label>经常失禁,需要别人处理.</label></td>
             <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
-
         <tr>
             <td >(10)<br/>小便控制</td>
             <td ><input name="sh_xiaob" type="radio" value="0" /><label>日夜皆不会尿失禁,或可自行使用并清理尿套</label></td>
@@ -155,7 +152,6 @@
             <td ><input name="sh_xiaob" type="radio" value="10" /><label>经常失禁,需要别人处理.</label></td>
             <td ><input size="1" class="pingfen" opt="info1pingfeng" readonly></td>
         </tr>
-
         <tr>
             <td >总分</td>
             <td colspan="2" style="text-align: center;">
@@ -166,7 +162,6 @@
                 <input name="sh_pingguf" readonly>
             </td>
         </tr>
-
         <tr>
             <td >结论</td>
             <td colspan="5">
@@ -220,7 +215,7 @@
         </tr>
         <tr><td>评分</td>
             <td colspan="3">
-                <input name="jj_pingguf">
+                <input name="jj_pingguf" readonly>
             </td>
         </tr>
         <tr><td>评估员</td>
@@ -260,7 +255,7 @@
 
         <tr><td>评分</td>
             <td colspan="3">
-                <input name="jz_pingguf">
+                <input name="jz_pingguf" readonly>
             </td>
         </tr>
         <tr><td>评估员</td>
@@ -293,7 +288,7 @@
 
         <tr><td>评分</td>
             <td colspan="3">
-                <input name="nl_pingguf">
+                <input name="nl_pingguf" readonly>
             </td>
         </tr>
 
@@ -322,7 +317,7 @@
 
         <tr><td>评分</td>
             <td>
-                <input name="gx_pingguf">
+                <input name="gx_pingguf" readonly>
             </td>
         </tr>
         <tr><td>评估员</td>
@@ -653,21 +648,21 @@
         <tr>
             <td>6.残障情况</td>
             <td>
-                <textarea style="width: 99%;height: 50px;" opt="canzhangqingkuang" name="canzhangqingkuang"></textarea>
+                <textarea style="width: 99%;height: 50px;" opt="canzhangqingkuang" name="canzhangqingkuang" readonly></textarea>
             </td>
             <td ><input size="1" class="pingfen"  name="cz_pingguf" readonly></td>
         </tr>
         <tr>
             <td>7.住房情况</td>
             <td>
-                <textarea style="width: 99%;height: 50px;" opt="zhufangqingkuang" name="zhufangqingkuang"></textarea>
+                <textarea style="width: 99%;height: 50px;" opt="zhufangqingkuang" name="zhufangqingkuang" readonly></textarea>
             </td>
             <td ><input size="1" class="pingfen"  name="zf_pingguf" readonly></td>
         </tr>
         <tr>
             <td>8.重大疾病</td>
             <td>
-                <textarea style="width: 99%;height: 50px;" opt="zhongdajibing" name="zhongdajibing"></textarea>
+                <textarea style="width: 99%;height: 50px;" opt="zhongdajibing" name="zhongdajibing" readonly></textarea>
             </td>
             <td ><input size="1" class="pingfen"  name="jb_pingguf" readonly></td>
         </tr>

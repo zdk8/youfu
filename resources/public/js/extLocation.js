@@ -1,5 +1,5 @@
 ﻿serverUrl="http://10.40.190.20:8089/"
-serverUrl="http://192.168.2.6/"
+serverUrl="http://192.168.2.4/"
 /*var mysessionid="nosessionid";
 if(sessionid){
     mysessionid=sessionid;

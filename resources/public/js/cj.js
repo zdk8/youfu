@@ -397,10 +397,13 @@ jQuery.fn.cssCheckBox = function () {
     }).toggle(function () {
             $(this).prev()[0].checked = true;
             $(this).addClass("checked");
+            $($(this).prev()[0]).attr("checked","checked");
+
         },
         function () {
             $(this).prev()[0].checked = false;
             $(this).removeClass("checked");
+            $($(this).prev()[0]).removeAttr("checked");
         }).prev().hide();
 }
 
