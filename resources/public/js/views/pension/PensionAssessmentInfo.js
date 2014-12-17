@@ -40,7 +40,7 @@ define(function(){
     /*初始化radio,并加载radio事件*/
     var initRadioEvent = function(local){
         var selectRadio = ":input[type=radio] + label";
-        local.find(selectRadio).each(function () {
+        local.find(selectRadio).not(':input[name=sh_jiel] + label,:input[name=sum_sh_jiel] + label').each(function () {
             if ($(this).prev()[0].checked){
                 $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
             }
@@ -62,7 +62,7 @@ define(function(){
                 }
             })
             .prev().hide();     //原来的圆点样式设置为不可见
-        /*处理特殊贡献这块*/
+        //处理特殊贡献这块
         local.find(":input[type=checkbox] + label").each(function () {
             if ($(this).prev()[0].checked) {
                 $(this).addClass("checked");
@@ -77,6 +77,13 @@ define(function(){
                 $(this).removeClass("checked");
                 $($(this).prev()[0]).removeAttr("checked");
             }).prev().hide();
+
+
+        $(':input[name=sh_jiel] + label,:input[name=sum_sh_jiel] + label').parent().cssRadioOnly();
+
+/*
+        local.not('[name=sh_jiel]+label').cssRadio();
+        local.cssCheckBox();*/
     }
     /*通过身份证号加载老年人*/
     var loadOldByIdentityid = function(local){
