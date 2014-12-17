@@ -158,7 +158,7 @@
        reviewtime (common/get-nowtime)
        jja_id (:jja_id params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "通过") "2" "0")
+       aulevel (if (= issuccess "通过") "2" "-1")
        auflag (if (= issuccess "通过") "街镇审查通过" "街镇审查未通过")
        auuser (:username (session/get :usermsg))
        newappdata (conj approvedata {:aulevel aulevel :auflag auflag :bstime reviewtime :auuser auuser :audesc streetreview})]
@@ -174,7 +174,7 @@
        audittime (common/get-nowtime)
        jja_id (:jja_id params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "通过") "3" "0")
+       aulevel (if (= issuccess "通过") "3" "-1")
        auflag (if (= issuccess "通过") "县民政局审核通过" "县民政局审核未通过")
        auuser (:username (session/get :usermsg))
        newappdata (conj approvedata {:aulevel aulevel :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
