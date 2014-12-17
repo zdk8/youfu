@@ -233,7 +233,7 @@
         (db/update-audit "0" "0" dvcode "驳回已处理" loginname    ;;修改对应的审核表
           (inc (:max (db/get-max "userlog"))) "0" auditid opseno))
       (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由的状态下，修改对应审核表
-    (db/update-approveby-lrid  lr_id)                                    ;;修改审核表的状态
+    (db/update-approveby-lrid  lr_id "t_oldpeople")                                    ;;修改审核表的状态
     (db/add-approve appdata)                                                 ;;添加新的审核表历史状态
     (str "修改成功")))
 
@@ -437,7 +437,7 @@
        bstablepk (:bstablepk params)
        bstablename (:bstablename params)
        appdata (set-approve2 params)]
-    (db/update-approveby-lrid bstablepk)                                                        ;更新上一次评估信息为历史状态
+    (db/update-approveby-lrid bstablepk "t_oldpeople")                                                        ;更新上一次评估信息为历史状态
     (db/add-approve appdata)                                                                          ;添加本次评估信息记录
     (db/set-tablestatus idname bstablepk bstablename)                                        ;将老人数据的状态更改为正式数据状态
     (str "audit success")))
@@ -446,14 +446,14 @@
   (let[bstablepk (:bstablepk params)
         appdata (set-approve1 params)
        ]
-    (db/update-approveby-lrid bstablepk)                                                        ;更新上次评估信息的为历史状态
+    (db/update-approveby-lrid bstablepk "t_oldpeople")                                                        ;更新上次评估信息的为历史状态
     (db/add-approve appdata)))                                                                        ;添加本次评估信息记录
 
 (defn set-audit-approvefail [params]                                                                 "老人信息审核不通过"
   (let[aulevel (:aulevel params)
         bstablepk (:bstablepk params)
         appdata (set-approvefail params)]
-    (if (not= (count aulevel) 0)  (db/update-approveby-lrid bstablepk))                                                        ;修改审批表的状态
+    (if (not= (count aulevel) 0)  (db/update-approveby-lrid bstablepk "t_oldpeople"))                                                        ;修改审批表的状态
     (db/add-approve appdata)                                                                        ;添加一条审核记录
     (str "audit not pass")))
 
@@ -475,7 +475,7 @@
        bstablename (:bstablename params)
        aulevel (:aulevel params)
        ]
-    (db/update-approveby-lrid bstablepk)                                                        ;更新上次审核信息的为历史状态
+    (db/update-approveby-lrid bstablepk "t_oldpeople")                                                        ;更新上次审核信息的为历史状态
     (db/add-approve appdata)                                                                          ;添加新的审核信息
     (if (= aulevel "3") (db/set-tablestatus idname bstablepk bstablename))        ;如果审批通过，将老人数据的状态更改为正式数据状态
     ))
@@ -484,7 +484,7 @@
   (let[aulevel (:aulevel params)
        bstablepk (:bstablepk params)
        appdata (set-auditfail params)]
-    (db/update-approveby-lrid bstablepk)                                                      ;修改审批表的状态
+    (db/update-approveby-lrid bstablepk "t_oldpeople")                                                      ;修改审批表的状态
     (db/add-approve appdata)                                                                        ;添加一条审核记录
     (str "audit not pass")))
 
@@ -509,7 +509,7 @@
        bstablepk (:bstablepk params)
        bstablename (:bstablename params)
        appdata (set-approve2 params)]
-    (db/update-approveby-lrid bstablepk)                                                        ;更新上一次评估信息为历史状态
+    (db/update-approveby-lrid bstablepk "t_oldpeople")                                                        ;更新上一次评估信息为历史状态
     (db/add-approve appdata)                                                                          ;添加本次评估信息记录
     (db/set-tablestatus idname bstablepk bstablename)                     ;将老人评估数据的状态更改为正式数据状态
     (str "evaluate success")))
@@ -518,7 +518,7 @@
   (let[bstablepk (:bstablepk params)
        appdata (set-approve1 params)
        ]
-    (db/update-approveby-lrid bstablepk)                                                        ;更新上次评估信息的为历史状态
+    (db/update-approveby-lrid bstablepk "t_oldpeople")                                                        ;更新上次评估信息的为历史状态
     (db/add-approve appdata)                                                                          ;添加一条审核记录
     (str "evaluate success")))
 
@@ -526,7 +526,7 @@
   (let[aulevel (:aulevel params)
        bstablepk (:bstablepk params)
        appdata (set-approvefail params)]
-    (if (not= (count aulevel) 0)  (db/update-approveby-lrid bstablepk))            ;修改审批表的状态
+    (if (not= (count aulevel) 0)  (db/update-approveby-lrid bstablepk "t_oldpeople"))            ;修改审批表的状态
     (db/add-approve appdata)                                                                         ;添加一条审核记录
     (str "evaluate not pass")))
 

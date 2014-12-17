@@ -61,7 +61,7 @@
        page (:page params)
        name (:name params)
        identityid (:identityid params)
-       cond (str " and (ishandle != '1' or ishandle is null)" (common/likecond "name" name) (common/likecond "identityid" identityid))
+       cond (str " and ( ishandle is null)" (common/likecond "name" name) (common/likecond "identityid" identityid))
        getresult (common/fenye rows page t_jjylapply cond " order by jja_id ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
@@ -146,6 +146,7 @@
         newappdata (conj approvedata {:aulevel "1" :auflag "社区意见提交" :bstime opiniontime :auuser auuser :audesc communityopinion })
         ]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
+    (db/update-approveby-lrid jja_id "t_jjylapply")                                                                              ;;如果是评估不通过的，修改之前的审核表状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
     (db/update-apply {:communityopinion communityopinion :opiniontime opiniontime} jja_id)              ;;将社区意见添加申请表中
     (str "社区意见")))
