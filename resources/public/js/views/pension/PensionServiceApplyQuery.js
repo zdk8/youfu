@@ -37,7 +37,7 @@ define(function(){
                                             //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='assessment'){         //评估
                                             cj.showContent({                                          //详细信息(tab标签)
-                                                title:record.name+'详细信息',
+                                                title:record.name+'信息评估',
                                                 htmfile:'text!views/pension/PensionAssessmentInfo.htm',
                                                 jsfile:'views/pension/PensionAssessmentInfo',
                                                 queryParams:{

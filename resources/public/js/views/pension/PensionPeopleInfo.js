@@ -26,7 +26,6 @@ define(function(){
 
 
     function create(local,option){
-
         addToolBar(local);
         var districtid = local.find('[opt=districtid]');      //行政区划
         getdivision(districtid);                                          //加载行政区划
@@ -37,8 +36,8 @@ define(function(){
         local.find('[name=operators]').val(cj.getUserMsg().username);
         local.find('[opt=setdaytime]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
 
-
-        if(option.queryParams && option.queryParams.actiontype == "info"){            //处理
+        console.log(option.queryParams)
+        /*if(option.queryParams && option.queryParams.actiontype == "info"){            //处理
             dealwith.show();                                        //显示处理按钮
             local.find('[opt=newfamilymemeradd_btn]').hide()   //隐藏子表新增按钮
             local.find('[opt=delfamilymemer_btn]').hide()      //隐藏子表删除按钮
@@ -62,9 +61,7 @@ define(function(){
                 }
             })
         }else{
-
-
-            /*加载地区树*/
+            *//*加载地区树*//*
             var divisiontree = local.find('[opt=mydistrictid]') ;
             divisiontree.combotree({
                 url:'get-divisionlist?dvhigh=330424',
@@ -82,15 +79,6 @@ define(function(){
                 js.render(local)
             })
 
-
-
-
-
-
-
-
-
-
             local.find('[opt=save]').show().bind('click',function(){
                 local.find('[opt=pensionform]').form('submit', {
                     url:'/saveold',
@@ -106,16 +94,62 @@ define(function(){
 
 
             });
-        }
+        }*/
 
+    }
+
+    /*新增数据时进入*/
+    var saveFunc = function(local,option){
+        var savebtn = local.find('[opt=save]');               //保存按钮
+        savebtn.show()
+        savebtn.click(function(){
+            local.find('[opt=mainform]').form('submit', {
+                url:"wwwwwwww",
+                onSubmit: function(){
+                },
+                success:function(data){
+                    console.log(data)
+                }
+            });
+        })
+    }
+
+    /*处理时进入页面(actionType=info)*/
+    var dealwithInfoFunc = function(local,option){
+        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
+        dealwithbtn.show()                                            //显示处理按钮
+        var pensionform = local.find('[opt=pensionform]');      //老人信息主表
+        for(var i=0;i<pensionform[0].length;i++){             //禁用表单
+            var element = pensionform[0].elements[i];
+            element.disabled = true
+        }
+        disabledForm(local);                                //禁用easyui框
+        $.ajax({
+            url:"searchid",                                //查询老人表
+            data:{
+                id:option.queryParams.data.lr_id
+            },
+            type:"post",
+            dataType:"json",
+            success:function(data){
+                pensionform.form('load',data)        //填充主表
+                //famillylist(option.queryParams.data.lr_id)     //填充子表
+//                dealwithFunc({dealwith:dealwith,data:option.queryParams.data,refresh:option.queryParams.refresh}) //数据处理
+//                showProcess(false);
+            }
+        })
     }
 
 
     var render=function(l,o){
+        create(l,o);
         if(o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'update1':
                     (function(){alert('hahaha')})();
+                    break;
+                case 'info':
+                    dealwithInfoFunc(l,o);
                     break;
                 case 'update':
                     actionInfo(l, o);
@@ -124,7 +158,7 @@ define(function(){
                     break;
             }
         }else{
-            create(l, o);
+            saveFunc(l, o);
         }
     }
     return {

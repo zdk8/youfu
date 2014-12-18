@@ -7,6 +7,7 @@ define(function(){
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '删除',hidden:'hidden',opt:'delete'},
             {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '评估完成',hidden:'hidden',opt:'assessmentover'},
             {text: '提交',hidden:'hidden',opt:'commit'},
             {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
@@ -29,7 +30,13 @@ define(function(){
         scoreFunc(local);                                   //评分
         local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
         /*为每个label注册收缩事件*/
-        local.find('fieldset').find('legend').find('label').each(function(){
+        local.find('fieldset').find('legend').find('label').each(function(obj,fn,arg){
+            var labelopt = fn.attributes[0].value.toString()
+            var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
+            if(label_talbe != "info0"){
+                FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+            }
+
         }).click(function(e){
                 var labelopt = $(this)[0].attributes[0].value.toString();
                 var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
@@ -165,17 +172,17 @@ define(function(){
     var dealwithInfoFunc = function(local,option){
         var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
         dealwithbtn.show()
-        data = option.queryParams.data
+//        data = option.queryParams.data
         local.find('form').form('load',option.queryParams.data)
     }
     /*评估*/
     var assessmentFunc = function(local,option){
         var savebtn = local.find('[opt=save]');            //保存按钮
-        var commitbtn = local.find('[opt=commit]');            //提交按钮
+        var assessmentoverbtn = local.find('[opt=assessmentover]');            //提交按钮
         savebtn.show()
-        commitbtn.show()
+        assessmentoverbtn.show()
         disabledForm(local);                                  //禁用表单
-        dd = option.queryParams.data
+//        dd = option.queryParams.data
         /*通过id查询申请人员，若有评估信息也一并加载*/
         $.ajax({
             url:"audit/getassessbyid",
@@ -227,18 +234,63 @@ define(function(){
                 url:"audit/addassessmessage",
                 dataType:'json',
                 onSubmit: function(){
+//                    var flag = $(this).form('validate');
+//                    if (flag) {
+                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+//                    }
+//                    return flag
                 },
                 success:function(data){
                     var data = eval('(' + data + ')');
                     if(data.success){
-                        alert('保存成功')
+                        showProcess(false);
+                        $.messager.show({
+                            title:'温馨提示',
+                            msg:'保存成功!',
+                            timeout:3000,
+                            showType:'slide'
+                        });
+//                        alert('保存成功')
                     }
+                },
+                onLoadError: function () {
+                    showProcess(false);
+                    $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
                 }
             });
         })
-        /*提交*/
-        commitbtn.click(function(){
-            console.log('commitbtn')
+        /*评估完成*/
+        assessmentoverbtn.click(function(){
+            local.find('[opt=mainform]').form('submit', {
+                url:"audit/assesscomplete",
+                dataType:'json',
+                onSubmit: function(){
+//                    var flag = $(this).form('validate');
+//                    if (flag) {
+                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+//                    }
+//                    return flag
+                },
+                success:function(data){
+                    console.log(data)
+                    var data = eval('(' + data + ')');
+                    if(data.success){
+                        showProcess(false);
+                        $.messager.show({
+                            title:'温馨提示',
+                            msg:'评估完成!',
+                            timeout:3000,
+                            showType:'slide'
+                        });
+//                        alert('保存成功')
+                    }
+                },
+                onLoadError: function () {
+                    showProcess(false);
+                    $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
+                }
+            });
+            console.log('assessmentoverbtn')
         })
     }
     /*评分*/
@@ -443,6 +495,7 @@ define(function(){
             result.find(':input[name=pinggusum]').val(value)
         }
         result.find('td>:input[class=pingfen]').each(function(){
+            rrr  =  $(this)
             $(this).bind('change',calculate)
         })
         result.find('a[opt=recalculate]').bind('click',calculate)
@@ -458,7 +511,7 @@ define(function(){
                 case 'update':
                     updateInfoFunc(l, o);
                     break;
-                case 'assessment':
+                case 'assessment':              //评估
                     assessmentFunc(l, o);
                     break;
                 default :
