@@ -22,7 +22,8 @@
          :jb_gaoxy :jb_xinlsj :jb_guanxb :jb_xinlshic :jb_manxzhiqguany :jb_feiqz :jb_feixb :jb_feiy :jb_naoxguanyw :jb_pajshensz :jb_laonchidz :jb_youyz :jb_tangnb
          :jb_tongf :jb_zhitguz :jb_jianzy :jb_jinzb :jb_leifshigjiey :jb_gandjib :jb_bainz :jb_qinguany :jb_shiwmoxguanjib :jb_tangnbingswangmbingb :jb_shenzjib
          :jb_qit1name :jb_qit2name :jb_qit3name :jb_pingguy :jb_beiz :pinggusum :standard :startdate :enddate :facilitator :content :amount :operator_date :active :zf_pingguf
-         :cz_pingguf :jb_pingguf :zf_shiyingfnum :zf_shangpinfnum :zf_zijianfnum :jb_qita1 :jb_qita2 :jb_qita3 :rz_jinqijy :rz_chengxujy :rz_dingxiangnl :rz_panduannl :rz_zongfen :rz_pingguf :rz_jiel :rz_pingguy])
+         :cz_pingguf :jb_pingguf :zf_shiyingfnum :zf_shangpinfnum :zf_zijianfnum :jb_qita1 :jb_qita2 :jb_qita3 :rz_jinqijy :rz_chengxujy :rz_dingxiangnl :rz_panduannl :rz_zongfen
+         :rz_pingguf :rz_jiel :rz_pingguy :pgy_dianhua :pgy_danwei])
 (def suggest [:shys_songc :shys_songcbz :shys_zuoc :shys_zuocbz :shqj_chuangy :shqj_chuangybz :shqj_zhenglyw :shqj_zhenglywbz :shqj_fans :shqj_fansbz :shqj_ruc
         :shqj_rucbz :shzy_shangm :shzy_shangmbz :shzy_yus :shzy_yusbz :shws_yiw :shws_yiwbz :shws_chuangs :shws_chuangsbz :shws_shin :shws_shinbz
         :shdb_meiq :shdb_meiqbz :shdb_shoux :shdb_shouxbz :shdb_feiy :shdb_feiybz :shqt_name1 :shqt_fuwu1 :shqt_fuwu1bz :shqt_name2 :shqt_fuwu2 :shqt_fuwu2bz
@@ -135,7 +136,7 @@
 
 
 (defn assessaudit0 [params]                                                                              "社区提交意见"
-  (let [approvedata (select-keys (old/approve) params)
+  (let [approvedata (select-keys params (old/approve) )
         communityopinion (:communityopinion params)                                         ;;社区意见
         opiniontime      (common/get-nowtime)                                                   ;;提交时间
         ;audesc       communityopinion
@@ -153,7 +154,7 @@
 
 (defn assessaudit1 [params]                                                                              "街镇审查"
   (let[issuccess (:issuccess params)
-       approvedata (select-keys (old/approve) params)
+       approvedata (select-keys params (old/approve))
        streetreview (:streetreview params)
        reviewtime (common/get-nowtime)
        jja_id (:jja_id params)
@@ -164,12 +165,13 @@
        newappdata (conj approvedata {:aulevel aulevel :auflag auflag :bstime reviewtime :auuser auuser :audesc streetreview})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
-    (db/update-apply {:streetreview streetreview :reviewtime reviewtime} jja_id)              ;;将社区意见添加申请表中
+    (if (= issuccess "通过") (db/update-apply {:streetreview streetreview :reviewtime reviewtime} jja_id)
+                                        (db/update-apply {:streetreview streetreview :reviewtime reviewtime :ishandle nil} jja_id))               ;;将社区意见添加申请表中
     (str "街镇审查")))
 
 (defn assessaudit2 [params]                                                                              "县民政局审核"
   (let[issuccess (:issuccess params)
-       approvedata (select-keys (old/approve) params)
+       approvedata (select-keys params (old/approve))
        countyaudit (:countyaudit params)
        audittime (common/get-nowtime)
        jja_id (:jja_id params)
@@ -180,7 +182,8 @@
        newappdata (conj approvedata {:aulevel aulevel :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
-    (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle "y"} jja_id)              ;;将社区意见添加申请表中
+    (if (= issuccess "通过") (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle "y"} jja_id)
+                                        (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle nil} jja_id) )             ;;将社区意见添加申请表中
     (str "县民政局审核")))
 
 (defn assess-audit [request]                                                                   "评估审核"
