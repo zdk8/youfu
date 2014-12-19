@@ -665,15 +665,18 @@
   (insert approve
     (values  result)))
 
-(defn update-approve [sh_id result]
+(defn update-approve [sh_id result]                                                                 "更新审核表信息"
   (update approve
     (set-fields result)
     (where {:sh_id sh_id})))
 
-(defn update-approveby-lrid [bstablepk]                                                           "修改状态"
+
+
+(defn update-approveby-lrid [bstablepk bstablename]                                                           "修改状态"
   (update approve
     (set-fields {:status "0"})                                                                                    ;将状态修改成历史状态
     (where {:bstablepk bstablepk
+                 :bstablename bstablename
                  :status "1"})))
 
 (defn set-tablestatus [idname id  tablename]                                                          "审核通过修改被审核表状态"
