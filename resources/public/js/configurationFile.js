@@ -1,4 +1,5 @@
 ﻿approvalProcess=['打回重审','提交未审核','审核未审批','审批通过','保存未提交'];    //流程状态
+approvalProcessService=['评估完成','提交未审核','审核未审批','审批通过','打回重审'];    //流程状态
 getGender=['女','男']             //性别
 /*日期时间*/
 var myformatter = function(date){

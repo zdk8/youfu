@@ -184,33 +184,51 @@
 </fieldset>
 <fieldset style="width: 900px;margin: 0px auto;" opt="info2">
     <legend>
-        <label opt="info2_shrinkage">生活自理能力</label>
+        <label opt="info2_shrinkage">经济条件</label>
     </legend>
     <table class="formtable" opt="info2_table">
         <tr>
-            <td rowspan="5">经济条件</td>
+            <td rowspan="6">经济条件</td>
             <td>分类</td>
             <td>判断评分</td>
+            <td>收入情况</td>
 
         </tr>
         <tr>
-            <td>退休工资(2000元-3000元)</td>
+            <td>有退休工资</td>
+            <td><input name="jj_shour" type="radio" value="0" /><label>0分</label></td>
+            <td>本人养老金收入<input name="">元/月</td>
+
+        </tr>
+        <tr>
+            <td>无退休工资</td>
+            <td><input name="jj_shour" type="radio" value="5" /><label>5分</label></td>
+            <td>本人养老金收入<input name="">元/月</td>
+
+        </tr>
+        <tr>
+            <td>低收入</td>
             <td><input name="jj_shour" type="radio" value="10" /><label>10分</label></td>
+            <td>本人收入<input name="">元/月</td>
 
         </tr>
         <tr>
-            <td>低退休工资(2000元以下)</td>
-            <td><input name="jj_shour" type="radio" value="15" /><label>15分</label></td>
-
-        </tr>
-        <tr>
-            <td>无社保</td>
+            <td>低保护缘户</td>
             <td><input name="jj_shour" type="radio" value="20" /><label>20分</label></td>
+            <td>本人收入<input name="">元/月</td>
 
         </tr>
         <tr>
-            <td>低保</td>
-            <td><input name="jj_shour" type="radio" value="25" /><label>25分</label></td>
+            <td>低保、特困</td>
+            <td><input name="jj_shour" type="radio" value="30" /><label>30分</label></td>
+            <td>
+                <input name="" type="radio" value="5" />
+                <label>低保</label>
+                <input name="" type="radio" value="5" />
+                <label>特困职工</label>
+                <input name="" type="radio" value="5" />
+                <label>困难家庭</label>
+            </td>
 
         </tr>
         <tr><td>评分</td>
@@ -231,26 +249,30 @@
     </legend>
     <table class="formtable" opt="info3_table">
         <tr>
-            <td rowspan="4">居住环境</td>
+            <td rowspan="5">居住环境</td>
             <td style="text-align: center;">分类</td>
             <td>判断评分</td>
             <td>是否有生活照料</td>
         </tr>
         <tr>
-            <td>与子女,亲友共住</td>
-            <td><input name="jz_fenl" type="radio" value="15" /><label>15分</label></td>
-            <td rowspan="3">
+            <td>与子女同住</td>
+            <td><input name="jz_fenl" type="radio" value="0" /><label>0分</label></td>
+            <td rowspan="4">
                 <input name="jz_zhaol" type="radio" value="1" /><label>是</label>
                 <input name="jz_zhaol" type="radio" value="0" /><label>否</label>
             </td>
         </tr>
         <tr>
-            <td>空巢</td>
-            <td><input name="jz_fenl" type="radio" value="20" /><label>20分</label></td>
+            <td>与亲友同住</td>
+            <td><input name="jz_fenl" type="radio" value="5" /><label>5分</label></td>
         </tr>
         <tr>
-            <td>独居,孤寡</td>
-            <td><input name="jz_fenl" type="radio" value="25" /><label>25分</label></td>
+            <td>仅与配偶同住</td>
+            <td><input name="jz_fenl" type="radio" value="15" /><label>15分</label></td>
+        </tr>
+        <tr>
+            <td>独居</td>
+            <td><input name="jz_duju" type="radio" value="20" /><label>20分</label></td>
         </tr>
 
         <tr><td>评分</td>
@@ -263,6 +285,132 @@
                 <input name="jz_pingguy">
             </td>
         </tr>
+    </table>
+</fieldset>
+<fieldset style="width: 900px;margin: 0px auto;" opt="info9">
+    <legend>
+        <label opt="info9_cognitive">认知能力</label>
+    </legend>
+    <table class="formtable" opt="info9_table" border="1">
+        <tbody>
+        <tr style="height: 40px;">
+            <td colspan="2" style="width: 100px;">评估事项</td>
+            <td colspan="4" style="text-align: center;">评估内容</td>
+            <td style="width: 50px;">评估分</td>
+        </tr>
+        <tr style="height: 40px;">
+            <td style="width: 30px;">(1)<br/>近<br/>期<br/>记<br/>忆</td>
+            <td style="width: 150px;">
+                <label>回想近期发生的事情</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_jinqijy" type="radio" value="5" />
+                <label>0分<br/>对近期发生的事情记忆清晰</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_jinqijy" type="radio" value="5" />
+                <label>1分<br/>对近期发生的事情记忆模糊</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_jinqijy" type="radio" value="10" />
+                <label>3分<br/>对近期发生的事情遗忘，在提示下能记起部分.</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_jinqijy" type="radio" value="5" />
+                <label>5分<br/>经常提示也不能记起近期的发生的事情</label>
+            </td>
+            <td ><input size="1" class="pingfen" opt="info9pingfeng" readonly></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td style="width: 30px;">(2)<br/>程<br/>序<br/>记<br/>忆</td>
+            <td style="width: 150px;">
+                <label>完成基本生活技能，如穿衣程序、烧水泡茶等</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_chengxujy" type="radio" value="5" />
+                <label>0分<br/>正确完成</label>
+            </td>
+            <td style="width: 175px;text-align: center">
+                <label>-</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_chengxujy" type="radio" value="10" />
+                <label>3分<br/>在提示下能正确完成.</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_chengxujy" type="radio" value="5" />
+                <label>5分<br/>经提示也不能正确完成</label>
+            </td>
+            <td ><input size="1" class="pingfen" opt="info9pingfeng" readonly></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td style="width: 30px;">(3)<br/>定<br/>向<br/>能<br/>力</td>
+            <td style="width: 150px;">
+                <label>现实导向能力，对人物、地点、时间、空间等的识别和判断能力</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_dingxiangnl" type="radio" value="5" />
+                <label>0分<br/>定向能力正常</label>
+            </td>
+            <td style="width: 175px;text-align: center">
+                <label>-</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_dingxiangnl" type="radio" value="10" />
+                <label>3分<br/>在提示下，能正确说出人物、地点、时间、空间等.</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_dingxiangnl" type="radio" value="5" />
+                <label>5分<br/>经提示也不能正确说出人物、地点、时间、空间等</label>
+            </td>
+            <td ><input size="1" class="pingfen" opt="info9pingfeng" readonly></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td style="width: 30px;">(4)<br/>判<br/>断<br/>能<br/>力</td>
+            <td style="width: 150px;">
+                <label>对日常生活的内容、时间、谁人处理等作出判断</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_panduannl" type="radio" value="5" />
+                <label>0分<br/>能正确作出判断</label>
+            </td>
+            <td style="width: 175px;text-align: center">
+                <label>-</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_panduannl" type="radio" value="10" />
+                <label>3分<br/>在提示下能作出判断，表现为判断迟缓、不决.</label>
+            </td>
+            <td style="width: 175px;">
+                <input name="rz_panduannl" type="radio" value="5" />
+                <label>5分<br/>判断错误</label>
+            </td>
+            <td ><input size="1" class="pingfen" opt="info9pingfeng" readonly></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td style="width: 30px;">总分</td>
+            <td style="width: 500px;text-align: center" colspan="3">
+                <input class="pingfen" name="rz_zongfen" opt="rz_zongfen" readonly>
+            </td>
+            <td style="width: 175px;">
+                <label>评估分</label>
+            </td>
+            <td style="width: 175px;text-align: center" colspan="2">
+                <input class="pingfen" name="rz_pingguf" opt="rz_pingguf" readonly>
+            </td>
+        </tr>
+        <tr style="height: 40px;">
+            <td style="width: 30px;">结论</td>
+            <td style="width: 500px;" colspan="6">
+                <ul>
+                    <li style="margin-left: 20px; display: inline;"><input name="rz_jiel" type="radio" value="0" /><label>正常 </label></li>
+                    <li style="margin-left: 40px; display: inline;"><input name="rz_jiel" type="radio" value="1" /><label>轻度缺失 </label></li>
+                    <li style="margin-left: 40px; display: inline;"><input name="rz_jiel" type="radio" value="2" /><label>中度缺失 </label></li>
+                    <li style="margin-left: 40px; display: inline;"><input name="rz_jiel" type="radio" value="3" /><label>重度缺失 </label></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
     </table>
 </fieldset>
 <fieldset style="width: 900px;margin: 0px auto;" opt="info4">
@@ -303,12 +451,12 @@
             <td>特殊贡献</td>
             <td>
                 <ul style="list-style-type:none">
-                    <li><span style="width: 100px;">1. 市级以上劳模</span><input name="gx_laom" type="checkbox" value="10" /><label>10分</label></li>
+                    <li><span style="width: 100px;">1. 县级以上劳模</span><input name="gx_laom" type="checkbox" value="10" /><label>10分</label></li>
                     <li><span style="width: 100px;">2. 重点优抚对象</span><input name="gx_youf" type="checkbox" value="10" /><label>10分</label></li>
-                    <li><span style="width: 100px;">2. 纯居干&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <!--<li><span style="width: 100px;">2. 纯居干&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </span><input name="gx_chunjg" type="checkbox" value="10" /><label>10分</label></li>
                     <li><span style="width: 100px;">3. 离休干部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </span><input name="gx_ganb" type="checkbox" value="10" /><label>10分</label></li>
+                    </span><input name="gx_ganb" type="checkbox" value="10" /><label>10分</label></li>-->
                 </ul>
             </td>
 
@@ -593,59 +741,75 @@
     <input type="hidden" name="pg_id">
     <table class="formtable" style="width:100%" opt="result1_table">
         <tr>
-            <td style="width: 90px;">评估参数</td>
-            <td>判断等级</td>
-            <td style="width: 70px;">评估分值</td>
+            <td style="width: 90px;text-align: center" colspan="2">主要参数</td>
+            <!--<td>判断等级</td>
+            <td style="width: 70px;">评估分值</td>-->
+            <td>评估分值</td>
         </tr>
         <tr>
-            <td>1.生活处理能力<br/>(0-100分)</td>
-            <td>
+            <td style="text-align: center;">评估分值1</td>
+            <td style="text-align: center;">综合生活自理能力</td>
+            <!--<td>1.生活处理能力<br/>(0-100分)</td>-->
+            <!--<td>
                 <input name="sum_sh_jiel" type="radio" value="0"/><label>正常</label>
                 <input name="sum_sh_jiel" type="radio" value="1" /><label>轻度依赖</label>
                 <input name="sum_sh_jiel" type="radio" value="2" /><label>中度依赖</label>
                 <input name="sum_sh_jiel" type="radio" value="3" /><label>重度依赖</label>
-            </td>
+            </td>-->
             <td ><input size="1" class="pingfen" name="sum_sh_pingguf" readonly></td>
         </tr>
         <tr>
-            <td>2.经济条件<br/>(0-25分)</td>
-            <td>
+            <td style="text-align: center;">评估分值2</td>
+            <td style="text-align: center;">居住环境</td>
+            <!--<td>2.经济条件<br/>(0-25分)</td>-->
+            <!--<td>
                 <input name="sum_jj_shour" type="radio" value="10" /><label>低保</label>
                 <input name="sum_jj_shour" type="radio" value="15" /><label>无社保</label>
                 <input name="sum_jj_shour" type="radio" value="20" /><label>低退休工资</label>
                 <input name="sum_jj_shour" type="radio" value="25" /><label>退休工资</label>
-            </td>
+            </td>-->
             <td ><input size="1" class="pingfen" name="sum_jj_pingguf" readonly></td>
         </tr>
         <tr>
-            <td>3.居住环境<br/>(0-25分)</td>
-            <td>
+            <td style="text-align: center;">评估分值3</td>
+            <td style="text-align: center;">经济条件</td>
+            <!--<td>3.居住环境<br/>(0-25分)</td>-->
+            <!--<td>
                 <input name="sum_jz_fenl" type="radio" value="15" /><label>独居,孤寡</label>
                 <input name="sum_jz_fenl" type="radio" value="20" /><label>空巢</label>
                 <input name="sum_jz_fenl" type="radio" value="25" /><label>与子女,亲友共住</label>
-            </td>
+            </td>-->
             <td ><input size="1" class="pingfen" name="sum_jz_pingguf" readonly></td>
         </tr>
         <tr>
-            <td>4.年龄<br/>(0-10分)</td>
-            <td>
+            <td style="text-align: center;">附加分值1</td>
+            <td style="text-align: center;">认知能力</td>
+            <!--<td>4.年龄<br/>(0-10分)</td>-->
+            <!--<td>
                 <input name="sum_nl_fenl" type="radio" value="0" /><label>60-79</label>
                 <input name="sum_nl_fenl" type="radio" value="5" /><label>80-90</label>
                 <input name="sum_nl_fenl" type="radio" value="10" /><label>90以上</label>
-            </td>
+            </td>-->
             <td ><input size="1" class="pingfen" name="sum_nl_pingguf" readonly></td>
         </tr>
         <tr>
-            <td>5.特殊贡献<br/>(0-40分)</td>
-            <td>
+            <td style="text-align: center;">附加分值2</td>
+            <td style="text-align: center;">年龄</td>
+            <!--<td>5.特殊贡献<br/>(0-40分)</td>-->
+            <!--<td>
                 <input name="sum_gx_laom" type="checkbox" value="10" /><label>市级以上劳模</label>
                 <input name="sum_gx_youf" type="checkbox" value="10" /><label>重点优抚对象</label>
                 <input name="sum_gx_chunjg" type="checkbox" value="10" /><label>纯居干</label>
                 <input name="sum_gx_ganb" type="checkbox" value="10" /><label>离休干部</label>
-            </td>
+            </td>-->
             <td ><input size="1" class="pingfen" name="sum_gx_pingguf" readonly></td>
         </tr>
         <tr>
+            <td style="text-align: center;">附加分值3</td>
+            <td style="text-align: center;">特殊贡献</td>
+            <td ><input size="1" class="pingfen" name="sum_jz_pingguf" readonly></td>
+        </tr>
+        <!--<tr>
             <td>6.残障情况</td>
             <td>
                 <textarea style="width: 99%;height: 50px;" opt="canzhangqingkuang" name="canzhangqingkuang" readonly></textarea>
@@ -665,16 +829,18 @@
                 <textarea style="width: 99%;height: 50px;" opt="zhongdajibing" name="zhongdajibing" readonly></textarea>
             </td>
             <td ><input size="1" class="pingfen"  name="jb_pingguf" readonly></td>
-        </tr>
+        </tr>-->
         <tr>
-            <td>评估总分</td>
+            <td style="text-align: center;">评估总分</td>
             <td style="text-align: center;">
-                <label><input name="pinggusum" size="2" class="pingfen" readonly>分</label>
+                <!--<label><input name="pinggusum" size="2" class="pingfen" readonly>分</label>-->
+                <label>=评估分值1+评估分值2+评估分值3+附加分值1+附加分值2+附加分值3</label>
             </td>
-            <td><a opt="recalculate">计算</a></td>
+            <!--<td><a opt="recalculate">计算</a></td>-->
+            <td ><input size="1" class="pingfen" size="2" name="pinggusum" readonly></td>
         </tr>
         <tr>
-            <td>建议服务标准</td>
+            <td style="text-align: center;">建议服务标准</td>
             <td colspan="2" style="text-align: center;">
                 <label><input name="standard" size="2" class="pingfen">小时</label>
             </td>
@@ -1141,15 +1307,15 @@
         </tr>
 
         <tr>
-            <td>社区(村)意见</td>
+            <td opt="sqjy">社区(村)意见</td>
             <td colspan="4"><textarea style="width: 99%;height: 50px;" name="shequcomment"></textarea></td>
         </tr>
         <tr>
-            <td>街镇审查</td>
+            <td opt="jdsc">街镇审查</td>
             <td colspan="4"><textarea style="width: 99%;height: 50px;" name="xiangzhencomment"></textarea></td>
         </tr>
         <tr>
-            <td>民政局审核</td>
+            <td opt="mzjsh">民政局审核</td>
             <td colspan="4"><textarea style="width: 99%;height: 50px;" name="minzhengcomment"></textarea></td>
         </tr>
 

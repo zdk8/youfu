@@ -33,10 +33,15 @@ define(function(){
         local.find('fieldset').find('legend').find('label').each(function(obj,fn,arg){
             var labelopt = fn.attributes[0].value.toString()
             var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
-            if(label_talbe != "info0"){
-                FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+            if(option.queryParams.actiontype == "dealwith"){
+                if(label_talbe != "result1"){
+                    FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+                }
+            }else{
+                if(label_talbe != "info0"){
+                    FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+                }
             }
-
         }).click(function(e){
                 var labelopt = $(this)[0].attributes[0].value.toString();
                 var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
@@ -47,7 +52,9 @@ define(function(){
     /*初始化radio,并加载radio事件*/
     var initRadioEvent = function(local){
         var selectRadio = ":input[type=radio] + label";
-        local.find(selectRadio).not(':input[name=sh_jiel] + label,:input[name=sum_sh_jiel] + label').each(function () {
+        var selectCheck = ":input[type=checkbox] + label";
+        local.find(selectRadio).not(':input[name=sh_jiel] + label').each(function () {
+//        local.find(selectRadio).not(':input[name=sh_jiel] + label,[opt=result1_table] + label').each(function () {
             if ($(this).prev()[0].checked){
                 $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
             }
@@ -69,6 +76,8 @@ define(function(){
                 }
             })
             .prev().hide();     //原来的圆点样式设置为不可见
+        $(':input[name=sh_jiel] + label').parent().cssRadioOnly();
+//        $(':input[name=sum_gx_laom] + label').parent().cssCheckBoxOnly();
         //处理特殊贡献这块
         local.find(":input[type=checkbox] + label").each(function () {
             if ($(this).prev()[0].checked) {
@@ -86,7 +95,7 @@ define(function(){
             }).prev().hide();
 
 
-        $(':input[name=sh_jiel] + label,:input[name=sum_sh_jiel] + label').parent().cssRadioOnly();
+
 
 /*
         local.not('[name=sh_jiel]+label').cssRadio();
@@ -175,27 +184,13 @@ define(function(){
         data = option.queryParams.data
         local.find('form').form('load',option.queryParams.data)
     }
-    /*处理时进入页面(actionType=info)*/
-    var dealwithInfoFunc = function(local,option){
-        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
-        dealwithbtn.show()
-//        data = option.queryParams.data
-        local.find('form').form('load',option.queryParams.data)
-    }
-    /*评估*/
-    var assessmentFunc = function(local,option){
-        var savebtn = local.find('[opt=save]');            //保存按钮
-        var assessmentoverbtn = local.find('[opt=assessmentover]');            //提交按钮
-        savebtn.show()
-        assessmentoverbtn.show()
-        disabledForm(local);                                  //禁用表单
-//        dd = option.queryParams.data
-        /*通过id查询申请人员，若有评估信息也一并加载*/
+    /*通过id查询申请人员，若有评估信息也一并加载*/
+    var getassessbyidFunc = function(local,jjaid){
         $.ajax({
             url:"audit/getassessbyid",
             type:"post",
             data:{
-                jja_id:option.queryParams.data.jja_id
+                jja_id:jjaid
             },
             dataType: 'json',
             success:function(data){
@@ -234,7 +229,51 @@ define(function(){
                 local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
             }
         })
-
+    }
+    /*查看信息(actionType=view)*/
+    var viewInfoFunc = function(local,option){
+        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
+        dealwithbtn.show()
+        getassessbyidFunc(local,option.queryParams.data.bstablepk)   //加载人员信息
+    }
+    /*处理时进入页面(actionType=dealwith)*/
+    var dealwithInfoFunc = function(local,option){
+        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
+        dealwithbtn.show()
+        local.find('[opt=info0]').hide();
+        local.find('[opt=info1]').hide();
+        local.find('[opt=info2]').hide();
+        local.find('[opt=info3]').hide();
+        local.find('[opt=info4]').hide();
+        local.find('[opt=info5]').hide();
+        local.find('[opt=info6]').hide();
+        local.find('[opt=info7]').hide();
+        local.find('[opt=info8]').hide();
+        local.find('[opt=info9]').hide();
+//        FieldSetVisual(local,'result1_table','result1_shrinkage','result1')
+        getassessbyidFunc(local,option.queryParams.data.bstablepk)   //加载人员信息
+    }
+    /*评估*/
+    var assessmentFunc = function(local,option){
+        var savebtn = local.find('[opt=save]');            //保存按钮
+        var assessmentoverbtn = local.find('[opt=assessmentover]');            //提交按钮
+        savebtn.show()
+        assessmentoverbtn.show()
+        disabledForm(local);                                  //禁用表单
+        /*local.find('[opt=sqjy]').hide()
+        local.find('[name=shequcomment]').hide()
+        local.find('[opt=jdsc]').hide()
+        local.find('[name=xiangzhencomment]').hide()
+        local.find('[opt=mzjsh]').hide()
+        local.find('[name=minzhengcomment]').hide()*/
+        /*local.find('[opt=result3_table]').append("<tr>" +
+                                                        "<td>民政局审核</td>" +
+                                                        "<td colspan='4'>" +
+                                                            "<textarea style='width: 99%;height: 50px;' name='minzhengcomment'></textarea>" +
+                                                        "</td>" +
+                                                    "</tr>")*/
+//        dd = option.queryParams.data
+        getassessbyidFunc(local,option.queryParams.data.jja_id)
         /*保存*/
         savebtn.click(function(){
             local.find('[opt=mainform]').form('submit', {
@@ -279,7 +318,6 @@ define(function(){
 //                    return flag
                 },
                 success:function(data){
-                    console.log(data)
                     var data = eval('(' + data + ')');
                     if(data.success){
                         showProcess(false);
@@ -512,7 +550,10 @@ define(function(){
         initPage(l,o);                //初始化页面
         if(o.queryParams) {
             switch (o.queryParams.actiontype){
-                case 'info':
+                case 'view':                   //查看详细信息，并且可进行处理
+                    viewInfoFunc(l,o);
+                    break;
+                case 'dealwith':                   //处理
                     dealwithInfoFunc(l,o);
                     break;
                 case 'update':
