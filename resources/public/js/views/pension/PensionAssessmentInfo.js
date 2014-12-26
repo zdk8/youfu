@@ -227,6 +227,7 @@ define(function(){
                         })
                 }
                 local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
+                local.find(':input[name=rz_zongfen]').attr("readonly","readonly").val(20); //认知能力info9总分
             }
         })
     }
@@ -413,6 +414,51 @@ define(function(){
                     var v = 0;
                 local.find(':input[name=jz_pingguf]').attr("readonly","readonly").val(v);
                 local.find('fieldset[opt=result1] :input[name=sum_jz_pingguf]').attr("readonly","readonly").val(v);
+            })
+        })
+        /*认知能力info9评分*/
+        local.find('fieldset[opt=info9] :input[type=radio]+label').each(function(i){
+            $(this).bind('click',function(){
+                var radioValue=0;
+                if($(this).prev()[0].checked){
+                    radioValue= ($(this).prev()).val();
+                    $($(this).parent().parent().children().last().children()[0]).val(radioValue);
+                }else{
+                    $($(this).parent().parent().children().last().children()[0]).removeAttr("value");
+                }
+                var rz_zongfen=0;
+                local.find('fieldset[opt=info9]').find(':input[opt=info9pingfeng]').each(function(){
+//                    $(this).attr("readonly","readonly");
+                    rz_zongfen+=Number($(this).val())
+                })
+                local.find(':input[name=rz_pingguf]').attr("readonly","readonly").val(rz_zongfen)
+//                local.find('fieldset[opt=result1]').find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val(sh_zongf)
+                /*
+                local.find(':input[name=sh_jiel]+label').removeClass("checked");
+                local.find(':input[name=sh_jiel]').removeAttr("checked");
+                local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]+label').removeClass("checked");
+                local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]').removeAttr("checked");
+                if(sh_zongf == 0){
+                    local.find(':input[name=sh_jiel]:eq(0)').attr("checked","checked");
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)').attr("checked","checked");
+                    local.find(':input[name=sh_jiel]:eq(0)+label').addClass("checked");
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)+label').addClass("checked");
+                }else if(sh_zongf > 0 &&sh_zongf <= 10){
+                    local.find(':input[name=sh_jiel]:eq(1)').attr("checked","checked");
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)').attr("checked","checked");
+                    local.find(':input[name=sh_jiel]:eq(1)+label').addClass("checked");
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)+label').addClass("checked");
+                }else if(sh_zongf > 10 &&sh_zongf <= 50){
+                    local.find(':input[name=sh_jiel]:eq(2)').attr("checked","checked");
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)').attr("checked","checked");
+                    local.find(':input[name=sh_jiel]:eq(2)+label').addClass("checked");
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)+label').addClass("checked");
+                }else{
+                    local.find(':input[name=sh_jiel]:eq(3)').attr("checked","checked");
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(3)').attr("checked","checked");
+                    local.find(':input[name=sh_jiel]:eq(3)+label').addClass("checked");
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(3)+label').addClass("checked");
+                }*/
             })
         })
         /*年龄情况评分*/
