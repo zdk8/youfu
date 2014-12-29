@@ -760,7 +760,7 @@
         </tr>
         <tr>
             <td style="text-align: center;">评估分值2</td>
-            <td style="text-align: center;">居住环境</td>
+            <td style="text-align: center;">经济条件</td>
             <!--<td>2.经济条件<br/>(0-25分)</td>-->
             <!--<td>
                 <input name="sum_jj_shour" type="radio" value="10" /><label>低保</label>
@@ -772,7 +772,7 @@
         </tr>
         <tr>
             <td style="text-align: center;">评估分值3</td>
-            <td style="text-align: center;">经济条件</td>
+            <td style="text-align: center;">居住环境</td>
             <!--<td>3.居住环境<br/>(0-25分)</td>-->
             <!--<td>
                 <input name="sum_jz_fenl" type="radio" value="15" /><label>独居,孤寡</label>
@@ -790,7 +790,7 @@
                 <input name="sum_nl_fenl" type="radio" value="5" /><label>80-90</label>
                 <input name="sum_nl_fenl" type="radio" value="10" /><label>90以上</label>
             </td>-->
-            <td ><input size="1" class="pingfen" name="sum_nl_pingguf" readonly></td>
+            <td ><input size="1" class="pingfen" name="sum_rz_pingguf" readonly></td>
         </tr>
         <tr>
             <td style="text-align: center;">附加分值2</td>
@@ -802,12 +802,12 @@
                 <input name="sum_gx_chunjg" type="checkbox" value="10" /><label>纯居干</label>
                 <input name="sum_gx_ganb" type="checkbox" value="10" /><label>离休干部</label>
             </td>-->
-            <td ><input size="1" class="pingfen" name="sum_gx_pingguf" readonly></td>
+            <td ><input size="1" class="pingfen" name="sum_nl_pingguf" readonly></td>
         </tr>
         <tr>
             <td style="text-align: center;">附加分值3</td>
             <td style="text-align: center;">特殊贡献</td>
-            <td ><input size="1" class="pingfen" name="sum_jz_pingguf" readonly></td>
+            <td ><input size="1" class="pingfen" name="sum_gx_pingguf" readonly></td>
         </tr>
         <!--<tr>
             <td>6.残障情况</td>
@@ -837,7 +837,9 @@
                 <label>=评估分值1+评估分值2+评估分值3+附加分值1+附加分值2+附加分值3</label>
             </td>
             <!--<td><a opt="recalculate">计算</a></td>-->
-            <td ><input size="1" class="pingfen" size="2" name="pinggusum" readonly></td>
+            <td ><input size="1" size="2" name="pinggusum" readonly>
+                <a style="float: right" opt="recalculate">计算</a>
+            </td>
         </tr>
         <tr>
             <td style="text-align: center;">建议服务标准</td>
@@ -1308,15 +1310,24 @@
 
         <tr>
             <td opt="sqjy">社区(村)意见</td>
-            <td colspan="4"><textarea style="width: 99%;height: 50px;" name="shequcomment"></textarea></td>
+            <td colspan="4"><textarea style="width: 99%;height: 50px;" name="communityopinion"></textarea></td>
         </tr>
         <tr>
             <td opt="jdsc">街镇审查</td>
-            <td colspan="4"><textarea style="width: 99%;height: 50px;" name="xiangzhencomment"></textarea></td>
+            <td colspan="4">
+                <!--<li style="margin-left: 20px; display: inline;"><label>符合评估标准</label><input name="fuhe" type="radio" value="0" /></li>-->
+                <textarea style="width: 99%;height: 50px;" name="streetreview"></textarea>
+                <label>符合评估标准</label><input type="radio" name="shenghe"><label></label>
+                <label>建议再次评估</label><input type="radio" name="shenghe"><label></label>
+            </td>
         </tr>
         <tr>
             <td opt="mzjsh">民政局审核</td>
-            <td colspan="4"><textarea style="width: 99%;height: 50px;" name="minzhengcomment"></textarea></td>
+            <td colspan="4">
+                <textarea style="width: 99%;height: 50px;" name="countyaudit"></textarea>
+                <label>确认评估结果</label><input type="radio" name="shengpi"><label></label>
+                <label>要求再次评估</label><input type="radio" name="shengpi"><label></label>
+            </td>
         </tr>
 
 

@@ -51,33 +51,7 @@ define(function(){
 
     /*初始化radio,并加载radio事件*/
     var initRadioEvent = function(local){
-        var selectRadio = ":input[type=radio] + label";
-        var selectCheck = ":input[type=checkbox] + label";
-        local.find(selectRadio).not(':input[name=sh_jiel] + label').each(function () {
-//        local.find(selectRadio).not(':input[name=sh_jiel] + label,[opt=result1_table] + label').each(function () {
-            if ($(this).prev()[0].checked){
-                $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
-            }
-        }).click(function () {               //为第个元素注册点击事件
-                var s = $($(this).prev()[0]).attr('name')
-                s = ":input[name=" + s + "]+label"
-                var isChecked=$(this).prev()[0].checked;
-                local.find(s).each(function (i) {
-                    $(this).prev()[0].checked = false;
-                    $(this).removeClass("checked");
-                    $($(this).prev()[0]).removeAttr("checked");
-                });
-                if(isChecked){
-                    //如果单选已经为选中状态,则什么都不做
-                }else{
-                    $(this).prev()[0].checked = true;
-                    $(this).addClass("checked");
-                    $($(this).prev()[0]).attr("checked","checked");
-                }
-            })
-            .prev().hide();     //原来的圆点样式设置为不可见
-        $(':input[name=sh_jiel] + label').parent().cssRadioOnly();
-//        $(':input[name=sum_gx_laom] + label').parent().cssCheckBoxOnly();
+        enableRadioFunc(local,"");            //radio不可编辑
         //处理特殊贡献这块
         local.find(":input[type=checkbox] + label").each(function () {
             if ($(this).prev()[0].checked) {
@@ -93,13 +67,6 @@ define(function(){
                 $(this).removeClass("checked");
                 $($(this).prev()[0]).removeAttr("checked");
             }).prev().hide();
-
-
-
-
-/*
-        local.not('[name=sh_jiel]+label').cssRadio();
-        local.cssCheckBox();*/
     }
     /*通过身份证号加载老年人*/
     var loadOldByIdentityid = function(local){
@@ -184,8 +151,79 @@ define(function(){
         data = option.queryParams.data
         local.find('form').form('load',option.queryParams.data)
     }
+    /*设置radio不可编辑*/
+    var enableRadioFunc = function(local,radio){
+        var selectRadio = ":input[type=radio] + label";
+        if(radio == "" || radio == null){
+            local.find(selectRadio).each(function () {
+                if ($(this).prev()[0].checked){
+                    $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
+                }
+            }).click(function () {               //为第个元素注册点击事件
+                    var s = $($(this).prev()[0]).attr('name')
+                    s = ":input[name=" + s + "]+label"
+                    var isChecked=$(this).prev()[0].checked;
+                    local.find(s).each(function (i) {
+                        $(this).prev()[0].checked = false;
+                        $(this).removeClass("checked");
+                        $($(this).prev()[0]).removeAttr("checked");
+                    });
+                    if(isChecked){
+                        //如果单选已经为选中状态,则什么都不做
+                    }else{
+                        $(this).prev()[0].checked = true;
+                        $(this).addClass("checked");
+                        $($(this).prev()[0]).attr("checked","checked");
+                    }
+                })
+                .prev().hide();     //原来的圆点样式设置为不可见
+        }else{
+            local.find(selectRadio).not(':input[name='+radio+'] + label').each(function () {
+                if ($(this).prev()[0].checked){
+                    $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
+                }
+            }).click(function () {               //为第个元素注册点击事件
+                    var s = $($(this).prev()[0]).attr('name')
+                    s = ":input[name=" + s + "]+label"
+                    var isChecked=$(this).prev()[0].checked;
+                    local.find(s).each(function (i) {
+                        $(this).prev()[0].checked = false;
+                        $(this).removeClass("checked");
+                        $($(this).prev()[0]).removeAttr("checked");
+                    });
+                    if(isChecked){
+                        //如果单选已经为选中状态,则什么都不做
+                    }else{
+                        $(this).prev()[0].checked = true;
+                        $(this).addClass("checked");
+                        $($(this).prev()[0]).attr("checked","checked");
+                    }
+                })
+                .prev().hide();     //原来的圆点样式设置为不可见
+            $(':input[name='+radio+'] + label').parent().cssRadioOnly();
+        }
+    }
     /*通过id查询申请人员，若有评估信息也一并加载*/
-    var getassessbyidFunc = function(local,jjaid){
+    var getassessbyidFunc = function(local,jjaid,aulevel){
+        local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
+        local.find(':input[name=rz_zongfen]').attr("readonly","readonly").val(20); //认知能力info9总分
+        if(aulevel == "0"){                                             //评估等级
+            local.find("[name=streetreview]").attr("readonly","readonly")
+            local.find("[name=countyaudit]").attr("readonly","readonly")
+            enableRadioFunc(local,"");            //radio不可编辑
+        }else if(aulevel == "1"){
+            local.find("[name=communityopinion]").attr("readonly","readonly")
+            local.find("[name=countyaudit]").attr("readonly","readonly")
+            enableRadioFunc(local,"shenghe");            //radio不可编辑
+        }else if(aulevel == "2"){
+            local.find("[name=communityopinion]").attr("readonly","readonly")
+            local.find("[name=streetreview]").attr("readonly","readonly")
+            enableRadioFunc(local,"shengpi");            //radio不可编辑
+        }else{
+            local.find("[name=communityopinion]").attr("readonly","readonly")
+            local.find("[name=streetreview]").attr("readonly","readonly")
+            local.find("[name=countyaudit]").attr("readonly","readonly")
+        }
         $.ajax({
             url:"audit/getassessbyid",
             type:"post",
@@ -212,6 +250,7 @@ define(function(){
                     local.find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val($(':input[name=sh_pingguf]').val());
                     local.find(':input[name=sum_jj_pingguf]').attr("readonly","readonly").val($(':input[name=jj_pingguf]').val());
                     local.find(':input[name=sum_jz_pingguf]').attr("readonly","readonly").val($(':input[name=jz_pingguf]').val());
+                    local.find(':input[name=sum_rz_pingguf]').attr("readonly","readonly").val($(':input[name=rz_pingguf]').val());
                     local.find(':input[name=sum_nl_pingguf]').attr("readonly","readonly").val($(':input[name=nl_pingguf]').val());
                     local.find(':input[name=sum_gx_pingguf]').attr("readonly","readonly").val($(':input[name=gx_pingguf]').val());
                     local.find('fieldset[opt=info1]')
@@ -221,13 +260,16 @@ define(function(){
                                 radioValue= ($(this).prev()).val();
                                 $($(this).parent().parent().children().last().children()[0]).val(radioValue);
                             }
-                            local.find('fieldset[opt=info1]').find(':input[opt=info1pingfeng]').each(function(){
-                                $(this).attr("readonly","readonly");
-                            })
+                        })
+                    local.find('fieldset[opt=info9]')
+                        .find(':input[type=radio]+label').each(function(i){
+                            var radioValue=0;
+                            if($(this).prev()[0].checked){
+                                radioValue= ($(this).prev()).val();
+                                $($(this).parent().parent().children().last().children()[0]).val(radioValue);
+                            }
                         })
                 }
-                local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
-                local.find(':input[name=rz_zongfen]').attr("readonly","readonly").val(20); //认知能力info9总分
             }
         })
     }
@@ -235,7 +277,30 @@ define(function(){
     var viewInfoFunc = function(local,option){
         var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
         dealwithbtn.show()
-        getassessbyidFunc(local,option.queryParams.data.bstablepk)   //加载人员信息
+        getassessbyidFunc(local,option.queryParams.data.bstablepk,"")   //加载人员信息
+    }
+    /*根据aulevel等级判断传参意见*/
+    function paramsOpinion(local,option,optionarea){
+        $.ajax({
+            url:"audit/assessauditsubmit",
+//            url:"audit/assessauditsubmit112222",
+            data:{
+                audesc:local.find('[name='+optionarea+']').val(),     //意见
+                aulevel:option.queryParams.data.aulevel,       //流程标示
+                appoperators:option.queryParams.data.appoperators,
+                bstablename:option.queryParams.data.bstablename,
+                bstablepk:option.queryParams.data.bstablepk,
+                bstablepkname:option.queryParams.data.bstablepkname,
+                messagebrief:option.queryParams.data.messagebrief,
+                sh_id:option.queryParams.data.sh_id,
+                dvcode:option.queryParams.data.dvcode
+            },
+            type:"post",
+            dataType:"json",
+            success:function(data){
+                console.log(data)
+            }
+        })
     }
     /*处理时进入页面(actionType=dealwith)*/
     var dealwithInfoFunc = function(local,option){
@@ -252,7 +317,36 @@ define(function(){
         local.find('[opt=info8]').hide();
         local.find('[opt=info9]').hide();
 //        FieldSetVisual(local,'result1_table','result1_shrinkage','result1')
-        getassessbyidFunc(local,option.queryParams.data.bstablepk)   //加载人员信息
+        var aulevel = option.queryParams.data.aulevel;              //评估信息流程等级
+//        var aulevel = "1";
+        getassessbyidFunc(local,option.queryParams.data.bstablepk,aulevel)   //加载人员信息
+        dealwithbtn.click(function(){
+            if(aulevel == "0"){
+                if(local.find('[name=communityopinion]').val() == "" || local.find('[name=communityopinion]').val() == null){
+                    $.messager.alert('温馨提示','请填写社区(村)意见！',"",function(r){
+                        local.find('[name=communityopinion]').focus();
+                    });
+                }else{
+                    paramsOpinion(local,option,"communityopinion")
+                }
+            }else if(aulevel == "1"){
+                if(local.find('[name=streetreview]').val() == "" || local.find('[name=streetreview]').val() == null){
+                    $.messager.alert('温馨提示','请填写街镇审查意见！',"",function(r){
+                        local.find('[name=streetreview]').focus();
+                    });
+                }else{
+                    paramsOpinion(local,option,"streetreview")
+                }
+            }else if(aulevel == "2"){
+                if(local.find('[name=countyaudit]').val() == "" || local.find('[name=countyaudit]').val() == null){
+                    $.messager.alert('温馨提示','请填写民政局审核意见！',"",function(r){
+                        local.find('[name=countyaudit]').focus();
+                    });
+                }else{
+                    paramsOpinion(local,option,"countyaudit")
+                }
+            }
+        })
     }
     /*评估*/
     var assessmentFunc = function(local,option){
@@ -274,12 +368,13 @@ define(function(){
                                                         "</td>" +
                                                     "</tr>")*/
 //        dd = option.queryParams.data
-        getassessbyidFunc(local,option.queryParams.data.jja_id)
+        getassessbyidFunc(local,option.queryParams.data.jja_id,"")
         /*保存*/
         savebtn.click(function(){
+            console.log(111)
             local.find('[opt=mainform]').form('submit', {
                 url:"audit/addassessmessage",
-                dataType:'json',
+//                dataType:'json',
                 onSubmit: function(){
 //                    var flag = $(this).form('validate');
 //                    if (flag) {
@@ -297,11 +392,10 @@ define(function(){
                             timeout:3000,
                             showType:'slide'
                         });
-//                        alert('保存成功')
                     }
                 },
                 onLoadError: function () {
-                    showProcess(false);
+//                    showProcess(false);
                     $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
                 }
             });
@@ -344,6 +438,7 @@ define(function(){
         /*生活自理能力info1评分*/
         local.find('fieldset[opt=info1] :input[type=radio]+label').each(function(i){
                 $(this).bind('click',function(){
+                    tt = $(this)
                     var radioValue=0;
                     if($(this).prev()[0].checked){
                         radioValue= ($(this).prev()).val();
@@ -428,37 +523,25 @@ define(function(){
                 }
                 var rz_zongfen=0;
                 local.find('fieldset[opt=info9]').find(':input[opt=info9pingfeng]').each(function(){
-//                    $(this).attr("readonly","readonly");
                     rz_zongfen+=Number($(this).val())
                 })
                 local.find(':input[name=rz_pingguf]').attr("readonly","readonly").val(rz_zongfen)
-//                local.find('fieldset[opt=result1]').find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val(sh_zongf)
-                /*
-                local.find(':input[name=sh_jiel]+label').removeClass("checked");
-                local.find(':input[name=sh_jiel]').removeAttr("checked");
-                local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]+label').removeClass("checked");
-                local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]').removeAttr("checked");
-                if(sh_zongf == 0){
-                    local.find(':input[name=sh_jiel]:eq(0)').attr("checked","checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)').attr("checked","checked");
-                    local.find(':input[name=sh_jiel]:eq(0)+label').addClass("checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)+label').addClass("checked");
-                }else if(sh_zongf > 0 &&sh_zongf <= 10){
-                    local.find(':input[name=sh_jiel]:eq(1)').attr("checked","checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)').attr("checked","checked");
-                    local.find(':input[name=sh_jiel]:eq(1)+label').addClass("checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)+label').addClass("checked");
-                }else if(sh_zongf > 10 &&sh_zongf <= 50){
-                    local.find(':input[name=sh_jiel]:eq(2)').attr("checked","checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)').attr("checked","checked");
-                    local.find(':input[name=sh_jiel]:eq(2)+label').addClass("checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)+label').addClass("checked");
+                local.find(':input[name=rz_jiel]+label').removeClass("checked");
+                local.find(':input[name=rz_jiel]').removeAttr("checked");
+                if(rz_zongfen == 0){
+                    local.find(':input[name=rz_jiel]:eq(0)').attr("checked","checked");
+                    local.find(':input[name=rz_jiel]:eq(0)+label').addClass("checked");
+                }else if(rz_zongfen > 0 &&rz_zongfen <= 5){
+                    local.find(':input[name=rz_jiel]:eq(1)').attr("checked","checked");
+                    local.find(':input[name=rz_jiel]:eq(1)+label').addClass("checked");
+                }else if(rz_zongfen > 5 &&rz_zongfen <= 10){
+                    local.find(':input[name=rz_jiel]:eq(2)').attr("checked","checked");
+                    local.find(':input[name=rz_jiel]:eq(2)+label').addClass("checked");
                 }else{
-                    local.find(':input[name=sh_jiel]:eq(3)').attr("checked","checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(3)').attr("checked","checked");
-                    local.find(':input[name=sh_jiel]:eq(3)+label').addClass("checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(3)+label').addClass("checked");
-                }*/
+                    local.find(':input[name=rz_jiel]:eq(3)').attr("checked","checked");
+                    local.find(':input[name=rz_jiel]:eq(3)+label').addClass("checked");
+                }
+                local.find('fieldset[opt=result1]').find(':input[name=sum_rz_pingguf]').val(rz_zongfen);
             })
         })
         /*年龄情况评分*/
@@ -490,7 +573,7 @@ define(function(){
                 local.find( 'input[name=gx_pingguf]').attr("readonly","readonly").val(sum);
                 //同步到result1
                 local.find('input[name=sum_gx_pingguf]').attr("readonly","readonly").val(sum);
-                var ischecked= $(this).prev()[0].checked;
+                /*var ischecked= $(this).prev()[0].checked;
                 var sum_gx_label=local.find('input[name=sum_'+$(this).prev()[0].name+']+label');
                 if(ischecked){
                     local.find(sum_gx_label).prev()[0].checked = true;
@@ -498,7 +581,7 @@ define(function(){
                 }else{
                     local.find(sum_gx_label).prev()[0].checked = false;
                     local.find(sum_gx_label).removeClass("checked");
-                }
+                }*/
             })
         })
         /*智障情况评分*/
@@ -586,7 +669,7 @@ define(function(){
             result.find(':input[name=pinggusum]').val(value)
         }
         result.find('td>:input[class=pingfen]').each(function(){
-            rrr  =  $(this)
+//            rrr  =  $(this)
             $(this).bind('change',calculate)
         })
         result.find('a[opt=recalculate]').bind('click',calculate)
