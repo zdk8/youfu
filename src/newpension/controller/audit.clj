@@ -190,7 +190,7 @@
   (let[params (:params request)
        ;bstablepk (:bstablepk params)
        ;sh_id (:sh_id params)
-       aulevel     (:aulevel)
+       aulevel     (:aulevel params)
        ]
     (cond (= aulevel "0")       (assessaudit0 params)
       (= aulevel "1")        (assessaudit1 params)
