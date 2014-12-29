@@ -137,7 +137,7 @@
 
 (defn assessaudit0 [params]                                                                              "社区提交意见"
   (let [approvedata (select-keys params (old/approve) )
-        communityopinion (:communityopinion params)                                         ;;社区意见
+        communityopinion (:audesc params)                                         ;;社区意见
         opiniontime      (common/get-nowtime)                                                   ;;提交时间
         ;audesc       communityopinion
         ;dvcode
@@ -155,7 +155,7 @@
 (defn assessaudit1 [params]                                                                              "街镇审查"
   (let[issuccess (:issuccess params)
        approvedata (select-keys params (old/approve))
-       streetreview (:streetreview params)
+       streetreview (:audesc params)
        reviewtime (common/get-nowtime)
        jja_id (:jja_id params)
        sh_id   (:sh_id params)
@@ -172,7 +172,7 @@
 (defn assessaudit2 [params]                                                                              "县民政局审核"
   (let[issuccess (:issuccess params)
        approvedata (select-keys params (old/approve))
-       countyaudit (:countyaudit params)
+       countyaudit (:audesc params)
        audittime (common/get-nowtime)
        jja_id (:jja_id params)
        sh_id   (:sh_id params)
