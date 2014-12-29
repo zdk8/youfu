@@ -159,13 +159,14 @@
        reviewtime (common/get-nowtime)
        jja_id (:jja_id params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "通过") "2" "-1")
-       auflag (if (= issuccess "通过") "街镇审查通过" "街镇审查未通过")
+       aulevel (if (= issuccess "0") "2" "-1")
+       auflag (if (= issuccess "0") "街镇审查通过" "街镇审查未通过")
+       status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
-       newappdata (conj approvedata {:aulevel aulevel :auflag auflag :bstime reviewtime :auuser auuser :audesc streetreview})]
+       newappdata (conj approvedata {:aulevel aulevel :auflag auflag :status status :bstime reviewtime :auuser auuser :audesc streetreview})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
-    (if (= issuccess "通过") (db/update-apply {:streetreview streetreview :reviewtime reviewtime} jja_id)
+    (if (= issuccess "0") (db/update-apply {:streetreview streetreview :reviewtime reviewtime} jja_id)
                                         (db/update-apply {:streetreview streetreview :reviewtime reviewtime :ishandle nil} jja_id))               ;;将社区意见添加申请表中
     (str "街镇审查")))
 
@@ -176,13 +177,14 @@
        audittime (common/get-nowtime)
        jja_id (:jja_id params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "通过") "3" "-1")
-       auflag (if (= issuccess "通过") "县民政局审核通过" "县民政局审核未通过")
+       aulevel (if (= issuccess "0") "3" "-1")
+       auflag (if (= issuccess "0") "县民政局审核通过" "县民政局审核未通过")
+       status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
-       newappdata (conj approvedata {:aulevel aulevel :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
+       newappdata (conj approvedata {:aulevel aulevel :status status :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
-    (if (= issuccess "通过") (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle "y"} jja_id)
+    (if (= issuccess "0") (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle "y"} jja_id)
                                         (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle nil} jja_id) )             ;;将社区意见添加申请表中
     (str "县民政局审核")))
 
