@@ -223,6 +223,7 @@ define(function(){
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=streetreview]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
+            enableRadioFunc(local,"");            //radio不可编辑
         }
         $.ajax({
             url:"audit/getassessbyid",
@@ -280,10 +281,10 @@ define(function(){
         getassessbyidFunc(local,option.queryParams.data.bstablepk,"")   //加载人员信息
     }
     /*根据aulevel等级判断传参意见*/
-    function paramsOpinion(local,option,optionarea){
+    function paramsOpinion(local,option,optionarea,issuccess){
+        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
         $.ajax({
             url:"audit/assessauditsubmit",
-//            url:"audit/assessauditsubmit112222",
             data:{
                 audesc:local.find('[name='+optionarea+']').val(),     //意见
                 aulevel:option.queryParams.data.aulevel,       //流程标示
@@ -293,12 +294,24 @@ define(function(){
                 bstablepkname:option.queryParams.data.bstablepkname,
                 messagebrief:option.queryParams.data.messagebrief,
                 sh_id:option.queryParams.data.sh_id,
-                dvcode:option.queryParams.data.dvcode
+                dvcode:option.queryParams.data.dvcode,
+                issuccess:issuccess == "" ? "":issuccess
             },
             type:"post",
             dataType:"json",
             success:function(data){
-                console.log(data)
+                if(data.success){
+                    showProcess(false);
+                    $.messager.show({
+                        title:'温馨提示',
+                        msg:'处理成功!',
+                        timeout:3000,
+                        showType:'slide'
+                    });
+                    setTimeout(function(){
+                        $("#tabs").tabs('close',option.queryParams.title)
+                    },1000)
+                }
             }
         })
     }
@@ -318,7 +331,6 @@ define(function(){
         local.find('[opt=info9]').hide();
 //        FieldSetVisual(local,'result1_table','result1_shrinkage','result1')
         var aulevel = option.queryParams.data.aulevel;              //评估信息流程等级
-//        var aulevel = "1";
         getassessbyidFunc(local,option.queryParams.data.bstablepk,aulevel)   //加载人员信息
         dealwithbtn.click(function(){
             if(aulevel == "0"){
@@ -327,7 +339,7 @@ define(function(){
                         local.find('[name=communityopinion]').focus();
                     });
                 }else{
-                    paramsOpinion(local,option,"communityopinion")
+                    paramsOpinion(local,option,"communityopinion","")
                 }
             }else if(aulevel == "1"){
                 if(local.find('[name=streetreview]').val() == "" || local.find('[name=streetreview]').val() == null){
@@ -335,7 +347,17 @@ define(function(){
                         local.find('[name=streetreview]').focus();
                     });
                 }else{
-                    paramsOpinion(local,option,"streetreview")
+                    var shengheval = "";
+                    local.find('[name=shenghe]').each(function(){
+                        if($(this)[0].checked){
+                            shengheval = $(this)[0].value
+                        }
+                    })
+                    if(shengheval == ""){
+                        $.messager.alert('温馨提示','请勾选评估结果！');
+                    }else{
+                        paramsOpinion(local,option,"streetreview",shengheval)
+                    }
                 }
             }else if(aulevel == "2"){
                 if(local.find('[name=countyaudit]').val() == "" || local.find('[name=countyaudit]').val() == null){
@@ -343,7 +365,17 @@ define(function(){
                         local.find('[name=countyaudit]').focus();
                     });
                 }else{
-                    paramsOpinion(local,option,"countyaudit")
+                    var shengpival = "";
+                    local.find('[name=shengpi]').each(function(){
+                        if($(this)[0].checked){
+                            shengpival = $(this)[0].value
+                        }
+                    })
+                    if(shengpival == ""){
+                        $.messager.alert('温馨提示','请勾选评估结果！');
+                    }else{
+                        paramsOpinion(local,option,"countyaudit",shengpival)
+                    }
                 }
             }
         })
@@ -371,7 +403,6 @@ define(function(){
         getassessbyidFunc(local,option.queryParams.data.jja_id,"")
         /*保存*/
         savebtn.click(function(){
-            console.log(111)
             local.find('[opt=mainform]').form('submit', {
                 url:"audit/addassessmessage",
 //                dataType:'json',
