@@ -181,9 +181,9 @@
        sh_id   (:sh_id params)
        aulevel (if (= issuccess "0") "3" "-1")
        auflag (if (= issuccess "0") "县民政局审核通过" "县民政局审核未通过")
-       status  (if (= issuccess "0") "1" "0")
+       ;status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
-       newappdata (conj approvedata {:aulevel aulevel :status "1" :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
+       newappdata (conj approvedata {:aulevel aulevel :status "0" :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
     (if (= issuccess "0") (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle "y"} jja_id)
