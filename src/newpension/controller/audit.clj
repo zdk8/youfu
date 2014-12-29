@@ -33,6 +33,7 @@
         :jz_qtfuwu1name :jz_qtfuwu1 :jz_qtfuwu1bz :jz_qtfuwu2name :jz_qtfuwu2 :jz_qtfuwu2bz :jz_qtfuwu3name :jz_qtfuwu3 :jz_qtfuwu3bz :jj_hujj :jj_hujjbz :jj_shouj
         :jj_shoujbz :jj_qtfuwu1name :jj_qtfuwu1 :jj_qtfuwu1bz :jj_qtfuwu2name :jj_qtfuwu2 :jj_qtfuwu2bz :jj_qtfuwu3name :jj_qtfuwu3 :jj_qtfuwu3bz :qt_fuwu1name
         :qt_fuwu1 :qt_fuwu1bz :qt_fuwu2name :qt_fuwu2 :qt_fuwu2bz :qt_fuwu3name :qt_fuwu3 :qt_fuwu3bz :qt_fuwu4name :qt_fuwu4 :qt_fuwu4bz :suggestservice :servicebz :jja_id])
+(def approvekeys [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators :messagebrief :bstablepkname])
 
 (def t_jjylapply "t_jjylapply")
 (def t_jjylassessment "t_jjylassessment")
@@ -136,34 +137,36 @@
 
 
 (defn assessaudit0 [params]                                                                              "社区提交意见"
-  (let [approvedata (select-keys params (old/approve) )
+  (let [approvedata (select-keys params approvekeys)
         communityopinion (:audesc params)                                         ;;社区意见
         opiniontime      (common/get-nowtime)                                                   ;;提交时间
         ;audesc       communityopinion
         ;dvcode
-        jja_id (:jja_id params)
+        jja_id (:bstablepk params)
         sh_id   (:sh_id params)
         auuser (:username (session/get :usermsg))
-        newappdata (conj approvedata {:aulevel "1" :auflag "社区意见提交" :bstime opiniontime :auuser auuser :audesc communityopinion })
+        newappdata (conj approvedata {:aulevel "1" :status "1" :auflag "社区意见提交" :bstime opiniontime :auuser auuser :audesc communityopinion })
         ]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/update-approveby-lrid jja_id "t_jjylapply")                                                                              ;;如果是评估不通过的，修改之前的审核表状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
     (db/update-apply {:communityopinion communityopinion :opiniontime opiniontime} jja_id)              ;;将社区意见添加申请表中
-    (str "社区意见")))
+    (str "社区意见"))
+)
 
 (defn assessaudit1 [params]                                                                              "街镇审查"
   (let[issuccess (:issuccess params)
-       approvedata (select-keys params (old/approve))
+       approvedata (select-keys params approvekeys)
        streetreview (:audesc params)
        reviewtime (common/get-nowtime)
-       jja_id (:jja_id params)
+       jja_id (:bstablepk params)
        sh_id   (:sh_id params)
        aulevel (if (= issuccess "0") "2" "-1")
        auflag (if (= issuccess "0") "街镇审查通过" "街镇审查未通过")
        status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
        newappdata (conj approvedata {:aulevel aulevel :auflag auflag :status status :bstime reviewtime :auuser auuser :audesc streetreview})]
+       newappdata (conj approvedata {:aulevel aulevel :status "1" :auflag auflag :bstime reviewtime :auuser auuser :audesc streetreview})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
     (if (= issuccess "0") (db/update-apply {:streetreview streetreview :reviewtime reviewtime} jja_id)
@@ -172,15 +175,16 @@
 
 (defn assessaudit2 [params]                                                                              "县民政局审核"
   (let[issuccess (:issuccess params)
-       approvedata (select-keys params (old/approve))
+       approvedata (select-keys params approvekeys)
        countyaudit (:audesc params)
        audittime (common/get-nowtime)
-       jja_id (:jja_id params)
+       jja_id (:bstablepk params)
        sh_id   (:sh_id params)
        aulevel (if (= issuccess "0") "3" "-1")
        auflag (if (= issuccess "0") "县民政局审核通过" "县民政局审核未通过")
        status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
+       newappdata (conj approvedata {:aulevel aulevel :status "1" :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
        newappdata (conj approvedata {:aulevel aulevel :status status :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
@@ -194,6 +198,7 @@
        ;sh_id (:sh_id params)
        aulevel     (:aulevel params)
        ]
+    (println "AAAAAAAAAAAAAAA"  aulevel "  "  (= aulevel "0")  params)
     (cond (= aulevel "0")       (assessaudit0 params)
       (= aulevel "1")        (assessaudit1 params)
       (= aulevel "2")        (assessaudit2 params)
