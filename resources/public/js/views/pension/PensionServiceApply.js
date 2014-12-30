@@ -81,10 +81,10 @@ define(function(){
                 })
             }
         });
-        genCheckBox(local.find('[opt=liveplace]'), 'liveplace', 'live',record);
-        genCheckBox(local.find('[opt=hyfwjingji]'), 'hyfwjingji', 'economy',record);
-        genCheckBox(local.find('[opt=culture]'), 'hyculture', 'culture',record);
-        genCheckBox(local.find('[opt=marriage]'), 'marriage', 'marriage',record);
+//        genCheckBox(local.find('[opt=liveplace]'), 'liveplace', 'live',record);
+//        genCheckBox(local.find('[opt=hyfwjingji]'), 'hyfwjingji', 'economy',record);
+//        genCheckBox(local.find('[opt=culture]'), 'hyculture', 'culture',record);
+//        genCheckBox(local.find('[opt=marriage]'), 'marriage', 'marriage',record);
 
 
 

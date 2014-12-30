@@ -8,6 +8,7 @@
         <label opt="info0_shrinkage">用户基本信息</label>
         <!--<img alt="展开或收缩" opt="info0_shrinkage" id="info0_shrinkage" src="img/search.gif"/>-->
     </legend>
+    <!--<form method="post" opt="mainform">-->
     <div>
         <input type="hidden" name="jja_id">
         <input type="hidden" name="ss_id">
@@ -52,7 +53,7 @@
 
         </table>
     </div>
-
+    <!--</form>-->
 </fieldset>
 <fieldset style="width: 900px;margin: 0px auto;" opt="info1">
     <legend>
@@ -272,7 +273,7 @@
         </tr>
         <tr>
             <td>独居</td>
-            <td><input name="jz_duju" type="radio" value="20" /><label>20分</label></td>
+            <td><input name="jz_fenl" type="radio" value="20" /><label>20分</label></td>
         </tr>
 
         <tr><td>评分</td>
@@ -837,7 +838,7 @@
                 <label>=评估分值1+评估分值2+评估分值3+附加分值1+附加分值2+附加分值3</label>
             </td>
             <!--<td><a opt="recalculate">计算</a></td>-->
-            <td ><input size="1" size="2" name="pinggusum" readonly>
+            <td ><input size="1" style="text-align:  center" name="pinggusum" readonly>
                 <a style="float: right" opt="recalculate">计算</a>
             </td>
         </tr>

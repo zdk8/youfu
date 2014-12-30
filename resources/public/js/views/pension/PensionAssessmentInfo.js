@@ -44,14 +44,16 @@ define(function(){
             }
         }).click(function(e){
                 var labelopt = $(this)[0].attributes[0].value.toString();
+                console.log("收缩")
+                console.log(labelopt)
                 var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
-                FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+                FieldSetVisual(local,label_talbe+'_table',label_talbe,"图片")
             })
     }
 
     /*初始化radio,并加载radio事件*/
     var initRadioEvent = function(local){
-        enableRadioFunc(local,"");            //radio不可编辑
+        enableRadioFunc(local,{radio1:"sh_jiel"});            //radio不可编辑
         //处理特殊贡献这块
         local.find(":input[type=checkbox] + label").each(function () {
             if ($(this).prev()[0].checked) {
@@ -152,9 +154,9 @@ define(function(){
         local.find('form').form('load',option.queryParams.data)
     }
     /*设置radio不可编辑*/
-    var enableRadioFunc = function(local,radio){
+    var enableRadioFunc = function(local,radios){
         var selectRadio = ":input[type=radio] + label";
-        if(radio == "" || radio == null){
+        if(radios == "" || radios == null){
             local.find(selectRadio).each(function () {
                 if ($(this).prev()[0].checked){
                     $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
@@ -164,6 +166,7 @@ define(function(){
                     s = ":input[name=" + s + "]+label"
                     var isChecked=$(this).prev()[0].checked;
                     local.find(s).each(function (i) {
+                        console.log(111)
                         $(this).prev()[0].checked = false;
                         $(this).removeClass("checked");
                         $($(this).prev()[0]).removeAttr("checked");
@@ -178,7 +181,13 @@ define(function(){
                 })
                 .prev().hide();     //原来的圆点样式设置为不可见
         }else{
-            local.find(selectRadio).not(':input[name='+radio+'] + label').each(function () {
+            var radiostrs = [];
+            for(var radio in radios){
+                var radiostr = ':input[name='+radios[radio]+'] + label'
+                radiostrs.push(radiostr)
+            }
+            console.log(radiostrs.toString())
+            local.find(selectRadio).not(radiostrs.toString()).each(function () {
                 if ($(this).prev()[0].checked){
                     $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
                 }
@@ -200,30 +209,39 @@ define(function(){
                     }
                 })
                 .prev().hide();     //原来的圆点样式设置为不可见
-            $(':input[name='+radio+'] + label').parent().cssRadioOnly();
+            $(radiostrs.toString()).parent().cssRadioOnly();
         }
     }
     /*通过id查询申请人员，若有评估信息也一并加载*/
     var getassessbyidFunc = function(local,jjaid,aulevel){
         local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
         local.find(':input[name=rz_zongfen]').attr("readonly","readonly").val(20); //认知能力info9总分
-        if(aulevel == "0"){                                             //评估等级
+        if(aulevel == "0"){                                             //评估等级(提交)
+            console.log("aulevel==============0")
             local.find("[name=streetreview]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
-            enableRadioFunc(local,"");            //radio不可编辑
-        }else if(aulevel == "1"){
+            enableRadioFunc(local,"");            //radio全不可编辑
+//            enableRadioFunc(local,{radio1:"shenghe"});
+        }else if(aulevel == "1"){                                      //(审核)
+            console.log("aulevel==============1")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
-            enableRadioFunc(local,"shenghe");            //radio不可编辑
-        }else if(aulevel == "2"){
+//            enableRadioFunc(local,"");                              //屏蔽所有radio
+//            enableRadioFunc(local,{radio1:"shenghe"});            //radio可编辑
+            enableRadioFunc(local,{radio1:"shenghe"});            //radio可编辑
+        }else if(aulevel == "2"){                                     //(审批)
+            console.log("aulevel==============2")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=streetreview]").attr("readonly","readonly")
-            enableRadioFunc(local,"shengpi");            //radio不可编辑
+//            enableRadioFunc(local,"");                              //屏蔽所有radio
+//            enableRadioFunc(local,{radio1:"shengpi"});            //radio可编辑
+            enableRadioFunc(local,{radio1:"shengpi"});            //radio可编辑
         }else{
+            console.log("aulevel==============3")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=streetreview]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
-            enableRadioFunc(local,"");            //radio不可编辑
+//            enableRadioFunc(local,{radio1:"shenghe",radio2:"shengpi",radio3:"sh_jiel",radio4:"rz_jiel"}); //radio不可编辑
         }
         $.ajax({
             url:"audit/getassessbyid",
