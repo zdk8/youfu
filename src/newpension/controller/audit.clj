@@ -112,7 +112,7 @@
        bstablename "t_jjylapply"
        bstablepkname      "jja_id"
        status   "1"
-       aulevel     "0"
+       aulevel     "1"
        auflag   "评估完成"
        bstime      (common/get-nowtime)
        auuser   (:username (session/get :usermsg))
@@ -124,19 +124,19 @@
        ]
     (add-assessmessage request)                                                                     ;保存评估信息
     (db/add-approve approvedata)                                                                   ;添加到审核流程
-    (db/update-apply {:ishandle "1"} bstablepk)                                                ;更改申请表状态
+    (db/update-apply {:ishandle "1" :communityopinion communityopinion :opiniontime opiniontime} bstablepk)                  ;更改申请表状态,添加社区意见
     (resp/json {:success true :message "assess complete"})))
 
 (defn get-assessaudit [request]                                                                           "查询评估信息中待审核的信息"
   (let[params (:params request)
        rows (:rows params)
        page (:page params)
-       cond (str " and bstablename = 't_jjylapply' and status = '1'")
+       cond (str " and bstablename = 't_jjylapply' and status = '1' ")
        getresult (common/fenye rows page approve cond " order by sh_id ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
 
-(defn assessaudit0 [params]                                                                              "社区提交意见"
+#_(defn assessaudit0 [params]                                                                              "社区提交意见"
   (let [approvedata (select-keys params approvekeys)
         communityopinion (:audesc params)                                         ;;社区意见
         opiniontime      (common/get-nowtime)                                                   ;;提交时间
@@ -161,7 +161,7 @@
        reviewtime (common/get-nowtime)
        jja_id (:bstablepk params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "0") "2" "-1")
+       aulevel (if (= issuccess "0") "2" "0")
        auflag (if (= issuccess "0") "街镇审查通过" "街镇审查未通过")
        status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
@@ -179,7 +179,7 @@
        audittime (common/get-nowtime)
        jja_id (:bstablepk params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "0") "3" "-1")
+       aulevel (if (= issuccess "0") "3" "0")
        auflag (if (= issuccess "0") "县民政局审核通过" "县民政局审核未通过")
        ;status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
@@ -196,8 +196,9 @@
        ;sh_id (:sh_id params)
        aulevel     (:aulevel params)
        ]
-    (println "AAAAAAAAAAAAAAA"  aulevel "  "  (= aulevel "0")  params)
-    (cond (= aulevel "0")       (assessaudit0 params)
+   ; (println "AAAAAAAAAAAAAAA"  aulevel "  "  (= aulevel "0")  params)
+    (cond
+      ;;(= aulevel "0")       (assessaudit0 params)
       (= aulevel "1")        (assessaudit1 params)
       (= aulevel "2")        (assessaudit2 params)
       )
