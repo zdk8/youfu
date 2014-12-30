@@ -44,14 +44,16 @@ define(function(){
             }
         }).click(function(e){
                 var labelopt = $(this)[0].attributes[0].value.toString();
+                console.log("收缩")
+                console.log(labelopt)
                 var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
-                FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+                FieldSetVisual(local,label_talbe+'_table',label_talbe,"图片")
             })
     }
 
     /*初始化radio,并加载radio事件*/
     var initRadioEvent = function(local){
-        enableRadioFunc(local,"");            //radio不可编辑
+        enableRadioFunc(local,{radio1:"sh_jiel"});            //radio不可编辑
         //处理特殊贡献这块
         local.find(":input[type=checkbox] + label").each(function () {
             if ($(this).prev()[0].checked) {
@@ -152,9 +154,9 @@ define(function(){
         local.find('form').form('load',option.queryParams.data)
     }
     /*设置radio不可编辑*/
-    var enableRadioFunc = function(local,radio){
+    var enableRadioFunc = function(local,radios){
         var selectRadio = ":input[type=radio] + label";
-        if(radio == "" || radio == null){
+        if(radios == "" || radios == null){
             local.find(selectRadio).each(function () {
                 if ($(this).prev()[0].checked){
                     $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
@@ -164,6 +166,7 @@ define(function(){
                     s = ":input[name=" + s + "]+label"
                     var isChecked=$(this).prev()[0].checked;
                     local.find(s).each(function (i) {
+                        console.log(111)
                         $(this).prev()[0].checked = false;
                         $(this).removeClass("checked");
                         $($(this).prev()[0]).removeAttr("checked");
@@ -178,7 +181,13 @@ define(function(){
                 })
                 .prev().hide();     //原来的圆点样式设置为不可见
         }else{
-            local.find(selectRadio).not(':input[name='+radio+'] + label').each(function () {
+            var radiostrs = [];
+            for(var radio in radios){
+                var radiostr = ':input[name='+radios[radio]+'] + label'
+                radiostrs.push(radiostr)
+            }
+            console.log(radiostrs.toString())
+            local.find(selectRadio).not(radiostrs.toString()).each(function () {
                 if ($(this).prev()[0].checked){
                     $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
                 }
@@ -200,29 +209,39 @@ define(function(){
                     }
                 })
                 .prev().hide();     //原来的圆点样式设置为不可见
-            $(':input[name='+radio+'] + label').parent().cssRadioOnly();
+            $(radiostrs.toString()).parent().cssRadioOnly();
         }
     }
     /*通过id查询申请人员，若有评估信息也一并加载*/
     var getassessbyidFunc = function(local,jjaid,aulevel){
         local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
         local.find(':input[name=rz_zongfen]').attr("readonly","readonly").val(20); //认知能力info9总分
-        if(aulevel == "0"){                                             //评估等级
+        if(aulevel == "0"){                                             //评估等级(提交)
+            console.log("aulevel==============0")
             local.find("[name=streetreview]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
-            enableRadioFunc(local,"");            //radio不可编辑
-        }else if(aulevel == "1"){
+            enableRadioFunc(local,"");            //radio全不可编辑
+//            enableRadioFunc(local,{radio1:"shenghe"});
+        }else if(aulevel == "1"){                                      //(审核)
+            console.log("aulevel==============1")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
-            enableRadioFunc(local,"shenghe");            //radio不可编辑
-        }else if(aulevel == "2"){
+//            enableRadioFunc(local,"");                              //屏蔽所有radio
+//            enableRadioFunc(local,{radio1:"shenghe"});            //radio可编辑
+            enableRadioFunc(local,{radio1:"shenghe"});            //radio可编辑
+        }else if(aulevel == "2"){                                     //(审批)
+            console.log("aulevel==============2")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=streetreview]").attr("readonly","readonly")
-            enableRadioFunc(local,"shengpi");            //radio不可编辑
+//            enableRadioFunc(local,"");                              //屏蔽所有radio
+//            enableRadioFunc(local,{radio1:"shengpi"});            //radio可编辑
+            enableRadioFunc(local,{radio1:"shengpi"});            //radio可编辑
         }else{
+            console.log("aulevel==============3")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=streetreview]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
+//            enableRadioFunc(local,{radio1:"shenghe",radio2:"shengpi",radio3:"sh_jiel",radio4:"rz_jiel"}); //radio不可编辑
         }
         $.ajax({
             url:"audit/getassessbyid",
@@ -280,10 +299,10 @@ define(function(){
         getassessbyidFunc(local,option.queryParams.data.bstablepk,"")   //加载人员信息
     }
     /*根据aulevel等级判断传参意见*/
-    function paramsOpinion(local,option,optionarea){
+    function paramsOpinion(local,option,optionarea,issuccess){
+        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
         $.ajax({
             url:"audit/assessauditsubmit",
-//            url:"audit/assessauditsubmit112222",
             data:{
                 audesc:local.find('[name='+optionarea+']').val(),     //意见
                 aulevel:option.queryParams.data.aulevel,       //流程标示
@@ -293,12 +312,24 @@ define(function(){
                 bstablepkname:option.queryParams.data.bstablepkname,
                 messagebrief:option.queryParams.data.messagebrief,
                 sh_id:option.queryParams.data.sh_id,
-                dvcode:option.queryParams.data.dvcode
+                dvcode:option.queryParams.data.dvcode,
+                issuccess:issuccess == "" ? "":issuccess
             },
             type:"post",
             dataType:"json",
             success:function(data){
-                console.log(data)
+                if(data.success){
+                    showProcess(false);
+                    $.messager.show({
+                        title:'温馨提示',
+                        msg:'处理成功!',
+                        timeout:3000,
+                        showType:'slide'
+                    });
+                    setTimeout(function(){
+                        $("#tabs").tabs('close',option.queryParams.title)
+                    },1000)
+                }
             }
         })
     }
@@ -318,7 +349,6 @@ define(function(){
         local.find('[opt=info9]').hide();
 //        FieldSetVisual(local,'result1_table','result1_shrinkage','result1')
         var aulevel = option.queryParams.data.aulevel;              //评估信息流程等级
-//        var aulevel = "1";
         getassessbyidFunc(local,option.queryParams.data.bstablepk,aulevel)   //加载人员信息
         dealwithbtn.click(function(){
             if(aulevel == "0"){
@@ -327,7 +357,7 @@ define(function(){
                         local.find('[name=communityopinion]').focus();
                     });
                 }else{
-                    paramsOpinion(local,option,"communityopinion")
+                    paramsOpinion(local,option,"communityopinion","")
                 }
             }else if(aulevel == "1"){
                 if(local.find('[name=streetreview]').val() == "" || local.find('[name=streetreview]').val() == null){
@@ -335,7 +365,17 @@ define(function(){
                         local.find('[name=streetreview]').focus();
                     });
                 }else{
-                    paramsOpinion(local,option,"streetreview")
+                    var shengheval = "";
+                    local.find('[name=shenghe]').each(function(){
+                        if($(this)[0].checked){
+                            shengheval = $(this)[0].value
+                        }
+                    })
+                    if(shengheval == ""){
+                        $.messager.alert('温馨提示','请勾选评估结果！');
+                    }else{
+                        paramsOpinion(local,option,"streetreview",shengheval)
+                    }
                 }
             }else if(aulevel == "2"){
                 if(local.find('[name=countyaudit]').val() == "" || local.find('[name=countyaudit]').val() == null){
@@ -343,7 +383,17 @@ define(function(){
                         local.find('[name=countyaudit]').focus();
                     });
                 }else{
-                    paramsOpinion(local,option,"countyaudit")
+                    var shengpival = "";
+                    local.find('[name=shengpi]').each(function(){
+                        if($(this)[0].checked){
+                            shengpival = $(this)[0].value
+                        }
+                    })
+                    if(shengpival == ""){
+                        $.messager.alert('温馨提示','请勾选评估结果！');
+                    }else{
+                        paramsOpinion(local,option,"countyaudit",shengpival)
+                    }
                 }
             }
         })
@@ -371,7 +421,6 @@ define(function(){
         getassessbyidFunc(local,option.queryParams.data.jja_id,"")
         /*保存*/
         savebtn.click(function(){
-            console.log(111)
             local.find('[opt=mainform]').form('submit', {
                 url:"audit/addassessmessage",
 //                dataType:'json',

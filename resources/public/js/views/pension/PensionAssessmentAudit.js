@@ -66,14 +66,16 @@ define(function(){
                                             })
                                         }
                                     )*/
+                                    var title = record.messagebrief.substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'服务评估处理';
                                     cj.showContent({                                          //详细信息(tab标签)
-                                        title:record.messagebrief.substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'服务评估处理',
+                                        title:title,
                                         htmfile:'text!views/pension/PensionAssessmentInfo.htm',
                                         jsfile:'views/pension/PensionAssessmentInfo',
                                         queryParams:{
                                             actiontype:'dealwith',         //（处理）操作方式
                                             data:record,                   //填充数据
-                                            refresh:paaudit                //刷新
+                                            refresh:paaudit,                //刷新
+                                            title:title
                                         }
                                     })
                                 }
