@@ -108,6 +108,8 @@
 
 (defn assess-complete [request]                                                                        "评估完成"
   (let[params (:params request)
+       communityopinion (:audesc params)                                         ;;社区意见
+       opiniontime      (common/get-nowtime)                                                   ;;提交时间
        bstablepk  (:jja_id params)
        bstablename "t_jjylapply"
        bstablepkname      "jja_id"
