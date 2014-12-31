@@ -7,8 +7,8 @@ define(function(){
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '删除',hidden:'hidden',opt:'delete'},
             {text: '保存',hidden:'hidden',opt:'save'},
-            {text: '评估完成',hidden:'hidden',opt:'assessmentover'},
-            {text: '提交',hidden:'hidden',opt:'commit'},
+            {text: '提交',hidden:'hidden',opt:'assessmentover'},
+//            {text: '提交',hidden:'hidden',opt:'commit'},
             {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
@@ -22,38 +22,37 @@ define(function(){
 
     function initPage(local,option){
         addToolBar(local);
-        var districtid = local.find('[opt=districtid]');      //行政区划
-        getdivision(districtid);                               //加载行政区划
+//        var districtid = local.find('[opt=districtid]');      //行政区划
+//        getdivision(districtid);                               //加载行政区划
 
         initRadioEvent(local);                                 //初始化radio
-        loadOldByIdentityid(local);                                 //通过身份证号加载老年人
+//        loadOldByIdentityid(local);                                 //通过身份证号加载老年人
         scoreFunc(local);                                   //评分
-        local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
+//        local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
         /*为每个label注册收缩事件*/
         local.find('fieldset').find('legend').find('label').each(function(obj,fn,arg){
             var labelopt = fn.attributes[0].value.toString()
             var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
             if(option.queryParams.actiontype == "dealwith"){
-                if(label_talbe != "result1"){
-                    FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+                if(label_talbe != "result1" && label_talbe != "result3"){
+                    FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
                 }
             }else{
-                if(label_talbe != "info0"){
-                    FieldSetVisual(local,label_talbe+'_table',label_talbe,labelopt)
+                if(label_talbe != "info0" && label_talbe != "info1" && label_talbe != "result3"){
+                    FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
                 }
             }
         }).click(function(e){
                 var labelopt = $(this)[0].attributes[0].value.toString();
-                console.log("收缩")
-                console.log(labelopt)
                 var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
-                FieldSetVisual(local,label_talbe+'_table',label_talbe,"图片")
+                FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
             })
     }
 
     /*初始化radio,并加载radio事件*/
     var initRadioEvent = function(local){
-        enableRadioFunc(local,{radio1:"sh_jiel"});            //radio不可编辑
+//        enableRadioFunc(local,{radio1:"sh_jiel"});            //radio不可编辑
+        enableRadioFunc(local,"");            //radio不可编辑
         //处理特殊贡献这块
         local.find(":input[type=checkbox] + label").each(function () {
             if ($(this).prev()[0].checked) {
@@ -213,16 +212,52 @@ define(function(){
         }
     }
     /*通过id查询申请人员，若有评估信息也一并加载*/
-    var getassessbyidFunc = function(local,jjaid,aulevel){
-        local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
-        local.find(':input[name=rz_zongfen]').attr("readonly","readonly").val(20); //认知能力info9总分
-        if(aulevel == "0"){                                             //评估等级(提交)
+    var getassessbyidFunc = function(local,dataparams,aulevel){
+        local.find('form').form('load',dataparams);             //填充表单
+        for(var key in dataparams){
+            var name = key;
+            var value = dataparams[key];
+            if(local.find('input[name='+name+']:radio').val()){
+                local.find('input[name='+name+'][type=radio][value='+value+']').attr("checked","checked");
+                local.find('input[name='+name+'][type=radio][value='+value+']+label').addClass("checked");
+            }else if(local.find('input[name='+name+']:checkbox').val()){
+                local.find('input[name='+name+'][type=checkbox][value='+value+']').attr("checked","checked");
+                local.find('input[name='+name+'][type=checkbox][value='+value+']+label').addClass("checked");
+            }
+        }
+        local.find('[opt=csrq]').datebox('setValue',local.find('[opt=birthdate]').datebox('getValue'));
+        local.find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val(local.find(':input[name=sh_pingguf]').val());
+        local.find(':input[name=sum_jj_pingguf]').attr("readonly","readonly").val(local.find(':input[name=jj_pingguf]').val());
+        local.find(':input[name=sum_jz_pingguf]').attr("readonly","readonly").val(local.find(':input[name=jz_pingguf]').val());
+        local.find(':input[name=sum_rz_pingguf]').attr("readonly","readonly").val(local.find(':input[name=rz_pingguf]').val());
+        local.find(':input[name=sum_nl_pingguf]').attr("readonly","readonly").val(local.find(':input[name=nl_pingguf]').val());
+        local.find(':input[name=sum_gx_pingguf]').attr("readonly","readonly").val(local.find(':input[name=gx_pingguf]').val());
+        /*生活自理能力*/
+        local.find('div[opt=info1_1]')
+            .find(':input[type=radio]+label').each(function(i){
+                var radioValue=0;
+                if($(this).prev()[0].checked){
+                    radioValue= ($(this).prev()).val();
+                    $($(this).parent().parent().children().last().children()[0]).val(radioValue);
+                }
+            })
+        /*认知能力*/
+        local.find('div[opt=info1_4]')
+            .find(':input[type=radio]+label').each(function(i){
+                var radioValue=0;
+                if($(this).prev()[0].checked){
+                    radioValue= ($(this).prev()).val();
+                    $($(this).parent().parent().children().last().children()[0]).val(radioValue);
+                }
+            })
+        /*if(aulevel == "0"){                                             //评估等级(提交)
             console.log("aulevel==============0")
             local.find("[name=streetreview]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
             enableRadioFunc(local,"");            //radio全不可编辑
 //            enableRadioFunc(local,{radio1:"shenghe"});
-        }else if(aulevel == "1"){                                      //(审核)
+        }*/
+        if(aulevel == "1"){                                      //(审核)
             console.log("aulevel==============1")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
@@ -238,59 +273,11 @@ define(function(){
             enableRadioFunc(local,{radio1:"shengpi"});            //radio可编辑
         }else{
             console.log("aulevel==============3")
-            local.find("[name=communityopinion]").attr("readonly","readonly")
+//            local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=streetreview]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
 //            enableRadioFunc(local,{radio1:"shenghe",radio2:"shengpi",radio3:"sh_jiel",radio4:"rz_jiel"}); //radio不可编辑
         }
-        $.ajax({
-            url:"audit/getassessbyid",
-            type:"post",
-            data:{
-                jja_id:jjaid
-            },
-            dataType: 'json',
-            success:function(data){
-                if(data){
-                    local.find('form').form('load',data[0]);
-                    for(var key in data[0] ){
-                        var name = key;
-                        var value = data[0][key];
-                        if(local.find('input[name='+name+']:radio').val()){
-                            local.find('input[name='+name+'][type=radio][value='+value+']').attr("checked","checked");
-                            local.find('input[name='+name+'][type=radio][value='+value+']+label').addClass("checked");
-                        }else if(local.find('input[name='+name+']:checkbox').val()){
-                            local.find('input[name='+name+'][type=checkbox][value='+value+']').attr("checked","checked");
-                            local.find('input[name='+name+'][type=checkbox][value='+value+']+label').addClass("checked");
-                        }
-                    }
-                    local.find('[opt=csrq]').datebox('setValue',$('[opt=birthdate]').datebox('getValue'));
-                    local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100);
-                    local.find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val($(':input[name=sh_pingguf]').val());
-                    local.find(':input[name=sum_jj_pingguf]').attr("readonly","readonly").val($(':input[name=jj_pingguf]').val());
-                    local.find(':input[name=sum_jz_pingguf]').attr("readonly","readonly").val($(':input[name=jz_pingguf]').val());
-                    local.find(':input[name=sum_rz_pingguf]').attr("readonly","readonly").val($(':input[name=rz_pingguf]').val());
-                    local.find(':input[name=sum_nl_pingguf]').attr("readonly","readonly").val($(':input[name=nl_pingguf]').val());
-                    local.find(':input[name=sum_gx_pingguf]').attr("readonly","readonly").val($(':input[name=gx_pingguf]').val());
-                    local.find('fieldset[opt=info1]')
-                        .find(':input[type=radio]+label').each(function(i){
-                            var radioValue=0;
-                            if($(this).prev()[0].checked){
-                                radioValue= ($(this).prev()).val();
-                                $($(this).parent().parent().children().last().children()[0]).val(radioValue);
-                            }
-                        })
-                    local.find('fieldset[opt=info9]')
-                        .find(':input[type=radio]+label').each(function(i){
-                            var radioValue=0;
-                            if($(this).prev()[0].checked){
-                                radioValue= ($(this).prev()).val();
-                                $($(this).parent().parent().children().last().children()[0]).val(radioValue);
-                            }
-                        })
-                }
-            }
-        })
     }
     /*查看信息(actionType=view)*/
     var viewInfoFunc = function(local,option){
@@ -336,22 +323,13 @@ define(function(){
     /*处理时进入页面(actionType=dealwith)*/
     var dealwithInfoFunc = function(local,option){
         var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
-        dealwithbtn.show()
         local.find('[opt=info0]').hide();
         local.find('[opt=info1]').hide();
-        local.find('[opt=info2]').hide();
-        local.find('[opt=info3]').hide();
-        local.find('[opt=info4]').hide();
-        local.find('[opt=info5]').hide();
-        local.find('[opt=info6]').hide();
-        local.find('[opt=info7]').hide();
-        local.find('[opt=info8]').hide();
-        local.find('[opt=info9]').hide();
 //        FieldSetVisual(local,'result1_table','result1_shrinkage','result1')
-        var aulevel = option.queryParams.data.aulevel;              //评估信息流程等级
-        getassessbyidFunc(local,option.queryParams.data.bstablepk,aulevel)   //加载人员信息
-        dealwithbtn.click(function(){
-            if(aulevel == "0"){
+        var aulevel = option.queryParams.aulevel;              //评估信息流程等级
+        getassessbyidFunc(local,option.queryParams.data,aulevel)   //加载人员信息
+        dealwithbtn.show().click(function(){
+            /*if(aulevel == "0"){
                 if(local.find('[name=communityopinion]').val() == "" || local.find('[name=communityopinion]').val() == null){
                     $.messager.alert('温馨提示','请填写社区(村)意见！',"",function(r){
                         local.find('[name=communityopinion]').focus();
@@ -359,7 +337,8 @@ define(function(){
                 }else{
                     paramsOpinion(local,option,"communityopinion","")
                 }
-            }else if(aulevel == "1"){
+            }*/
+            if(aulevel == "1"){
                 if(local.find('[name=streetreview]').val() == "" || local.find('[name=streetreview]').val() == null){
                     $.messager.alert('温馨提示','请填写街镇审查意见！',"",function(r){
                         local.find('[name=streetreview]').focus();
@@ -402,76 +381,33 @@ define(function(){
     var assessmentFunc = function(local,option){
         var savebtn = local.find('[opt=save]');            //保存按钮
         var assessmentoverbtn = local.find('[opt=assessmentover]');            //提交按钮
-        savebtn.show()
-        assessmentoverbtn.show()
-        disabledForm(local);                                  //禁用表单
-        /*local.find('[opt=sqjy]').hide()
-        local.find('[name=shequcomment]').hide()
-        local.find('[opt=jdsc]').hide()
-        local.find('[name=xiangzhencomment]').hide()
-        local.find('[opt=mzjsh]').hide()
-        local.find('[name=minzhengcomment]').hide()*/
-        /*local.find('[opt=result3_table]').append("<tr>" +
-                                                        "<td>民政局审核</td>" +
-                                                        "<td colspan='4'>" +
-                                                            "<textarea style='width: 99%;height: 50px;' name='minzhengcomment'></textarea>" +
-                                                        "</td>" +
-                                                    "</tr>")*/
-//        dd = option.queryParams.data
-        getassessbyidFunc(local,option.queryParams.data.jja_id,"")
+        getassessbyidFunc(local,option.queryParams.data,"")   //加载老年人员
         /*保存*/
-        savebtn.click(function(){
+        savebtn.show().click(function(){
             local.find('[opt=mainform]').form('submit', {
                 url:"audit/addassessmessage",
 //                dataType:'json',
                 onSubmit: function(){
-//                    var flag = $(this).form('validate');
-//                    if (flag) {
+                    var isvalidate = $(this).form('validate');
+                    if (isvalidate) {
                         showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-//                    }
-//                    return flag
+                    }
+                    return isvalidate
                 },
                 success:function(data){
                     var data = eval('(' + data + ')');
                     if(data.success){
-                        showProcess(false);
+//                        showProcess(false);
                         $.messager.show({
                             title:'温馨提示',
                             msg:'保存成功!',
-                            timeout:3000,
+                            timeout:2000,
                             showType:'slide'
                         });
-                    }
-                },
-                onLoadError: function () {
-//                    showProcess(false);
-                    $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
-                }
-            });
-        })
-        /*评估完成*/
-        assessmentoverbtn.click(function(){
-            local.find('[opt=mainform]').form('submit', {
-                url:"audit/assesscomplete",
-                dataType:'json',
-                onSubmit: function(){
-//                    var flag = $(this).form('validate');
-//                    if (flag) {
-                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-//                    }
-//                    return flag
-                },
-                success:function(data){
-                    var data = eval('(' + data + ')');
-                    if(data.success){
-                        showProcess(false);
-                        $.messager.show({
-                            title:'温馨提示',
-                            msg:'评估完成!',
-                            timeout:3000,
-                            showType:'slide'
-                        });
-//                        alert('保存成功')
+                        setTimeout(function(){
+                            showProcess(false);
+                            $("#tabs").tabs('close',option.queryParams.title)
+                        },1000)
                     }
                 },
                 onLoadError: function () {
@@ -479,15 +415,53 @@ define(function(){
                     $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
                 }
             });
-            console.log('assessmentoverbtn')
+        })
+        /*提交*/
+        assessmentoverbtn.show().click(function(){
+            var communityopinionval = local.find('[name=communityopinion]').val()
+            if(communityopinionval == "" || communityopinionval == null){
+                $.messager.alert('温馨提示','请填写社区(村)意见！',"",function(r){
+                    local.find('[name=communityopinion]').focus();
+                });
+            }else{
+                local.find('[opt=mainform]').form('submit', {
+                    url:"audit/assesscomplete",
+                    dataType:'json',
+                    onSubmit: function(){
+                    var isvalidate = $(this).form('validate');
+                    if (isvalidate) {
+                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    }
+                    return isvalidate
+                    },
+                    success:function(data){
+                        var data = eval('(' + data + ')');
+                        if(data.success){
+                            showProcess(false);
+                            $.messager.show({
+                                title:'温馨提示',
+                                msg:'评估完成!',
+                                timeout:3000,
+                                showType:'slide'
+                            });
+                        }
+                        setTimeout(function(){
+                            $("#tabs").tabs('close',option.queryParams.title)
+                        },1000)
+                    },
+                    onLoadError: function () {
+                        showProcess(false);
+                        $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
+                    }
+                });
+            }
         })
     }
     /*评分*/
     var scoreFunc = function(local){
-        /*生活自理能力info1评分*/
-        local.find('fieldset[opt=info1] :input[type=radio]+label').each(function(i){
+        /*生活自理能力info1_1评分*/
+        local.find('div[opt=info1_1] :input[type=radio]+label').each(function(i){
                 $(this).bind('click',function(){
-                    tt = $(this)
                     var radioValue=0;
                     if($(this).prev()[0].checked){
                         radioValue= ($(this).prev()).val();
@@ -496,42 +470,32 @@ define(function(){
                         $($(this).parent().parent().children().last().children()[0]).removeAttr("value");
                     }
                     var sh_zongf=0;
-                    local.find('fieldset[opt=info1]').find(':input[opt=info1pingfeng]').each(function(){
+                    local.find('div[opt=info1_1]').find(':input[opt=info1pingfeng]').each(function(){
                         $(this).attr("readonly","readonly");
                         sh_zongf+=Number($(this).val())
                     })
-                    local.find(':input[name=sh_pingguf]').attr("readonly","readonly").val(sh_zongf)
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_pingguf]').attr("readonly","readonly").val(sh_zongf)
-
+                    local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(sh_zongf)
+                    local.find(':input[name=sh_pingguf]').attr("readonly","readonly").val(sh_zongf/2)
                     local.find(':input[name=sh_jiel]+label').removeClass("checked");
                     local.find(':input[name=sh_jiel]').removeAttr("checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]+label').removeClass("checked");
-                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]').removeAttr("checked");
                     if(sh_zongf == 0){
                         local.find(':input[name=sh_jiel]:eq(0)').attr("checked","checked");
-                        local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)').attr("checked","checked");
                         local.find(':input[name=sh_jiel]:eq(0)+label').addClass("checked");
-                        local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(0)+label').addClass("checked");
                     }else if(sh_zongf > 0 &&sh_zongf <= 10){
                         local.find(':input[name=sh_jiel]:eq(1)').attr("checked","checked");
-                        local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)').attr("checked","checked");
                         local.find(':input[name=sh_jiel]:eq(1)+label').addClass("checked");
-                        local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(1)+label').addClass("checked");
                     }else if(sh_zongf > 10 &&sh_zongf <= 50){
                         local.find(':input[name=sh_jiel]:eq(2)').attr("checked","checked");
-                        local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)').attr("checked","checked");
                         local.find(':input[name=sh_jiel]:eq(2)+label').addClass("checked");
-                        local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(2)+label').addClass("checked");
                     }else{
                         local.find(':input[name=sh_jiel]:eq(3)').attr("checked","checked");
-                        local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(3)').attr("checked","checked");
                         local.find(':input[name=sh_jiel]:eq(3)+label').addClass("checked");
-                        local.find('fieldset[opt=result1]').find(':input[name=sum_sh_jiel]:eq(3)+label').addClass("checked");
                     }
+                    local.find('fieldset[opt=result1]').find(':input[name=sum_sh_pingguf]').val(sh_zongf/2)
                 })
             })
-        /*生活自理能力info2评分*/
-        local.find('[opt=info2] :input[name=jj_shour]+label').each(function(i){
+        /*经济条件info1_2评分*/
+        local.find('div[opt=info1_2] :input[name=jj_shour]+label').each(function(i){
             $(this).bind('click',function(){
                 local.find('fieldset[opt=result1]').find(':input[name=sum_jj_shour]+label').removeClass("checked");
                 local.find('fieldset[opt=result1]').find(':input[name=sum_jj_shour]').removeAttr("checked");
@@ -541,12 +505,12 @@ define(function(){
                     local.find('fieldset[opt=result1]').find(':input[name=sum_jj_shour][value='+ v +']').attr("checked","checked");
                 }else
                     var v = 0;
-                local.find(':input[name=jj_pingguf]').attr("readonly","readonly").val(v)
-                local.find('fieldset[opt=result1] :input[name=sum_jj_pingguf]').attr("readonly","readonly").val(v)
+                local.find(':input[name=jj_pingguf]').attr("readonly","readonly").val(v/2)
+                local.find('fieldset[opt=result1] :input[name=sum_jj_pingguf]').attr("readonly","readonly").val(v/2)
             })
         })
-        /*居住环境info3评分*/
-        local.find('fieldset[opt=info3] :input[name=jz_fenl]+label').each(function(i){
+        /*居住环境info1_3评分*/
+        local.find('div[opt=info1_3] :input[name=jz_fenl]+label').each(function(i){
             $(this).bind('click',function(){
                 local.find('fieldset[opt=result1]').find(':input[name=sum_nl_fenl]+label').removeClass("checked");
                 local.find('fieldset[opt=result1]').find(':input[name=sum_nl_fenl]').removeAttr("checked");
@@ -556,12 +520,12 @@ define(function(){
                     local.find('fieldset[opt=result1]').find(':input[name=sum_jz_fenl][value='+ v +']').attr("checked","checked");
                 }else
                     var v = 0;
-                local.find(':input[name=jz_pingguf]').attr("readonly","readonly").val(v);
-                local.find('fieldset[opt=result1] :input[name=sum_jz_pingguf]').attr("readonly","readonly").val(v);
+                local.find(':input[name=jz_pingguf]').attr("readonly","readonly").val(v/2);
+                local.find('fieldset[opt=result1] :input[name=sum_jz_pingguf]').attr("readonly","readonly").val(v/2);
             })
         })
-        /*认知能力info9评分*/
-        local.find('fieldset[opt=info9] :input[type=radio]+label').each(function(i){
+        /*认知能力info1_4评分*/
+        local.find('div[opt=info1_4] :input[type=radio]+label').each(function(i){
             $(this).bind('click',function(){
                 var radioValue=0;
                 if($(this).prev()[0].checked){
@@ -571,10 +535,11 @@ define(function(){
                     $($(this).parent().parent().children().last().children()[0]).removeAttr("value");
                 }
                 var rz_zongfen=0;
-                local.find('fieldset[opt=info9]').find(':input[opt=info9pingfeng]').each(function(){
+                local.find('div[opt=info1_4]').find(':input[opt=info9pingfeng]').each(function(){
                     rz_zongfen+=Number($(this).val())
                 })
-                local.find(':input[name=rz_pingguf]').attr("readonly","readonly").val(rz_zongfen)
+                local.find(':input[name=rz_zongfen]').attr("readonly","readonly").val(rz_zongfen)
+                local.find(':input[name=rz_pingguf]').attr("readonly","readonly").val(rz_zongfen/2)
                 local.find(':input[name=rz_jiel]+label').removeClass("checked");
                 local.find(':input[name=rz_jiel]').removeAttr("checked");
                 if(rz_zongfen == 0){
@@ -590,11 +555,11 @@ define(function(){
                     local.find(':input[name=rz_jiel]:eq(3)').attr("checked","checked");
                     local.find(':input[name=rz_jiel]:eq(3)+label').addClass("checked");
                 }
-                local.find('fieldset[opt=result1]').find(':input[name=sum_rz_pingguf]').val(rz_zongfen);
+                local.find('fieldset[opt=result1]').find(':input[name=sum_rz_pingguf]').val(rz_zongfen/2);
             })
         })
-        /*年龄情况评分*/
-        local.find('fieldset[opt=info4] :input[name=nl_fenl]+label').each(function(){
+        /*年龄情况info1_5评分*/
+        local.find('div[opt=info1_5] :input[name=nl_fenl]+label').each(function(){
             $(this).bind('click',function(){
                 local.find('fieldset[opt=result1]').find(':input[name=sum_nl_fenl]+label').removeClass("checked");
                 local.find('fieldset[opt=result1]').find(':input[name=sum_nl_fenl]').removeAttr("checked");
@@ -604,13 +569,13 @@ define(function(){
                     local.find('fieldset[opt=result1]').find(':input[name=sum_nl_fenl][value='+ v +']').attr("checked","checked");
                 }else
                     var v = 0;
-                local.find(':input[name=nl_pingguf]').attr("readonly","readonly").val(v)
-                local.find('fieldset[opt=result1] :input[name=sum_nl_pingguf]').attr("readonly","readonly").val(v)
+                local.find(':input[name=nl_pingguf]').attr("readonly","readonly").val(v/2)
+                local.find('fieldset[opt=result1] :input[name=sum_nl_pingguf]').attr("readonly","readonly").val(v/2)
             })
         })
-        /*特殊贡献评分info5*/
+        /*特殊贡献评分info1_6*/
         var checks = [];
-        local.find('fieldset[opt=info5] :input[type=checkbox]+label').each(function(i){
+        local.find('div[opt=info1_6] :input[type=checkbox]+label').each(function(i){
             checks.push($(this));
             $(this).bind('click',function(){
                 var sum=0;
@@ -619,9 +584,9 @@ define(function(){
                         sum+=Number(checks[i].prev().val());
                     }
                 }
-                local.find( 'input[name=gx_pingguf]').attr("readonly","readonly").val(sum);
+                local.find( 'input[name=gx_pingguf]').attr("readonly","readonly").val(sum/2);
                 //同步到result1
-                local.find('input[name=sum_gx_pingguf]').attr("readonly","readonly").val(sum);
+                local.find('input[name=sum_gx_pingguf]').attr("readonly","readonly").val(sum/2);
                 /*var ischecked= $(this).prev()[0].checked;
                 var sum_gx_label=local.find('input[name=sum_'+$(this).prev()[0].name+']+label');
                 if(ischecked){
@@ -633,9 +598,9 @@ define(function(){
                 }*/
             })
         })
-        /*智障情况评分*/
+        /*智障情况info1_7评分*/
         var radioLables=[];
-        local.find('fieldset[opt=info6] :input[type=radio]+label').each(function(i){
+        local.find('div[opt=info1_7] :input[type=radio]+label').each(function(i){
             radioLables.push($(this))
             $(this).bind('click',function(){
                 var text='';
@@ -651,7 +616,7 @@ define(function(){
                 local.find('[opt=canzhangqingkuang]').val(text);
             })
         })
-        /*住房情况评分*/
+        /*住房情况info1_8评分*/
         var radioLable = [];
         var getMessage=function(){
             var text='';
@@ -675,14 +640,14 @@ define(function(){
             local.find('[opt=zhufangqingkuang]').val(text);
             local.find('input[name=zf_pingguf]').attr("readonly","readonly").val(v);
         }
-        local.find('fieldset[opt=info7] :input[type=radio]+label').each(function(i){
+        local.find('div[opt=info1_8] :input[type=radio]+label').each(function(i){
             radioLable.push($(this))
             local.find(this).bind('click',getMessage)
             local.find(this).next(':input').bind('change',getMessage)
             local.find(this).parent().parent().find(':input[name=zf_qit]').bind('change',getMessage)
         })
-        /*重大疾病评分*/
-        var info=local.find('fieldset[opt=info8]')
+        /*重大疾病info1_9评分*/
+        var info=local.find('div[opt=info1_9]')
         $('ol:first>li').css({'line-height':'21px'});
         var zhongdajibing=info.find('tr[opt=zhongdajibing]');
         var titles=[];

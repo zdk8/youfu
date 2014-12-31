@@ -1,3 +1,4 @@
+<!--老人注销查询-->
 <div class="easyui-layout"  data-options="fit:true">
     <div data-options="region:'center'" data-options="fit:true">
         <table class="easyui-datagrid-noauto" opt="peopleinfoquery"
@@ -17,7 +18,7 @@
                 <th data-options="field:'ro',width:50,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;assessment&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>评估</span></span></a>');
+                    str=$(str).append('<a action=&quot;assessment&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>注销</span></span></a>');
                     return str.html();
                 }">操作</th>
                 <th data-options="field:'lr_id',hidden:true" ></th>
@@ -64,3 +65,7 @@
 
     </div>
 </div>
+
+
+
+

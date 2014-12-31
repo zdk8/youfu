@@ -1,0 +1,89 @@
+<!--老人注销-->
+<fieldset style="width: 900px;margin: 0px auto;" opt="pplogout" name="pplogout">
+    <legend>
+        <label opt="pplogout_shrinkage"><img opt="pplogout_img" id="pplogout_img" src="img/add.png"/>居家养老人员注销</label>
+    </legend>
+
+    <table class="formtable" opt="pplogout_table" border="1">
+        <tr>
+            <td class="formtdtext">注销人姓名</td>
+            <td style="width: 200px;"><input size="25" name="name"></td>
+            <td>性别</td>
+            <td style="width: 200px;"><input name="sex"></td>
+            <td class="formtdtext">名族</td>
+            <td style="width: 200px;"><input name="sex"></td>
+            <td class="formtdtext">家庭人口数</td>
+            <td style="width: 200px;"><input name="sex"></td>
+        </tr>
+        <tr>
+            <td class="formtdtext">家庭详细住址</td>
+            <td colspan="5" style="width: 200px;"><input size="25" name="name"></td>
+            <td class="formtdtext">宅电</td>
+            <td colspan="2" style="width: 200px;"><input name="sex"></td>
+        </tr>
+        <tr>
+            <td class="formtdtext">身份证号码</td>
+            <td colspan="4" style="width: 200px;"><input size="25" name="name"></td>
+            <td class="formtdtext">低保证编号</td>
+            <td colspan="3" style="width: 200px;"><input name="sex"></td>
+        </tr>
+        <tr>
+            <td class="formtdtext">类别</td>
+            <td colspan="7" style="width: 200px;">
+                <input type="radio" name="vehicle" value="Bike">困难老年人
+                <input type="radio" name="vehicle" value="Car">特殊贡献老年人
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">居住类别</td>
+            <td colspan="7" style="width: 200px;">
+                <input type="radio" name="vehicle" value="Bike">有子女独居
+                <input type="radio" name="vehicle" value="Car">孤老
+                <input type="radio" name="vehicle" value="Car">纯老家庭
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">生活自理能力</td>
+            <td colspan="7" style="width: 200px;">
+                <input type="radio" name="vehicle" value="Bike">自理困难
+                <input type="radio" name="vehicle" value="Car">长期卧床不起
+                <input type="radio" name="vehicle" value="Car">正常
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">享受开始时间</td>
+            <td colspan="7" style="width: 200px;">
+                <input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext" opt="sqjy">注销理由</td>
+            <td colspan="7"><textarea style="width: 99%;height: 50px;" name="communityopinion"></textarea></td>
+        </tr>
+        <tr>
+            <td class="formtdtext" opt="sqjy">所在村意见</td>
+            <td colspan="7"><textarea style="width: 99%;height: 50px;" name="communityopinion"></textarea></td>
+        </tr>
+        <tr>
+            <td class="formtdtext" opt="jdsc">所在镇、街街道审核意见</td>
+            <td colspan="7">
+                <textarea style="width: 99%;height: 50px;" name="streetreview"></textarea>
+                <!--<label>符合评估标准</label><input type="radio" name="shenghe" value="0"><label></label>-->
+                <!--<label>建议再次评估</label><input type="radio" name="shenghe" value="1"><label></label>-->
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext" opt="mzjsh">民政局审批意见</td>
+            <td colspan="7">
+                <textarea style="width: 99%;height: 50px;" name="countyaudit"></textarea>
+                <!--<label>确认评估结果</label><input type="radio" name="shengpi" value="0"><label></label>-->
+                <!--<label>要求再次评估</label><input type="radio" name="shengpi" value="1"><label></label>-->
+            </td>
+        </tr>
+
+
+    </table>
+</fieldset>
+
+
+
