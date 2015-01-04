@@ -14,7 +14,8 @@
                [newpension.layout :as layout]))
 
 (def applykeys [:name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
-            :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate])
+            :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime
+            :countyaudit :audittime :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime ])
 (def opofapply [:name :identityid :gender :birthd :nation :culture :marriage :live :economy :age :registration :address :telephone :mobilephone])
 (def  assess  [:jja_id :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_xingz :sh_lout :sh_chuany :sh_dab :sh_xiaob :sh_zongf :sh_pingguf :sh_jiel :sh_pingguy
          :jj_shour :jj_fenl :jj_leix :jj_pingguf :jj_pingguy :jz_fenl :jz_zhaol :jz_pingguf :jz_pingguy :nl_fenl :nl_pingguf :nl_pingguy :gx_laom :gx_youf :gx_youf_kind
@@ -51,11 +52,16 @@
     (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
     (resp/json {:success true :message "apply success"})))
 
+(defn applydateformat [data]
+  (common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list
+(common/time-formatymd-before-list(common/time-formatymd-before-list (common/time-before-list (common/time-before-list data "birthd")
+"applydate")"opiniontime")"reviewtime")"audittime")"rm_opiniontime")"rm_reviewtime")"rm_audittime"))
+
 (defn get-apply-byid [request]                                                                          "根据id查询申请信息"
   (let[params (:params request)
        jja_id (:jja_id params)
        applydata (db/get-apply-byid jja_id)]
-    (resp/json (common/time-before-list (common/time-before-list applydata "birthd") "applydate"))))
+    (resp/json (applydateformat applydata))))
 
 (defn getall-apply [request]                                                                               "查找所有的申请信息"
   (let[params (:params request)
