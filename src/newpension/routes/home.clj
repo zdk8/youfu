@@ -177,6 +177,9 @@
   ;(POST "/audit/getassessauditbyid" request (audit/getassessauditbyid request))
   (POST "/audit/assessauditsubmit" request (audit/assess-audit request))                                ;;评估信息审核
   (POST "/audit/getauditdata" request (audit/get-audtidata request))                                      ;;获取审核通过的信息
+  (POST "/audit/removesubmit" request (audit/remove-submit request))                                        ;;注销居家养老的老人
+  (POST "/audit/removeaudit" request (audit/remove-audit request))                                          ;;注销审核
+  (POST "/audit/get-removeaudit" request (audit/get-audtidata request))                                   ;;获取注销流程数据
 
 
   (POST "/queryyljg" [] (old/get-yljg) )

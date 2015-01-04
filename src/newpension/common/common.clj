@@ -83,13 +83,13 @@
   (new Timestamp (System/currentTimeMillis)))
 
 
-(defn fenye [rows page tablename cond  order]
+(defn fenye [rows page tablename colnames cond  order]
   (let[r   (read-string rows)
        p  (read-string page)
        start  (inc(* r (dec p)))
        end (* r p)
       conds (if (not= (count cond) 0) (str " where 1=1 " cond))
-       sql (str "select * from " tablename conds order)
+       sql (str "select " colnames " from " tablename conds order)
        results (db/getall-results start end sql)
        totalsql  (str "select count(*) as sum  from " tablename  conds)
        total (get (first(db/get-results-bysql totalsql)) :sum)]
