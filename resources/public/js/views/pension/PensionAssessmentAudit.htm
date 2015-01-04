@@ -22,12 +22,13 @@
             }">操作</th>
         <th data-options="field:'aulevel',width:100,
         formatter: function(value,row,index){
-                if(value == -1){
+                return approvalProcessService[value]
+			}">状态</th>
+        <!--if(value == -1){
                     return approvalProcessService[4]
                 }else{
                     return approvalProcessService[value]
-                }
-			}">状态</th>
+                }-->
         <th data-options="field:'auflag',width:100">流程信息</th>
         <th data-options="field:'audesc',width:180">处理意见</th>
         <th data-options="field:'messagebrief',width:340,align:'left',

@@ -4,8 +4,9 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '保存',opt:'save'}/*,
-            {text: '操作日志',opt:'log'}*/
+            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '修改',hidden:'hidden',opt:'update'},
+            {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -57,9 +58,32 @@ define(function(){
         local.find('form').form('load',option.queryParams.data)
     };
 
-
+    /*初始化页面*/
     function baseRender(local,record){
         addToolBar(local);
+        /*保存*/
+        local.find('[opt=save]').show().bind('click',function(){
+            local.find('[opt=pensionform]').form('submit', {
+                url:'audit/addauditapply',
+                onSubmit: function () {
+                    var isValid = $(this).form('validate');
+                    if(isValid){
+                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    }
+                    return isValid;
+                },
+                success: function (data) {
+                    var data =  eval('(' + data + ')');
+                    if(data.success){
+                        cj.slideShow('操作成功');
+                        setTimeout(function(){
+                            showProcess(false);
+                            $("#tabs").tabs('close',"居家养老服务申请")
+                        },1000);
+                    }
+                }
+            });
+        });
         var districtid = local.find('[opt=districtid]');
         var pensionform = local.find('[opt=pensionform]');
         var familymembersgrid = local.find('[opt=familymembersgrid]');
@@ -85,10 +109,6 @@ define(function(){
 //        genCheckBox(local.find('[opt=hyfwjingji]'), 'hyfwjingji', 'economy',record);
 //        genCheckBox(local.find('[opt=culture]'), 'hyculture', 'culture',record);
 //        genCheckBox(local.find('[opt=marriage]'), 'marriage', 'marriage',record);
-
-
-
-
 
         var $registration=local.find('[opt=registration]')
         $registration.combotree({
@@ -116,8 +136,6 @@ define(function(){
                     $address.combotree('tree').tree('getSelected').divisionpath);
             }
         });
-
-
         var doinitage_radio=function(age){
             var age=age;
             if(age<80){
@@ -144,67 +162,34 @@ define(function(){
     }
 
     function create(local,option){
-
         baseRender(local);
-
-
-        if(option.queryParams && option.queryParams.actiontype == "info"){            //处理
-            dealwith.show();                                        //显示处理按钮
-            local.find('[opt=newfamilymemeradd_btn]').hide()   //隐藏子表新增按钮
-            local.find('[opt=delfamilymemer_btn]').hide()      //隐藏子表删除按钮
-            for(var i=0;i<pensionform[0].length;i++){             //禁用表单
-                var element = pensionform[0].elements[i];
-                element.disabled = true
-            }
-            $.ajax({
-                url:"searchid",                                //查询老人表
-                data:{
-                    id:option.queryParams.data.lr_id
-                },
-                type:"post",
-                dataType:"json",
-                success:function(data){
-                    pensionform.form('load',data)        //填充主表
-                    //famillylist(option.queryParams.data.lr_id)     //填充子表
-                    dealwithFunc({dealwith:dealwith,data:option.queryParams.data,refresh:option.queryParams.refresh}) //数据处理
-                    showProcess(false);
-                }
-            })
-        }
-        else{
-
-            local.find('[opt=save]').show().bind('click',function(){
-                local.find('[opt=pensionform]').form('submit', {
-                    url:'/audit/addauditapply',
-                    onSubmit: function () {
-                        var isValid = $(this).form('validate');
-                        cj.slideShow('表单验证结果:' + isValid);
-                        return isValid;
-                    },
-                    success: function (data) {
-                        cj.slideShow('操作成功');
-                    }
-                });
-
-
-            });
-        }
-
     }
     function showinfo(local,option){
         baseRender(local, option.queryParams.data);
-        console.log(option.queryParams.data);
         local.find('form').form('load', option.queryParams.data);
-        local.find('[opt=save]').show().bind('click',function(){
+        local.find('[opt=save]').hide()
+        local.find('[opt=update]').show().bind('click',function(){
             local.find('[opt=pensionform]').form('submit', {
-                url:'/audit/updateapply',
+                url:'audit/updateapply',
+                dataType:"json",
                 onSubmit: function () {
                     var isValid = $(this).form('validate');
-                    cj.slideShow('表单验证结果:' + isValid);
+                    if(isValid){
+                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    }
                     return isValid;
                 },
                 success: function (data) {
-                    cj.slideShow('操作成功');
+                    var data =  eval('(' + data + ')');
+                    if(data.success){
+                        cj.slideShow('操作成功');
+                        setTimeout(function(){
+                            showProcess(false);
+                            $("#tabs").tabs('close',option.queryParams.title)
+                        },1000)
+                        var ref = option.queryParams.refresh;             //刷新
+                        ref();
+                    }
                 }
             });
 
@@ -216,7 +201,7 @@ define(function(){
         if(o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'info':
-                    showinfo(l,o);
+                    showinfo(l,o);                  //查看详细信息，并可进行修改
                     break;
                 case 'update':
                     actionInfo(l, o);

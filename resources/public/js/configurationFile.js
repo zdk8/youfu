@@ -1,5 +1,5 @@
 ﻿approvalProcess=['打回重审','提交未审核','审核未审批','审批通过','保存未提交'];    //流程状态
-approvalProcessService=['评估完成','提交未审核','审核未审批','审批通过','打回重审'];    //流程状态
+approvalProcessService=['打回重审','提交未审核','审核未审批','审批通过'];    //流程状态
 getGender=['女','男']             //性别
 /*日期时间*/
 var myformatter = function(date){
@@ -72,15 +72,15 @@ var FieldSetVisual = function(local, pTableID, pFieldSetID, pImageID )
 {
     var objTable = local.find('[opt='+pTableID+']');
     var objFieldSet = local.find('[opt='+pFieldSetID+']');
-//            var objImage = document.getElementById( pImageID) ;
+    var objImage = document.getElementById(pImageID) ;
     if(objTable.is(":hidden")){
         objTable.show()
         var heightTable = parseInt( objTable.height())+22 ;
         objFieldSet.height(heightTable+"px");
-//            objImage.src="F:\\相册\\按钮\\searchorange.jpg" ;        //打开
+        objImage.src="img/add.png" ;        //打开
     }else{
         objTable.hide()
         objFieldSet.height("22px");
-//            objImage.src="F:\\相册\\按钮\\hengtiao.jpg" ;       //收缩
+        objImage.src="img/reduction.png" ;       //收缩
     }
 }

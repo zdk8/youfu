@@ -6,6 +6,7 @@ define(function(){
             url:'need/search-oldassessment',
             method:'post',
             onDblClickRow: function(){
+                console.log(11111)
                 var selected = $('#need').datagrid('getSelected');
                 if (selected){
                     var post = $("#need").datagrid("getSelected").name;
@@ -34,7 +35,6 @@ define(function(){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
                             var record=rows[index];
-//                            record=rows[index];
                             $(btns_arr[j][i]).click(function(){
                                 if($(this).attr("action")=='view'){
                                     cj.showContent({                                          //详细信息(tab标签)
