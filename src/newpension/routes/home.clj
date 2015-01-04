@@ -176,6 +176,8 @@
   (POST "/audit/getassessaudit" request (audit/get-assessaudit request))                               ;;获取评估审核信息
   ;(POST "/audit/getassessauditbyid" request (audit/getassessauditbyid request))
   (POST "/audit/assessauditsubmit" request (audit/assess-audit request))                                ;;评估信息审核
+  (POST "/audit/getauditdata" request (audit/get-audtidata request))                                      ;;获取审核通过的信息
+
 
   (POST "/queryyljg" [] (old/get-yljg) )
 ;  (GET "/queryyljg" [] (exec-raw ["SELECT * FROM t_mpensionagence"] :results) )

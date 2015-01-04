@@ -64,7 +64,7 @@
        name (:name params)
        identityid (:identityid params)
        cond (str " and ( ishandle is null)" (common/likecond "name" name) (common/likecond "identityid" identityid))
-       getresult (common/fenye rows page t_jjylapply cond " order by jja_id ")]
+       getresult (common/fenye rows page t_jjylapply cond " order by jja_id asc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
 (defn  update-apply [request]                                                                           "更新申请信息"
@@ -134,7 +134,7 @@
        rows (:rows params)
        page (:page params)
        cond (str " and bstablename = 't_jjylapply' and status = '1' ")
-       getresult (common/fenye rows page approve cond " order by sh_id ")]
+       getresult (common/fenye rows page approve cond " order by sh_id asc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
 
@@ -205,3 +205,13 @@
       (= aulevel "2")        (assessaudit2 params)
       )
     (resp/json {:success true :message "audit success"})))
+
+(defn get-audtidata [request]                                                            "获取审核通过的数据"
+  (let[params (:params request)
+       rows (:rows params)
+       page (:page params)
+       name (:name params)
+       identityid (:identityid params)
+       cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid))
+       getresult (common/fenye rows page t_jjylapply cond " order by jja_id asc")]
+    (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
