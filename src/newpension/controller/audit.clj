@@ -233,7 +233,7 @@
        auuser   (:username (session/get :usermsg))
        ;AUDESC
        ;DVCODE
-       approvedata (conj appdata {:status   "1" :aulevel  "4" :auflag "社区注销意见"  :bstime rm_opiniontime :auuser auuser :audesc rm_communityopinion})
+       approvedata (conj appdata {:status   "1" :aulevel  "7" :auflag "社区注销意见"  :bstime rm_opiniontime :auuser auuser :audesc rm_communityopinion})
        ]
     (db/update-apply {:ishandle "1" :rm_reason rm_reason :rm_communityopinion rm_communityopinion :rm_opiniontime rm_opiniontime} jja_id)     ;;更改申请表状态
     (db/add-approve approvedata)                                                                     ;;添加到注销审核流程
@@ -243,7 +243,7 @@
   (let[params (:params request)
        rows (:rows params)
        page (:page params)
-       cond (str " and bstablename = 't_jjylapply' and status = '1' AND (aulevel = 4 OR aulevel = 5)")
+       cond (str " and bstablename = 't_jjylapply' and status = '1' AND (aulevel = 7 OR aulevel = 8)")
        getresult (common/fenye rows page approve "*" cond " order by sh_id asc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
@@ -255,7 +255,7 @@
        rm_reviewtime (common/get-nowtime)
        jja_id (:bstablepk params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "0") "7" "-6")
+       aulevel (if (= issuccess "0") "8" "-6")
        auflag (if (= issuccess "0") "街镇审查通过" "街镇审查未通过")
        status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
