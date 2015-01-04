@@ -8,7 +8,7 @@ define(function(){
 
             localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
-                    url:'/audit/getauditdata',
+                    url:'audit/get-removeaudit',
                     method:'post',
                     queryParams: {
 

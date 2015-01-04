@@ -19,16 +19,15 @@
                 <th data-options="field:'ro',width:150,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;logout&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>注销</span></span></a>');
-                    str=$(str).append('<a action=&quot;change&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>变更</span></span></a>');
+                    str=$(str).append('<a action=&quot;dealwith&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>处理</span></span></a>');
                     return str.html();
                 }">操作</th>
                 <th data-options="field:'aulevel',width:127,
                 formatter: function(value,row,index){
-                        if(value == '' || value == null){
-                            return approvalProcess[4]
-                        }else{
-                            return approvalProcess[value]
+                        if(value == '7'){
+                            return approvalProcess[1]
+                        }else if(value == '8'){
+                            return approvalProcess[2]
                         }
                     }">状态</th>
                 <th data-options="field:'auflag',width:100">流程信息</th>
