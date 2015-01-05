@@ -35,35 +35,39 @@ define(function(){
                                         }
                                     })
                                 }else if(action == "dealwith"){                   //处理
-                                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                     var title = record.messagebrief.substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'服务评估处理';
-                                    console.log(record)
-                                    $.ajax({
-                                        url:"audit/getassessbyid",
-                                        type:"post",
-                                        data:{
-                                            jja_id:record.bstablepk
-                                        },
-                                        dataType: 'json',
-                                        success:function(data){
-                                            if(data){
-                                                cj.showContent({                                          //详细信息(tab标签)
-                                                    title:title,
-                                                    htmfile:'text!views/pension/PensionAssessmentInfo.htm',
-                                                    jsfile:'views/pension/PensionAssessmentInfo',
-                                                    queryParams:{
-                                                        actiontype:'dealwith',         //（处理）操作方式
-                                                        data:data[0],
+                                    if($("#tabs").tabs('getTab',title)){
+                                        console.log("已经加载了")
+                                        $("#tabs").tabs('select',title)
+                                    }else{
+                                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                        $.ajax({
+                                            url:"audit/getassessbyid",
+                                            type:"post",
+                                            data:{
+                                                jja_id:record.bstablepk
+                                            },
+                                            dataType: 'json',
+                                            success:function(data){
+                                                if(data){
+                                                    cj.showContent({                                          //详细信息(tab标签)
                                                         title:title,
-                                                        aulevel:record.aulevel
-                                                    }
-                                                })
-                                                setTimeout(function(){
-                                                    showProcess(false);
-                                                },1000)
+                                                        htmfile:'text!views/pension/PensionAssessmentInfo.htm',
+                                                        jsfile:'views/pension/PensionAssessmentInfo',
+                                                        queryParams:{
+                                                            actiontype:'dealwith',         //（处理）操作方式
+                                                            data:data[0],
+                                                            title:title,
+                                                            aulevel:record.aulevel
+                                                        }
+                                                    })
+                                                    setTimeout(function(){
+                                                        showProcess(false);
+                                                    },1000)
+                                                }
                                             }
-                                        }
-                                    })
+                                        })
+                                    }
                                 }
                             });
                         })(i)

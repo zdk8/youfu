@@ -1,14 +1,18 @@
 <div  class="easyui-panel" opt="formcontentpanel" style="overflow-y: scroll;" data-options="fit:true,border:false">
 <form opt="pensionform" class="common-form" method="post">
-<fieldset>
-    <legend>老年人基本信息</legend>
+<fieldset opt="baseinfo">
+    <legend>
+        <label opt="baseinfo_shrinkage">
+            <img opt="baseinfo_img" id="baseinfo_img" src="img/add.png"/>老年人基本信息
+        </label>
+    </legend>
     <div>
         <input type="hidden" name="lr_id">
-        <table class="formtable" readonly=true>
+        <table class="formtable" opt="baseinfo_table" border="1">
             <tr>
                 <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
                 <td colspan="5">
-                    <input opt="mydistrictid" data-options="required:true, valueField:'divisionpath'"
+                    <input opt="districtid" data-options="required:true, valueField:'divisionpath'"
                            style="width: 300px;"  name="districtid">
                 </td>
                 <td rowspan="4" colspan="2" style="text-align: center">
@@ -46,20 +50,18 @@
                            opt="nation"
                            name="nation"
                            data-options="
-                                loader: cj.getLoader('nation'),
+                                loader: cj.getLoader('oldnation'),
                                 mode: 'remote',
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'
             "> </td>
             </tr>
-        </table>
-        <table class="formtable">
             <tr>
                 <td class="formtdtext">家庭住址</td>
                 <td colspan="3"><input class="easyui-validatebox" name="address" style="width: 300px"></td>
                 <td class="formtdtext">人员类型</td>
-                <td>
+                <td colspan="2">
                     <input class="easyui-combobox "
                            opt="type"
                            name="type"
@@ -74,7 +76,7 @@
             </tr>
             <tr>
                 <td class="formtdtext">户籍地</td>
-                <td colspan="5"><input class="easyui-validatebox" name="registration" style="width: 300px"></td>
+                <td colspan="7"><input class="easyui-validatebox" name="registration" style="width: 300px"></td>
             </tr>
             <tr>
                 <td class="formtdtext">居住环境</td>
@@ -102,7 +104,7 @@
                      ">
                 </td>
                 <td class="formtdtext">家庭经济条件</td>
-                <td>
+                <td colspan="2">
                     <input class="easyui-combobox "
                            name="economy"
                            style="width: auto"
@@ -130,7 +132,7 @@
                      ">
                 </td>
                 <td class="formtdtext">手机号码</td>
-                <td><input class="easyui-validatebox" name="mobilephone"></td>
+                <td colspan="2"><input class="easyui-validatebox" name="mobilephone"></td>
             </tr>
             <tr>
                 <td class="formtdtext">退休工资</td>
@@ -138,7 +140,7 @@
                 <td class="formtdtext">住宅电话</td>
                 <td><input class="easyui-validatebox" name="telephone"></td>
                 <td class="formtdtext">老人呼叫机</td>
-                <td><input class="easyui-validate" name="hjj_hjj"></td>
+                <td colspan="2"><input class="easyui-validate" name="hjj_hjj"></td>
             </tr>
             <tr>
                 <td class="formtdtext">呼叫机种类</td>
@@ -166,31 +168,44 @@
                      ">
                 </td>
                 <td class="formtdtext">呼叫手机号</td>
-                <td><input class="easyui-validatebox" name="hjj_phone"></td>
+                <td colspan="2"><input class="easyui-validatebox" name="hjj_phone"></td>
             </tr>
+        </table>
 
+    </div>
+</fieldset>
+
+<fieldset opt="baseinfo1">
+    <legend>
+        <label opt="baseinfo1_shrinkage">
+            <img opt="baseinfo1_img" id="baseinfo1_img" src="img/add.png"/>享受服务类型
+        </label>
+    </legend>
+    <div opt="lrxsfwlx">
+        <table class="formtable" opt="baseinfo1_table">
+            <tr>
+                <td>
+                    <input name="fwlx_jjyl" type="checkbox" value="100" /> 居家养老服务
+                    <input name="fwlx_fwj" type="checkbox" value="100" /> 服务卷
+                    <input name="fwlx_mftj" type="checkbox" value="100" />免费体检
+                    <input name="fwlx_dylnb" type="checkbox" value="100" />订阅老年报
+                    <input name="fwlx_jgyl" type="checkbox" value="100" />机构养老
+                    <input name="fwlx_tyfw" type="checkbox" value="100" />体验服务
+                    <input name="fwlx_hjj" type="checkbox" value="100" />呼叫机
+                    <input name="fwlx_qt" type="checkbox" value="100" />其他
+                </td>
+            </tr>
         </table>
     </div>
 </fieldset>
-
-<fieldset>
-    <legend>享受服务类型</legend>
-    <div opt="lrxsfwlx">
-        <input name="fwlx_jjyl" type="checkbox" value="100" /> 居家养老服务
-        <input name="fwlx_fwj" type="checkbox" value="100" /> 服务卷
-        <input name="fwlx_mftj" type="checkbox" value="100" />免费体检
-        <input name="fwlx_dylnb" type="checkbox" value="100" />订阅老年报
-        <input name="fwlx_jgyl" type="checkbox" value="100" />机构养老
-        <input name="fwlx_tyfw" type="checkbox" value="100" />体验服务
-        <input name="fwlx_hjj" type="checkbox" value="100" />呼叫机
-        <input name="fwlx_qt" type="checkbox" value="100" />其他
-    </div>
-</fieldset>
-
-<fieldset>
-    <legend>居住信息</legend>
+<fieldset  opt="baseinfo2">
+    <legend>
+        <label opt="baseinfo2_shrinkage">
+            <img opt="baseinfo2_img" id="baseinfo2_img" src="img/add.png"/>居住信息
+        </label>
+    </legend>
     <div>
-        <table class="formtable">
+        <table class="formtable" opt="baseinfo2_table">
             <tr>
                 <td class="formtdtext">邻居一姓名</td>
                 <td><input class="easyui-validatebox" name="jz_yixingm"></td>
@@ -248,12 +263,15 @@
         </table>
     </div>
 </fieldset>
-
 <!--健康信息-->
-<fieldset>
-    <legend>健康信息</legend>
+<fieldset  opt="baseinfo3">
+    <legend>
+        <label opt="baseinfo3_shrinkage">
+            <img opt="baseinfo3_img" id="baseinfo3_img" src="img/add.png"/>健康信息
+        </label>
+    </legend>
     <div>
-        <table class="formtable">
+        <table class="formtable" opt="baseinfo3_table">
             <tr>
                 <td class="formtdtext">血型</td>
                 <td>
@@ -431,12 +449,13 @@
         </table>
     </div>
 </fieldset>
-
 <!--爱好及活动需求-->
-<fieldset>
-    <legend>爱好及活动需求</legend>
+<fieldset  opt="baseinfo4">
+    <legend>
+        <label opt="baseinfo4_shrinkage"><img opt="baseinfo4_img" id="baseinfo4_img" src="img/add.png"/>爱好及活动需求</label>
+    </legend>
     <div>
-        <table class="formtable">
+        <table class="formtable" opt="baseinfo4_table">
             <tr>
                 <td class="formtdtext">性格特征</td>
                 <td colspan="5">
@@ -467,103 +486,6 @@
     </div>
 </fieldset>
 
-<!--<fieldset style="width: 900px;margin: 0px auto">
-    <legend>家庭成员列表</legend>
-    <div opt="familymembersdiv">
-        <table class="easyui-datagrid"  opt="familymembersgrid" id="familymembersgrid1" style="width: 900px"
-               data-options="rownumbers:true,toolbar:'#pensionmembertb',singleSelect:true,showFooter:true">
-
-            <thead data-options="frozen:true">
-            <tr>
-                <th data-options="field:'bottom',width:40,align:'center',editor:'icon-remove'">
-                    <a data-options="plain:true">选择</a>
-                </th>
-            </tr>
-            </thead>
-            <thead>
-            <tr>
-                <th class=""
-                    data-options="
-                    field:'guanx',
-                    align:'center',
-                    width:100,
-                    editor:{
-                         type:'combobox',
-                         options:{
-                            required:true,
-                            loader:cj.getLoader('relation'),
-                            method:'get' ,
-                            editable:false,
-                            width:60,
-                            valueField: 'id',
-                            textField: 'text'}}">关系<span style="color: red">*</span></th>
-                <th data-options="required:true,field:'gx_name',width:90,align:'center',editor:{
-                    type:'validatebox',
-                    options:{required:true}
-                   } ">姓名<span style="color: red">*</span></th>
-                <th opt="gxidentityid" data-options="field:'gx_identityid',width:150,align:'center',editor:{
-                            type:'validatebox',
-                            options:{
-                                required:true,
-                                invalidMessage:'请输入正确的身份证号',
-                                validType:'identityid'
-                            }
-                        }">身份证号<span style="color: red">*</span></th>
-                <th class="" data-options="field:'gx_gender',align:'center',width:60,editor:{
-							type:'combobox',
-							options:{
-							    required:true,
-                                loader:cj.getLoader('gender'),
-                                method:'get' ,
-                                editable:false,
-                                width:60,
-                                valueField: 'id',
-                                textField: 'text'
-							}
-						}">性别<span style="color: red">*</span></th>
-                <th data-options="field:'gx_birth',width:90,align:'center',editor:'text'">出生日期</th>
-                <th  data-options="field:'gx_telephone',width:160,align:'center',editor:'text'">宅电</th>
-                <th data-options="field:'gx_mobilephone',width:160,align:'center',editor:'text'">手机</th>
-                <th  data-options="field:'gx_economy',width:100,align:'center',editor:'text'">月收入</th>
-                <th class="" data-options="field:'gx_culture',align:'center',width:60,editor:{
-							type:'combobox',
-							options:{
-                               loader:cj.getLoader('culture'),
-                                method:'get' ,
-                                editable:false,
-                                width:60,
-                                valueField: 'id',
-                                textField: 'text'
-							}
-						}">文化程度</th>
-                <th  data-options="field:'gx_registration',width:100,align:'center',editor:'text'">籍贯</th>
-                &lt;!&ndash;<th  data-options="field:'gx_nation',width:100,align:'center',editor:'text'">&ndash;&gt;
-                <th class="" data-options="field:'gx_nation',align:'center',width:60,editor:{
-							type:'combobox',
-							options:{
-                                loader:cj.getLoader('NATION'),
-                                method:'get' ,
-                                editable:false,
-                                width:60,
-                                valueField: 'id',
-                                textField: 'text'
-							}
-						}">民族</th>
-                <th  data-options="field:'gx_work',width:100,align:'center',editor:'text'">工作地点</th>
-
-                <th data-options="field:'prseno',width:160,align:'center',editor:'text',hidden:true">prseno</th>
-                <th data-options="field:'lrgx_id',width:160,align:'center',editor:'text',hidden:true">lrgx_id</th>
-                <th data-options="field:'lr_id',width:160,align:'center',editor:'text',hidden:true">lr_id</th>
-            </tr>
-            </thead>
-        </table>
-        <div opt="familymembertb" style="height:auto">
-            <a opt="newfamilymemeradd_btn" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
-            <a opt="delfamilymemer_btn" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
-        </div>
-    </div>
-</fieldset>-->
-
 <div style="width: 900px;margin: 0px auto">
     <table style="width: 900px">
         <tr>
@@ -590,7 +512,6 @@
         </tr>
     </table>
 </div>
-
 </form>
 </div>
 

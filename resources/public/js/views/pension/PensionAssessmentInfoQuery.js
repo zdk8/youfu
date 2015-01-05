@@ -6,7 +6,6 @@ define(function(){
             url:'need/search-oldassessment',
             method:'post',
             onDblClickRow: function(){
-                console.log(11111)
                 var selected = $('#need').datagrid('getSelected');
                 if (selected){
                     var post = $("#need").datagrid("getSelected").name;

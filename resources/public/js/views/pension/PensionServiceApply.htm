@@ -24,8 +24,7 @@
                                 loader:cj.getLoader('gender'),
                                 editable:false,
                                 valueField:'id',
-                                textField:'text'
-            ">
+                                textField:'text'">
                         </td>
                         <td class="formtdtext">出生年月</td>
                         <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd">
@@ -37,7 +36,12 @@
 
                         <td class="formtdtext">民族</td>
                         <td>
-                            <input name="nation" class="easyui-combobox">
+                            <input name="nation" class="easyui-combobox"
+                                   data-options="
+                                loader:cj.getLoader('oldnation'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'">
                             <!--<input class="easyui-combobox"
                                    opt="nation"
                                    name="nation"

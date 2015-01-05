@@ -325,7 +325,6 @@ define(function(){
         var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
         local.find('[opt=info0]').hide();
         local.find('[opt=info1]').hide();
-//        FieldSetVisual(local,'result1_table','result1_shrinkage','result1')
         var aulevel = option.queryParams.aulevel;              //评估信息流程等级
         getassessbyidFunc(local,option.queryParams.data,aulevel)   //加载人员信息
         dealwithbtn.show().click(function(){

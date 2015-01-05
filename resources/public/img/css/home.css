@@ -131,7 +131,8 @@ span.error,a.error{
     color:red;
 }
 .searchbox-button {
-    background: url('images/searchbox_button22.png') no-repeat center center;
+    /*background: url('images/searchbox_button22.png') no-repeat center center;*/
+    background: url('') no-repeat center center;
 }
 
 .gray7{
@@ -605,6 +606,11 @@ div.weboxbuttons ul li a:active
     border-left:0px;
     text-align: center;
     border-bottom: 1px solid red;
+}
+
+.tabs-panels {
+    padding-top: 5px;
+    background-color: rgba(253, 204, 206, 0);
 }
 
 

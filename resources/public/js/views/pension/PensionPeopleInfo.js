@@ -27,6 +27,18 @@ define(function(){
 
     function create(local,option){
         addToolBar(local);
+        /*为每个label注册收缩事件*/
+        local.find('fieldset').find('legend').find('label').each(function(obj,fn,arg){
+            var labelopt = fn.attributes[0].value.toString()
+            var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
+            if(label_talbe != "baseinfo"){
+                FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
+            }
+        }).click(function(e){
+                var labelopt = $(this)[0].attributes[0].value.toString();
+                var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
+                FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
+            })
         var districtid = local.find('[opt=districtid]');      //行政区划
         getdivision(districtid);                                          //加载行政区划
         var pensionform = local.find('[opt=pensionform]');      //老人信息主表
@@ -36,7 +48,6 @@ define(function(){
         local.find('[name=operators]').val(cj.getUserMsg().username);
         local.find('[opt=setdaytime]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
 
-        console.log(option.queryParams)
         /*if(option.queryParams && option.queryParams.actiontype == "info"){            //处理
             dealwith.show();                                        //显示处理按钮
             local.find('[opt=newfamilymemeradd_btn]').hide()   //隐藏子表新增按钮

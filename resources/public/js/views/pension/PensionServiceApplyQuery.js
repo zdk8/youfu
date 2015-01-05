@@ -39,35 +39,39 @@ define(function(){
                                             })
                                             //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='assessment'){         //评估
-                                            showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                             var title = record.name+'信息评估'
-                                            $.ajax({
-                                                url:"audit/getassessbyid",
-                                                type:"post",
-                                                data:{
-                                                    jja_id:record.jja_id
-                                                },
-                                                dataType: 'json',
-                                                success:function(data){
-                                                    if(data){
-                                                        cj.showContent({                                          //详细信息(tab标签)
-                                                            title:title,
-                                                            htmfile:'text!views/pension/PensionAssessmentInfo.htm',
-                                                            jsfile:'views/pension/PensionAssessmentInfo',
-                                                            queryParams:{
-                                                                actiontype:'assessment',         //（处理）操作方式
-                                                                data:data[0],
+                                            if($("#tabs").tabs('getTab',title)){
+                                                console.log("已经加载了")
+                                                $("#tabs").tabs('select',title)
+                                            }else{
+                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                                $.ajax({
+                                                    url:"audit/getassessbyid",
+                                                    type:"post",
+                                                    data:{
+                                                        jja_id:record.jja_id
+                                                    },
+                                                    dataType: 'json',
+                                                    success:function(data){
+                                                        if(data){
+                                                            cj.showContent({                                          //详细信息(tab标签)
                                                                 title:title,
-                                                                refresh:refreshGrid
-                                                            }
-                                                        })
-                                                        setTimeout(function(){
-                                                            showProcess(false);
-                                                        },1000)
+                                                                htmfile:'text!views/pension/PensionAssessmentInfo.htm',
+                                                                jsfile:'views/pension/PensionAssessmentInfo',
+                                                                queryParams:{
+                                                                    actiontype:'assessment',         //（处理）操作方式
+                                                                    data:data[0],
+                                                                    title:title,
+                                                                    refresh:refreshGrid
+                                                                }
+                                                            })
+                                                            setTimeout(function(){
+                                                                showProcess(false);
+                                                            },1000)
+                                                        }
                                                     }
-                                                }
-                                            })
-
+                                                })
+                                            }
                                             //deleteRoleInfo(record);
                                         }else if($(this).attr("action")=='grant'){
                                             //grant(record);
