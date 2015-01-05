@@ -57,6 +57,11 @@
 (common/time-formatymd-before-list(common/time-formatymd-before-list (common/time-before-list (common/time-before-list data "birthd")
 "applydate")"opiniontime")"reviewtime")"audittime")"rm_opiniontime")"rm_reviewtime")"rm_audittime"))
 
+(defn applydate-formatin [data]
+  (common/timefmt-bef-insert(common/timefmt-bef-insert(common/timefmt-bef-insert(common/timefmt-bef-insert
+  (common/timefmt-bef-insert(common/timefmt-bef-insert(common/timefmt-bef-insert (common/time-before-list data "birthd")
+  "applydate")"opiniontime")"reviewtime")"audittime")"rm_opiniontime")"rm_reviewtime")"rm_audittime"))
+
 (defn get-apply-byid [request]                                                                          "根据id查询申请信息"
   (let[params (:params request)
        jja_id (:jja_id params)
@@ -69,9 +74,11 @@
        page (:page params)
        name (:name params)
        identityid (:identityid params)
-       cond (str " and ( ishandle is null)" (common/likecond "name" name) (common/likecond "identityid" identityid))
+       cond (str " and ( ishandle is null or ishandle = 'r' )" (common/likecond "name" name) (common/likecond "identityid" identityid))
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id asc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
+
+
 
 (defn  update-apply [request]                                                                           "更新申请信息"
   (let [params (:params request)
@@ -114,13 +121,14 @@
 
 (defn assess-complete [request]                                                                        "评估完成"
   (let[params (:params request)
+       ishandle (:ishandle params)
        communityopinion (:communityopinion params)                                         ;;社区意见
        opiniontime      (common/get-nowtime)                                                   ;;提交时间
        bstablepk  (:jja_id params)
        bstablename "t_jjylapply"
        bstablepkname      "jja_id"
        status   "1"
-       aulevel     "1"
+       aulevel    (if (= ishandle "r") "4" "1")
        auflag   "评估完成"
        bstime      (common/get-nowtime)
        auuser   (:username (session/get :usermsg))
@@ -163,39 +171,43 @@
 )
 
 (defn assessaudit1 [params]                                                                              "街镇审查"
-  (let[issuccess (:issuccess params)
+  (let[aulevel (:aulevel params)
+       issuccess (:issuccess params)
        approvedata (select-keys params approvekeys)
        streetreview (:audesc params)
        reviewtime (common/get-nowtime)
        jja_id (:bstablepk params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "0") "2" "0")
+       newaulevel (if (= issuccess "0") (if (= aulevel "4") "5" "2") (if (= aulevel "4") "-3" "0"))
        auflag (if (= issuccess "0") "街镇审查通过" "街镇审查未通过")
        status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
-       newappdata (conj approvedata {:aulevel aulevel :auflag auflag :status status :bstime reviewtime :auuser auuser :audesc streetreview})]
+       ishandle   (if (= aulevel "4") "r" nil)
+       newappdata (conj approvedata {:aulevel newaulevel :auflag auflag :status status :bstime reviewtime :auuser auuser :audesc streetreview})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
     (if (= issuccess "0") (db/update-apply {:streetreview streetreview :reviewtime reviewtime} jja_id)
-                                        (db/update-apply {:streetreview streetreview :reviewtime reviewtime :ishandle nil} jja_id))               ;;将社区意见添加申请表中
+                                        (db/update-apply {:streetreview streetreview :reviewtime reviewtime :ishandle ishandle} jja_id))               ;;将社区意见添加申请表中
     (str "街镇审查")))
 
 (defn assessaudit2 [params]                                                                              "县民政局审核"
   (let[issuccess (:issuccess params)
+       aulevel (:aulevel params)
        approvedata (select-keys params approvekeys)
        countyaudit (:audesc params)
        audittime (common/get-nowtime)
        jja_id (:bstablepk params)
        sh_id   (:sh_id params)
-       aulevel (if (= issuccess "0") "3" "0")
+       newaulevel (if (= issuccess "0") (if (= aulevel "5") "6" "3") (if (= aulevel "5") "-3" "0"))
        auflag (if (= issuccess "0") "县民政局审核通过" "县民政局审核未通过")
        ;status  (if (= issuccess "0") "1" "0")
        auuser (:username (session/get :usermsg))
-       newappdata (conj approvedata {:aulevel aulevel :status "0" :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
+       ishandle (if (= aulevel "5") "n" nil)
+       newappdata (conj approvedata {:aulevel newaulevel :status "0" :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
     (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
     (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
     (if (= issuccess "0") (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle "y"} jja_id)
-                                        (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle nil} jja_id) )             ;;将社区意见添加申请表中
+                                        (db/update-apply {:countyaudit countyaudit :audittime audittime :ishandle ishandle} jja_id) )             ;;将社区意见添加申请表中
     (str "县民政局审核")))
 
 (defn assess-audit [request]                                                                   "评估审核"
@@ -209,6 +221,8 @@
       ;;(= aulevel "0")       (assessaudit0 params)
       (= aulevel "1")        (assessaudit1 params)
       (= aulevel "2")        (assessaudit2 params)
+      (= aulevel "4")        (assessaudit1 params)
+      (= aulevel "5")        (assessaudit2 params)
       )
     (resp/json {:success true :message "audit success"})))
 
@@ -292,3 +306,12 @@
       (= aulevel "8")        (assessaudit8 params)
       )
     (resp/json {:success true :message "remove audit success"})))
+
+(defn  reassess [request]                                                                           "更新信息重新评估"
+  (let [params (:params request)
+        jja_id  (:jja_id params)
+        changedata {:communityopinion nil :opiniontime nil :streetreview nil :reviewtime nil :countyaudit nil :audittime nil :ishandle "r"}
+        applydata (conj (select-keys params applykeys) changedata)
+        ]
+    (db/update-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate") jja_id)
+    (resp/json {:success true :message "reassess apply success"})))
