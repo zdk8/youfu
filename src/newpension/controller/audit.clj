@@ -248,7 +248,7 @@
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
 
-(defn assessaudit4 [params]                                                                              "街镇审查"
+(defn assessaudit7 [params]                                                                              "街镇审查"
   (let[issuccess (:issuccess params)
        approvedata (select-keys params approvekeys)
        rm_streetreview (:audesc params)
@@ -266,7 +266,7 @@
       (db/update-apply {:rm_streetreview rm_streetreview :rm_reviewtime rm_reviewtime :ishandle "y"} jja_id))               ;;将社区意见添加申请表中
     (str "街镇审查")))
 
-(defn assessaudit5 [params]                                                                              "县民政局审核"
+(defn assessaudit8 [params]                                                                              "县民政局审核"
   (let[issuccess (:issuccess params)
        approvedata (select-keys params approvekeys)
        rm_countyaudit (:audesc params)
@@ -288,7 +288,7 @@
   (let[params (:params request)
        aulevel   (:aulevel params)]
     (cond
-      (= aulevel "4")        (assessaudit4 params)
-      (= aulevel "5")        (assessaudit5 params)
+      (= aulevel "7")        (assessaudit7 params)
+      (= aulevel "8")        (assessaudit8 params)
       )
     (resp/json {:success true :message "remove audit success"})))
