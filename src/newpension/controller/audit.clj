@@ -147,7 +147,7 @@
   (let[params (:params request)
        rows (:rows params)
        page (:page params)
-       cond (str " and bstablename = 't_jjylapply' and status = '1' AND (aulevel = 1 OR aulevel = 2)")
+       cond (str " and bstablename = 't_jjylapply' and status = '1' AND aulevel != '7' AND aulevel != '8' ")
        getresult (common/fenye rows page approve "*" cond " order by sh_id asc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
