@@ -338,4 +338,5 @@
   (let[params (:params request)
        jdep_id (:jdep_id params)
        departdata (common/time-before-insert (common/time-before-insert (select-keys params jjyldepartment) "founddata") "starttime")]
-    (db/update-jjyldepart departdata jdep_id)))
+    (db/update-jjyldepart departdata jdep_id)
+    (resp/json {:success true :message "jjyldepart update success"})))
