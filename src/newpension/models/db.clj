@@ -136,6 +136,12 @@
   (table :t_servicesuggest)
   (database dboracle))
 
+;;居家服务申请表
+(defentity t_jjyldepartment
+  (pk :jdep_id)
+  (table :t_jjyldepartment)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -718,6 +724,11 @@
   (update t_jjylassessment
     (set-fields assessdata)
     (where {:pg_id pg_id})))
+
+;;居家养老服务机构
+(defn add-jjyldepart [depdata]
+  (insert t_jjyldepartment
+    (values depdata)))
 
 
 

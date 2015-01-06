@@ -35,11 +35,14 @@
         :jj_shoujbz :jj_qtfuwu1name :jj_qtfuwu1 :jj_qtfuwu1bz :jj_qtfuwu2name :jj_qtfuwu2 :jj_qtfuwu2bz :jj_qtfuwu3name :jj_qtfuwu3 :jj_qtfuwu3bz :qt_fuwu1name
         :qt_fuwu1 :qt_fuwu1bz :qt_fuwu2name :qt_fuwu2 :qt_fuwu2bz :qt_fuwu3name :qt_fuwu3 :qt_fuwu3bz :qt_fuwu4name :qt_fuwu4 :qt_fuwu4bz :suggestservice :servicebz :jja_id])
 (def approvekeys [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators :messagebrief :bstablepkname])
+(def jjyldepartment [:departid :departname :responsible :telephone :corporate :founddata :servicearea :certificatenum :specialtynum :servicenum :registnumber :departcode
+                     :businesslicense :taxnumber :billingunit :billingprice :starttime  :registnature :address :dailyavgnum  :departoverview :servicecontent])
 
 (def t_jjylapply "t_jjylapply")
 (def t_jjylassessment "t_jjylassessment")
 (def t_servicesuggest "t_servicesuggest")
 (def approve "approve")
+(def t_jjyldepartment "t_jjyldepartment")
 
 
 (defn add-audit-apply [request]                                                                        "添加申请"
@@ -315,3 +318,9 @@
         ]
     (db/update-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate") jja_id)
     (resp/json {:success true :message "reassess apply success"})))
+
+(defn add-jjyldepart [request]
+  (let[params (:params request)
+       depdata (common/timefmt-bef-insert(common/timefmt-bef-insert(select-keys params jjyldepartment) "founddata" )"starttime")]
+    (db/add-jjyldepart depdata)
+    (resp/json {:success true :message "jjyldepart add success"})))
