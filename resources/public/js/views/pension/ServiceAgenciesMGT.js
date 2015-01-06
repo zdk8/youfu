@@ -1,0 +1,115 @@
+define(function(){
+    return {
+        render:function(local,option){
+            var localDataGrid;
+            var refreshGrid=function() {
+                localDataGrid.datagrid('reload');
+            };
+
+            localDataGrid=
+                local.find('.easyui-datagrid-noauto').datagrid({
+                    url:'audit/getalljjyldepart',
+                    method:'post',
+                    queryParams: {
+
+                    },
+                    onLoadSuccess:function(data){
+                        var viewbtns=local.find('[action=view]');
+                        var updatebtns=local.find('[action=update]');
+                        var deletebtns=local.find('[action=delete]');
+                        var btns_arr=[viewbtns,updatebtns,deletebtns];
+                        var rows=data.rows;
+                        for(var i=0;i<rows.length;i++){
+                            for(var j=0;j<btns_arr.length;j++){
+                                (function(index){
+                                    var record=rows[index];
+                                    $(btns_arr[j][i]).click(function(){
+                                        if($(this).attr("action")=='view'){
+                                            var title = "【"+record.name+'】服务申请详细信息'
+                                            cj.showContent({                                          //详细信息(tab标签)
+                                                title:title,
+                                                htmfile:'text!views/pension/PensionServiceApply.htm',
+                                                jsfile:'views/pension/PensionServiceApply',
+                                                queryParams:{
+                                                    actiontype:'information',         //（详细信息）操作方式
+                                                    data:record,
+                                                    title:title,
+                                                    refresh:refreshGrid
+                                                }
+                                            })
+                                            //viewRoleInfo(record);
+                                        }else if($(this).attr("action")=='update'){         //修改
+                                            var title = "【"+record.departname+'】信息修改'
+                                            if($("#tabs").tabs('getTab',title)){
+                                                $("#tabs").tabs('select',title)
+                                            }else{
+//                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                                cj.showContent({                                          //详细信息(tab标签)
+                                                    title:title,
+                                                    htmfile:'text!views/pension/ServiceAgenciesForm.htm',
+                                                    jsfile:'views/pension/ServiceAgenciesForm',
+                                                    queryParams:{
+                                                        actiontype:'update',         //（处理）操作方式
+                                                        data:record,
+                                                        title:title,
+                                                        refresh:refreshGrid
+                                                    }
+                                                })
+                                            }
+                                        }else if($(this).attr("action")=='delete'){               //删除
+                                            /*var title = "【"+record.name+'】信息变更'
+                                            if($("#tabs").tabs('getTab',title)){
+                                                $("#tabs").tabs('select',title)
+                                            }else{
+//                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                                cj.showContent({                                          //变更详细信息(tab标签)
+                                                    title:title,
+                                                    htmfile:'text!views/pension/PensionServiceApply.htm',
+                                                    jsfile:'views/pension/PensionServiceApply',
+                                                    queryParams:{
+                                                        actiontype:'change',         //（处理）操作方式
+                                                        data:record,
+                                                        title:title,
+                                                        refresh:refreshGrid
+                                                    }
+                                                })
+                                            }*/
+                                        }
+                                    });
+                                })(i);
+                            }
+
+                            //check
+                            if(rows[i].userid) {
+                                localDataGrid.datagrid('checkRow', i);
+                            }
+                        }
+                    },
+                    striped:true,
+                    toolbar:local.find('div[tb]')
+                })
+
+            local.find('.searchbtn').click(function(){
+                localDataGrid.datagrid('load',{
+                    departname:local.find('[opt=departname]').searchbox('getValue')
+                })
+            })
+
+            /*添加服务机构*/
+            local.find('[opt=addsamgt]').click(function(){
+                var title = "添加服务机构"
+                cj.showContent({                                          //添加服务机构
+                    title:title,
+                    htmfile:'text!views/pension/ServiceAgenciesForm.htm',
+                    jsfile:'views/pension/ServiceAgenciesForm',
+                    queryParams:{
+                        actiontype:'add',         //（处理）操作方式
+                        data:"",
+                        title:title,
+                        refresh:refreshGrid
+                    }
+                })
+            })
+        }
+    }
+})

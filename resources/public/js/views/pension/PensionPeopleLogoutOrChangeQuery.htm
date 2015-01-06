@@ -16,44 +16,44 @@
             <thead>
             <tr>
                 <th data-options="field:'lr_id',hidden:true" ></th>
-                <th data-options="field:'ro',width:150,align:'center',formatter:function(value,rowData,rowIndex)
+                <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
                     str=$(str).append('<a action=&quot;logout&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>注销</span></span></a>');
                     str=$(str).append('<a action=&quot;change&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>变更</span></span></a>');
                     return str.html();
                 }">操作</th>
-                <th data-options="field:'aulevel',width:127,
+                <!--<th data-options="field:'aulevel',width:127,
                 formatter: function(value,row,index){
                         if(value == '' || value == null){
                             return approvalProcess[4]
                         }else{
                             return approvalProcess[value]
                         }
-                    }">状态</th>
-                <th data-options="field:'auflag',width:100">流程信息</th>
-                <th data-options="field:'audesc',width:180">处理意见</th>
-                <th data-options="field:'name',width:340,align:'left',
+                    }">状态</th>-->
+                <!--<th data-options="field:'auflag',width:100">流程信息</th>
+                <th data-options="field:'audesc',width:180">处理意见</th>-->
+                <!--<th data-options="field:'name',width:340,align:'left',
                 formatter:function(v,r,i)
                 {
                     var str='<div></div>';
                     str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
                     return str.html();
-                }">人员信息</th>
-                <th data-options="field:'auuser',width:127">办理人</th>
+                }">人员信息</th>-->
+                <!--<th data-options="field:'auuser',width:127">办理人</th>-->
                 <!--<th data-options="field:'bsnyue',width:127">业务期</th>-->
-                <th data-options="field:'opiniontime',width:230">时间</th>
-                <!--<th data-options="field:'name',width:100,align:'center',
+                <!--<th data-options="field:'opiniontime',width:230">时间</th>-->
+                <th data-options="field:'name',width:100,align:'center',
                 formatter:function(v,r,i)
                 {
                     var str='<div></div>';
                     str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
                     return str.html();
-                }">姓名</th>-->
-                <!--<th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
+                }">姓名</th>
+                <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
                 <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
                 <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
-                <th data-options="field:'address',width:200,align:'left'">住址</th>-->
+                <th data-options="field:'address',width:200,align:'left'">住址</th>
             </tr>
             </thead>
         </table>

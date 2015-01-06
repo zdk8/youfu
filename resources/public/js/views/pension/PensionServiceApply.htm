@@ -7,7 +7,14 @@
                 <input type="hidden" name="jja_id">
 
                 <table class="formtable">
-
+                    <tr>
+                        <td class="formtdtext" style="width: 100px">行政区划</td>
+                        <td colspan="3">
+                            <input name="districtid" style="width: 300px;" opt="districtid"
+                                   data-options="required:true, valueField:''">
+                            <input type="text" name="districtname" opt="districtname">
+                        </td>
+                    </tr>
                     <tr>
                         <td class="formtdtext" style="width: 100px">姓名<span style="color: red">*</span></td>
                         <td style="width: 350px"><input class="easyui-validatebox  input-text" name="name" data-options="required:true"></td>
@@ -48,9 +55,9 @@
                                    data-options=" loader: cj.getLoader('nation'), mode: 'remote', editable:false, valueField:'id', textField:'text' ">--> </td>
                         <td class="formtdtext">文化程度</td>
                         <td opt="culture">
-                            <input type="radio" name="vehicle" value="Bike">文盲
-                            <input type="radio" name="vehicle" value="Car">略识字
-                            <input type="radio" name="vehicle" value="Bike">能读字,最高学历
+                            <input type="radio" name="culture" value="0">文盲
+                            <input type="radio" name="culture" value="1">略识字
+                            <input type="radio" name="culture" value="2">能读字,最高学历
                         </td>
                     </tr>
                     <tr>
@@ -61,32 +68,32 @@
                         </td>
                         <td class="formtdtext">婚姻状况</td>
                         <td opt="marriage">
-                            <input type="radio" name="marriage" value="Bike">未婚
-                            <input type="radio" name="marriage" value="Car">已婚
-                            <input type="radio" name="marriage" value="Bike">丧偶
-                            <input type="radio" name="marriage" value="Bike">离婚
+                            <input type="radio" name="marriage" value="0">未婚
+                            <input type="radio" name="marriage" value="1">已婚
+                            <input type="radio" name="marriage" value="2">丧偶
+                            <input type="radio" name="marriage" value="3">离婚
                         </td>
                     </tr>
                     <tr>
 
                         <td class="formtdtext">居住</td>
                         <td colspan="3" opt="liveplace">
-                            <input type="radio" name="live" value="Bike">与子女同住
-                            <input type="radio" name="live" value="Car">与亲友同住
-                            <input type="radio" name="live" value="Bike">与配偶同住
-                            <input type="radio" name="live" value="Bike">独居
+                            <input type="radio" name="live" value="0">与子女同住
+                            <input type="radio" name="live" value="1">与亲友同住
+                            <input type="radio" name="live" value="2">与配偶同住
+                            <input type="radio" name="live" value="3">独居
                         </td>
                     </tr>
                     <tr>
 
                         <td class="formtdtext">经济条件</td>
                         <td colspan="3" opt="hyfwjingji">
-                            <input type="radio" name="economy" value="Bike">低保 特困职工
-                            <input type="radio" name="economy" value="Car">低保边缘户
-                            <input type="radio" name="economy" value="Bike">低收入
-                            <input type="radio" name="economy" value="Bike">无退休工资
-                            <input type="radio" name="economy" value="Bike">有退休工资
-                            <input type="radio" name="economy" value="Bike">特殊贡献
+                            <input type="radio" name="economy" value="0">低保 特困职工
+                            <input type="radio" name="economy" value="1">低保边缘户
+                            <input type="radio" name="economy" value="2">低收入
+                            <input type="radio" name="economy" value="3">无退休工资
+                            <input type="radio" name="economy" value="4">有退休工资
+                            <input type="radio" name="economy" value="5">特殊贡献
                         </td>
                     </tr>
                     <tr>
@@ -126,7 +133,7 @@
                         <td class="formtdtext">手机</td>
                         <td><input class="input-text easyui-validatebox" name="mobilephone" data-options="validType:['maxLength[15]']"></td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td class="formtdtext">代理人姓名</td>
                         <td><input class="input-text" name="agent"></td>
                         <td class="formtdtext">与申请人关系</td>
@@ -141,7 +148,7 @@
                         <td><input class="input-text easyui-validatebox" name="agentphone" data-options="validType:['maxLength[25]']"></td>
                         <td class="formtdtext">手机</td>
                         <td><input class="input-text easyui-validatebox" name="agentmobilephone" data-options="validType:['maxLength[15]']"></td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td class="formtdtext">申请时间</td>
                         <td><input class="input-text easyui-datebox" name="applydate" opt="applydate" data-options="formatter:myformatter,parser:myparser"></td>
@@ -152,8 +159,6 @@
 
             </div>
         </fieldset>
-
-
     </form>
 </div>
 

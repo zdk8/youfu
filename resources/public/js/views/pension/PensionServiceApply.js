@@ -6,6 +6,7 @@ define(function(){
         var toolBar=cj.getFormToolBar([
             {text: '保存',hidden:'hidden',opt:'save'},
             {text: '修改',hidden:'hidden',opt:'update'},
+            {text: '变更',hidden:'hidden',opt:'change'},
             {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
@@ -61,6 +62,9 @@ define(function(){
     /*初始化页面*/
     function baseRender(local,record){
         addToolBar(local);
+        var districtid = local.find('[opt=districtid]');      //行政区划值
+        var districtname = local.find('[opt=districtname]');  //行政区划名称
+        getdivision(districtid,districtname);                   //加载行政区划
         /*保存*/
         local.find('[opt=save]').show().bind('click',function(){
             local.find('[opt=pensionform]').form('submit', {
@@ -75,11 +79,11 @@ define(function(){
                 success: function (data) {
                     var data =  eval('(' + data + ')');
                     if(data.success){
-                        cj.slideShow('操作成功');
-                        setTimeout(function(){
-                            showProcess(false);
+                        showProcess(false);
+                        cj.slideShow('保存成功');
+                        if(showProcess(false)){
                             $("#tabs").tabs('close',"居家养老服务申请")
-                        },1000);
+                        }
                     }
                 }
             });
@@ -164,6 +168,7 @@ define(function(){
     function create(local,option){
         baseRender(local);
     }
+    /*修改*/
     function showinfo(local,option){
         baseRender(local, option.queryParams.data);
         local.find('form').form('load', option.queryParams.data);
@@ -182,19 +187,58 @@ define(function(){
                 success: function (data) {
                     var data =  eval('(' + data + ')');
                     if(data.success){
-                        cj.slideShow('操作成功');
-                        setTimeout(function(){
-                            showProcess(false);
+                        showProcess(false);
+                        cj.slideShow('修改成功');
+                        if(showProcess(false)){
                             $("#tabs").tabs('close',option.queryParams.title)
-                        },1000)
-                        var ref = option.queryParams.refresh;             //刷新
-                        ref();
+                             var ref = option.queryParams.refresh;             //刷新
+                             ref();
+                        }
+
                     }
                 }
             });
 
 
         });
+    }
+    /*查看详细信息*/
+    function showInformation(local,option){
+        baseRender(local, option.queryParams.data);
+        local.find('[opt=save]').hide()
+        local.find('form').form('load', option.queryParams.data);
+    }
+    /*变更人员信息*/
+    function changeInfo(local,option){
+        baseRender(local, option.queryParams.data);
+        local.find('[opt=save]').hide()
+        local.find('form').form('load',option.queryParams.data)
+        local.find('[opt=change]').show().click(function(){
+            local.find('[opt=pensionform]').form('submit', {
+                url:'audit/reassess',
+                dataType:"json",
+                onSubmit: function () {
+                    var isValid = $(this).form('validate');
+                    if(isValid){
+//                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    }
+                    return isValid;
+                },
+                success: function (data) {
+                    var data =  eval('(' + data + ')');
+                    if(data.success){
+                        showProcess(false);
+                        cj.slideShow('操作成功');
+                        if(showProcess(false)){
+                            $("#tabs").tabs('close',option.queryParams.title)
+                            var ref = option.queryParams.refresh;             //刷新
+                            ref();
+                        }
+
+                    }
+                }
+            });
+        })
     }
 
     var render=function(l,o){
@@ -203,8 +247,14 @@ define(function(){
                 case 'info':
                     showinfo(l,o);                  //查看详细信息，并可进行修改
                     break;
+                case 'information':
+                    showInformation(l,o);           //只查看信息
+                    break;
                 case 'update':
                     actionInfo(l, o);
+                    break;
+                case 'change':                   //变更
+                    changeInfo(l,o);
                     break;
                 default :
                     break;

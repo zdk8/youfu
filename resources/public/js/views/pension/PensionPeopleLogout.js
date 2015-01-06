@@ -4,7 +4,7 @@ define(function(){
             var toolBarHeight=30;
             var toolBar=cj.getFormToolBar([
                 {text: '提交',hidden:'hidden',opt:'commit'},
-                {text: '操作日志',hidden:'hidden',opt:'log'}
+                {text: '处理',hidden:'hidden',opt:'dealwith'}
             ]);
             local.append(toolBar);
             local.find('div[opt=formcontentpanel]').panel({
@@ -16,55 +16,140 @@ define(function(){
         };
 
         var pplogoutform = local.find("[opt=pplogoutform]");     //注销表单
-        pplogoutform.form("load",option.queryParams.data)
-        /*for ( var i = 0; i < $("[opt=pplogoutform]")[0].length; i++) {
-            $("[opt=pplogoutform]")[0].elements[i].disabled = true
-        }*/
         addToolBar(local);
-        local.find('[opt=commit]').show().click(function(){
-            var rm_reasonval = local.find("[name=rm_reason]");
-            var rm_communityopinionval = local.find("[name=rm_communityopinion]");
-            if(rm_reasonval.val() == "" || rm_communityopinionval.val() == ""){
-                alert("请填写注销理由！")
-            }else{
-                $.ajax({
-                    url:"audit/removesubmit",                       //注销
-                    type:"post",
-                    dataType:"json",
-                    data:{
-                        jja_id:option.queryParams.data.jja_id,
-                        rm_reason:rm_reasonval.val(),
-                        rm_communityopinion:rm_communityopinionval.val()
-                    },
-                    success:function(data){
-                        console.log(data)
-                        /*$("#tabs").tabs("close",option.queryParams.title)   //关闭节点
-                        var refreshfun = option.queryParams.refresh;
-                        refreshfun();                                   //刷新*/
-                    }
-                })
-            }
-
-
-            /*pplogoutform.form("submit",{
-                url:"qqqqqq",
-                onSubmit: function(){
-                    var isvalidate = $(this).form('validate');
-                    if (isvalidate) {
-//                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                    }
-                    return isvalidate
-                },
-                success:function(data){
-                    var data = eval('(' + data + ')');
-
-                },
-                onLoadError: function () {
-//                    showProcess(false);
-                    $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
+        if(option.queryParams.actiontype == "logout"){         //注销
+            /*for ( var i = 0; i < $("[opt=pplogoutform]")[0].length; i++) {
+             $("[opt=pplogoutform]")[0].elements[i].disabled = true
+             }*/
+            pplogoutform.form("load",option.queryParams.data)
+            local.find('[opt=commit]').show().click(function(){
+                var rm_reasonval = local.find("[name=rm_reason]");
+                var rm_communityopinionval = local.find("[name=rm_communityopinion]");
+                if(rm_reasonval.val() == "" || rm_communityopinionval.val() == ""){
+                    rm_reasonval.val() == "" ? $.messager.alert('温馨提示','请填写注销理由！',"",function(r){
+                        rm_reasonval.focus()
+                    }) :rm_communityopinionval.val() == "" ? $.messager.alert('温馨提示','请填写村意见！',"",function(r){
+                        rm_communityopinionval.focus()
+                    }) : null
+                }else{
+                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    $.ajax({
+                        url:"audit/removesubmit",                       //注销
+                        type:"post",
+                        dataType:"json",
+                        data:{
+                            jja_id:option.queryParams.data.jja_id,
+                            rm_reason:rm_reasonval.val(),
+                            rm_communityopinion:rm_communityopinionval.val()
+                        },
+                        success:function(data){
+                            if(data.success){
+                                showProcess(false);
+                                $.messager.show({
+                                    title:'温馨提示',
+                                    msg:'提交成功!',
+                                    timeout:2000,
+                                    showType:'slide'
+                                });
+                                if(showProcess(false)){
+                                    $("#tabs").tabs('close',option.queryParams.title)
+                                    var refresh = option.queryParams.refresh;
+                                    refresh();
+                                }
+                            }
+                        }
+                    })
                 }
-            })*/
-        });
+            });
+        }else if(option.queryParams.actiontype == "logoutdealwith"){   //注销处理
+            pplogoutform.form("load",option.queryParams.data)
+            var rm_streetreviewval = local.find("[name=rm_streetreview]")   //审核意见
+            var rm_countyaudit = local.find("[name=rm_countyaudit]")        //审批意见
+            var aulevel = option.queryParams.aulevel;
+            local.find('[opt=dealwith]').show().click(function(){
+                if(aulevel == "7"){             //注销审核
+                    if(rm_streetreviewval.val() == "" || rm_streetreviewval.val() == null){
+                        $.messager.alert('温馨提示','请填写所在镇、街街道审核意见！',"",function(r){
+                            rm_streetreviewval.focus();
+                        });
+                    }else{
+                        var shengheval = "";
+                        local.find('[name=shenghe]').each(function(){
+                            if($(this)[0].checked){
+                                shengheval = $(this)[0].value
+                            }
+                        })
+                        if(shengheval == ""){
+                            $.messager.alert('温馨提示','请勾选审核结果！');
+                        }else{
+                            auditFunc(local,option,"rm_streetreview",shengheval);
+                        }
+                    }
+                    /*rm_streetreviewval.val() == "" ? $.messager.alert('温馨提示','请填写所在镇、街街道审核意见！',"",function(r){
+                        rm_streetreviewval.focus()
+                    }) : auditFunc(local,option,"rm_streetreview");*/
+                }else if(aulevel == "8"){       //注销审批
+                    if(rm_countyaudit.val() == "" || rm_countyaudit.val() == null){
+                        $.messager.alert('温馨提示','请填写民政局审批意见！',"",function(r){
+                            rm_countyaudit.focus();
+                        });
+                    }else{
+                        var shengpival = "";
+                        local.find('[name=shengpi]').each(function(){
+                            if($(this)[0].checked){
+                                shengpival = $(this)[0].value
+                            }
+                        })
+                        if(shengpival == ""){
+                            $.messager.alert('温馨提示','请勾选审批结果！');
+                        }else{
+                            auditFunc(local,option,"rm_countyaudit",shengpival);
+                        }
+                    }
+                    /*rm_countyaudit.val() == "" ? $.messager.alert('温馨提示','请填写民政局审批意见！',"",function(r){
+                        rm_countyaudit.focus()
+                    }) : auditFunc(local,option,"rm_countyaudit");*/
+                }
+            })
+        }
+
+    }
+    /*注销审核*/
+    function auditFunc(local,option,optionarea,issuccess){
+        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+        $.ajax({
+            url:"audit/removeaudit",
+            data:{
+                audesc:local.find('[name='+optionarea+']').val(),     //意见
+                aulevel:option.queryParams.aulevel,            //流程标示
+                appoperators:option.queryParams.record.appoperators,
+                bstablename:option.queryParams.record.bstablename,
+                bstablepk:option.queryParams.record.bstablepk,
+                bstablepkname:option.queryParams.record.bstablepkname,
+                messagebrief:option.queryParams.record.messagebrief,
+                sh_id:option.queryParams.record.sh_id,
+                dvcode:option.queryParams.record.dvcode,
+                issuccess:issuccess == "" ? "":issuccess
+            },
+            type:"post",
+            dataType:"json",
+            success:function(data){
+                if(data.success){
+                    showProcess(false);
+                    $.messager.show({
+                        title:'温馨提示',
+                        msg:'处理成功!',
+                        timeout:2000,
+                        showType:'slide'
+                    });
+                    if(showProcess(false)){
+                        $("#tabs").tabs('close',option.queryParams.title)
+                        var refresh = option.queryParams.refresh;
+                        refresh();
+                    }
+                }
+            }
+        })
     }
 
     return {
