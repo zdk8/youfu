@@ -26,8 +26,9 @@ function formatterYM(date){
     var m = date.getMonth()+1;
     return y+''+(m<10?('0'+m):m);
 }
+
 /*行政区划的树结构*/
-var getdivision = function(divisiontree){
+var getdivision = function(divisiontree,districtname){
     divisiontree.combotree({
         panelHeight:300,
         url:'getdivisiontree',
@@ -47,7 +48,8 @@ var getdivision = function(divisiontree){
             divisiontree.combotree('setValue',
                     divisiontree.combotree('tree').tree('getSelected').id)
                 .combobox('setText',
-                    divisiontree.combotree('tree').tree('getSelected').text);
+                    divisiontree.combotree('tree').tree('getSelected').totalname);
+            districtname.val(divisiontree.combotree('tree').tree('getSelected').totalname)
         }
     });
 }
@@ -55,7 +57,7 @@ var getdivision = function(divisiontree){
 var showProcess = function(isShow, title, msg) {
     if (!isShow) {
         $.messager.progress('close');
-        return;
+        return true;
     }
     var win = $.messager.progress({
         title: title,
@@ -77,10 +79,10 @@ var FieldSetVisual = function(local, pTableID, pFieldSetID, pImageID )
         objTable.show()
         var heightTable = parseInt( objTable.height())+22 ;
         objFieldSet.height(heightTable+"px");
-        objImage.src="img/add.png" ;        //打开
+        objImage.src="img/reduction.png" ;        //打开
     }else{
         objTable.hide()
         objFieldSet.height("22px");
-        objImage.src="img/reduction.png" ;       //收缩
+        objImage.src="img/add.png" ;       //收缩
     }
 }

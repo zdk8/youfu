@@ -25,7 +25,7 @@ define(function(){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
                                         if($(this).attr("action")=='view'){
-                                            var title = record.name+'详细信息'
+                                            var title = "【"+record.name+'】服务申请详细信息'
                                             cj.showContent({                                          //详细信息(tab标签)
                                                 title:title,
                                                 htmfile:'text!views/pension/PensionServiceApply.htm',
@@ -39,12 +39,23 @@ define(function(){
                                             })
                                             //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='assessment'){         //评估
-                                            var title = record.name+'信息评估'
+                                            var title = "【"+record.name+'】信息评估'
                                             if($("#tabs").tabs('getTab',title)){
-                                                console.log("已经加载了")
                                                 $("#tabs").tabs('select',title)
                                             }else{
-                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                                /*cj.showContent({                                          //详细信息(tab标签)
+                                                    title:title,
+                                                    htmfile:'text!views/pension/PensionAssessmentInfo.htm',
+                                                    jsfile:'views/pension/PensionAssessmentInfo',
+                                                    queryParams:{
+                                                        actiontype:'assessment',         //（处理）操作方式
+                                                        data:data[0],
+                                                        record:record,
+                                                        title:title,
+                                                        refresh:refreshGrid
+                                                    }
+                                                })*/
+//                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                                 $.ajax({
                                                     url:"audit/getassessbyid",
                                                     type:"post",
@@ -61,6 +72,7 @@ define(function(){
                                                                 queryParams:{
                                                                     actiontype:'assessment',         //（处理）操作方式
                                                                     data:data[0],
+                                                                    record:record,
                                                                     title:title,
                                                                     refresh:refreshGrid
                                                                 }

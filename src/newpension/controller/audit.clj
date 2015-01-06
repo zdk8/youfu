@@ -13,7 +13,7 @@
                [noir.io :as io]
                [newpension.layout :as layout]))
 
-(def applykeys [:name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
+(def applykeys [:districtname :districtid :name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
             :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime
             :countyaudit :audittime :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime ])
 (def opofapply [:name :identityid :gender :birthd :nation :culture :marriage :live :economy :age :registration :address :telephone :mobilephone])
@@ -337,6 +337,6 @@
 (defn update-jjyldepart [request]
   (let[params (:params request)
        jdep_id (:jdep_id params)
-       departdata (common/time-before-insert (common/time-before-insert (select-keys params jjyldepartment) "founddata") "starttime")]
+       departdata (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys params jjyldepartment) "founddata") "starttime")]
     (db/update-jjyldepart departdata jdep_id)
     (resp/json {:success true :message "jjyldepart update success"})))

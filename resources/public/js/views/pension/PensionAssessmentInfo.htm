@@ -5,7 +5,7 @@
 <form method="post" opt="mainform">
 <fieldset style="width: 900px;margin: 0px auto;" opt="info0">
     <legend>
-        <label opt="info0_shrinkage"><img opt="info0_img" id="info0_img" src="img/add.png"/>用户基本信息</label>
+        <label opt="info0_shrinkage"><img opt="info0_img" id="info0_img" src="img/reduction.png"/>用户基本信息</label>
     </legend>
     <!--<form method="post" opt="mainform">-->
     <div>
@@ -16,7 +16,7 @@
                 <td class="formtdtext">行政区划:</td>
                 <td colspan="3">
                     <!--<input name="registration" style="width: 300px;" opt="districtid" data-options="idField:'dvcode', textField:'dvname'"></td>-->
-                    <input name="registration" style="width: 300px;" readonly></td>
+                    <input name="districtid" style="width: 300px;" readonly></td>
                 <td rowspan="4" colspan="2" style="text-align: center;" >
                     <img src="img/noperson.gif" opt="personimg" alt="用户照片" height="120" width="120"></td>
             </tr>
@@ -49,7 +49,7 @@
          <td>
              <!--<input type="text" name="nation" readonly>-->
              <input class="easyui-combobox" name="nation" opt="nation"  readonly
-                    data-options=" loader:cj.getLoader('nation'), editable:false, valueField:'id', textField:'text' ">
+                    data-options=" loader:cj.getLoader('oldnation'), editable:false, valueField:'id', textField:'text' ">
          </td>
          <td class="formtdtext">文化程度:</td>
          <td>
@@ -64,7 +64,7 @@
 </fieldset>
 <fieldset style="width: 900px;margin: 0px auto;" opt="info1">
     <legend>
-        <label opt="info1_shrinkage"><img opt="info1_img" id="info1_img" src="img/add.png"/>用户辅助信息</label>
+        <label opt="info1_shrinkage"><img opt="info1_img" id="info1_img" src="img/reduction.png"/>用户辅助信息</label>
     </legend>
     <div opt="info1_table" class="easyui-tabs" style="width:900px;height:550px;position: relative">
         <div title="生活自理能力" style="padding:0px;" opt="info1_1">
@@ -725,7 +725,7 @@
 
 <fieldset style="width: 900px;margin: 0px auto;" opt="result1">
     <legend>
-        <label opt="result1_shrinkage"><img opt="result1_img" id="result1_img" src="img/add.png"/>评估报告一:评估总分计算</label>
+        <label opt="result1_shrinkage"><img opt="result1_img" id="result1_img" src="img/reduction.png"/>评估报告一:评估总分计算</label>
     </legend>
     <input type="hidden" name="pg_id">
     <table class="formtable" style="width:100%" opt="result1_table">
@@ -848,7 +848,7 @@
 </fieldset>
 <fieldset style="width: 900px;margin: 0px auto;" opt="result2">
     <legend>
-        <label opt="result2_shrinkage"><img opt="result2_img" id="result2_img" src="img/add.png"/>服务形式建议</label>
+        <label opt="result2_shrinkage"><img opt="result2_img" id="result2_img" src="img/reduction.png"/>服务形式建议</label>
     </legend>
     <table class="formtable" style="width:100%" opt="result2_table">
     <tr>
@@ -1250,7 +1250,7 @@
 </fieldset>
 <fieldset style="width: 900px;margin: 0px auto;" opt="result3" name="result3">
     <legend>
-        <label opt="result3_shrinkage"><img opt="result3_img" id="result3_img" src="img/add.png"/>评估报告二:评估报告确认</label>
+        <label opt="result3_shrinkage"><img opt="result3_img" id="result3_img" src="img/reduction.png"/>评估报告二:评估报告确认</label>
     </legend>
 
     <table class="formtable" opt="result3_table">
@@ -1293,8 +1293,12 @@
         <tr>
             <td>评估分值</td>
             <td><input size="25" opt="pinggusum"></td>
-            <td>服务时间</td>
-            <td><input size="25" name="servicedate"></td>
+            <td>服务时间<input size="10" class="easyui-datebox" name="servicedate"></td>
+            <td>
+                服务机构
+                <input size="25" class="easyui-combobox" opt="servicemgt" name="servicemgt"
+                       data-options="editable:false">
+            </td>
         </tr>
 
         <tr>

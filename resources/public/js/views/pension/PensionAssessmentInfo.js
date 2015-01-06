@@ -8,7 +8,6 @@ define(function(){
             {text: '删除',hidden:'hidden',opt:'delete'},
             {text: '保存',hidden:'hidden',opt:'save'},
             {text: '提交',hidden:'hidden',opt:'assessmentover'},
-//            {text: '提交',hidden:'hidden',opt:'commit'},
             {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
@@ -34,6 +33,8 @@ define(function(){
             var labelopt = fn.attributes[0].value.toString()
             var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
             if(option.queryParams.actiontype == "dealwith"){
+                local.find('[opt=info0]').hide();
+                local.find('[opt=info1]').hide();
                 if(label_talbe != "result1" && label_talbe != "result3"){
                     FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
                 }
@@ -47,6 +48,8 @@ define(function(){
                 var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
                 FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
             })
+        /*获取机构名称*/
+        getDepartName(local);
     }
 
     /*初始化radio,并加载radio事件*/
@@ -69,63 +72,41 @@ define(function(){
                 $($(this).prev()[0]).removeAttr("checked");
             }).prev().hide();
     }
-    /*通过身份证号加载老年人*/
-    var loadOldByIdentityid = function(local){
-        local.find("[opt=identityid]").combogrid({
-            panelWidth:350,
+    /*获取机构名称*/
+    var getDepartName = function(local){
+        local.find("input[opt=servicemgt]").combogrid({
+            panelWidth:330,
             panelHeight:350,
-            url:'oldid',
+            url:'audit/getalljjyldepart',
             method:'post',
-            idField:'identityid',
-            textField:'identityid',
+            idField:'departname',
+            textField:'departname',
             fitColumns:true,
             pagination:true,
             mode:'remote',
             columns:[[
-                {field:'name',title:'姓名',width:60},
-                {field:'identityid',title:'身份证',width:80},
-                {field:'address',title:'地址',align:'right',width:60}
+                {field:'departname',title:'机构名称',width:80},
+                {field:'responsible',title:'负责人',width:35},
+                {field:'telephone',title:'联系电话',width:60}
             ]],
             onClickRow:function(index,row){
-                $.ajax({
-                    url:'searchid',
-                    data:{
-                        id:row.lr_id
-                    },
-                    type:'get',
-                    success:function(res){
-                        if(res){
-                            local.find('form[opt=mainform]').form('load',res);
-                            local.find('[opt=csrq]').datebox('setValue',res.birthd);
-                            var date = $(':input[opt=csrq]').datebox('getValue');
-                            var age = res.age;
-                            if (age >= 60 && age < 80){
-                                local.find('input[name=nl_fenl]:eq(0)').attr("checked","checked");
-                                local.find('input[name=sum_nl_fenl]:eq(0)').attr("checked","checked");
-                                local.find('input[name=nl_fenl]:eq(0)+label').addClass("checked");
-                                local.find('input[name=sum_nl_fenl]:eq(0)+label').addClass("checked");
-                                local.find('input[name=nl_pingguf]').attr("readonly","readonly").val(0);
-                                local.find('input[name=sum_nl_pingguf]').attr("readonly","readonly").val(0);
-                            } else if(age >= 80 && age <= 90){
-                                local.find('input[name=nl_fenl]:eq(1)').attr("checked","checked");
-                                local.find('input[name=sum_nl_fenl]:eq(1)').attr("checked","checked");
-                                local.find('input[name=nl_fenl]:eq(1)+label').addClass("checked");
-                                local.find('input[name=sum_nl_fenl]:eq(1)+label').addClass("checked");
-                                local.find('input[name=nl_pingguf]').attr("readonly","readonly").val(5);
-                                local.find('input[name=sum_nl_pingguf]').attr("readonly","readonly").val(5);
-                            }else if(age >90){
-                                local.find('input[name=nl_fenl]:eq(2)').attr("checked","checked");
-                                local.find('input[name=sum_nl_fenl]:eq(2)').attr("checked","checked");
-                                local.find('input[name=nl_fenl]:eq(2)+label').addClass("checked");
-                                local.find('input[name=sum_nl_fenl]:eq(2)+label').addClass("checked");
-                                local.find('input[name=nl_pingguf]').attr("readonly","readonly").val(10);
-                                local.find('input[name=sum_nl_pingguf]').attr("readonly","readonly").val(10);
-                            }
-                        }else{
-                            alert('无数据')
-                        }
-                    }
-                })
+                console.log(index)
+                console.log(row.jdep_id)
+                /*$.ajax({
+                 url:'searchid',
+                 data:{
+                 id:row.lr_id
+                 },
+                 type:'get',
+                 success:function(res){
+                 console.log(res)
+                 if(res){
+
+                 }else{
+                 alert('无数据')
+                 }
+                 }
+                 })*/
             }
         })
     }
@@ -257,14 +238,14 @@ define(function(){
             enableRadioFunc(local,"");            //radio全不可编辑
 //            enableRadioFunc(local,{radio1:"shenghe"});
         }*/
-        if(aulevel == "1"){                                      //(审核)
+        if(aulevel == "1" || aulevel == "4"){                                      //(审核)
             console.log("aulevel==============1")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=countyaudit]").attr("readonly","readonly")
 //            enableRadioFunc(local,"");                              //屏蔽所有radio
 //            enableRadioFunc(local,{radio1:"shenghe"});            //radio可编辑
             enableRadioFunc(local,{radio1:"shenghe"});            //radio可编辑
-        }else if(aulevel == "2"){                                     //(审批)
+        }else if(aulevel == "2" || aulevel == "5"){                                     //(审批)
             console.log("aulevel==============2")
             local.find("[name=communityopinion]").attr("readonly","readonly")
             local.find("[name=streetreview]").attr("readonly","readonly")
@@ -281,9 +262,9 @@ define(function(){
     }
     /*查看信息(actionType=view)*/
     var viewInfoFunc = function(local,option){
-        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
-        dealwithbtn.show()
-        getassessbyidFunc(local,option.queryParams.data.bstablepk,"")   //加载人员信息
+        dealwithbtnFunc(local,option)
+        var aulevel = option.queryParams.aulevel;              //评估信息流程等级
+        getassessbyidFunc(local,option.queryParams.data,aulevel)   //加载人员信息
     }
     /*根据aulevel等级判断传参意见*/
     function paramsOpinion(local,option,optionarea,issuccess){
@@ -292,14 +273,14 @@ define(function(){
             url:"audit/assessauditsubmit",
             data:{
                 audesc:local.find('[name='+optionarea+']').val(),     //意见
-                aulevel:option.queryParams.data.aulevel,       //流程标示
-                appoperators:option.queryParams.data.appoperators,
-                bstablename:option.queryParams.data.bstablename,
-                bstablepk:option.queryParams.data.bstablepk,
-                bstablepkname:option.queryParams.data.bstablepkname,
-                messagebrief:option.queryParams.data.messagebrief,
-                sh_id:option.queryParams.data.sh_id,
-                dvcode:option.queryParams.data.dvcode,
+                aulevel:option.queryParams.record.aulevel,       //流程标示
+                appoperators:option.queryParams.record.appoperators,
+                bstablename:option.queryParams.record.bstablename,
+                bstablepk:option.queryParams.record.bstablepk,
+                bstablepkname:option.queryParams.record.bstablepkname,
+                messagebrief:option.queryParams.record.messagebrief,
+                sh_id:option.queryParams.record.sh_id,
+                dvcode:option.queryParams.record.dvcode,
                 issuccess:issuccess == "" ? "":issuccess
             },
             type:"post",
@@ -313,31 +294,30 @@ define(function(){
                         timeout:3000,
                         showType:'slide'
                     });
-                    setTimeout(function(){
+                    if(showProcess(false)){
                         $("#tabs").tabs('close',option.queryParams.title)
-                    },1000)
+                        var refresh = option.queryParams.refresh;
+                        refresh();
+                    }
                 }
             }
         })
     }
-    /*处理时进入页面(actionType=dealwith)*/
-    var dealwithInfoFunc = function(local,option){
+    /*处理按钮*/
+    function dealwithbtnFunc(local,option){
         var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
-        local.find('[opt=info0]').hide();
-        local.find('[opt=info1]').hide();
         var aulevel = option.queryParams.aulevel;              //评估信息流程等级
-        getassessbyidFunc(local,option.queryParams.data,aulevel)   //加载人员信息
         dealwithbtn.show().click(function(){
             /*if(aulevel == "0"){
-                if(local.find('[name=communityopinion]').val() == "" || local.find('[name=communityopinion]').val() == null){
-                    $.messager.alert('温馨提示','请填写社区(村)意见！',"",function(r){
-                        local.find('[name=communityopinion]').focus();
-                    });
-                }else{
-                    paramsOpinion(local,option,"communityopinion","")
-                }
-            }*/
-            if(aulevel == "1"){
+             if(local.find('[name=communityopinion]').val() == "" || local.find('[name=communityopinion]').val() == null){
+             $.messager.alert('温馨提示','请填写社区(村)意见！',"",function(r){
+             local.find('[name=communityopinion]').focus();
+             });
+             }else{
+             paramsOpinion(local,option,"communityopinion","")
+             }
+             }*/
+            if(aulevel == "1" || aulevel == "4"){
                 if(local.find('[name=streetreview]').val() == "" || local.find('[name=streetreview]').val() == null){
                     $.messager.alert('温馨提示','请填写街镇审查意见！',"",function(r){
                         local.find('[name=streetreview]').focus();
@@ -355,7 +335,7 @@ define(function(){
                         paramsOpinion(local,option,"streetreview",shengheval)
                     }
                 }
-            }else if(aulevel == "2"){
+            }else if(aulevel == "2" || aulevel == "5"){
                 if(local.find('[name=countyaudit]').val() == "" || local.find('[name=countyaudit]').val() == null){
                     $.messager.alert('温馨提示','请填写民政局审核意见！',"",function(r){
                         local.find('[name=countyaudit]').focus();
@@ -375,6 +355,14 @@ define(function(){
                 }
             }
         })
+    }
+    /*处理时进入页面(actionType=dealwith)*/
+    var dealwithInfoFunc = function(local,option){
+       /* local.find('[opt=info0]').hide();
+        local.find('[opt=info1]').hide();*/
+        dealwithbtnFunc(local,option)
+        var aulevel = option.queryParams.aulevel;              //评估信息流程等级
+        getassessbyidFunc(local,option.queryParams.data,aulevel)   //加载人员信息
     }
     /*评估*/
     var assessmentFunc = function(local,option){
@@ -396,17 +384,18 @@ define(function(){
                 success:function(data){
                     var data = eval('(' + data + ')');
                     if(data.success){
-//                        showProcess(false);
+                        showProcess(false);
                         $.messager.show({
                             title:'温馨提示',
                             msg:'保存成功!',
                             timeout:2000,
                             showType:'slide'
                         });
-                        setTimeout(function(){
-                            showProcess(false);
+                        if(showProcess(false)){
                             $("#tabs").tabs('close',option.queryParams.title)
-                        },1000)
+                            var refresh = option.queryParams.refresh;
+                            refresh();
+                        }
                     }
                 },
                 onLoadError: function () {
@@ -426,12 +415,13 @@ define(function(){
                 local.find('[opt=mainform]').form('submit', {
                     url:"audit/assesscomplete",
                     dataType:'json',
-                    onSubmit: function(){
-                    var isvalidate = $(this).form('validate');
-                    if (isvalidate) {
-                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                    }
-                    return isvalidate
+                    onSubmit: function(param){
+                        param.ishandle = option.queryParams.record.ishandle;
+                        var isvalidate = $(this).form('validate');
+                        if (isvalidate) {
+                            showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        }
+                        return isvalidate
                     },
                     success:function(data){
                         var data = eval('(' + data + ')');
@@ -443,10 +433,12 @@ define(function(){
                                 timeout:3000,
                                 showType:'slide'
                             });
+                            if(showProcess(false)){
+                                $("#tabs").tabs('close',option.queryParams.title)
+                                 var refresh = option.queryParams.refresh;
+                                 refresh();
+                            }
                         }
-                        setTimeout(function(){
-                            $("#tabs").tabs('close',option.queryParams.title)
-                        },1000)
                     },
                     onLoadError: function () {
                         showProcess(false);

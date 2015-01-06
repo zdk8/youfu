@@ -15,9 +15,8 @@ define(function(){
                     },
                     onLoadSuccess:function(data){
                         var viewbtns=local.find('[action=view]');
-                        var logoutbtns=local.find('[action=logout]');
-                        var changebtns=local.find('[action=change]');
-                        var btns_arr=[viewbtns,logoutbtns,changebtns];
+                        var dealwithbtns=local.find('[action=dealwith]');
+                        var btns_arr=[viewbtns,dealwithbtns];
                         var rows=data.rows;
                         for(var i=0;i<rows.length;i++){
                             for(var j=0;j<btns_arr.length;j++){
@@ -25,80 +24,20 @@ define(function(){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
                                         if($(this).attr("action")=='view'){
-                                            var title = record.name+'详细信息'
-                                            cj.showContent({                                          //详细信息(tab标签)
-                                                title:title,
-                                                htmfile:'text!views/pension/PensionServiceApply.htm',
-                                                jsfile:'views/pension/PensionServiceApply',
-                                                queryParams:{
-                                                    actiontype:'info',         //（详细信息）操作方式
-                                                    data:record,
-                                                    title:title,
-                                                    refresh:refreshGrid
-                                                }
-                                            })
-                                            //viewRoleInfo(record);
-                                        }else if($(this).attr("action")=='logout'){         //注销
-                                            var title = record.name+'人员注销'
+                                            var title = "【"+record.name+'】服务申请详细信息'
                                             if($("#tabs").tabs('getTab',title)){
                                                 $("#tabs").tabs('select',title)
                                             }else{
-//                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                                                cj.showContent({                                          //详细信息(tab标签)
-                                                    title:title,
-                                                    htmfile:'text!views/pension/PensionPeopleLogout.htm',
-                                                    jsfile:'views/pension/PensionPeopleLogout',
-                                                    queryParams:{
-                                                        actiontype:'logout',         //（处理）操作方式
-                                                        data:record,
-                                                        title:title,
-                                                        refresh:refreshGrid
-                                                    }
-                                                })
-                                                /*$.ajax({
-                                                    url:"audit/getassessbyid",
-                                                    type:"post",
-                                                    data:{
-                                                        jja_id:record.jja_id
-                                                    },
-                                                    dataType: 'json',
-                                                    success:function(data){
-                                                        if(data){
-                                                            cj.showContent({                                          //详细信息(tab标签)
-                                                                title:title,
-                                                                htmfile:'text!views/pension/PensionPeopleLogout.htm',
-                                                                jsfile:'views/pension/PensionPeopleLogout',
-                                                                queryParams:{
-                                                                    actiontype:'assessment',         //（处理）操作方式
-                                                                    data:data[0],
-                                                                    title:title,
-                                                                    refresh:refreshGrid
-                                                                }
-                                                            })
-                                                            setTimeout(function(){
-//                                                            showProcess(false);
-                                                            },1000)
-                                                        }
-                                                    }
-                                                })*/
+                                                getapplybyidFunc({jja_id:record.bstablepk,title:title,record:record,aulevel:record.aulevel})
                                             }
-                                        }else if($(this).attr("action")=='change'){               //变更
-                                            var title = record.name+'人员变更'
+                                        }else if($(this).attr("action")=='dealwith'){         //注销处理
+                                            var title = "【"+record.messagebrief.
+                                                            substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+
+                                                                '】人员注销处理'
                                             if($("#tabs").tabs('getTab',title)){
                                                 $("#tabs").tabs('select',title)
                                             }else{
-//                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                                                cj.showContent({                                          //变更详细信息(tab标签)
-                                                    title:title,
-                                                    htmfile:'text!views/pension/PensionPeopleLogout.htm',
-                                                    jsfile:'views/pension/PensionPeopleLogout',
-                                                    queryParams:{
-                                                        actiontype:'change',         //（处理）操作方式
-                                                        data:record,
-                                                        title:title,
-                                                        refresh:refreshGrid
-                                                    }
-                                                })
+                                                getapplybyidFunc({jja_id:record.bstablepk,title:title,record:record,aulevel:record.aulevel})
                                             }
                                         }
                                     });
@@ -114,6 +53,38 @@ define(function(){
                     striped:true,
                     toolbar:local.find('div[tb]')
                 })
+
+            function getapplybyidFunc(params){
+                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                $.ajax({
+                    url:"audit/getapplybyid",
+                    type:"post",
+                    data:{
+                        jja_id:params.jja_id
+                    },
+                    dataType: 'json',
+                    success:function(data){
+                        if(data){
+                            cj.showContent({                                          //详细信息(tab标签)
+                                title:params.title,
+                                htmfile:'text!views/pension/PensionPeopleLogout.htm',
+                                jsfile:'views/pension/PensionPeopleLogout',
+                                queryParams:{
+                                    actiontype:'logoutdealwith',         //（处理）操作方式
+                                    data:data[0],
+                                    title:params.title,
+                                    refresh:refreshGrid,
+                                    record:params.record,
+                                    aulevel:params.aulevel
+                                }
+                            })
+                            setTimeout(function(){
+                                showProcess(false);
+                            },500)
+                        }
+                    }
+                })
+            }
 
             local.find('.searchbtn').click(function(){
                 localDataGrid.datagrid('load',{

@@ -91,7 +91,7 @@
         node (get params :node)
         id (get params :id)
         ni (if node node id)
-        current-xian (str (subs (:dvcode (session/get :usermsg)) 0 4) "00")
+        current-xian (:dvcode (session/get :usermsg));(str (subs (:dvcode (session/get :usermsg)) 0 4) "00")
         results (if ni (basemd/divisiontree ni) (basemd/divisiontree current-xian))]
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )
