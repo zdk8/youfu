@@ -730,6 +730,11 @@
   (insert t_jjyldepartment
     (values depdata)))
 
+(defn update-jjyldepart [departdata jdep_id]
+  (update t_jjyldepartment
+    (set-fields departdata)
+    (where {:jdep_id jdep_id})))
+
 
 
 

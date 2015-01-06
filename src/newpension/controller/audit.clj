@@ -333,3 +333,9 @@
        cond (str  (common/likecond "departname" departname))
        getresult (common/fenye rows page t_jjyldepartment "*" cond " order by jdep_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "founddata") "starttime")})))
+
+(defn update-jjyldepart [request]
+  (let[params (:params request)
+       jdep_id (:jdep_id params)
+       departdata (common/time-before-insert (common/time-before-insert (select-keys params jjyldepartment) "founddata") "starttime")]
+    (db/update-jjyldepart departdata jdep_id)))

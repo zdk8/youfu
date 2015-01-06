@@ -183,6 +183,7 @@
   (POST "/audit/reassess" request (audit/reassess request))                                                           ;;更改信息，重新评估
   (POST "/audit/addjjyldepart" request (audit/add-jjyldepart request))                                              ;;添加居家养老服务机构
   (POST "/audit/getalljjyldepart" request (audit/getall-jjyldepart request))                                        ;;获取居家养老服务机构
+  (POST "/audit/updatejjyldepart" request (audit/update-jjyldepart request))                                      ;;更新居家养老服务机构
 
 
   (POST "/queryyljg" [] (old/get-yljg) )
