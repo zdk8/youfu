@@ -324,3 +324,12 @@
        depdata (common/timefmt-bef-insert(common/timefmt-bef-insert(select-keys params jjyldepartment) "founddata" )"starttime")]
     (db/add-jjyldepart depdata)
     (resp/json {:success true :message "jjyldepart add success"})))
+
+(defn getall-jjyldepart [request]
+  (let[params (:params request)
+       departname (:departname params)
+       rows (:rows params)
+       page (:page params)
+       cond (str  (common/likecond "departname" departname))
+       getresult (common/fenye rows page t_jjyldepartment "*" cond " order by jdep_id desc ")]
+    (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "founddata") "starttime")})))
