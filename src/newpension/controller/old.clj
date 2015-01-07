@@ -188,13 +188,20 @@
         brief (str "姓名：" (:name params) " 身份证："(:identityid params)  )
         appdata {:bstablepk tprkey :bstablename "t_oldpeople" :status "1" :aulevel "0" :auflag "新增数据" :bstime (common/get-nowtime)
                  :appoperators username :auuser loginname  :messagebrief brief :bstablepkname "lr_id"}]
-    (db/create-old (into {} (cons (select-keys olds (vec (keys checkinfo)))    ;;新增养老信息
-                              (cons [:lr_id tprkey]
-                                (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date")))))
+    (println "ssssss" opseno  auditid)
+    (println "DDDDDDDDDDDD" (conj (select-keys olds (vec (keys checkinfo)))  {:opseno opseno}  ;;新增养老信息
+                              (conj {:lr_id tprkey}
+                                (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date"))))
+    (db/create-old (conj (select-keys olds (vec (keys checkinfo)))   ;;新增养老信息
+                     (conj {:lr_id tprkey}
+                       (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date"))))
+    ;(cons (select-keys olds (vec (keys checkinfo)))    ;;新增养老信息
+     ; (cons [:lr_id tprkey]
+    ;    (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date")))
     (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
     (db/create-audit opseno auditid)             ;;新增对应的审核表
     (db/add-approve appdata)                                                                           ;;将新增数据添加到审核表中
-    (str "新增成功")))
+    (resp/json {:success true :msg "add success"})))
 
 (defn add-oldpeople [request]
   (let[params (:params request)
