@@ -78,7 +78,7 @@
        name (:name params)
        identityid (:identityid params)
        cond (str " and ( ishandle is null or ishandle = 'r' )" (common/likecond "name" name) (common/likecond "identityid" identityid))
-       getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id asc ")]
+       getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
 
@@ -151,7 +151,7 @@
        rows (:rows params)
        page (:page params)
        cond (str " and bstablename = 't_jjylapply' and status = '1' AND aulevel != '7' AND aulevel != '8' ")
-       getresult (common/fenye rows page approve "*" cond " order by sh_id asc ")]
+       getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
 
@@ -236,7 +236,7 @@
        name (:name params)
        identityid (:identityid params)
        cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid))
-       getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id asc")]
+       getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
 (defn remove-submit [request]
@@ -261,7 +261,7 @@
        rows (:rows params)
        page (:page params)
        cond (str " and bstablename = 't_jjylapply' and status = '1' AND (aulevel = 7 OR aulevel = 8)")
-       getresult (common/fenye rows page approve "*" cond " order by sh_id asc ")]
+       getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
 
