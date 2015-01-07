@@ -549,8 +549,11 @@
   (let[{params :params}request
        {page :page}params
        {rows :rows}params
+       name (:name params)
+       identityid (:identityid params)
        auuser  (:username (session/get :usermsg))
-       getresult (common/fenye rows page v_oldapprove "*" "" " order by lr_id asc")]
+       cond (str (common/likecond "name" name) (common/likecond  "identityid" identityid))
+       getresult (common/fenye rows page v_oldapprove "*" cond " order by lr_id asc")]
     (resp/json {:total (:total getresult) :rows (map #(conj % {:loginuser auuser} )(common/time-formatymd-before-list (:rows getresult) "bstime"))})))
 
 ;;根据外键查询操作日志
