@@ -473,7 +473,9 @@
                 (= aulevel "2")     (set-audit-approve2 params)                                         ;待审批
                  :else (set-audit-approve1 params))                                                          ;待提交和待审核
       (set-audit-approvefail params))                                                                            ;审核不通过
-    (resp/json {:success true :message "approve success"})))
+;    (resp/json {:success true :message "approve success"})
+    (str "true")
+    ))
 
 (defn auditsuccess [params]                                                                               "审核通过"
   (let[bstablepk (:bstablepk params)

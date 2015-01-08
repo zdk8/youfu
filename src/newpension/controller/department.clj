@@ -55,7 +55,9 @@
        filter-fields (select-keys params depart)
        {dep_id :dep_id}params]
     (db/update-departbyid filter-fields dep_id)
-    (resp/json {:success true :message "update success"})))
+;    (resp/json {:success true :message "update success"})
+    (str "true")
+    ))
 
 (defn delete-departbyid [request]
   (let[{params :params}request
