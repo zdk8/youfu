@@ -101,7 +101,7 @@
        {rows :rows}params
        cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname) " and checkouttime is null")
        getresult (common/fenye rows page "t_oldpeopledep" "*" cond "")]
-    (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult) "checkintime")})))
+    (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "checkintime")})))
 
 (defn oldpeople-checkout [request]
   (let[{params :params}request
