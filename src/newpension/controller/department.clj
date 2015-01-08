@@ -96,6 +96,13 @@
         )
 ))
 
+(defn update-opdep-byid [request]
+  (let[params (:params request)
+       opd_id (opd_id params)
+       opddata (common/timefmt-bef-insert(common/timefmt-bef-insert (select-keys params deppeople) "checkintime") "checkouttime")]
+    (db/update-oldpeopledep opddata opd_id)
+    (str "update opdep success")))
+
 (defn select-opdofdepart [request]
   (let[{params :params}request
        {name :name}params
