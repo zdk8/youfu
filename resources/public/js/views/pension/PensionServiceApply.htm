@@ -10,9 +10,9 @@
                     <tr>
                         <td class="formtdtext" style="width: 100px">行政区划</td>
                         <td colspan="3">
-                            <input name="districtid" style="width: 300px;" opt="districtid"
+                            <input style="width: 300px;" opt="districtid"
                                    data-options="required:true, valueField:''">
-                            <input type="text" name="districtname" opt="districtname">
+                            <input type="text" name="districtname" opt="districtname" hidden="true">
                         </td>
                     </tr>
                     <tr>
@@ -151,9 +151,11 @@
                     </tr>-->
                     <tr>
                         <td class="formtdtext">申请时间</td>
-                        <td><input class="input-text easyui-datebox" name="applydate" opt="applydate" data-options="formatter:myformatter,parser:myparser"></td>
-                        <td class="formtdtext"></td>
-                        <td></td>
+                        <td colspan="3">
+                            <input class="input-text easyui-datebox" name="applydate" opt="applydate" readonly
+                                   data-options="formatter:myformatter,parser:myparser">
+                        </td>
+                        <!--<td class="formtdtext"></td>-->
                     </tr>
                 </table>
 

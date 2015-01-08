@@ -65,14 +65,19 @@ define(function(){
         var districtid = local.find('[opt=districtid]');      //行政区划值
         var districtname = local.find('[opt=districtname]');  //行政区划名称
         getdivision(districtid,districtname);                   //加载行政区划
+        /*根据身份证获取基本信息*/
+        getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
+            gender:local.find('[opt=gender]'),tip_age:local.find('[opt=tip_age]'),agetype:"span"})
+
         /*保存*/
         local.find('[opt=save]').show().bind('click',function(){
             local.find('[opt=pensionform]').form('submit', {
                 url:'audit/addauditapply',
-                onSubmit: function () {
+                onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
                         showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        params.districtid = districtid.combobox("getValue")
                     }
                     return isValid;
                 },
@@ -88,21 +93,22 @@ define(function(){
                 }
             });
         });
-        var districtid = local.find('[opt=districtid]');
+//        var districtid = local.find('[opt=districtid]');
         var pensionform = local.find('[opt=pensionform]');
         var familymembersgrid = local.find('[opt=familymembersgrid]');
         var dealwith = local.find('[opt=dealwith]');
 
         local.find('[name=operators]').val(cj.getUserMsg().username);
         local.find('[opt=applydate]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
+        /*默认籍贯*/
         local.find('[opt=getjiguan]').bind('click',function(){
-            $me = $(this);
-            var id=$('[opt=identityid]').val();
+            var $me = $(this);
+            var id=local.find('[opt=identityid]').val();
             if(id) {
                 $.ajax({
                     url:'gethometown',
                     data:{
-                        identityid:$('[opt=identityid]').val()
+                        identityid:local.find('[opt=identityid]').val()
                     },success:function(res){
                         $me.prev().val(res.totalname);
                     }
@@ -114,7 +120,7 @@ define(function(){
 //        genCheckBox(local.find('[opt=culture]'), 'hyculture', 'culture',record);
 //        genCheckBox(local.find('[opt=marriage]'), 'marriage', 'marriage',record);
 
-        var $registration=local.find('[opt=registration]')
+        /*var $registration=local.find('[opt=registration]')
         $registration.combotree({
             url:'get-divisionlist?dvhigh=330424',
             method: 'get',
@@ -139,7 +145,7 @@ define(function(){
                 $address.combotree('setValue',
                     $address.combotree('tree').tree('getSelected').divisionpath);
             }
-        });
+        });*/
         var doinitage_radio=function(age){
             var age=age;
             if(age<80){
@@ -171,16 +177,24 @@ define(function(){
     /*修改*/
     function showinfo(local,option){
         baseRender(local, option.queryParams.data);
+        var districtid = local.find('[opt=districtid]');      //行政区划值
         local.find('form').form('load', option.queryParams.data);
+        districtid.combotree("setValue",option.queryParams.data.districtname)  //填充行政区划
         local.find('[opt=save]').hide()
+        /*修改*/
         local.find('[opt=update]').show().bind('click',function(){
             local.find('[opt=pensionform]').form('submit', {
                 url:'audit/updateapply',
                 dataType:"json",
-                onSubmit: function () {
+                onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
                         showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        if(!isNaN($("[opt=districtid]").combobox("getValue"))){          //是否是数字
+                            params.districtid = districtid.combobox("getValue")
+                        }else{
+                            params.districtid = option.queryParams.data.districtid
+                        }
                     }
                     return isValid;
                 },
@@ -194,12 +208,9 @@ define(function(){
                              var ref = option.queryParams.refresh;             //刷新
                              ref();
                         }
-
                     }
                 }
             });
-
-
         });
     }
     /*查看详细信息*/
@@ -211,8 +222,11 @@ define(function(){
     /*变更人员信息*/
     function changeInfo(local,option){
         baseRender(local, option.queryParams.data);
-        local.find('[opt=save]').hide()
+        var districtid = local.find('[opt=districtid]');      //行政区划值
         local.find('form').form('load',option.queryParams.data)
+        districtid.combotree("setValue",option.queryParams.data.districtname)  //填充行政区划
+        local.find('[opt=save]').hide()
+        /*变更*/
         local.find('[opt=change]').show().click(function(){
             local.find('[opt=pensionform]').form('submit', {
                 url:'audit/reassess',

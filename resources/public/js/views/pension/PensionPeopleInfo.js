@@ -1,8 +1,7 @@
 define(function(){
-
-
     var addToolBar=function(local) {
-        var toolBarHeight=30;
+        var toolBarHeight=35;
+//        var toolBarHeight=100;
         var toolBar=cj.getFormToolBar([
             {text: '处理',hidden:'hidden',opt:'dealwith'},
             {text: '修改',hidden:'hidden',opt:'update'},
@@ -40,86 +39,35 @@ define(function(){
                 FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
             })
         var districtid = local.find('[opt=districtid]');      //行政区划
-        getdivision(districtid);                                          //加载行政区划
+        var districtname = local.find('[opt=districtname]');  //行政区划名称
+        getdivision(districtid,districtname);                   //加载行政区划
         var pensionform = local.find('[opt=pensionform]');      //老人信息主表
         var familymembersgrid = local.find('[opt=familymembersgrid]');      //老人信息子表
         var dealwith = local.find('[opt=dealwith]');            //处理按钮
-
-        local.find('[name=operators]').val(cj.getUserMsg().username);
-        local.find('[opt=setdaytime]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
-
-        /*if(option.queryParams && option.queryParams.actiontype == "info"){            //处理
-            dealwith.show();                                        //显示处理按钮
-            local.find('[opt=newfamilymemeradd_btn]').hide()   //隐藏子表新增按钮
-            local.find('[opt=delfamilymemer_btn]').hide()      //隐藏子表删除按钮
-            for(var i=0;i<pensionform[0].length;i++){             //禁用表单
-                var element = pensionform[0].elements[i];
-                element.disabled = true
-            }
-            disabledForm(local);                                //禁用easyui框
-            $.ajax({
-                url:"searchid",                                //查询老人表
-                data:{
-                    id:option.queryParams.data.lr_id
-                },
-                type:"post",
-                dataType:"json",
-                success:function(data){
-                    pensionform.form('load',data)        //填充主表
-                    //famillylist(option.queryParams.data.lr_id)     //填充子表
-                    dealwithFunc({dealwith:dealwith,data:option.queryParams.data,refresh:option.queryParams.refresh}) //数据处理
-                    showProcess(false);
-                }
-            })
-        }else{
-            *//*加载地区树*//*
-            var divisiontree = local.find('[opt=mydistrictid]') ;
-            divisiontree.combotree({
-                url:'get-divisionlist?dvhigh=330424',
-                method: 'get',
-                onBeforeExpand: function (node) {
-                    divisiontree.combotree("tree").tree("options").url
-                        ="get-divisionlist?dvhigh=" + node.parentid;
-                },
-                onHidePanel: function () {
-                    divisiontree.combotree('setValue',
-                        divisiontree.combotree('tree').tree('getSelected').divisionpath);
-                }
-            });
-            require(['commonfuncs/BirthGenderAge'],function(js){
-                js.render(local)
-            })
-
-            local.find('[opt=save]').show().bind('click',function(){
-                local.find('[opt=pensionform]').form('submit', {
-                    url:'/saveold',
-                    onSubmit: function () {
-                        var isValid = $(this).form('validate');
-                        cj.slideShow('表单验证结果:' + isValid);
-                        return isValid;
-                    },
-                    success: function (data) {
-                        cj.slideShow('操作成功');
-                    }
-                });
-
-
-            });
-        }*/
-
     }
 
     /*新增数据时进入*/
     var saveFunc = function(local,option){
+        local.find('[name=operators]').val(cj.getUserMsg().username);
+        local.find('[opt=setdaytime]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
+        /*根据身份证获取基本信息*/
+        getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
+            gender:local.find('[opt=gender]'),age:local.find('[opt=age]'),agetype:null})
         var savebtn = local.find('[opt=save]');               //保存按钮
-        savebtn.show()
-        savebtn.click(function(){
-            local.find('[opt=mainform]').form('submit', {
-                url:"wwwwwwww",
-                onSubmit: function(){
+        savebtn.show().click(function(){
+            local.find('[opt=pensionform]').form('submit', {
+                url:'/saveold',
+                onSubmit: function () {
+                    var isValid = $(this).form('validate');
+                    return isValid;
                 },
-                success:function(data){
+                success: function (data) {
+                    var data = eval('('+data+')')
                     console.log(data)
+                    if(data.success){
+                        cj.slideShow('保存成功');
+                        $("#tabs").tabs("close","老年基本信息录入")
+                    }
                 }
             });
         })
@@ -127,28 +75,47 @@ define(function(){
 
     /*处理时进入页面(actionType=info)*/
     var dealwithInfoFunc = function(local,option){
-        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
-        dealwithbtn.show()                                            //显示处理按钮
         var pensionform = local.find('[opt=pensionform]');      //老人信息主表
-        for(var i=0;i<pensionform[0].length;i++){             //禁用表单
+        pensionform.form('load',option.queryParams.data)        //填充表单
+        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
+        dealwithbtn.show().click(function(){
+            require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
+                function(win,htmfile,jsfile){
+                    win.render({
+                        title:'处理',
+                        width:395,
+                        height:250,
+                        html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},
+                            {
+                                text:'保存',
+                                handler:function(html,parent){ }}
+                        ],
+                        renderHtml:function(local,submitbtn,parent){
+                            jsfile.render(local,{
+                                submitbtn:submitbtn,
+                                act:'c',
+                                refresh:option.queryParams.refresh,
+                                data:option.queryParams.record,
+                                title:option.queryParams.title,
+                                parent:parent,
+                                onCreateSuccess:function(data){
+                                    parent.trigger('close');
+                                }
+                            })
+                        }
+                    })
+                }
+            )
+        })
+        /*for(var i=0;i<pensionform[0].length;i++){             //禁用表单
             var element = pensionform[0].elements[i];
             element.disabled = true
         }
-        disabledForm(local);                                //禁用easyui框
-        $.ajax({
-            url:"searchid",                                //查询老人表
-            data:{
-                id:option.queryParams.data.lr_id
-            },
-            type:"post",
-            dataType:"json",
-            success:function(data){
-                pensionform.form('load',data)        //填充主表
-                //famillylist(option.queryParams.data.lr_id)     //填充子表
-//                dealwithFunc({dealwith:dealwith,data:option.queryParams.data,refresh:option.queryParams.refresh}) //数据处理
-//                showProcess(false);
-            }
-        })
+        disabledForm(local);*/                                //禁用easyui框
     }
 
 
