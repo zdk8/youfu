@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="yljj-old 20150108&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/controller/department.clj" afterPath="$PROJECT_DIR$/src/newpension/controller/department.clj" />
+    <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
     <ignored path="newpension.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1420693820688" ignored="false" />
+    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1420703743872" ignored="false" />
     <file path="/home.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1420529883047" ignored="false" />
     <file path="/db.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1420530167966" ignored="false" />
     <file path="/department.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1420693739314" ignored="false" />
@@ -94,7 +93,7 @@
       <file leaf-file-name="department.clj" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="8" selection-start="3694" selection-end="3694" vertical-scroll-proportion="0.5902778">
+            <state line="110" column="34" selection-start="5051" selection-end="5051" vertical-scroll-proportion="-0.47826087">
               <folding />
             </state>
           </provider>
@@ -121,7 +120,7 @@
       <file leaf-file-name="home.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="156" column="66" selection-start="8291" selection-end="8291" vertical-scroll-proportion="0.0">
+            <state line="156" column="68" selection-start="8293" selection-end="8293" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,7 +129,7 @@
       <file leaf-file-name="common.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/common/common.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="6" selection-start="1505" selection-end="1505" vertical-scroll-proportion="0.0">
+            <state line="53" column="6" selection-start="2059" selection-end="2075" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -208,8 +207,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -356,6 +353,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1220,7 +1219,23 @@
       <created>1420681145975</created>
       <updated>1420681145975</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="yljj-old 20150108&#10;">
+      <created>1420694071964</created>
+      <updated>1420694071964</updated>
+    </task>
+    <task id="LOCAL-00146" summary="yljj-old 20150108&#10;">
+      <created>1420695361355</created>
+      <updated>1420695361355</updated>
+    </task>
+    <task id="LOCAL-00147" summary="yljj-old 20150108&#10;">
+      <created>1420698541813</created>
+      <updated>1420698541813</updated>
+    </task>
+    <task id="LOCAL-00148" summary="yljj-old 20150108&#10;">
+      <created>1420699292131</created>
+      <updated>1420699292131</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1244,7 +1259,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1396104" sideWeight="0.7115073" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1396104" sideWeight="0.7115073" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24149108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1402,13 +1417,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="66" selection-start="8291" selection-end="8291" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
       <provider selected="true" editor-type-id="text-editor">
         <state line="174" column="6" selection-start="7603" selection-end="7603" vertical-scroll-proportion="0.0">
@@ -1423,16 +1431,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="68" selection-start="8293" selection-end="8293" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/common/common.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="6" selection-start="1505" selection-end="1505" vertical-scroll-proportion="0.0">
+        <state line="53" column="6" selection-start="2059" selection-end="2075" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="8" selection-start="3694" selection-end="3694" vertical-scroll-proportion="0.5902778">
+        <state line="110" column="34" selection-start="5051" selection-end="5051" vertical-scroll-proportion="-0.47826087">
           <folding />
         </state>
       </provider>
