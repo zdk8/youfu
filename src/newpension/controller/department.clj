@@ -15,8 +15,9 @@
 
   (:import [java.io File FileInputStream FileOutputStream]))
 
-(def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime])
-(def deppeople [:name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy :deptype])
+(def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime :serial_id :manage_id])
+(def deppeople [:name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy
+                :deptype :sex :contact :phone :cellphone :health :comments])
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
 (def canteen [:departname :register :telephone :people :address :busline :coordinates :buildarea :function :runtime :avgnumber])
 
@@ -81,8 +82,9 @@
         {identityid :identityid}params
         checkop (get-oldpeople identityid)
        checkopdep (get-oldpeopledep identityid)
-        nowtime (common/get-nowtime)
-        opddate (conj (select-keys params deppeople) {:checkintime nowtime})]
+        ;nowtime (common/get-nowtime)
+        opddate (common/timefmt-bef-insert (select-keys params deppeople) "checkintime") ;(conj (select-keys params deppeople) {:checkintime nowtime})
+        ]
     (println "DDDDDDD"  (select-keys params deppeople))
     (if (<= (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request)))                 ;判断老年表是否存在，不存在添加数据到老年表
     (if (> (count checkopdep) 0)  (resp/json {:success false :message "user already checkin"})                              ;判断是否已经入住了
