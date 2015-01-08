@@ -72,7 +72,7 @@
   (GET "/myimage/:user-id/:file-name" [user-id file-name]
     (depart/mytest user-id file-name))
 
-
+  (POST "/getdistrictname" request (old/getdistrictname request))
 ;  (GET "/dm" [] (dm-page));;;123456790
   (GET "/" request (old/home request)) ;;登录页面
   (GET "/index" request (old/home request))  ;;退出后跳到登录页面

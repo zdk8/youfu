@@ -742,6 +742,9 @@
 
 
 
+(defn getdistrictname [districtid]
+  (select division
+    (where {:dvcode districtid})))
 
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM

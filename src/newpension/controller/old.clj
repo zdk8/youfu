@@ -37,6 +37,11 @@
 (def v_oldapprove "v_oldapprove")
 (def t_oldpeople "t_oldpeople")
 
+(defn getdistrictname [request]
+  (let[params (:params request)
+       districtid (:districtid params)]
+    (resp/json (db/getdistrictname districtid))))
+
 ;;用户登录
 (defn home [request]
   (try
