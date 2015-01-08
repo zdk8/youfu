@@ -638,9 +638,14 @@
     (where{:identityid identityid})
     (where (= :checkouttime nil))))
 
-(defn add-oldpeopledep [opddate]
+(defn add-oldpeopledep [opddata]
   (insert t_oldpeopledep
-    (values opddate)))
+    (values opddata)))
+
+(defn update-oldpeopledep [opddata opd_id]
+  (update t_oldpeopledep
+    (set-fields opddata)
+    (where {:opd_id opd_id})))
 
 (defn select-opdofdepart [name identityid departname deptype]
   (select t_oldpeopledep
@@ -737,6 +742,9 @@
 
 
 
+(defn getdistrictname [districtid]
+  (select division
+    (where {:dvcode districtid})))
 
 (defn getall-results [start end sql]
   (let [sql (str "SELECT * FROM

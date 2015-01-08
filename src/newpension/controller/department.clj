@@ -16,7 +16,7 @@
   (:import [java.io File FileInputStream FileOutputStream]))
 
 (def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime :serial_id :manage_id])
-(def deppeople [:name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy
+(def deppeople [:name :age :identityid  :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy
                 :deptype :sex :contact :phone :cellphone :health :comments :jjzk_baofang :jjzk_lixiu :jjzk_baomu])
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
 (def canteen [:departname :register :telephone :people :address :busline :coordinates :buildarea :function :runtime :avgnumber])
@@ -97,6 +97,13 @@
         (str "true")
         )
 ))
+
+(defn update-opdep-byid [request]
+  (let[params (:params request)
+       opd_id (:opd_id params)
+       opddata (common/timefmt-bef-insert(common/timefmt-bef-insert (select-keys params deppeople) "checkintime") "checkouttime")]
+    (db/update-oldpeopledep opddata opd_id)
+    (str "update opdep success")))
 
 (defn select-opdofdepart [request]
   (let[{params :params}request
