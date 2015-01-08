@@ -1,23 +1,21 @@
-<!--老年人审核表-->
-<table opt="ppaudit" data-options="
+<table class="easyui-datagrid-noauto"
+               data-options="
                method:'post',
-               toolbar:'#tb_ppaudit',
                fit:true,
-               fitColumns:true,
                border:false,
                rownumbers:true,
+               fitColumns:true,
                pageSize:cj.getDataGridAttr('pageSize'),
                pageList:cj.getDataGridAttr('pageList'),
                singleSelect:true,
-               pagination:true,
-               loadMsg:''">
+               loadMsg:'',
+               pagination:true">
     <thead>
     <tr>
         <th data-options="field:'lr_id',hidden:true">老人表主键</th>
         <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
             {
                 var str='<div></div>';
-                <!--str=$(str).append('<a action=&quot;info&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>详细信息</span></span></a>');-->
                 str=$(str).append('<a action=&quot;dealwith&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>处理</span></span></a>');
                 return str.html();
             }">操作</th>
@@ -73,8 +71,3 @@
     </table>
     <div class="clear"></div>
 </div>
-<!--<div id="tb_ppaudit">
-    <a opt="operationlog" class="easyui-linkbutton" iconCls="icon-log" plain="true">操作日志</a>
-</div>-->
-
-

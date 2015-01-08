@@ -1,7 +1,9 @@
 define(function(){
     function render(local,option){
         var divisiontree = local.find('[opt=districtid]'); //行政区划id
-        getdivision(divisiontree);                                 //加载行政区划
+        var districtname = local.find('[opt=districtname]'); //行政区划id
+        districtname.hide();
+        getdivision(divisiontree,districtname);                                 //加载行政区划
         var rzrydlg = local.find('[opt=rzrydlg]');      //表单
         var determine = option.submitbtn                //确定按钮
         var actiontype = option.actiontype;             //操作方式
@@ -91,49 +93,42 @@ define(function(){
             if(params.actiontype == "addrzry"){         //新增入住人员
                 params.rzrydlg.form('submit',{
                     url:'pension/addoldpeopledepart',
-                    dataType:"json",
-                    onSubmit: function () {
+                    onSubmit: function (param) {
                         var flag = $(this).form('validate');
                         if (flag) {
+                            param.deptype = params.option.data.deptype
+                            param.dep_id = params.option.data.dep_id
+                            param.departname = params.option.data.departname
                             showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                         }
                         return flag
                     },
                     success:function(data){
-                        showProcess(false);                                        //关闭进度框
-                        var data = eval('(' + data + ')');
-                        if(data.success){
-                            alert("成功添加入住人员！");
-//                            $.messager.progress('close');
-//                            $.messager.alert('消息提示','成功添加入住人员！');
+                        showProcess(false);
+                        if(data == "true"){
+                            cj.slideShow('成功添加入住人员');
                             params.option.parent.trigger('close');
-                            params.option.refresh.trigger('click'); //刷新
+//                            params.option.refresh.trigger('click'); //刷新
                         }else{
-                            $.messager.show({
-                                title:'温馨提示',
-                                msg:'添加失败！老人已入住',
-                                timeout:3000,
-                                showType:'slide'
-                            });
+                            cj.slideShow('添加失败！老人已入住');
                         }
                     },
                     onLoadError: function () {
                         showProcess(false);
-                        $.messager.alert('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
+                        cj.slideShow('温馨提示', '由于网络或服务器太忙，提交失败，请重试！');
                     }
                 });
             }else if(params.actiontype == "update"){     //修改
                 params.rzrydlg.form('submit',{
                     url:'pension/updatedepartmentbyid',
-                    dataType:"json",
                     success:function(data){
                         var data = eval('(' + data + ')');
                         if(data.success){
-                            alert("修改成功！");
+                            cj.slideShow("修改成功！")
                             params.option.parent.trigger('close');
                             params.option.refresh.trigger('click'); //刷新
                         }else{
-                            alert("修改失败！")
+                            cj.slideShow("修改失败！")
                         }
                     }
                 });

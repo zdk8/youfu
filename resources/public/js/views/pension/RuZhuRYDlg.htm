@@ -1,11 +1,19 @@
 <div class="d-content" style="max-height: 579px; overflow: auto; height: auto;">
     <div class="dialog_content">
         <form opt="rzrydlg" method="post">
-            <input hidden="true" name="deptype" value="jigou">
-            <input hidden="true" name="dep_id">
-            <input hidden="false" name="departname">         <!--机构名称-->
+            <!--<input hidden="true" name="deptype" value="jigou">-->
+            <!--<input hidden="true" name="dep_id">-->
+            <!--<input hidden="false" name="departname">         &lt;!&ndash;机构名称&ndash;&gt;-->
             <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
                 <tbody>
+                <tr>
+                    <td class="formtdtext" style="width: 100px">行政区划 :</td>
+                    <td colspan="3">
+                        <input style="width: 300px;" opt="districtid"
+                               data-options="required:true, valueField:''">
+                        <input type="text" name="districtname" opt="districtname">
+                    </td>
+                </tr>
                 <tr>
                     <th width="100">身份证<span style="color: red">*</span>:</th>
                     <td><input type="text" name="identityid" class="input-text easyui-validatebox" ></td>
@@ -17,10 +25,15 @@
                     <th>老人年龄 :</th>
                     <td><input type="text" name="age" class="input-text easyui-validatebox"></td>
 
-                    <th>行政区划 :</th>
-                    <td><input type="text" name="districtid" opt="districtid" class="input-text easyui-combotree"></td>
+                    <th>性别 :</th>
+                    <td><input type="text" name="sex" opt="sex"
+                               class="easyui-combobox lazy-combobox input-text"
+                               data-options="
+                                loader:cj.getLoader('gender'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'"></td>
                 </tr>
-
                 <tr>
                     <th>家庭住址 :</th>
                     <td>
@@ -73,9 +86,12 @@
                                 textField:'text'">
                     </td>
 
-                    <th>家庭经济条件 :</th>
+                    <th>经济状况 :</th>
                     <td>
-                        <input type="text"
+                        <input type="checkbox" name="jjzk_baofang" value="0">离休
+                        <input type="checkbox" name="jjzk_lixiu" value="0">包房
+                        <input type="checkbox" name="jjzk_baomu" value="0">保姆
+                        <!--<input type="text"
                                class="easyui-combobox lazy-combobox input-text"
                                name="economy"
                                data-options="
@@ -83,7 +99,7 @@
                                 editable:false,
                                 panelHeight:'auto',
                                 valueField:'id',
-                                textField:'text'">
+                                textField:'text'">-->
                     </td>
                 </tr>
                 <tr>
@@ -113,17 +129,48 @@
                                 textField:'text'">
                     </td>
                 </tr>
-                <!--<tr>
+
+                <tr>
+                    <th>联系人 :</th>
+                    <td><input type="text" name="contact" class="input-text easyui-validatebox"></td>
+
+                    <th>联系电话 :</th>
+                    <td><input type="text" name="phone" class="input-text easyui-validatebox"></td>
+                </tr>
+                <tr>
+                    <th>手机 :</th>
+                    <td><input type="text" name="cellphone" class="input-text easyui-validatebox"></td>
+
+                    <th>身体状况 :</th>
+                    <td><input type="text" name="health" class="easyui-combobox lazy-combobox input-text"
+                               data-options="
+                                loader:cj.getLoader('health'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>备注 :</th>
+                    <td colspan="3">
+                        <textarea name="comments" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
                     <td class="formtdtext">入住时间</td>
                     <td>
-                        <input class="easyui-datebox" name="checkintime">
+                        <input class="easyui-datebox" style="width: 164px" name="checkintime">
                     </td>
 
                     <td class="formtdtext">离开时间</td>
                     <td>
-                        <input class="easyui-datebox" name="checkouttime">
+                        <input class="easyui-datebox" style="width: 164px" name="checkouttime">
                     </td>
-                </tr>-->
+                </tr>
+
                 </tbody>
             </table>
         </form>

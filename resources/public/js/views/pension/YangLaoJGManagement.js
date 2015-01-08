@@ -88,7 +88,7 @@ define(function(){
                     win.render({
                         title:'添加养老机构',
                         width:700,
-                        height:258,
+                        height:293,
                         html:htmfile,
                         buttons:[
                          {text:'取消',handler:function(html,parent){
@@ -122,7 +122,7 @@ define(function(){
                     win.render({
                         title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
                         width:700,
-                        height:258,
+                        height:295,
                         html:htmfile,
                         buttons:[
                             {text:'取消',handler:function(html,parent){
@@ -156,7 +156,7 @@ define(function(){
                 win.render({
                     title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">添加入住人员-'+departname+'</label>',
                     width:700,
-                    height:290,
+                    height:475,
                     html:htmfile,
                     buttons:[
                         {text:'取消',handler:function(html,parent){

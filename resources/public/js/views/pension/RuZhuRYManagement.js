@@ -38,7 +38,7 @@ define(function(){
                                                 },
                                                 success:function(data){
                                                     if(data.success){
-                                                        alert("人员注销成功")
+                                                        cj.slideShow('人员注销成功');
                                                         rzrygl.datagrid("reload")
                                                     }
                                                 },

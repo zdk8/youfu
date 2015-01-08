@@ -98,11 +98,16 @@ div.form-foot-btns ul li
 div.form-foot-btns ul li a, div.form-foot-btns ul li a:visited
 {
     cursor: pointer;
-    border: 1px #4e667d solid;
+    /*border: 1px #4e667d solid;*/
     text-decoration: none;
     white-space: nowrap;
     outline-width: 50px;
-    background-image: url("../../img/button1.jpg");
+    background-image: url("../toolbtn.jpg");
+    /*background-size: 65px 25px;*/
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 6px;
+    padding-top: 2px;
 }
 div.form-foot-btns ul li a:hover
 {

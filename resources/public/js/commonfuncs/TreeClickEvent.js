@@ -8,7 +8,8 @@ define(function(){
                 myjsfile = 'views/Blank';
             }
             var mydc="?v="+new Date().getTime()
-            require([option.htmfile+mydc,myjsfile],function(htm,js){
+            require([option.htmfile,myjsfile],function(htm,js){
+//            require([option.htmfile+mydc,myjsfile],function(htm,js){
                 var title=option.title;
                 if(mainTab.tabs('exists',title)){
                     mainTab.tabs('select', title);

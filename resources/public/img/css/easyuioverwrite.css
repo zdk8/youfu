@@ -20,7 +20,8 @@ span.error,a.error{
     text-decoration: underline;
 }
 .searchbox-button {
-    background: url('images/searchbox_button22.png') no-repeat center center;
+    background: url('') no-repeat center center;
+    /*background: url('images/searchbox_button22.png') no-repeat center center;*/
 }
 .datagrid-htable, .datagrid-btable, .datagrid-ftable {
     color: gray;
@@ -126,4 +127,19 @@ span.error,a.error{
 
 .combobox-item{
     padding-left: 20px;
+}
+
+element.style {
+}
+.icon-add-pl15 {
+    background: url('../../img/addtab.png') no-repeat left center;
+    padding-left: 16px;
+}
+.icon-add-pl16 {
+    background: url('../../img/edittab.png') no-repeat left center;
+    padding-left: 16px;
+}
+.icon-del-pl15 {
+    background: url('../../img/deletetab.png') no-repeat left center;
+    padding-left: 16px;
 }

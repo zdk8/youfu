@@ -17,22 +17,31 @@ define(function(){
             if(params.actiontype == "add"){         //新增
                 params.yljgdlg.form('submit',{
                     url:'pension/adddepartment',
-                    dataType:"json",
+                    onSubmit:function(param){
+                        param.deptype = "jigou"
+                    },
                     success:function(data){
-                        var data = eval('(' + data + ')');
-                        if(data.success){
-                            alert("添加成功！");
+                        if(data == "true"){
+                            cj.slideShow("添加成功")
                             params.option.parent.trigger('close');
                             params.option.refresh.trigger('click'); //刷新
                         }else{
-                            alert("添加失败！")
+                            cj.slideShow("添加失败")
                         }
+                        /*var data = eval('(' + data + ')');
+                        if(data.success){
+
+                        }else{
+
+                        }*/
                     }
                 });
             }else if(params.actiontype == "update"){     //修改
                 params.yljgdlg.form('submit',{
                     url:'pension/updatedepartmentbyid',
-                    dataType:"json",
+                    onSubmit:function(param){
+                        param.dep_id = params.option.data.dep_id
+                    },
                     success:function(data){
                         var data = eval('(' + data + ')');
                         if(data.success){
