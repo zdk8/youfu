@@ -30,7 +30,9 @@
   (let [{params :params}request
         filter-fields (select-keys params depart)]
     (db/add-depart (common/timefmt-bef-insert   filter-fields "runtime"))
-    (resp/json {:success true :message "add success"})))
+;    (resp/json {:success true :message "add success"})
+    (str "true")
+    ))
 
 (defn getall-department [request]
   (let[{params :params}request
@@ -87,8 +89,11 @@
         ]
     (println "DDDDDDD"  (select-keys params deppeople))
     (if (<= (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request)))                 ;判断老年表是否存在，不存在添加数据到老年表
-    (if (> (count checkopdep) 0)  (resp/json {:success false :message "user already checkin"})                              ;判断是否已经入住了
-      (do (db/add-oldpeopledep opddate) (resp/json {:success true :message "checkin success"})))
+    (if (> (count checkopdep) 0)  (str "false");(resp/json {:success false :message "user already checkin"})                              ;判断是否已经入住了
+      (do (db/add-oldpeopledep opddate)
+;        (resp/json {:success true :message "checkin success"})
+        (str "true")
+        ))
 ))
 
 (defn select-opdofdepart [request]
