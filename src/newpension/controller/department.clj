@@ -112,7 +112,7 @@
        {page :page}params
        {rows :rows}params
        cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname) " and checkouttime is null")
-       getresult (common/fenye rows page "t_oldpeopledep" "*" cond "")]
+       getresult (common/fenye rows page "t_oldpeopledep" "*" cond " order by opd_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "checkintime")})))
 
 (defn oldpeople-checkout [request]
