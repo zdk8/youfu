@@ -83,7 +83,7 @@
         checkop (get-oldpeople identityid)
        checkopdep (get-oldpeopledep identityid)
         ;nowtime (common/get-nowtime)
-        opddate (common/timefmt-bef-insert (select-keys params deppeople) "checkintime") ;(conj (select-keys params deppeople) {:checkintime nowtime})
+        opddate (common/timefmt-bef-insert(common/timefmt-bef-insert (select-keys params deppeople) "checkintime") "checkouttime") ;(conj (select-keys params deppeople) {:checkintime nowtime})
         ]
     (println "DDDDDDD"  (select-keys params deppeople))
     (if (<= (count checkop) 0) (let[opdate (select-keys params oldpeople)]   (old/create-old request)))                 ;判断老年表是否存在，不存在添加数据到老年表
