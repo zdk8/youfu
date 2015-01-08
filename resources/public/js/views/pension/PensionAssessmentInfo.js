@@ -90,8 +90,8 @@ define(function(){
                 {field:'telephone',title:'联系电话',width:60}
             ]],
             onClickRow:function(index,row){
-                console.log(index)
-                console.log(row.jdep_id)
+                /*console.log(index)
+                console.log(row.jdep_id)*/
                 /*$.ajax({
                  url:'searchid',
                  data:{
@@ -195,6 +195,7 @@ define(function(){
     /*通过id查询申请人员，若有评估信息也一并加载*/
     var getassessbyidFunc = function(local,dataparams,aulevel){
         local.find('form').form('load',dataparams);             //填充表单
+        local.find('[opt=districtid]').combobox("setValue",dataparams.districtname)  //填充行政区划
         for(var key in dataparams){
             var name = key;
             var value = dataparams[key];

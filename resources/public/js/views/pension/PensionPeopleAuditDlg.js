@@ -38,11 +38,13 @@ define(function(){
                 success:function(data){
                     var data = eval('(' + data + ')');
                     if(data.success){
-                        alert("处理完成！");
+                        cj.slideShow('处理完成');
                         params.option.parent.trigger('close');
-                        params.option.refresh.datagrid("reload"); //刷新
+                        $("#tabs").tabs("close",params.option.title)
+                        var ref =  params.option.refresh;
+                        ref();  //刷新
                     }else{
-                        alert("处理失败！")
+                        cj.slideShow('处理失败');
                     }
                 }
             });

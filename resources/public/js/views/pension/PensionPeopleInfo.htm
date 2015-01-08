@@ -3,17 +3,18 @@
 <fieldset opt="baseinfo">
     <legend>
         <label opt="baseinfo_shrinkage">
-            <img opt="baseinfo_img" id="baseinfo_img" src="img/add.png"/>老年人基本信息
+            <img opt="baseinfo_img" id="baseinfo_img" src="img/reduction.png"/>老年人基本信息
         </label>
     </legend>
     <div>
-        <input type="hidden" name="lr_id">
-        <table class="formtable" opt="baseinfo_table" border="1">
+        <!--<input type="hidden" name="lr_id">-->
+        <table class="formtable" opt="baseinfo_table">
             <tr>
                 <td class="formtdtext"  style="width: 100px">行政区划<span style="color: red">*</span></td>
                 <td colspan="5">
                     <input opt="districtid" data-options="required:true, valueField:'divisionpath'"
                            style="width: 300px;"  name="districtid">
+                    <input type="text" name="districtname" opt="districtname" hidden="true">
                 </td>
                 <td rowspan="4" colspan="2" style="text-align: center">
                     <img name="pensionimgpath" src="img/noperson.gif" value="" opt="personimg" alt="用户照片" width="150px" height="120px">
@@ -43,7 +44,7 @@
             </tr>
             <tr>
                 <td class="formtdtext">出生年月</td>
-                <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd"></td>
+                <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser"></td>
                 <td class="formtdtext">民族</td>
                 <td>
                     <input class="easyui-combobox"
@@ -178,7 +179,7 @@
 <fieldset opt="baseinfo1">
     <legend>
         <label opt="baseinfo1_shrinkage">
-            <img opt="baseinfo1_img" id="baseinfo1_img" src="img/add.png"/>享受服务类型
+            <img opt="baseinfo1_img" id="baseinfo1_img" src="img/reduction.png"/>享受服务类型
         </label>
     </legend>
     <div opt="lrxsfwlx">
@@ -201,7 +202,7 @@
 <fieldset  opt="baseinfo2">
     <legend>
         <label opt="baseinfo2_shrinkage">
-            <img opt="baseinfo2_img" id="baseinfo2_img" src="img/add.png"/>居住信息
+            <img opt="baseinfo2_img" id="baseinfo2_img" src="img/reduction.png"/>居住信息
         </label>
     </legend>
     <div>
@@ -267,7 +268,7 @@
 <fieldset  opt="baseinfo3">
     <legend>
         <label opt="baseinfo3_shrinkage">
-            <img opt="baseinfo3_img" id="baseinfo3_img" src="img/add.png"/>健康信息
+            <img opt="baseinfo3_img" id="baseinfo3_img" src="img/reduction.png"/>健康信息
         </label>
     </legend>
     <div>
@@ -277,6 +278,7 @@
                 <td>
                     <input class="easyui-combobox "
                            name="jk_xuex"
+                           id="jk_xuex"
                            style="width: 100px"
                            data-options="
                                 loader:cj.getLoader('bloodtype'),
@@ -452,7 +454,7 @@
 <!--爱好及活动需求-->
 <fieldset  opt="baseinfo4">
     <legend>
-        <label opt="baseinfo4_shrinkage"><img opt="baseinfo4_img" id="baseinfo4_img" src="img/add.png"/>爱好及活动需求</label>
+        <label opt="baseinfo4_shrinkage"><img opt="baseinfo4_img" id="baseinfo4_img" src="img/reduction.png"/>爱好及活动需求</label>
     </legend>
     <div>
         <table class="formtable" opt="baseinfo4_table">
@@ -494,16 +496,17 @@
                     <tr>
                         <td class="formtdtext" style="text-align: right;width: 70px">制单日期:</td>
                         <td style="width: 100;text-align: left" >
-                            <input class="easyui-datebox" opt="setdaytime" name="operator_date" data-options="formatter:myformatter,parser:myparser" id="operator_date">
+                            <input class="easyui-datebox" opt="setdaytime" name="operator_date" readonly
+                                   data-options="formatter:myformatter,parser:myparser" id="operator_date">
                         </td>
                     </tr>
                 </table>
             </td>
             <td style="text-align: right">
-                <table style="text-align: right;width: 450px">
-                    <tr style="text-align: right">
-                        <td style="width: 100px" >制单人:<input class="easyui-validatebox" name="operators" readonly="true"></td>
-                        <td style="width: 100px" >原制单人:<input class="easyui-validatebox" readonly="true"></td>
+                <table style="width: 450px">
+                    <tr>
+                        <td style="width: 100px" >制单人:<input size="15" class="easyui-validatebox" name="operators" readonly="true"></td>
+                        <!--<td style="width: 100px" >原制单人:<input size="15" class="easyui-validatebox" readonly="true"></td>-->
                     </tr>
                 </table>
             </td>
