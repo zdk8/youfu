@@ -17,7 +17,7 @@
 
 (def depart [:departname :districtid :deptype :register :telephone :people :address :busline :coordinates :approvedbed :actualbed :livenumber :buildarea :function :runtime :serial_id :manage_id])
 (def deppeople [:name :age :identityid :lr_id :dep_id :departname :checkintime :checkouttime :neednurse :districtid :address :registration :type :live :marriage :culture :economy
-                :deptype :sex :contact :phone :cellphone :health :comments])
+                :deptype :sex :contact :phone :cellphone :health :comments :jjzk_baofang :jjzk_lixiu :jjzk_baomu])
 (def oldpeople [:districtid :name :identityid :address :registration :type :live :marriage :economy :culture])
 (def canteen [:departname :register :telephone :people :address :busline :coordinates :buildarea :function :runtime :avgnumber])
 
