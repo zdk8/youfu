@@ -1,8 +1,11 @@
+<div  class="easyui-panel newRadio" opt="formcontentpanel"
+      style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
+      data-options="fit:true,border:false">
 <div class="d-content" style="max-height: 579px; overflow: auto; height: auto;">
     <div class="dialog_content">
         <form opt="ylstdlg" method="post">
-            <input hidden="true" name="c_id">
-            <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+            <!--<input hidden="true" name="c_id">-->
+            <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
                 <tbody>
                 <tr>
                     <th width="100">部门名称<span style="color: red">*</span>:</th>
@@ -55,7 +58,7 @@
                 <tr>
                     <th>开办时间 :</th>
                     <td>
-                        <input class="easyui-validatebox input-text" name="runtime">
+                        <input class="easyui-datebox input-text" name="runtime">
                     </td>
 
                     <th>平均每年服务人数 :</th>
@@ -67,5 +70,6 @@
             </table>
         </form>
     </div>
+</div>
 </div>
 

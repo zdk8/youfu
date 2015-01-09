@@ -26,14 +26,8 @@ define(function(){
                             params.option.parent.trigger('close');
                             params.option.refresh.trigger('click'); //刷新
                         }else{
-                            cj.slideShow("添加失败")
+                            cj.slideShow("<label style='color: red'>添加失败</label>")
                         }
-                        /*var data = eval('(' + data + ')');
-                        if(data.success){
-
-                        }else{
-
-                        }*/
                     }
                 });
             }else if(params.actiontype == "update"){     //修改
@@ -43,13 +37,12 @@ define(function(){
                         param.dep_id = params.option.data.dep_id
                     },
                     success:function(data){
-                        var data = eval('(' + data + ')');
-                        if(data.success){
-                            alert("修改成功！");
+                        if(data == "true"){
+                            cj.slideShow("修改成功")
                             params.option.parent.trigger('close');
                             params.option.refresh.trigger('click'); //刷新
                         }else{
-                            alert("修改失败！")
+                            cj.slideShow("<label style='color: red'>修改失败</label>")
                         }
                     }
                 });

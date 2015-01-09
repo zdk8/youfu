@@ -1,5 +1,22 @@
 define(function(){
+    var addToolBar=function(local) {
+        var toolBarHeight=30;
+        var toolBar=cj.getFormToolBar([
+            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '修改',hidden:'hidden',opt:'update'},
+        ]);
+        local.append(toolBar);
+        local.find('div[opt=formcontentpanel]').panel({
+            onResize: function (width, height) {
+                $(this).height($(this).height() - toolBarHeight);
+                toolBar.height(toolBarHeight);
+            }
+        });
+    };
+
     function render(local,option){
+        addToolBar(local)
+
         var divisiontree = local.find('[opt=districtid]'); //行政区划id
         var districtname = local.find('[opt=districtname]'); //行政区划id
         districtname.hide();
@@ -17,6 +34,40 @@ define(function(){
         if(actiontype == "addrzry"){                     //添加入住人员
             rzrydlg.form('load', {departname:option.data.departname,dep_id:option.data.dep_id});  //填充机构名称、机构id
             determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
+        }else if(option.queryParams.actiontype == "view"){
+            local.find("[opt=save]").hide();
+            rzrydlg.form('load',option.queryParams.record)
+            var districtnameval = getDivistionTotalname(option.queryParams.record.districtid)
+            /*$.ajax({
+                url:"getdistrictname",
+                type:"post",
+                dataType:"json",
+                data:{
+                    districtid:option.queryParams.record.districtid
+                },
+                success:function(data){
+                    console.log(data[0].totalname)
+                }
+            })*/
+            divisiontree.combotree("setValue",districtnameval)  //填充行政区划
+            local.find("[opt=update]").show().click(function(){
+                rzrydlg.form('submit',{
+                    url:"ddddd",
+                    onSubmit:function(params){
+                        params.opd_id = option.queryParams.record.opd_id
+                    },
+                    success:function(data){
+                        console.log(data)
+                        if(data == "true"){
+                            cj.slideShow("修改成功！")
+//                            params.option.parent.trigger('close');
+//                            params.option.refresh.trigger('click'); //刷新
+                        }else{
+                            cj.slideShow("修改失败！")
+                        }
+                    }
+                })
+            })
         }
 
         /*取消*/
@@ -24,7 +75,7 @@ define(function(){
             option.parent.trigger('close');
         })
         /*根据身份证获取基本信息*/
-        local.find("[name=identityid]").change(function(){
+        /*local.find("[name=identityid]").change(function(){
             var val = local.find("[name=identityid]").val();
             var sex;
             var birthdayValue;
@@ -67,7 +118,7 @@ define(function(){
             if(birthdayValue == "" || birthdayValue == null){
                 alert("请输入正确的身份证!")
             }else{
-                /*根据身份证从老年人表中带出老年人信息*/
+                *//*根据身份证从老年人表中带出老年人信息*//*
                 $.ajax({
                     url:'pension/checkidentityid',
                     type:'post',
@@ -83,7 +134,7 @@ define(function(){
                     dataType:'json'
                 })
             }
-        });
+        });*/
     }
 
 

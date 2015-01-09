@@ -16,7 +16,13 @@
         <th data-options="field:'ck',checkbox:true"></th>
         <th data-options="field:'opd_id',hidden:true"></th>
         <th data-options="field:'departname',width:145,align:'center'">机构名称</th>
-        <th data-options="field:'name',width:145,align:'center'">人员姓名</th>
+        <th data-options="field:'name',width:145,align:'center',
+        formatter:function(v,r,i)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                    return str.html();
+                }">人员姓名</th>
         <th data-options="field:'age',width:145,align:'center'">年龄</th>
         <th data-options="field:'identityid',width:145,align:'center'">身份证</th>
         <th data-options="field:'address',width:145,align:'center'">家庭住址</th>

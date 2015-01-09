@@ -53,6 +53,23 @@ var getdivision = function(divisiontree,districtname){
         }
     });
 }
+/*获取行政区划全名*/
+var getDivistionTotalname = function(districtid){
+    var name;
+    $.ajax({
+        url:"getdistrictname",
+        type:"post",
+        dataType:"json",
+        async:false,
+        data:{
+            districtid:districtid
+        },
+        success:function(data){
+            name = data[0].totalname
+        }
+    })
+    return name
+}
 /*进度框*/
 var showProcess = function(isShow, title, msg) {
     if (!isShow) {

@@ -3,7 +3,10 @@ define(function(){
         var yljjgl = local.find('[opt=yanlaojjmanagement]');        //居家养老设施管理
         var refresh = local.find('[opt=refresh]');                  //刷新
         var departname = local.find('[opt=departname]');            //机构名称
-        addyljjFun(local,refresh);                                       //添加居家养老设施
+        var refreshGrid = function(){
+            yljjgl.datagrid("reload")
+        }
+        addyljjFun(local,refreshGrid);                                       //添加居家养老设施
         yljjgl.datagrid({
             url:'pension/getalldepartment',
             queryParams:{
@@ -25,7 +28,7 @@ define(function(){
                                 if(action == "update"){         //修改
                                     var data = record;
                                     var departname = record.departname;         //机构名称
-                                    updateyljjFun(local,departname,data,refresh)        //修改居家养老服务设施
+                                    updateyljjFun(local,departname,data,refreshGrid)        //修改居家养老服务设施
                                     /*cj.showContent({
                                      title:record.biaozhunmingcheng+'修改',
                                      htmfile:'text!views/dmxt/PlaceCommon.htm',
@@ -49,9 +52,8 @@ define(function(){
                                                     dep_id:record.dep_id
                                                 },
                                                 success:function(data){
-//                                                    var data = eval('(' + data + ')');
                                                     if(data.success){
-                                                        alert("删除成功")
+                                                        cj.slideShow("删除成功")
                                                         yljjgl.datagrid("reload")
                                                     }
                                                 },
@@ -76,9 +78,24 @@ define(function(){
     }
 
     /*添加居家养老设施*/
-    var addyljjFun = function(local,refresh){
+    var addyljjFun = function(local,refreshGrid){
         local.find('[opt=addyljj]').click(function(){
-            require(['commonfuncs/popwin/win','text!views/pension/YangLaoJJDlg.htm','views/pension/YangLaoJJDlg'],
+            var title = "添加养老设施"
+            if($("#tabs").tabs('getTab',title)){
+                $("#tabs").tabs('select',title)
+            }else{
+                cj.showContent({                                          //详细信息(tab标签)
+                    title:title,
+                    htmfile:'text!views/pension/YangLaoJJDlg.htm',
+                    jsfile:'views/pension/YangLaoJJDlg',
+                    queryParams:{
+                        actiontype:'add',         //（处理）操作方式
+                        title:title,
+                        refresh:refreshGrid
+                    }
+                })
+            }
+            /*require(['commonfuncs/popwin/win','text!views/pension/YangLaoJJDlg.htm','views/pension/YangLaoJJDlg'],
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'添加养老设施',
@@ -107,12 +124,28 @@ define(function(){
                         }
                     })
                 }
-            )
+            )*/
         })
     }
     /*修改居家养老设施*/
-    var updateyljjFun = function(local,departname,data,refresh){
-        require(['commonfuncs/popwin/win','text!views/pension/YangLaoJJDlg.htm','views/pension/YangLaoJJDlg'],
+    var updateyljjFun = function(local,departname,data,refreshGrid){
+        var title = '<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>'
+        if($("#tabs").tabs('getTab',title)){
+            $("#tabs").tabs('select',title)
+        }else{
+            cj.showContent({                                          //详细信息(tab标签)
+                title:title,
+                htmfile:'text!views/pension/YangLaoJJDlg.htm',
+                jsfile:'views/pension/YangLaoJJDlg',
+                queryParams:{
+                    actiontype:'update',         //（处理）操作方式
+                    data:data,
+                    title:title,
+                    refresh:refreshGrid
+                }
+            })
+        }
+        /*require(['commonfuncs/popwin/win','text!views/pension/YangLaoJJDlg.htm','views/pension/YangLaoJJDlg'],
             function(win,htmfile,jsfile){
                 win.render({
                     title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
@@ -142,7 +175,7 @@ define(function(){
                     }
                 })
             }
-        )
+        )*/
     }
 
     return {

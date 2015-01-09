@@ -4,6 +4,9 @@ define(function(){
         var refresh = local.find('[opt=refresh]');        //刷新
         var departname = local.find('[opt=departname]');        //机构名称
         addyljgFun(local,refresh);                     //添加养老机构
+        var refreshGrid = function(){
+            yljggl.datagrid("reload")
+        }
         yljggl.datagrid({
             url:'pension/getalldepartment',
             queryParams:{
@@ -12,10 +15,11 @@ define(function(){
             type:'post',
             onLoadSuccess:function(data){
                 var updates = local.find('[action=update]');           //修改
+                var viewbtn = local.find('[action=view]');           //查看详细信息
                 var del = local.find('[action=delete]');                //删除
                 var addrzry = local.find('[action=addrzry]');                //添加入住人员
                 var rows=data.rows;
-                var btns_arr=[updates,del,addrzry];
+                var btns_arr=[updates,viewbtn,del,addrzry];
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -49,10 +53,10 @@ define(function(){
                                                 success:function(data){
 //                                            var data = eval('(' + data + ')');
                                                     if(data.success){
-                                                        alert("删除成功")
+                                                        cj.slideShow("删除成功")
                                                         yljggl.datagrid("reload")
                                                     }else{
-                                                        alert("该机构下存在入住人员，不能删除！")
+                                                        cj.slideShow("<label style='color: red'>该机构下存在入住人员，不能删除！</label>")
                                                     }
                                                 },
                                                 dataType:'json'

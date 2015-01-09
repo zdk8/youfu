@@ -20,7 +20,6 @@ define(function(){
     /*保存*/
     function saveFunc(local,option){
         var serviceagenciesform = local.find("[opt=serviceagenciesform]");
-        console.log(223242)
         local.find('[opt=save]').show().click(function(){
             serviceagenciesform.form('submit', {
                 url:"audit/addjjyldepart",
