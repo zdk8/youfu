@@ -7,6 +7,7 @@ table {border-collapse:collapse;border-spacing:0;}
     background: #fff  repeat-x;
     font-family: Verdana, Geneva, sans-serif, "宋体";
     font-size: 12px;
+    width: 160px;
 }
 .table_form .input-text{background-color: rgb(231, 241, 211);background: rgb(231, 241, 211); }
 textarea,textarea.input-text,textarea.input-focus{font-size:12px;height:auto; padding:5px; margin:0;}

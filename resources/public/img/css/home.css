@@ -610,6 +610,13 @@ div.weboxbuttons ul li a:active
     text-align: center;
     border-bottom: 1px solid red;
 }
+.pingfen_zongfen{
+    border-top:0px;
+    border-right:0px;
+    border-left:0px;
+    text-align: center;
+    border-bottom: 1px solid red;
+}
 
 .tabs-panels {
     padding-top: 5px;
