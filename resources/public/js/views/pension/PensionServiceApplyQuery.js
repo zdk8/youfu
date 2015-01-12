@@ -43,18 +43,6 @@ define(function(){
                                             if($("#tabs").tabs('getTab',title)){
                                                 $("#tabs").tabs('select',title)
                                             }else{
-                                                /*cj.showContent({                                          //详细信息(tab标签)
-                                                    title:title,
-                                                    htmfile:'text!views/pension/PensionAssessmentInfo.htm',
-                                                    jsfile:'views/pension/PensionAssessmentInfo',
-                                                    queryParams:{
-                                                        actiontype:'assessment',         //（处理）操作方式
-                                                        data:data[0],
-                                                        record:record,
-                                                        title:title,
-                                                        refresh:refreshGrid
-                                                    }
-                                                })*/
 //                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                                 $.ajax({
                                                     url:"audit/getassessbyid",
@@ -65,7 +53,7 @@ define(function(){
                                                     dataType: 'json',
                                                     success:function(data){
                                                         if(data){
-                                                            cj.showContent({                                          //详细信息(tab标签)
+                                                            cj.showContent({            //详细信息(tab标签)、评估
                                                                 title:title,
                                                                 htmfile:'text!views/pension/PensionAssessmentInfo.htm',
                                                                 jsfile:'views/pension/PensionAssessmentInfo',
@@ -77,9 +65,9 @@ define(function(){
                                                                     refresh:refreshGrid
                                                                 }
                                                             })
-                                                            setTimeout(function(){
+                                                            /*setTimeout(function(){
                                                                 showProcess(false);
-                                                            },1000)
+                                                            },1000)*/
                                                         }
                                                     }
                                                 })

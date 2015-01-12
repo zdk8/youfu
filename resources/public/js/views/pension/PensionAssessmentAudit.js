@@ -55,7 +55,7 @@ define(function(){
     }
     /*获取评估人员信息*/
     function getassessbyidFunc(params){
-        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+//        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
         $.ajax({
             url:"audit/getassessbyid",
             type:"post",
@@ -78,9 +78,9 @@ define(function(){
                             refresh:params.refresh                //刷新
                         }
                     })
-                    setTimeout(function(){
+                    /*setTimeout(function(){
                         showProcess(false);
-                    },1000)
+                    },1000)*/
                 }
             }
         })

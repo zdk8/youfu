@@ -7,7 +7,7 @@ define(function(){
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '删除',hidden:'hidden',opt:'delete'},
             {text: '保存',hidden:'hidden',opt:'save'},
-            {text: '操作日志',hidden:'hidden',opt:'log'}
+//            {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -39,8 +39,7 @@ define(function(){
                 FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
             })
         var districtid = local.find('[opt=districtid]');      //行政区划
-        var districtname = local.find('[opt=districtname]');  //行政区划名称
-        getdivision(districtid,districtname);                   //加载行政区划
+        getdivision(districtid);                   //加载行政区划
         var pensionform = local.find('[opt=pensionform]');      //老人信息主表
         var familymembersgrid = local.find('[opt=familymembersgrid]');      //老人信息子表
         var dealwith = local.find('[opt=dealwith]');            //处理按钮
@@ -53,6 +52,9 @@ define(function(){
         /*根据身份证获取基本信息*/
         getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
             gender:local.find('[opt=gender]'),age:local.find('[opt=age]'),agetype:null})
+        local.find('[opt=dealwith]').hide()
+        local.find('[opt=update]').hide()
+        local.find('[opt=delete]').hide()
         var savebtn = local.find('[opt=save]');               //保存按钮
         savebtn.show().click(function(){
             local.find('[opt=pensionform]').form('submit', {
@@ -78,6 +80,9 @@ define(function(){
         var pensionform = local.find('[opt=pensionform]');      //老人信息主表
         pensionform.form('load',option.queryParams.data)        //填充表单
         var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
+        local.find('[opt=save]').hide()
+        local.find('[opt=update]').hide()
+        local.find('[opt=delete]').hide()
         dealwithbtn.show().click(function(){
             require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
                 function(win,htmfile,jsfile){

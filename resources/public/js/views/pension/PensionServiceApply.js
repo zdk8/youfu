@@ -6,8 +6,8 @@ define(function(){
         var toolBar=cj.getFormToolBar([
             {text: '保存',hidden:'hidden',opt:'save'},
             {text: '修改',hidden:'hidden',opt:'update'},
-            {text: '变更',hidden:'hidden',opt:'change'},
-            {text: '操作日志',hidden:'hidden',opt:'log'}
+            {text: '变更',hidden:'hidden',opt:'change'}
+//            {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -64,35 +64,12 @@ define(function(){
         addToolBar(local);
         var districtid = local.find('[opt=districtid]');      //行政区划值
         var districtname = local.find('[opt=districtname]');  //行政区划名称
-        getdivision(districtid,districtname);                   //加载行政区划
+        getdivision(districtid);                   //加载行政区划
         /*根据身份证获取基本信息*/
         getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
             gender:local.find('[opt=gender]'),tip_age:local.find('[opt=tip_age]'),agetype:"span"})
 
-        /*保存*/
-        local.find('[opt=save]').show().bind('click',function(){
-            local.find('[opt=pensionform]').form('submit', {
-                url:'audit/addauditapply',
-                onSubmit: function (params) {
-                    var isValid = $(this).form('validate');
-                    if(isValid){
-                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                        params.districtid = districtid.combobox("getValue")
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    var data =  eval('(' + data + ')');
-                    if(data.success){
-                        showProcess(false);
-                        cj.slideShow('保存成功');
-                        if(showProcess(false)){
-                            $("#tabs").tabs('close',"居家养老服务申请")
-                        }
-                    }
-                }
-            });
-        });
+
 //        var districtid = local.find('[opt=districtid]');
         var pensionform = local.find('[opt=pensionform]');
         var familymembersgrid = local.find('[opt=familymembersgrid]');
@@ -115,10 +92,7 @@ define(function(){
                 })
             }
         });
-//        genCheckBox(local.find('[opt=liveplace]'), 'liveplace', 'live',record);
-//        genCheckBox(local.find('[opt=hyfwjingji]'), 'hyfwjingji', 'economy',record);
-//        genCheckBox(local.find('[opt=culture]'), 'hyculture', 'culture',record);
-//        genCheckBox(local.find('[opt=marriage]'), 'marriage', 'marriage',record);
+
 
         /*var $registration=local.find('[opt=registration]')
         $registration.combotree({
@@ -174,13 +148,47 @@ define(function(){
     function create(local,option){
         baseRender(local);
     }
+    /*新增*/
+    function addInfo(local,option){
+        local.find('[opt=update]').hide()
+        local.find('[opt=change]').hide()
+        var districtid = local.find('[opt=districtid]');      //行政区划值
+        /*保存*/
+        local.find('[opt=save]').show().bind('click',function(){
+            local.find('[opt=pensionform]').form('submit', {
+                url:'audit/addauditapply',
+                onSubmit: function (params) {
+                    var isValid = $(this).form('validate');
+                    if(isValid){
+                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        params.districtid = districtid.combobox("getValue")
+                    }
+                    return isValid;
+                },
+                success: function (data) {
+                    if(data == "true"){
+                        showProcess(false);
+                        cj.slideShow('保存成功');
+                        if(showProcess(false)){
+                            $("#tabs").tabs('close',"居家养老服务申请")
+                        }
+                    }else{
+                        showProcess(false);
+                        cj.slideShow('<label style="color: red">保存失败</label>');
+                    }
+                }
+            });
+        });
+    }
     /*修改*/
     function showinfo(local,option){
         baseRender(local, option.queryParams.data);
         var districtid = local.find('[opt=districtid]');      //行政区划值
         local.find('form').form('load', option.queryParams.data);
-        districtid.combotree("setValue",option.queryParams.data.districtname)  //填充行政区划
+        var districtnameval = getDivistionTotalname(option.queryParams.data.districtid)
+        districtid.combotree("setValue",districtnameval)  //填充行政区划
         local.find('[opt=save]').hide()
+        local.find('[opt=change]').hide()
         /*修改*/
         local.find('[opt=update]').show().bind('click',function(){
             local.find('[opt=pensionform]').form('submit', {
@@ -199,8 +207,7 @@ define(function(){
                     return isValid;
                 },
                 success: function (data) {
-                    var data =  eval('(' + data + ')');
-                    if(data.success){
+                    if(data == "true"){
                         showProcess(false);
                         cj.slideShow('修改成功');
                         if(showProcess(false)){
@@ -226,6 +233,7 @@ define(function(){
         local.find('form').form('load',option.queryParams.data)
         districtid.combotree("setValue",option.queryParams.data.districtname)  //填充行政区划
         local.find('[opt=save]').hide()
+        local.find('[opt=update]').hide();
         /*变更*/
         local.find('[opt=change]').show().click(function(){
             local.find('[opt=pensionform]').form('submit', {
@@ -256,6 +264,7 @@ define(function(){
     }
 
     var render=function(l,o){
+        create(l, o);
         if(o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'info':
@@ -274,7 +283,7 @@ define(function(){
                     break;
             }
         }else{
-            create(l, o);
+            addInfo(l, o);
         }
     }
     return {

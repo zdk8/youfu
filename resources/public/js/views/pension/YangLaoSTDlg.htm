@@ -5,14 +5,29 @@
     <div class="dialog_content">
         <form opt="ylstdlg" method="post">
             <!--<input hidden="true" name="c_id">-->
-            <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
+            <table width="50%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
                 <tbody>
                 <tr>
-                    <th width="100">部门名称<span style="color: red">*</span>:</th>
-                    <td><input type="text" name="departname" class="input-text easyui-validatebox" >
+                    <th>部门名称<span style="color: red">*</span>:</th>
+                    <td><input type="text" name="departname" class="input-text easyui-validatebox"
+                               data-options="required:true">
 
                     </td>
 
+                    <!--<th>登记性质<span style="color: red">*</span>:</th>
+                    <td><input type="text"
+                               class="easyui-combobox lazy-combobox input-text"
+                               name="register"
+                               data-options="
+                                required:true,
+                                loader:cj.getLoader('ylregister'),
+                                editable:false,
+                                panelHeight:'auto',
+                                valueField:'id',
+                                textField:'text'">
+                    </td>-->
+                </tr>
+                <tr>
                     <th>登记性质<span style="color: red">*</span>:</th>
                     <td><input type="text"
                                class="easyui-combobox lazy-combobox input-text"
@@ -23,12 +38,17 @@
                                 editable:false,
                                 panelHeight:'auto',
                                 valueField:'id',
-                                textField:'text'"></td>
+                                textField:'text'">
+                    </td>
                 </tr>
                 <tr>
                     <th>联系电话<span style="color: red">*</span>:</th>
                     <td><input type="text" name="telephone" class="input-text easyui-validatebox"></td>
 
+                    <!--<th>联系人 :</th>
+                    <td><input type="text" name="people" class="input-text easyui-validatebox"></td>-->
+                </tr>
+                <tr>
                     <th>联系人 :</th>
                     <td><input type="text" name="people" class="input-text easyui-validatebox"></td>
                 </tr>
@@ -39,6 +59,12 @@
                         <input class="easyui-validatebox input-text" name="address">
                     </td>
 
+                    <!--<th>公交线路 :</th>
+                    <td>
+                        <input class="easyui-validatebox input-text" name="busline">
+                    </td>-->
+                </tr>
+                <tr>
                     <th>公交线路 :</th>
                     <td>
                         <input class="easyui-validatebox input-text" name="busline">
@@ -50,6 +76,12 @@
                         <input class="easyui-validatebox input-text" name="coordinates">
                     </td>
 
+                    <!--<th>建筑面积 :</th>
+                    <td>
+                        <input class="easyui-validatebox input-text" name="buildarea">
+                    </td>-->
+                </tr>
+                <tr>
                     <th>建筑面积 :</th>
                     <td>
                         <input class="easyui-validatebox input-text" name="buildarea">
@@ -61,6 +93,12 @@
                         <input class="easyui-datebox input-text" name="runtime">
                     </td>
 
+                    <!--<th>平均每年服务人数 :</th>
+                    <td>
+                        <input class="easyui-validatebox input-text" name="avgnumber">
+                    </td>-->
+                </tr>
+                <tr>
                     <th>平均每年服务人数 :</th>
                     <td>
                         <input class="easyui-validatebox input-text" name="avgnumber">

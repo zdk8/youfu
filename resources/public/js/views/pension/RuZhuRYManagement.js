@@ -51,7 +51,6 @@ define(function(){
                                         }
                                     });
                                 }else if(action = "view"){
-                                    console.log(record)
                                     var title = "【"+record.name+'】详细信息';
                                     if($("#tabs").tabs('getTab',title)){
                                         $("#tabs").tabs('select',title)
