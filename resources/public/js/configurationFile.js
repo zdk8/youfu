@@ -28,7 +28,7 @@ function formatterYM(date){
 }
 
 /*行政区划的树结构*/
-var getdivision = function(divisiontree,districtname){
+var getdivision = function(divisiontree){
     divisiontree.combotree({
         panelHeight:300,
         url:'getdivisiontree',
@@ -49,7 +49,6 @@ var getdivision = function(divisiontree,districtname){
                     divisiontree.combotree('tree').tree('getSelected').id)
                 .combobox('setText',
                     divisiontree.combotree('tree').tree('getSelected').totalname);
-            districtname.val(divisiontree.combotree('tree').tree('getSelected').totalname)
         }
     });
 }
@@ -93,12 +92,12 @@ var FieldSetVisual = function(local, pTableID, pFieldSetID, pImageID ){
     var objImage = document.getElementById(pImageID) ;
     if(objTable.is(":hidden")){
         objTable.show()
-        var heightTable = parseInt( objTable.height())+22 ;
+        var heightTable = parseInt( objTable.height())+24 ;
         objFieldSet.height(heightTable+"px");
         objImage.src="img/reduction.png" ;        //打开
     }else{
         objTable.hide()
-        objFieldSet.height("22px");
+        objFieldSet.height("24px");
         objImage.src="img/add.png" ;       //收缩
     }
 }
