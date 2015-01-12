@@ -53,7 +53,9 @@
        applydata (select-keys params applykeys)]
     (if (= checkold 0) (old/add-oldpeople opdata))                                           ;如果老人数据没有此数据，将其添加到老人数据库中
     (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
-    (resp/json {:success true :message "apply success"})))
+;    (resp/json {:success true :message "apply success"})
+    (str "true")
+    ))
 
 (defn applydateformat [data]
   (common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list
@@ -88,7 +90,9 @@
         jja_id  (:jja_id params)
         applydata (select-keys params applykeys)]
     (db/update-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate") jja_id)
-    (resp/json {:success true :message "update apply success"})))
+;    (resp/json {:success true :message "update apply success"})
+    (str "true")
+    ))
 
 (defn add-assessmessage [request]                                                                         "居家养老信息评估"
   (let[params (:params request)
