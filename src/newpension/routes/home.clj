@@ -161,6 +161,8 @@
   (POST "/pension/updatecanteen" request (depart/update-canteen  request))                      ;;食堂修改
   (POST "/pension/deletecanteen" request (depart/delete-canteen  request))                       ;;删除食堂
 
+  (POST "/pension/getdepartmentbyname"  request (depart/get-departmentbyname  request))      ;;
+
   (POST "/pension/auditfunction" request (old/audit-fun request))                                     ;;审核
   (POST "/pension/get-auditpeople" request (old/get-auditpeople request))                     ;;获取未通过审批的老年人
 
@@ -185,6 +187,11 @@
   (POST "/audit/addjjyldepart" request (audit/add-jjyldepart request))                                              ;;添加居家养老服务机构
   (POST "/audit/getalljjyldepart" request (audit/getall-jjyldepart request))                                        ;;获取居家养老服务机构
   (POST "/audit/updatejjyldepart" request (audit/update-jjyldepart request))                                      ;;更新居家养老服务机构
+
+
+
+
+
 
 
   (POST "/queryyljg" [] (old/get-yljg) )

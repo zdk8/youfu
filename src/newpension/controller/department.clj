@@ -50,6 +50,11 @@
        {dep_id :dep_id}params]
     (resp/json (db/get-departbyid dep_id))))
 
+(defn get-departmentbyname  [request]
+  (let[params (:params request)
+       mapguid (:mapguid params)]
+    (resp/json(db/get-departbyname mapguid))))
+
 (defn update-departbyid [request]
   (let[{params :params}request
        filter-fields (select-keys params depart)
