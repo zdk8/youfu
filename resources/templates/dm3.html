@@ -211,6 +211,9 @@
         <li class="li-skinitem">
             <a opt="KqYaHUodlGekYv9sanhD" style="background: url(img/pension03/icon_zijinfafang.png) no-repeat;cursor:pointer">资金发放</a>
         </li>
+        <li class="li-skinitem">
+            <a opt="closeAllTabs" style="background: url(img/pension03/icon_zijinfafang.png) no-repeat;cursor:pointer">关闭</a>
+        </li>
     </ul>
 </div>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -534,7 +537,16 @@
     $('#headnavul a').bind('click',function(){
         $('#current-user-msg a,#headnavul a').removeClass('hight-color');
         $(this).addClass('hight-color');
-        swapFunction($(this).attr('opt'));
+        if($($(this)[0]).attr('opt') == "closeAllTabs"){
+            /*关闭页签*/
+            $(".tabs li").each(function(index, obj) {
+                //获取所有可关闭的选项卡
+                var tab = $(".tabs-closable", this).text();
+                $(".easyui-tabs").tabs('close', tab);
+            });
+        }else{
+            swapFunction($(this).attr('opt'));
+        }
     });
     $('#current-user-msg a,#headnavul a').hover(function(){
         $('#current-user-msg a,#headnavul a').removeClass('hight-color-2');

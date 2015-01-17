@@ -89,7 +89,7 @@ var showProcess = function(isShow, title, msg) {
 var FieldSetVisual = function(local, pTableID, pFieldSetID, pImageID ){
     var objTable = local.find('[opt='+pTableID+']');
     var objFieldSet = local.find('[opt='+pFieldSetID+']');
-    var objImage = document.getElementById(pImageID) ;
+    var objImage = local.find('[opt='+pImageID+']')[0];
     if(objTable.is(":hidden")){
         objTable.show()
         var heightTable = parseInt( objTable.height())+24 ;
@@ -149,4 +149,12 @@ var getBaseInfoByIdentityid = function(params){
             params.age.val(age);
         }
     });
+}
+/*计算评估总分*/
+var calculate=function(local){
+    var value=0;
+    local.find('table[opt=result1_table] td>:input[class=pingfen]').each(function(){
+        value+=Number($(this).val())
+    })
+    local.find('table[opt=result1_table] :input[name=pinggusum]').val(value)
 }

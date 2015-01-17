@@ -22,7 +22,7 @@
             }">操作</th>
         <th data-options="field:'aulevel',width:127,
         formatter: function(value,row,index){
-                if(value == '' || value == null){
+                if(value == 0){
                     return approvalProcess[4]
                 }else{
                     return approvalProcess[value]

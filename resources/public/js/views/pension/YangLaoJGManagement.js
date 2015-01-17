@@ -18,8 +18,9 @@ define(function(){
                 var viewbtn = local.find('[action=view]');           //查看详细信息
                 var del = local.find('[action=delete]');                //删除
                 var addrzry = local.find('[action=addrzry]');                //添加入住人员
+                var mapbtn = local.find('[action=map]');                //地图
                 var rows=data.rows;
-                var btns_arr=[updates,viewbtn,del,addrzry];
+                var btns_arr=[updates,viewbtn,del,addrzry,mapbtn];
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -57,6 +58,14 @@ define(function(){
                                     var data = record;
                                     var departname = record.departname;         //机构名称
                                     addrzryFun(local,departname,data,refreshGrid)                //添加入住人员
+                                }else if(action == "map"){
+                                    var ywtype = "PT_JLY"
+                                    var mapguid = record.mapguid;
+                                    window.open (mapURL+'map#task?ywtype='+ywtype+'&'+
+                                        'mapguid='+mapguid,
+                                        'newwindow', 'height='+window.screen.availHeight+', width='+window.screen.availWidth+', top=0, left=0, toolbar=no, ' +
+                                            'menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
+
                                 }
                             });
                         })(i)

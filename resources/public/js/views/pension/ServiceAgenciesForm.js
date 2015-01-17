@@ -19,6 +19,7 @@ define(function(){
     }
     /*保存*/
     function saveFunc(local,option){
+        local.find('[opt=update]').hide()
         var serviceagenciesform = local.find("[opt=serviceagenciesform]");
         local.find('[opt=save]').show().click(function(){
             serviceagenciesform.form('submit', {
@@ -47,6 +48,7 @@ define(function(){
     }
     /*修改*/
     function updateInfoFunc(local,option){
+        local.find('[opt=save]').hide()
         var serviceagenciesform = local.find("[opt=serviceagenciesform]");
         serviceagenciesform.form("load",option.queryParams.data)
         local.find('[opt=update]').show().click(function(){

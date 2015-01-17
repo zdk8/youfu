@@ -6,6 +6,7 @@
             [noir.session :as session]
             [clojure.data.json :as json]
             [newpension.controller.manager :as myctrl]
+            [newpension.controller.audit :as audit]
             ))
 
 (defroutes manager-routes
@@ -54,11 +55,25 @@
   (POST "/saveroleuser" req (myctrl/save-role-user req))
   ;;测试session
   (GET "/getiframes" [pagename pagetitle]
-    (layout/render "iframes.html" {:pagename pagename
+    (layout/render "addold.html" {:pagename pagename
                                    :pagetitle pagetitle
                                    :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)}))
+  (POST "/getData" req (println "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" req))
+  (GET "/gethtmliframe" [name data]
+    (layout/render "test.html"
+      {:htmlpath (str "text!views/pension/" name ".htm") :jspath  (str "views/pension/" name) :data data}
+      )
+    )
   (context "/mysessiontest/:name" [name]
     (GET "/put" [] (myctrl/my-session-put name))
     (GET "/get" [] (myctrl/my-session-get))
     (GET "/remove" [] (myctrl/my-session-remove)))
+
+  (GET "/gethtml" [name] (layout/render name))
+  (GET "/getPensionServiceAssHtml" req (layout/render "PensionServiceAss.html"
+                                         (let [datas (first(audit/get-assessbyid2 req))]
+                                            {:dataall datas :jsondata (json/json-str datas)})))
+  (GET "/getPensionServiceAuditHtml" req (layout/render "PensionServiceAudit.html"
+                                         (let [datas (first(audit/get-assessbyid2 req))]
+                                           {:dataall datas :jsondata (json/json-str datas)})))
   )

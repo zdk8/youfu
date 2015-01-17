@@ -1,0 +1,149 @@
+<div id="assessmentid" class="easyui-panel newRadio" opt="formcontentpanel"
+     style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
+     data-options="fit:true,border:false">
+    <form method="post" opt="mainform">
+        <input type="hidden" opt="jsondata" value="{{jsondata}}" style="width:0px">
+
+        <fieldset style="width: 900px;margin: 0px auto;" opt="result1">
+            <legend>
+                <label opt="result1_shrinkage"><img opt="result1_img" src="img/reduction.png"/>评估报告一:评估总分计算</label>
+            </legend>
+            <table opt="result1_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+                <tr>
+                    <td style="width: 90px;text-align: center" colspan="2">主要参数</td>
+                    <td>评估分值</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">评估分值1</td>
+                    <td style="text-align: center;">生活自理能力</td>
+                    <td ><input size="1" class="pingfen" name="sum_sh_pingguf" value="{{dataall.sh_pingguf}}" readonly></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">评估分值2</td>
+                    <td style="text-align: center;">经济条件</td>
+                    <td ><input size="1" class="pingfen" name="sum_jj_pingguf" value="{{dataall.jj_pingguf}}" readonly></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">评估分值3</td>
+                    <td style="text-align: center;">居住环境</td>
+                    <td ><input size="1" class="pingfen" name="sum_jz_pingguf" value="{{dataall.jz_pingguf}}" readonly></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">附加分值1</td>
+                    <td style="text-align: center;">认知能力</td>
+                    <td ><input size="1" class="pingfen" name="sum_rz_pingguf" value="{{dataall.rz_pingguf}}" readonly></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">附加分值2</td>
+                    <td style="text-align: center;">年龄情况</td>
+                    <td ><input size="1" class="pingfen" name="sum_nl_pingguf" value="{{dataall.nl_pingguf}}" readonly></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">附加分值3</td>
+                    <td style="text-align: center;">特殊贡献</td>
+                    <td ><input size="1" class="pingfen" name="sum_gx_pingguf" value="{{dataall.gx_pingguf}}" readonly></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">评估总分</td>
+                    <td style="text-align: center;">
+                        <label>=评估分值1+评估分值2+评估分值3+附加分值1+附加分值2+附加分值3</label>
+                    </td>
+                    <td >
+                        <input class="pingfen_zongfen" size="1" style="text-align:  center" name="pinggusum" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">建议服务标准</td>
+                    <td colspan="2" style="text-align: center;">
+                        <label>
+                            <input name="standard" class="input-text" style="width: 30px" value="{{dataall.standard}}" readonly>小时
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset style="width: 900px;margin: 0px auto;" opt="result2">
+            <legend>
+                <label opt="result2_shrinkage"><img opt="result2_img" src="img/reduction.png"/>服务形式建议</label>
+            </legend>
+            <div opt="result2_table" style="width:900px;height:2150px;"></div>
+        </fieldset>
+
+        <fieldset style="width: 900px;margin: 0px auto;" opt="result3" name="result3">
+            <legend>
+                <label opt="result3_shrinkage"><img opt="result3_img" src="img/reduction.png"/>评估报告二:评估报告确认</label>
+            </legend>
+            <table opt="result3_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+            <tr>
+                <td colspan="5" style="text-align: center;">评估表基本信息</td>
+            </tr>
+            <tr>
+                <td rowspan="5" style="width: 30px;">评估确认员完成</td>
+                <td style="width: 200px;">评估员姓名</td>
+                <td style="width: 200px;"><input class="input-text" value="{{pingguyname}}" size="25" name="pingguyname" readonly></td>
+                <td rowspan="3" style="width: 150px;">确认完成</td>
+                <td rowspan="3">
+                    <ul style="list-style-type:none">
+                        <li>首次评估<input type="radio" name="realend"><label></label></li>
+                        <li>复检评估<input type="radio" name="realend"><label></label></li>
+                        <li>变更评估<input type="radio" name="realend"><label></label></li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td>联络电话</td>
+                <td><input class="input-text" size="25" name="pingguyphone" value="{{pingguyphone}}" readonly></td>
+            </tr>
+            <tr>
+                <td>完成时间</td>
+                <td><input size="25" name="pingguenddate" class="easyui-datebox" value="{{pingguenddate}}"
+                           data-options="formatter:myformatter,parser:myparser" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>所属单位</td>
+                <td colspan="3"><input class="input-text" style="width: 300px" name="pingguydept" value="{{pingguydept}}" readonly></td>
+            </tr>
+
+            <tr>
+                <td>评估分值</td>
+                <td><input class="pingfen" style="width: 50px" opt="pinggusum" value="{{pinggusum}}" readonly></td>
+                <td>服务时间<input size="10" class="easyui-datebox" name="servicedate" value="{{servicedate}}" readonly></td>
+                <td>
+                    服务机构
+                    <input size="25" class="easyui-combobox" opt="servicemgt" name="servicemgt"
+                           data-options="editable:false" readonly>
+                </td>
+            </tr>
+
+            <tr>
+                <td opt="sqjy">社区(村)意见</td>
+                <td colspan="4">
+                    <textarea class="input-text" style="width: 97%;height: 50px;" name="communityopinion" readonly>{{dataall.communityopinion}}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td opt="jdsc">街镇审查</td>
+                <td colspan="4">
+                    <textarea class="input-text" style="width: 97%;height: 50px;" name="streetreview">{{dataall.streetreview}}</textarea>
+                    <input type="radio" name="shenghe" value="0"><label>符合评估标准</label>
+                    <input type="radio" name="shenghe" value="1"><label>建议再次评估</label>
+                </td>
+            </tr>
+            <tr>
+                <td opt="mzjsh">民政局审核</td>
+                <td colspan="4">
+                    <textarea class="input-text" style="width: 97%;height: 50px;" name="countyaudit">{{dataall.countyaudit}}</textarea>
+                    <input type="radio" name="shengpi" value="0"><label>确认评估结果</label>
+                    <input type="radio" name="shengpi" value="1"><label>要求再次评估</label>
+                </td>
+            </tr>
+        </table>
+        </fieldset>
+    </form>
+</div>
+
+
+

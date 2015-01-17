@@ -8,7 +8,6 @@ define(function(){
             {text: '删除',hidden:'hidden',opt:'delete'},
             {text: '保存',hidden:'hidden',opt:'save'},
             {text: '提交',hidden:'hidden',opt:'assessmentover'}
-//            {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -377,6 +376,9 @@ define(function(){
                             var refresh = option.queryParams.refresh;
                             refresh();
                         }
+                    }else{
+                        showProcess(false);
+                        cj.slideShow('<label style="color: red">保存失败！</label>')
                     }
                 },
                 onLoadError: function () {

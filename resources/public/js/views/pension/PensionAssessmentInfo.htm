@@ -1,68 +1,69 @@
 <!--评估信息表-->
-<div  class="easyui-panel newRadio" opt="formcontentpanel"
+<div id="assessmentid" class="easyui-panel newRadio" opt="formcontentpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
+
 <form method="post" opt="mainform">
 <fieldset style="width: 900px;margin: 0px auto;" opt="info0">
     <legend>
         <label opt="info0_shrinkage"><img opt="info0_img" id="info0_img" src="img/reduction.png"/>用户基本信息</label>
     </legend>
     <!--<form method="post" opt="mainform">-->
-    <div>
-        <input type="hidden" name="jja_id">
-        <input type="hidden" name="ss_id">
-        <!--<table class="formtable" opt="info0_table">-->
-        <table opt="info0_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
-            <tr>
-                <td class="formtdtext">行政区划 :</td>
-                <td colspan="3">
-                    <!--<input name="registration" style="width: 300px;" opt="districtid" data-options="idField:'dvcode', textField:'dvname'"></td>-->
-                    <input class="easyui-combobox" opt="districtid" style="width: 300px;" readonly>
-                </td>
-                <td rowspan="4" colspan="2" style="text-align: center;" >
-                    <img src="img/noperson.gif" opt="personimg" alt="用户照片" height="120" width="120"></td>
-            </tr>
-            <tr>
-                <td class="formtdtext">姓名 :</td>
-                <td><input class="input-text" type="text" name="name" opt="name" readonly></td>
-                <td class="formtdtext">身份证 :</td>
-                <td>
-                    <input class="input-text" name="identityid" type="text" readonly>
-                    <!--<input opt="identityid" name="identityid" class="easyui-validatebox"-->
-                           <!--data-options="required:true">-->
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">性别 :</td>
-                <td>
-                    <input class="easyui-combobox" name="gender" opt="gender"  readonly
-                           data-options=" loader:cj.getLoader('gender'), editable:false, valueField:'id', textField:'text' ">
-                    <!--<input type="text" name="gender" opt="gender" readonly>-->
+        <div>
+            <input type="hidden" name="jja_id">
+            <input type="hidden" name="ss_id">
+            <!--<table class="formtable" opt="info0_table">-->
+            <table opt="info0_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+                <tr>
+                    <td class="formtdtext">行政区划 :</td>
+                    <td colspan="3">
+                        <!--<input name="registration" style="width: 300px;" opt="districtid" data-options="idField:'dvcode', textField:'dvname'"></td>-->
+                        <input class="easyui-combobox" opt="districtid" style="width: 300px;" readonly>
+                    </td>
+                    <td rowspan="4" colspan="2" style="text-align: center;" >
+                        <img src="img/noperson.gif" opt="personimg" alt="用户照片" height="120" width="120"></td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">姓名 :</td>
+                    <td><input class="input-text" type="text" name="name" opt="name" readonly></td>
+                    <td class="formtdtext">身份证 :</td>
+                    <td>
+                        <input class="input-text" name="identityid" type="text" readonly>
+                        <!--<input opt="identityid" name="identityid" class="easyui-validatebox"-->
+                        <!--data-options="required:true">-->
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">性别 :</td>
+                    <td>
+                        <input class="easyui-combobox" name="gender" opt="gender"  readonly
+                               data-options=" loader:cj.getLoader('gender'), editable:false, valueField:'id', textField:'text' ">
+                        <!--<input type="text" name="gender" opt="gender" readonly>-->
 
-         </td>
-         <td class="formtdtext">出生年月 :</td>
-         <td>
-             <!--<input  name="birthd" opt="birthdate" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">-->
-             <input opt="birthdate" name="birthd" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" readonly>
-         </td>
-     </tr>
-     <tr>
-         <td class="formtdtext">民族 :</td>
-         <td>
-             <!--<input type="text" name="nation" readonly>-->
-             <input class="easyui-combobox" name="nation" opt="nation"  readonly
-                    data-options=" loader:cj.getLoader('oldnation'), editable:false, valueField:'id', textField:'text' ">
-         </td>
-         <td class="formtdtext">文化程度 :</td>
-         <td>
-             <!--<input type="text" name="culture" readonly>-->
-             <input class="easyui-combobox" name="culture"  opt="culture" readonly
-                        data-options=" loader:cj.getLoader('culture'), editable:false, valueField:'id', textField:'text' ">
-         </td>
-     </tr>
- </table>
-</div>
-<!--</form>-->
+                    </td>
+                    <td class="formtdtext">出生年月 :</td>
+                    <td>
+                        <!--<input  name="birthd" opt="birthdate" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">-->
+                        <input opt="birthdate" name="birthd" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">民族 :</td>
+                    <td>
+                        <!--<input type="text" name="nation" readonly>-->
+                        <input class="easyui-combobox" name="nation" opt="nation"  readonly
+                               data-options=" loader:cj.getLoader('oldnation'), editable:false, valueField:'id', textField:'text' ">
+                    </td>
+                    <td class="formtdtext">文化程度 :</td>
+                    <td>
+                        <!--<input type="text" name="culture" readonly>-->
+                        <input class="easyui-combobox" name="culture"  opt="culture" readonly
+                               data-options=" loader:cj.getLoader('culture'), editable:false, valueField:'id', textField:'text' ">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <!--</form>-->
 </fieldset>
 <fieldset style="width: 900px;margin: 0px auto;" opt="info1">
     <legend>
@@ -1243,4 +1244,6 @@
     </table>
 </fieldset>
 </form>
+
 </div>
+

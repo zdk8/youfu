@@ -104,25 +104,43 @@
     (println "IIIIIIIIIIIIIIIIIIIIII"  " ss_id:" ss_id  " pg_id:" pg_id  )
     (if (= (count ss_id) 0) (db/insert-suggest suggestdata)  (db/update-suggest suggestdata ss_id))
     (if (= (count pg_id) 0) (db/insert-assess assessdata) (db/update-assess assessdata pg_id))
-    (resp/json {:success true :message "assess save success"})))
+;    (resp/json {:success true :message "assess save success"})
+    (str "true")
+    ))
 
-;BIRTHD,APPLYDATE,STARTDATE,ENDDATE,OPERATOR_DATE
+;BIRTHD,APPLYDATE,STARTDATE,ENDDATE,OPERATOR_DATE ,opiniontime reviewtime  audittime rm_opiniontime rm_reviewtime rm_audittime
 
 (defn assess-time-format[result]
-  (common/time-before-list (common/time-before-list
-  (common/time-before-list (common/time-before-list
- (common/time-before-list result "birthd") "applydate") "startdate") "enddate") "operator_date"))
+  (common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list
+(common/time-formatymd-before-list(common/time-before-list (common/time-before-list(common/time-before-list (common/time-before-list
+ (common/time-before-list result "birthd") "applydate") "startdate") "enddate") "operator_date")"opiniontime")
+  "reviewtime")"audittime")"rm_opiniontime") "rm_reviewtime" )"rm_audittime"))
 
 (defn get-assessbyid [request]                                                                           "获取评估信息"
   (let[params (:params request)
         jja_id (:jja_id params)
+        ;sql (str "select a.jja_id,t.jja_id,s.jja_id from
         sql (str "select a.*,t.*,s.* from
+
                     (SELECT * FROM T_JJYLAPPLY WHERE jja_id = " jja_id ") a
                       left join T_JJYLASSESSMENT t  on a.jja_id=t.jja_id
                       left join T_SERVICESUGGEST s  on a.jja_id=s.jja_id")
         data (db/get-results-bysql sql)]
     ;(println "SSSSSSSSSSS" starttime " , "  endtime " " chatime)
     (resp/json (assess-time-format data))))
+
+(defn get-assessbyid2 [request]                                                                           "获取评估信息"
+  (let[params (:params request)
+       jja_id (:jja_id params)
+       ;sql (str "select a.jja_id,t.jja_id,s.jja_id from
+       sql (str "select a.*,t.*,s.* from
+
+                    (SELECT * FROM T_JJYLAPPLY WHERE jja_id = " jja_id ") a
+                      left join T_JJYLASSESSMENT t  on a.jja_id=t.jja_id
+                      left join T_SERVICESUGGEST s  on a.jja_id=s.jja_id")
+       data (db/get-results-bysql sql)]
+    ;(println "SSSSSSSSSSS" starttime " , "  endtime " " chatime)
+    (assess-time-format data)))
 
 
 
@@ -148,7 +166,9 @@
     (add-assessmessage request)                                                                     ;保存评估信息
     (db/add-approve approvedata)                                                                   ;添加到审核流程
     (db/update-apply {:ishandle "1" :communityopinion communityopinion :opiniontime opiniontime} bstablepk)                  ;更改申请表状态,添加社区意见
-    (resp/json {:success true :message "assess complete"})))
+;    (resp/json {:success true :message "assess complete"})
+    (str "true")
+    ))
 
 (defn get-assessaudit [request]                                                                           "查询评估信息中待审核的信息"
   (let[params (:params request)
