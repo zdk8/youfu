@@ -108,7 +108,7 @@
        opd_id (:opd_id params)
        opddata (common/timefmt-bef-insert(common/timefmt-bef-insert (select-keys params deppeople) "checkintime") "checkouttime")]
     (db/update-oldpeopledep opddata opd_id)
-    (str "update opdep success")))
+    (str "true")))
 
 (defn select-opdofdepart [request]
   (let[{params :params}request
@@ -135,7 +135,9 @@
   (let[{params :params}request
        canteendate (select-keys params canteen)]
     (db/add-canteen (common/timefmt-bef-insert canteendate "runtime"))
-    (resp/json {:success true :message "add canteen success"})))
+;    (resp/json {:success true :message "add canteen success"})
+    (str "true")
+    ))
 
 (defn getall-canteen  [request]
   (let[{params :params}request
@@ -151,7 +153,9 @@
        {c_id :c_id}params
        canteendate (select-keys params canteen)]
     (db/update-canteen (common/timefmt-bef-insert canteendate "runtime") c_id)
-    (resp/json {:success true :message "update canteen success"})))
+;    (resp/json {:success true :message "update canteen success"})
+    (str "true")
+    ))
 
 (defn delete-canteen [request]
   (let[{params :params}request

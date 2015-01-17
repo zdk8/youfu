@@ -1,26 +1,35 @@
-<div  class="easyui-panel" opt="formcontentpanel" style="overflow-y: scroll;" data-options="fit:true,border:false">
-    <form opt="pensionform" class="common-form" method="post">
-        <fieldset>
-            <legend>居家养老服务申请</legend>
+<div  class="easyui-panel newRadio" opt="formcontentpanel"
+      style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
+      data-options="fit:true,border:false">
+<!--<div  class="easyui-panel"  style="overflow-y: scroll;" data-options="fit:true,border:false">-->
+    <form opt="pensionform" method="post">
+        <!--<fieldset>-->
+            <!--<legend>居家养老服务申请</legend>-->
             <div>
                 <input type="hidden" name="age" opt="age">
                 <input type="hidden" name="jja_id">
-
-                <table class="formtable">
+                <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
+                <!--<table class="formtable"  width="80%" style="margin: 0 auto;margin-top: 10px;" class="table_form">-->
                     <tr>
                         <td class="formtdtext" style="width: 100px">行政区划</td>
                         <td colspan="3">
-                            <input style="width: 300px;" opt="districtid"
+                            <input style="width: 300px;" opt="districtid" class="input-text"
                                    data-options="required:true, valueField:''">
-                            <input type="text" name="districtname" opt="districtname" hidden="true">
                         </td>
                     </tr>
                     <tr>
                         <td class="formtdtext" style="width: 100px">姓名<span style="color: red">*</span></td>
-                        <td style="width: 350px"><input class="easyui-validatebox  input-text" name="name" data-options="required:true"></td>
+                        <td style="width: 350px">
+                            <input class="easyui-validatebox  input-text" name="name"
+                                   data-options="required:true">
+                        </td>
                         <td class="formtdtext" style="width: 100px">身份证号码<span style="color: red">*</span></td>
-                        <td><input opt="identityid" name="identityid" class="easyui-validatebox  input-text"
-                                   data-options="required:true,invalidMessage:'请输入正确的身份证号',validType:'identityid'" id="identityid"></td>
+                        <td>
+                            <input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 159px"
+                                   data-options="required:true,
+                                   invalidMessage:'请输入正确的身份证号',
+                                   validType:'identityid'">
+                        </td>
                     </tr>
                     <tr>
                         <td class="formtdtext">性别</td>
@@ -160,7 +169,7 @@
                 </table>
 
             </div>
-        </fieldset>
+        <!--</fieldset>-->
     </form>
 </div>
 

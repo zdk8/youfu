@@ -3,15 +3,16 @@
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
 <form method="post" opt="pplogoutform">
-<fieldset style="width: 900px;margin: 0px auto;padding-top: 10px" opt="pplogout" name="pplogout">
-    <legend>
-        <label opt="pplogout_shrinkage">
+<!--<fieldset style="width: 900px;margin: 0px auto;padding-top: 10px" opt="pplogout" name="pplogout">-->
+    <!--<legend>-->
+        <!--<label opt="pplogout_shrinkage">-->
             <!--<img opt="pplogout_img" id="pplogout_img" src="img/add.png"/>-->
-            居家养老人员注销
-        </label>
-    </legend>
-    <table class="formtable" opt="pplogout_table">
-        <tr>
+            <!--居家养老人员注销-->
+        <!--</label>-->
+    <!--</legend>-->
+    <!--<table class="formtable" opt="pplogout_table">-->
+    <table opt="pplogout_table" width="80%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+    <tr>
             <td class="formtdtext" style="width: 100px">注销人姓名</td>
             <td style="width: 350px">
                 <input class="easyui-validatebox  input-text" name="name">
@@ -90,16 +91,16 @@
         </tr>
         <tr>
             <td class="formtdtext" opt="rm_reason">注销理由</td>
-            <td colspan="3"><textarea style="width: 99%;height: 50px;" name="rm_reason"></textarea></td>
+            <td colspan="3"><textarea class="input-text" style="width: 97%;height: 50px;" name="rm_reason"></textarea></td>
         </tr>
         <tr>
             <td class="formtdtext" opt="rm_communityopinion">所在村意见</td>
-            <td colspan="3"><textarea style="width: 99%;height: 50px;" name="rm_communityopinion"></textarea></td>
+            <td colspan="3"><textarea class="input-text" style="width: 97%;height: 50px;" name="rm_communityopinion"></textarea></td>
         </tr>
         <tr>
             <td class="formtdtext" opt="rm_streetreview">所在镇、街街道审核意见</td>
             <td colspan="3">
-                <textarea style="width: 99%;height: 50px;" name="rm_streetreview"></textarea>
+                <textarea class="input-text" style="width: 97%;height: 50px;" name="rm_streetreview"></textarea>
                 <!--<label>符合评估标准</label><input type="radio" name="shenghe" value="0"><label></label>
                 <label>建议再次评估</label><input type="radio" name="shenghe" value="1"><label></label>-->
                 <input type="radio" name="shenghe" value="0">符合注销条件
@@ -109,13 +110,13 @@
         <tr>
             <td class="formtdtext" opt="rm_countyaudit">民政局审批意见</td>
             <td colspan="3">
-                <textarea style="width: 99%;height: 50px;" name="rm_countyaudit"></textarea>
+                <textarea class="input-text" style="width: 97%;height: 50px;" name="rm_countyaudit"></textarea>
                 <input type="radio" name="shengpi" value="0">确认注销结果
                 <input type="radio" name="shengpi" value="1">要求重新注销
             </td>
         </tr>
     </table>
-</fieldset>
+<!--</fieldset>-->
 </form>
 
 

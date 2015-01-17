@@ -36,8 +36,7 @@ define(function(){
                 },
                 dataType:"json",
                 success:function(data){
-                    var data = eval('(' + data + ')');
-                    if(data.success){
+                    if(data == "true"){
                         cj.slideShow('处理完成');
                         params.option.parent.trigger('close');
                         $("#tabs").tabs("close",params.option.title)

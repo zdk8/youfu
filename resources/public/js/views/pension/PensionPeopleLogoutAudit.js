@@ -55,7 +55,7 @@ define(function(){
                 })
 
             function getapplybyidFunc(params){
-                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+//                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                 $.ajax({
                     url:"audit/getapplybyid",
                     type:"post",
@@ -78,9 +78,9 @@ define(function(){
                                     aulevel:params.aulevel
                                 }
                             })
-                            setTimeout(function(){
+                            /*setTimeout(function(){
                                 showProcess(false);
-                            },500)
+                            },500)*/
                         }
                     }
                 })

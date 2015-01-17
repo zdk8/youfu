@@ -1,5 +1,5 @@
 /*审核处理*/
-define(function(){
+define(['views/pension/PensionServiceAudit','views/pension/PensionServiceAss'],function(auditfile,assfile){
     function render(local,option){
         var paaudit = local.find('[opt=paaudit]');               //审核datagrid
         var dealwith = local.find('[opt=dealwith]');             //处理
@@ -31,8 +31,27 @@ define(function(){
                                     if($("#tabs").tabs('getTab',title)){
                                         $("#tabs").tabs('select',title)
                                     }else{
-                                        getassessbyidFunc({jja_id:record.bstablepk,title:title,record:record,
-                                                            aulevel:record.aulevel,refresh:refreshGrid})
+                                        $("#tabs").tabs('add', {
+                                            title: title,
+                                            href: 'getPensionServiceAssHtml?jja_id='+record.bstablepk,
+                                            closable: true
+                                        })
+                                        var timer = window.setInterval(function () {
+                                            var local=$("#tabs").tabs('getTab',title)
+                                            if (local && local.find('[opt=info1_table]').length) {
+                                                window.clearInterval(timer);
+                                                assfile.render(local,{queryParams:{
+                                                    title:title,
+                                                    data:data,
+                                                    refresh:refreshGrid,
+                                                    actionType:"view"
+                                                }});
+                                            }else{
+                                                console.log('oops....info1_table is not ready ')
+                                            }
+                                        }, 200);
+                                        /*getassessbyidFunc({jja_id:record.bstablepk,title:title,record:record,
+                                                            aulevel:record.aulevel,refresh:refreshGrid})*/
                                     }
                                 }else if(action == "dealwith"){                   //处理
                                     var title = "【"+record.messagebrief.
@@ -40,8 +59,28 @@ define(function(){
                                     if($("#tabs").tabs('getTab',title)){
                                         $("#tabs").tabs('select',title)
                                     }else{
-                                        getassessbyidFunc({jja_id:record.bstablepk,title:title,record:record,
-                                            aulevel:record.aulevel,refresh:refreshGrid})
+                                        $("#tabs").tabs('add', {
+                                            title: title,
+                                            href: 'getPensionServiceAuditHtml?jja_id='+record.bstablepk,
+                                            closable: true
+                                        })
+                                        var timer = window.setInterval(function () {
+                                            var local=$("#tabs").tabs('getTab',title)
+                                            if (local && local.find('[opt=result1]').length) {
+                                                window.clearInterval(timer);
+                                                auditfile.render(local,{queryParams:{
+                                                    title:title,
+                                                    data:data,
+                                                    record:record,
+                                                    refresh:refreshGrid,
+                                                    actionType:"dealwith"
+                                                }});
+                                            }else{
+                                                console.log('oops....result1 is not ready ')
+                                            }
+                                        }, 200);
+                                        /*getassessbyidFunc({jja_id:record.bstablepk,title:title,record:record,
+                                            aulevel:record.aulevel,refresh:refreshGrid})*/
                                     }
                                 }
                             });
@@ -55,7 +94,7 @@ define(function(){
     }
     /*获取评估人员信息*/
     function getassessbyidFunc(params){
-        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+//        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
         $.ajax({
             url:"audit/getassessbyid",
             type:"post",
@@ -78,9 +117,9 @@ define(function(){
                             refresh:params.refresh                //刷新
                         }
                     })
-                    setTimeout(function(){
+                    /*setTimeout(function(){
                         showProcess(false);
-                    },1000)
+                    },1000)*/
                 }
             }
         })

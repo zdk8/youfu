@@ -28,7 +28,7 @@ function formatterYM(date){
 }
 
 /*行政区划的树结构*/
-var getdivision = function(divisiontree,districtname){
+var getdivision = function(divisiontree){
     divisiontree.combotree({
         panelHeight:300,
         url:'getdivisiontree',
@@ -49,9 +49,25 @@ var getdivision = function(divisiontree,districtname){
                     divisiontree.combotree('tree').tree('getSelected').id)
                 .combobox('setText',
                     divisiontree.combotree('tree').tree('getSelected').totalname);
-            districtname.val(divisiontree.combotree('tree').tree('getSelected').totalname)
         }
     });
+}
+/*获取行政区划全名*/
+var getDivistionTotalname = function(districtid){
+    var name;
+    $.ajax({
+        url:"getdistrictname",
+        type:"post",
+        dataType:"json",
+        async:false,
+        data:{
+            districtid:districtid
+        },
+        success:function(data){
+            name = data[0].totalname
+        }
+    })
+    return name
 }
 /*进度框*/
 var showProcess = function(isShow, title, msg) {
@@ -73,15 +89,15 @@ var showProcess = function(isShow, title, msg) {
 var FieldSetVisual = function(local, pTableID, pFieldSetID, pImageID ){
     var objTable = local.find('[opt='+pTableID+']');
     var objFieldSet = local.find('[opt='+pFieldSetID+']');
-    var objImage = document.getElementById(pImageID) ;
+    var objImage = local.find('[opt='+pImageID+']')[0];
     if(objTable.is(":hidden")){
         objTable.show()
-        var heightTable = parseInt( objTable.height())+22 ;
+        var heightTable = parseInt( objTable.height())+24 ;
         objFieldSet.height(heightTable+"px");
         objImage.src="img/reduction.png" ;        //打开
     }else{
         objTable.hide()
-        objFieldSet.height("22px");
+        objFieldSet.height("24px");
         objImage.src="img/add.png" ;       //收缩
     }
 }
@@ -133,4 +149,12 @@ var getBaseInfoByIdentityid = function(params){
             params.age.val(age);
         }
     });
+}
+/*计算评估总分*/
+var calculate=function(local){
+    var value=0;
+    local.find('table[opt=result1_table] td>:input[class=pingfen]').each(function(){
+        value+=Number($(this).val())
+    })
+    local.find('table[opt=result1_table] :input[name=pinggusum]').val(value)
 }

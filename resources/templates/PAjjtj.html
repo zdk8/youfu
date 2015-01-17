@@ -1,0 +1,55 @@
+<table opt="PAjjtj" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+    <tr>
+        <td rowspan="6">经济条件</td>
+        <td>分类</td>
+        <td>判断评分</td>
+        <td>收入情况</td>
+    </tr>
+    <tr>
+        <td>有退休工资</td>
+        <td><input name="jj_fenl" type="radio" value="0" /><label>0分</label></td>
+        <td>本人养老金收入<input class="input-text" opt="jj_shour0" name="">元/月</td>
+    </tr>
+    <tr>
+        <td>无退休工资</td>
+        <td><input name="jj_fenl" type="radio" value="5" /><label>5分</label></td>
+        <td>本人养老金收入<input class="input-text" opt="jj_shour5" name="">元/月</td>
+    </tr>
+    <tr>
+        <td>低收入</td>
+        <td><input name="jj_fenl" type="radio" value="10" /><label>10分</label></td>
+        <td>本人收入<input class="input-text" opt="jj_shour10" name="">元/月</td>
+
+    </tr>
+    <tr>
+        <td>低保护缘户</td>
+        <td><input name="jj_fenl" type="radio" value="20" /><label>20分</label></td>
+        <td>本人收入<input class="input-text" opt="jj_shour20" name="">元/月</td>
+
+    </tr>
+    <tr>
+        <td>低保、特困</td>
+        <td><input name="jj_fenl" type="radio" value="30" /><label>30分</label></td>
+        <td>
+            <input opt="jj_leix" name="" type="radio" value="0" />
+            <label>低保</label>
+            <input opt="jj_leix" name="" type="radio" value="1" />
+            <label>特困职工</label>
+            <input opt="jj_leix" name="" type="radio" value="2" />
+            <label>困难家庭</label>
+        </td>
+
+    </tr>
+    <tr><td>评分</td>
+        <td colspan="3">
+            <input class="pingfen" name="jj_pingguf" readonly>
+        </td>
+    </tr>
+    <tr><td>评估员</td>
+        <td colspan="3">
+            <input class="input-text" name="jj_pingguy">
+        </td>
+    </tr>
+</table>
+
+

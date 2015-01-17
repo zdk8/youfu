@@ -1,30 +1,90 @@
 define(function(){
-    function render(local,option){
-        var divisiontree = local.find('[opt=districtid]'); //行政区划id
-        var districtname = local.find('[opt=districtname]'); //行政区划id
-        districtname.hide();
-        getdivision(divisiontree,districtname);                                 //加载行政区划
-        var rzrydlg = local.find('[opt=rzrydlg]');      //表单
-        var determine = option.submitbtn                //确定按钮
-        var actiontype = option.actiontype;             //操作方式
+    var addToolBar=function(local) {
+        var toolBarHeight=30;
+        var toolBar=cj.getFormToolBar([
+            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '修改',hidden:'hidden',opt:'update'},
+        ]);
+        local.append(toolBar);
+        local.find('div[opt=formcontentpanel]').panel({
+            onResize: function (width, height) {
+                $(this).height($(this).height() - toolBarHeight);
+                toolBar.height(toolBarHeight);
+            }
+        });
+    };
 
-        /*if(actiontype == "update"){                     //编辑
-//            rzrydlg.form('load', {departname:option.data.departname});  //填充
-            determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
-        }else if(actiontype == "add"){                  //新增
-            determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
-        }*/
+    function render(local,option){
+        addToolBar(local)
+
+        var divisiontree = local.find('[opt=districtid]'); //行政区划id
+        getdivision(divisiontree);                                 //加载行政区划
+        var rzrydlg = local.find('[opt=rzrydlg]');      //表单
+//        var determine = option.submitbtn                //确定按钮
+        var actiontype = option.queryParams.actiontype;             //操作方式
+
         if(actiontype == "addrzry"){                     //添加入住人员
-            rzrydlg.form('load', {departname:option.data.departname,dep_id:option.data.dep_id});  //填充机构名称、机构id
-            determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
+//            rzrydlg.form('load', {departname:option.queryParams.data.departname,dep_id:option.queryParams.data.dep_id});  //填充机构名称、机构id
+            local.find("[opt=update]").hide();
+            local.find("[opt=save]").show().click(function(){
+                rzrydlg.form('submit',{
+                    url:"pension/addoldpeopledepart",
+                    onSubmit:function(params){
+                        params.deptype = option.queryParams.data.deptype
+                        params.dep_id = option.queryParams.data.dep_id
+                        params.departname = option.queryParams.data.departname
+                        params.districtid = divisiontree.combobox("getValue")
+                    },
+                    success:function(data){
+                        if(data == "true"){
+                            cj.slideShow("成功添加入住人员！")
+                            $("#tabs").tabs("close",option.queryParams.title)
+                            var ref = option.queryParams.refresh
+                            ref();
+                        }else{
+                            cj.slideShow("<label style='color: red'>添加失败！老人已入住！</label>")
+                        }
+                    }
+                })
+            });
+//            determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
+        }else if(actiontype == "view"){                                  //查看并修改
+            local.find("[opt=save]").hide();
+            rzrydlg.form('load',option.queryParams.record)
+            var districtnameval = getDivistionTotalname(option.queryParams.record.districtid)   //获取行政区划全名
+            divisiontree.combotree("setValue",districtnameval)  //填充行政区划
+            local.find("[opt=update]").show().click(function(){
+                rzrydlg.form('submit',{
+                    url:"pension/updateopdepbyid",
+                    onSubmit:function(params){
+                        params.opd_id = option.queryParams.record.opd_id
+                        if(!isNaN(divisiontree.combobox("getValue"))){          //是否是数字
+                            params.districtid = divisiontree.combobox("getValue")
+                        }else{
+                            params.districtid = option.queryParams.record.districtid
+                        }
+                    },
+                    success:function(data){
+                        console.log(data)
+                        if(data == "true"){
+                            cj.slideShow("修改成功！")
+                            $("#tabs").tabs("close",option.queryParams.title)
+                            var ref = option.queryParams.refresh
+                            ref();
+                        }else{
+                            cj.slideShow("<label style='color: red'>修改失败！</label>")
+                        }
+                    }
+                })
+            })
         }
 
         /*取消*/
-        local.find('[opt=cancle]').click(function(){
+       /* local.find('[opt=cancle]').click(function(){
             option.parent.trigger('close');
-        })
+        })*/
         /*根据身份证获取基本信息*/
-        local.find("[name=identityid]").change(function(){
+        /*local.find("[name=identityid]").change(function(){
             var val = local.find("[name=identityid]").val();
             var sex;
             var birthdayValue;
@@ -67,7 +127,7 @@ define(function(){
             if(birthdayValue == "" || birthdayValue == null){
                 alert("请输入正确的身份证!")
             }else{
-                /*根据身份证从老年人表中带出老年人信息*/
+                *//*根据身份证从老年人表中带出老年人信息*//*
                 $.ajax({
                     url:'pension/checkidentityid',
                     type:'post',
@@ -83,12 +143,12 @@ define(function(){
                     dataType:'json'
                 })
             }
-        });
+        });*/
     }
 
 
     /*确定按钮*/
-    var determinefunc = function(params){
+    /*var determinefunc = function(params){
         params.determine.click(function(e){
             if(params.actiontype == "addrzry"){         //新增入住人员
                 params.rzrydlg.form('submit',{
@@ -134,7 +194,7 @@ define(function(){
                 });
             }
         });
-    }
+    }*/
 
     return {
         render:render

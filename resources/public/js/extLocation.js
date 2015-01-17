@@ -20,6 +20,7 @@ if(document.URL.indexOf('localhost')>0){
 preFixUrl+=urldest;
 
 extEasyui=serverUrl+"easyui/";
+extEasyui="easyui/easyui/";
 extJqueryui=serverUrl+"jqueryui/"
 hstock=serverUrl+"hstock/"
 hchart=serverUrl+"hchart/"
@@ -32,9 +33,11 @@ var defaultPage = "dmxt.PlaceAdd";
 // defaultPage = "manager.Role";
 //defaultPage = "pension.RuZhuRYManagement";
 //defaultPage = "pension.YangLaoJGManagement";
-//defaultPage = "pension.PensionPeopleAudit";
+//defaultPage = "pension.PensionServiceApplyQuery";
 defaultPage=undefined;
 var onlyPage=!true;
 //select t.*, t.rowid from T_ENUMS t WHERE t.ENUM_GROUP_GUID='759AB90C-E2BC-E210-BDCC-B8EB0793557E' --and enum_name like '交%'
 
-
+/*地图接口*/
+var mapURL = "http://192.168.2.12:3000/"
+//var mapURL = "http://172.25.102.101:8008/zsmap/"

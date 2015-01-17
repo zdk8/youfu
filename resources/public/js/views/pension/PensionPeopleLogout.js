@@ -21,6 +21,7 @@ define(function(){
             /*for ( var i = 0; i < $("[opt=pplogoutform]")[0].length; i++) {
              $("[opt=pplogoutform]")[0].elements[i].disabled = true
              }*/
+            local.find('[opt=dealwith]').hide()
             pplogoutform.form("load",option.queryParams.data)
             local.find('[opt=commit]').show().click(function(){
                 var rm_reasonval = local.find("[name=rm_reason]");
@@ -62,6 +63,7 @@ define(function(){
                 }
             });
         }else if(option.queryParams.actiontype == "logoutdealwith"){   //注销处理
+            local.find('[opt=commit]').hide()
             pplogoutform.form("load",option.queryParams.data)
             var rm_streetreviewval = local.find("[name=rm_streetreview]")   //审核意见
             var rm_countyaudit = local.find("[name=rm_countyaudit]")        //审批意见

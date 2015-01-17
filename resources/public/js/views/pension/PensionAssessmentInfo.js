@@ -7,8 +7,7 @@ define(function(){
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '删除',hidden:'hidden',opt:'delete'},
             {text: '保存',hidden:'hidden',opt:'save'},
-            {text: '提交',hidden:'hidden',opt:'assessmentover'},
-            {text: '操作日志',hidden:'hidden',opt:'log'}
+            {text: '提交',hidden:'hidden',opt:'assessmentover'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -21,13 +20,8 @@ define(function(){
 
     function initPage(local,option){
         addToolBar(local);
-//        var districtid = local.find('[opt=districtid]');      //行政区划
-//        getdivision(districtid);                               //加载行政区划
-
         initRadioEvent(local);                                 //初始化radio
-//        loadOldByIdentityid(local);                                 //通过身份证号加载老年人
         scoreFunc(local);                                   //评分
-//        local.find(':input[name=sh_zongf]').attr("readonly","readonly").val(100); //生活自理能力info1总分
         /*为每个label注册收缩事件*/
         local.find('fieldset').find('legend').find('label').each(function(obj,fn,arg){
             var labelopt = fn.attributes[0].value.toString()
@@ -49,12 +43,11 @@ define(function(){
                 FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
             })
         /*获取机构名称*/
-        getDepartName(local);
+//        getDepartName(local);
     }
 
     /*初始化radio,并加载radio事件*/
     var initRadioEvent = function(local){
-//        enableRadioFunc(local,{radio1:"sh_jiel"});            //radio不可编辑
         enableRadioFunc(local,"");            //radio不可编辑
         //处理特殊贡献这块
         local.find(":input[type=checkbox] + label").each(function () {
@@ -89,25 +82,7 @@ define(function(){
                 {field:'responsible',title:'负责人',width:35},
                 {field:'telephone',title:'联系电话',width:60}
             ]],
-            onClickRow:function(index,row){
-                /*console.log(index)
-                console.log(row.jdep_id)*/
-                /*$.ajax({
-                 url:'searchid',
-                 data:{
-                 id:row.lr_id
-                 },
-                 type:'get',
-                 success:function(res){
-                 console.log(res)
-                 if(res){
-
-                 }else{
-                 alert('无数据')
-                 }
-                 }
-                 })*/
-            }
+            onClickRow:function(index,row){}
         })
     }
     /*新增数据时进入*/
@@ -194,8 +169,8 @@ define(function(){
     }
     /*通过id查询申请人员，若有评估信息也一并加载*/
     var getassessbyidFunc = function(local,dataparams,aulevel){
-        local.find('form').form('load',dataparams);             //填充表单
-        local.find('[opt=districtid]').combobox("setValue",dataparams.districtname)  //填充行政区划
+//        local.find('form').form('load',dataparams);             //填充表单
+//        local.find('[opt=districtid]').combobox("setValue",dataparams.districtname)  //填充行政区划
         for(var key in dataparams){
             var name = key;
             var value = dataparams[key];
@@ -263,7 +238,14 @@ define(function(){
     }
     /*查看信息(actionType=view)*/
     var viewInfoFunc = function(local,option){
+        local.find('[opt=update]').hide()
+        local.find('[opt=delete]').hide()
+        local.find('[opt=save]').hide()
+        local.find('[opt=assessmentover]').hide()
         dealwithbtnFunc(local,option)
+        local.find('[opt=mainform]').form('load',option.queryParams.data);             //填充表单
+        var districtnameval = getDivistionTotalname(option.queryParams.data.districtid)
+        local.find('[opt=districtid]').combobox("setValue",districtnameval)  //填充行政区划
         var aulevel = option.queryParams.aulevel;              //评估信息流程等级
         getassessbyidFunc(local,option.queryParams.data,aulevel)   //加载人员信息
     }
@@ -309,15 +291,6 @@ define(function(){
         var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
         var aulevel = option.queryParams.aulevel;              //评估信息流程等级
         dealwithbtn.show().click(function(){
-            /*if(aulevel == "0"){
-             if(local.find('[name=communityopinion]').val() == "" || local.find('[name=communityopinion]').val() == null){
-             $.messager.alert('温馨提示','请填写社区(村)意见！',"",function(r){
-             local.find('[name=communityopinion]').focus();
-             });
-             }else{
-             paramsOpinion(local,option,"communityopinion","")
-             }
-             }*/
             if(aulevel == "1" || aulevel == "4"){
                 if(local.find('[name=streetreview]').val() == "" || local.find('[name=streetreview]').val() == null){
                     $.messager.alert('温馨提示','请填写街镇审查意见！',"",function(r){
@@ -359,22 +332,28 @@ define(function(){
     }
     /*处理时进入页面(actionType=dealwith)*/
     var dealwithInfoFunc = function(local,option){
-       /* local.find('[opt=info0]').hide();
-        local.find('[opt=info1]').hide();*/
+        local.find('[opt=info0]').hide();
+        local.find('[opt=info1]').hide();
+        local.find('[opt=update]').hide()
+        local.find('[opt=delete]').hide()
+        local.find('[opt=save]').hide()
         dealwithbtnFunc(local,option)
         var aulevel = option.queryParams.aulevel;              //评估信息流程等级
         getassessbyidFunc(local,option.queryParams.data,aulevel)   //加载人员信息
     }
     /*评估*/
     var assessmentFunc = function(local,option){
-        var savebtn = local.find('[opt=save]');            //保存按钮
-        var assessmentoverbtn = local.find('[opt=assessmentover]');            //提交按钮
+        local.find('[opt=dealwith]').hide()
+        local.find('[opt=update]').hide()
+        local.find('[opt=delete]').hide()
+        local.find('[opt=mainform]').form('load',option.queryParams.data);             //填充表单
+        var districtnameval = getDivistionTotalname(option.queryParams.data.districtid)
+        local.find('[opt=districtid]').combobox("setValue",districtnameval)  //填充行政区划
         getassessbyidFunc(local,option.queryParams.data,"")   //加载老年人员
         /*保存*/
-        savebtn.show().click(function(){
+        local.find('[opt=save]').show().click(function(){
             local.find('[opt=mainform]').form('submit', {
                 url:"audit/addassessmessage",
-//                dataType:'json',
                 onSubmit: function(){
                     var isvalidate = $(this).form('validate');
                     if (isvalidate) {
@@ -397,6 +376,9 @@ define(function(){
                             var refresh = option.queryParams.refresh;
                             refresh();
                         }
+                    }else{
+                        showProcess(false);
+                        cj.slideShow('<label style="color: red">保存失败！</label>')
                     }
                 },
                 onLoadError: function () {
@@ -406,7 +388,7 @@ define(function(){
             });
         })
         /*提交*/
-        assessmentoverbtn.show().click(function(){
+        local.find('[opt=assessmentover]').show().click(function(){
             var communityopinionval = local.find('[name=communityopinion]').val()
             if(communityopinionval == "" || communityopinionval == null){
                 $.messager.alert('温馨提示','请填写社区(村)意见！',"",function(r){

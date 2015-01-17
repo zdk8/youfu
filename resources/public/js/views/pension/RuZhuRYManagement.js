@@ -5,6 +5,9 @@ define(function(){
         var departname = local.find('[opt=departname]');        //机构名称
         var name = local.find('[opt=name]');                     //姓名
         var identityid = local.find('[opt=identityid]');        //身份证
+        var refreshGrid = function(){
+            rzrygl.datagrid("reload")
+        }
         rzrygl.datagrid({
             url:'pension/getalloldpeopledepart',
             queryParams:{
@@ -15,10 +18,11 @@ define(function(){
                /* var updates = local.find('[action=update]');           //修改
                 var del = local.find('[action=delete]');                //删除
                 var addrzry = local.find('[action=addrzry]');                //添加入住人员*/
+                var viewbtn = local.find("[action=view]")
                 var cancellation = local.find('[action=cancellation]');     //注销入住人员
                 var rows=data.rows;
 //                var btns_arr=[updates,del,addrzry];
-                var btns_arr=[cancellation];
+                var btns_arr=[viewbtn,cancellation];
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -46,6 +50,24 @@ define(function(){
                                             })
                                         }
                                     });
+                                }else if(action = "view"){
+                                    var title = "【"+record.name+'】详细信息';
+                                    if($("#tabs").tabs('getTab',title)){
+                                        $("#tabs").tabs('select',title)
+                                    }else{
+                                        cj.showContent({                                          //详细信息(tab标签)
+                                            title:title,
+                                            htmfile:'text!views/pension/RuZhuRYDlg.htm',
+                                            jsfile:'views/pension/RuZhuRYDlg',
+                                            queryParams:{
+                                                actiontype:'view',         //（处理）操作方式
+//                                                data:data,                   //填充数据
+                                                record:record,
+                                                title:title,
+                                                refresh:refreshGrid                //刷新
+                                            }
+                                        })
+                                    }
                                 }
                             });
                         })(i)

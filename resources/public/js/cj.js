@@ -266,6 +266,12 @@ var cj=(function(){
             }
             require(['commonfuncs/TreeClickEvent'],f)
         },
+        showHtmlIframe:function(value){
+            var f=function(show){
+                show.ShowHtmlIframe(value)
+            }
+            require(['commonfuncs/TreeClickEvent'],f)
+        },
         showIframe:function(value,jsfile,title,customparam){
             var f=function(show){
                 show.ShowIframe(value,jsfile,title,customparam)
@@ -335,6 +341,7 @@ var cj=(function(){
             return $btnarea;
         },getUserMsg:function(){
             return usermsg;
+//            return "";
         }
     }
 
