@@ -143,3 +143,7 @@ element.style {
     background: url('../../img/deletetab.png') no-repeat left center;
     padding-left: 16px;
 }
+.icon-map-pl1 {
+    background: url('../../img/map.png') no-repeat left center;
+    padding-left: 16px;
+}
