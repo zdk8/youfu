@@ -614,6 +614,10 @@
   (select t_pensiondepartment
     (where {:dep_id dep_id})))
 
+(defn get-departbyname [mapguid]
+  (select t_pensiondepartment
+    (where {:mapguid mapguid})))
+
 (defn update-departbyid [filter-fields dep_id]
   (update t_pensiondepartment
     (set-fields filter-fields)
@@ -681,6 +685,10 @@
     (set-fields result)
     (where {:sh_id sh_id})))
 
+(defn get-approve [sh_id]
+  (select approve
+    (fields :status)
+    (where {:sh_id sh_id})))
 
 
 (defn update-approveby-lrid [bstablepk bstablename]                                                           "修改状态"
@@ -756,11 +764,6 @@
 
 (defn get-results-bysql[totalsql]
   (exec-raw [totalsql []] :results))
-
-
-
-
-
 
 
 ;;分页
