@@ -19,12 +19,14 @@ define(function(){
                             {text:'取消',handler:function(html,parent){
                                 parent.trigger('close');
                             }},{
-                                text:'资金发放',
+//                                text:'资金发放',
+                                text:'发放',
                                 handler:function(html,parent){
                                     console.log("资金发放")
                                 }
                             },,{
-                                text:'重新发放',
+//                                text:'重新发放',
+                                text:'重发',
                                 handler:function(html,parent){
                                     console.log("重新发放")
                                 }

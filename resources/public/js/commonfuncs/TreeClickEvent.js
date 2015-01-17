@@ -61,6 +61,27 @@ define(function(){
 
             })
         },
+        ShowHtmlIframe:function(value){
+            var record = value.queryParams.record;
+
+            var require_render=function(){
+                if(mainTab.tabs('exists',value.title)){
+                    mainTab.tabs('select', value.title);
+                    return;
+                }
+                var myurl = value;
+                /*if(value.indexOf(functionid)==-1){
+                    myurl=value+"&="+functionid
+                }*/
+                mainTab.tabs('add', {
+                    title: value.title,
+                    content:'<iframe src="gethtmliframe?name='+value.htmfile+'&data='+record.jja_id+'" width="100%" height="100%" frameborder="0"></iframe>',
+//                    content:'<iframe src="gethtmliframe?name='+value.htmfile+'" width="100%" height="100%" frameborder="0"><form method="post" action="getData?data=1"></form></iframe>',
+                    closable: true
+                });
+            };
+            require_render();
+        },
         ShowIframe:function(value,jsfile,title,functionid){
             var require_render=function(){
                 if(mainTab.tabs('exists',title)){
