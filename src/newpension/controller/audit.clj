@@ -111,10 +111,10 @@
 ;BIRTHD,APPLYDATE,STARTDATE,ENDDATE,OPERATOR_DATE ,opiniontime reviewtime  audittime rm_opiniontime rm_reviewtime rm_audittime
 
 (defn assess-time-format[result]
-  (common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list
+  (common/time-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list(common/time-formatymd-before-list
 (common/time-formatymd-before-list(common/time-before-list (common/time-before-list(common/time-before-list (common/time-before-list
  (common/time-before-list result "birthd") "applydate") "startdate") "enddate") "operator_date")"opiniontime")
-  "reviewtime")"audittime")"rm_opiniontime") "rm_reviewtime" )"rm_audittime"))
+  "reviewtime")"audittime")"rm_opiniontime") "rm_reviewtime" )"rm_audittime")"finishdate"))
 
 (defn get-assessbyid [request]                                                                           "获取评估信息"
   (let[params (:params request)
