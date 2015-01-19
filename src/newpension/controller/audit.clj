@@ -378,6 +378,16 @@
     (db/add-depservice depservicedata)
     (str "true")))
 
+(defn getall-depservice [request]
+  (let[params (:params request)
+       rows (:rows params)
+       page (:page params)
+      departname (:departname params)
+      servicename (:servername params)
+      cond (str  (common/likecond "departname" departname) (common/likecond "servicename" servicename))
+      getresult (common/fenye rows page " (SELECT s.*,p.departname FROM t_depservice s,T_PENSIONDEPARTMENT p ) " "*" cond " order by s_id desc ")
+      ]
+    (resp/json {:total (:total getresult) :rows (:rows getresult)})))
 
 
 

@@ -64,7 +64,9 @@
        dep_id (:dep_id params)
        rows (:rows params)
        page (:page params)
-       cond (str " and dep_id = " dep_id)
+       mykey (:mykey params)
+       searchcond (if (> (count mykey) 0) (str " and (NAME LIKE '%" mykey "%' OR address LIKE '%" mykey "%')"))
+       cond (str " and dep_id = " dep_id  searchcond)
        getresult (common/fenye rows page t_oldpeopledep "*" cond " order by opd_id desc ")]
     (resp/json {:iTotalRecords (:total getresult) :iTotalDisplayRecords (:total getresult) :rows (:rows getresult)})))
 
