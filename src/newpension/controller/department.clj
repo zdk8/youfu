@@ -52,8 +52,12 @@
 
 (defn get-departmentbyname  [request]
   (let[params (:params request)
-       mapguid (:mapguid params)]
-    (resp/json(db/get-departbyname mapguid))))
+       mapguid (:mapguid params)
+       departdata (first(db/get-departbyname mapguid))
+       dep_id (:dep_id departdata)
+       opsum (first(db/get-results-bysql (str "SELECT COUNT(*) as opsum  FROM T_OLDPEOPLEDEP WHERE dep_id = " dep_id)))
+       ]
+    (resp/json (conj [] (conj departdata opsum)))))
 
 (defn update-departbyid [request]
   (let[{params :params}request
