@@ -383,7 +383,7 @@
        rows (:rows params)
        page (:page params)
       departname (:departname params)
-      servicername (:servername params)
+      servicername (:servicername params)
       cond (str  (common/likecond "departname" departname) (common/likecond "servicername" servicername))
       getresult (common/fenye rows page " (SELECT s.*,p.departname FROM t_depservice s,t_jjyldepartment p where s.DEP_ID = p.JDEP_ID) " "*" cond " order by s_id desc ")
       ]
