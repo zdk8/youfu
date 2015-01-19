@@ -384,7 +384,7 @@
        page (:page params)
       departname (:departname params)
       servicename (:servername params)
-      cond (str  (common/likecond "departname" departname) (common/likecond "servicename" servicename))
+      cond (str  (common/likecond "departname" departname) (common/likecond "servicename" servicername))
       getresult (common/fenye rows page " (SELECT s.*,p.departname FROM t_depservice s,t_jjyldepartment p where s.DEP_ID = p.JDEP_ID) " "*" cond " order by s_id desc ")
       ]
     (resp/json {:total (:total getresult) :rows (:rows getresult)})))
