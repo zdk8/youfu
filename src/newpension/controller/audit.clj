@@ -347,7 +347,9 @@
   (let[params (:params request)
        depdata (common/timefmt-bef-insert(common/timefmt-bef-insert(select-keys params jjyldepartment) "founddata" )"starttime")]
     (db/add-jjyldepart depdata)
-    (resp/json {:success true :message "jjyldepart add success"})))
+;    (resp/json {:success true :message "jjyldepart add success"})
+    (str "true")
+    ))
 
 (defn getall-jjyldepart [request]
   (let[params (:params request)
@@ -363,7 +365,9 @@
        jdep_id (:jdep_id params)
        departdata (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys params jjyldepartment) "founddata") "starttime")]
     (db/update-jjyldepart departdata jdep_id)
-    (resp/json {:success true :message "jjyldepart update success"})))
+;    (resp/json {:success true :message "jjyldepart update success"})
+    (str "true")
+    ))
 
 
 
