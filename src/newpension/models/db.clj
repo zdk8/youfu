@@ -142,6 +142,12 @@
   (table :t_jjyldepartment)
   (database dboracle))
 
+;;服务机构服务人员表
+(defentity t_depservice
+  (pk :s_id)
+  (table :t_depservice)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -747,6 +753,10 @@
   (update t_jjyldepartment
     (set-fields departdata)
     (where {:jdep_id jdep_id})))
+
+(defn add-depservice [depservicedata]
+  (insert t_depservice
+    (values depservicedata)))
 
 
 

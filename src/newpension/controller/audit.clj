@@ -37,12 +37,14 @@
 (def approvekeys [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators :messagebrief :bstablepkname])
 (def jjyldepartment [:departid :departname :responsible :telephone :corporate :founddata :servicearea :certificatenum :specialtynum :servicenum :registnumber :departcode
                      :businesslicense :taxnumber :billingunit :billingprice :starttime  :registnature :address :dailyavgnum  :departoverview :servicecontent])
+(def depservice [:dep_id :servicername :servicephone :serviceaddress])
 
 (def t_jjylapply "t_jjylapply")
 (def t_jjylassessment "t_jjylassessment")
 (def t_servicesuggest "t_servicesuggest")
 (def approve "approve")
 (def t_jjyldepartment "t_jjyldepartment")
+(def t_depservice "t_depservice")
 
 
 (defn add-audit-apply [request]                                                                        "添加申请"
@@ -368,6 +370,13 @@
 ;    (resp/json {:success true :message "jjyldepart update success"})
     (str "true")
     ))
+
+(defn add-depservice [request]
+  (let[params (:params request)
+       depservicedata (select-keys params depservice)
+       ]
+    (db/add-depservice depservicedata)
+    (str "true")))
 
 
 

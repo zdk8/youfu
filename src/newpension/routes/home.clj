@@ -188,6 +188,7 @@
   (POST "/audit/addjjyldepart" request (audit/add-jjyldepart request))                                              ;;添加居家养老服务机构
   (POST "/audit/getalljjyldepart" request (audit/getall-jjyldepart request))                                        ;;获取居家养老服务机构
   (POST "/audit/updatejjyldepart" request (audit/update-jjyldepart request))                                      ;;更新居家养老服务机构
+  (POST "/audit/adddepservice" request (audit/add-depservice request))                                              ;;添加机构服务人员
 
 
 
