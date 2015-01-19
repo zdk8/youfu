@@ -96,7 +96,7 @@
 
 (defn add-assessmessage [request]                                                                         "居家养老信息评估"
   (let[params (:params request)
-       assessdata (common/timefmt-bef-insert (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys params assess) "startdate") "enddate") "operator_date")                                    ;STARTDATE,ENDDATE,OPERATOR_DATE
+       assessdata (common/timefmt-bef-insert(common/timefmt-bef-insert (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys params assess) "startdate") "enddate") "operator_date")"finishdate")                                    ;STARTDATE,ENDDATE,OPERATOR_DATE
        suggestdata (select-keys params suggest)                                ;
        ss_id (:ss_id params)
        pg_id (:pg_id params)
