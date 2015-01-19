@@ -59,6 +59,15 @@
        ]
     (resp/json (conj [] (conj departdata opsum)))))
 
+(defn get-opbydepid [request]
+  (let[params (:params request)
+       dep_id (:dep_id params)
+       rows (:rows params)
+       page (:page params)
+       cond (str " and dep_id = " dep_id)
+       getresult (common/fenye rows page t_oldpeopledep "*" cond " order by opd_id desc ")]
+    (resp/json {:iTotalRecords (:total getresult) :iTotalDisplayRecords (:total getresult) :rows (:rows getresult)})))
+
 (defn update-departbyid [request]
   (let[{params :params}request
        filter-fields (select-keys params depart)
@@ -94,7 +103,7 @@
   (let [{params :params}request
         {identityid :identityid}params
         checkop (get-oldpeople identityid)
-       checkopdep (get-oldpeopledep identityid)
+        checkopdep (get-oldpeopledep identityid)
         ;nowtime (common/get-nowtime)
         opddate (common/timefmt-bef-insert(common/timefmt-bef-insert (select-keys params deppeople) "checkintime") "checkouttime") ;(conj (select-keys params deppeople) {:checkintime nowtime})
         ]
