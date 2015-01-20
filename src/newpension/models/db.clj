@@ -754,6 +754,10 @@
     (set-fields departdata)
     (where {:jdep_id jdep_id})))
 
+(defn get-jjyldepartbyid [jdep_id]
+  (select t_jjyldepartment
+    (where {:jdep_id jdep_id})))
+
 (defn add-depservice [depservicedata]
   (insert t_depservice
     (values depservicedata)))
@@ -761,6 +765,10 @@
 (defn update-dsbyid [dsdata s_id]
   (update t_depservice
     (set-fields dsdata)
+    (where {:s_id s_id})))
+
+(defn get-depservicebyid [s_id]
+  (select t_depservice
     (where {:s_id s_id})))
 
 

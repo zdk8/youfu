@@ -362,6 +362,12 @@
        getresult (common/fenye rows page t_jjyldepartment "*" cond " order by jdep_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "founddata") "starttime")})))
 
+(defn get-jjyldepartbyid [request]
+  (let[params (:params request)
+       jdep_id (:jdep_id params)
+       ]
+    (resp/json (db/get-jjyldepartbyid jdep_id))))
+
 (defn update-jjyldepart [request]
   (let[params (:params request)
        jdep_id (:jdep_id params)
@@ -395,6 +401,11 @@
        dsdata (select-keys params depservice)]
     (db/update-dsbyid dsdata s_id)
     (str "true")))
+
+(defn get-depservicebyid [request]
+  (let[params (:params request)
+       s_id (:s_id params)]
+    (resp/json (db/get-depservicebyid s_id))))
 
 
 
