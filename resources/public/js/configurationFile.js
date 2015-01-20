@@ -69,6 +69,40 @@ var getDivistionTotalname = function(districtid){
     })
     return name
 }
+/*获取服务机构全名*/
+var getServicemgtTotalname = function(jdepid){
+    var name;
+    $.ajax({
+        url:"audit/getjjyldepartbyid",
+        type:"post",
+        dataType:"json",
+        async:false,
+        data:{
+            jdep_id:jdepid
+        },
+        success:function(data){
+            name = data[0].departname
+        }
+    })
+    return name
+}
+/*获取服务机构人员全名*/
+var getServicepeoplevalTotalname = function(sid){
+    var name;
+    $.ajax({
+        url:"audit/getdepservicebyid",
+        type:"post",
+        dataType:"json",
+        async:false,
+        data:{
+            s_id:sid
+        },
+        success:function(data){
+            name = data[0].servicername
+        }
+    })
+    return name
+}
 /*进度框*/
 var showProcess = function(isShow, title, msg) {
     if (!isShow) {
@@ -90,13 +124,14 @@ var FieldSetVisual = function(local, pTableID, pFieldSetID, pImageID ){
     var objTable = local.find('[opt='+pTableID+']');
     var objFieldSet = local.find('[opt='+pFieldSetID+']');
     var objImage = local.find('[opt='+pImageID+']')[0];
+    var heightTable;
     if(objTable.is(":hidden")){
-        objTable.show()
-        var heightTable = parseInt( objTable.height())+24 ;
+        heightTable = parseInt( objTable.height())+24 ;
+        objTable.show();
         objFieldSet.height(heightTable+"px");
         objImage.src="img/reduction.png" ;        //打开
     }else{
-        objTable.hide()
+        objTable.hide() ;
         objFieldSet.height("24px");
         objImage.src="img/add.png" ;       //收缩
     }
@@ -157,4 +192,5 @@ var calculate=function(local){
         value+=Number($(this).val())
     })
     local.find('table[opt=result1_table] :input[name=pinggusum]').val(value)
+    local.find(':input[opt=pinggusum]').val(value)
 }

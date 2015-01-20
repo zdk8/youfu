@@ -7,7 +7,6 @@ define(function(){
             {text: '保存',hidden:'hidden',opt:'save'},
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '变更',hidden:'hidden',opt:'change'}
-//            {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -17,7 +16,7 @@ define(function(){
             }
         });
     };
-    var genCheckBox=function(w,enumtype,name,record) {
+    var getCheckBox=function(w,enumtype,name,record) {
         $.ajax({
             url: 'getenumbytype',
             dataType: 'jsonp',
