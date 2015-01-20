@@ -30,10 +30,11 @@
                 <th data-options="field:'address',width:200,align:'left'">住址</th>-->
 
 
-                <th data-options="field:'ro',width:145,align:'center',formatter:function(value,rowData,rowIndex)
+                <th data-options="field:'ro',width:200,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
+                    str=$(str).append('<a action=&quot;addfwry&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl15&quot;>添加服务人员</span></span></a>');
+                    str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>编辑</span></span></a>');
                     str=$(str).append('<a action=&quot;delete&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-del-pl15&quot;>删除</span></span></a>');
                     return str.html();
                 }">操作</th>

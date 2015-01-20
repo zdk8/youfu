@@ -1,175 +1,169 @@
 <div  class="easyui-panel newRadio" opt="formcontentpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
-<!--<div  class="easyui-panel"  style="overflow-y: scroll;" data-options="fit:true,border:false">-->
     <form opt="pensionform" method="post">
-        <!--<fieldset>-->
-            <!--<legend>居家养老服务申请</legend>-->
-            <div>
-                <input type="hidden" name="age" opt="age">
-                <input type="hidden" name="jja_id">
-                <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
-                <!--<table class="formtable"  width="80%" style="margin: 0 auto;margin-top: 10px;" class="table_form">-->
-                    <tr>
-                        <td class="formtdtext" style="width: 100px">行政区划</td>
-                        <td colspan="3">
-                            <input style="width: 300px;" opt="districtid" class="input-text"
-                                   data-options="required:true, valueField:''">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="formtdtext" style="width: 100px">姓名<span style="color: red">*</span></td>
-                        <td style="width: 350px">
-                            <input class="easyui-validatebox  input-text" name="name"
-                                   data-options="required:true">
-                        </td>
-                        <td class="formtdtext" style="width: 100px">身份证号码<span style="color: red">*</span></td>
-                        <td>
-                            <input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 159px"
-                                   data-options="required:true,
+        <input type="hidden" name="age" opt="age">
+        <input type="hidden" name="jja_id">
+        <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
+            <!--<table class="formtable"  width="80%" style="margin: 0 auto;margin-top: 10px;" class="table_form">-->
+            <tr>
+                <td class="formtdtext" style="width: 100px">行政区划</td>
+                <td colspan="3">
+                    <input style="width: 300px;" opt="districtid" class="input-text"
+                           data-options="required:true, valueField:''">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext" style="width: 100px">姓名<span style="color: red">*</span></td>
+                <td style="width: 350px">
+                    <input class="easyui-validatebox  input-text" name="name"
+                           data-options="required:true">
+                </td>
+                <td class="formtdtext" style="width: 100px">身份证号码<span style="color: red">*</span></td>
+                <td>
+                    <input name="identityid" class="input-text" style="width: 159px">
+                    <!--<input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 159px"
+                           data-options="required:true,
                                    invalidMessage:'请输入正确的身份证号',
-                                   validType:'identityid'">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="formtdtext">性别</td>
-                        <td>
-                            <input opt="gender" class="easyui-combobox "
-                                   name="gender"
-                                   data-options="
+                                   validType:'identityid'">-->
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">性别</td>
+                <td>
+                    <input opt="gender" class="easyui-combobox "
+                           name="gender"
+                           data-options="
                                 loader:cj.getLoader('gender'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'">
-                        </td>
-                        <td class="formtdtext">出生年月</td>
-                        <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd">
-                            <span opt="tip_age"></span>
-                        </td>
+                </td>
+                <td class="formtdtext">出生年月</td>
+                <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd">
+                    <span opt="tip_age"></span>
+                </td>
 
-                    </tr>
-                    <tr>
+            </tr>
+            <tr>
 
-                        <td class="formtdtext">民族</td>
-                        <td>
-                            <input name="nation" class="easyui-combobox"
-                                   data-options="
+                <td class="formtdtext">民族</td>
+                <td>
+                    <input name="nation" class="easyui-combobox"
+                           data-options="
                                 loader:cj.getLoader('oldnation'),
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'">
-                            <!--<input class="easyui-combobox"
-                                   opt="nation"
-                                   name="nation"
-                                   data-options=" loader: cj.getLoader('nation'), mode: 'remote', editable:false, valueField:'id', textField:'text' ">--> </td>
-                        <td class="formtdtext">文化程度</td>
-                        <td opt="culture">
-                            <input type="radio" name="culture" value="0">文盲
-                            <input type="radio" name="culture" value="1">略识字
-                            <input type="radio" name="culture" value="2">能读字,最高学历
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="formtdtext">籍贯</td>
-                        <td>
-                            <input name="birthplace" class="input-text">
-                            <a opt="getjiguan" style="cursor: pointer;font-size: 8px;">默认籍贯</a>
-                        </td>
-                        <td class="formtdtext">婚姻状况</td>
-                        <td opt="marriage">
-                            <input type="radio" name="marriage" value="0">未婚
-                            <input type="radio" name="marriage" value="1">已婚
-                            <input type="radio" name="marriage" value="2">丧偶
-                            <input type="radio" name="marriage" value="3">离婚
-                        </td>
-                    </tr>
-                    <tr>
+                    <!--<input class="easyui-combobox"
+                           opt="nation"
+                           name="nation"
+                           data-options=" loader: cj.getLoader('nation'), mode: 'remote', editable:false, valueField:'id', textField:'text' ">--> </td>
+                <td class="formtdtext">文化程度</td>
+                <td opt="culture">
+                    <input type="radio" name="culture" value="0">文盲
+                    <input type="radio" name="culture" value="1">略识字
+                    <input type="radio" name="culture" value="2">能读字,最高学历
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext">籍贯</td>
+                <td>
+                    <input name="birthplace" class="input-text">
+                    <a opt="getjiguan" style="cursor: pointer;font-size: 8px;">默认籍贯</a>
+                </td>
+                <td class="formtdtext">婚姻状况</td>
+                <td opt="marriage">
+                    <input type="radio" name="marriage" value="0">未婚
+                    <input type="radio" name="marriage" value="1">已婚
+                    <input type="radio" name="marriage" value="2">丧偶
+                    <input type="radio" name="marriage" value="3">离婚
+                </td>
+            </tr>
+            <tr>
 
-                        <td class="formtdtext">居住</td>
-                        <td colspan="3" opt="liveplace">
-                            <input type="radio" name="live" value="0">与子女同住
-                            <input type="radio" name="live" value="1">与亲友同住
-                            <input type="radio" name="live" value="2">与配偶同住
-                            <input type="radio" name="live" value="3">独居
-                        </td>
-                    </tr>
-                    <tr>
+                <td class="formtdtext">居住</td>
+                <td colspan="3" opt="liveplace">
+                    <input type="radio" name="live" value="0">与子女同住
+                    <input type="radio" name="live" value="1">与亲友同住
+                    <input type="radio" name="live" value="2">与配偶同住
+                    <input type="radio" name="live" value="3">独居
+                </td>
+            </tr>
+            <tr>
 
-                        <td class="formtdtext">经济条件</td>
-                        <td colspan="3" opt="hyfwjingji">
-                            <input type="radio" name="economy" value="0">低保 特困职工
-                            <input type="radio" name="economy" value="1">低保边缘户
-                            <input type="radio" name="economy" value="2">低收入
-                            <input type="radio" name="economy" value="3">无退休工资
-                            <input type="radio" name="economy" value="4">有退休工资
-                            <input type="radio" name="economy" value="5">特殊贡献
-                        </td>
-                    </tr>
-                    <tr>
+                <td class="formtdtext">经济条件</td>
+                <td colspan="3" opt="hyfwjingji">
+                    <input type="radio" name="economy" value="0">低保 特困职工
+                    <input type="radio" name="economy" value="1">低保边缘户
+                    <input type="radio" name="economy" value="2">低收入
+                    <input type="radio" name="economy" value="3">无退休工资
+                    <input type="radio" name="economy" value="4">有退休工资
+                    <input type="radio" name="economy" value="5">特殊贡献
+                </td>
+            </tr>
+            <tr>
 
-                        <td class="formtdtext">年龄</td>
-                        <td colspan="3">
-                            <input type="radio" name="agerange" opt="a">80岁以下
-                            <input type="radio" name="agerange" opt="b">80-90岁
-                            <input type="radio" name="agerange" opt="c">90-100岁
-                            <input type="radio" name="agerange" opt="d">100岁以上
-                        </td>
-                    </tr>
-                    <tr>
+                <td class="formtdtext">年龄</td>
+                <td colspan="3">
+                    <input type="radio" name="agerange" opt="a">80岁以下
+                    <input type="radio" name="agerange" opt="b">80-90岁
+                    <input type="radio" name="agerange" opt="c">90-100岁
+                    <input type="radio" name="agerange" opt="d">100岁以上
+                </td>
+            </tr>
+            <tr>
 
-                        <td class="formtdtext">户籍所在地</td>
-                        <td colspan="3">
-                            <!--<input class="input-text" name="registration" opt="registration" style="width: 300px;">-->
-                            <input class="input-text" name="registration" style="width: 300px;">
+                <td class="formtdtext">户籍所在地</td>
+                <td colspan="3">
+                    <!--<input class="input-text" name="registration" opt="registration" style="width: 300px;">-->
+                    <input class="input-text" name="registration" style="width: 300px;">
 
-                        </td>
-                    </tr>
-                    <tr>
+                </td>
+            </tr>
+            <tr>
 
-                        <td class="formtdtext">居住地址</td>
-                        <td colspan="3">
-                            <!--<input class="input-text" name="address" opt="address" style="width: 300px;">-->
-                            <input class="input-text" name="address" style="width: 300px;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="formtdtext" rowspan="2">邮编</td>
-                        <td rowspan="2"><input class="input-text easyui-validatebox" name="postcode"  data-options="validType:['maxLength[6]']"></td>
-                        <td class="formtdtext">住宅电话</td>
-                        <td><input class="input-text easyui-validatebox" name="telephone" data-options="validType:['maxLength[25]']"></td>
-                    </tr>
-                    <tr>
-                        <td class="formtdtext">手机</td>
-                        <td><input class="input-text easyui-validatebox" name="mobilephone" data-options="validType:['maxLength[15]']"></td>
-                    </tr>
-                    <!--<tr>
-                        <td class="formtdtext">代理人姓名</td>
-                        <td><input class="input-text" name="agent"></td>
-                        <td class="formtdtext">与申请人关系</td>
-                        <td><input class="input-text" name="oprelation"></td>
-                    </tr>
-                    <tr>
-                        <td class="formtdtext">代理人地址</td>
-                        <td colspan="3"><input class="input-text" name="agentaddr"></td>
-                    </tr>
-                    <tr>
-                        <td class="formtdtext">电话</td>
-                        <td><input class="input-text easyui-validatebox" name="agentphone" data-options="validType:['maxLength[25]']"></td>
-                        <td class="formtdtext">手机</td>
-                        <td><input class="input-text easyui-validatebox" name="agentmobilephone" data-options="validType:['maxLength[15]']"></td>
-                    </tr>-->
-                    <tr>
-                        <td class="formtdtext">申请时间</td>
-                        <td colspan="3">
-                            <input class="input-text easyui-datebox" name="applydate" opt="applydate" readonly
-                                   data-options="formatter:myformatter,parser:myparser">
-                        </td>
-                        <!--<td class="formtdtext"></td>-->
-                    </tr>
-                </table>
-
-            </div>
-        <!--</fieldset>-->
+                <td class="formtdtext">居住地址</td>
+                <td colspan="3">
+                    <!--<input class="input-text" name="address" opt="address" style="width: 300px;">-->
+                    <input class="input-text" name="address" style="width: 300px;">
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext" rowspan="2">邮编</td>
+                <td rowspan="2"><input class="input-text easyui-validatebox" name="postcode"  data-options="validType:['maxLength[6]']"></td>
+                <td class="formtdtext">住宅电话</td>
+                <td><input class="input-text easyui-validatebox" name="telephone" data-options="validType:['maxLength[25]']"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">手机</td>
+                <td><input class="input-text easyui-validatebox" name="mobilephone" data-options="validType:['maxLength[15]']"></td>
+            </tr>
+            <!--<tr>
+                <td class="formtdtext">代理人姓名</td>
+                <td><input class="input-text" name="agent"></td>
+                <td class="formtdtext">与申请人关系</td>
+                <td><input class="input-text" name="oprelation"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">代理人地址</td>
+                <td colspan="3"><input class="input-text" name="agentaddr"></td>
+            </tr>
+            <tr>
+                <td class="formtdtext">电话</td>
+                <td><input class="input-text easyui-validatebox" name="agentphone" data-options="validType:['maxLength[25]']"></td>
+                <td class="formtdtext">手机</td>
+                <td><input class="input-text easyui-validatebox" name="agentmobilephone" data-options="validType:['maxLength[15]']"></td>
+            </tr>-->
+            <tr>
+                <td class="formtdtext">申请时间</td>
+                <td colspan="3">
+                    <input class="input-text easyui-datebox" name="applydate" opt="applydate" readonly
+                           data-options="formatter:myformatter,parser:myparser">
+                </td>
+                <!--<td class="formtdtext"></td>-->
+            </tr>
+        </table>
     </form>
 </div>
 

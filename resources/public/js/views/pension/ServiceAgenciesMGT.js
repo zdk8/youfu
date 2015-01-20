@@ -17,14 +17,16 @@ define(function(){
                         var viewbtns=local.find('[action=view]');
                         var updatebtns=local.find('[action=update]');
                         var deletebtns=local.find('[action=delete]');
-                        var btns_arr=[viewbtns,updatebtns,deletebtns];
+                        var addfwrybtn=local.find('[action=addfwry]');      //添加服务人员
+                        var btns_arr=[viewbtns,updatebtns,deletebtns,addfwrybtn];
                         var rows=data.rows;
                         for(var i=0;i<rows.length;i++){
                             for(var j=0;j<btns_arr.length;j++){
                                 (function(index){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
-                                        if($(this).attr("action")=='view'){
+                                        var action = $(this).attr("action");
+                                        if(action == 'view'){
                                             var title = "【"+record.name+'】服务申请详细信息'
                                             cj.showContent({                                          //详细信息(tab标签)
                                                 title:title,
@@ -38,7 +40,7 @@ define(function(){
                                                 }
                                             })
                                             //viewRoleInfo(record);
-                                        }else if($(this).attr("action")=='update'){         //修改
+                                        }else if(action=='update'){         //修改
                                             var title = "【"+record.departname+'】信息修改'
                                             if($("#tabs").tabs('getTab',title)){
                                                 $("#tabs").tabs('select',title)
@@ -56,7 +58,7 @@ define(function(){
                                                     }
                                                 })
                                             }
-                                        }else if($(this).attr("action")=='delete'){               //删除
+                                        }else if(action=='delete'){               //删除
                                             /*var title = "【"+record.name+'】信息变更'
                                             if($("#tabs").tabs('getTab',title)){
                                                 $("#tabs").tabs('select',title)
@@ -74,6 +76,24 @@ define(function(){
                                                     }
                                                 })
                                             }*/
+                                        }else if(action=='addfwry'){
+                                            var title = '<label style="font-weight: bold;color: rgba(39,42,40,0.83)">添加服务人员-'+record.departname+'</label>';
+                                            if($("#tabs").tabs('getTab',title)){
+                                                $("#tabs").tabs('select',title)
+                                            }else{
+//                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                                cj.showContent({                                          //详细信息(tab标签)
+                                                    title:title,
+                                                    htmfile:'text!views/pension/ServiceAgenciesPeople.htm',
+                                                    jsfile:'views/pension/ServiceAgenciesPeople',
+                                                    queryParams:{
+                                                        actiontype:'addfwry',         //（处理）操作方式
+                                                        data:record,
+                                                        title:title,
+                                                        refresh:refreshGrid
+                                                    }
+                                                })
+                                            }
                                         }
                                     });
                                 })(i);

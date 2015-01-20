@@ -20,19 +20,19 @@ define(function(){
     /*保存*/
     function saveFunc(local,option){
         local.find('[opt=update]').hide()
-        var serviceagenciesform = local.find("[opt=serviceagenciesform]");
+        var servicepeopleform = local.find("[opt=servicepeopleform]");
         local.find('[opt=save]').show().click(function(){
-            serviceagenciesform.form('submit', {
-                url:"audit/addjjyldepart",
-                onSubmit: function(){
+            servicepeopleform.form('submit', {
+                url:"audit/adddepservice",
+                onSubmit: function(params){
                     var isValid = $(this).form('validate');
                     if(isValid){
-                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        params.dep_id = option.queryParams.data.jdep_id
+//                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     }
                     return isValid;
                 },
                 success:function(data){
-//                    var data = eval('(' + data + ')');
                     if(data == "true"){
                         showProcess(false);
                         cj.slideShow('保存成功');
@@ -49,28 +49,31 @@ define(function(){
     /*修改*/
     function updateInfoFunc(local,option){
         local.find('[opt=save]').hide()
-        var serviceagenciesform = local.find("[opt=serviceagenciesform]");
-        serviceagenciesform.form("load",option.queryParams.data)
+        var servicepeopleform = local.find("[opt=servicepeopleform]");
+        servicepeopleform.form("load",option.queryParams.record)
         local.find('[opt=update]').show().click(function(){
-            serviceagenciesform.form('submit', {
-                url:"audit/updatejjyldepart",
+            servicepeopleform.form('submit', {
+                url:"audit/updatejjyldepart111",
                 onSubmit: function(params){
-                    params.jdep_id = option.queryParams.data.jdep_id;
+                    params.jdep_id = option.queryParams.record.jdep_id;
                     var isValid = $(this).form('validate');
                     if(isValid){
-                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+//                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     }
                     return isValid;
                 },
                 success:function(data){
                     if(data == "true"){
                         showProcess(false);
-                        cj.slideShow('修改成功');
+                        cj.slideShow('修改成功!');
                         if(showProcess(false)){
                             $("#tabs").tabs("close",option.title)
                             var ref = option.queryParams.refresh;
                             ref();
                         }
+                    }else{
+                        showProcess(false)
+                        cj.slideShow('<label style="color: red">修改失败!</label>')
                     }
                 }
             })
@@ -90,7 +93,7 @@ define(function(){
                 case 'update':                     //修改
                     updateInfoFunc(l, o);
                     break;
-                case 'add':              //保存
+                case 'addfwry':              //保存
                     saveFunc(l, o);
                     break;
                 default :

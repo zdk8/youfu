@@ -47,7 +47,7 @@ define(function(){
             panelHeight:350,
             url:'audit/getalljjyldepart',
             method:'post',
-            idField:'departname',
+            idField:'jdep_id',
             textField:'departname',
             fitColumns:true,
             pagination:true,
@@ -57,7 +57,37 @@ define(function(){
                 {field:'responsible',title:'负责人',width:35},
                 {field:'telephone',title:'联系电话',width:60}
             ]],
-            onClickRow:function(index,row){}
+            onBeforeLoad:function(params){
+                params.departname = local.find('[opt=servicemgt]').combobox('getValue')
+            },
+            onClickRow:function(index,row){
+                local.find('[opt=servicepeople_div]').show()
+                local.find("input[opt=servicepeople]").combogrid({
+                    panelWidth:330,
+                    panelHeight:350,
+                    url:'audit/getalldepservice',
+                    queryParams:{
+                        departname:row.departname
+                    },
+                    method:'post',
+//                    idField:'servicername',
+                    idField:'s_id',
+                    textField:'servicername',
+                    fitColumns:true,
+                    pagination:true,
+                    mode:'remote',
+                    columns:[[
+                        {field:'servicername',title:'姓名',width:35},
+                        {field:'servicephone',title:'身份证号',width:90},
+                        {field:'serviceaddress',title:'住址',width:60}
+                    ]],
+                    onBeforeLoad:function(params){
+                        params.servicername = local.find('[opt=servicepeople]').combobox('getValue')
+                    },
+                    onClickRow:function(index,row){
+                    }
+                })
+            }
         })
     }
     /*评估*/
@@ -97,6 +127,24 @@ define(function(){
                             gxlaomCheck.checked?params.gx_laom=gxlaomCheck.value:params.gx_laom=''
                             gxyoufCheck.checked?params.gx_youf=gxyoufCheck.value:params.gx_youf=''
                         }
+                        //服务机构是否是数字
+                        !isNaN(local.find("[opt=servicemgt]").combobox("getValue"))?
+                            params.jdep_id = local.find('[opt=servicemgt]').combobox("getValue"):
+                            params.jdep_id = local.find('[opt=servicemgtval]').val()
+                        //服务机构人员是否是数字
+                        !isNaN(local.find("[opt=servicepeople]").combobox("getValue"))?
+                            params.s_id = local.find('[opt=servicepeople]').combobox("getValue"):
+                            params.s_id = local.find('[opt=servicepeopleval]').val()
+                        /*if(!isNaN(local.find("[opt=servicemgt]").combobox("getValue"))){  //服务机构是否是数字
+                            params.jdep_id = local.find('[opt=servicemgt]').combobox("getValue")
+                        }else{
+                            params.jdep_id = local.find('[opt=servicemgtval]').val()
+                        }
+                        if(!isNaN(local.find("[opt=servicepeople]").combobox("getValue"))){  //服务机构人员是否是数字
+                            params.s_id = local.find('[opt=servicepeople]').combobox("getValue")
+                        }else{
+                            params.s_id = local.find('[opt=servicepeopleval]').val()
+                        }*/
                         showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     }
                     return isvalidate
@@ -176,14 +224,20 @@ define(function(){
           var info1_table =  local.find('[opt=info1_table]');        //主要参数
           var result1_table =  local.find('[opt=result1_table]');    //result1
           var result2_table =  local.find('[opt=result2_table]');    //result2
+          var hide_div=local.find('[opt=info1_div]');
+          var result2_div=local.find('[opt=result2_div]');
+          var result1_div=local.find('[opt=result1_div]');
+          hide_div.show();
+          result2_div.show();
+          result1_div.show();
           var isfirst = true;
           /*为每个label注册收缩事件*/
           local.find('legend').find('label').each(function(obj,fn,arg){
-              var labelopt = fn.attributes[0].value.toString()
-              var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
-              if(label_talbe != "info0" && label_talbe != "result3"){
-                  FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
-              }
+              /*var labelopt = fn.attributes[0].value.toString()
+              var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));*/
+              /*if(label_talbe != "info0" && label_talbe != "result3"){
+                  //FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
+              }*/
           }).click(function(e){
                   var labelopt = $(this)[0].attributes[0].value.toString();
                   var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
@@ -244,11 +298,21 @@ define(function(){
                       }
                   }
               })
+          //hide_fieldset.show();
           calculate(local);     //计算评估总分
           if(option.queryParams.actionType == "assessment"){      //评估
+              assessmentFunc(local,option);
               getDepartName(local);     //加载服务机构
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划
-              assessmentFunc(local,option);
+              var servicemgtval = local.find('[opt=servicemgtval]').val()
+              var servicepeopleval = local.find('[opt=servicepeopleval]').val()
+              if(servicemgtval != ""){
+                  local.find('[opt=servicemgt]').combobox('setValue',getServicemgtTotalname(servicemgtval))
+              }
+              if(servicepeopleval != ""){
+                  local.find('[opt=servicepeople_div]').show()
+                  local.find('[opt=servicepeople]').combobox('setValue',getServicepeoplevalTotalname(servicepeopleval))
+              }
           }else if(option.queryParams.actionType == "view"){  //查看详细信息
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划
               viewInfoFunc(local,option)
