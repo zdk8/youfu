@@ -758,6 +758,11 @@
   (insert t_depservice
     (values depservicedata)))
 
+(defn update-dsbyid [dsdata s_id]
+  (update t_depservice
+    (set-fields dsdata)
+    (where {:s_id s_id})))
+
 
 
 (defn getdistrictname [districtid]
