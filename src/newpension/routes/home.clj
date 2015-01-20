@@ -192,7 +192,9 @@
   (POST "/audit/adddepservice" request (audit/add-depservice request))                                              ;;添加机构服务人员
   (POST "/audit/getalldepservice" request (audit/getall-depservice request))                                            ;;获取服务人员信息
   (POST "/audit/updatedsbyid" request (audit/update-dsbyid request))                                                     ;;修改服务人员信息
-  (POST "/audit/getdepservicebyid"  request (audit/get-depservicebyid request))
+  (POST "/audit/getdepservicebyid"  request (audit/get-depservicebyid request))                                    ;;根据id获取服务人员信息
+
+  (POST "/audit/getqualifyop" request (audit/getqualifyop request))                                                         ;;查询具有资金发放资格的人员
 
 
 

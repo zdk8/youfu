@@ -758,6 +758,7 @@
   (select t_jjyldepartment
     (where {:jdep_id jdep_id})))
 
+;;居家养老服务机构的服务人员
 (defn add-depservice [depservicedata]
   (insert t_depservice
     (values depservicedata)))
@@ -770,6 +771,10 @@
 (defn get-depservicebyid [s_id]
   (select t_depservice
     (where {:s_id s_id})))
+
+
+;;资金发放
+
 
 
 

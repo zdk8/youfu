@@ -408,6 +408,12 @@
     (resp/json (db/get-depservicebyid s_id))))
 
 
+(defn getqualifyop [request]
+  (let[qopsql (str "SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.MONTHSUBSIDY,a.SERVICETIME,a.HOSPITALSUBSIDY
+FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' AND j.JJA_ID = a.JJA_ID")]
+    (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))))
+
+
 
 
 
