@@ -413,6 +413,16 @@
 FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' AND j.JJA_ID = a.JJA_ID")]
     (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))))
 
+(defn getcompleteqop [request]
+  (let[cqopsql (str "select t.*,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE
+from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID")]
+    (resp/json (common/time-before-list(db/get-results-bysql cqopsql)"birthd"))))
+
+(defn sendmoney [request]
+  (let[testdata [{:jja_id 11 :monthsubsidy 254}{:jja_id 22 :monthsubsidy 252}]]
+    (if (> (count testdata) 0)
+      (db/sendmoney testdata))
+    (str "true")))
 
 
 

@@ -148,6 +148,12 @@
   (table :t_depservice)
   (database dboracle))
 
+;;发放资金表
+(defentity t_dolemoney
+  (pk :doleid)
+  (table :t_dolemoney)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -774,7 +780,13 @@
 
 
 ;;资金发放
-
+(defn sendmoney [testdata]
+  (loop [cnt (count testdata) acc 1];开始点，变量绑定cnt-》n，acc-》1
+    (if (zero? cnt);结束点
+      acc
+      (recur (dec cnt) (insert t_dolemoney
+                         (values (get testdata (dec cnt)))))))
+)
 
 
 
@@ -792,6 +804,7 @@
 
 (defn get-results-bysql[totalsql]
   (exec-raw [totalsql []] :results))
+
 
 
 ;;分页
