@@ -149,6 +149,7 @@ define(function(){
               })
           calculate(local);     //计算评估总分
           if(option.queryParams.actionType == "dealwith"){  //处理
+              ooopp = option.queryParams
               dealwithInfoFunc(local,option)   //审核审批方法
           }
 

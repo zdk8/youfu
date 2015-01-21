@@ -90,6 +90,18 @@ define(function(){
             }
         })
     }
+    /*显示机构*/
+    var showServicemgt = function(local){
+        var servicemgtval = local.find('[opt=servicemgtval]').val()
+        var servicepeopleval = local.find('[opt=servicepeopleval]').val()
+        if(servicemgtval != ""){
+            local.find('[opt=servicemgt]').combobox('setValue',getServicemgtTotalname(servicemgtval))
+        }
+        if(servicepeopleval != ""){
+            local.find('[opt=servicepeople_div]').show()
+            local.find('[opt=servicepeople]').combobox('setValue',getServicepeoplevalTotalname(servicepeopleval))
+        }
+    }
     /*评估*/
     var assessmentFunc = function(local,option){
         local.find('[opt=dealwith]').hide()
@@ -135,16 +147,6 @@ define(function(){
                         !isNaN(local.find("[opt=servicepeople]").combobox("getValue"))?
                             params.s_id = local.find('[opt=servicepeople]').combobox("getValue"):
                             params.s_id = local.find('[opt=servicepeopleval]').val()
-                        /*if(!isNaN(local.find("[opt=servicemgt]").combobox("getValue"))){  //服务机构是否是数字
-                            params.jdep_id = local.find('[opt=servicemgt]').combobox("getValue")
-                        }else{
-                            params.jdep_id = local.find('[opt=servicemgtval]').val()
-                        }
-                        if(!isNaN(local.find("[opt=servicepeople]").combobox("getValue"))){  //服务机构人员是否是数字
-                            params.s_id = local.find('[opt=servicepeople]').combobox("getValue")
-                        }else{
-                            params.s_id = local.find('[opt=servicepeopleval]').val()
-                        }*/
                         showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     }
                     return isvalidate
@@ -154,7 +156,7 @@ define(function(){
                         showProcess(false);
                         cj.slideShow("保存成功!")
                         if(showProcess(false)){
-                            $("#tabs").tabs('close',option.queryParams.title)
+//                            $("#tabs").tabs('close',option.queryParams.title)
                             var ref = option.queryParams.refresh;
                             ref();
                         }
@@ -304,23 +306,12 @@ define(function(){
               assessmentFunc(local,option);
               getDepartName(local);     //加载服务机构
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划
-              var servicemgtval = local.find('[opt=servicemgtval]').val()
-              var servicepeopleval = local.find('[opt=servicepeopleval]').val()
-              if(servicemgtval != ""){
-                  local.find('[opt=servicemgt]').combobox('setValue',getServicemgtTotalname(servicemgtval))
-              }
-              if(servicepeopleval != ""){
-                  local.find('[opt=servicepeople_div]').show()
-                  local.find('[opt=servicepeople]').combobox('setValue',getServicepeoplevalTotalname(servicepeopleval))
-              }
+              showServicemgt(local)     //显示机构
           }else if(option.queryParams.actionType == "view"){  //查看详细信息
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划
               viewInfoFunc(local,option)
+              showServicemgt(local)     //显示机构
           }
-
-
-
-
       }
   }
 })

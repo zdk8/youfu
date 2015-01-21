@@ -69,7 +69,6 @@ define(function(){
             gender:local.find('[opt=gender]'),tip_age:local.find('[opt=tip_age]'),agetype:"span"})
 
 
-//        var districtid = local.find('[opt=districtid]');
         var pensionform = local.find('[opt=pensionform]');
         var familymembersgrid = local.find('[opt=familymembersgrid]');
         var dealwith = local.find('[opt=dealwith]');
@@ -228,9 +227,13 @@ define(function(){
     /*变更人员信息*/
     function changeInfo(local,option){
         baseRender(local, option.queryParams.data);
-        var districtid = local.find('[opt=districtid]');      //行政区划值
         local.find('form').form('load',option.queryParams.data)
-        districtid.combotree("setValue",option.queryParams.data.districtname)  //填充行政区划
+        ddd = option.queryParams
+//        local.find('[opt=districtid]').val(getDivistionTotalname(option.queryParams.data.identityid))//填充行政区划
+        local.find('[opt=districtid]').combotree("setValue",getDivistionTotalname(option.queryParams.data.identityid))//填充行政区划
+        /*var districtid = local.find('[opt=districtid]');      //行政区划值
+        local.find('form').form('load',option.queryParams.data)
+        districtid.combotree("setValue",option.queryParams.data.districtname)  //填充行政区划*/
         local.find('[opt=save]').hide()
         local.find('[opt=update]').hide();
         /*变更*/

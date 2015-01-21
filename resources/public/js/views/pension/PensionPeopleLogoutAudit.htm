@@ -20,9 +20,10 @@
                 <th data-options="field:'ro',width:150,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;dealwith&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>处理</span></span></a>');
+                    str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>');
                     return str.html();
-                }">操作</th>
+                }">操作
+                </th>
                 <th data-options="field:'aulevel',width:127,
                 formatter: function(value,row,index){
                         if(value == '7'){

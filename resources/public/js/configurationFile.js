@@ -64,7 +64,9 @@ var getDivistionTotalname = function(districtid){
             districtid:districtid
         },
         success:function(data){
-            name = data[0].totalname
+            if(data.length){
+                name = data[0].totalname
+            }
         }
     })
     return name

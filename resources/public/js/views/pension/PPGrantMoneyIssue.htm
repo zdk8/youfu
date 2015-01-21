@@ -13,8 +13,15 @@
                pagination:true">
     <thead data-options="frozen:true">
     <tr>
+        <th rowspan="2" data-options="field:'ro',width:70,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;resend&quot;title=&quot;重发&quot;><span><span class=&quot;icon-add-pl15&quot;></span></span></a>');
+                    return str.html();
+                }">操作
+        </th>
         <th rowspan="2" data-options="field:'bsnyue'">业务期</th>
-        <th rowspan="2" data-options="field:'name',width:100,
+        <th rowspan="2" data-options="field:'name',width:50,
             formatter:function(v,r,i)
                 {
                     var str='<div></div>';
@@ -23,10 +30,10 @@
                 }">
             姓名
         </th>
-        <th rowspan="2" data-options="field:'identityid',width:200">身份证号码</th>
-        <th rowspan="2" data-options="field:'monthsubsidy',width:90">每月补助(/元)</th>
-        <th rowspan="2" data-options="field:'hospitalsubsidy',width:90">住院补助(/元)</th>
-        <th rowspan="2" data-options="field:'servicetime',width:90">服务时间(/小时)</th>
+        <th rowspan="2" data-options="field:'identityid',width:170">身份证号码</th>
+        <th rowspan="2" data-options="field:'monthsubsidy',width:60">每月补助<br>(/元)</th>
+        <th rowspan="2" data-options="field:'hospitalsubsidy',width:60">住院补助<br>(/元)</th>
+        <th rowspan="2" data-options="field:'servicetime',width:60">服务时间<br>(/小时)</th>
     </tr>
     </thead>
     <thead>
@@ -72,7 +79,7 @@
                        type="keyword" style="width:200px" >
             </td>
             <td style="width: 200px;text-align: right">
-                <input opt="identityid" class="easyui-searchbox" data-options="prompt:'业务期',iconCls:'icon-log'"
+                <input opt="bsnyue" class="easyui-searchbox" data-options="prompt:'业务期',iconCls:'icon-log'"
                        type="keyword" style="width:200px" >
             </td>
 
