@@ -12,7 +12,7 @@ define(function(){
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'资金发放【月发放】',
-                        width:450,
+                        width:600,
                         height:375,
                         html:htmfile,
                         buttons:[
@@ -22,6 +22,51 @@ define(function(){
 //                                text:'资金发放',
                                 text:'发放',
                                 handler:function(html,parent){
+                                   /* $.messager.alert('提示',
+                                        '<label style="color: darkgray">请输入业务期:如2015年01月业务期为-201501</label><br>' +
+                                            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业务期 :<input opt="datebs" type="text" style="width:100px" value="'+formatterYM(new Date())+'">',
+                                        '');*/
+                                    dolledata = parent.find("[opt=ppgrantmoneyissuedlg]").datagrid("getSelections");
+                                    /*if(rows.length > 0){
+                                        for(r=0;r<rows.length;r++){
+                                            rowarrs.push(rows)
+//                                            var oldpg_id = rows[r].pg_id;
+//                                            var oldmoney = jq("#money").val();
+                                            *//*$.post(
+                                                'insert-grantmoney',
+                                                {
+                                                    grantid:grantmoney_key++,
+                                                    bsnyue:jq("#bsnyue").val(),
+                                                    pg_id:oldpg_id,
+                                                    money:oldmoney
+                                                },
+                                                function(data){
+                                                    lazgrantold(jq("#bsnyue").val())
+                                                    lazgrantoldready();
+                                                }
+                                            )*//*
+                                        }
+                                    }*/
+                                    var bsnyueval = parent.find('[opt=bsnyue]').datebox('getValue')
+//                                    if(isNaN(bsnyueval) != ""){
+//                                        console.log(111)
+//                                    }
+                                    $.messager.confirm('提示', '<label style="color: darkgray">当前发放的业务是 :'+bsnyueval+'</label>', function(r){
+                                        if (r){
+                                            $.ajax({
+                                                url:"searchid11111",
+                                                data:{
+                                                    dolledata:JSON.stringify(dolledata),
+                                                    bsnyue:bsnyueval
+                                                },
+                                                type:"post",
+                                                dataType:"json",
+                                                success:function(data){
+                                                    console.log(data)
+                                                }
+                                            })
+                                        }
+                                    });
                                     console.log("资金发放")
                                 }
                             },,{
@@ -53,9 +98,11 @@ define(function(){
     function lazgrantoldready(local){
         var ppgrantmoneyissue = local.find("[opt=ppgrantmoneyissue]");
         ppgrantmoneyissue.datagrid({
-            url:'get-grantmoney',
+//            url:'get-grantmoney',
+            url:'audit/getcompleteqop',
             onLoadSuccess:function(data){
-            }
+            },
+            toolbar:local.find('div[tb]')
         });
     }
 

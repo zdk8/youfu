@@ -16,9 +16,6 @@ define(function(){
             var parentlocal = option.plocal;
             var datas = eval('('+parentlocal.find('[opt=jsondata]').val()+')')
             fillDatas(local,datas);         //数据填充
-
-
-
         }
     }
 })
