@@ -11,6 +11,7 @@
                [clj-time.local :as l]
                [clj-time.coerce :as c]
                [noir.io :as io]
+               [clojure.data.json :as json]
                [newpension.layout :as layout]))
 
 (def applykeys [:districtname :districtid :name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
@@ -38,6 +39,7 @@
 (def jjyldepartment [:departid :departname :responsible :telephone :corporate :founddata :servicearea :certificatenum :specialtynum :servicenum :registnumber :departcode
                      :businesslicense :taxnumber :billingunit :billingprice :starttime  :registnature :address :dailyavgnum  :departoverview :servicecontent])
 (def depservice [:dep_id :servicername :servicephone :serviceaddress])
+(def dolemoney [:jja_id :bsnyue :monthsubsidy :servicetime :hospitalsubsidy])
 
 (def t_jjylapply "t_jjylapply")
 (def t_jjylassessment "t_jjylassessment")
@@ -429,8 +431,12 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID")]
 (defn sendmoney [request]
   (let[params (:params request)
        bsnyue (:bsnyue params)
-       doledata (:doledata params)]
-    (println bsnyue  doledata)
+       doledata   (json/read-str  (:dolledata params) :key-fn keyword)
+       doledatas (map #(conj (select-keys % dolemoney) {:bsnyue bsnyue}) doledata)
+       ;doledata (map #(select-keys % dolemoney) (:dolledata params))
+       ]
+   ; (println "DDDDDDDDDDDDDDD" bsnyue  doledatas (count doledatas) )
+    (if (> (count doledatas) 0) (db/sendmoney (vec doledatas)))
     (str "true")))
 
 

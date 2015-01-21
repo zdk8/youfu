@@ -781,6 +781,7 @@
 
 ;;资金发放
 (defn sendmoney [testdata]
+ ; (println (vector? testdata)"SSSSSSSSS" testdata )
   (loop [cnt (count testdata) acc 1];开始点，变量绑定cnt-》n，acc-》1
     (if (zero? cnt);结束点
       acc

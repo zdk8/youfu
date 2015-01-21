@@ -54,7 +54,7 @@ define(function(){
                                     $.messager.confirm('提示', '<label style="color: darkgray">当前发放的业务是 :'+bsnyueval+'</label>', function(r){
                                         if (r){
                                             $.ajax({
-                                                url:"searchid11111",
+                                                url:"audit/sendmoney",
                                                 data:{
                                                     dolledata:JSON.stringify(dolledata),
                                                     bsnyue:bsnyueval
