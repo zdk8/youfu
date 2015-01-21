@@ -1,4 +1,4 @@
-define(function(){
+define(['views/pension/PensionServiceAss'],function(psafile){
     return {
         render:function(local,option){
             var localDataGrid;
@@ -25,8 +25,32 @@ define(function(){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
                                         if($(this).attr("action")=='view'){
+                                            console.log(record.jja_id)
                                             var title = "【"+record.name+'】服务申请详细信息'
-                                            cj.showContent({                                          //详细信息(tab标签)
+                                            if($("#tabs").tabs('getTab',title)){
+                                                $("#tabs").tabs('select',title)
+                                            }else{
+                                                $("#tabs").tabs('add', {
+                                                    title: title,
+                                                    href: 'getPensionServiceAssHtml?jja_id='+record.jja_id,
+                                                    closable: true
+                                                })
+                                                var timer = window.setInterval(function () {
+                                                    var local=$("#tabs").tabs('getTab',title)
+                                                    if (local && local.find('[opt=info1_table]').length) {
+                                                        window.clearInterval(timer);
+                                                        psafile.render(local,{queryParams:{
+                                                            title:title,
+                                                            data:data,
+                                                            refresh:refreshGrid,
+                                                            actionType:"view"
+                                                        }});
+                                                    }else{
+                                                        console.log('oops....info1_table is not ready ')
+                                                    }
+                                                }, 200);
+                                            }
+                                            /*cj.showContent({                                          //详细信息(tab标签)
                                                 title:title,
                                                 htmfile:'text!views/pension/PensionServiceApply.htm',
                                                 jsfile:'views/pension/PensionServiceApply',
@@ -36,7 +60,7 @@ define(function(){
                                                     title:title,
                                                     refresh:refreshGrid
                                                 }
-                                            })
+                                            })*/
                                             //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='logout'){         //注销
                                             var title = "【"+record.name+'】人员注销'

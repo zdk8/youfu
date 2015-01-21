@@ -13,8 +13,15 @@
                loadMsg:''">
     <thead>
     <tr>
-        <th data-options="field:'ck',checkbox:true"></th>
-        <th data-options="field:'opd_id',hidden:true"></th>
+        <!--<th data-options="field:'ck',checkbox:true"></th>
+        <th data-options="field:'opd_id',hidden:true"></th>-->
+        <th data-options="field:'ro',width:55,align:'center',formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;cancellation&quot;title=&quot;注销&quot;><span><span class=&quot;icon-update-pl16&quot;></span></span></a>');
+                return str.html();
+            }">操作
+        </th>
         <th data-options="field:'departname',width:145,align:'center'">机构名称</th>
         <th data-options="field:'name',width:145,align:'center',
         formatter:function(v,r,i)
@@ -27,12 +34,7 @@
         <th data-options="field:'identityid',width:145,align:'center'">身份证</th>
         <th data-options="field:'address',width:145,align:'center'">家庭住址</th>
         <th data-options="field:'checkintime',width:145,align:'center'">入住时间</th>
-        <th data-options="field:'ro',width:145,align:'center',formatter:function(value,rowData,rowIndex)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;cancellation&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>注销</span></span></a>');
-                return str.html();
-            }">操作</th>
+
         <!--str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
                 str=$(str).append('<a action=&quot;delete&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-logout-pl16&quot;>删除</span></span></a>');-->
     </tr>

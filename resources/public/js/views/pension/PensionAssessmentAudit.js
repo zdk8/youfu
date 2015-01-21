@@ -87,7 +87,16 @@ define(['views/pension/PensionServiceAudit','views/pension/PensionServiceAss'],f
                         })(i)
                     }
                 }
-            }
+            },
+            striped:true,
+            toolbar:local.find('div[tb]')
+        })
+
+        local.find('.searchbtn').click(function(){
+            paaudit.datagrid('load',{
+                name:local.find('[opt=name]').searchbox('getValue'),
+                identityid:local.find('[opt=identityid]').searchbox('getValue')
+            })
         })
         operationlogFunc(operationlog);             //操作日志
 

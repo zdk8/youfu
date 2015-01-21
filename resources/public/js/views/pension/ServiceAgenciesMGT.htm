@@ -30,14 +30,15 @@
                 <th data-options="field:'address',width:200,align:'left'">住址</th>-->
 
 
-                <th data-options="field:'ro',width:200,align:'center',formatter:function(value,rowData,rowIndex)
+                <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;addfwry&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl15&quot;>添加服务人员</span></span></a>');
-                    str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>编辑</span></span></a>');
-                    str=$(str).append('<a action=&quot;delete&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-del-pl15&quot;>删除</span></span></a>');
+                    str=$(str).append('<a action=&quot;addfwry&quot;title=&quot;添加服务人员&quot;><span><span class=&quot;icon-add-pl15&quot;></span></span></a>&nbsp;&nbsp;');
+                    str=$(str).append('<a action=&quot;update&quot;title=&quot;编辑&quot;><span><span class=&quot;icon-update-pl16&quot;></span></span></a>&nbsp;&nbsp;');
+                    str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;><span><span class=&quot;icon-del-pl15&quot;></span></span></a>');
                     return str.html();
-                }">操作</th>
+                }">操作
+                </th>
                 <th data-options="field:'departname',width:145,align:'center'">机构名称</th>
                 <th data-options="field:'responsible',width:145,align:'center'">负责人</th>
                 <th data-options="field:'telephone',width:145,align:'center'">联系电话</th>

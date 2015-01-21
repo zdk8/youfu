@@ -19,61 +19,66 @@ define(function(){
                             {text:'取消',handler:function(html,parent){
                                 parent.trigger('close');
                             }},{
-//                                text:'资金发放',
                                 text:'发放',
                                 handler:function(html,parent){
-                                   /* $.messager.alert('提示',
-                                        '<label style="color: darkgray">请输入业务期:如2015年01月业务期为-201501</label><br>' +
-                                            '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业务期 :<input opt="datebs" type="text" style="width:100px" value="'+formatterYM(new Date())+'">',
-                                        '');*/
-                                    dolledata = parent.find("[opt=ppgrantmoneyissuedlg]").datagrid("getSelections");
-                                    /*if(rows.length > 0){
-                                        for(r=0;r<rows.length;r++){
-                                            rowarrs.push(rows)
-//                                            var oldpg_id = rows[r].pg_id;
-//                                            var oldmoney = jq("#money").val();
-                                            *//*$.post(
-                                                'insert-grantmoney',
-                                                {
-                                                    grantid:grantmoney_key++,
-                                                    bsnyue:jq("#bsnyue").val(),
-                                                    pg_id:oldpg_id,
-                                                    money:oldmoney
-                                                },
-                                                function(data){
-                                                    lazgrantold(jq("#bsnyue").val())
-                                                    lazgrantoldready();
-                                                }
-                                            )*//*
-                                        }
-                                    }*/
+                                    var dolledata = parent.find("[opt=ppgrantmoneyissuedlg]").datagrid("getSelections");
                                     var bsnyueval = parent.find('[opt=bsnyue]').datebox('getValue')
 //                                    if(isNaN(bsnyueval) != ""){
 //                                        console.log(111)
 //                                    }
-                                    $.messager.confirm('提示', '<label style="color: darkgray">当前发放的业务是 :'+bsnyueval+'</label>', function(r){
+                                    if(dolledata.length){
+                                        $.messager.confirm('提示', '<label style="color: darkgray">当前发放的业务期是 :'+bsnyueval+'</label>', function(r){
+                                            if (r){
+                                                $.ajax({
+                                                    url:"audit/sendmoney",
+                                                    data:{
+                                                        dolledata:JSON.stringify(dolledata),
+                                                        bsnyue:bsnyueval
+                                                    },
+                                                    type:"post",
+                                                    dataType:"json",
+                                                    success:function(data){
+                                                        if(data){
+                                                            cj.slideShow('发放完成!')
+                                                            parent.find("[opt=ppgrantmoneyissuedlg]").datagrid("reload")
+                                                            local.find("[opt=ppgrantmoneyissue]").datagrid('reload')
+                                                        }else{
+                                                            cj.slideShow('<label style="color: red">发放失败!</label>')
+                                                        }
+                                                    }
+                                                })
+                                            }
+                                        });
+                                    }else{
+                                        $.messager.alert('提示','请选择要发放的人员','info')
+                                    }
+                                }
+                            },,{
+                                text:'重发',
+                                handler:function(html,parent){
+                                    var bsnyueval = parent.find('[opt=bsnyue]').datebox('getValue')
+                                    $.messager.confirm('提示', '<label style="color: darkgray">是否将业务期为【'+bsnyueval+'】的人员全部重发?</label>', function(r){
                                         if (r){
                                             $.ajax({
-                                                url:"audit/sendmoney",
+                                                url:"audit/resendmoney",
                                                 data:{
-                                                    dolledata:JSON.stringify(dolledata),
+                                                    doleid:'',
                                                     bsnyue:bsnyueval
                                                 },
                                                 type:"post",
                                                 dataType:"json",
                                                 success:function(data){
-                                                    console.log(data)
+                                                    if(data){
+                                                        cj.slideShow('重发成功!')
+                                                        parent.find("[opt=ppgrantmoneyissuedlg]").datagrid("reload")
+                                                        local.find("[opt=ppgrantmoneyissue]").datagrid('reload')
+                                                    }else{
+                                                        cj.slideShow('<label style="color: red">重发失败!</label>')
+                                                    }
                                                 }
                                             })
                                         }
                                     });
-                                    console.log("资金发放")
-                                }
-                            },,{
-//                                text:'重新发放',
-                                text:'重发',
-                                handler:function(html,parent){
-                                    console.log("重新发放")
                                 }
                             }
                         ],
@@ -98,12 +103,57 @@ define(function(){
     function lazgrantoldready(local){
         var ppgrantmoneyissue = local.find("[opt=ppgrantmoneyissue]");
         ppgrantmoneyissue.datagrid({
-//            url:'get-grantmoney',
             url:'audit/getcompleteqop',
             onLoadSuccess:function(data){
+                var resendbtn=local.find('[action=resend]');
+                var btns_arr=[resendbtn];
+                var rows=data.rows;
+                for(var i=0;i<rows.length;i++){
+                    for(var j=0;j<btns_arr.length;j++){
+                        (function(index){
+                            var record=rows[index];
+                            $(btns_arr[j][i]).click(function(){
+                                if($(this).attr("action")=='resend'){
+                                    $.messager.confirm('是否重发',
+                                        '<label style="color: darkgray">姓名 :'+record.name+'<br>业务期 :'+record.bsnyue+'</label>',
+                                        function(r){
+                                            if (r){
+                                                $.ajax({
+                                                    url:"audit/resendmoney",
+                                                    data:{
+                                                        doleid:record.doleid,
+                                                        bsnyue:""
+                                                    },
+                                                    type:"post",
+                                                    dataType:"json",
+                                                    success:function(data){
+                                                        if(data){
+                                                            cj.slideShow('重发成功!')
+                                                            ppgrantmoneyissue.datagrid('reload')
+                                                        }else{
+                                                            cj.slideShow('<label style="color: red">重发失败!</label>')
+                                                        }
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    );
+                                }
+                            });
+                        })(i);
+                    }
+                }
             },
             toolbar:local.find('div[tb]')
         });
+
+        local.find('.searchbtn').click(function(){
+            ppgrantmoneyissue.datagrid('load',{
+                name:local.find('[opt=name]').searchbox('getValue'),
+                identityid:local.find('[opt=identityid]').searchbox('getValue'),
+                bsnyue:local.find('[opt=bsnyue]').searchbox('getValue')
+            })
+        })
     }
 
     return {

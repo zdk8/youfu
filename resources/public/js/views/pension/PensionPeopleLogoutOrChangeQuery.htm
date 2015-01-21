@@ -20,8 +20,8 @@
                 <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;logout&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>注销</span></span></a>');
-                    str=$(str).append('<a action=&quot;change&quot;class=&quot;opiconbg&quot;><span><span class=&quot;icon-add-pl16&quot;>变更</span></span></a>');
+                    str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;><span><span class=&quot;icon-cancell-pl1&quot;></span></span></a>&nbsp;&nbsp;');
+                    str=$(str).append('<a action=&quot;change&quot;title=&quot;变更&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>');
                     return str.html();
                 }">操作</th>
                 <!--<th data-options="field:'aulevel',width:127,
