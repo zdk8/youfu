@@ -413,7 +413,7 @@
         name (:name request)
         identityid (:identityid params)
         bsnyue (:bsnyue params)
-        ywq (if (> (count bsnyue) 0) (common/ywq) bsnyue)
+        ywq (if (> (count bsnyue) 0) bsnyue (common/ywq))
         condname (if (> (count name) 0) (str " and j.name like '%" name "%' "))
         condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
         qopsql (str "SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.MONTHSUBSIDY,a.SERVICETIME,a.HOSPITALSUBSIDY
