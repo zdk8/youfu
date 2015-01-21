@@ -82,6 +82,11 @@
 (defn get-nowtime []                          "获取当前系统时间"
   (new Timestamp (System/currentTimeMillis)))
 
+(defn ywq []
+  (let[nowdate (get-nowtime)
+        df (new SimpleDateFormat "yyyyMM")
+        tf (.format df nowdate)]
+    (str tf)))
 
 (defn fenye [rows page tablename colnames cond  order]
   (let[r   (read-string rows)

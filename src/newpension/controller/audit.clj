@@ -409,8 +409,16 @@
 
 
 (defn getqualifyop [request]
-  (let[qopsql (str "SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.MONTHSUBSIDY,a.SERVICETIME,a.HOSPITALSUBSIDY
-FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' AND j.JJA_ID = a.JJA_ID")]
+  (let[params (:params request)
+        name (:name request)
+        identityid (:identityid params)
+        bsnyue (:bsnyue params)
+        ywq (if (> (count bsnyue) 0) (common/ywq) bsnyue)
+        condname (if (> (count name) 0) (str " and j.name like '%" name "%' "))
+        condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
+        qopsql (str "SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.MONTHSUBSIDY,a.SERVICETIME,a.HOSPITALSUBSIDY
+FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid " AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
+(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "')")]
     (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))))
 
 (defn getcompleteqop [request]
@@ -423,6 +431,11 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID")]
     (if (> (count testdata) 0)
       (db/sendmoney testdata))
     (str "true")))
+
+
+
+(defn testtime [request]
+  (common/ywq))
 
 
 
