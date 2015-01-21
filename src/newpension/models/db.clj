@@ -789,6 +789,10 @@
                          (values (get testdata (dec cnt)))))))
 )
 
+(defn resendmoney [word value]
+  (delete t_dolemoney
+    (where {(keyword word) value})))
+
 
 
 (defn getdistrictname [districtid]

@@ -446,6 +446,15 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid con
     (if (> (count doledatas) 0) (db/sendmoney (vec doledatas)))
     (str "true")))
 
+(defn resendmoney [request]
+  (let[params (:params request)
+       doleid (:doleid params)
+       bsnyue  (:bsnyue params)]
+    (if (> (count doleid) 0)
+         (db/resendmoney "doleid" doleid)
+         (if (> (count bsnyue) 0)  (db/resendmoney "bsnyue" bsnyue)))
+    (str "true")))
+
 
 
 (defn testtime [request]

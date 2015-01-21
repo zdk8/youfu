@@ -198,6 +198,7 @@
   (POST "/audit/getcompleteqop" request (audit/getcompleteqop request))                                                ;;查找已经发放的人员
 
   (POST "/audit/sendmoney" request (audit/sendmoney request))
+  (POST "/audit/resendmoney" request (audit/resendmoney request))
 
   ;(GET "/test/testtime" request (audit/testtime request))
 
