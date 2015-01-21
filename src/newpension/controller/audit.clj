@@ -412,7 +412,7 @@
   (let[params (:params request)
         name (:name request)
         identityid (:identityid params)
-        bsnyue (:bsnyue params)
+        bsnyue (clojure.string/trim (:bsnyue params))
         ywq (if (> (count bsnyue) 0) bsnyue (common/ywq))
         condname (if (> (count name) 0) (str " and j.name like '%" name "%' "))
         condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
@@ -427,9 +427,10 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID")]
     (resp/json (common/time-before-list(db/get-results-bysql cqopsql)"birthd"))))
 
 (defn sendmoney [request]
-  (let[testdata [{:jja_id 11 :monthsubsidy 254}{:jja_id 22 :monthsubsidy 252}]]
-    (if (> (count testdata) 0)
-      (db/sendmoney testdata))
+  (let[params (:params request)
+       bsnyue (:bsnyue params)
+       doledata (:doledata params)]
+    (println bsnyue  doledata)
     (str "true")))
 
 

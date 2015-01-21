@@ -197,7 +197,7 @@
   (POST "/audit/getqualifyop" request (audit/getqualifyop request))                                                         ;;查询具有资金发放资格的人员
   (POST "/audit/getcompleteqop" request (audit/getcompleteqop request))                                                ;;查找已经发放的人员
 
-;  (GET "/audit/sendmoney" request (audit/sendmoney request))
+  (POST "/audit/sendmoney" request (audit/sendmoney request))
 
   ;(GET "/test/testtime" request (audit/testtime request))
 
