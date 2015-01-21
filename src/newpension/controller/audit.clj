@@ -427,7 +427,7 @@ FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid 
   (let[params (:params request)
         name (:name params)
         identityid (:identityid params)
-        bsnyue (:BSNYUE params)
+        bsnyue (:bsnyue params)
         condname (if (> (count name) 0) (str " AND j.NAME LIKE '%" name "%' ") )
         condid   (if (> (count identityid) 0)  (str " AND j.IDENTITYID LIKE '%" identityid "%' ") )
         condbsnyue  (if (> (count bsnyue) 0)  (str " AND t.BSNYUE LIKE '%" bsnyue "%' ") )
