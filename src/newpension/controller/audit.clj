@@ -413,27 +413,35 @@
 (defn getqualifyop [request]
   (let[params (:params request)
         name (:name request)
+        rows (:rows params)
+        page (:page params)
         identityid (:identityid params)
         bsnyue (clojure.string/trim (:bsnyue params))
         ywq (if (> (count bsnyue) 0) bsnyue (common/ywq))
         condname (if (> (count name) 0) (str " and j.name like '%" name "%' "))
         condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
-        qopsql (str "SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.MONTHSUBSIDY,a.SERVICETIME,a.HOSPITALSUBSIDY
+        qopsql (str "(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.MONTHSUBSIDY,a.SERVICETIME,a.HOSPITALSUBSIDY
 FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid " AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
-(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "')")]
-    (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))))
+(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "'))")
+        getresult (common/fenye rows page qopsql "*" "" " order by JJA_ID desc ")]
+   ; (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))
+    (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "birthd")})))
 
 (defn getcompleteqop [request]
   (let[params (:params request)
         name (:name params)
         identityid (:identityid params)
         bsnyue (:bsnyue params)
+        rows (:rows params)
+        page (:page params)
         condname (if (> (count name) 0) (str " AND j.NAME LIKE '%" name "%' ") )
         condid   (if (> (count identityid) 0)  (str " AND j.IDENTITYID LIKE '%" identityid "%' ") )
         condbsnyue  (if (> (count bsnyue) 0)  (str " AND t.BSNYUE LIKE '%" bsnyue "%' ") )
-        cqopsql (str "select t.*,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE
-from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid condbsnyue " ORDER BY t.doleid DESC")]
-    (resp/json (common/time-before-list(db/get-results-bysql cqopsql)"birthd"))))
+        cqopsql (str "( select t.*,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE
+from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid condbsnyue ")")
+        getresult (common/fenye rows page cqopsql "*" "" " order by doleid desc ")]
+    ;(resp/json (common/time-before-list(db/get-results-bysql cqopsql)"birthd"))
+    (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "birthd")})))
 
 (defn sendmoney [request]
   (let[params (:params request)
