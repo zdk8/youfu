@@ -424,8 +424,15 @@ FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid 
     (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))))
 
 (defn getcompleteqop [request]
-  (let[cqopsql (str "select t.*,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE
-from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID")]
+  (let[params (:params request)
+        name (:name params)
+        identityid (:identityid params)
+        bsnyue (:BSNYUE params)
+        condname (if (> (count name) 0) (str " AND j.NAME LIKE '%" name "%' ") )
+        condid   (if (> (count identityid) 0)  (str " AND j.IDENTITYID LIKE '%" identityid "%' ") )
+        condbsnyue  (if (> (count bsnyue) 0)  (str " AND t.BSNYUE LIKE '%" bsnyue "%' ") )
+        cqopsql (str "select t.*,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE
+from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid condbsnyue " ORDER BY t.doleid DESC")]
     (resp/json (common/time-before-list(db/get-results-bysql cqopsql)"birthd"))))
 
 (defn sendmoney [request]
