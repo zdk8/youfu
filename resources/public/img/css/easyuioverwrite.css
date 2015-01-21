@@ -141,9 +141,14 @@ element.style {
 }
 .icon-del-pl15 {
     background: url('../../img/deletetab.png') no-repeat left center;
+    /*background: url('../../img/shanchu.png') no-repeat left center;*/
+    padding-left: 16px;
+}
+.icon-cancell-pl1 {
+    background: url('../../img/cancell_show.png') no-repeat left center;
     padding-left: 16px;
 }
 .icon-map-pl1 {
-    background: url('../../img/map.png') no-repeat left center;
+    background: url('../../img/map_show.png') no-repeat left center;
     padding-left: 16px;
 }
