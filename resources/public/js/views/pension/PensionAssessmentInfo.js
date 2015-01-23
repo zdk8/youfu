@@ -141,7 +141,6 @@ define(function(){
                 var radiostr = ':input[name='+radios[radio]+'] + label'
                 radiostrs.push(radiostr)
             }
-            console.log(radiostrs.toString())
             local.find(selectRadio).not(radiostrs.toString()).each(function () {
                 if ($(this).prev()[0].checked){
                     $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式

@@ -65,9 +65,11 @@
 
         <fieldset style="width: 900px;margin: 0px auto;" opt="result2">
             <legend>
-                <label opt="result2_shrinkage"><img opt="result2_img" src="img/reduction.png"/>服务形式建议</label>
+                <label opt="result2_shrinkage"><img opt="result2_img" src="img/add.png"/>服务形式建议</label>
             </legend>
-            <div opt="result2_table" style="width:900px;height:2150px;"></div>
+            <div style="display:none;height:0px;"  opt="result2_div">
+                <div opt="result2_table" style="width:900px;height:2150px;display:none;"></div>
+            </div>
         </fieldset>
 
         <fieldset style="width: 900px;margin: 0px auto;" opt="result3" name="result3">
@@ -79,9 +81,9 @@
                 <td colspan="5" style="text-align: center;">评估表基本信息</td>
             </tr>
             <tr>
-                <td rowspan="5" style="width: 30px;">评估确认员完成</td>
+                <td rowspan="6" style="width: 30px;">评估确认员完成</td>
                 <td style="width: 200px;">评估员姓名</td>
-                <td style="width: 200px;"><input class="input-text" value="{{pingguyname}}" size="25" name="pingguyname" readonly></td>
+                <td style="width: 200px;"><input class="input-text" value="{{dataall.pinggy}}" size="25" name="pinggy" readonly></td>
                 <td rowspan="3" style="width: 150px;">确认完成</td>
                 <td rowspan="3">
                     <ul style="list-style-type:none">
@@ -94,27 +96,50 @@
 
             <tr>
                 <td>联络电话</td>
-                <td><input class="input-text" size="25" name="pingguyphone" value="{{pingguyphone}}" readonly></td>
+                <td><input class="input-text" size="25" name="pingguyphone" value="{{dataall.pingguyphone}}" readonly></td>
             </tr>
             <tr>
                 <td>完成时间</td>
-                <td><input size="25" name="pingguenddate" class="easyui-datebox" value="{{pingguenddate}}"
+                <td><input size="25" name="finishdate" class="easyui-datebox" value="{{dataall.finishdate}}"
                            data-options="formatter:myformatter,parser:myparser" readonly>
                 </td>
             </tr>
             <tr>
                 <td>所属单位</td>
-                <td colspan="3"><input class="input-text" style="width: 300px" name="pingguydept" value="{{pingguydept}}" readonly></td>
+                <td colspan="3"><input class="input-text" style="width: 300px" name="pingguydept" value="{{dataall.pingguydept}}" readonly></td>
             </tr>
 
             <tr>
                 <td>评估分值</td>
-                <td><input class="pingfen" style="width: 50px" opt="pinggusum" value="{{pinggusum}}" readonly></td>
-                <td>服务时间<input size="10" class="easyui-datebox" name="servicedate" value="{{servicedate}}" readonly></td>
+                <td><input class="pingfen" style="width: 50px" opt="pinggusum" value="{{dataall.pinggusum}}" readonly></td>
+                <td>服务时间
+                    <label>
+                        <input name="servicetime" class="input-text" style="width: 30px" value="{{dataall.servicetime}}" readonly>小时
+                    </label>
+                </td>
                 <td>
                     服务机构
-                    <input size="25" class="easyui-combobox" opt="servicemgt" name="servicemgt"
-                           data-options="editable:false" readonly>
+                    <input type="hidden" opt="servicemgtval" value="{{dataall.jdep_id}}">
+                    <input size="25" class="easyui-combobox" opt="servicemgt" readonly
+                           data-options="editable:true">
+                    <div style="display: none" opt="servicepeople_div">
+                        服务人员
+                        <input type="hidden" opt="servicepeopleval" value="{{dataall.s_id}}">
+                        <input size="25" class="easyui-combobox" opt="servicepeople" readonly
+                               data-options="editable:true">
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>资金补助</td>
+                <td colspan="3">
+                    <label style="float: left">
+                        每月补助 :<input class="input-text" name="monthsubsidy" value="{{dataall.monthsubsidy}}" readonly>元
+                    </label>
+                    <label style="float: right;padding-right: 5px">
+                        住院补助 :<input class="input-text" name="hospitalsubsidy" value="{{dataall.hospitalsubsidy}}" readonly>元
+                    </label>
                 </td>
             </tr>
 

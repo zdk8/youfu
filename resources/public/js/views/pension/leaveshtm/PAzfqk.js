@@ -19,7 +19,6 @@ define(function(){
     }
     return {
         render:function(local,option){
-            console.log("住房情况")
             var parentlocal = option.plocal;
             var datas = eval('('+parentlocal.find('[opt=jsondata]').val()+')')
             fillDatas(local,datas);         //数据填充

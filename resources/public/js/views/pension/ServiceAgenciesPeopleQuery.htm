@@ -20,15 +20,15 @@
                 str=$(str).append('<a action=&quot;update&quot;title=&quot;编辑&quot;><span><span class=&quot;icon-update-pl16&quot;></span></span></a>');
                 return str.html();
             }">操作</th>
-        <th data-options="field:'departname',width:145,align:'center'">机构名称</th>
-        <th data-options="field:'servicername',width:145,align:'center',
+        <th data-options="field:'servicername',width:50,align:'center',
         formatter:function(v,r,i)
                 {
                     var str='<div></div>';
                     str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
                     return str.html();
                 }">人员姓名</th>
-        <th data-options="field:'servicephone',width:145,align:'center'">联系电话</th>
+        <th data-options="field:'servicephone',width:120,align:'center'">身份证号</th>
+        <th data-options="field:'departname',width:120,align:'center'">所在机构</th>
         <th data-options="field:'serviceaddress',width:145,align:'center'">家庭住址</th>
     </tr>
     </thead>

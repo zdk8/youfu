@@ -70,7 +70,7 @@ define(['views/pension/PensionServiceAudit','views/pension/PensionServiceAss'],f
                                                 window.clearInterval(timer);
                                                 auditfile.render(local,{queryParams:{
                                                     title:title,
-                                                    data:data,
+//                                                    data:data,
                                                     record:record,
                                                     refresh:refreshGrid,
                                                     actionType:"dealwith"

@@ -23,19 +23,23 @@ define(function(){
             }
         }).click(function () {               //为第个元素注册点击事件
                 var s = $($(this).prev()[0]).attr('name')
-                s = ":input[name=" + s + "]+label"
-                var isChecked=$(this).prev()[0].checked;
-                local.find(s).each(function (i) {
-                    $(this).prev()[0].checked = false;
-                    $(this).removeClass("checked");
-                    $($(this).prev()[0]).removeAttr("checked");
-                });
-                if(isChecked){
-                    //如果单选已经为选中状态,则什么都不做
+                if(s == "shenghe" || s == "shengpi"){
+                    console.log(s)
                 }else{
-                    $(this).prev()[0].checked = true;
-                    $(this).addClass("checked");
-                    $($(this).prev()[0]).attr("checked","checked");
+                    s = ":input[name=" + s + "]+label"
+                    var isChecked=$(this).prev()[0].checked;
+                    local.find(s).each(function (i) {
+                        $(this).prev()[0].checked = false;
+                        $(this).removeClass("checked");
+                        $($(this).prev()[0]).removeAttr("checked");
+                    });
+                    if(isChecked){
+                        //如果单选已经为选中状态,则什么都不做
+                    }else{
+                        $(this).prev()[0].checked = true;
+                        $(this).addClass("checked");
+                        $($(this).prev()[0]).attr("checked","checked");
+                    }
                 }
             })
             .prev().hide();     //原来的圆点样式设置为不可见
@@ -221,7 +225,7 @@ define(function(){
     return {
       render:function(local,option){
           addToolBar(local);
-          addRadioCss(local)
+          addRadioCss(local);
 //          datas = eval('('+local.find('[opt=jsondata]').val()+')');
           var info1_table =  local.find('[opt=info1_table]');        //主要参数
           var result1_table =  local.find('[opt=result1_table]');    //result1
