@@ -345,7 +345,9 @@
         applydata (conj (select-keys params applykeys) changedata)
         ]
     (db/update-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate") jja_id)
-    (resp/json {:success true :message "reassess apply success"})))
+;    (resp/json {:success true :message "reassess apply success"})
+    (str "true")
+    ))
 
 (defn add-jjyldepart [request]
   (let[params (:params request)
