@@ -14,7 +14,7 @@ define(function(){
                     queryParams: {
 
                     },
-                    onDblClickRow: function(){
+                    /*onDblClickRow: function(){
                         var selected = localDataGrid.datagrid('getSelected');
                         if (selected){
                             var post = localDataGrid.datagrid("getSelected").name;
@@ -31,7 +31,7 @@ define(function(){
                                 });
                             }
                         }
-                    },
+                    },*/
                     onLoadSuccess:function(data){
                         var viewbtns=local.find('[action=view]');
                         var deletebtns=local.find('[action=delete]');

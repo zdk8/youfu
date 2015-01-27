@@ -4,7 +4,7 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '提交',hidden:'hidden',opt:'save'},
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '变更',hidden:'hidden',opt:'change'}
         ]);

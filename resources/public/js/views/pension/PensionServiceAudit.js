@@ -141,7 +141,7 @@ define(function(){
       render:function(local,option){
           addToolBar(local);
           addRadioCss(local)
-          datas = eval('('+local.find('[opt=jsondata]').val()+')');
+//          datas = eval('('+local.find('[opt=jsondata]').val()+')');
           var result2_table =  local.find('[opt=result2_table]');    //result2
           var result2_div=local.find('[opt=result2_div]');
           result2_div.show();
