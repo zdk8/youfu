@@ -16,7 +16,8 @@
 
 (def applykeys [:districtname :districtid :name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
             :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime
-            :countyaudit :audittime :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime ])
+            :countyaudit :audittime :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime
+            :familynum :allowanceid :old_type :live_type :life_ability])
 (def opofapply [:name :identityid :gender :birthd :nation :culture :marriage :live :economy :age :registration :address :telephone :mobilephone])
 (def  assess  [:jja_id :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_xingz :sh_lout :sh_chuany :sh_dab :sh_xiaob :sh_zongf :sh_pingguf :sh_jiel :sh_pingguy
          :jj_shour :jj_fenl :jj_leix :jj_pingguf :jj_pingguy :jz_fenl :jz_zhaol :jz_pingguf :jz_pingguy :nl_fenl :nl_pingguf :nl_pingguy :gx_laom :gx_youf :gx_youf_kind
@@ -40,6 +41,7 @@
                      :businesslicense :taxnumber :billingunit :billingprice :starttime  :registnature :address :dailyavgnum  :departoverview :servicecontent])
 (def depservice [:dep_id :servicername :servicephone :serviceaddress])
 (def dolemoney [:jja_id :bsnyue :monthsubsidy :servicetime :hospitalsubsidy])
+(def hospitalsubsidy [:hospital_days :subsidy_money :hospital_desc :hcommunityopinion :hopiniontime :hstreetreview :hreviewtime :hcountyaudit])
 
 (def t_jjylapply "t_jjylapply")
 (def t_jjylassessment "t_jjylassessment")
@@ -47,6 +49,7 @@
 (def approve "approve")
 (def t_jjyldepartment "t_jjyldepartment")
 (def t_depservice "t_depservice")
+(def t_hospitalsubsidy "t_hospitalsubsidy")
 
 
 (defn add-audit-apply [request]                                                                        "添加申请"
@@ -271,9 +274,10 @@
 (defn remove-submit [request]
   (let[params (:params request)
        jja_id (:jja_id params)
-       rm_reason (:rm_reason params)
        rm_communityopinion (:rm_communityopinion params)
+       jjyldata (select-keys params jjyldepartment)
        rm_opiniontime (common/get-nowtime)
+       upjjyldata (conj jjyldata {:rm_opiniontime rm_opiniontime :ishandle "1"})
        appsql (str "select a.* from approve a where a.bstablepk = " jja_id " and a.bstablename = 't_jjylapply' and a.aulevel = 3")
        appdata (first(db/get-results-bysql appsql))
        auuser   (:username (session/get :usermsg))
@@ -281,7 +285,7 @@
        ;DVCODE
        approvedata (conj appdata {:status   "1" :aulevel  "7" :auflag "社区注销意见"  :bstime rm_opiniontime :auuser auuser :audesc rm_communityopinion})
        ]
-    (db/update-apply {:ishandle "1" :rm_reason rm_reason :rm_communityopinion rm_communityopinion :rm_opiniontime rm_opiniontime} jja_id)     ;;更改申请表状态
+    (db/update-apply upjjyldata jja_id)     ;;更改申请表状态
     (db/add-approve approvedata)                                                                     ;;添加到注销审核流程
     (resp/json {:success true :message "remove audit submit"})))
 
@@ -400,17 +404,34 @@
       ]
     (resp/json {:total (:total getresult) :rows (:rows getresult)})))
 
-(defn update-dsbyid [request]
+(defn update-dsbyid [request]                                   "更新结构服务人员信息"
   (let[params (:params request)
        s_id (:s_id params)
        dsdata (select-keys params depservice)]
     (db/update-dsbyid dsdata s_id)
     (str "true")))
 
-(defn get-depservicebyid [request]
+(defn get-depservicebyid [request]                            "获取结构服务人员信息"
   (let[params (:params request)
        s_id (:s_id params)]
     (resp/json (db/get-depservicebyid s_id))))
+
+(defn apply-hospitalsubsidy  [request]                                                 "住院补助申请"
+  (let[params (:params request)
+        hcommunityopinion (:hcommunityopinion params)
+        appoperators (:username (session/get :usermsg))
+        messagebrief  (str  "姓名：" (:name params) ",身份证：" (:identityid params))
+        jjyldata (select-keys params jjyldepartment)
+        hsdata (select-keys params hospitalsubsidy)
+        hs_id  (:max(first(db/get-hsmaxid)))
+        jja_id (:jja_id params)
+        newhs_id (if hs_id (inc hs_id)  10)
+        appdata {:bstablepk newhs_id :bstablename "t_hospitalsubsidy" :status 1 :aulevel 1 :auflag "住院补助申请提交" :bstime (common/get-nowtime)  :audesc hcommunityopinion :appoperators appoperators :messagebrief messagebrief :bstablepkname "hs_id"}
+        ]
+    (db/add-hospitalsubsidy (conj hsdata {:hs_id hs_id :jja_id jja_id}))             ;保存住院申请信息
+    (db/update-jjyldepart jjyldata jja_id)                                                           ;保存老人信息
+    (db/add-approve appdata)                                                                           ;将申请信息添加到审核流程中
+    (str "true")))
 
 
 (defn getqualifyop [request]
@@ -469,7 +490,7 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid con
 
 
 (defn testtime [request]
-  (common/ywq))
+  (resp/json (:max(first(db/get-hsmaxid)))))
 
 
 

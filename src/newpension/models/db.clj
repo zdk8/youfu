@@ -154,6 +154,12 @@
   (table :t_dolemoney)
   (database dboracle))
 
+;;住院补助表
+(defentity t_hospitalsubsidy
+  (pk :hs_id)
+  (table :t_hospitalsubsidy)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -777,6 +783,15 @@
 (defn get-depservicebyid [s_id]
   (select t_depservice
     (where {:s_id s_id})))
+
+;;住院补助
+(defn get-hsmaxid []
+  (select t_hospitalsubsidy
+    (aggregate (max :hs_id) :max)))
+
+(defn add-hospitalsubsidy [hsdata]
+  (insert t_hospitalsubsidy
+    (values hsdata)))
 
 
 ;;资金发放
