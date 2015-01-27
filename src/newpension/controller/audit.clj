@@ -456,7 +456,7 @@
 (defn get-hsdatabyid [request]
   (let[params (:params request)
         hs_id (:hs_id params)
-        hssql (str "select h.*,j.* from t_hospitalsubsidy h,t_jjylapply j where h.hs_id = " hs_id " and h.isprovide is null  and h.jja_id = j.jja_id")]
+        hssql (str "select h.*,j.* from t_hospitalsubsidy h,t_jjylapply j where h.hs_id = " hs_id " and h.isprovide != 'n'  and h.jja_id = j.jja_id")]
     (resp/json (common/time-before-list (common/time-before-list (common/time-before-list (db/get-results-bysql hssql)"hopiniontime")"hreviewtime")"haudittime"))))
 
 
