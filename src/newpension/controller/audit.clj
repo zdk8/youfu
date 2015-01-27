@@ -445,6 +445,14 @@
     (db/add-approve appdata)                                                                           ;将申请信息添加到审核流程中
     (str "true")))
 
+(defn hospitalsubsidy-audit [request]
+  (let[params (:params request)
+       rows (:rows params)
+       page (:page params)
+       cond (str " and bstablename = 't_hospitalsubsidy' and status = '1' ")
+       getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
+    (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
+
 
 (defn getqualifyop [request]
   (let[params (:params request)
