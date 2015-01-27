@@ -271,6 +271,7 @@
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
+
 (defn remove-submit [request]
   (let[params (:params request)
        jja_id (:jja_id params)
@@ -415,6 +416,17 @@
   (let[params (:params request)
        s_id (:s_id params)]
     (resp/json (db/get-depservicebyid s_id))))
+
+
+(defn get-hospitaldata [request]                                                            "获取审核通过的数据"
+  (let[params (:params request)
+       rows (:rows params)
+       page (:page params)
+       name (:name params)
+       identityid (:identityid params)
+       cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid) " and jja_id NOT IN (SELECT jja_id FROM T_HOSPITALSUBSIDY WHERE ISPROVIDE IS NULL)")
+       getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc")]
+    (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
 (defn apply-hospitalsubsidy  [request]                                                 "住院补助申请"
   (let[params (:params request)

@@ -194,6 +194,7 @@
   (POST "/audit/updatedsbyid" request (audit/update-dsbyid request))                                                     ;;修改服务人员信息
   (POST "/audit/getdepservicebyid"  request (audit/get-depservicebyid request))                                    ;;根据id获取服务人员信息
 
+  (POST "/audit/gethositaldata" request (audit/get-hospitaldata request))                                              ;;获取未申请住院补助信息
   (POST "/audit/applyhospitalsubsidy" request (audit/apply-hospitalsubsidy request))                                 ;;住院补助申请
 
   (POST "/audit/getqualifyop" request (audit/getqualifyop request))                                                         ;;查询具有资金发放资格的人员
