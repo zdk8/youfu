@@ -208,13 +208,6 @@
     (db/add-approve appdata)                                                                           ;;将新增数据添加到审核表中
     (resp/json {:success true :msg "add success"})))
 
-(defn add-oldpeople [request]
-  (let[params (:params request)
-       opdata (select-keys params oldpeople)                                                      ;获取老人数据
-       opfamily (select-keys params fimallyrelinfo)                                                ;获取老人家庭数据
-       lr_id (inc (:max (db/get-max "olds")))                                                         ;获取老人id再+1
-
-       ]))
 
 (defn sele_oldsocrel [gx_name]
   (str (db/sele_oldsocrel gx_name)))

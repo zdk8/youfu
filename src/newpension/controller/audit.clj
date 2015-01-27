@@ -55,7 +55,8 @@
        checkold (count (db/get-oldpeople identityid))
        opdata (select-keys params opofapply)
        applydata (select-keys params applykeys)]
-    (if (= checkold 0) (old/add-oldpeople opdata))                                           ;如果老人数据没有此数据，将其添加到老人数据库中
+    (println "TTTTTTT" checkold  "OOOOOOO"  opdata  (= checkold 0))
+    (if (= checkold 0) (old/create-old request))                                           ;如果老人数据没有此数据，将其添加到老人数据库中
     (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
 ;    (resp/json {:success true :message "apply success"})
     (str "true")
