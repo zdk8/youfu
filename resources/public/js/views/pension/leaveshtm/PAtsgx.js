@@ -44,7 +44,6 @@ define(function(){
     }
     return {
         render:function(local,option){
-            console.log("特殊贡献")
             var parentlocal = option.plocal
             var datas = eval('('+parentlocal.find('[opt=jsondata]').val()+')')
             tsgxScore(local,parentlocal);       //评分

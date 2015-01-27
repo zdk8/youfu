@@ -8,7 +8,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
 
             localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
-                    url:'/audit/getallapply',
+                    url:'audit/getallapply',
                     method:'post',
                     queryParams: {
 

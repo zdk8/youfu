@@ -58,7 +58,7 @@ define(function(){
         var savebtn = local.find('[opt=save]');               //保存按钮
         savebtn.show().click(function(){
             local.find('[opt=pensionform]').form('submit', {
-                url:'/saveold',
+                url:'saveold',
                 onSubmit: function () {
                     var isValid = $(this).form('validate');
                     return isValid;

@@ -196,7 +196,7 @@ define(function(){
                     var isValid = $(this).form('validate');
                     if(isValid){
                         showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                        if(!isNaN($("[opt=districtid]").combobox("getValue"))){          //是否是数字
+                        if(!isNaN(local.find("[opt=districtid]").combobox("getValue"))){          //是否是数字
                             params.districtid = districtid.combobox("getValue")
                         }else{
                             params.districtid = option.queryParams.data.districtid
@@ -228,12 +228,8 @@ define(function(){
     function changeInfo(local,option){
         baseRender(local, option.queryParams.data);
         local.find('form').form('load',option.queryParams.data)
-        ddd = option.queryParams
-//        local.find('[opt=districtid]').val(getDivistionTotalname(option.queryParams.data.identityid))//填充行政区划
-        local.find('[opt=districtid]').combotree("setValue",getDivistionTotalname(option.queryParams.data.identityid))//填充行政区划
-        /*var districtid = local.find('[opt=districtid]');      //行政区划值
-        local.find('form').form('load',option.queryParams.data)
-        districtid.combotree("setValue",option.queryParams.data.districtname)  //填充行政区划*/
+        var districtidval = option.queryParams.data.districtid
+        local.find('[opt=districtid]').combotree("setValue",getDivistionTotalname(districtidval))
         local.find('[opt=save]').hide()
         local.find('[opt=update]').hide();
         /*变更*/
@@ -241,24 +237,31 @@ define(function(){
             local.find('[opt=pensionform]').form('submit', {
                 url:'audit/reassess',
                 dataType:"json",
-                onSubmit: function () {
+                onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
 //                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        if(!isNaN(local.find("[opt=districtid]").combobox("getValue"))){          //是否是数字
+                            params.districtid = local.find('[opt=districtid]').combobox("getValue")
+                        }else{
+                            params.districtid = districtidval
+                        }
                     }
                     return isValid;
                 },
                 success: function (data) {
-                    var data =  eval('(' + data + ')');
-                    if(data.success){
+//                    var data =  eval('(' + data + ')');
+                    if(data == "true"){
                         showProcess(false);
-                        cj.slideShow('操作成功');
+                        cj.slideShow('变更成功');
                         if(showProcess(false)){
                             $("#tabs").tabs('close',option.queryParams.title)
                             var ref = option.queryParams.refresh;             //刷新
                             ref();
                         }
-
+                    }else{
+                        showProcess(false);
+                        cj.slideShow('<label style="color: red">变更失败</label>');
                     }
                 }
             });
