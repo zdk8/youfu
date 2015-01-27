@@ -424,7 +424,7 @@
        page (:page params)
        name (:name params)
        identityid (:identityid params)
-       cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid) " and jja_id NOT IN (SELECT jja_id FROM T_HOSPITALSUBSIDY WHERE ISPROVIDE IS NULL)")
+       cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid) " and jja_id NOT IN (SELECT jja_id FROM T_HOSPITALSUBSIDY WHERE ISPROVIDE != 'n')")
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
@@ -440,7 +440,7 @@
         newhs_id (if hs_id (inc hs_id)  10)
         appdata {:bstablepk newhs_id :bstablename "t_hospitalsubsidy" :status 1 :aulevel 1 :auflag "住院补助申请提交" :bstime (common/get-nowtime)  :audesc hcommunityopinion :appoperators appoperators :messagebrief messagebrief :bstablepkname "hs_id"}
         ]
-    (db/add-hospitalsubsidy (conj hsdata {:hs_id newhs_id :jja_id jja_id}))             ;保存住院申请信息
+    (db/add-hospitalsubsidy (conj hsdata {:hs_id newhs_id :jja_id jja_id :isprovide "1"}))             ;保存住院申请信息
     (db/update-jjyldepart jjyldata jja_id)                                                           ;保存老人信息
     (db/add-approve appdata)                                                                           ;将申请信息添加到审核流程中
     (str "true")))
@@ -456,9 +456,55 @@
 (defn get-hsdatabyid [request]
   (let[params (:params request)
         hs_id (:hs_id params)
-        hssql (str "select h.*,j.* from t_hospitalsubsidy h,t_jjylapply j where h.hs_id = " hs_id " and h.jja_id = j.jja_id")]
+        hssql (str "select h.*,j.* from t_hospitalsubsidy h,t_jjylapply j where h.hs_id = " hs_id " and h.isprovide is null  and h.jja_id = j.jja_id")]
     (resp/json (common/time-before-list (common/time-before-list (common/time-before-list (db/get-results-bysql hssql)"hopiniontime")"hreviewtime")"haudittime"))))
 
+
+(defn hsapplyaudit1 [params]                                                                              "街镇审查"
+  (let[issuccess (:issuccess params)
+       approvedata (select-keys params approvekeys)
+       hstreetreview (:audesc params)
+       hreviewtime (common/get-nowtime)
+       hs_id (:bstablepk params)
+       sh_id   (:sh_id params)
+       aulevel (if (= issuccess "0") "2" "0")
+       auflag (if (= issuccess "0") "街镇审查通过" "街镇审查未通过")
+       status  (if (= issuccess "0") "1" "0")
+       auuser (:username (session/get :usermsg))
+       newappdata (conj approvedata {:aulevel aulevel :auflag auflag :status status :bstime hreviewtime :auuser auuser :audesc hstreetreview})]
+    (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
+    (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
+    (if (= issuccess "0") (db/update-hsapply {:hstreetreview hstreetreview :hreviewtime hreviewtime} hs_id)
+      (db/update-hsapply {:hstreetreview hstreetreview :hreviewtime hreviewtime :isprovide "n"} hs_id))               ;;将社区意见添加申请表中
+    (str "街镇审查")))
+
+(defn hsapplyaudit2 [params]                                                                              "县民政局审核"
+  (let[issuccess (:issuccess params)
+       approvedata (select-keys params approvekeys)
+       hcountyaudit (:audesc params)
+       haudittime (common/get-nowtime)
+       hs_id (:bstablepk params)
+       sh_id   (:sh_id params)
+       aulevel (if (= issuccess "0") "3" "0")
+       auflag (if (= issuccess "0") "县民政局审核通过" "县民政局审核未通过")
+       ;status  (if (= issuccess "0") "1" "0")
+       auuser (:username (session/get :usermsg))
+       newappdata (conj approvedata {:aulevel aulevel :status "0" :auflag auflag :bstime haudittime :auuser auuser :audesc hcountyaudit})]
+    (db/update-approve sh_id {:status "0"})                                                                                         ;;当前审核信息更改为历史状态
+    (db/add-approve newappdata)                                                                                                       ;;添加新的审核信息状态
+    (if (= issuccess "0") (db/update-hsapply {:hcountyaudit hcountyaudit :haudittime haudittime :isprovide "y"} hs_id)
+      (db/update-hsapply {:hcountyaudit hcountyaudit :haudittime haudittime :isprovide "n"} hs_id) )             ;;将社区意见添加申请表中
+    (str "县民政局审核")))
+
+(defn audit-hsapply [request]
+  (let[params (:params request)
+        aulevel (:aulevel params)
+        ]
+    (cond
+      (= aulevel "1")        (hsapplyaudit1 params)
+      (= aulevel "2")        (hsapplyaudit2 params)
+      )
+    (resp/json {:success true :message "hsapply audit success"})))
 
 (defn getqualifyop [request]
   (let[params (:params request)

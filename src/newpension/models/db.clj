@@ -793,6 +793,11 @@
   (insert t_hospitalsubsidy
     (values hsdata)))
 
+(defn update-hsapply [hsdata hs_id]
+  (update t_hospitalsubsidy
+    (set-fields hsdata)
+    (where {:hs_id hs_id})))
+
 
 ;;资金发放
 (defn sendmoney [testdata]

@@ -198,6 +198,7 @@
   (POST "/audit/applyhospitalsubsidy" request (audit/apply-hospitalsubsidy request))                                 ;;住院补助申请
   (POST "/audit/hospitalsubsidyaudit"  request (audit/hospitalsubsidy-audit request))                                     ;;获取审核流程中的住院补助信息
   (POST "/audit/gethsdatabyid" request (audit/get-hsdatabyid request))                                                      ;;通过id获取老人信息
+  (POST "/audit/audithsapply" request (audit/audit-hsapply request))                                                          ;;审核住院补助申请
 
   (POST "/audit/getqualifyop" request (audit/getqualifyop request))                                                         ;;查询具有资金发放资格的人员
   (POST "/audit/getcompleteqop" request (audit/getcompleteqop request))                                                ;;查找已经发放的人员
