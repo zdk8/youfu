@@ -453,6 +453,12 @@
        getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
+(defn get-hsdatabyid [request]
+  (let[params (:params request)
+        hs_id (:hs_id params)
+        hssql (str "select h.*,j.* from t_hospitalsubsidy h,t_jjylapply j where h.hs_id = " hs_id " and h.jja_id = j.jja_id")]
+    (resp/json (common/time-before-list (common/time-before-list (common/time-before-list (db/get-results-bysql hssql)"hopiniontime")"hreviewtime")"haudittime"))))
+
 
 (defn getqualifyop [request]
   (let[params (:params request)
