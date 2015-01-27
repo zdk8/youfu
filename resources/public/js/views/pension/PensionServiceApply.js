@@ -250,16 +250,18 @@ define(function(){
                     return isValid;
                 },
                 success: function (data) {
-                    var data =  eval('(' + data + ')');
-                    if(data.success){
+//                    var data =  eval('(' + data + ')');
+                    if(data == "true"){
                         showProcess(false);
-                        cj.slideShow('操作成功');
+                        cj.slideShow('变更成功');
                         if(showProcess(false)){
                             $("#tabs").tabs('close',option.queryParams.title)
                             var ref = option.queryParams.refresh;             //刷新
                             ref();
                         }
-
+                    }else{
+                        showProcess(false);
+                        cj.slideShow('<label style="color: red">变更失败</label>');
                     }
                 }
             });

@@ -622,6 +622,26 @@ div.weboxbuttons ul li a:active
     padding-top: 5px;
     background-color: rgba(253, 204, 206, 0);
 }
+/*工具栏背景*/
+.highcharstoolbar{
+    background: url("../../img/hengtiao.jpg");
+    height: 25px;
+}
+/*工具栏按钮*/
+.highcharstoolbarbutton {
+    border: 1px solid rgba(128, 176, 79, 0.12);
+    display: inline-block;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    width:70px;
+    height: 21px;
+    background:url(../../img/hengtiao.jpg);
+}
+.highcharstoolbarbutton:active {
+    position: relative;
+    top: 1px;
+}
 
 
 

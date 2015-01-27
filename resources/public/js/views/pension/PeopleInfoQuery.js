@@ -19,7 +19,6 @@ define(function(){
                         if (selected){
                             var post = localDataGrid.datagrid("getSelected").name;
                             var id = localDataGrid.datagrid("getSelected").lr_id;
-//                        alert("ok"+post+"id:"+id);
                             var jq = $;
                             if (jq('#tabs').tabs('exists', post+'详细信息'))
                                 jq('#tabs').tabs('select', post+'详细信息');

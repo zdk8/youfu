@@ -53,7 +53,7 @@ define(function(){
                                         $.messager.alert('提示','请选择要发放的人员','info')
                                     }
                                 }
-                            },,{
+                            },{
                                 text:'重发',
                                 handler:function(html,parent){
                                     var bsnyueval = parent.find('[opt=bsnyue]').datebox('getValue')
@@ -153,6 +153,49 @@ define(function(){
                 identityid:local.find('[opt=identityid]').searchbox('getValue'),
                 bsnyue:local.find('[opt=bsnyue]').searchbox('getValue')
             })
+        })
+        local.find('[opt=exportexcel]').click(function(){
+            require(['commonfuncs/popwin/win','text!views/pension/ReportXls.htm','views/pension/ReportXls'],
+                function(win,htmfile,jsfile){
+                    win.render({
+                        title:'excel导出',
+                        width:700,
+                        height:375,
+                        html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},{text:'导出',handler:function(html,parent){
+//                                parent.trigger('close');
+                                console.log(111)
+                            }}
+                        ],
+                        renderHtml:function(local,submitbtn,parent){
+                            jsfile.render(local,{
+                                submitbtn:submitbtn,
+                                act:'c',
+                                parent:parent,
+//                                refresh:refresh,         //刷新按钮
+                                actiontype:'add',       //操作方式
+                                onCreateSuccess:function(data){
+                                    parent.trigger('close');
+                                }
+                            })
+                        }
+                    })
+                }
+            )
+//            window.location.href= "report-xls/my-test2";
+            /*$.ajax({
+                url:"report-xls/my-test2",
+                type:"get",
+                data:{
+
+                },
+                onLoadSuccess:function(data){
+                    console.log(11)
+                }
+            })*/
         })
     }
 
