@@ -440,9 +440,6 @@
         newhs_id (if hs_id (inc hs_id)  10)
         appdata {:bstablepk newhs_id :bstablename "t_hospitalsubsidy" :status 1 :aulevel 1 :auflag "住院补助申请提交" :bstime (common/get-nowtime)  :audesc hcommunityopinion :appoperators appoperators :messagebrief messagebrief :bstablepkname "hs_id"}
         ]
-    (println params)
-    (println hsdata)
-    (println jjyldata)
     (db/add-hospitalsubsidy (conj hsdata {:hs_id newhs_id :jja_id jja_id :isprovide "1"}))             ;保存住院申请信息
     (db/update-apply jjyldata jja_id)                                                           ;保存老人信息
     (db/add-approve appdata)                                                                           ;将申请信息添加到审核流程中
