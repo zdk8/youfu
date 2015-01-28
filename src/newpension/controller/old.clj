@@ -206,7 +206,9 @@
     (db/create-userlog opseno digest tprkey functionid dvcode loginname username)     ;;新增对应的操作日志
     (db/create-audit opseno auditid)             ;;新增对应的审核表
     (db/add-approve appdata)                                                                           ;;将新增数据添加到审核表中
-    (resp/json {:success true :msg "add success"})))
+;    (resp/json {:success true :msg "add success"})
+    (str "true")
+    ))
 
 
 (defn sele_oldsocrel [gx_name]
@@ -672,8 +674,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        statistype (:statistype params)
        statis-sql (condp = statistype
                     "dm" (dmstatis params)
-                    "lx"   (lxstatis params)
-                    "xb" (xbstatis params))
+                    "xb"   (lxstatis params)
+                    "sj" (xbstatis params))
        ]
     (resp/json (db/get-results-bysql statis-sql))))
 
