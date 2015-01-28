@@ -87,9 +87,6 @@ define(function(){
                             auditFunc(local,option,"rm_streetreview",shengheval);
                         }
                     }
-                    /*rm_streetreviewval.val() == "" ? $.messager.alert('温馨提示','请填写所在镇、街街道审核意见！',"",function(r){
-                        rm_streetreviewval.focus()
-                    }) : auditFunc(local,option,"rm_streetreview");*/
                 }else if(aulevel == "8"){       //注销审批
                     if(rm_countyaudit.val() == "" || rm_countyaudit.val() == null){
                         $.messager.alert('温馨提示','请填写民政局审批意见！',"",function(r){
@@ -108,9 +105,6 @@ define(function(){
                             auditFunc(local,option,"rm_countyaudit",shengpival);
                         }
                     }
-                    /*rm_countyaudit.val() == "" ? $.messager.alert('温馨提示','请填写民政局审批意见！',"",function(r){
-                        rm_countyaudit.focus()
-                    }) : auditFunc(local,option,"rm_countyaudit");*/
                 }
             })
         }
