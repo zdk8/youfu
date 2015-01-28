@@ -1,0 +1,83 @@
+    <table class="easyui-datagrid-noauto"
+           data-options="
+                   method:'post',
+                   fit:true,
+                   border:false,
+                   rownumbers:true,
+                   fitColumns:true,
+                  pageSize:cj.getDataGridAttr('pageSize'),
+                   pageList:cj.getDataGridAttr('pageList'),
+                   singleSelect:true,
+                   pagination:!true">
+        <thead>
+        <tr>
+            <th data-options="field:'productid',width:100">Product</th>
+            <th data-options="field:'itemid',width:80">Item ID</th>
+            <th data-options="field:'listprice',width:80,align:'right'">List Price</th>
+            <th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+            <th data-options="field:'attr1',width:240">Attribute</th>
+            <th data-options="field:'status',width:60,align:'center'">Status</th>
+        </tr>
+        </thead>
+    </table>
+
+    <div tb style="border-bottom:1px solid blue;background-color:#eef1f8;">
+        <table cellspacing="0" cellpadding="0" style="float: left">
+            <tr>
+
+                <td><label class="gray7" style="background-color: rgb(181, 171, 171);">搜索条件:</label></td>
+
+                <td style="width: 270px;border:">
+                    时间：
+                    <input class="easyui-datebox" style="width:100px">
+                    -
+                    <input class="easyui-datebox" style="width:100px">
+                </td>
+
+                <td>
+                    地区：
+                    <input style="width: 150px;" opt="districtid">
+
+                </td>
+                <td>
+                    性别：
+                    <input style="width: 100px;" class="easyui-combobox"
+                           data-options=" valueField: 'value', textField: 'label', data: [{ label: '男', value: '1' },{ label: '女', value: '0' }]"/>
+                </td>
+
+                <td>
+                    <button >清空条件</button>
+
+                </td>
+            </tr>
+            <tr ><td colspan="5" style="height:5px;"></td></tr>
+            <tr>
+
+                <td><label class="gray7" style="background-color: rgb(181, 171, 171);">分组条件:</label></td>
+
+                <td >
+                    <input type="radio" name="date" value="3">年份
+                    <input type="radio" name="date"  value="2">月份
+                    <input type="radio"  name="date" value="1">天
+                    <input type="radio"  name="date" value="0">不分组
+                </td>
+                <td>
+                    <input type="radio"  name="diqu" value="1">分组
+                    <input type="radio"  name="diqu" value="0">不分组
+
+                </td>
+                <td>
+                    <input type="radio"  name="sex" value="1">分组
+                    <input type="radio"  name="sex" value="0">不分组
+
+                </td>
+                <td>
+                    <button >查询</button>
+
+                </td>
+
+            </tr>
+
+        </table>
+        <div class="clear"></div>
+    </div>
