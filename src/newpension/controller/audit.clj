@@ -276,7 +276,7 @@
   (let[params (:params request)
        jja_id (:jja_id params)
        rm_communityopinion (:rm_communityopinion params)
-       jjyldata (select-keys params jjyldepartment)
+       jjyldata (select-keys params applykeys)
        rm_opiniontime (common/get-nowtime)
        upjjyldata (conj jjyldata {:rm_opiniontime rm_opiniontime :ishandle "1"})
        appsql (str "select a.* from approve a where a.bstablepk = " jja_id " and a.bstablename = 't_jjylapply' and a.aulevel = 3")
@@ -433,15 +433,18 @@
         hcommunityopinion (:hcommunityopinion params)
         appoperators (:username (session/get :usermsg))
         messagebrief  (str  "姓名：" (:name params) ",身份证：" (:identityid params))
-        jjyldata (select-keys params jjyldepartment)
+        jjyldata (select-keys params applykeys)
         hsdata (select-keys params hospitalsubsidy)
         hs_id  (:max(first(db/get-hsmaxid)))
         jja_id (:jja_id params)
         newhs_id (if hs_id (inc hs_id)  10)
         appdata {:bstablepk newhs_id :bstablename "t_hospitalsubsidy" :status 1 :aulevel 1 :auflag "住院补助申请提交" :bstime (common/get-nowtime)  :audesc hcommunityopinion :appoperators appoperators :messagebrief messagebrief :bstablepkname "hs_id"}
         ]
+    (println params)
+    (println hsdata)
+    (println jjyldata)
     (db/add-hospitalsubsidy (conj hsdata {:hs_id newhs_id :jja_id jja_id :isprovide "1"}))             ;保存住院申请信息
-    (db/update-jjyldepart jjyldata jja_id)                                                           ;保存老人信息
+    (db/update-apply jjyldata jja_id)                                                           ;保存老人信息
     (db/add-approve appdata)                                                                           ;将申请信息添加到审核流程中
     (str "true")))
 
