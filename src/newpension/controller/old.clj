@@ -681,3 +681,39 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (resp/json (db/get-results-bysql opstatis-sql))))
 
 
+
+
+(defn opstatistic2 [request]
+  (let[params (:params request)
+        starttime (:starttime params)
+        endtime (:endtime params)
+        districtid (:districtid params)
+        gender (:gender params)
+        dlength (+ (count districtid) 3)
+        sj (:sj params)
+        dq (:dq params)
+        xb (:xb params)
+       starttimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE >= to_date('" starttime "','yyyy-mm-dd') ")  )
+       endtimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE <= to_date('" endtime "','yyyy-mm-dd') " ) )
+       districtidcond (if (> (count starttime) 0) (str " and districtid like '" districtid "%' ")  )
+       gendercond (if (> (count starttime) 0 ) (str " and gender = '" gender "' ") )
+       tjconds (str starttimecond endtimecond  districtidcond gendercond )
+       sjgroup (condp = sj
+                     "Y"      (str " to_char(OPERATOR_DATE,'yyyy') ")
+                      "Q"      (str " CONCAT(to_char(OPERATOR_DATE,'yyyy'),to_char(OPERATOR_DATE,'Q')) ")
+                      "M"     (str " CONCAT(to_char(OPERATOR_DATE,'yyyy'),to_char(OPERATOR_DATE,'mm')) ")
+                      "D"       (str " to_char(OPERATOR_DATE,'yyyy-mm-dd') ")
+                       nil       )
+       dqgroup (if (= dq "dq") (condp = dlength
+                      6   (str " substr(districtid,0,6) ")
+                      9   (str " substr(districtid,0,9) ")
+                      12   " districtid "
+                      nil))
+        xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)
+        groups (str (if sjgroup (str sjgroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")))
+        groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups))))
+        opstatissql (str " select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup "null") " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum from " t_oldpeople " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith)]
+    (println "SSSSSSSSSSSSSS" opstatissql)
+    (resp/json (db/get-results-bysql opstatissql))))
+
+
