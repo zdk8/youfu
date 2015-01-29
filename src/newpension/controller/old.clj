@@ -704,12 +704,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                       "M"     (str " CONCAT(to_char(OPERATOR_DATE,'yyyy'),to_char(OPERATOR_DATE,'mm')) ")
                       "D"       (str " to_char(OPERATOR_DATE,'yyyy-mm-dd') ")
                        nil       )
-       dqgroup (condp = dlength
+       dqgroup (if (= dq "dq") (condp = dlength
                       6   (str " substr(districtid,0,6) ")
                       9   (str " substr(districtid,0,9) ")
                       12   " districtid "
-                      nil)
-        xbgroup (if (> (count gender) 0) (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)
+                      nil))
+        xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)
         opstatissql (str " select " sjgroup " as operator ," dqgroup " as districtid, " xbgroup " as gender,count(*) as opsum from " t_oldpeople " where 1=1 " starttimecond endtimecond districtidcond gendercond)]
     (resp/json (db/get-results-bysql opstatissql))))
 
