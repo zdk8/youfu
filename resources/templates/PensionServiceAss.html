@@ -170,9 +170,9 @@
                 <td rowspan="3" style="width: 150px;">确认完成</td>
                 <td rowspan="3">
                     <ul style="list-style-type:none">
-                        <li>首次评估<input type="radio" name="assesstype"><label></label></li>
-                        <li>复检评估<input type="radio" name="assesstype"><label></label></li>
-                        <li>变更评估<input type="radio" name="assesstype"><label></label></li>
+                        <li>首次评估<input type="radio" name="assesstype" value="0"><label></label></li>
+                        <li>复检评估<input type="radio" name="assesstype" value="1"><label></label></li>
+                        <li>变更评估<input type="radio" name="assesstype" value="2"><label></label></li>
                     </ul>
                 </td>
             </tr>
@@ -216,14 +216,14 @@
             </tr>
 
             <tr>
-                <td>资金补助</td>
+                <td>每月补助</td>
                 <td colspan="3">
-                    <label style="float: left">
-                        每月补助 :<input class="input-text" name="monthsubsidy" value="{{dataall.monthsubsidy}}">元
-                    </label>
-                    <label style="float: right;padding-right: 5px">
+                    <!--<label style="float: left">-->
+                         <input class="input-text" name="monthsubsidy" value="{{dataall.monthsubsidy}}">元
+                    <!--</label>-->
+                    <!--<label style="float: right;padding-right: 5px">
                         住院补助 :<input class="input-text" name="hospitalsubsidy" value="{{dataall.hospitalsubsidy}}">元
-                    </label>
+                    </label>-->
                 </td>
             </tr>
 

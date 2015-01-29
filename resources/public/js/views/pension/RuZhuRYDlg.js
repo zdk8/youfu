@@ -13,9 +13,35 @@ define(function(){
             }
         });
     };
-
+    /*为radio添加样式*/
+    var addRadioCss = function(local) {
+        var selectRadio = ":input[type=checkbox] + label";
+        local.find(selectRadio).each(function () {
+            if ($(this).prev()[0].checked){
+                $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
+            }
+        }).click(function () {               //为第个元素注册点击事件
+                var s = $($(this).prev()[0]).attr('name')
+                s = ":input[name=" + s + "]+label"
+                var isChecked=$(this).prev()[0].checked;
+                local.find(s).each(function (i) {
+                    $(this).prev()[0].checked = false;
+                    $(this).removeClass("checked");
+                    $($(this).prev()[0]).removeAttr("checked");
+                });
+                if(isChecked){
+                    //如果单选已经为选中状态,则什么都不做
+                }else{
+                    $(this).prev()[0].checked = true;
+                    $(this).addClass("checked");
+                    $($(this).prev()[0]).attr("checked","checked");
+                }
+            })
+            .prev().hide();     //原来的圆点样式设置为不可见
+    }
     function render(local,option){
-        addToolBar(local)
+        addToolBar(local);
+        addRadioCss(local);
 
         var divisiontree = local.find('[opt=districtid]'); //行政区划id
         getdivision(divisiontree);                                 //加载行政区划
@@ -50,9 +76,15 @@ define(function(){
 //            determinefunc({determine:determine,rzrydlg:rzrydlg,actiontype:actiontype,option:option})
         }else if(actiontype == "view"){                                  //查看并修改
             local.find("[opt=save]").hide();
-            rzrydlg.form('load',option.queryParams.record)
+            var datas = option.queryParams.record;
+            rzrydlg.form('load',datas);
             var districtnameval = getDivistionTotalname(option.queryParams.record.districtid)   //获取行政区划全名
             divisiontree.combotree("setValue",districtnameval)  //填充行政区划
+            var jjzkarr = ['jjzk_baofang','jjzk_lixiu','jjzk_baomu'];
+            for(var i=0;i<jjzkarr.length;i++){
+                local.find('input[name='+jjzkarr[i]+'][type=checkbox][value='+datas[jjzkarr[i]]+']').attr("checked","checked");
+                local.find('input[name='+jjzkarr[i]+'][type=checkbox][value='+datas[jjzkarr[i]]+']+label').addClass("checked");
+            }
             local.find("[opt=update]").show().click(function(){
                 rzrydlg.form('submit',{
                     url:"pension/updateopdepbyid",

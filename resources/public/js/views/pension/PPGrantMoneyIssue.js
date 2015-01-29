@@ -154,8 +154,9 @@ define(function(){
                 bsnyue:local.find('[opt=bsnyue]').searchbox('getValue')
             })
         })
+        /*导出报表*/
         local.find('[opt=exportexcel]').click(function(){
-            require(['commonfuncs/popwin/win','text!views/pension/ReportXls.htm','views/pension/ReportXls'],
+            require(['commonfuncs/popwin/win','text!views/pension/PPGrantMoneyIssueXls.htm','views/pension/PPGrantMoneyIssueXls'],
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'excel导出',
