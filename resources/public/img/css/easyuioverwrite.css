@@ -152,3 +152,10 @@ element.style {
     background: url('../../img/map_show.png') no-repeat left center;
     padding-left: 16px;
 }
+
+
+
+/****************/
+tr.datagrid-row.highGroupRow{
+    background-color:red;
+}

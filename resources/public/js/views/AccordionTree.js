@@ -68,6 +68,7 @@ define(function () {
             //默认打开页面
             require(['commonfuncs/TreeClickEvent'],function(TreeClickEvent){
                 var view=defaultPage;
+                view='pension.statisticsom'
                 if(view){
                     TreeClickEvent.ShowContent({
                         htmfile:'text!views/'+view.replace(/\./g,'/')+'.htm',
