@@ -3,8 +3,7 @@ define(function(){
     render:function(local,option){
       var localDataGrid=
           local.find('.easyui-datagrid-noauto').datagrid({
-            url:'datagrid_data1.json',
-            method:'get',
+            url:'/old/opstatistic',
             queryParams: {
               intelligentsp:null
             },
@@ -161,17 +160,20 @@ define(function(){
 
       
       local.find('button[opt=query]').bind('click',function(){
-        localDataGrid.datagrid('reload',{a:'b',c:'d'});
-        ieMaxRowHeight();
         var data={
           districtid:districtid.combotree('getValue'),
 
           timfun:'dd',starttime:'2014-01-01',endtime:'2016-01-01',
           gender:'1',
-          sj:'Y'
+          sj:'mm'
           
         }
-        $.post('/old/opstatistic',data)
+
+        localDataGrid.datagrid('reload',data);
+        ieMaxRowHeight();
+
+        
+//        $.post('/old/opstatistic',data)
       });
 
       
