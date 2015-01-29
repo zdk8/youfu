@@ -166,18 +166,19 @@ define(function(){
               })
           calculate(local);     //计算评估总分
           if(option.queryParams.actionType == "dealwith"){  //处理
+              var datas = eval('('+local.find('[opt=jsondata]').val()+')');
               showServicemgt(local)
               var aulevel = option.queryParams.record.aulevel;   //审核审批等级
               if(aulevel == "1" || aulevel == "4"){
-                  console.log("审核")
                   local.find('textarea[name=countyaudit]').attr("readonly","readonly");
                   RadioCssEnabel(local,"shenghe");
               }else if(aulevel == "2" || aulevel == "5"){
-                  console.log("审批")
                   local.find('textarea[name=streetreview]').attr("readonly","readonly");
                   RadioCssEnabel(local,"shengpi");
               }
               dealwithInfoFunc(local,option)   //审核审批方法
+              local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']').attr("checked","checked");
+              local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']+label').addClass("checked");
           }
 
 

@@ -7,10 +7,11 @@ define(function(){
             peopleinfodatarid.datagrid('reload');
         };
         peopleinfodatarid.datagrid({
-            url:"old/search-oldpeople",
+            url:"old/opstatistic",
             type:'post',
             queryParams:{
-
+                statistype:"dm",
+                districtid:"330424"
             },
             onLoadSuccess:function(data){
             }
@@ -26,7 +27,8 @@ define(function(){
             console.log(birth1val.datebox("getValue"))
             console.log(birth2val.datebox("getValue"))
             peopleinfodatarid.datagrid("load",{
-                dd:"1"
+                statistype:"dm",
+                districtid:"330424"
             })
         })
 

@@ -5,7 +5,6 @@
         <input type="hidden" name="age" opt="age">
         <input type="hidden" name="jja_id">
         <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
-            <!--<table class="formtable"  width="80%" style="margin: 0 auto;margin-top: 10px;" class="table_form">-->
             <tr>
                 <td class="formtdtext" style="width: 100px">行政区划</td>
                 <td colspan="3">
@@ -55,15 +54,12 @@
                                 editable:false,
                                 valueField:'id',
                                 textField:'text'">
-                    <!--<input class="easyui-combobox"
-                           opt="nation"
-                           name="nation"
-                           data-options=" loader: cj.getLoader('nation'), mode: 'remote', editable:false, valueField:'id', textField:'text' ">--> </td>
+                </td>
                 <td class="formtdtext">文化程度</td>
                 <td opt="culture">
-                    <input type="radio" name="culture" value="0">文盲
-                    <input type="radio" name="culture" value="1">略识字
-                    <input type="radio" name="culture" value="2">能读字,最高学历
+                    <input type="radio" name="culture" value="0"><label>文盲</label>
+                    <input type="radio" name="culture" value="1"><label>略识字</label>
+                    <input type="radio" name="culture" value="2"><label>能读字,最高学历</label>
                 </td>
             </tr>
             <tr>
@@ -74,42 +70,42 @@
                 </td>
                 <td class="formtdtext">婚姻状况</td>
                 <td opt="marriage">
-                    <input type="radio" name="marriage" value="0">未婚
-                    <input type="radio" name="marriage" value="1">已婚
-                    <input type="radio" name="marriage" value="2">丧偶
-                    <input type="radio" name="marriage" value="3">离婚
+                    <input type="radio" name="marriage" value="0"><label>未婚</label>
+                    <input type="radio" name="marriage" value="1"><label>已婚</label>
+                    <input type="radio" name="marriage" value="2"><label>丧偶</label>
+                    <input type="radio" name="marriage" value="3"><label>离婚</label>
                 </td>
             </tr>
             <tr>
 
                 <td class="formtdtext">居住</td>
                 <td colspan="3" opt="liveplace">
-                    <input type="radio" name="live" value="0">与子女同住
-                    <input type="radio" name="live" value="1">与亲友同住
-                    <input type="radio" name="live" value="2">与配偶同住
-                    <input type="radio" name="live" value="3">独居
+                    <input type="radio" name="live" value="0"><label>与子女同住</label>
+                    <input type="radio" name="live" value="1"><label>与亲友同住</label>
+                    <input type="radio" name="live" value="2"><label>与配偶同住</label>
+                    <input type="radio" name="live" value="3"><label>独居</label>
                 </td>
             </tr>
             <tr>
 
                 <td class="formtdtext">经济条件</td>
                 <td colspan="3" opt="hyfwjingji">
-                    <input type="radio" name="economy" value="0">低保 特困职工
-                    <input type="radio" name="economy" value="1">低保边缘户
-                    <input type="radio" name="economy" value="2">低收入
-                    <input type="radio" name="economy" value="3">无退休工资
-                    <input type="radio" name="economy" value="4">有退休工资
-                    <input type="radio" name="economy" value="5">特殊贡献
+                    <input type="radio" name="economy" value="0"><label>低保 特困职工</label>
+                    <input type="radio" name="economy" value="1"><label>低保边缘户</label>
+                    <input type="radio" name="economy" value="2"><label>低收入</label>
+                    <input type="radio" name="economy" value="3"><label>无退休工资</label>
+                    <input type="radio" name="economy" value="4"><label>有退休工资</label>
+                    <input type="radio" name="economy" value="5"><label>特殊贡献</label>
                 </td>
             </tr>
             <tr>
 
                 <td class="formtdtext">年龄</td>
                 <td colspan="3">
-                    <input type="radio" name="agerange" opt="a">80岁以下
-                    <input type="radio" name="agerange" opt="b">80-90岁
-                    <input type="radio" name="agerange" opt="c">90-100岁
-                    <input type="radio" name="agerange" opt="d">100岁以上
+                    <input type="radio" name="agerange" opt="a" value="0"><label>80岁以下</label>
+                    <input type="radio" name="agerange" opt="b" value="0"><label>80-90岁</label>
+                    <input type="radio" name="agerange" opt="c" value="0"><label>90-100岁</label>
+                    <input type="radio" name="agerange" opt="d" value="0"><label>100岁以上</label>
                 </td>
             </tr>
             <tr>

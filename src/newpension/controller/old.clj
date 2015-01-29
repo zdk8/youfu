@@ -629,7 +629,7 @@
 
 (defn dmstatis [params]
   (let[districtid (:districtid params)
-       length (count districtid)
+       length (if(=(count districtid)6) 9 12)
        ]
     (if (> (count districtid) 9)
       (str "SELECT s.districtid,s.opsum,dv.dvname FROM division dv,
@@ -643,7 +643,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid")
 (SELECT districtid,SUM(opsum) AS opsum FROM
 (SELECT d.dvcode AS districtid,0 opsum FROM division d WHERE d.dvhigh = '" districtid "'
 UNION ALL
-SELECT substr(districtid,0," length ") AS districtid ,COUNT(*) AS opsum FROM t_oldpeople WHERE substr(districtid,0," length ") = '" districtid "'  GROUP BY substr(districtid,0," length "))
+SELECT substr(districtid,0," length ") AS districtid ,COUNT(*) AS opsum FROM t_oldpeople WHERE districtid like '" districtid "%'  GROUP BY substr(districtid,0," length "))
 GROUP BY districtid) s
 WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
@@ -677,6 +677,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                     "xb"   (lxstatis params)
                     "sj" (xbstatis params))
        ]
+    (println statis-sql)
     (resp/json (db/get-results-bysql statis-sql))))
 
 

@@ -173,6 +173,27 @@ define(function(){
             }
         })
     }
+    /*详细信息*/
+    function showinfo(local,option){
+        var selectRadio = ":input[type=radio] + label";
+        local.find(selectRadio).each(function () {
+            if ($(this).prev()[0].checked){
+                $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
+            }
+        }).prev().hide();
+        local.find('[opt=hospital_table] input').attr("readonly","readonly");//表单不可编辑
+        local.find('[opt=hospital_table] textarea').attr("readonly","readonly");//表单不可编辑
+        var hospitalform = local.find("[opt=hospitalform]");     //住院补助
+        hospitalform.form("load",option.queryParams.data)        //填充表单
+        local.find('input[name=life_ability][type=radio][value='+option.queryParams.data.life_ability+']').attr("checked","checked");
+        local.find('input[name=life_ability][type=radio][value='+option.queryParams.data.life_ability+']+label').addClass("checked");
+        local.find('input[name=live_type][type=radio][value='+option.queryParams.data.live_type+']').attr("checked","checked");
+        local.find('input[name=live_type][type=radio][value='+option.queryParams.data.live_type+']+label').addClass("checked");
+        local.find('input[name=old_type][type=radio][value='+option.queryParams.data.old_type+']').attr("checked","checked");
+        local.find('input[name=old_type][type=radio][value='+option.queryParams.data.old_type+']+label').addClass("checked");
+        local.find('[opt=commit]').hide();
+        local.find('[opt=dealwith]').hide();
+    }
 
     /*住院补助处理*/
     function zybzdealwith(local,option){
