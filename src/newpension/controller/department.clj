@@ -184,6 +184,66 @@
 (defn server-file [file-name]
   (file-response (str "upload" File/separator file-name)))
 
+
+;;机构统计
+
+(defn depart-dmstatis [params]
+  (let[districtid (:districtid params)
+       length (if(=(count districtid)6) 9 12)
+       ]
+    (if (> (count districtid) 9)
+      (str "SELECT s.districtid,s.opsum,dv.dvname FROM division dv,
+(SELECT districtid,SUM(opsum) AS opsum FROM
+(SELECT d.dvcode AS districtid,0 opsum FROM division d WHERE d.dvcode = '" districtid "'
+UNION ALL
+SELECT districtid,COUNT(*) AS opsum FROM " t_oldpeopledep " WHERE districtid = '" districtid "' GROUP BY districtid )
+GROUP BY districtid) s
+WHERE s.districtid = dv.dvcode ORDER BY s.districtid")
+      (str "SELECT s.districtid,s.opsum,dv.dvname FROM division dv,
+(SELECT districtid,SUM(opsum) AS opsum FROM
+(SELECT d.dvcode AS districtid,0 opsum FROM division d WHERE d.dvhigh = '" districtid "'
+UNION ALL
+SELECT substr(districtid,0," length ") AS districtid ,COUNT(*) AS opsum FROM " t_oldpeopledep " WHERE districtid like '" districtid "%'  GROUP BY substr(districtid,0," length "))
+GROUP BY districtid) s
+WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
+
+(defn depart-xbstatis [params]
+  (let[districtid (:districtid params)
+       districtcond (if (> (count districtid) 0)  (str " and districtid LIKE '" districtid "%'"))
+       ]
+    (str "SELECT (case sex   when '1' then '男' when '0' then '女'  else '空'   END) AS sex,COUNT(*) AS opsum FROM " t_oldpeopledep "
+    WHERE 1=1 " districtcond "  GROUP BY sex")))
+
+
+(defn depart-sjstatis [params]
+  (let[districtid (:districtid params)
+       checkstatus (:checkstatus params)
+       field  (condp = checkstatus
+                "in"      "checkintime"
+                "out"      "checkouttime"
+                 "nowin"     "checkintime" )
+       checkcond  (if (= checkstatus "nowin") (str " and checkouttime is null"))
+       timfun      (:timfun params)
+       typetime   (:typetime params)
+       starttime   (:starttime params)
+       endtime    (:endtime params)]
+    (condp = timfun
+      "yyyy" (str "SELECT to_char(" field ",'yyyy') AS tname,count(*) AS tsum FROM " t_oldpeopledep " where districtid like '" districtid "%' " checkcond "  GROUP BY to_char(" field ",'yyyy') ORDER BY to_number(to_char(" field ",'yyyy')) ASC")
+      "Q"     (str "SELECT CONCAT('" typetime "-',to_char(" field ",'Q')) AS tname,count(*) AS tsum FROM " t_oldpeopledep " where  districtid  like '" districtid "%' " checkcond " and  to_char(" field ",'yyyy') = '" typetime "'  GROUP BY to_char(" field ",'Q') ORDER BY to_number(to_char(" field ",'Q')) ASC")
+      "mm"  (str "SELECT CONCAT('" typetime "-',to_char(" field ",'mm')) AS tname,count(*) AS tsum FROM " t_oldpeopledep " where  districtid  like '" districtid "%' " checkcond " and   to_char(" field ",'yyyy') = '" typetime "' GROUP BY to_char(" field ",'mm') ORDER BY to_number(to_char(" field ",'mm')) ASC")
+      "md"   (str "SELECT to_char(" field ",'yyyy-mm-dd') AS tname,count(*)  AS tsum  FROM " t_oldpeopledep " where  districtid  like '" districtid "%' " checkcond " and   to_char(" field ",'yyyy-mm') = '" typetime "'  GROUP BY to_char(" field ",'yyyy-mm-dd') ORDER BY to_date(to_char(" field ",'yyyy-mm-dd'),'yyyy-mm-dd') ASC")
+      "dd"    (str "SELECT to_char(" field ",'yyyy-mm-dd') AS tname,count(*) AS tsum  FROM " t_oldpeopledep " where  districtid  like '" districtid "%' " checkcond " and   " field " between to_date('" starttime "','yyyy-mm-dd') and to_date('" endtime "','yyyy-mm-dd')  GROUP BY to_char(" field ",'yyyy-mm-dd') ORDER BY to_date(to_char(" field ",'yyyy-mm-dd'),'yyyy-mm-dd') ASC")
+      )))
+(defn depart-statistic [request]
+  (let[params (:params request)
+       statistype (:statistype params)
+       departstatis-sql (condp = statistype
+                               "dm" (depart-dmstatis params)
+                               "sj"   (depart-sjstatis params)
+                               "xb" (depart-xbstatis params))]
+    ))
+
+
 (defn testfun [request]
   (println (l/local-now))
   (println  (c/to-long  (l/local-now)))

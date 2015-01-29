@@ -627,7 +627,7 @@
 
 ;;老人信息统计
 
-(defn dmstatis [params]
+(defn op-dmstatis [params]
   (let[districtid (:districtid params)
        length (if(=(count districtid)6) 9 12)
        ]
@@ -647,7 +647,7 @@ SELECT substr(districtid,0," length ") AS districtid ,COUNT(*) AS opsum FROM t_o
 GROUP BY districtid) s
 WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
-(defn lxstatis [params]
+(defn op-xbstatis [params]
   (let[districtid (:districtid params)
         districtcond (if (> (count districtid) 0)  (str " and districtid LIKE '" districtid "%'"))
         ]
@@ -655,7 +655,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     WHERE 1=1 " districtcond "  GROUP BY gender")))
 
 
-(defn xbstatis [params]
+(defn op-sjstatis [params]
   (let[districtid (:districtid params)
        timfun      (:timfun params)
        typetime   (:typetime params)
@@ -663,7 +663,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        endtime   (:endtime params)]
     (condp = timfun
       "yyyy" (str "SELECT to_char(OPERATOR_DATE,'yyyy') AS tname,count(*) AS tsum FROM t_oldpeople where districtid like '" districtid "%' GROUP BY to_char(OPERATOR_DATE,'yyyy') ORDER BY to_number(to_char(OPERATOR_DATE,'yyyy')) ASC")
-      "Q"     (str "FROM t_oldpeople where  districtid  like '" districtid "%' and  to_char(OPERATOR_DATE,'yyyy') = '" typetime "'  GROUP BY to_char(OPERATOR_DATE,'Q') ORDER BY to_number(to_char(OPERATOR_DATE,'Q')) ASC")
+      "Q"     (str "SELECT CONCAT('" typetime "-',to_char(OPERATOR_DATE,'Q')) AS tname,count(*) AS tsum FROM t_oldpeople where  districtid  like '" districtid "%' and  to_char(OPERATOR_DATE,'yyyy') = '" typetime "'  GROUP BY to_char(OPERATOR_DATE,'Q') ORDER BY to_number(to_char(OPERATOR_DATE,'Q')) ASC")
       "mm"  (str "SELECT CONCAT('" typetime "-',to_char(OPERATOR_DATE,'mm')) AS tname,count(*) AS tsum FROM t_oldpeople where  districtid  like '" districtid "%' and   to_char(OPERATOR_DATE,'yyyy') = '" typetime "' GROUP BY to_char(OPERATOR_DATE,'mm') ORDER BY to_number(to_char(OPERATOR_DATE,'mm')) ASC")
       "md"   (str "SELECT to_char(OPERATOR_DATE,'yyyy-mm-dd') AS tname,count(*)  AS tsum  FROM t_oldpeople where  districtid  like '" districtid "%' and   to_char(OPERATOR_DATE,'yyyy-mm') = '" typetime "'  GROUP BY to_char(OPERATOR_DATE,'yyyy-mm-dd') ORDER BY to_date(to_char(OPERATOR_DATE,'yyyy-mm-dd'),'yyyy-mm-dd') ASC")
       "dd"    (str "SELECT to_char(OPERATOR_DATE,'yyyy-mm-dd') AS tname,count(*) AS tsum  FROM t_oldpeople where  districtid  like '" districtid "%' and   OPERATOR_DATE between to_date('" starttime "','yyyy-mm-dd') and to_date('" endtime "','yyyy-mm-dd')  GROUP BY to_char(OPERATOR_DATE,'yyyy-mm-dd') ORDER BY to_date(to_char(OPERATOR_DATE,'yyyy-mm-dd'),'yyyy-mm-dd') ASC")
@@ -672,12 +672,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 (defn opstatistic [request]
   (let[params (:params request)
        statistype (:statistype params)
-       statis-sql (condp = statistype
-                    "dm" (dmstatis params)
-                    "xb"   (lxstatis params)
-                    "sj" (xbstatis params))
+       opstatis-sql (condp = statistype
+                    "dm" (op-dmstatis params)
+                    "sj"   (op-sjstatis params)
+                    "xb" (op-xbstatis params))
        ]
-    (println statis-sql)
-    (resp/json (db/get-results-bysql statis-sql))))
+    (println opstatis-sql)
+    (resp/json (db/get-results-bysql opstatis-sql))))
 
 
