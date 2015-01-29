@@ -696,7 +696,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        starttimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE >= to_date('" starttime "','yyyy-mm-dd') ")  )
        endtimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE <= to_date('" endtime "','yyyy-mm-dd') " ) )
        districtidcond (if (> (count starttime) 0) (str " and districtid like '" districtid "%' ")  )
-       gendercond (if (> (count starttime) 0 ) (str " and gender = '" districtid "' ") )
+       gendercond (if (> (count starttime) 0 ) (str " and gender = '" gender "' ") )
        tjconds (str starttimecond endtimecond  districtidcond gendercond )
        sjgroup (condp = sj
                      "Y"      (str " to_char(OPERATOR_DATE,'yyyy') ")
@@ -710,7 +710,10 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                       12   " districtid "
                       nil))
         xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)
-        opstatissql (str " select " sjgroup " as operator ," dqgroup " as districtid, " xbgroup " as gender,count(*) as opsum from " t_oldpeople " where 1=1 " starttimecond endtimecond districtidcond gendercond)]
+        groups (str (if sjgroup (str sjgroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")))
+        groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups))))
+        opstatissql (str " select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup "null") " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum from " t_oldpeople " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith)]
+    (println "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (db/get-results-bysql opstatissql))))
 
 
