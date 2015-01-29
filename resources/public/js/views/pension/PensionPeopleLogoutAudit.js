@@ -1,4 +1,4 @@
-define(function(){
+define(['views/pension/PensionServiceAss'],function(psafile){
     return {
         render:function(local,option){
             var localDataGrid;
@@ -24,11 +24,31 @@ define(function(){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
                                         if($(this).attr("action")=='view'){
-                                            var title = "【"+record.name+'】服务申请详细信息'
+                                            var title = "【"+record.messagebrief.
+                                                substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'】服务评估详细信息'
                                             if($("#tabs").tabs('getTab',title)){
                                                 $("#tabs").tabs('select',title)
                                             }else{
-                                                getapplybyidFunc({jja_id:record.bstablepk,title:title,record:record,aulevel:record.aulevel})
+//                                                getapplybyidFunc({jja_id:record.bstablepk,title:title,record:record,aulevel:record.aulevel})
+                                                $("#tabs").tabs('add', {
+                                                    title: title,
+                                                    href: 'getPensionServiceAssHtml?jja_id='+record.bstablepk,
+                                                    closable: true
+                                                })
+                                                var timer = window.setInterval(function () {
+                                                    var local=$("#tabs").tabs('getTab',title)
+                                                    if (local && local.find('[opt=info1_table]').length) {
+                                                        window.clearInterval(timer);
+                                                        psafile.render(local,{queryParams:{
+                                                            title:title,
+                                                            data:record,
+                                                            refresh:refreshGrid,
+                                                            actionType:"view"
+                                                        }});
+                                                    }else{
+                                                        console.log('oops....info1_table is not ready ')
+                                                    }
+                                                }, 200);
                                             }
                                         }else if($(this).attr("action")=='dealwith'){         //注销处理
                                             var title = "【"+record.messagebrief.

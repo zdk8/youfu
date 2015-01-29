@@ -220,7 +220,6 @@ define(function(){
         local.find('[opt=dealwith]').hide()
         local.find('[opt=save]').hide()
         local.find('[opt=commit]').hide()
-        console.log(11)
     }
     return {
       render:function(local,option){
@@ -239,11 +238,6 @@ define(function(){
           var isfirst = true;
           /*为每个label注册收缩事件*/
           local.find('legend').find('label').each(function(obj,fn,arg){
-              /*var labelopt = fn.attributes[0].value.toString()
-              var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));*/
-              /*if(label_talbe != "info0" && label_talbe != "result3"){
-                  //FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
-              }*/
           }).click(function(e){
                   var labelopt = $(this)[0].attributes[0].value.toString();
                   var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
@@ -307,14 +301,22 @@ define(function(){
           //hide_fieldset.show();
           calculate(local);     //计算评估总分
           if(option.queryParams.actionType == "assessment"){      //评估
+              var datas = eval('('+local.find('[opt=jsondata]').val()+')');
               assessmentFunc(local,option);
               getDepartName(local);     //加载服务机构
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划
               showServicemgt(local)     //显示机构
+              local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']').attr("checked","checked");
+              local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']+label').addClass("checked");
           }else if(option.queryParams.actionType == "view"){  //查看详细信息
+              var datas = eval('('+local.find('[opt=jsondata]').val()+')');
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划
               viewInfoFunc(local,option)
               showServicemgt(local)     //显示机构
+              if(datas.assesstype){
+                  local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']').attr("checked","checked");
+                  local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']+label').addClass("checked");
+              }
           }
       }
   }

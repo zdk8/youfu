@@ -560,6 +560,66 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid con
     (str "true")))
 
 
+;;居家养老统计
+
+(defn jjyl-dmstatis [params]
+  (let[districtid (:districtid params)
+       length (if(=(count districtid)6) 9 12)
+       ]
+    (if (> (count districtid) 9)
+      (str "SELECT s.districtid,s.opsum,dv.dvname FROM division dv,
+(SELECT districtid,SUM(opsum) AS opsum FROM
+(SELECT d.dvcode AS districtid,0 opsum FROM division d WHERE d.dvcode = '" districtid "'
+UNION ALL
+SELECT districtid,COUNT(*) AS opsum FROM " t_jjylapply " WHERE districtid = '" districtid "' GROUP BY districtid )
+GROUP BY districtid) s
+WHERE s.districtid = dv.dvcode ORDER BY s.districtid")
+      (str "SELECT s.districtid,s.opsum,dv.dvname FROM division dv,
+(SELECT districtid,SUM(opsum) AS opsum FROM
+(SELECT d.dvcode AS districtid,0 opsum FROM division d WHERE d.dvhigh = '" districtid "'
+UNION ALL
+SELECT substr(districtid,0," length ") AS districtid ,COUNT(*) AS opsum FROM " t_jjylapply " WHERE districtid like '" districtid "%'  GROUP BY substr(districtid,0," length "))
+GROUP BY districtid) s
+WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
+
+(defn jjyl-xbstatis [params]
+  (let[districtid (:districtid params)
+       districtcond (if (> (count districtid) 0)  (str " and districtid LIKE '" districtid "%'"))
+       ]
+    (str "SELECT (case gender   when '1' then '男' when '0' then '女'  else '空'   END) AS sex,COUNT(*) AS opsum FROM " t_jjylapply "
+    WHERE 1=1 " districtcond "  GROUP BY gender")))
+
+
+(defn jjyl-sjstatis [params]
+  (let[districtid (:districtid params)
+       ishandle (:ishandle params)
+       field  (condp = ishandle
+                 "y"      "audittime"
+                 "n"      "rm_audittime"
+                           "applydate" )
+       ishandlecond  (if (> (count ishandle) 0)  (str " and ishandle = '" ishandle "'"))
+       timfun      (:timfun params)
+       typetime   (:typetime params)
+       starttime   (:starttime params)
+       endtime    (:endtime params)]
+    (condp = timfun
+      "yyyy" (str "SELECT to_char(" field ",'yyyy') AS tname,count(*) AS tsum FROM " t_jjylapply " where districtid like '" districtid "%' " ishandlecond " GROUP BY to_char(" field ",'yyyy') ORDER BY to_number(to_char(" field ",'yyyy')) ASC")
+      "Q"     (str "SELECT CONCAT('" typetime "-',to_char(" field ",'Q')) AS tname,count(*) AS tsum FROM " t_jjylapply " where  districtid  like '" districtid "%' " ishandlecond " and  to_char(" field ",'yyyy') = '" typetime "'  GROUP BY to_char(" field ",'Q') ORDER BY to_number(to_char(" field ",'Q')) ASC")
+      "mm"  (str "SELECT CONCAT('" typetime "-',to_char(" field ",'mm')) AS tname,count(*) AS tsum FROM " t_jjylapply " where  districtid  like '" districtid "%' " ishandlecond " and   to_char(" field ",'yyyy') = '" typetime "' GROUP BY to_char(" field ",'mm') ORDER BY to_number(to_char(" field ",'mm')) ASC")
+      "md"   (str "SELECT to_char(" field ",'yyyy-mm-dd') AS tname,count(*)  AS tsum  FROM " t_jjylapply " where  districtid  like '" districtid "%' " ishandlecond " and   to_char(" field ",'yyyy-mm') = '" typetime "'  GROUP BY to_char(" field ",'yyyy-mm-dd') ORDER BY to_date(to_char(" field ",'yyyy-mm-dd'),'yyyy-mm-dd') ASC")
+      "dd"    (str "SELECT to_char(" field ",'yyyy-mm-dd') AS tname,count(*) AS tsum  FROM " t_jjylapply " where  districtid  like '" districtid "%' " ishandlecond " and   " field " between to_date('" starttime "','yyyy-mm-dd') and to_date('" endtime "','yyyy-mm-dd')  GROUP BY to_char(" field ",'yyyy-mm-dd') ORDER BY to_date(to_char(" field ",'yyyy-mm-dd'),'yyyy-mm-dd') ASC")
+      )))
+
+(defn jjyl-statistic [request]
+  (let[params (:params request)
+       statistype (:statistype params)
+       jjlystatis-sql (condp = statistype
+                        "dm" (jjyl-dmstatis params)
+                        "sj"   (jjyl-sjstatis params)
+                        "xb" (jjyl-xbstatis params))]
+    (resp/json (db/get-results-bysql jjlystatis-sql))))
+
+
 
 (defn testtime [request]
   (resp/json (:max(first(db/get-hsmaxid)))))

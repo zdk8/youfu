@@ -16,6 +16,36 @@ define(function(){
             }
         });
     };
+    /*为radio添加样式*/
+    var addRadioCss = function(local) {
+        var selectRadio = ":input[type=radio] + label";
+        local.find(selectRadio).each(function () {
+            if ($(this).prev()[0].checked){
+                $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
+            }
+        }).click(function () {               //为第个元素注册点击事件
+                var s = $($(this).prev()[0]).attr('name')
+                if(s == "agerange"){
+                    console.log("不操作")
+                }else{
+                    s = ":input[name=" + s + "]+label"
+                    var isChecked=$(this).prev()[0].checked;
+                    local.find(s).each(function (i) {
+                        $(this).prev()[0].checked = false;
+                        $(this).removeClass("checked");
+                        $($(this).prev()[0]).removeAttr("checked");
+                    });
+                    if(isChecked){
+                        //如果单选已经为选中状态,则什么都不做
+                    }else{
+                        $(this).prev()[0].checked = true;
+                        $(this).addClass("checked");
+                        $($(this).prev()[0]).attr("checked","checked");
+                    }
+                }
+            })
+            .prev().hide();     //原来的圆点样式设置为不可见
+    }
     var getCheckBox=function(w,enumtype,name,record) {
         $.ajax({
             url: 'getenumbytype',
@@ -62,7 +92,6 @@ define(function(){
     function baseRender(local,record){
         addToolBar(local);
         var districtid = local.find('[opt=districtid]');      //行政区划值
-        var districtname = local.find('[opt=districtname]');  //行政区划名称
         getdivision(districtid);                   //加载行政区划
         /*根据身份证获取基本信息*/
         getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
@@ -122,12 +151,16 @@ define(function(){
             var age=age;
             if(age<80){
                 local.find('[opt=a][name=agerange]').attr("checked",'true');
+                local.find('[opt=a][name=agerange]+label').addClass("checked");
             }else if(age>=80 && age<90){
                 local.find('[opt=b][name=agerange]').attr("checked",'true');
+                local.find('[opt=a][name=agerange]+label').addClass("checked");
             }else if(age>=90 && age<100){
                 local.find('[opt=c][name=agerange]').attr("checked",'true');
+                local.find('[opt=a][name=agerange]+label').addClass("checked");
             }else{
                 local.find('[opt=d][name=agerange]').attr("checked",'true');
+                local.find('[opt=a][name=agerange]+label').addClass("checked");
             }
             local.find('[opt=tip_age]').text(age+'岁');
         }
@@ -148,8 +181,9 @@ define(function(){
     }
     /*新增*/
     function addInfo(local,option){
-        local.find('[opt=update]').hide()
-        local.find('[opt=change]').hide()
+        addRadioCss(local);
+        local.find('[opt=update]').hide();
+        local.find('[opt=change]').hide();
         var districtid = local.find('[opt=districtid]');      //行政区划值
         /*保存*/
         local.find('[opt=save]').show().bind('click',function(){
@@ -180,13 +214,23 @@ define(function(){
     }
     /*修改*/
     function showinfo(local,option){
+        addRadioCss(local);
         baseRender(local, option.queryParams.data);
         var districtid = local.find('[opt=districtid]');      //行政区划值
         local.find('form').form('load', option.queryParams.data);
         var districtnameval = getDivistionTotalname(option.queryParams.data.districtid)
         districtid.combotree("setValue",districtnameval)  //填充行政区划
-        local.find('[opt=save]').hide()
-        local.find('[opt=change]').hide()
+        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']').attr("checked","checked");
+        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']+label').addClass("checked");
+        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']').attr("checked","checked");
+        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']+label').addClass("checked");
+        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']').attr("checked","checked");
+        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']+label').addClass("checked");
+        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']').attr("checked","checked");
+        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']+label').addClass("checked");
+
+        local.find('[opt=save]').hide();
+        local.find('[opt=change]').hide();
         /*修改*/
         local.find('[opt=update]').show().bind('click',function(){
             local.find('[opt=pensionform]').form('submit', {
@@ -226,10 +270,19 @@ define(function(){
     }
     /*变更人员信息*/
     function changeInfo(local,option){
+        addRadioCss(local);
         baseRender(local, option.queryParams.data);
-        local.find('form').form('load',option.queryParams.data)
-        var districtidval = option.queryParams.data.districtid
-        local.find('[opt=districtid]').combotree("setValue",getDivistionTotalname(districtidval))
+        local.find('form').form('load',option.queryParams.data);
+        var districtidval = option.queryParams.data.districtid;
+        local.find('[opt=districtid]').combotree("setValue",getDivistionTotalname(districtidval));
+        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']').attr("checked","checked");
+        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']+label').addClass("checked");
+        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']').attr("checked","checked");
+        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']+label').addClass("checked");
+        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']').attr("checked","checked");
+        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']+label').addClass("checked");
+        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']').attr("checked","checked");
+        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']+label').addClass("checked");
         local.find('[opt=save]').hide()
         local.find('[opt=update]').hide();
         /*变更*/
@@ -288,7 +341,7 @@ define(function(){
                     break;
             }
         }else{
-            addInfo(l, o);
+            addInfo(l, o);            //新增态
         }
     }
     return {

@@ -24,13 +24,14 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
                                         if($(this).attr("action")=='view'){
-                                            var title = "【"+record.name+'】服务申请详细信息'
+                                            var title = "【"+record.messagebrief.
+                                                substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'】住院补助细信息'
                                             if($("#tabs").tabs('getTab',title)){
                                                 $("#tabs").tabs('select',title)
                                             }else{
-                                                $("#tabs").tabs('add', {
+                                                /*$("#tabs").tabs('add', {
                                                     title: title,
-                                                    href: 'getPensionServiceAssHtml?jja_id='+record.jja_id,
+                                                    href: 'getPensionServiceAssHtml?jja_id='+record.bstablepk,
                                                     closable: true
                                                 })
                                                 var timer = window.setInterval(function () {
@@ -39,14 +40,38 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                                                         window.clearInterval(timer);
                                                         psafile.render(local,{queryParams:{
                                                             title:title,
-                                                            data:data,
+                                                            data:record,
                                                             refresh:refreshGrid,
                                                             actionType:"view"
                                                         }});
                                                     }else{
                                                         console.log('oops....info1_table is not ready ')
                                                     }
-                                                }, 200);
+                                                }, 200);*/
+                                                $.ajax({
+                                                    url:"audit/gethsdatabyid",
+                                                    data:{
+                                                        hs_id:record.bstablepk
+                                                    },
+                                                    type:"post",
+                                                    dataType:"json",
+                                                    success:function(data){
+                                                        if(data){
+                                                            cj.showContent({                                          //详细信息(tab标签)
+                                                                title:title,
+                                                                htmfile:'text!views/pension/HospitalSubsidy.htm',
+                                                                jsfile:'views/pension/HospitalSubsidy',
+                                                                queryParams:{
+                                                                    actiontype:'info',         //（处理）操作方式
+                                                                    record:record,
+                                                                    data:data[0],
+                                                                    title:title,
+                                                                    refresh:refreshGrid
+                                                                }
+                                                            })
+                                                        }
+                                                    }
+                                                })
                                             }
                                         }else if($(this).attr("action")=='zybzdealwith'){               //住院补助处理
                                             var title = "【"+record.messagebrief.
