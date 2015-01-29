@@ -157,5 +157,6 @@ element.style {
 
 /****************/
 tr.datagrid-row.highGroupRow{
-    background-color:red;
+    background-color:#E0ECFF;
+    color:green;
 }

@@ -15,15 +15,26 @@ define(function(){
                 var btns_arr=[detailbtns,xueyangbtns,trendgbtns];
                 var rows=data.rows;
 
+                var fields=[];
+                if(local.find('input[name=diqu]:checked').val()>0){
+                  fields.push('itemid');
+                }
+
+                if(local.find('input[name=date]:checked').val()>0){
+                  console.log('>>>>>>>>>>>>>>>>');
+                  fields.push('productid');
+                }
+
                 var myGroups=(function(a){
                   var b=[];
                   for(var i in a){
                     b.push({g:{name:rows[0][a[i]],len:0,start:0},field:a[i]})
                   }
                   return b;
-                })(['productid','itemid']);
+                })(fields);
 
                 var dg=$(this);
+                
                 var doGroupMerge=function(g,i,field){
                   if(g.name==rows[i][field]){
                     g.len++;
@@ -56,12 +67,16 @@ define(function(){
                   //分组
 
 
-//                  doGroupMerge(prevgroup,i,'productid');
+                  //                  doGroupMerge(prevgroup,i,'productid');
 
                   for(var j in myGroups){
                     doGroupMerge(myGroups[j].g,i,myGroups[j].field);      
                   }
-              
+                  //
+
+
+                  //console.log(local.find('.datagrid-body>table tr').eq(i).css({color:'red',height:'50px'}));
+                  
                   /*
                    if(prevgroup.name==rows[i].productid){
 
@@ -96,25 +111,25 @@ define(function(){
                 var table=local.find('.datagrid-body>table');
                 var currentTR=table.find('tr').eq(index);
                 var myfirsttd=function(p,i){
-                  pppp=p;
-                  if(p.find('td').eq(0).is(':hidden') ||  i>=0){
+                  if(p.find('td').eq(0).is(':hidden') &&  i>=0){
                     return myfirsttd(p.prev(),--i);
                   }else{
                     return p;
                   }
                 };
 
+                
                 var myrowsaction=function(r,i){
                   if(i==0)return;
                   $(r).addClass('highGroupRow');
-                  myrowsaction(r.prev(),--i);
+                  myrowsaction(r.next(),--i);
                 }
-                var len=$(myfirsttd(currentTR,index)).find('td').eq(0).attr('rowspan');
+                var mygroupfirstrow=$(myfirsttd(currentTR,index));
+                var len=mygroupfirstrow.find('td').eq(0).attr('rowspan')||1;
 
                 console.log(len);
-
                 table.find('tr').removeClass('highGroupRow');
-                myrowsaction(currentTR,len)
+                myrowsaction(mygroupfirstrow,len);
 
               },
               toolbar:local.find('div[tb]')
@@ -128,9 +143,40 @@ define(function(){
 
 
 
+
+      var ieMaxRowHeight=function(){
+
+        //window.setInterval
+        var count=0;
+        var timer=window.setInterval(function(){
+          var f=local.find('.datagrid-body>table tr').css({height:'25px'});
+          if(count++>20){
+            window.clearInterval(timer);
+          }
+        },100);
+        
+      }
+
+      ieMaxRowHeight();
       var districtid = local.find('[opt=districtid]');      //行政区划值
       getdivision(districtid);
 
+      
+      local.find('button[opt=query]').bind('click',function(){
+        localDataGrid.datagrid('reload',{a:'b',c:'d'});
+        ieMaxRowHeight();
+      });
+
+
+      //清除所有条件
+      local.find('[opt=clear]').bind('click',function(){
+        local.find('[opt=districtid]').combotree('clear');
+        local.find('[opt=sex]').combobox('clear');
+        local.find('[opt=date1]').datebox('setValue','');
+        local.find('[opt=date2]').datebox('setValue','');
+        
+
+      })
     }
 
   }
