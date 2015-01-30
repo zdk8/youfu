@@ -712,7 +712,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
         xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)
         groups (str (if sjgroup (str sjgroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")))
         groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups))))
-        opstatissql (str " select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup "null") " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum from " t_oldpeople " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith)]
+        opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup "null") " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum
+                                from " t_oldpeople " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
     (println "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (db/get-results-bysql opstatissql))))
 
