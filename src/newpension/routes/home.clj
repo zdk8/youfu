@@ -205,6 +205,7 @@
 
   (POST "/audit/sendmoney" request (audit/sendmoney request))                                                         ;;资金发放
   (POST "/audit/resendmoney" request (audit/resendmoney request))                                                  ;;重新发放
+  (GET "/audit/getmoneyreport" request (audit/get-moneyreport request))
 
 
   ;(POST "/old/opstatistic" request (old/opstatistic request))                                                                  ;;老人信息统计

@@ -621,10 +621,48 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 
 
+(def  chance ["jja_id" ",MONTHSUBSIDY AS " ",0 AS "])
+
+
+
 (defn testtime [request]
   (resp/json (:max(first(db/get-hsmaxid)))))
 
+(defn get-monthsql [num month ]
+  (println num month)
+  (let[msql (loop [cnt (count month) acc (conj [](chance 0))]
+              (if (zero? cnt)
+                acc
+                (recur (dec cnt)
+                  (if (= cnt  num)(conj  acc (chance 1) (str "a" (get month (dec cnt))))(conj  acc (chance 2)(str "a" (get month (dec cnt)))) ))))]
+    msql ))
 
+(defn unionsql [month ym]
+  (let [usql (interpose " union all " (loop [cnt (count month) acc []]
+                                        (if(zero? cnt)
+                                          acc
+                                          (recur (dec cnt)
+                                            (conj acc
+                                              (str "(SELECT "
+                                                (apply str (get-monthsql cnt month))
+                                                " FROM T_DOLEMONEY  WHERE  bsnyue = '"
+                                                (get ym (dec cnt))
+                                                "')"))))))]
+    usql))
+
+(defn get-moneyreport [request]
+  (let[f ["一月" "二月" "三月" "四月"]
+       sf ["01" "02" "03" "04"]
+       year "2015"
+       ym (vec(map #(str year %)sf))
+       col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
+       get-mreportsql (apply str (unionsql sf ym))
+       get-moneysql (str "select jja_id," col "from (" get-mreportsql ") group by jja_id")
+       get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress, s.*,jm.servicetime,jm.assesstype from ( " get-moneysql ") s, (select j.jja_id,j.name,j.identityid,j.address,a.servicername,a.servicephone,a.serviceaddress,a.servicetime,a.assesstype from t_jjylapply j
+                          left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime,t.assesstype from t_jjylassessment t
+                                                 left join t_depservice ds on t.s_id = ds.s_id) a  on j.jja_id = a.jja_id) jm
+                           where s.jja_id = jm.jja_id" )]
+    (resp/json (db/get-results-bysql get-resultsql))))
 
 
 
