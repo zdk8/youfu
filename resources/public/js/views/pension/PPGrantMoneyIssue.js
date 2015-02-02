@@ -168,6 +168,7 @@ define(function(){
                                 parent.trigger('close');
                             }},{text:'导出',handler:function(html,parent){
 //                                parent.trigger('close');
+
                                 window.location.href="report-xls-post?year="+parent.find('[opt=yearvalue]').val()+
                                                         "&months="+parent.find('[opt=monthvalue]').val()+
                                                         "&nums="+parent.find('[opt=monthvaluenum]').val();
@@ -181,6 +182,9 @@ define(function(){
                                     type:"get",
                                     success:function(data){
                                         if(data == "true"){
+                                            window.location.href="report-xls-post?year="+parent.find('[opt=yearvalue]').val()+
+                                            "&months="+parent.find('[opt=monthvalue]').val()+
+                                            "&nums="+parent.find('[opt=monthvaluenum]').val();
                                             cj.slideShow("导出成功")
                                         }else{
                                             cj.slideShow('<label style="color: red">导出失败</label>')

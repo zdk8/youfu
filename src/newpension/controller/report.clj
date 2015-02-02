@@ -133,19 +133,20 @@
        :headers {"Content-Type" "text/html"}
        :body (.getMessage ex)})))
 ;;;;;;;;;;;;;;;;;;;; 导出资金发放报表(月)
-(defn xls-report-wb [months datas out]
-  (.write (ReportXlsByMoths/getReport months datas) out))
+(defn xls-report-wb [year months datas out]
+  (.write (ReportXlsByMoths/getReport year months datas) out))
+(defn xls-report-wb-null [year months out]
+  (.write (ReportXlsByMoths/getReportNull year months) out))
 (defn xls-report-by-java [request]
   (try
     (let [reportxls (new ReportXlsByMoths)
           params (:params request)
           months (:months params)         ;月份
+          year (:year params)             ;年份
           out (new java.io.ByteArrayOutputStream)
           datas (audit/get-moneyreport request)
           ]
-      (println "EEEEEEEEEEE" datas)
-;      (.getDatas ReportXlsByMoths  (into-array datas))
-      (xls-report-wb months (into-array datas) out)
+      (if (>(count datas)0)(xls-report-wb year months (into-array datas) out) (xls-report-wb-null year months out))
       (write-response (.toByteArray out) "xls")
       )
     (catch Exception ex
