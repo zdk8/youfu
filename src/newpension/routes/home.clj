@@ -235,4 +235,7 @@
   (GET "/report-xls/:report-type" [report-type] (report/generate-report-xls report-type))
   ;;/report-xls/my-test1   调用的是java
   ;;/report-xls/my-test2   调用的是clj-excel.core
+  (GET "/report-xls" req (report/xls-report-by-java req))
+  (POST "/report-xls-post1" req (report/xls-report-by-java req))
+  (GET "/report-xls-post" req (report/xls-report-by-java req))
   )
