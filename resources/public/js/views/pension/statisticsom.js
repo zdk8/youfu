@@ -1,6 +1,7 @@
 define(function(){
   var a={
     render:function(local,option){
+       dd = local;
       var localDataGrid=
           local.find('.easyui-datagrid-noauto').datagrid({
             url:'/old/opstatistic',
@@ -19,10 +20,10 @@ define(function(){
                 fields.push('itemid');
               }
 
-              if(local.find('input[name=date]:checked').val()>0){
-                console.log('>>>>>>>>>>>>>>>>');
-                fields.push('productid');
-              }
+//              if(local.find('input[name=date]:checked').val()>0){
+//                console.log('>>>>>>>>>>>>>>>>');
+//                fields.push('productid');
+//              }
 
               var myGroups=(function(a){
                 var b=[];
@@ -163,9 +164,12 @@ define(function(){
         var data={
           districtid:districtid.combotree('getValue'),
 
-          timfun:'dd',starttime:'2014-01-01',endtime:'2016-01-01',
-          gender:'1',
-          sj:'mm'
+          starttime:$('input[opt=date1]').datebox('getValue'),
+          endtime:$('input[opt=date2]').datebox('getValue'),
+          gender:$('[opt=sex]').combobox('getValue'),
+          sj:$('input[name=date]:checked').val(),
+          dq:$('input[name=diqu]:checked').val(),
+          xb:$('input[name=sex]:checked').val()
           
         }
 
