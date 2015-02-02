@@ -273,13 +273,13 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                                  6   (str " substr(districtid,0,9) ")
                                  9   (str " substr(districtid,0,12) ")
                                  12   " substr(districtid,0,12)  "
-                                 " substr(districtid,0,6)  "))
+                                 nil))
 
        xbgroup (if (= xb "xb") (str " (case sex   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)                   ;性别分组
        lxgroup  (if (= lx "lx") (str " (case type   when '2' then '农村五保' when '3' then '城镇三无' when '4' then '其他'  else '空'   END) ") nil)
        groups (str (if sjgroup (str sjgroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ","))(if lxgroup (str lxgroup ",")))                            ;组合分组
        groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
-       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup (if (= (count groups) 0) (str " substr(districtid,0,6) ") (if (>(count districtid)0) districtid "330424") )) " as districtid, " (if xbgroup xbgroup "null") " as gender," (if lxgroup lxgroup "null") " as type,count(*) as opsum
+       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup "null") " as gender," (if lxgroup lxgroup "null") " as type,count(*) as opsum
                                 from " t_oldpeopledep " where 1=1 " tjconds " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
     (println "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (db/get-results-bysql opstatissql))))
