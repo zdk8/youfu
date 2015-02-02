@@ -11,6 +11,7 @@
                [clj-time.local :as l]
                [clj-time.coerce :as c]
                [noir.io :as io]
+               [clojure.string :as str]
                [clojure.data.json :as json]
                [newpension.layout :as layout]))
 
@@ -706,9 +707,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     usql))
 
 (defn get-moneyreport [request]
-  (let[f ["一月" "二月" "三月" "四月"]
-       sf ["01" "02" "03" "04"]
-       year "2015"
+  (let[params (:params request)
+       months (:months params)
+       nums (:nums params)
+       f (str/split months #",")
+       sf (str/split nums #",")
+       year (:year params)
        ym (vec(map #(str year %)sf))
        col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
        get-mreportsql (apply str (unionsql sf ym))
@@ -717,7 +721,9 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                           left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime,t.assesstype from t_jjylassessment t
                                                  left join t_depservice ds on t.s_id = ds.s_id) a  on j.jja_id = a.jja_id) jm
                            where s.jja_id = jm.jja_id" )]
-    (resp/json (db/get-results-bysql get-resultsql))))
+    (println f sf year)
+    (println get-resultsql)
+    (db/get-results-bysql get-resultsql)))
 
 
 

@@ -2,7 +2,7 @@
   (:use clojure.java.io)
   (:import [clojure.lang Keyword APersistentMap])
   (:import java.util.Date)
-  ;;(:import [org.apache.poi.xssf.usermodel XSSFWorkbook])ç”±äºä¸‹è½½jarä¸åˆ°,æš‚åœä½¿ç”¨
+  ;;(:import [org.apache.poi.xssf.usermodel XSSFWorkbook])ÓÉÓÚÏÂÔØjar²»µ½,ÔİÍ£Ê¹ÓÃ
   (:import [org.apache.poi.hssf.usermodel HSSFWorkbook])
   (:import [org.apache.poi.ss.usermodel Row Cell DateUtil
             ;;WorkbookFactory
@@ -174,7 +174,7 @@
 
 (defn ^Workbook workbook-xssf
   "Create or open new excel workbook. Defaults to xlsx format."
-  ;;([] (new XSSFWorkbook)) ç”±äºä¸‹è½½poi-ooxmlåŠä¾èµ–jarä¸åˆ°çš„åŸå› ,æš‚åœä½¿ç”¨XSSFWorkbook,ç”±HSSFWorkbookä»£æ›¿
+  ;;([] (new XSSFWorkbook)) ÓÉÓÚÏÂÔØpoi-ooxml¼°ÒÀÀµjar²»µ½µÄÔ­Òò,ÔİÍ£Ê¹ÓÃXSSFWorkbook,ÓÉHSSFWorkbook´úÌæ
   ([] (new HSSFWorkbook))
   ([input ] (new HSSFWorkbook (input-stream input)))
   ;;([input] (WorkbookFactory/create (input-stream input)))

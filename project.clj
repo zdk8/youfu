@@ -14,13 +14,13 @@
                  [noir-exception "0.2.2"]
                  [com.oracle/ojdbc6 "11.2.0.3"]
                  [korma "0.3.1"]
-                 ;;[clj-pdf "1.11.21"] clj-pdf依赖以下三个jar包
+                 ;;[clj-pdf "1.11.21"] clj-pdf依赖以下三个jar�?
                  [org.jfree/jfreechart "1.0.15"]
                  [com.lowagie/itext "4.2.1"]
                  [org.apache.xmlgraphics/batik-gvt "1.7"]
 
                  [org.apache.poi/poi "3.9"]
-                 ;;[org.apache.poi/poi-ooxml "3.9"]  由于下载poi-ooxml及依赖jar不到的原因,暂停使用(在clj-excel.core)
+                 ;;[org.apache.poi/poi-ooxml "3.9"]  由于下载poi-ooxml及依赖jar不到的原�?暂停使用(在clj-excel.core)
                  [hvitmiddleware "0.1.6"]]
 
   :repl-options {:init-ns newpension.repl}
@@ -44,7 +44,7 @@
   :repositories [
                   ["java.net" "http://download.java.net/maven/2"]
                   ["nexus" "https://code.lds.org/nexus/content/groups/main-repo"]
-                  ["mymvn" "http://www.mvnrepository.com/artifact"]
+                 ;; ["mymvn" "http://www.mvnrepository.com/artifact"]
                   ["sonatype" {:url "http://oss.sonatype.org/content/repositories/releases"
                                ;; If a repository contains releases only setting
                                ;; :snapshots to false will speed up dependencies.
@@ -62,5 +62,5 @@
                                :releases {:checksum :fail :update :always}}]
 
                   ]
-  :java-source-paths ["src/newpension/java" ]
+  :java-source-paths ["src/newpension/javaxls"]
   :min-lein-version "2.0.0")

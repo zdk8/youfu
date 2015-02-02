@@ -4,9 +4,12 @@
             [ring.util.response :as response]
             [clj-pdf.core :refer [pdf template]]
             [clj-excel.core :as myexcel]
+            [newpension.controller.audit :as audit]
             [newpension.controller.zhfont :as zhfont]
             )
-  (:import [newpension.java XlsReport])
+  (:import [newpension.javaxls XlsReport]
+           [newpension.javaxls ReportXlsByMoths]
+           )
 
   )
 
@@ -71,13 +74,32 @@
 
 (defn xls-report-java [out]
   (.write (XlsReport/getReport) out))
+(defn a-cell-value [name]
+  {:value name
+   :alignment :center
+;   :comment {:text "Lorem Ipsum" :width 4 :height 2}          ;提示框
+   :border [:none :thin :dashed :thin]
+   :foreground-color :grey-25-percent :pattern :solid-foreground
+   :font {:color :red :underline :single :italic true
+          :size 12 :font "Arial"}
+   :rows 2
+   }
+  )
 (defn xls-report-clj [out]
-  (-> (myexcel/build-workbook (myexcel/workbook-hssf) {"Numbers"
-                                                       [(vec '(1 2 3 4))
-                                                        (vec (range 10))
-                                                        (vec (range 10 100 5))
+  (-> (myexcel/build-workbook (myexcel/workbook-hssf) {"资金发放表"
+                                                       [
+;                                                         (vec '("乡镇街道" "姓名" "身份证" "家庭住址"))
+;                                                        (vec (range 10))
+;                                                        (vec (range 10 100 5))
+                                                         [(a-cell-value "乡镇街道") (a-cell-value "姓名")
+                                                          (a-cell-value "身份证") (a-cell-value "家庭住址")
+                                                          ]
+                                                         [
+                                                          "武原街道" "朱介民" "330424192707120013" "百可社区"
+                                                          ]
                                                         ]
-                                                       })
+                                                       }
+        )
     (myexcel/save out)))
 
 
@@ -90,7 +112,10 @@
 
       (response/header "Content-Disposition" (str "filename=document." ext-name))
       (response/header "Content-Length" (count report-bytes))
-      (response/content-type (str "application/" ext-name))) ))
+      (response/content-type (str "application/" ext-name))
+      )
+    )
+  )
 
 
 
@@ -107,14 +132,37 @@
       {:status 500
        :headers {"Content-Type" "text/html"}
        :body (.getMessage ex)})))
+;;;;;;;;;;;;;;;;;;;; 导出资金发放报表(月)
+(defn xls-report-wb [months datas out]
+  (.write (ReportXlsByMoths/getReport months datas) out))
+(defn xls-report-by-java [request]
+  (try
+    (let [reportxls (new ReportXlsByMoths)
+          params (:params request)
+          months (:months params)         ;月份
+          out (new java.io.ByteArrayOutputStream)
+          datas (audit/get-moneyreport request)
+          ]
+      (println "EEEEEEEEEEE" datas)
+;      (.getDatas ReportXlsByMoths  (into-array datas))
+      (xls-report-wb months (into-array datas) out)
+      (write-response (.toByteArray out) "xls")
+      )
+    (catch Exception ex
+      {:status 500
+       :headers {"Content-Type" "text/html"}
+       :body (.getMessage ex)}))
+  )
 
 (defn generate-report-xls [report-type]
   (try
     (let [out (new java.io.ByteArrayOutputStream)]
       (condp = (keyword report-type)
         :my-test1 (xls-report-java out)
+        :my-java (xls-report-by-java out)
         :my-test2  (xls-report-clj out))
-      (write-response (.toByteArray out) "xls"))
+      (write-response (.toByteArray out) "xls")
+      )
 
     (catch Exception ex
       {:status 500

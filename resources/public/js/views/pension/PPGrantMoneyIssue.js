@@ -168,7 +168,25 @@ define(function(){
                                 parent.trigger('close');
                             }},{text:'导出',handler:function(html,parent){
 //                                parent.trigger('close');
-                                console.log(111)
+                                window.location.href="report-xls-post?year="+parent.find('[opt=yearvalue]').val()+
+                                                        "&months="+parent.find('[opt=monthvalue]').val()+
+                                                        "&nums="+parent.find('[opt=monthvaluenum]').val();
+                                /*$.ajax({
+                                    url:"report-xls-post",
+                                    data:{
+                                        year:parent.find('[opt=yearvalue]').val(),
+                                        months:parent.find('[opt=monthvalue]').val(),
+                                        nums:parent.find('[opt=monthvaluenum]').val()
+                                    },
+                                    type:"get",
+                                    success:function(data){
+                                        if(data == "true"){
+                                            cj.slideShow("导出成功")
+                                        }else{
+                                            cj.slideShow('<label style="color: red">导出失败</label>')
+                                        }
+                                    }
+                                })*/
                             }}
                         ],
                         renderHtml:function(local,submitbtn,parent){
