@@ -619,6 +619,61 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                         "xb" (jjyl-xbstatis params))]
     (resp/json (db/get-results-bysql jjlystatis-sql))))
 
+(defn jjyl-statistic2 [request]
+  (let[params (:params request)
+       datetp (:datetype params)
+       datetype (if (= (count datetp) 0)  "APPLYDATE" datetp)
+       starttime (:starttime params)
+       endtime (:endtime params)
+       districtid (:districtid params)
+       gender (:gender params)
+       dlength (count districtid)
+       sj (:sj params)
+       dq (:dq params)
+       xb (:xb params)
+       starttimecond   (if (> (count starttime) 0) (str " and " datetype " >= to_date('" starttime "','yyyy-mm-dd') ")  )
+       endtimecond   (if (> (count endtime) 0) (str " and " datetype " <= to_date('" endtime "','yyyy-mm-dd') " ) )
+       districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
+       gendercond (if (> (count gender) 0 ) (str " and gender = '" gender "' ") )
+       tjconds (str starttimecond endtimecond  districtidcond gendercond )            ;分组查询条件
+       sjgroup (condp = sj                                                                                    ;时间分组
+                 "Y"      (str " to_char(" datetype ",'yyyy') ")
+                 "Q"      (str " CONCAT(to_char(" datetype ",'yyyy'),to_char(" datetype ",'Q')) ")
+                 "M"     (str " CONCAT(to_char(" datetype ",'yyyy'),to_char(" datetype ",'mm')) ")
+                 "D"       (str " to_char(" datetype ",'yyyy-mm-dd') ")
+                 nil       )
+       dqgroup (if (= dq "dq") (condp = dlength                                                   ;地区分组
+                                 6   (str " substr(districtid,0,9) ")
+                                 9   (str " substr(districtid,0,12) ")
+                                 12   " substr(districtid,0,12)  "
+                                 " substr(districtid,0,6)  "))
+
+       xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)                   ;性别分组
+       groups (str (if sjgroup (str sjgroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")))                            ;组合分组
+       groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
+       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup (if (= (count groups) 0) (str " substr(districtid,0,6) ") (if (>(count districtid)0) districtid "330424") )) " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum
+                                from " t_jjylapply " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
+    (println "SSSSSSSSSSSSSS" opstatissql)
+    (resp/json (db/get-results-bysql opstatissql))))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 (def  chance ["jja_id" ",MONTHSUBSIDY AS " ",0 AS "])

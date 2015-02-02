@@ -209,11 +209,13 @@
 
 
   ;(POST "/old/opstatistic" request (old/opstatistic request))                                                                  ;;老人信息统计
-  (POST "/audit/jjylstatistic" request (audit/jjyl-statistic request))                                                             ;;居家养老统计
-  (POST "/depart/departstatistic" request (depart/depart-statistic request))                                                ;;机构统计分析
+  ;(POST "/audit/jjylstatistic" request (audit/jjyl-statistic request))                                                             ;;居家养老统计
+ ; (POST "/depart/departstatistic" request (depart/depart-statistic request))                                                ;;机构统计分析
 
 
  (POST "/old/opstatistic" request (old/opstatistic2 request))                                                                  ;;老人信息统计2
+  (POST "/audit/jjylstatistic" request (audit/jjyl-statistic2 request))                                                             ;;居家养老统计2
+  (POST "/depart/departstatistic" request (depart/depart-statistic2 request))                                                ;;机构统计分析2
 
  ; (GET "/test/testtime" request (audit/testtime request))
 

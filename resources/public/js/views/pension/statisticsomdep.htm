@@ -1,0 +1,98 @@
+    <table class="easyui-datagrid-noauto"
+           data-options="
+                   method:'post',
+                   fit:true,
+                   border:false,
+                   rownumbers:!true,
+                   fitColumns:true,
+                  pageSize:cj.getDataGridAttr('pageSize'),
+                   pageList:cj.getDataGridAttr('pageList'),
+                   singleSelect:true,
+                   pagination:true">
+        <thead>
+        <tr>
+          <th data-options="field:'operator',width:80,align:'right'">时间</th>
+          <th data-options="field:'dvname',width:100">地区</th>
+            <th data-options="field:'type',width:80">类型</th>
+            <th data-options="field:'gender',width:80">性别</th>
+            <th data-options="field:'opsum',width:80,align:'right'">人数</th>
+        </tr>
+        </thead>
+    </table>
+
+    <div tb style="border-bottom:1px solid blue;background-color:#eef1f8;">
+        <table cellspacing="0" cellpadding="0" style="float: left">
+            <tr>
+
+                <td><label class="gray7" style="background-color: rgb(181, 171, 171);">搜索条件:</label></td>
+                <td>
+                    时间类型：
+                    <input style="width: 100px;" class="easyui-combobox" opt="datetype"
+                           data-options=" valueField: 'value', textField: 'label', data: [{ label: '入住时间', value: 'CHECKINTIME' },{ label: '离开时间', value: 'CHECKOUTTIME' }]"/>
+                </td>
+                <td style="width: 270px;border:1">
+                    时间：
+                    <input class="easyui-datebox" style="width:100px" opt="date1">
+                    -
+                    <input class="easyui-datebox" style="width:100px" opt="date2">
+                </td>
+
+                <td>
+                    地区：
+                    <input style="width: 150px;" opt="districtid">
+
+                </td>
+                <td>
+                    类型：
+                    <input style="width: 100px;" class="easyui-combobox" opt="type"
+                           data-options=" valueField: 'value', textField: 'label', data: [{ label: '农村五保', value: '2' },{ label: '城镇三无', value: '3' },{ label: '其他', value: '4' }]"/>
+                </td>
+                <td>
+                    性别：
+                    <input style="width: 100px;" class="easyui-combobox" opt="sex"
+                           data-options=" valueField: 'value', textField: 'label', data: [{ label: '男', value: '1' },{ label: '女', value: '0' }]"/>
+                </td>
+
+
+                <td>
+                    <button opt="clear">清空条件</button>
+
+                </td>
+            </tr>
+            <tr ><td colspan="5" style="height:5px;"></td></tr>
+            <tr>
+
+                <td><label class="gray7" style="background-color: rgb(181, 171, 171);">分组条件:</label></td>
+
+                <td >
+                    <input type="radio" name="date" value="Y">年份
+                    <input type="radio" name="date"  value="M">月份
+                    <input type="radio"  name="date" value="D">天
+                    <input type="radio"  name="date" value="">不分组
+                </td>
+                <td></td>
+                <td>
+                    <input type="radio"  name="diqu" value="dq">分组
+                    <input type="radio"  name="diqu" value="">不分组
+
+                </td>
+                <td>
+                    <input type="radio"  name="sex" value="xb">分组
+                    <input type="radio"  name="sex" value="">不分组
+
+                </td>
+                <td>
+                    <input type="radio"  name="leixing" value="lx">分组
+                    <input type="radio"  name="leixing" value="">不分组
+
+                </td>
+                <td>
+                    <button opt="query" >查询</button>
+
+                </td>
+
+            </tr>
+
+        </table>
+        <div class="clear"></div>
+    </div>

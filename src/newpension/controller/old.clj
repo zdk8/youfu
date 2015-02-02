@@ -693,6 +693,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
         sj (:sj params)
         dq (:dq params)
         xb (:xb params)
+        rows (:rows params)
+       page (:page params)
        starttimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE >= to_date('" starttime "','yyyy-mm-dd') ")  )
        endtimecond   (if (> (count endtime) 0) (str " and OPERATOR_DATE <= to_date('" endtime "','yyyy-mm-dd') " ) )
        districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
@@ -708,12 +710,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                       6   (str " substr(districtid,0,9) ")
                       9   (str " substr(districtid,0,12) ")
                       12   " substr(districtid,0,12)  "
-                            " substr(districtid,0,6)  "))
+                      nil))
 
         xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)                   ;性别分组
         groups (str (if sjgroup (str sjgroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")))                            ;组合分组
         groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
-        opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup (if (= (count groups) 0) (str " substr(districtid,0,6) ") "null" )) " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum
+        opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup (if (= (count groups) 0) (str " substr(districtid,0,6) ") (if (>(count districtid)0) districtid "330424") )) " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum
                                 from " t_oldpeople " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
     (println "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (db/get-results-bysql opstatissql))))

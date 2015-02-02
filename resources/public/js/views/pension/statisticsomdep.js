@@ -4,7 +4,7 @@ define(function(){
        dd = local;
       var localDataGrid=
           local.find('.easyui-datagrid-noauto').datagrid({
-            url:'old/opstatistic',
+            url:'depart/departstatistic',
             queryParams: {
               intelligentsp:null
             },
@@ -163,14 +163,15 @@ define(function(){
       local.find('button[opt=query]').bind('click',function(){
         var data={
           districtid:districtid.combotree('getValue'),
-
+          datetype:$('[opt=datetype]').combobox('getValue'),
           starttime:$('input[opt=date1]').datebox('getValue'),
           endtime:$('input[opt=date2]').datebox('getValue'),
           gender:$('[opt=sex]').combobox('getValue'),
+          type:$('[opt=type]').combobox('getValue'),
           sj:$('input[name=date]:checked').val(),
           dq:$('input[name=diqu]:checked').val(),
-          xb:$('input[name=sex]:checked').val()
-          
+          xb:$('input[name=sex]:checked').val(),
+          lx:$('input[name=leixing]:checked').val()
         }
 
         localDataGrid.datagrid('reload',data);
