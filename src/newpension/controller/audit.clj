@@ -647,12 +647,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                                  6   (str " substr(districtid,0,9) ")
                                  9   (str " substr(districtid,0,12) ")
                                  12   " substr(districtid,0,12)  "
-                                 " substr(districtid,0,6)  "))
+                                 nil))
 
        xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)                   ;性别分组
        groups (str (if sjgroup (str sjgroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")))                            ;组合分组
        groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
-       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup (if (= (count groups) 0) (str " substr(districtid,0,6) ") (if (>(count districtid)0) districtid "330424") )) " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum
+       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ,"(if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum
                                 from " t_jjylapply " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
     (println "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (db/get-results-bysql opstatissql))))
@@ -717,10 +717,17 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
        get-mreportsql (apply str (unionsql sf ym))
        get-moneysql (str "select jja_id," col "from (" get-mreportsql ") group by jja_id")
-       get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress, s.*,jm.servicetime,jm.assesstype from ( " get-moneysql ") s, (select j.jja_id,j.name,j.identityid,j.address,a.servicername,a.servicephone,a.serviceaddress,a.servicetime,a.assesstype from t_jjylapply j
-                          left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime,t.assesstype from t_jjylassessment t
-                                                 left join t_depservice ds on t.s_id = ds.s_id) a  on j.jja_id = a.jja_id) jm
-                           where s.jja_id = jm.jja_id" )]
+       get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress, s.*,jm.servicetime,jm.assesstype,h.subsidy_money  from ( " get-moneysql ") s
+                           left join  (select j.jja_id,j.name,j.identityid,j.address,a.servicername,a.servicephone,a.serviceaddress,a.servicetime,a.assesstype from t_jjylapply j
+                                         left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime,t.assesstype from t_jjylassessment t
+                                                 left join t_depservice ds on t.s_id = ds.s_id) a
+                                         on j.jja_id = a.jja_id) jm
+                           on s.jja_id = jm.jja_id
+                           left join (select * from t_hospitalsubsidy  where isprovide = 'y' ) h
+                           on s.jja_id = h.jja_id
+                           " )]
+    ;left join (SELECT * FROM T_HOSPITALSUBSIDY  WHERE ISPROVIDE = 'y' ) h
+    ;            on h.jja_id = jm.jja_id                            ,h.SUBSIDY_MONEY
     (println f sf year)
     (println get-resultsql)
     (db/get-results-bysql get-resultsql)))
