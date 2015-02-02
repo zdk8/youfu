@@ -182,7 +182,7 @@
   )
 
 (defn ^Workbook workbook-hssf
-  "Create or open new excel workbook. Defaults to xls format."
+  "Create or open new excel workbook. Defaults to xls format.(创建或打开新的Excel工作簿。缺省为XLS格式。)"
   ([] (new HSSFWorkbook))
   ([input ] (new HSSFWorkbook (input-stream input)))
   ;;([input] (WorkbookFactory/create (input-stream input)))
@@ -297,7 +297,7 @@
     (.setCellComment cell (create-comment cell comment))))
 
 (defn set-cell
-  "Set cell at specified location with value."
+  "Set cell at specified location with value.(设置单元格在指定位置的值)"
   ([cell value] (cell-mutator cell value))
   ([^Row row col value] (set-cell (or (get-cell row col) (.createCell row col)) value))
   ([^Sheet sheet row col value] (set-cell (or (.getRow sheet row) (.createRow sheet row)) col value)))
@@ -320,7 +320,7 @@
     (merge-rows sheet 0 rows)))
 
 (defn build-workbook
-  "Build workbook from map of sheet names to multi dimensional seqs (ie a seq of seq)."
+  "Build workbook from map of sheet names to multi dimensional seqs (ie a seq of seq)(从对应表名的map建立工作薄多位序列)."
   ([wb wb-map]
      (let [cache (caching-style-builder wb)]
        (doseq [[sheetname rows] wb-map]
