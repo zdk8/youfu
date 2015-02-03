@@ -684,9 +684,9 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 (defn testtime [request]
   (resp/json (:max(first(db/get-hsmaxid)))))
 
-(defn get-monthsql [num month fisrtkey]
+(defn get-monthsql [num month]
   (println num month)
-  (let[msql (loop [cnt (count month) acc (conj [] fisrtkey)]
+  (let[msql (loop [cnt (count month) acc (conj [] "jja_id")]
               (if (zero? cnt)
                 acc
                 (recur (dec cnt)
@@ -700,7 +700,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                                           (recur (dec cnt)
                                             (conj acc
                                               (str "(SELECT "
-                                                (apply str (get-monthsql cnt month "jja_id"))
+                                                (apply str (get-monthsql cnt month))
                                                 " FROM T_DOLEMONEY  WHERE  bsnyue = '"
                                                 (get ym (dec cnt))
                                                 "')"))))))]
@@ -733,9 +733,10 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 
 (defn get-yearmoneyreport [request]
+  (println "yeaer" request)
   (let[params (:params request)
        f ["一" "二" "三" "四" "五" "六" "七" "八" "九" "十" "十一" "十二"]
-       sf ["1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12"]
+       sf ["01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12"]
        year (:year params)
        ym (vec(map #(str year %)sf))
        col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
@@ -753,9 +754,9 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 	                        ON dv.dvcode = substr(jm.districtid,0,9)" )
        get-yearmrsql (str "SELECT dvname,count(*) as opsum,SUM(一) as 一,SUM(二) as 二,SUM(三) as 三,SUM(四) as 四,SUM(五) as 五,SUM(六) as 六,SUM(七) as 七,SUM(八) as 八,SUM(九) as 九,SUM(十) as 十,SUM(十一) as 十一,SUM(十二) as 十二,SUM(subsidy_money) AS subsidy_money FROM ("
                        get-resultsql ") GROUP BY dvname")]
-    (println f sf year)
     (println get-yearmrsql)
-    (db/get-results-bysql get-yearmrsql)))
+    (db/get-results-bysql get-yearmrsql)
+    ))
 
 
 
