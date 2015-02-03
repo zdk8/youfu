@@ -519,6 +519,10 @@
         condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
         qopsql (str "(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.MONTHSUBSIDY,a.SERVICETIME,a.HOSPITALSUBSIDY
 FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid " AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
+(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "')
+UNION ALL
+SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,0 AS MONTHSUBSIDY,'0' AS SERVICETIME,0 AS HOSPITALSUBSIDY
+FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'n' " condname  condid " AND to_char(RM_AUDITTIME,'yyyy')  = '" (subs ywq 0 4) "'  AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
 (SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "'))")
         getresult (common/fenye rows page qopsql "*" "" " order by JJA_ID desc ")]
    ; (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))
@@ -632,6 +636,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        sj (:sj params)
        dq (:dq params)
        xb (:xb params)
+       rows (:rows params)
+       page (:page params)
        starttimecond   (if (> (count starttime) 0) (str " and " datetype " >= to_date('" starttime "','yyyy-mm-dd') ")  )
        endtimecond   (if (> (count endtime) 0) (str " and " datetype " <= to_date('" endtime "','yyyy-mm-dd') " ) )
        districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
@@ -655,7 +661,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ,"(if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum
                                 from " t_jjylapply " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
     (println "SSSSSSSSSSSSSS" opstatissql)
-    (resp/json (db/get-results-bysql opstatissql))))
+    (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))))
 
 
 
@@ -715,6 +721,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        year (:year params)
        ym (vec(map #(str year %)sf))
        col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
+       sumcol (apply str (interpose "," (map #(str "sum(" % ") as " % " ") f)))
        get-mreportsql (apply str (unionsql sf ym))
        get-moneysql (str "select jja_id," col "from (" get-mreportsql ") group by jja_id")
        get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress, s.*,jm.servicetime,jm.assesstype,jm.districtid,h.subsidy_money,dv.dvname  from ( " get-moneysql ") s
@@ -726,10 +733,14 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                            left join (select * from t_hospitalsubsidy  where isprovide = 'y' ) h
                            on s.jja_id = h.jja_id
                            LEFT JOIN division dv
-	                        ON dv.dvcode = substr(jm.districtid,0,9)" )]
-    (println f sf year)
-    (println get-resultsql)
-    (db/get-results-bysql get-resultsql)))
+	                        ON dv.dvcode = substr(jm.districtid,0,9)" )
+       get-resultsumsql (str "SELECT * FROM("   get-resultsql " union all "
+                          "SELECT CONCAT('',count(*)) AS NAME,'' AS identityid,'' AS address,'' AS servicername,'' AS servicephone,'' AS serviceaddress,0 AS jja_id," sumcol ",'' AS servicetime,'' AS assesstype,'' AS districtid,SUM(subsidy_money) AS subsidy_money, CONCAT(dvname,'小计')AS dvname FROM ("
+                          get-resultsql ") GROUP BY dvname
+                          )ORDER BY dvname ASC")]
+    (println col f sf year sumcol)
+    (println get-resultsumsql)
+    (db/get-results-bysql get-resultsumsql)))
 
 
 (defn get-yearmoneyreport [request]

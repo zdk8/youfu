@@ -257,6 +257,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        dq (:dq params)
        xb (:xb params)
        lx (:lx params)
+       rows (:rows params)
+       page (:page params)
        starttimecond   (if (> (count starttime) 0) (str " and " datetype " >= to_date('" starttime "','yyyy-mm-dd') ")  )
        endtimecond   (if (> (count endtime) 0) (str " and " datetype " <= to_date('" endtime "','yyyy-mm-dd') " ) )
        districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
@@ -282,7 +284,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup "null") " as gender," (if lxgroup lxgroup "null") " as type,count(*) as opsum
                                 from " t_oldpeopledep " where 1=1 " tjconds " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
     (println "SSSSSSSSSSSSSS" opstatissql)
-    (resp/json (db/get-results-bysql opstatissql))))
+    (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))))
 
 
 

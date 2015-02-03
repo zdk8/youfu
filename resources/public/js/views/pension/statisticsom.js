@@ -160,7 +160,7 @@ define(function(){
       getdivision(districtid);
 
       
-      local.find('button[opt=query]').bind('click',function(){
+      local.find('[opt=query]').bind('click',function(){
         var data={
           districtid:districtid.combotree('getValue'),
 

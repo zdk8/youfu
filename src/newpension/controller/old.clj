@@ -718,6 +718,6 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
         opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if sjgroup sjgroup "null") " as operator ," (if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup "null") " as gender,count(*) as opsum
                                 from " t_oldpeople " where 1=1 " starttimecond endtimecond districtidcond gendercond " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
     (println "SSSSSSSSSSSSSS" opstatissql)
-    (resp/json (db/get-results-bysql opstatissql))))
+    (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))))
 
 
