@@ -184,9 +184,9 @@
           params (:params request)
           year (:year params)             ;年份
           out (new java.io.ByteArrayOutputStream)
-;          datas (audit/get-moneyreport request)
+          datas (audit/get-yearmoneyreport request)
           ]
-;      (if (>(count datas)0)(xls-report-summary year (into-array datas) out) (xls-report-summary-null year out))
+      (if (>(count datas)0)(xls-report-summary year (into-array datas) out) (xls-report-summary-null year out))
       (xls-report-summary-null year out)
       (write-response (.toByteArray out) "xls")
       )
