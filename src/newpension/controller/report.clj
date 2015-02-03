@@ -9,6 +9,7 @@
             )
   (:import [newpension.javaxls XlsReport]
            [newpension.javaxls ReportXlsByMoths]
+           [newpension.javaxls ReportXlsSummary]
            )
 
   )
@@ -132,35 +133,12 @@
       {:status 500
        :headers {"Content-Type" "text/html"}
        :body (.getMessage ex)})))
-;;;;;;;;;;;;;;;;;;;; 导出资金发放报表(月)
-(defn xls-report-wb [year months datas out]
-  (.write (ReportXlsByMoths/getReport year months datas) out))
-(defn xls-report-wb-null [year months out]
-  (.write (ReportXlsByMoths/getReportNull year months) out))
-(defn xls-report-by-java [request]
-  (try
-    (let [reportxls (new ReportXlsByMoths)
-          params (:params request)
-          months (:months params)         ;月份
-          year (:year params)             ;年份
-          out (new java.io.ByteArrayOutputStream)
-          datas (audit/get-moneyreport request)
-          ]
-      (if (>(count datas)0)(xls-report-wb year months (into-array datas) out) (xls-report-wb-null year months out))
-      (write-response (.toByteArray out) "xls")
-      )
-    (catch Exception ex
-      {:status 500
-       :headers {"Content-Type" "text/html"}
-       :body (.getMessage ex)}))
-  )
 
 (defn generate-report-xls [report-type]
   (try
     (let [out (new java.io.ByteArrayOutputStream)]
       (condp = (keyword report-type)
         :my-test1 (xls-report-java out)
-        :my-java (xls-report-by-java out)
         :my-test2  (xls-report-clj out))
       (write-response (.toByteArray out) "xls")
       )
@@ -169,4 +147,54 @@
       {:status 500
        :headers {"Content-Type" "text/html"}
        :body (.getMessage ex)})))
+
+
+;;;;;;;;;;;;;;;;;;;; 导出资金发放报表(月)
+(defn xls-report-months [year months datas out]
+  (.write (ReportXlsByMoths/getReport year months datas) out))
+(defn xls-report-months-null [year months out]
+  (.write (ReportXlsByMoths/getReportNull year months) out))
+(defn xls-report-by-months [request]
+  (try
+    (let [reportxls (new ReportXlsByMoths)
+          params (:params request)
+          months (:months params)         ;月份
+          year (:year params)             ;年份
+          out (new java.io.ByteArrayOutputStream)
+          datas (audit/get-moneyreport request)
+          ]
+      (if (>(count datas)0)(xls-report-months year months (into-array datas) out) (xls-report-months-null year months out))
+      (write-response (.toByteArray out) "xls")
+      )
+    (catch Exception ex
+      {:status 500
+       :headers {"Content-Type" "text/html"}
+       :body (.getMessage ex)}))
+  )
+;;汇总表
+(defn xls-report-summary [year datas out]
+  (.write (ReportXlsSummary/getReport year datas) out)
+  )
+(defn xls-report-summary-null [year out]
+  (.write (ReportXlsSummary/getReportNull year) out)
+  )
+(defn xls-report-by-summary [request]
+  (try
+    (let [reportxls (new ReportXlsByMoths)
+          params (:params request)
+          year (:year params)             ;年份
+          out (new java.io.ByteArrayOutputStream)
+;          datas (audit/get-moneyreport request)
+          ]
+;      (if (>(count datas)0)(xls-report-summary year (into-array datas) out) (xls-report-summary-null year out))
+      (xls-report-summary-null year out)
+      (write-response (.toByteArray out) "xls")
+      )
+    (catch Exception ex
+      {:status 500
+       :headers {"Content-Type" "text/html"}
+       :body (.getMessage ex)}))
+  )
+
+
 
