@@ -172,6 +172,19 @@ public class ReportXlsByMoths {
     }
     //表体值
     public void setValueXls(HSSFSheet sheet,HSSFWorkbook wb,String[] monthsarr,Map[] datas){
+        /*样式一*/
+        HSSFFont font = wb.createFont();  //字体
+        font.setFontHeightInPoints((short) 11);
+        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        HSSFCellStyle style_bold = wb.createCellStyle();
+        style_bold.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
+        style_bold.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        style_bold.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+        style_bold.setBorderTop(HSSFCellStyle.BORDER_THIN);
+        style_bold.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+        style_bold.setBorderRight(HSSFCellStyle.BORDER_THIN);
+        style_bold.setFont(font);
+        /*样式二*/
         HSSFCellStyle style = wb.createCellStyle();
         style.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
         style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
@@ -179,8 +192,51 @@ public class ReportXlsByMoths {
         style.setBorderTop(HSSFCellStyle.BORDER_THIN);
         style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
-        Map datasval = getDatas(datas);
-        int rowindex = 4;     //表体值从第4行开始
+
+        Map datasval = getDatas(datas);  //数据
+
+        HSSFRow row4 = sheet.createRow((int) 4);
+        sheet.addMergedRegion(new CellRangeAddress(4,4,0,3));
+        HSSFCell cell_heji = row4.createCell((short) 0);   //合计
+        cell_heji.setCellValue("合   计");
+        cell_heji.setCellStyle(style_bold);
+        row4.createCell((short) 1).setCellStyle(style_bold);
+        row4.createCell((short) 2).setCellStyle(style_bold);
+        row4.createCell((short) 3).setCellStyle(style_bold);
+        HSSFCell cell_renshu = row4.createCell((short) 4);   //人数
+        cell_renshu.setCellValue("人  数");
+        cell_renshu.setCellStyle(style_bold);
+        HSSFCell cell_renshu_val = row4.createCell((short) 5);   //人数val
+        cell_renshu_val.setCellValue(datasval.size());
+        cell_renshu_val.setCellStyle(style_bold);
+        sheet.addMergedRegion(new CellRangeAddress(4,4,6,10));
+        HSSFCell cell_jine = row4.createCell((short) 6);   //金额
+        cell_jine.setCellValue("金   额");
+        cell_jine.setCellStyle(style_bold);
+        row4.createCell((short) 7).setCellStyle(style_bold);
+        row4.createCell((short) 8).setCellStyle(style_bold);
+        row4.createCell((short) 9).setCellStyle(style_bold);
+        row4.createCell((short) 10).setCellStyle(style_bold);
+        for (int i=0;i<datasval.size();i++){
+            Map dataval = (Map)datasval.get(i);
+            /*月份值*/
+            if (monthsarr.length>0){
+                String month;
+                for (int m=0;m<monthsarr.length;m++){
+                    month = ":"+monthsarr[m];
+//                    System.out.println("月份值:一月:"+dataval.get(":一"));
+                    /*HSSFCell cell_yuefen = row4.createCell((short) 11+m);
+                    String month = ":"+monthsarr[m];
+                    cell_yuefen.setCellValue(dataval.get(month).toString());
+                    cell_yuefen.setCellStyle(style);*/
+                }
+                System.out.println("月:"+monthsarr);
+//                System.out.println("月份值:一月:"+dataval.get(":一"));
+            }
+        }
+
+
+        int rowindex = 5;     //表体值从第4行开始
         for (int i=0;i<datasval.size();i++){
             HSSFRow rownum = sheet.createRow((int) rowindex++);
             Map dataval = (Map)datasval.get(i);
@@ -309,7 +365,7 @@ public class ReportXlsByMoths {
     public static void main(String args[]) throws Exception{
         ReportXlsByMoths cetd = new ReportXlsByMoths();
 //        String[] arr = {"?","??","??","??","??","??"};
-        String arr = "一,二,三";
+        String arr = "一,二,三,四";
 //        String arr = "";
 //        cetd.getMonths(arr);
 
@@ -319,7 +375,7 @@ public class ReportXlsByMoths {
         System.out.println(cetd.getMonths());
         try {
             FileOutputStream fout = new FileOutputStream("C:\\Users\\Administrator\\Downloads\\"+new Date().getTime()+".xls");
-            getReport(arr,"2015",maptest).write(fout);
+            getReport("2015",arr,maptest).write(fout);
 //            getReport(arr);  //д??
             fout.close();
         }catch (Exception e){

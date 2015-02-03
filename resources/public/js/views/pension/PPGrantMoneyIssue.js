@@ -168,29 +168,9 @@ define(function(){
                                 parent.trigger('close');
                             }},{text:'导出',handler:function(html,parent){
 //                                parent.trigger('close');
-
-                                window.location.href="report-xls-post?year="+parent.find('[opt=yearvalue]').val()+
+                                window.location.href="report-xls-months?year="+parent.find('[opt=yearvalue]').val()+
                                                         "&months="+parent.find('[opt=monthvalue]').val()+
                                                         "&nums="+parent.find('[opt=monthvaluenum]').val();
-                                /*$.ajax({
-                                    url:"report-xls-post",
-                                    data:{
-                                        year:parent.find('[opt=yearvalue]').val(),
-                                        months:parent.find('[opt=monthvalue]').val(),
-                                        nums:parent.find('[opt=monthvaluenum]').val()
-                                    },
-                                    type:"get",
-                                    success:function(data){
-                                        if(data == "true"){
-                                            window.location.href="report-xls-post?year="+parent.find('[opt=yearvalue]').val()+
-                                            "&months="+parent.find('[opt=monthvalue]').val()+
-                                            "&nums="+parent.find('[opt=monthvaluenum]').val();
-                                            cj.slideShow("导出成功")
-                                        }else{
-                                            cj.slideShow('<label style="color: red">导出失败</label>')
-                                        }
-                                    }
-                                })*/
                             }}
                         ],
                         renderHtml:function(local,submitbtn,parent){
@@ -208,17 +188,39 @@ define(function(){
                     })
                 }
             )
-//            window.location.href= "report-xls/my-test2";
-            /*$.ajax({
-                url:"report-xls/my-test2",
-                type:"get",
-                data:{
-
-                },
-                onLoadSuccess:function(data){
-                    console.log(11)
+        })
+        /*导出汇总表*/
+        local.find('[opt=exportexcel_summary]').click(function(){
+            require(['commonfuncs/popwin/win','text!views/pension/PPGrantMoneyIssueXls.htm','views/pension/PPGrantMoneyIssueXls'],
+                function(win,htmfile,jsfile){
+                    win.render({
+                        title:'excel导出',
+                        width:700,
+                        height:375,
+                        html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},{text:'导出',handler:function(html,parent){
+//                                parent.trigger('close');
+                                window.location.href="report-xls-summary?year="+parent.find('[opt=yearvalue]').val();
+                            }}
+                        ],
+                        renderHtml:function(local,submitbtn,parent){
+                            jsfile.render(local,{
+                                submitbtn:submitbtn,
+                                act:'c',
+                                parent:parent,
+//                                refresh:refresh,         //刷新按钮
+                                actiontype:'add',       //操作方式
+                                onCreateSuccess:function(data){
+                                    parent.trigger('close');
+                                }
+                            })
+                        }
+                    })
                 }
-            })*/
+            )
         })
     }
 
