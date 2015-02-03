@@ -7,6 +7,7 @@ define(function(){
         var monthvalue = local.find('[opt=monthvalue]');
         var monthvaluenum = local.find('[opt=monthvaluenum]');
         var isfirst = true
+        /*月份改变事件*/
         month1.change(function(){
             month2[0].length = 1; //清空选择月份2
             if(isfirst){
@@ -32,7 +33,6 @@ define(function(){
                     monthvalue.val("")
                     monthvaluenum.val("")
                 }
-//                isfirst = true;
             }
         })
         month2.change(function(){
@@ -46,6 +46,19 @@ define(function(){
             monthvalue.val(str.toString())
             monthvaluenum.val(strnum.toString())
         })
+        /*年*/
+        var yearvalue = local.find("[opt=yearvalue]");
+        yearvalue.val(new Date().getFullYear());
+        local.find('[opt=yeardel]').click(function () {
+            var year=yearvalue.val();
+            year=Number(year)-1;
+            yearvalue.val(year);
+        });
+        local.find('[opt=yearadd]').click(function(){
+            var year=yearvalue.val();
+            year=Number(year)+1;
+            yearvalue.val(year);
+        });
     }
 
 

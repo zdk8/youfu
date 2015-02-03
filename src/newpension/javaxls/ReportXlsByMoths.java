@@ -26,12 +26,12 @@ public class ReportXlsByMoths {
         return mapall;
     }
     /*设置表头*/
-    public void setHeadXls(HSSFSheet sheet,HSSFWorkbook wb,String[] monthsarr,String title){
+    public void setHeadXls(HSSFSheet sheet,HSSFWorkbook wb,String[] monthsarr,String year,String title){
         Calendar date=Calendar.getInstance();
         HSSFRow row = sheet.createRow((int) 0);  //创建第0行
         HSSFCell cell = row.createCell((short) 0);//创建单元格0
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 12+monthsarr.length));//合并列
-        cell.setCellValue("海盐县"+date.get(Calendar.YEAR)+"年"+title+"居家养老政府购买服务资金下拔清单");//标题
+        cell.setCellValue("海盐县"+year+"年"+title+"居家养老政府购买服务资金下拔清单");//标题
 
         HSSFFont font = wb.createFont();  //字体
         font.setFontHeightInPoints((short) 16);
@@ -179,10 +179,8 @@ public class ReportXlsByMoths {
         style.setBorderTop(HSSFCellStyle.BORDER_THIN);
         style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
-
         Map datasval = getDatas(datas);
         int rowindex = 4;     //表体值从第4行开始
-
         for (int i=0;i<datasval.size();i++){
             HSSFRow rownum = sheet.createRow((int) rowindex++);
             Map dataval = (Map)datasval.get(i);
@@ -251,7 +249,7 @@ public class ReportXlsByMoths {
         }
     }
     /*xls导出报表*/
-    public static Workbook getReport(String months,Map[] datas) throws Exception{
+    public static Workbook getReport(String year,String months,Map[] datas) throws Exception{
         String[] monthsarr = {};//存放月份数组
         System.out.println("数组:"+monthsarr);
         String title = "xx月";
@@ -265,9 +263,28 @@ public class ReportXlsByMoths {
         HSSFWorkbook wb = new HSSFWorkbook();
         // 创建一个sheet
         HSSFSheet sheet = wb.createSheet(title);
-        mainclass.setHeadXls(sheet,wb,monthsarr,title);   //表头
+        mainclass.setHeadXls(sheet,wb,monthsarr,year,title);   //表头
         mainclass.setBodyXls(sheet,wb,monthsarr);   //表体
         mainclass.setValueXls(sheet,wb,monthsarr,datas);   //值
+        return wb;
+    }
+    /*xls导出空报表*/
+    public static Workbook getReportNull(String year,String months) throws Exception{
+        String[] monthsarr = {};//存放月份数组
+        System.out.println("数组:"+monthsarr);
+        String title = "xx月";
+        ReportXlsByMoths mainclass = new ReportXlsByMoths();
+        Map<String,Integer> map = mainclass.getMonths();
+        if (months.length()>0){
+            monthsarr = months.split(",");
+            title = map.get(monthsarr[0])+"-"+map.get(monthsarr[monthsarr.length-1])+"月";
+        }
+        // 创建webbook的Excel工作薄
+        HSSFWorkbook wb = new HSSFWorkbook();
+        // 创建一个sheet
+        HSSFSheet sheet = wb.createSheet(title);
+        mainclass.setHeadXls(sheet,wb,monthsarr,year,title);   //表头
+        mainclass.setBodyXls(sheet,wb,monthsarr);   //表体
         return wb;
     }
 
@@ -292,17 +309,17 @@ public class ReportXlsByMoths {
     public static void main(String args[]) throws Exception{
         ReportXlsByMoths cetd = new ReportXlsByMoths();
 //        String[] arr = {"?","??","??","??","??","??"};
-        String arr = "?,??,??,??,??,??,??,??,??,?,??,???";
+        String arr = "一,二,三";
 //        String arr = "";
 //        cetd.getMonths(arr);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
         System.out.println(new Date().getTime());
-        Map maptest = new HashMap();
+        Map[] maptest = new HashMap[]{};
         System.out.println(cetd.getMonths());
         try {
             FileOutputStream fout = new FileOutputStream("C:\\Users\\Administrator\\Downloads\\"+new Date().getTime()+".xls");
-//            getReport(arr).write(fout);  //д??
+            getReport(arr,"2015",maptest).write(fout);
 //            getReport(arr);  //д??
             fout.close();
         }catch (Exception e){
