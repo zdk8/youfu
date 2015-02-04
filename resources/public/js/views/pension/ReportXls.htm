@@ -1,5 +1,48 @@
 <!--导出xls报表-->
-<table opt="ppgrantmoneyissue"
+<div>
+    <select opt="tabchange">
+        <option value="0">汇总表</option>
+        <option value="1">月份表</option>
+    </select>
+    <span style="float: right">
+        <input type="hidden" size="30" opt="monthvaluenum">
+        <input type="hidden" size="30" opt="monthvalue">
+        <span>
+            <label style="color: #0099FF">年份 :</label>
+            <a href="javascript:void(0)" opt="yeardel">< <</a>
+            <input opt="yearvalue" size="5" style="text-align: center">年
+            <a href="javascript:void(0)" opt="yearadd">> ></a>
+        </span>
+        <span opt="month_span" style="display: none">
+            <label style="color: #0099FF">月份 :</label>
+            <select opt="month1">
+                <option value="none">选择月份...</option>
+                <option value="1">一</option>
+                <option value="2">二</option>
+                <option value="3">三</option>
+                <option value="4">四</option>
+                <option value="5">五</option>
+                <option value="6">六</option>
+                <option value="7">七</option>
+                <option value="8">八</option>
+                <option value="9">九</option>
+                <option value="10">十</option>
+                <option value="11">十一</option>
+                <option value="12">十二</option>
+            </select>月--
+            <select opt="month2">
+                <option value="none">选择月份...</option>
+            </select>月
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="highcharstoolbarbutton" type="button" opt="query" value="查询">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="highcharstoolbarbutton" type="button" opt="exportexcel" value="导出Excel">
+        &nbsp;&nbsp;
+    </span>
+</div>
+<div opt="reportmonths" style="width: 100%;height: 95%;position: absolute">
+    <table opt="reportmonthstab"
        data-options="
                method:'post',
                fit:true,
@@ -11,105 +54,74 @@
                singleSelect:true,
                loadMsg:'',
                pagination:true">
-    <thead data-options="frozen:true">
-    <tr>
-        <th rowspan="2" data-options="field:'bsnyue'">业务期</th>
-        <th rowspan="2" data-options="field:'name',width:50">
-            姓名
-        </th>
-        <th rowspan="2" data-options="field:'identityid',width:170">身份证号码</th>
-        <th rowspan="2" data-options="field:'monthsubsidy',width:60">每月补助<br>(/元)</th>
-        <th rowspan="2" data-options="field:'subsidy_money',width:60">住院补助<br>(/元)</th>
-        <th rowspan="2" data-options="field:'servicetime',width:60">服务时间<br>(/小时)</th>
-    </tr>
-    </thead>
-    <thead>
-    <tr>
-        <th colspan="7">基本信息</th>
-        <!--<th colspan="7">生活方面</th>-->
-    </tr>
-    <tr>
-        <th data-options="field:'birthd',width:50">出生日期</th>
-        <th data-options="field:'gender',formatter:cj.enumFormatter('gender')">性别</th>
-        <th data-options="field:'age'">年龄</th>
-        <th data-options="field:'nation',formatter:cj.enumFormatter('oldnation')">民族</th>
-        <th data-options="field:'type'">人员类型</th>
-        <th data-options="field:'age2'">服务等级</th>
-        <th data-options="field:'address',width:90">家庭地址</th>
-        <!--<th data-options="field:'sh_jings'">生活-进食</th>
-        <th data-options="field:'sh_yid'">移动</th>
-        <th data-options="field:'sh_weis'">个人卫生</th>
-        <th data-options="field:'sh_ruc'">入厕</th>
-        <th data-options="field:'sh_xiz'">洗澡</th>
-        <th data-options="field:'sh_xingz'">行走于平地上</th>
-        <th data-options="field:'sh_lout'">上下楼梯</th>-->
-    </tr>
-    </thead>
-</table>
-<div tb>
-    <table cellspacing="0" cellpadding="0" style="float: left">
+    <!--<thead data-options="frozen:true">
         <tr>
-            <td>
-                <input opt="exportexcel" type="button" data-options="iconCls:icon-add" value="导出Excel">
-                <input opt="exportexcel_summary" type="button" data-options="iconCls:icon-add" value="导出汇总表">
-            </td>
+            <th rowspan="2" data-options="field:'dvname',width:100">乡镇街道</th>
         </tr>
+    </thead>
+    <thead opt="theee">
+        <tr>
+            <th colspan="3">被服务对象</th>
+            <th colspan="3">服务人员</th>
+            <th rowspan="2" data-options="field:'birthd1',width:90">服务等级</th>
+            <th rowspan="2" data-options="field:'assesstype',width:90">人员类型</th>
+            <th rowspan="2" data-options="field:'servicetime',width:40">服务<br>时间</th>
+            <th rowspan="2" data-options="field:'subsidy_money',width:90">住院补助</th>
+            <th rowspan="2" data-options="field:'address1',width:90">补助金额</th>
+        </tr>
+        <tr>
+            <th data-options="field:'name',width:70">姓名</th>
+            <th data-options="field:'identityid',width:200">身份证号</th>
+            <th data-options="field:'address',width:290">家庭地址</th>
+            <th data-options="field:'servicername',width:70">姓名</th>
+            <th data-options="field:'servicephone',width:200">身份证号</th>
+            <th data-options="field:'serviceaddress',width:290">家庭地址</th>
+        </tr>
+    </thead>-->
+</table>
+</div>
+<div opt="reportsummary" style="width: 100%;height: 95%;position: absolute">
+    <table opt="reportsummarytab"
+           data-options="
+               method:'post',
+               fit:true,
+               border:false,
+               rownumbers:true,
+               fitColumns:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:true,
+               loadMsg:'',
+               pagination:true">
+        <thead data-options="frozen:true">
+        <tr>
+            <th rowspan="2" data-options="field:'dvname',width:100">乡镇街道</th>
+            <th rowspan="2" data-options="field:'opsum',width:70">人数</th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <th colspan="12">月&nbsp;&nbsp;&nbsp;&nbsp;份</th>
+            <th rowspan="2" data-options="field:'subsidy_money',width:90">住院补贴</th>
+            <th rowspan="2" data-options="field:'address1',width:90">合计金额</th>
+        </tr>
+        <tr>
+            <th data-options="field:'一',width:70">一月</th>
+            <th data-options="field:'二',width:70">二月</th>
+            <th data-options="field:'三',width:70">三月</th>
+            <th data-options="field:'四',width:70">四月</th>
+            <th data-options="field:'五',width:70">五月</th>
+            <th data-options="field:'六',width:70">六月</th>
+            <th data-options="field:'七',width:70">七月</th>
+            <th data-options="field:'八',width:70">八月</th>
+            <th data-options="field:'九',width:70">九月</th>
+            <th data-options="field:'十',width:70">十月</th>
+            <th data-options="field:'十一',width:70">十一月</th>
+            <th data-options="field:'十二',width:70">十二月</th>
+
+        </tr>
+        </thead>
     </table>
-    <table cellspacing="0" cellpadding="0" style="float: right">
-        <div>
-
-    <span style="float: left">
-        年 :
-        <a href="javascript:void(0)" opt="yeardel">< <</a>
-        <input opt="yearvalue" size="5" style="text-align: center">年
-        <a href="javascript:void(0)" opt="yearadd">> ></a>
-    </span>
-
-    <span style="float: right">
-        月 :
-    <select opt="month1">
-        <option value="none">选择月份...</option>
-        <option value="1">一</option>
-        <option value="2">二</option>
-        <option value="3">三</option>
-        <option value="4">四</option>
-        <option value="5">五</option>
-        <option value="6">六</option>
-        <option value="7">七</option>
-        <option value="8">八</option>
-        <option value="9">九</option>
-        <option value="10">十</option>
-        <option value="11">十一</option>
-        <option value="12">十二</option>
-    </select>月--
-    <select opt="month2">
-        <option value="none">选择月份...</option>
-    </select>月
-    </span>
-
-        </div>
-        <!--<tr>
-            <td><label class="gray7">搜索条件:</label></td>
-            <td style="width: 200px;text-align: right">
-                <input opt="name" class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>
-            <td style="width: 200px;text-align: right">
-                <input opt="identityid" class="easyui-searchbox" data-options="prompt:'身份证',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>
-            <td style="width: 200px;text-align: right">
-                <input opt="bsnyue" class="easyui-searchbox" data-options="prompt:'业务期',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>
-
-            <td>
-                <span class="searchbtn" >&nbsp;</span>
-            </td>
-
-        </tr>-->
-    </table>
-    <div class="clear"></div>
 </div>
 
 

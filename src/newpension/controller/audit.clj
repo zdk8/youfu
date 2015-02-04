@@ -771,6 +771,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (db/get-results-bysql get-yearmrsql)
     ))
 
+(defn get-moneyreporttab [request]
+  (resp/json (get-moneyreport request)))
+
+(defn get-yearmoneyreporttab [request]
+  (resp/json (get-yearmoneyreport request)))
+
 
 
 
