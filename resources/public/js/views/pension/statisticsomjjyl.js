@@ -186,6 +186,7 @@ define(function(){
       local.find('[opt=clear]').bind('click',function(){
         local.find('[opt=districtid]').combotree('clear');
         local.find('[opt=sex]').combobox('clear');
+        local.find('[opt=datetype]').combobox('clear');
         local.find('[opt=date1]').datebox('setValue','');
         local.find('[opt=date2]').datebox('setValue','');
         
