@@ -28,14 +28,11 @@ define(function(){
         reportmonthstab.datagrid({
             url:'audit/getmoneyreport',
             queryParams:{
-                /*months:monthvalue.val(),
-                nums:monthvaluenum.val(),*/
-                months:"一,二",
-                nums:"01,02",
+                months:"",
+                nums:"",
                 year:yearvalue.val()
             },
             columns: [[
-                { field: 'dvname',title: '乡镇街道', rowspan:2,width: 80},
                 { title: '被服务对象',colspan:3},
                 { title: '服务人员',colspan:3},
                 { field: 'birthd1',title: '服务等级', rowspan:2,width: 90},
@@ -45,14 +42,13 @@ define(function(){
                 { field: 'address1',title: '补助金额', rowspan:2,width: 90}
             ],[
                 { field: 'name',title: '姓名', width: 70 },
-                { field: 'identityid',title: '身份证号', width: 200 },
-                { field: 'address',title: '家庭地址', width: 290 },
+                { field: 'identityid',title: '身份证号', width: 170 },
+                { field: 'address',title: '家庭地址', width: 200 },
                 { field: 'servicername',title: '姓名', width: 70 },
-                { field: 'servicephone',title: '身份证号', width: 200 },
-                { field: 'serviceaddress',title: '家庭地址', width: 290 }
+                { field: 'servicephone',title: '身份证号', width: 170 },
+                { field: 'serviceaddress',title: '家庭地址', width: 200 }
             ]],
             onLoadSuccess:function(data){
-                console.log(data)
             }
         });
         reportsummarytab.datagrid({
@@ -61,7 +57,6 @@ define(function(){
                 year:date.getFullYear()
             },
             onLoadSuccess:function(data){
-                console.log(data);
             }
         });
 
@@ -94,6 +89,7 @@ define(function(){
 
     /*年月初始化*/
     function yearAndMonthsInit(local){
+        var reportmonthstab = local.find("[opt=reportmonthstab]");
         var month = ['','一','二','三','四','五','六','七','八','九','十','十一','十二']
         var monthnum = ['','01','02','03','04','05','06','07','08','09','10','11','12']
         var month1 = local.find('[opt=month1]');
@@ -104,41 +100,53 @@ define(function(){
         /*月份改变事件*/
         month1.change(function(){
             month2[0].length = 1; //清空选择月份2
-            if(isfirst){
-                if(month1.val() != "none"){
-                    /*month2从几月开始*/
-                    for(var i=parseInt(month1.val());i<=12;i++){
-                        month2.append('<option value="'+i+'">'+month[i]+'</option>')
-                    }
-
-                }else{
-                    month2[0].length = 1;
+            if(month1.val() != "none"){
+                /*month2从几月开始*/
+                for(var i=parseInt(month1.val());i<=12;i++){
+                    month2.append('<option value="'+i+'">'+month[i]+'</option>')
                 }
-                isfirst = false;
             }else{
-                if(month1.val() != "none"){
-                    /*month2从几月开始*/
-                    for(var i=parseInt(month1.val());i<=12;i++){
-                        month2.append('<option value="'+i+'">'+month[i]+'</option>')
-                    }
-
-                }else{
-                    month2[0].length = 1;
-                    monthvalue.val("")
-                    monthvaluenum.val("")
-                }
+                month2[0].length = 1;
             }
         })
         month2.change(function(){
             var poorval = parseInt(month2.val())-parseInt(month1.val())
             var str = new Array();
             var strnum = new Array();
+            var strmonth = new Array();         //table表头的动态变换
+            strmonth.push({ title: '被服务对象',colspan:3})
+            strmonth.push({ title: '服务人员',colspan:3})
             for(var i=0;i<=poorval;i++){
                 str.push(month[parseInt(month1.val())+i])
                 strnum.push(monthnum[parseInt(month1.val())+i])
+                strmonth.push({ field: month[parseInt(month1.val())+i],title: month[parseInt(month1.val())+i]+'月', rowspan:2,width: 60})
             }
-            monthvalue.val(str.toString())
-            monthvaluenum.val(strnum.toString())
+            monthvalue.val(str.toString());
+            monthvaluenum.val(strnum.toString());
+            strmonth.push({ field: 'birthd1',title: '服务等级', rowspan:2,width: 90})
+            strmonth.push({ field: 'assesstype',title: '人员类型', rowspan:2,width: 90})
+            strmonth.push({ field: 'servicetime',title: '服务<br>时间', rowspan:2,width: 50})
+            strmonth.push({ field: 'subsidy_money',title: '住院补助', rowspan:2,width: 90})
+
+            reportmonthstab.datagrid({
+                url:'audit/getmoneyreport',
+                queryParams:{
+                    months:monthvalue.val(),
+                    nums:monthvaluenum.val(),
+                    year:yearvalue.val()
+                },
+                columns: [strmonth,[
+                    { field: 'name',title: '姓名', width: 70 },
+                    { field: 'identityid',title: '身份证号', width: 170 },
+                    { field: 'address',title: '家庭地址', width: 200 },
+                    { field: 'servicername',title: '姓名', width: 70 },
+                    { field: 'servicephone',title: '身份证号', width: 170 },
+                    { field: 'serviceaddress',title: '家庭地址', width: 200 }
+                ]],
+                onLoadSuccess:function(data){
+                    //console.log(data)
+                }
+            });
         })
         /*年*/
         var yearvalue = local.find("[opt=yearvalue]");
