@@ -734,7 +734,9 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                            on s.jja_id = h.jja_id
                            LEFT JOIN division dv
 	                        ON dv.dvcode = substr(jm.districtid,0,9)" )
-       get-resultsumsql (str "SELECT * FROM("   get-resultsql " union all "
+       get-resultsumsql (str "SELECT * FROM(SELECT '' AS NAME,'' AS identityid,'' AS address,CONCAT('',count(*)) AS servicername,'' AS servicephone,'' AS serviceaddress,0 AS jja_id," sumcol ",'' AS servicetime,'' AS assesstype,'' AS districtid,SUM(subsidy_money) AS subsidy_money, '总计' AS dvname FROM ("
+                          get-resultsql ") union all "
+                          get-resultsql " union all "
                           "SELECT '' AS NAME,'' AS identityid,'' AS address,CONCAT('',count(*)) AS servicername,'' AS servicephone,'' AS serviceaddress,0 AS jja_id," sumcol ",'' AS servicetime,'' AS assesstype,'' AS districtid,SUM(subsidy_money) AS subsidy_money, CONCAT(dvname,'小计')AS dvname FROM ("
                           get-resultsql ") GROUP BY dvname
                           )ORDER BY dvname ASC")]
