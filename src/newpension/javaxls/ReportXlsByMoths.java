@@ -1,6 +1,7 @@
 package newpension.javaxls;
 
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 
@@ -185,6 +186,19 @@ public class ReportXlsByMoths {
         style_bold.setBorderRight(HSSFCellStyle.BORDER_THIN);
         style_bold.setFont(font);
         /*样式二*/
+        HSSFFont font2 = wb.createFont();  //字体
+        font2.setFontHeightInPoints((short) 10);
+        font2.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        font2.setColor(HSSFColor.BLUE_GREY.index);
+        HSSFCellStyle style_bold2 = wb.createCellStyle();
+        style_bold2.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
+        style_bold2.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        style_bold2.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+        style_bold2.setBorderTop(HSSFCellStyle.BORDER_THIN);
+        style_bold2.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+        style_bold2.setBorderRight(HSSFCellStyle.BORDER_THIN);
+        style_bold2.setFont(font2);
+        /*样式三*/
         HSSFCellStyle style = wb.createCellStyle();
         style.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
         style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
@@ -194,28 +208,8 @@ public class ReportXlsByMoths {
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
 
         Map datasval = getDatas(datas);  //数据
-        /*Map dvname_map = new HashMap();
-        Map dvname_repeat = new HashMap();
-        *//*取出街道*//*
-        for (int i=0;i<datasval.size();i++){
-            Map dataval = (Map)datasval.get(i);
-            String dvname = dataval.get(":dvname").toString();
-            dvname_map.put(i,dvname);
-            dvname_repeat.put(i,dvname);
-        }
-        *//*移除重复的街道*//*
-        for (int p=0;p<dvname_map.size();p++){
-            if (dvname_map.get(p).equals(dvname_map.get(p + 1))){
-                dvname_map.remove(p);
-            }
-        }
 
-        System.out.println("乡镇街道:"+dvname_map+"长度:"+dvname_map.size()+"值:"+dvname_map.values().toArray()[1]);
-        System.out.println("重复的乡镇街道:"+dvname_repeat+"长度:"+dvname_repeat.size());*/
-
-        int rowindex = 5;     //表体值从第5行开始
-        int subsidy_moneysum = 0; //住院补贴总额
-        int total_money = 0;      //全部总额
+        int rowindex = 4;     //表体值从第4行开始
 
         for (int i=0;i<datasval.size();i++){
             HSSFRow rownum = sheet.createRow((int) rowindex++);
@@ -229,113 +223,119 @@ public class ReportXlsByMoths {
             HSSFCell cell_address1 = rownum.createCell((short) 1);
             cell_address1.setCellValue(dataval.get(":dvname").toString());
             cell_address1.setCellStyle(style);
-
-            HSSFCell cell_name = rownum.createCell((short) 2);              //姓名
-            cell_name.setCellValue(dataval.get(":name").toString());
-            cell_name.setCellStyle(style);
-
-            HSSFCell cell_identityid = rownum.createCell((short) 3);        //身份证号
-            cell_identityid.setCellValue(dataval.get(":identityid").toString());
-            cell_identityid.setCellStyle(style);
-
-            HSSFCell cell_address = rownum.createCell((short) 4);           //家庭地址
-            cell_address.setCellValue(dataval.get(":address").toString());
-            cell_address.setCellStyle(style);
-            /*服务人员*/
-            HSSFCell cell_servicername = rownum.createCell((short) 5);        //姓名
-            cell_servicername.setCellValue(dataval.get(":servicername").toString()==null?"1":dataval.get(":servicername").toString());
-            cell_servicername.setCellStyle(style);
-
-            HSSFCell cell_servicephone = rownum.createCell((short) 6);        //身份证号
-            cell_servicephone.setCellValue(dataval.get(":servicephone").toString());
-            cell_servicephone.setCellStyle(style);
-
-            HSSFCell cell_serviceaddress = rownum.createCell((short) 7);     //家庭地址
-            cell_serviceaddress.setCellValue(dataval.get(":serviceaddress").toString());
-            cell_serviceaddress.setCellStyle(style);
-
-            HSSFCell cell_servicephone1 = rownum.createCell((short) 8);       //服务等级
-            cell_servicephone1.setCellValue("中度");
-            cell_servicephone1.setCellStyle(style);
-
-            HSSFCell cell_assesstype = rownum.createCell((short) 9);         //人员类型
-            cell_assesstype.setCellValue(dataval.get(":assesstype").toString());
-            cell_assesstype.setCellStyle(style);
-
-            HSSFCell cell_servicetime = rownum.createCell((short) 10);       //政府购买服务标准(小时)
-            cell_servicetime.setCellValue(dataval.get(":servicetime").toString());
-            cell_servicetime.setCellStyle(style);
-
-            int rowmoney = 0;           //横向计算
-            /*月份值*/
-            if (monthsarr.length>0){
-                for (int m=0;m<monthsarr.length;m++){
-                    HSSFCell cell_yuefen = rownum.createCell((short) 11+m);
-                    String month = ":"+monthsarr[m];
-                    cell_yuefen.setCellValue(dataval.get(month).toString());
-                    cell_yuefen.setCellStyle(style);
-                    rowmoney+=Integer.parseInt(dataval.get(month).toString());
+            if (dataval.get(":dvname").toString().contains("小计") || dataval.get(":dvname").toString().equals("总计")){
+                String title = "";
+                HSSFCellStyle stylevar = wb.createCellStyle();
+                if (dataval.get(":dvname").toString().contains("小计")){
+                    title = "小计";
+                    stylevar = style_bold2;
+                }else if (dataval.get(":dvname").toString().equals("总计")){
+                    title = "总计";
+                    stylevar = style_bold;
                 }
+                HSSFCell cell_xiaoji = rownum.createCell((short) 0);              //小计
+                sheet.addMergedRegion(new CellRangeAddress(rowindex - 1, rowindex - 1, 0, 3));
+                cell_xiaoji.setCellValue(title);
+                cell_xiaoji.setCellStyle(stylevar);
+                rownum.createCell((short) 1).setCellStyle(stylevar);
+                rownum.createCell((short) 2).setCellStyle(stylevar);
+                rownum.createCell((short) 3).setCellStyle(stylevar);
+                HSSFCell cell_renshu = rownum.createCell((short) 4);              //人数
+                cell_renshu.setCellValue("人数");
+                cell_renshu.setCellStyle(stylevar);
+                HSSFCell cell_renshuval = rownum.createCell((short) 5);              //人数值
+                sheet.addMergedRegion(new CellRangeAddress(rowindex - 1, rowindex - 1, 5, 10));
+                cell_renshuval.setCellValue(dataval.get(":servicername").toString());
+                cell_renshuval.setCellStyle(stylevar);
+                rownum.createCell((short) 6).setCellStyle(stylevar);
+                rownum.createCell((short) 7).setCellStyle(stylevar);
+                rownum.createCell((short) 8).setCellStyle(stylevar);
+                rownum.createCell((short) 9).setCellStyle(stylevar);
+                rownum.createCell((short) 10).setCellStyle(stylevar);
+                int rowmoney = 0;           //横向计算
+                /*月份值*/
+                if (monthsarr.length>0){
+                    for (int m=0;m<monthsarr.length;m++){
+                        HSSFCell cell_yuefen1 = rownum.createCell((short) 11+m);
+                        String month = ":"+monthsarr[m];
+                        cell_yuefen1.setCellValue(dataval.get(month).toString());
+                        cell_yuefen1.setCellStyle(stylevar);
+                        rowmoney+=Integer.parseInt(dataval.get(month).toString());
+                    }
+                }
+                String zybt = dataval.get(":subsidy_money").toString();
+                if (zybt.length() >0){
+                    rowmoney +=Integer.parseInt(dataval.get(":subsidy_money").toString());
+                }
+
+                HSSFCell cell_zybz = rownum.createCell((short) 11+monthsarr.length); //住院补助
+                cell_zybz.setCellValue(dataval.get(":subsidy_money").toString());
+                cell_zybz.setCellStyle(stylevar);
+                HSSFCell cell_bzje = rownum.createCell((short) 12+monthsarr.length); //补助金额
+                cell_bzje.setCellValue(rowmoney);
+                cell_bzje.setCellStyle(stylevar);
+            }else{
+                HSSFCell cell_name = rownum.createCell((short) 2);              //姓名
+                cell_name.setCellValue(dataval.get(":name").toString());
+                cell_name.setCellStyle(style);
+                HSSFCell cell_identityid = rownum.createCell((short) 3);        //身份证号
+                cell_identityid.setCellValue(dataval.get(":identityid").toString());
+                cell_identityid.setCellStyle(style);
+
+                HSSFCell cell_address = rownum.createCell((short) 4);           //家庭地址
+                cell_address.setCellValue(dataval.get(":address").toString());
+                cell_address.setCellStyle(style);
+                /*服务人员*/
+                HSSFCell cell_servicername = rownum.createCell((short) 5);        //姓名
+                cell_servicername.setCellValue(dataval.get(":servicername").toString()==null?"1":dataval.get(":servicername").toString());
+                cell_servicername.setCellStyle(style);
+
+                HSSFCell cell_servicephone = rownum.createCell((short) 6);        //身份证号
+                cell_servicephone.setCellValue(dataval.get(":servicephone").toString());
+                cell_servicephone.setCellStyle(style);
+
+                HSSFCell cell_serviceaddress = rownum.createCell((short) 7);     //家庭地址
+                cell_serviceaddress.setCellValue(dataval.get(":serviceaddress").toString());
+                cell_serviceaddress.setCellStyle(style);
+
+                HSSFCell cell_servicephone1 = rownum.createCell((short) 8);       //服务等级
+                cell_servicephone1.setCellValue("中度");
+                cell_servicephone1.setCellStyle(style);
+
+                HSSFCell cell_assesstype = rownum.createCell((short) 9);         //人员类型
+                cell_assesstype.setCellValue(dataval.get(":assesstype").toString());
+                cell_assesstype.setCellStyle(style);
+
+                HSSFCell cell_servicetime = rownum.createCell((short) 10);       //政府购买服务标准(小时)
+                cell_servicetime.setCellValue(dataval.get(":servicetime").toString());
+                cell_servicetime.setCellStyle(style);
+
+                int rowmoney = 0;           //横向计算
+                /*月份值*/
+                if (monthsarr.length>0){
+                    for (int m=0;m<monthsarr.length;m++){
+                        HSSFCell cell_yuefen = rownum.createCell((short) 11+m);
+                        String month = ":"+monthsarr[m];
+                        cell_yuefen.setCellValue(dataval.get(month).toString());
+                        cell_yuefen.setCellStyle(style);
+                        rowmoney+=Integer.parseInt(dataval.get(month).toString());
+                    }
+                }
+
+                String zybt = dataval.get(":subsidy_money").toString();
+                if (zybt.length() >0){
+                    rowmoney +=Integer.parseInt(dataval.get(":subsidy_money").toString());
+                }
+
+                HSSFCell cell_zybz = rownum.createCell((short) 11+monthsarr.length); //住院补助
+                cell_zybz.setCellValue(dataval.get(":subsidy_money").toString());
+                cell_zybz.setCellStyle(style);
+                HSSFCell cell_bzje = rownum.createCell((short) 12+monthsarr.length); //补助金额
+                cell_bzje.setCellValue(rowmoney);
+                cell_bzje.setCellStyle(style_bold);
             }
 
-            HSSFCell cell_zybz = rownum.createCell((short) 11+monthsarr.length); //住院补助
-            cell_zybz.setCellValue(dataval.get(":subsidy_money").toString());
-            cell_zybz.setCellStyle(style);
-            HSSFCell cell_bzje = rownum.createCell((short) 12+monthsarr.length); //补助金额
-            cell_bzje.setCellValue(rowmoney);
-            cell_bzje.setCellStyle(style_bold);
-
-            String zybt = dataval.get(":subsidy_money").toString();
-            if (zybt.length() >0){
-                subsidy_moneysum +=Integer.parseInt(dataval.get(":subsidy_money").toString());
-                total_money +=Integer.parseInt(dataval.get(":subsidy_money").toString());
-            }
         }
-
-
-        HSSFRow row4 = sheet.createRow((int) 4);    //第4行值
-        sheet.addMergedRegion(new CellRangeAddress(4,4,0,3));
-        HSSFCell cell_heji = row4.createCell((short) 0);   //合计
-        cell_heji.setCellValue("合   计");
-        cell_heji.setCellStyle(style_bold);
-        row4.createCell((short) 1).setCellStyle(style_bold);
-        row4.createCell((short) 2).setCellStyle(style_bold);
-        row4.createCell((short) 3).setCellStyle(style_bold);
-        HSSFCell cell_renshu = row4.createCell((short) 4);   //人数
-        cell_renshu.setCellValue("人  数");
-        cell_renshu.setCellStyle(style_bold);
-        HSSFCell cell_renshu_val = row4.createCell((short) 5);   //人数val
-        cell_renshu_val.setCellValue(datasval.size());
-        cell_renshu_val.setCellStyle(style_bold);
-        sheet.addMergedRegion(new CellRangeAddress(4,4,6,10));
-        HSSFCell cell_jine = row4.createCell((short) 6);   //金额
-        cell_jine.setCellValue("金   额");
-        cell_jine.setCellStyle(style_bold);
-        row4.createCell((short) 7).setCellStyle(style_bold);
-        row4.createCell((short) 8).setCellStyle(style_bold);
-        row4.createCell((short) 9).setCellStyle(style_bold);
-        row4.createCell((short) 10).setCellStyle(style_bold);
-        int col_month_money_sum = 11;
-        String monthstr = "";
-
-        for (int m=0;m<monthsarr.length;m++){
-            monthstr = ":"+monthsarr[m];
-            int monthsum = 0;
-            for (int i=0;i<datasval.size();i++) {
-                Map dataval = (Map) datasval.get(i);
-                monthsum+=Integer.parseInt(dataval.get(monthstr).toString());
-            }
-            HSSFCell cell_money_sum = row4.createCell((short) col_month_money_sum++);   //金额
-            cell_money_sum.setCellValue(monthsum);
-            cell_money_sum.setCellStyle(style_bold);
-            total_money+=monthsum;
-        }
-        HSSFCell cell_zybz_sum = row4.createCell((short) 11+monthsarr.length);   //住院补助
-        cell_zybz_sum.setCellValue(subsidy_moneysum);
-        cell_zybz_sum.setCellStyle(style_bold);
-        HSSFCell cell_bzje_sum = row4.createCell((short) 12+monthsarr.length);   //补助金额
-        cell_bzje_sum.setCellValue(total_money);
-        cell_bzje_sum.setCellStyle(style_bold);
     }
     /*xls导出报表*/
     public static Workbook getReport(String year,String months,Map[] datas) throws Exception{
