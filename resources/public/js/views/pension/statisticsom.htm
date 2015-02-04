@@ -5,7 +5,8 @@
                    border:false,
                    rownumbers:!true,
                    fitColumns:true,
-                  pageSize:cj.getDataGridAttr('pageSize'),
+                   loadMsg:'',
+                   pageSize:cj.getDataGridAttr('pageSize'),
                    pageList:cj.getDataGridAttr('pageList'),
                    singleSelect:true,
                    pagination:true">
@@ -27,7 +28,7 @@
 
                 <td><label class="gray7" style="background-color: rgb(181, 171, 171);">搜索条件:</label></td>
 
-                <td style="width: 270px;border:">
+                <td style="width: 270px;border:1px">
                     时间：
                     <input class="easyui-datebox" style="width:100px" opt="date1">
                     -
@@ -46,7 +47,7 @@
                 </td>
 
                 <td>
-                    <button opt="clear">清空条件</button>
+                    <input class="buttontype" type="button" opt="clear" value="清空条件">
 
                 </td>
             </tr>

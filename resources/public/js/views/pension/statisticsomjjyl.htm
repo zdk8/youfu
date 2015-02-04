@@ -5,10 +5,11 @@
                    border:false,
                    rownumbers:!true,
                    fitColumns:true,
-                  pageSize:cj.getDataGridAttr('pageSize'),
+                   pageSize:cj.getDataGridAttr('pageSize'),
                    pageList:cj.getDataGridAttr('pageList'),
                    singleSelect:true,
-                   pagination:true">
+                   pagination:true,
+                   loadMsg:''">
         <thead>
         <tr>
           <th data-options="field:'operator',width:80,align:'right'">时间</th>
@@ -50,7 +51,7 @@
                 </td>
 
                 <td>
-                    <button opt="clear">清空条件</button>
+                    <input class="buttontype" type="button" opt="clear" value="清空条件">
 
                 </td>
             </tr>
