@@ -36,6 +36,11 @@
   (with-db dboracle
     (exec-raw ["select dvname text,dvcode value,dvcode id,dvcode,dvname,dvhigh,totalname,(decode (dvrank ,'5' ,'true' ,'false')) leaf  from division where dvhigh=?" [node]] :results) ))
 
+(defn divisiontreefirst [node]
+  (with-db dboracle
+    (exec-raw ["select dvname text,dvcode value,dvcode id,dvcode,dvname,dvhigh,totalname,(decode (dvrank ,'5' ,'true' ,'false')) leaf  from division where dvcode=?" [node]] :results) ))
+
+
 (defn get-function-by-id [id]
   (with-db dboracle
     (exec-raw ["select * from xt_function where functionid=?" [id]] :results)))
