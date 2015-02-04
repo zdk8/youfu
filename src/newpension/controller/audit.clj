@@ -746,7 +746,6 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 
 (defn get-yearmoneyreport [request]
-  (println "yeaer" request)
   (let[params (:params request)
        f ["一" "二" "三" "四" "五" "六" "七" "八" "九" "十" "十一" "十二"]
        sf ["01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12"]
@@ -772,10 +771,58 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     ))
 
 (defn get-moneyreporttab [request]
-  (resp/json (get-moneyreport request)))
+  (let[params (:params request)
+       months (:months params)
+       nums (:nums params)
+       rows (:rows params)
+       page (:page params)
+       f (str/split months #",")
+       sf (str/split nums #",")
+       year (:year params)
+       ym (vec(map #(str year %)sf))
+       col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
+       sumcol (apply str (interpose "," (map #(str "sum(" % ") as " % " ") f)))
+       get-mreportsql (apply str (unionsql sf ym))
+       get-moneysql (str "select jja_id," col "from (" get-mreportsql ") group by jja_id")
+       get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress, s.*,jm.servicetime,jm.assesstype,jm.districtid,h.subsidy_money,dv.dvname  from ( " get-moneysql ") s
+                           left join  (select j.jja_id,j.name,j.identityid,j.address,j.districtid,a.servicername,a.servicephone,a.serviceaddress,a.servicetime,a.assesstype from t_jjylapply j
+                                         left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime,t.assesstype from t_jjylassessment t
+                                                 left join t_depservice ds on t.s_id = ds.s_id) a
+                                         on j.jja_id = a.jja_id) jm
+                           on s.jja_id = jm.jja_id
+                           left join (select * from t_hospitalsubsidy  where isprovide = 'y' ) h
+                           on s.jja_id = h.jja_id
+                           LEFT JOIN division dv
+	                        ON dv.dvcode = substr(jm.districtid,0,9)" )
+      ]
+    (resp/json (common/fenye rows page (str "(" get-resultsql ")") "*" ""  ""))))
 
 (defn get-yearmoneyreporttab [request]
-  (resp/json (get-yearmoneyreport request)))
+  (let[params (:params request)
+       f ["一" "二" "三" "四" "五" "六" "七" "八" "九" "十" "十一" "十二"]
+       sf ["01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12"]
+       year (:year params)
+       rows (:rows params)
+       page (:page params)
+       ym (vec(map #(str year %)sf))
+       col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
+       get-mreportsql (apply str (unionsql sf ym))
+       get-moneysql (str "select jja_id," col "from (" get-mreportsql ") group by jja_id")
+       get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress, s.*,jm.servicetime,jm.assesstype,jm.districtid,h.subsidy_money,dv.dvname  from ( " get-moneysql ") s
+                           left join  (select j.jja_id,j.name,j.identityid,j.address,j.districtid,a.servicername,a.servicephone,a.serviceaddress,a.servicetime,a.assesstype from t_jjylapply j
+                                         left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime,t.assesstype from t_jjylassessment t
+                                                 left join t_depservice ds on t.s_id = ds.s_id) a
+                                         on j.jja_id = a.jja_id) jm
+                           on s.jja_id = jm.jja_id
+                           left join (select * from t_hospitalsubsidy  where isprovide = 'y' ) h
+                           on s.jja_id = h.jja_id
+                           LEFT JOIN division dv
+	                        ON dv.dvcode = substr(jm.districtid,0,9)" )
+       get-yearmrsql (str "SELECT dvname,count(*) as opsum,SUM(一) as 一,SUM(二) as 二,SUM(三) as 三,SUM(四) as 四,SUM(五) as 五,SUM(六) as 六,SUM(七) as 七,SUM(八) as 八,SUM(九) as 九,SUM(十) as 十,SUM(十一) as 十一,SUM(十二) as 十二,SUM(subsidy_money) AS subsidy_money FROM ("
+                       get-resultsql ") GROUP BY dvname")]
+    (println get-yearmrsql)
+    (resp/json (common/fenye rows page (str "(" get-yearmrsql ")") "*" ""  ""))
+    ))
 
 
 
