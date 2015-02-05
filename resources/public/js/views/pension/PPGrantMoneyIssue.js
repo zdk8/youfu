@@ -22,7 +22,7 @@ define(function(){
                                 text:'发放',
                                 handler:function(html,parent){
                                     var dolledata = parent.find("[opt=ppgrantmoneyissuedlg]").datagrid("getSelections");
-                                    var bsnyueval = parent.find('[opt=bsnyue]').datebox('getValue')
+                                    var bsnyueval = parent.find('[opt=bsnyue]').datebox('getValue');
 //                                    if(isNaN(bsnyueval) != ""){
 //                                        console.log(111)
 //                                    }
@@ -50,7 +50,30 @@ define(function(){
                                             }
                                         });
                                     }else{
-                                        $.messager.alert('提示','请选择要发放的人员','info')
+                                        //$.messager.alert('提示','请选择要发放的人员','info')
+                                        $.messager.confirm('提示', '<label style="color: darkgray">将发放的是 :'+bsnyueval+'</label>', function(r){
+                                            if (r){
+                                                $.ajax({
+                                                    url:"audit/sendallmoney",
+                                                    data:{
+                                                        bsnyue:bsnyueval,
+                                                        name:parent.find('[opt=name]').searchbox("getValue"),
+                                                        identityid:parent.find('[opt=identityid]').searchbox("getValue")
+                                                    },
+                                                    type:"post",
+                                                    dataType:"json",
+                                                    success:function(data){
+                                                        if(data){
+                                                            cj.slideShow('发放完成!')
+                                                            parent.find("[opt=ppgrantmoneyissuedlg]").datagrid("reload")
+                                                            local.find("[opt=ppgrantmoneyissue]").datagrid('reload')
+                                                        }else{
+                                                            cj.slideShow('<label style="color: red">发放失败!</label>')
+                                                        }
+                                                    }
+                                                })
+                                            }
+                                        })
                                     }
                                 }
                             },{
@@ -84,14 +107,14 @@ define(function(){
                         ],
                         renderHtml:function(local,submitbtn,parent){
                             jsfile.render(local,{
-                                submitbtn:submitbtn,
-                                act:'c',
-                                parent:parent,
+                                //submitbtn:submitbtn,
+                                //act:'c',
+                                parent:parent
 //                                refresh:refresh,         //刷新按钮
-                                actiontype:'add',       //操作方式
-                                onCreateSuccess:function(data){
+//                                actiontype:'add',       //操作方式
+                               /* onCreateSuccess:function(data){
                                     parent.trigger('close');
-                                }
+                                }*/
                             })
                         }
                     })
@@ -154,74 +177,7 @@ define(function(){
                 bsnyue:local.find('[opt=bsnyue]').searchbox('getValue')
             })
         })
-        /*导出报表*/
-        local.find('[opt=exportexcel]').click(function(){
-            require(['commonfuncs/popwin/win','text!views/pension/PPGrantMoneyIssueXls.htm','views/pension/PPGrantMoneyIssueXls'],
-                function(win,htmfile,jsfile){
-                    win.render({
-                        title:'excel导出',
-                        width:700,
-                        height:375,
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},{text:'导出',handler:function(html,parent){
-//                                parent.trigger('close');
-                                window.location.href="report-xls-months?year="+parent.find('[opt=yearvalue]').val()+
-                                                        "&months="+parent.find('[opt=monthvalue]').val()+
-                                                        "&nums="+parent.find('[opt=monthvaluenum]').val();
-                            }}
-                        ],
-                        renderHtml:function(local,submitbtn,parent){
-                            jsfile.render(local,{
-                                submitbtn:submitbtn,
-                                act:'c',
-                                parent:parent,
-//                                refresh:refresh,         //刷新按钮
-                                actiontype:'add',       //操作方式
-                                onCreateSuccess:function(data){
-                                    parent.trigger('close');
-                                }
-                            })
-                        }
-                    })
-                }
-            )
-        })
-        /*导出汇总表*/
-        local.find('[opt=exportexcel_summary]').click(function(){
-            require(['commonfuncs/popwin/win','text!views/pension/PPGrantMoneyIssueXls.htm','views/pension/PPGrantMoneyIssueXls'],
-                function(win,htmfile,jsfile){
-                    win.render({
-                        title:'excel导出',
-                        width:700,
-                        height:375,
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},{text:'导出',handler:function(html,parent){
-//                                parent.trigger('close');
-                                window.location.href="report-xls-summary?year="+parent.find('[opt=yearvalue]').val();
-                            }}
-                        ],
-                        renderHtml:function(local,submitbtn,parent){
-                            jsfile.render(local,{
-                                submitbtn:submitbtn,
-                                act:'c',
-                                parent:parent,
-//                                refresh:refresh,         //刷新按钮
-                                actiontype:'add',       //操作方式
-                                onCreateSuccess:function(data){
-                                    parent.trigger('close');
-                                }
-                            })
-                        }
-                    })
-                }
-            )
-        })
+
     }
 
     return {

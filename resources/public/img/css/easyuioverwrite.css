@@ -160,3 +160,15 @@ tr.datagrid-row.highGroupRow{
     background-color:#E0ECFF;
     color:green;
 }
+
+a.l-btn span span.l-btn-text {
+    position: relative;
+    display: inline-block;
+    top: 1px;
+    width: auto;
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+}
