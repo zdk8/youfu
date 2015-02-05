@@ -509,7 +509,7 @@
 
 (defn getqualifyop [request]
   (let[params (:params request)
-        name (:name request)
+        name (:name params)
         rows (:rows params)
         page (:page params)
         identityid (:identityid params)
@@ -531,6 +531,7 @@ FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'n' " condname  condid 
 LEFT JOIN t_hospitalsubsidy h
 ON h.jja_id = t.jja_id")
         getresult (common/fenye rows page (str "(" qopsql ")") "*" "" " order by JJA_ID desc ")]
+    (println name "RRRRRRR"  qopsql)
    ; (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "birthd")})))
 
@@ -563,7 +564,7 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid con
 
 (defn sendallmoney [request]
   (let[params (:params request)
-       name (:name request)
+       name (:name params)
        rows (:rows params)
        page (:page params)
        identityid (:identityid params)
