@@ -517,14 +517,20 @@
         ywq (if (> (count bsnyue) 0) bsnyue (common/ywq))
         condname (if (> (count name) 0) (str " and j.name like '%" name "%' "))
         condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
-        qopsql (str "(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.MONTHSUBSIDY,a.SERVICETIME,a.HOSPITALSUBSIDY
-FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid " AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
-(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "')
+        qopsql (str "SELECT t.JJA_ID,t.NAME,t.IDENTITYID,t.GENDER,t.BIRTHD,t.ADDRESS,t.AGE,t.MONTHSUBSIDY,t.SERVICETIME,t.HOSPITALSUBSIDY,h.SUBSIDY_MONEY FROM
+(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.SERVICETIME,a.HOSPITALSUBSIDY,a.MONTHSUBSIDY
+FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid "  AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
+(SELECT jja_id FROM t_dolemoney WHERE bsnyue ='" ywq "')) t
+LEFT JOIN t_hospitalsubsidy h
+ON h.jja_id = t.jja_id
 UNION ALL
-SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,0 AS MONTHSUBSIDY,'0' AS SERVICETIME,0 AS HOSPITALSUBSIDY
-FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'n' " condname  condid " AND to_char(RM_AUDITTIME,'yyyy')  = '" (subs ywq 0 4) "'  AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
-(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "'))")
-        getresult (common/fenye rows page qopsql "*" "" " order by JJA_ID desc ")]
+SELECT t.JJA_ID,t.NAME,t.IDENTITYID,t.GENDER,t.BIRTHD,t.ADDRESS,t.AGE,t.MONTHSUBSIDY,t.SERVICETIME,t.HOSPITALSUBSIDY,h.SUBSIDY_MONEY FROM
+(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,0 AS MONTHSUBSIDY,'0' AS SERVICETIME,0 AS HOSPITALSUBSIDY
+FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'n' " condname  condid " AND to_char(RM_AUDITTIME,'yyyy')  = '" (subs ywq 0 4) "' AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
+(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "')) t
+LEFT JOIN t_hospitalsubsidy h
+ON h.jja_id = t.jja_id")
+        getresult (common/fenye rows page (str "(" qopsql ")") "*" "" " order by JJA_ID desc ")]
    ; (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "birthd")})))
 
@@ -553,6 +559,35 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid con
        ]
    ; (println "DDDDDDDDDDDDDDD" bsnyue  doledatas (count doledatas) )
     (if (> (count doledatas) 0) (db/sendmoney (vec doledatas)))
+    (str "true")))
+
+(defn sendallmoney [request]
+  (let[params (:params request)
+       name (:name request)
+       rows (:rows params)
+       page (:page params)
+       identityid (:identityid params)
+       bsnyue (clojure.string/trim (:bsnyue params))
+       ywq (if (> (count bsnyue) 0) bsnyue (common/ywq))
+       condname (if (> (count name) 0) (str " and j.name like '%" name "%' "))
+       condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
+       qopsql (str "SELECT t.JJA_ID,t.NAME,t.IDENTITYID,t.GENDER,t.BIRTHD,t.ADDRESS,t.AGE,t.MONTHSUBSIDY,t.SERVICETIME,t.HOSPITALSUBSIDY,h.SUBSIDY_MONEY FROM
+(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.SERVICETIME,a.HOSPITALSUBSIDY,a.MONTHSUBSIDY
+FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid "  AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
+(SELECT jja_id FROM t_dolemoney WHERE bsnyue ='" ywq "')) t
+LEFT JOIN t_hospitalsubsidy h
+ON h.jja_id = t.jja_id
+UNION ALL
+SELECT t.JJA_ID,t.NAME,t.IDENTITYID,t.GENDER,t.BIRTHD,t.ADDRESS,t.AGE,t.MONTHSUBSIDY,t.SERVICETIME,t.HOSPITALSUBSIDY,h.SUBSIDY_MONEY FROM
+(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,0 AS MONTHSUBSIDY,'0' AS SERVICETIME,0 AS HOSPITALSUBSIDY
+FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'n' " condname  condid " AND to_char(RM_AUDITTIME,'yyyy')  = '" (subs ywq 0 4) "' AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
+(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "')) t
+LEFT JOIN t_hospitalsubsidy h
+ON h.jja_id = t.jja_id")
+       sendmsql (str "insert into t_dolemoney2(jja_id,BSNYUE,MONTHSUBSIDY,SERVICETIME,HOSPITALSUBSIDY)
+ SELECT jja_id,'" ywq "' AS BSNYUE,MONTHSUBSIDY,SERVICETIME,HOSPITALSUBSIDY FROM " qopsql)]
+    ; (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))
+    (db/get-results-bysql sendmsql)
     (str "true")))
 
 (defn resendmoney [request]

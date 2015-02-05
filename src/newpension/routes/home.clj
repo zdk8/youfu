@@ -204,6 +204,7 @@
   (POST "/audit/getcompleteqop" request (audit/getcompleteqop request))                                                ;;查找已经发放的人员
 
   (POST "/audit/sendmoney" request (audit/sendmoney request))                                                         ;;资金发放
+  (POST "/audit/sendallmoney" request (audit/sendallmoney request))                                                     ;;全部发放
   (POST "/audit/resendmoney" request (audit/resendmoney request))                                                  ;;重新发放
   (POST "/audit/getmoneyreport" request (audit/get-moneyreporttab request))                                           ;;excel导出人员补助信息
   (POST "/audit/getyearmoneyreport" request (audit/get-yearmoneyreporttab request))                                    ;;excel导出地区补助信息
