@@ -154,6 +154,11 @@
   (table :t_dolemoney)
   (database dboracle))
 
+(defentity t_dolemoney2
+  (pk :doleid)
+  (table :t_dolemoney2)
+  (database dboracle))
+
 ;;住院补助表
 (defentity t_hospitalsubsidy
   (pk :hs_id)
@@ -809,6 +814,8 @@
                          (values (get testdata (dec cnt)))))))
 )
 
+
+
 (defn resendmoney [word value]
   (delete t_dolemoney
     (where {(keyword word) value})))
@@ -830,6 +837,9 @@
 (defn get-results-bysql[totalsql]
   (exec-raw [totalsql []] :results))
 
+(defn insert-results-bysql[totalsql]
+  (exec-raw [totalsql []] ))
+
 
 
 ;;分页
@@ -842,3 +852,6 @@
     (exec-raw [(hvitmd/get-oraclequery-total {:table tablename :predicate conditions}) []] :results)))
 
 
+(defn sendallmoney [datasql]
+  (insert t_dolemoney2
+    (values (get-results-bysql datasql))))

@@ -572,23 +572,22 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid con
        ywq (if (> (count bsnyue) 0) bsnyue (common/ywq))
        condname (if (> (count name) 0) (str " and j.name like '%" name "%' "))
        condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
-       qopsql (str "SELECT t.JJA_ID,t.NAME,t.IDENTITYID,t.GENDER,t.BIRTHD,t.ADDRESS,t.AGE,t.MONTHSUBSIDY,t.SERVICETIME,t.HOSPITALSUBSIDY,h.SUBSIDY_MONEY FROM
-(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,a.SERVICETIME,a.HOSPITALSUBSIDY,a.MONTHSUBSIDY
-FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid "  AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
-(SELECT jja_id FROM t_dolemoney WHERE bsnyue ='" ywq "')) t
-LEFT JOIN t_hospitalsubsidy h
-ON h.jja_id = t.jja_id
-UNION ALL
-SELECT t.JJA_ID,t.NAME,t.IDENTITYID,t.GENDER,t.BIRTHD,t.ADDRESS,t.AGE,t.MONTHSUBSIDY,t.SERVICETIME,t.HOSPITALSUBSIDY,h.SUBSIDY_MONEY FROM
-(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,0 AS MONTHSUBSIDY,'0' AS SERVICETIME,0 AS HOSPITALSUBSIDY
-FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'n' " condname  condid " AND to_char(RM_AUDITTIME,'yyyy')  = '" (subs ywq 0 4) "' AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
-(SELECT jja_id FROM t_dolemoney WHERE bsnyue = '" ywq "')) t
-LEFT JOIN t_hospitalsubsidy h
-ON h.jja_id = t.jja_id")
-       sendmsql (str "insert into t_dolemoney2(jja_id,BSNYUE,MONTHSUBSIDY,SERVICETIME,HOSPITALSUBSIDY)
- SELECT jja_id,'" ywq "' AS BSNYUE,MONTHSUBSIDY,SERVICETIME,HOSPITALSUBSIDY FROM " qopsql)]
-    ; (resp/json (common/time-before-list(db/get-results-bysql qopsql)"birthd"))
-    (db/get-results-bysql sendmsql)
+       qopsql (str "(select t.jja_id,t.name,t.identityid,t.gender,t.birthd,t.address,t.age,t.monthsubsidy,t.servicetime,t.hospitalsubsidy,h.subsidy_money from
+(select j.jja_id,j.name,j.identityid,j.gender,j.birthd,j.address,j.age,a.servicetime,a.hospitalsubsidy,a.monthsubsidy
+from t_jjylapply j,t_jjylassessment a where j.ishandle = 'y' " condname  condid "  and j.jja_id = a.jja_id and j.jja_id not in
+(select jja_id from t_dolemoney where bsnyue ='" ywq "')) t
+left join t_hospitalsubsidy h
+on h.jja_id = t.jja_id)
+union all
+(select t.jja_id,t.name,t.identityid,t.gender,t.birthd,t.address,t.age,t.monthsubsidy,t.servicetime,t.hospitalsubsidy,h.subsidy_money from
+(select j.jja_id,j.name,j.identityid,j.gender,j.birthd,j.address,j.age,0 as monthsubsidy,'0' as servicetime,0 as hospitalsubsidy
+from t_jjylapply j,t_jjylassessment a where j.ishandle = 'n' " condname  condid " and to_char(rm_audittime,'yyyy')  = '" (subs ywq 0 4) "' and j.jja_id = a.jja_id and j.jja_id not in
+(select jja_id from t_dolemoney where bsnyue = '" ywq "')) t
+left join t_hospitalsubsidy h
+on h.jja_id = t.jja_id)")
+       sendmsql (str "insert into t_dolemoney(jja_id,bsnyue,monthsubsidy,servicetime,hospitalsubsidy)
+ select jja_id,'" ywq "' as bsnyue,monthsubsidy,servicetime,hospitalsubsidy from (" qopsql ")")]
+    (db/insert-results-bysql sendmsql)
     (str "true")))
 
 (defn resendmoney [request]
