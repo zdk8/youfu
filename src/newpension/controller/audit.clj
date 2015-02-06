@@ -303,6 +303,16 @@
        getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
+(defn getall-auditrm [request]
+  (let[params (:params request)
+       rows (:rows params)
+       page (:page params)
+       name (:name params)
+       identityid (:identityid params)
+       cond (str (common/likecond "name" name) (common/likecond "identityid" identityid))
+       getresult (common/fenye rows page (str "(SELECT *  from t_jjylapply  WHERE ishandle = 'n')")  "*" cond " order by jja_id desc ")]
+    (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult)  "rm_audittime")})))
+
 
 (defn assessaudit7 [params]                                                                              "街镇审查"
   (let[issuccess (:issuccess params)

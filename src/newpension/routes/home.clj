@@ -184,6 +184,7 @@
   (POST "/audit/removesubmit" request (audit/remove-submit request))                                        ;;注销居家养老的老人
   (POST "/audit/removeaudit" request (audit/remove-audit request))                                          ;;注销审核
   (POST "/audit/get-removeaudit" request (audit/get-removeaudit request))                                   ;;获取注销流程数据
+  (POST "/audit/getallauditrm" request (audit/getall-auditrm request))                                              ;;获取已经注销人员信息
   (POST "/audit/reassess" request (audit/reassess request))                                                           ;;更改信息，重新评估
   (POST "/audit/addjjyldepart" request (audit/add-jjyldepart request))                                              ;;添加居家养老服务机构
   (POST "/audit/getalljjyldepart" request (audit/getall-jjyldepart request))                                        ;;获取居家养老服务机构
