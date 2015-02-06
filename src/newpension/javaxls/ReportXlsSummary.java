@@ -249,9 +249,7 @@ public class ReportXlsSummary {
             HSSFCell cell_zybt = rownum.createCell((short) 15);         //住院补贴
             cell_zybt.setCellValue(dataval.get(":subsidy_money").toString());
             cell_zybt.setCellStyle(style);
-            HSSFCell cell_hjje = rownum.createCell((short) 16);         //合计金额
-            cell_hjje.setCellValue(rowmoney);
-            cell_hjje.setCellStyle(style);
+
 
             /*竖向计算*/
             opsum +=Integer.parseInt(dataval.get(":opsum").toString());
@@ -270,8 +268,13 @@ public class ReportXlsSummary {
             String zybt = dataval.get(":subsidy_money").toString();
             if (zybt.length() >0){
                 subsidy_moneysum +=Integer.parseInt(dataval.get(":subsidy_money").toString());
+                rowmoney+=Integer.parseInt(dataval.get(":subsidy_money").toString());
             }
             moneysum+=rowmoney;
+
+            HSSFCell cell_hjje = rownum.createCell((short) 16);         //合计金额
+            cell_hjje.setCellValue(rowmoney);
+            cell_hjje.setCellStyle(style);
         }
         int [] monthsum = {monthsum1,monthsum2,monthsum3,monthsum4,monthsum5,monthsum6,monthsum7,
                 monthsum8,monthsum9,monthsum10,monthsum11,monthsum12};

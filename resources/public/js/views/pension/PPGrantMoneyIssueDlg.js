@@ -10,7 +10,6 @@ define(function(){
     function lazgrantold(local){
         var ppgrantmoneyissuedlg = local.find('[opt=ppgrantmoneyissuedlg]');
         ppgrantmoneyissuedlg.datagrid({
-//            url:'get-cangrantmoney',/*,
             url:'audit/getqualifyop',
             queryParams:{
                 bsnyue: ""
@@ -36,7 +35,6 @@ define(function(){
 
         var name = local.find('[opt=name]');        //姓名
         var identityid = local.find('[opt=identityid]');        //身份证
-//        bsnyue.searchbox('setValue',formatterYM(new Date()))
         bsnyue.datebox('setValue',formatterYM(new Date()))
         //搜索
         local.find('[opt=searchbtn]').click(function(){

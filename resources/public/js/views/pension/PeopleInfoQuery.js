@@ -6,7 +6,6 @@ define(function(){
             var refreshGrid=function() {
                 localDataGrid.datagrid('reload');
             };
-
             localDataGrid=
                 peopleinfodatarid.datagrid({
                     url:'old/search-oldpeople',
@@ -63,7 +62,6 @@ define(function(){
                                     });
                                 })(i);
                             }
-
                             //check
                             if(rows[i].userid) {
                                 localDataGrid.datagrid('checkRow', i);
@@ -73,6 +71,19 @@ define(function(){
                     striped:true,
                     toolbar:local.find('div[tb]')
                 })
+
+
+            /*老人类型选择*/
+            var ppselect = local.find('[opt=ppselect]');
+            ppselect.change(function () {
+                if(ppselect.val() == "allpp"){         //所有老人
+                    console.log("所有老人");
+                }else if(ppselect.val() == "fwpgpp"){  //服务评估老人
+                    console.log("服务评估老人");
+                }else if(ppselect.val() == "yljgpp"){  //养老机构老人
+                    console.log("养老机构老人");
+                }
+            })
 
             var name = local.find('[opt=name]');                        //姓名
             var identityid = local.find('[opt=identityid]');        //身份证
