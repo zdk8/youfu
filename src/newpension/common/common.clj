@@ -88,6 +88,12 @@
         tf (.format df nowdate)]
     (str tf)))
 
+(defn get-nowyear []
+  (let[nowdate (get-nowtime)
+       df (new SimpleDateFormat "yyyy")
+       tf (.format df nowdate)]
+    (str tf)))
+
 (defn fenye [rows page tablename colnames cond  order]
   (let[r   (read-string rows)
        p  (read-string page)

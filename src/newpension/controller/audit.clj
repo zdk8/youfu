@@ -507,6 +507,19 @@
       )
     (resp/json {:success true :message "hsapply audit success"})))
 
+(defn getallaudiths [request]
+  (let[params (:params request)
+        name (:name params)
+        identityid (:identityid params)
+        year (:year params)
+        yearvalue (if (= (count year) 0) (common/get-nowyear) year)
+        rows (:rows params)
+        page (:page params)
+        conds (str (common/likecond " j.name " name) (common/likecond " j.identityid " identityid))
+        fromresults (str "select t.hospital_days,t.subsidy_money,t.hospital_desc,j.name,j.identityid from t_hospitalsubsidy t,t_jjylapply j
+                                 where t.jja_id = j.jja_id and t.isprovide = 'y' and  to_char(t.haudittime,'yyyy') = '" yearvalue "' ")]
+    (resp/json (db/get-results-bysql (common/fenye rows page (str "(" fromresults ")") "*" conds  " order by hs_id ")))))
+
 (defn getqualifyop [request]
   (let[params (:params request)
         name (:name params)
