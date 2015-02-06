@@ -106,9 +106,11 @@
     (let [{params :params} request
           {name :name} params
           {identityid :identityid} params
+          oldtype (:oldtype params)
           {page :page} params
           {rows :rows} params
-           cond (str (common/likecond "name" name) (common/likecond "identityid" identityid))
+           optypecond (if (> (count oldtype) 0)  (str " and datatype = '" oldtype "'"))
+           cond (str (common/likecond "name" name) (common/likecond "identityid" identityid) optypecond)
          order (str " order by lr_id desc")
           getresult (common/fenye rows page t_oldpeople "*" cond order)]
           ;p (Integer/parseInt page)
