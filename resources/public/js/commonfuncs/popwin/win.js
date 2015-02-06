@@ -34,6 +34,13 @@ define(function(){
         result.find('.pop-win-north-title').html(option['title']).width(option['width']-50);//设置标题名并设置宽度
         var $html=$(option['htmlcontent']);
         result.find('.htmlcontent').html($html);
+        result.hide();
+        layer.load(1)
+        window.setTimeout(function(){
+            result.show();
+        },1000)
+
+
 
 
         var submitbtn=null;

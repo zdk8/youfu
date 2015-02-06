@@ -93,8 +93,10 @@ define(function(){
     }
     /*提交页面*/
     function commitFun(local,option){
-        getPeopleByIdentityid(local)
-        addRadioCss(local)
+        getPeopleByIdentityid(local);
+        addRadioCss(local);
+        local.find('textarea[name=hstreetreview]').attr("readonly","readonly");
+        local.find('textarea[name=hcountyaudit]').attr("readonly","readonly");
         local.find('[opt=dealwith]').hide();
         local.find('[opt=commit]').show().click(function(){
             var hospital_descval = local.find("[name=hospital_desc]");
@@ -112,19 +114,22 @@ define(function(){
                         var isvalidate = $(this).form('validate');
                         if (isvalidate) {
                             showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                            //layer.load('正在提交数据...',0)
                         }
                         return isvalidate
                     },
                     success:function(data){
                         if(data == "true"){
                             showProcess(false);
-                            cj.slideShow("保存成功!")
+                            //layer.load('正在提交数据...',1)
+                            cj.slideShow("提交成功!")
                             if(showProcess(false)){
                                 $("#tabs").tabs('close',"住院补助申请")
                             }
                         }else{
                             showProcess(false);
-                            cj.slideShow('<label style="color: red">保存失败！</label>')
+                            //layer.load('正在提交数据...',1)
+                            cj.slideShow('<label style="color: red">提交失败！</label>')
                         }
                     },
                     onLoadError: function () {
@@ -204,6 +209,8 @@ define(function(){
             }
         }).prev().hide();
         local.find('[opt=hospital_table] input').attr("readonly","readonly");//表单不可编辑
+        local.find('[name=hcommunityopinion]').attr("readonly","readonly");
+        local.find('[name=hospital_desc]').attr("readonly","readonly");
         var hospitalform = local.find("[opt=hospitalform]");     //住院补助
         hospitalform.form("load",option.queryParams.data)        //填充表单
         local.find('input[name=life_ability][type=radio][value='+option.queryParams.data.life_ability+']').attr("checked","checked");
@@ -217,12 +224,15 @@ define(function(){
         var hcountyauditval = local.find("[name=hcountyaudit]")        //审批意见
         var aulevel = option.queryParams.record.aulevel;
         if(aulevel == "1"){
-            RadioCssEnabel(local,"shenghe")
+            RadioCssEnabel(local,"shenghe");
+            hcountyauditval.attr("readonly","readonly");
         }else if(aulevel == "2"){
-            RadioCssEnabel(local,"shengpi")
+            RadioCssEnabel(local,"shengpi");
+            hstreetreviewval.attr("readonly","readonly");
         }
 
         local.find('[opt=dealwith]').show().click(function(){
+            //layer.load(1);
             if(aulevel == "1"){             //注销审核
                 if(hstreetreviewval.val() == "" || hstreetreviewval.val() == null){
                     $.messager.alert('温馨提示','请填写所在镇、街街道审核意见！',"",function(r){

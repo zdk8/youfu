@@ -1,4 +1,4 @@
-<!--老年人查询-->
+<!--老人注销查询-->
 <div class="easyui-layout"  data-options="fit:true">
     <div data-options="region:'center'" data-options="fit:true">
         <table class="easyui-datagrid-noauto" opt="peopleinfoquery"
@@ -12,40 +12,49 @@
                pageList:cj.getDataGridAttr('pageList'),
                singleSelect:true,
                loadMsg:'',
+               striped:true,
                pagination:true">
             <thead>
             <tr>
                 <th data-options="field:'lr_id',hidden:true" ></th>
-                <th data-options="field:'name',width:100,align:'center',
-                formatter:function(v,r,i)
+                <th data-options="field:'ro',width:70,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                    str=$(str).append('<a action=&quot;zybzdealwith&quot;title=&quot;住院补助处理&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>');
                     return str.html();
-                }">姓名</th>
-                <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
-                <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
-                <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
-                <th data-options="field:'address',width:200,align:'left'">住址</th>
+                }">操作</th>
+                <th data-options="field:'aulevel',width:100,
+                    formatter: function(value,row,index){
+                        if(value == '4'){
+                            return approvalProcessService[1]
+                        }else if(value == '5'){
+                            return approvalProcessService[2]
+                        }else {
+                            return approvalProcessService[value]
+                        }
+
+                        }">状态
+                </th>
+                <th data-options="field:'auflag',width:120">流程信息</th>
+                <th data-options="field:'audesc',width:180">处理意见</th>
+                <th data-options="field:'messagebrief',width:340,align:'left',
+                    formatter:function(v,r,i)
+                    {
+                        var str='<div></div>';
+                        str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                        return str.html();
+                    }">人员信息
+                </th>
+                <th data-options="field:'auuser',width:127">办理人</th>
+                <th data-options="field:'bstime',width:230">时间</th>
             </tr>
             </thead>
         </table>
 
         <div tb>
-            <table cellspacing="0" cellpadding="0" style="float: left">
-                <tr>
-                    <td>
-                        <select opt="ppselect">
-                            <option value="allpp">所有老人</option>
-                            <option value="fwpgpp">服务评估老人</option>
-                            <option value="yljgpp">养老机构老人</option>
-                            <option value="sdpp">三低老人</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
             <table cellspacing="0" cellpadding="0" style="float: right">
                 <tr>
+
                     <td><label class="gray7">搜索条件:</label></td>
 
                     <td style="width: 200px;text-align: right">
@@ -61,6 +70,7 @@
                     <td>
                         <span class="searchbtn" >&nbsp;</span>
                     </td>
+
                 </tr>
             </table>
             <div class="clear"></div>
@@ -68,3 +78,7 @@
 
     </div>
 </div>
+
+
+
+

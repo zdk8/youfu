@@ -8,33 +8,21 @@ define(['views/pension/PensionServiceAss'],function(psafile){
 
             localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
-                    url:'audit/getallaudiths',
+                    url:'audit/getallauditrm',
                     method:'post',
                     queryParams: {
 
                     },
                     onLoadSuccess:function(data){
+
                     },
                     striped:true,
                     toolbar:local.find('div[tb]')
                 })
 
-            /*年*/
-            var yearvalue = local.find("[opt=yearvalue]");
-            yearvalue.val(new Date().getFullYear());
-            local.find('[opt=yeardel]').click(function () {
-                var year=yearvalue.val();
-                year=Number(year)-1;
-                yearvalue.val(year);
-            });
-            local.find('[opt=yearadd]').click(function(){
-                var year=yearvalue.val();
-                year=Number(year)+1;
-                yearvalue.val(year);
-            });
+
             local.find('.highcharstoolbarbutton').click(function(){
                 localDataGrid.datagrid('load',{
-                    year:yearvalue.val(),
                     name:local.find('[opt=name]').val(),
                     identityid:local.find('[opt=identityid]').val()
                 })

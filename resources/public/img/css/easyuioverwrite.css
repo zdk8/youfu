@@ -130,6 +130,9 @@ span.error,a.error{
 }
 
 element.style {
+    height: 34.777777671814px;
+    width: 617.777777671814px;
+    background: url(http://localhost:5000/img/popwindowtitlebackground1.png);
 }
 .icon-add-pl15 {
     background: url('../../img/addtab.png') no-repeat left center;

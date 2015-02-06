@@ -1,13 +1,5 @@
 define(function(){
     function render(local,option){
-        lazgrantold(local);
-        opp = option
-
-    }
-
-
-    /*加载未进行资金发放人员*/
-    function lazgrantold(local){
         var ppgrantmoneyissuedlg = local.find('[opt=ppgrantmoneyissuedlg]');
         ppgrantmoneyissuedlg.datagrid({
             url:'audit/getqualifyop',
@@ -17,14 +9,7 @@ define(function(){
             onLoadSuccess:function(){},
             toolbar:local.find('div[tb]')
         });
-
         var bsnyue = local.find('[opt=bsnyue]');        //业务期
-        /*bsnyue.datebox().datebox('calendar').calendar({
-            validator: function (date) {
-                console.log(111)
-                return date.getDay()==5;
-            }
-        });*/
         bsnyue.datebox({
             formatter:function(date){
                 var y = date.getFullYear();
@@ -32,7 +17,6 @@ define(function(){
                 return y+''+(m<10?('0'+m):m);
             }
         })
-
         var name = local.find('[opt=name]');        //姓名
         var identityid = local.find('[opt=identityid]');        //身份证
         bsnyue.datebox('setValue',formatterYM(new Date()))
@@ -44,7 +28,11 @@ define(function(){
                 identityid:identityid.searchbox('getValue')
             })
         })
+        window.setTimeout(function(){
+            ppgrantmoneyissuedlg.datagrid('reload')
+        },1000)
     }
+
 
     return {
         render:render
