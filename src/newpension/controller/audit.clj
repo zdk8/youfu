@@ -183,7 +183,9 @@
   (let[params (:params request)
        rows (:rows params)
        page (:page params)
-       cond (str " and bstablename = 't_jjylapply' and status = '1' AND aulevel != '7' AND aulevel != '8' ")
+       name (:name params)
+       identityid (:identityid params)
+       cond (str " and bstablename = 't_jjylapply' and status = '1' AND aulevel != '7' AND aulevel != '8' " " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
        getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
@@ -295,7 +297,9 @@
   (let[params (:params request)
        rows (:rows params)
        page (:page params)
-       cond (str " and bstablename = 't_jjylapply' and status = '1' AND (aulevel = 7 OR aulevel = 8)")
+       name (:name params)
+       identityid (:identityid params)
+       cond (str " and bstablename = 't_jjylapply' and status = '1' AND (aulevel = 7 OR aulevel = 8)"  " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
        getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
@@ -450,7 +454,9 @@
   (let[params (:params request)
        rows (:rows params)
        page (:page params)
-       cond (str " and bstablename = 't_hospitalsubsidy' and status = '1' ")
+       name (:name params)
+       identityid (:identityid params)
+       cond (str " and bstablename = 't_hospitalsubsidy' and status = '1' "  " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
        getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
