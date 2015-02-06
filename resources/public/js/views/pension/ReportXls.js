@@ -7,12 +7,10 @@ define(function(){
         var month_span = local.find('[opt=month_span]'); //月份条件
         tabchange.change(function(){
             if(tabchange.val() == "0"){         //汇总表
-                console.log("汇总")
                 month_span.hide();
                 reportmonths.hide();
                 reportsummary.show();
             }else if(tabchange.val() == "1"){   //月份表
-                console.log("月份")
                 month_span.show();
                 reportmonths.show();
                 reportsummary.hide();

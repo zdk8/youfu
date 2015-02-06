@@ -58,7 +58,7 @@
     (layout/render "addold.html" {:pagename pagename
                                    :pagetitle pagetitle
                                    :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)}))
-  (POST "/getData" req (println "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" req))
+  (GET "/getSession" req (println "ssssssss" (session/get :usermsg)))
   (GET "/gethtmliframe" [name data]
     (layout/render "test.html"
       {:htmlpath (str "text!views/pension/" name ".htm") :jspath  (str "views/pension/" name) :data data}

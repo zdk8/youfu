@@ -69,7 +69,7 @@ define(function(){
     /*通过身份证获取人员*/
     var getPeopleByIdentityid = function(local){
         local.find("input[opt=identityid]").combogrid({
-            panelWidth:330,
+            panelWidth:350,
             panelHeight:350,
             url:'audit/gethositaldata',
             method:'post',
@@ -79,8 +79,8 @@ define(function(){
             pagination:true,
             mode:'remote',
             columns:[[
-                {field:'name',title:'姓名',width:30},
-                {field:'identityid',title:'身份证号',width:85},
+                {field:'name',title:'姓名',width:40},
+                {field:'identityid',title:'身份证号',width:95},
                 {field:'address',title:'住址',width:60}
             ]],
             onBeforeLoad:function(params){

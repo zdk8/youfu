@@ -135,22 +135,45 @@ element.style {
     background: url('../../img/addtab.png') no-repeat left center;
     padding-left: 16px;
 }
+.icon-add-pl15:hover {
+    background: url('../../img/addtab_max.png') no-repeat left center;
+    padding-left: 17px;
+}
+
 .icon-add-pl16 {
     background: url('../../img/edittab.png') no-repeat left center;
     padding-left: 16px;
 }
+.icon-add-pl16:hover {
+    background: url('../../img/edittab_max.png') no-repeat left center;
+    padding-left: 17px;
+}
+
 .icon-del-pl15 {
     background: url('../../img/deletetab.png') no-repeat left center;
-    /*background: url('../../img/shanchu.png') no-repeat left center;*/
     padding-left: 16px;
 }
+.icon-del-pl15:hover {
+    background: url('../../img/deletetab_max.png') no-repeat left center;
+    padding-left: 17px;
+}
+
 .icon-cancell-pl1 {
     background: url('../../img/cancell_show.png') no-repeat left center;
     padding-left: 16px;
 }
+.icon-cancell-pl1:hover {
+    background: url('../../img/cancell_show_max.png') no-repeat left center;
+    padding-left: 17px;
+}
+
 .icon-map-pl1 {
     background: url('../../img/map_show.png') no-repeat left center;
     padding-left: 16px;
+}
+.icon-map-pl1:hover {
+    background: url('../../img/map_show_max.png') no-repeat left center;
+    padding-left: 17px;
 }
 
 

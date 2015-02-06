@@ -1,7 +1,7 @@
 define(function(){
   var a={
     render:function(local,option){
-       dd = local;
+        addRadioCssComm(local);
       var localDataGrid=
           local.find('.easyui-datagrid-noauto').datagrid({
             url:'depart/departstatistic',
@@ -190,6 +190,10 @@ define(function(){
         local.find('[opt=datetype]').combobox('clear');
         local.find('[opt=date1]').datebox('setValue','');
         local.find('[opt=date2]').datebox('setValue','');
+          local.find(':input[type=radio] + label').each(function () {
+              $(this).prev()[0].checked = false;
+              $(this).removeClass("checked");
+          })
       })
     }
 
