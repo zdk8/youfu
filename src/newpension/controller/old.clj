@@ -749,7 +749,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
        gendercond (if (> (count gender) 0 ) (str " and gender = '" gender "' ") )
        datatypecond (if (> (count datatype) 0 )   (str " and datatype = '" datatype "' "))
-       tjconds (str minagecond maxagecond  districtidcond gendercond datatype)            ;分组查询条件
+       tjconds (str minagecond maxagecond  districtidcond gendercond datatypecond)            ;分组查询条件
        agevalue (cond
                         (and  (> (count minage) 0) (> (count maxage) 0))  (str  minage "-"maxage"岁")
                         (and (> (count minage) 0) (= (count maxage) 0))  (str minage "岁以下")
