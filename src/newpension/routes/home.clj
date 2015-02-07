@@ -218,7 +218,7 @@
 
 
  (POST "/old/opstatistic" request (old/opstatistic3 request))                                                                  ;;老人信息统计2
-  (POST "/audit/jjylstatistic" request (audit/jjyl-statistic2 request))                                                             ;;居家养老统计2
+  (POST "/audit/jjylstatistic" request (audit/jjyl-statistic3 request))                                                             ;;居家养老统计2
   (POST "/depart/departstatistic" request (depart/depart-statistic2 request))                                                ;;机构统计分析2
 
  ; (GET "/test/testtime" request (audit/testtime request))

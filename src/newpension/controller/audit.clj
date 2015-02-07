@@ -729,6 +729,64 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))))
 
 
+(defn jjyl-statistic3 [request]
+  (let[params (:params request)
+       minage (:minage params)
+       maxage (:maxage params)
+       districtid (:districtid params)
+       gender (:gender params)
+       economy (:economy params)
+       dlength (count districtid)
+       nl (:sj params)
+       dq (:dq params)
+       xb (:xb params)
+       lb (:lb params)
+       rows (:rows params)
+       page (:page params)
+       minagecond (if (> (count minage) 0) (str " and age >= " minage)  )
+       maxagecond   (if (> (count maxage) 0) (str " and age <= " maxage)  )
+       ;starttimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE >= to_date('" starttime "','yyyy-mm-dd') ")  )
+       ;endtimecond   (if (> (count endtime) 0) (str " and OPERATOR_DATE <= to_date('" endtime "','yyyy-mm-dd') " ) )
+       districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
+       gendercond (if (> (count gender) 0 ) (str " and gender = '" gender "' ") )
+       economycond (if (> (count economy) 0 )   (str " and economy = '" economy "' "))
+       tjconds (str minagecond maxagecond  districtidcond gendercond economycond)            ;分组查询条件
+       agevalue (cond
+                  (and  (> (count minage) 0) (> (count maxage) 0))  (str  minage "-"maxage"岁")
+                  (and (> (count minage) 0) (= (count maxage) 0))  (str minage "岁以上")
+                  (and (= (count minage) 0) (> (count maxage) 0))  (str maxage "岁以下"))
+       gendervalue (cond
+                     (= gender "0")  "女"
+                     (= gender "1")  "男")
+       typevalue (cond
+                   (= economy "0") "低保特困职工"
+                   (= economy "1") "低保边缘户"
+                   (= economy "2")  "低收入"
+                   (= economy "3")  "无退休工资"
+                   (= economy "4")  "有退休工资"
+                   (= economy "5")  "特殊贡献")
+       agegroup (if (and (= nl "nl")(= (count minage) 0) (= (count maxage) 0))
+                  (str " (CASE WHEN age <= 60 THEN '60岁以下'
+	                                    WHEN age > 60 AND age < 70 THEN '60-70岁'
+	                                    WHEN age > 70 AND age<= 80 THEN '70-80岁'
+	                                    WHEN age > 80 AND age <= 90 THEN '80-90岁'
+	                                     ELSE '90岁以上' END)" ))
+       dqgroup (if (= dq "dq") (condp = dlength                                                   ;地区分组
+                                 6   (str " substr(districtid,0,9) ")
+                                 9   (str " substr(districtid,0,12) ")
+                                 12   " substr(districtid,0,12)  "
+                                 nil))
+       xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)                   ;性别分组
+       lbgroup (if (= lb "lb") (str " (case economy   when '0' then '低保特困职工' when '1' then '低保边缘户' when '2' then '低收入' when '3' then '无退休工资' when '4' then '有退休工资' when '5' then '特殊贡献' else '未划分'   END)  "))
+       groups (str (if agegroup (str agegroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")) (if lbgroup (str lbgroup ",")))                            ;组合分组
+       groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
+       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if agegroup agegroup (str " '" agevalue "' ")) " as agevalue ," (if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup (str " '" gendervalue "' ")) " as gender, " (if lbgroup lbgroup (str " '" typevalue "' ")) " as oldtype, count(*) as opsum
+                                from " t_jjylapply " where 1=1 " tjconds " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
+    (println "SSSSSSSSSSSSSS" opstatissql)
+    (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))
+    ))
+
+
 
 
 
