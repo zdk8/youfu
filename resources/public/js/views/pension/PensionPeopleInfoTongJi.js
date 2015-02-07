@@ -1,5 +1,6 @@
 define(function(){
     var render=function(local,option){
+        addRadioCssComm(local);
         var districtid = local.find('[opt=districtid]');      //行政区划
         getdivision(districtid);                   //加载行政区划
         var peopleinfodatarid = local.find('.easyui-datagrid-noauto');      //查询界面datagrid

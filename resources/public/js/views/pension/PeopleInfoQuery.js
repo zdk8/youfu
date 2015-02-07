@@ -58,19 +58,9 @@ define(function(){
             /*老人类型选择*/
             var ppselect = local.find('[opt=ppselect]');
             ppselect.change(function () {
-                if(ppselect.val() == ""){         //所有老人
-                    /*''*/
-                    console.log("所有老人");
-                }else if(ppselect.val() == "f"){  //服务评估老人
-                    /*f*/
-                    console.log("服务评估老人");
-                }else if(ppselect.val() == "j"){  //养老机构老人
-                    /*j*/
-                    console.log("养老机构老人");
-                }else if(ppselect.val() == "s"){  //养老机构老人
-                    /*s*/
-                    console.log("三低老人");
-                }
+                peopleinfodatarid.datagrid('load',{
+                    oldtype:ppselect.val()
+                })
             })
 
             var name = local.find('[opt=name]');                        //姓名
