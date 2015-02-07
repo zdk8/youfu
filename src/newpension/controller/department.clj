@@ -45,6 +45,21 @@
        ]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "runtime")})))
 
+(defn getall-department2 [request]
+  (let[{params :params}request
+       {deptype :deptype}params
+       {departname :departname}params
+       ;{page :page}params
+       ;{rows :rows}params
+       ;cond (str " and deptype = '" deptype "' "  (common/likecond "departname" departname))
+       ;getresult (common/fenye rows page t_pensiondepartment "*" cond "")
+       getdepartsql (str "select * from " t_pensiondepartment " where deptype = '" deptype "' " (common/likecond "departname" departname))
+       ]
+    ;(resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "runtime")})
+    (println "DDDDDDDDD" getdepartsql)
+    (resp/json(db/get-results-bysql  getdepartsql))))
+
+
 (defn get-departbyid [request]
   (let[{params :params}request
        {dep_id :dep_id}params]

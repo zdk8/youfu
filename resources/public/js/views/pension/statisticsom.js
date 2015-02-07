@@ -24,15 +24,19 @@ define(function(){
         for(var i in series[0]){
             var se=series[0];
             var dateOjb=existInArray(data,se.datename);
+            var dateType=existInArray(data,se.datatype);
             var dateSex=existInArray(data,se.sex);
+            var dateAge=existInArray(data,se.age);
             var valueOjb=existInArray(data,se.valuename);
             if(dateOjb){
                 var tmparr=[];
                 var categoriesDateX = [];
                 for(var i=0;i< dateOjb.dvalue.length;i++){
+                    var istype =dateType.dvalue[i] == null?"":"-"+dateType.dvalue[i];
                     var issex =dateSex.dvalue[i] == null?"":"-"+dateSex.dvalue[i];
+                    var isage =dateAge.dvalue[i] == null?"":"-"+dateAge.dvalue[i];
                     tmparr.push([
-                        "【"+dateOjb.dvalue[i]+issex+"】:"+valueOjb.dvalue[i]+"(人)",
+                        "【"+dateOjb.dvalue[i]+istype+issex+isage+"】:"+valueOjb.dvalue[i]+"(人)",
                         valueOjb.dvalue[i]])
                     categoriesDateX.push(dateOjb.dvalue[i])
                 }
@@ -189,19 +193,7 @@ define(function(){
               }
 
 
-                obj  = format(data.rows,dvnames)
-                var series = [{
-                    type: 'pie',
-                    name: 'Browser share',
-                    data: [
-                        //['Firefox',   45.0],
-                        //['IE',       26.8],
-                        //['Safari',    8.5],
-                        //['Opera',     6.2],
-                        //['Others',   0.7]
-                        ['海盐县:1193(人)',   1913]
-                    ]
-                }]
+                var obj  = format(data.rows,dvnames)
                 /*加载图形*/
                 renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local)
             },
@@ -264,13 +256,13 @@ define(function(){
         var data={
             districtid:districtid.combotree('getValue'),
             datatype:local.find('[opt=ppselect]').val(),
-            gender:$('[opt=sex]').combobox('getValue'),
+            gender:local.find('[opt=sex]').combobox('getValue'),
             minage:local.find('[opt=minage]').val(),
             maxage:local.find('[opt=maxage]').val(),
-            dq:$('input[name=diqu]:checked').val(),
-            lb:$('input[name=leibie]:checked').val(),
-            xb:$('input[name=sex]:checked').val(),
-            nl:$('input[name=age]:checked').val()
+            dq:local.find('input[name=diqu]:checked').val(),
+            lb:local.find('input[name=leibie]:checked').val(),
+            xb:local.find('input[name=sex]:checked').val(),
+            nl:local.find('input[name=age]:checked').val()
         }
 
         localDataGrid.datagrid('reload',data);

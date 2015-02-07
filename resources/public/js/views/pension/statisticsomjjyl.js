@@ -1,7 +1,136 @@
 define(function(){
+    /*将x、y轴分别装入数组*/
+    var existInArray=function(a,p){
+        for(var i in a){
+            if(a[i]['dname']==p){
+                return a[i];
+            }
+        }
+        return false;
+    }
+    var format=function(d,series){
+        var data=[];
+        for(var i in d){
+            for(var p in d[i]){
+                var obj=existInArray(data,p);
+                if(!obj){
+                    data.push({dname:p,dvalue:[d[i][p]]})
+                }else{
+                    obj.dvalue.push(d[i][p])
+                }
+            }
+        }
+        var seriesData=[];
+        for(var i in series[0]){
+            var se=series[0];
+            var dateOjb=existInArray(data,se.datename);
+            var dateType=existInArray(data,se.datatype);
+            var dateSex=existInArray(data,se.sex);
+            var dateAge=existInArray(data,se.age);
+            var valueOjb=existInArray(data,se.valuename);
+            if(dateOjb){
+                var tmparr=[];
+                var categoriesDateX = [];
+                for(var i=0;i< dateOjb.dvalue.length;i++){
+                    var istype =dateType.dvalue[i] == null?"":"-"+dateType.dvalue[i];
+                    var issex =dateSex.dvalue[i] == null?"":"-"+dateSex.dvalue[i];
+                    var isage =dateAge.dvalue[i] == null?"":"-"+dateAge.dvalue[i];
+                    tmparr.push([
+                        "【"+dateOjb.dvalue[i]+istype+issex+isage+"】:"+valueOjb.dvalue[i]+"(人)",
+                        valueOjb.dvalue[i]])
+                    categoriesDateX.push(dateOjb.dvalue[i])
+                }
+                seriesData.push({
+                    name : se.name,
+                    data : tmparr,
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                });
+            }
+        }
+        return {
+            //seriesName:seriesName,
+            data:data,
+            seriesData:seriesData,
+            categoriesDateX:categoriesDateX
+        }
+    }
+    /*初始化统计图*/
+    function renderAchart(series,option,local){
+        /*饼*/
+        local.find('[opt=containerPie]').highcharts({
+            chart: {
+                type: "pie"/*,
+                 options3d: {
+                 enabled: true,
+                 alpha: 45,
+                 beta: 0
+                 }*/
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    depth: 35,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    }
+                }
+            },
+            navigation: {
+                buttonOptions: {
+                    align: 'left'
+                }
+            },
+            /*legend: {
+             enabled: false
+             },*/
+            credits:{       //右下角图标
+                enabled:false
+            },
+            title: {
+                text: option.titleText
+            },
+            subtitle: {
+//                    text: option.subtitle
+            },
+            /*xAxis: {
+             title:{
+             text:"时间"
+             },
+             categories: option.categoriesDate
+             },
+             yAxis: {
+             title: {
+             text: option.yAxisTitleText
+             },
+             min:0,
+             labels: {
+             formatter: function() {
+             return this.value/10000 +"万"
+             }
+             }
+             },*/
+            tooltip: {
+                pointFormat: '<b>{point.percentage:.1f}%</b>'
+                /*formatter: function() {
+                 var yValue = this.y/10000;
+                 var y = yValue >= 1 ?changeTwoDecimal(yValue)+"万" : this.y
+                 return  '<b>{point.percentage:.1f}%</b>';
+                 }*/
+            },
+            series :series
+        });
+    }
   var a={
     render:function(local,option){
         addRadioCssComm(local);
+        var dvnames=[];
+        dvnames.push({
+            datename:'dvname',valuename:'opsum',datatype:'oldtype',sex:'gender',age:'agevalue'
+        })
       var localDataGrid=
           local.find('.easyui-datagrid-noauto').datagrid({
             url:'audit/jjylstatistic',
@@ -19,11 +148,6 @@ define(function(){
               if(local.find('input[name=diqu]:checked').val()>0){
                 fields.push('itemid');
               }
-
-//              if(local.find('input[name=date]:checked').val()>0){
-//                console.log('>>>>>>>>>>>>>>>>');
-//                fields.push('productid');
-//              }
 
               var myGroups=(function(a){
                 var b=[];
@@ -62,39 +186,14 @@ define(function(){
                 }
 
 
-                //分组
-
-
-                //                  doGroupMerge(prevgroup,i,'productid');
-
                 for(var j in myGroups){
                   doGroupMerge(myGroups[j].g,i,myGroups[j].field);      
                 }
-                //
-
-
-                //console.log(local.find('.datagrid-body>table tr').eq(i).css({color:'red',height:'50px'}));
-                
-                /*
-                  if(prevgroup.name==rows[i].productid){
-
-                  console.log(i+'分组:'+rows[i].productid)
-                  prevgroup.len++;
-                  }else{
-
-                  console.log(rows[i].productid+' new start :why:'+prevgroup.name)
-                  if(prevgroup.len>1){
-
-                  $(this).datagrid('mergeCells', { index: prevgroup.start, field: 'productid', rowspan: prevgroup.len });
-                  }
-
-                  prevgroup={name:rows[i].productid,len:1,start:i}
-
-                  }
-
-                */
-
               }
+
+                var obj  = format(data.rows,dvnames)
+                /*加载图形*/
+                renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local)
             },
             //striped:true,
             rowStyler2: function(index,row){
@@ -163,14 +262,14 @@ define(function(){
       local.find('[opt=query]').bind('click',function(){
         var data={
           districtid:districtid.combotree('getValue'),
-          datetype:$('[opt=datetype]').combobox('getValue'),
-          starttime:$('input[opt=date1]').datebox('getValue'),
-          endtime:$('input[opt=date2]').datebox('getValue'),
-          gender:$('[opt=sex]').combobox('getValue'),
-          sj:$('input[name=date]:checked').val(),
-          dq:$('input[name=diqu]:checked').val(),
-          xb:$('input[name=sex]:checked').val()
-          
+          datetype:local.find('[opt=ppselect]').val(),
+          gender:local.find('[opt=sex]').combobox('getValue'),
+            minage:local.find('[opt=minage]').val(),
+            maxage:local.find('[opt=maxage]').val(),
+            dq:local.find('input[name=diqu]:checked').val(),
+            lb:local.find('input[name=leibie]:checked').val(),
+            xb:local.find('input[name=sex]:checked').val(),
+            nl:local.find('input[name=age]:checked').val()
         }
 
         localDataGrid.datagrid('reload',data);
