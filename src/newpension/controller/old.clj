@@ -726,3 +726,58 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))))
 
 
+
+
+(defn opstatistic3 [request]
+  (let[params (:params request)
+       minage (:minage params)
+       maxage (:maxage params)
+       districtid (:districtid params)
+       gender (:gender params)
+       datatype (:datatype params)
+       dlength (count districtid)
+       nl (:sj params)
+       dq (:dq params)
+       xb (:xb params)
+       lb (:lb params)
+       rows (:rows params)
+       page (:page params)
+       minagecond (if (> (count minage) 0) (str " and age >= " minage)  )
+       maxagecond   (if (> (count maxage) 0) (str " and age <= " maxage)  )
+       ;starttimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE >= to_date('" starttime "','yyyy-mm-dd') ")  )
+       ;endtimecond   (if (> (count endtime) 0) (str " and OPERATOR_DATE <= to_date('" endtime "','yyyy-mm-dd') " ) )
+       districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
+       gendercond (if (> (count gender) 0 ) (str " and gender = '" gender "' ") )
+       datatypecond (if (> (count datatype) 0 )   (str " and datatype = '" datatype "' "))
+       tjconds (str minagecond maxagecond  districtidcond gendercond datatype)            ;分组查询条件
+       agevalue (cond
+                        (and  (> (count minage) 0) (> (count maxage) 0))  (str  minage "-"maxage"岁")
+                        (and (> (count minage) 0) (= (count maxage) 0))  (str minage "岁以下")
+                        (and (= (count minage) 0) (> (count maxage) 0))  (str maxage "岁以上"))
+        gendervalue (cond
+                               (= gender "0")  "女"
+                               (= gender "1")  "男")
+       typevalue (cond
+                             (= datatype "s") "三低老人"
+                             (= datatype "f") "居家养老"
+                            (= datatype "j")  "机构养老")
+       agegroup (if (and (= nl "nl")(= (count minage) 0) (= (count maxage) 0))
+                  (str " (CASE WHEN age <= 60 THEN '60岁以下'
+	                                    WHEN age > 60 AND age < 70 THEN '60-70岁'
+	                                    WHEN age > 70 AND age<= 80 THEN '70-80岁'
+	                                    WHEN age > 80 AND age <= 90 THEN '80-90岁'
+	                                     ELSE '90岁以上' END)" ))
+       dqgroup (if (= dq "dq") (condp = dlength                                                   ;地区分组
+                                 6   (str " substr(districtid,0,9) ")
+                                 9   (str " substr(districtid,0,12) ")
+                                 12   " substr(districtid,0,12)  "
+                                 nil))
+       xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)                   ;性别分组
+       lbgroup (if (= lb "lb") (str " (case datatype   when 's' then '三低老人' when 'f' then '居家养老' when 'j' then '机构养老' else '未划分'   END)  "))
+       groups (str (if agegroup (str agegroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")) (if lbgroup (str lbgroup ",")))                            ;组合分组
+       groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
+       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if agegroup agegroup (str " '" agevalue "' ")) " as agevalue ," (if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup (str " '" gendervalue "' ")) " as gender, " (if lbgroup lbgroup (str " '" typevalue "' ")) " as oldtype, count(*) as opsum
+                                from " t_oldpeople " where 1=1 " tjconds " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
+    (println "SSSSSSSSSSSSSS" opstatissql)
+    (resp/json (db/get-results-bysql opstatissql))
+))
