@@ -763,10 +763,11 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                             (= datatype "j")  "机构养老")
        agegroup (if (and (= nl "nl")(= (count minage) 0) (= (count maxage) 0))
                   (str " (CASE WHEN age <= 60 THEN '60岁以下'
-	                                    WHEN age > 60 AND age < 70 THEN '60-70岁'
+	                                    WHEN age > 60 AND age <= 70 THEN '60-70岁'
 	                                    WHEN age > 70 AND age<= 80 THEN '70-80岁'
 	                                    WHEN age > 80 AND age <= 90 THEN '80-90岁'
-	                                     ELSE '90岁以上' END)" ))
+	                                    WHEN age > 90 THEN '90岁以上'
+	                                     ELSE '年龄未知' END)" ))
        dqgroup (if (= dq "dq") (condp = dlength                                                   ;地区分组
                                  6   (str " substr(districtid,0,9) ")
                                  9   (str " substr(districtid,0,12) ")
