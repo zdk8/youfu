@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.FileOutputStream;
 import java.util.Date;
+import java.lang.*;
 
 /**
  * Created by Administrator on 2014/12/8.
@@ -13,12 +14,13 @@ public class XlsReport {
     public static Workbook getReport() {
         Workbook wb = new HSSFWorkbook();  // or new XSSFWorkbook();
 
-
         Sheet sheet1 = wb.createSheet("new sheet");
         Row row = sheet1.createRow((short)0);
         // Create a cell and put a value in it.
         Cell cell = row.createCell(0);
-        cell.setCellValue("HZXH");
+        String code1 = "??????";
+//        String code1_1 = new String(code1.getBytes("ISO-8859-1"),"GBK");
+        cell.setCellValue(code1);
 
         // Or do it on one line.
         CreationHelper createHelper = wb.getCreationHelper();

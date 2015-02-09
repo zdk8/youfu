@@ -262,7 +262,7 @@ define(function(){
       local.find('[opt=query]').bind('click',function(){
         var data={
           districtid:districtid.combotree('getValue'),
-          datetype:local.find('[opt=ppselect]').val(),
+            economy:local.find('[opt=ppselect]').val(),
           gender:local.find('[opt=sex]').combobox('getValue'),
             minage:local.find('[opt=minage]').val(),
             maxage:local.find('[opt=maxage]').val(),
