@@ -112,8 +112,8 @@
           {page :page} params
           {rows :rows} params
            optypecond (if (> (count oldtype) 0)  (str " and datatype = '" oldtype "'"))
-           minagecond (if (> (count minage) 0)  (str " and age > '" minage "'"))
-           maxagecond (if (> (count maxage) 0)  (str " and age <= '" maxage "'"))
+           minagecond (if (> (count minage) 0)  (str " and age > " minage ))
+           maxagecond (if (> (count maxage) 0)  (str " and age <= " maxage ))
            cond (str (common/likecond "name" name) (common/likecond "identityid" identityid) optypecond minagecond maxagecond)
           order (str " order by lr_id desc")
           getresult (common/fenye rows page t_oldpeople "*" cond order)]
@@ -123,7 +123,7 @@
       ;(if (<= (* p r) c)                              ;;分页
        ; (:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) (* p r))}))
         ;(:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) c)})))
-      (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "birthd")})
+      (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "birthd") })
       ))
 
 ;;根据关键字查询
@@ -746,7 +746,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        lb (:lb params)
        rows (:rows params)
        page (:page params)
-       minagecond (if (> (count minage) 0) (str " and age >= " minage)  )
+       minagecond (if (> (count minage) 0) (str " and age > " minage)  )
        maxagecond   (if (> (count maxage) 0) (str " and age <= " maxage)  )
        ;starttimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE >= to_date('" starttime "','yyyy-mm-dd') ")  )
        ;endtimecond   (if (> (count endtime) 0) (str " and OPERATOR_DATE <= to_date('" endtime "','yyyy-mm-dd') " ) )

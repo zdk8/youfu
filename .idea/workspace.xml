@@ -10,16 +10,16 @@
     <list id="17513d99-2323-47ab-89ad-90068af693ab" name="New changelist" comment="" />
     <ignored path="newpension.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423461501418" ignored="false" />
+    <file path="/Dummy.txt" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423465128865" ignored="false" />
     <file path="/home.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423208578439" ignored="false" />
     <file path="/db.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423116863079" ignored="false" />
     <file path="/department.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423463018224" ignored="false" />
     <file path="/common.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423194639223" ignored="false" />
-    <file path="/Clojure REPL" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423453359753" ignored="false" />
+    <file path="/Clojure REPL" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423470455176" ignored="false" />
     <file path="/testphoto.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417071997406" ignored="false" />
     <file path="/a.dummy" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1421833938292" ignored="false" />
     <file path="$PROJECT_DIR$/../../hvitpublic/src/hvit/controller/auth.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1417071289952" ignored="false" />
-    <file path="/old.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423462476209" ignored="false" />
+    <file path="/old.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423476657849" ignored="false" />
     <file path="/testpost.html" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1420708725291" ignored="false" />
     <file path="/audit.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1423462770204" ignored="false" />
     <file path="/report.clj" changelist="b10e0399-5f0e-4bb6-936a-eee849fea935" time="1418095135807" ignored="false" />
@@ -97,7 +97,7 @@
       <file leaf-file-name="audit.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/audit.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="275" column="7" selection-start="18148" selection-end="18378" vertical-scroll-proportion="0.0">
+            <state line="276" column="71" selection-start="18285" selection-end="18285" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -106,7 +106,7 @@
       <file leaf-file-name="old.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="11" selection-start="5398" selection-end="5474" vertical-scroll-proportion="0.0">
+            <state line="734" column="6" selection-start="38968" selection-end="38968" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -115,7 +115,7 @@
       <file leaf-file-name="department.clj" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="149" column="54" selection-start="6501" selection-end="6501" vertical-scroll-proportion="0.3629764">
+            <state line="154" column="71" selection-start="6734" selection-end="6734" vertical-scroll-proportion="0.7023593">
               <folding />
             </state>
           </provider>
@@ -133,7 +133,7 @@
       <file leaf-file-name="home.clj" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="158" column="67" selection-start="8556" selection-end="8556" vertical-scroll-proportion="-6.4074073">
+            <state line="158" column="63" selection-start="8552" selection-end="8552" vertical-scroll-proportion="-6.4074073">
               <folding />
             </state>
           </provider>
@@ -1528,7 +1528,11 @@
       <created>1423461509146</created>
       <updated>1423461509146</updated>
     </task>
-    <option name="localTasksCounter" value="217" />
+    <task id="LOCAL-00217" summary="jgtjall 20150209&#10;">
+      <created>1423465150906</created>
+      <updated>1423465150907</updated>
+    </task>
+    <option name="localTasksCounter" value="218" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1553,8 +1557,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23782468" sideWeight="0.81037277" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26256078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23782468" sideWeight="0.50405186" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49594814" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -1609,7 +1613,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="jgtj3 20150209&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="jgtjall 20150209&#10;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1623,7 +1627,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="hospital 20150121&#10;" />
     <MESSAGE value="hospitalbyid 20150127&#10;" />
     <MESSAGE value="audit hospital 20150127&#10;" />
     <MESSAGE value="opd-sendmoney 20150121&#10;" />
@@ -1648,6 +1651,7 @@
     <MESSAGE value="jgtj 20150209&#10;" />
     <MESSAGE value="jgtj2 20150209&#10;" />
     <MESSAGE value="jgtj3 20150209&#10;" />
+    <MESSAGE value="jgtjall 20150209&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1735,28 +1739,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="11" selection-start="5398" selection-end="5474" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="67" selection-start="8556" selection-end="8556" vertical-scroll-proportion="-6.4074073">
+        <state line="734" column="6" selection-start="38968" selection-end="38968" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/audit.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="275" column="7" selection-start="18148" selection-end="18378" vertical-scroll-proportion="0.0">
+        <state line="276" column="71" selection-start="18285" selection-end="18285" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="158" column="63" selection-start="8552" selection-end="8552" vertical-scroll-proportion="-6.4074073">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/department.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="54" selection-start="6501" selection-end="6501" vertical-scroll-proportion="0.3629764">
+        <state line="154" column="71" selection-start="6734" selection-end="6734" vertical-scroll-proportion="0.7023593">
           <folding />
         </state>
       </provider>

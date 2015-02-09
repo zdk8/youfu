@@ -151,8 +151,8 @@
        datatype (:datatype params)
        {page :page}params
        {rows :rows}params
-       minagecond (if (> (count minage) 0)  (str " and age > '" minage "'"))
-       maxagecond (if (> (count maxage) 0)  (str " and age <= '" maxage "'"))
+       minagecond (if (> (count minage) 0)  (str " and age > " minage  ))
+       maxagecond (if (> (count maxage) 0)  (str " and age <= " maxage ))
        typecond (if (> (count datatype) 0)  (str " and type = '" datatype "'"))
        cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname)  minagecond maxagecond typecond)           ;" and checkouttime is null"
        getresult (common/fenye rows page "t_oldpeopledep" "*" cond " order by opd_id desc")]
@@ -324,7 +324,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        jg (:jg params)
        rows (:rows params)
        page (:page params)
-       minagecond (if (> (count minage) 0) (str " and age >= " minage)  )
+       minagecond (if (> (count minage) 0) (str " and age > " minage)  )
        maxagecond   (if (> (count maxage) 0) (str " and age <= " maxage)  )
        ;starttimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE >= to_date('" starttime "','yyyy-mm-dd') ")  )
        ;endtimecond   (if (> (count endtime) 0) (str " and OPERATOR_DATE <= to_date('" endtime "','yyyy-mm-dd') " ) )
