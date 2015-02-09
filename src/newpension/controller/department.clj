@@ -350,7 +350,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                                  12   " substr(districtid,0,12)  "
                                  nil))
        xbgroup (if (= xb "xb") (str " (case sex   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)                   ;性别分组
-       lbgroup (if (= lb "lb") (str " (case datatype   when '2' then '农村五保' when '3' then '城镇三无' when '4' then '其他' else '未划分'   END)  "))
+       lbgroup (if (= lb "lb") (str " (case type   when '2' then '农村五保' when '3' then '城镇三无' when '4' then '其他' else '未划分'   END)  "))
        jggroup (if (= jg "jg") (str " departname "))
        groups (str (if agegroup (str agegroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")) (if lbgroup (str lbgroup ",")) (if jggroup (str jggroup ",")))                            ;组合分组
        groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
