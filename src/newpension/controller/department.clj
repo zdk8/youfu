@@ -311,7 +311,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        datatype (:datatype params)
        departname (:departname params)
        dlength (count districtid)
-       nl (:sj params)
+       nl (:nl params)
        dq (:dq params)
        xb (:xb params)
        lb (:lb params)
@@ -338,7 +338,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                    (= datatype "2") "农村五保"
                    (= datatype "3") "城镇三无"
                    (= datatype "4")  "其他")
-       agegroup (if (and (= nl "nl")(= (count minage) 0) (= (count maxage) 0))
+       agegroup (if (and (= nl "nl") (= (count minage) 0)  (= (count maxage) 0))
                   (str " (CASE WHEN age <= 60 THEN '60岁以下'
 	                                    WHEN age > 60 AND age < 70 THEN '60-70岁'
 	                                    WHEN age > 70 AND age<= 80 THEN '70-80岁'
@@ -354,9 +354,9 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        jggroup (if (= jg "jg") (str " departname "))
        groups (str (if agegroup (str agegroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")) (if lbgroup (str lbgroup ",")) (if jggroup (str jggroup ",")))                            ;组合分组
        groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
-       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if agegroup agegroup (str " '" agevalue "' ")) " as agevalue ," (if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup (str " '" gendervalue "' ")) " as gender, " (if lbgroup lbgroup (str " '" typevalue "' ")) " as oldtype," (if lbgroup lbgroup (str " '" departname "' ")) " as departname, count(*) as opsum
+       opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if agegroup agegroup (str " '" agevalue "' ")) " as agevalue ," (if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup (str " '" gendervalue "' ")) " as gender, " (if lbgroup lbgroup (str " '" typevalue "' ")) " as oldtype," (if jggroup jggroup (str " '" departname "' ")) " as departname, count(*) as opsum
                                 from " t_oldpeopledep " where 1=1 " tjconds " group by " groupwith ") s LEFT JOIN division dv ON s.districtid = dv.dvcode")]
-    (println "SSSSSSSSSSSSSS" opstatissql)
+    (println  "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))
     ) )
 
