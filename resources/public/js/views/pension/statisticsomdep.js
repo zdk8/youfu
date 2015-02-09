@@ -48,23 +48,25 @@ define(function(){
         for(var i in series[0]){
             var se=series[0];
             var dateOjb=existInArray(data,se.datename);
-            //var dateType=existInArray(data,se.datatype);
-            //var dateSex=existInArray(data,se.sex);
-            //var dateAge=existInArray(data,se.age);
+            var dateDepartname=existInArray(data,se.departname);
+            var dateType=existInArray(data,se.datatype);
+            var dateSex=existInArray(data,se.sex);
+            var dateAge=existInArray(data,se.age);
             var valueOjb=existInArray(data,se.valuename);
             if(dateOjb){
                 var tmparr=[];
                 var categoriesDateX = [];
                 for(var i=0;i< dateOjb.dvalue.length;i++){
-                    //var istype =dateType.dvalue[i] == null?"":"-"+dateType.dvalue[i];
-                    //var issex =dateSex.dvalue[i] == null?"":"-"+dateSex.dvalue[i];
-                    //var isage =dateAge.dvalue[i] == null?"":"-"+dateAge.dvalue[i];
-                    /*tmparr.push([
-                     "【"+dateOjb.dvalue[i]+istype+issex+isage+"】:"+valueOjb.dvalue[i]+"(人)",
-                     valueOjb.dvalue[i]])*/
+                    var isdepartname =dateDepartname.dvalue[i] == null?"":"-"+dateDepartname.dvalue[i];
+                    var istype =dateType.dvalue[i] == null?"":"-"+dateType.dvalue[i];
+                    var issex =dateSex.dvalue[i] == null?"":"-"+dateSex.dvalue[i];
+                    var isage =dateAge.dvalue[i] == null?"":"-"+dateAge.dvalue[i];
                     tmparr.push([
+                     "【"+dateOjb.dvalue[i]+isdepartname+istype+issex+isage+"】:"+valueOjb.dvalue[i]+"(人)",
+                     valueOjb.dvalue[i]])
+                    /*tmparr.push([
                         "【"+dateOjb.dvalue[i]+"】:"+valueOjb.dvalue[i]+"(人)",
-                        valueOjb.dvalue[i]])
+                        valueOjb.dvalue[i]])*/
                     categoriesDateX.push(dateOjb.dvalue[i])
                 }
                 seriesData.push({
@@ -156,7 +158,7 @@ define(function(){
         getDepartName(local);
         var dvnames=[];
         dvnames.push({
-            datename:'dvname',valuename:'opsum',datatype:'oldtype',sex:'gender',age:'agevalue'
+            datename:'dvname',valuename:'opsum',departname:'departname',datatype:'oldtype',sex:'gender',age:'agevalue'
         })
       var localDataGrid=
           local.find('.easyui-datagrid-noauto').datagrid({
@@ -291,15 +293,16 @@ define(function(){
       local.find('[opt=query]').bind('click',function(){
         var data={
           districtid:districtid.combotree('getValue'),
-          datetype:$('[opt=datetype]').combobox('getValue'),
-          starttime:$('input[opt=date1]').datebox('getValue'),
-          endtime:$('input[opt=date2]').datebox('getValue'),
-          gender:$('[opt=sex]').combobox('getValue'),
-          type:$('[opt=type]').combobox('getValue'),
-          sj:$('input[name=date]:checked').val(),
-          dq:$('input[name=diqu]:checked').val(),
-          xb:$('input[name=sex]:checked').val(),
-          lx:$('input[name=leixing]:checked').val()
+          departname:local.find('[opt=servicemgt]').combobox('getText'),
+          datetype:local.find('[opt=ppselect]').val(),
+            gender:local.find('[opt=sex]').combobox('getValue'),
+            minage:local.find('[opt=minage]').val(),
+            maxage:local.find('[opt=maxage]').val(),
+            dq:local.find('input[name=diqu]:checked').val(),
+            jg:local.find('input[name=jigou]:checked').val(),
+            lb:local.find('input[name=leibie]:checked').val(),
+            xb:local.find('input[name=sex]:checked').val(),
+            nl:local.find('input[name=age]:checked').val()
         }
 
         localDataGrid.datagrid('reload',data);

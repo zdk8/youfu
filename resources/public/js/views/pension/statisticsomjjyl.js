@@ -284,10 +284,10 @@ define(function(){
       //清除所有条件
       local.find('[opt=clear]').bind('click',function(){
         local.find('[opt=districtid]').combotree('clear');
-        local.find('[opt=sex]').combobox('clear');
-        local.find('[opt=datetype]').combobox('clear');
-        local.find('[opt=date1]').datebox('setValue','');
-        local.find('[opt=date2]').datebox('setValue','');
+          local.find('[opt=ppselect]').val('clear')
+          local.find('[opt=sex]').combobox('clear');
+          local.find('[opt=minage]').val('');
+          local.find('[opt=maxage]').val('');
           local.find(':input[type=radio] + label').each(function () {
               $(this).prev()[0].checked = false;
               $(this).removeClass("checked");
