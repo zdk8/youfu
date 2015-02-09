@@ -326,7 +326,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        gendercond (if (> (count gender) 0 ) (str " and sex = '" gender "' ") )
        datatypecond (if (> (count datatype) 0 )   (str " and type = '" datatype "' "))
        departcond (if (> (count departname) 0) (str " and departname = '" departname "'"))
-       tjconds (str minagecond maxagecond  districtidcond gendercond datatypecond)            ;分组查询条件
+       tjconds (str minagecond maxagecond  districtidcond gendercond datatypecond departcond)            ;分组查询条件
        agevalue (cond
                   (and  (> (count minage) 0) (> (count maxage) 0))  (str  minage "-"maxage"岁")
                   (and (> (count minage) 0) (= (count maxage) 0))  (str minage "岁以上")

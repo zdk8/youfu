@@ -255,7 +255,7 @@ define(function(){
               var mygroupfirstrow=$(myfirsttd(currentTR,index));
               var len=mygroupfirstrow.find('td').eq(0).attr('rowspan')||1;
 
-              console.log(len);
+              //console.log(len);
               table.find('tr').removeClass('highGroupRow');
               myrowsaction(mygroupfirstrow,len);
 
@@ -294,7 +294,7 @@ define(function(){
         var data={
           districtid:districtid.combotree('getValue'),
           departname:local.find('[opt=servicemgt]').combobox('getText'),
-          datetype:local.find('[opt=ppselect]').val(),
+            datatype:local.find('[opt=ppselect]').val(),
             gender:local.find('[opt=sex]').combobox('getValue'),
             minage:local.find('[opt=minage]').val(),
             maxage:local.find('[opt=maxage]').val(),
@@ -317,10 +317,11 @@ define(function(){
       //清除所有条件
       local.find('[opt=clear]').bind('click',function(){
         local.find('[opt=districtid]').combotree('clear');
+          local.find('[opt=servicemgt]').combobox('clear')
+          local.find('[opt=ppselect]').val('clear')
         local.find('[opt=sex]').combobox('clear');
-        local.find('[opt=datetype]').combobox('clear');
-        local.find('[opt=date1]').datebox('setValue','');
-        local.find('[opt=date2]').datebox('setValue','');
+        local.find('[opt=minage]').val('');
+        local.find('[opt=maxage]').val('');
           local.find(':input[type=radio] + label').each(function () {
               $(this).prev()[0].checked = false;
               $(this).removeClass("checked");
