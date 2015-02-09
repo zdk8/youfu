@@ -107,11 +107,15 @@
           {name :name} params
           {identityid :identityid} params
           oldtype (:oldtype params)
+          minage (:minage params)
+          maxage (:maxage params)
           {page :page} params
           {rows :rows} params
            optypecond (if (> (count oldtype) 0)  (str " and datatype = '" oldtype "'"))
-           cond (str (common/likecond "name" name) (common/likecond "identityid" identityid) optypecond)
-         order (str " order by lr_id desc")
+           minagecond (if (> (count minage) 0)  (str " and age > '" minage "'"))
+           maxagecond (if (> (count maxage) 0)  (str " and age <= '" maxage "'"))
+           cond (str (common/likecond "name" name) (common/likecond "identityid" identityid) optypecond minagecond maxagecond)
+          order (str " order by lr_id desc")
           getresult (common/fenye rows page t_oldpeople "*" cond order)]
           ;p (Integer/parseInt page)
           ;r (Integer/parseInt rows)

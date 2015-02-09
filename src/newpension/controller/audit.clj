@@ -270,7 +270,13 @@
        page (:page params)
        name (:name params)
        identityid (:identityid params)
-       cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid))
+       minage (:minage params)
+       maxage (:maxage params)
+       datatype (:datatype params)
+       minagecond (if (> (count minage) 0)  (str " and age > '" minage "'"))
+       maxagecond (if (> (count maxage) 0)  (str " and age <= '" maxage "'"))
+       typecond (if (> (count datatype) 0)  (str " and economy = '" datatype "'"))
+       cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid) minagecond maxagecond typecond )
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 

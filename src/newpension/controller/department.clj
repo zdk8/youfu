@@ -146,9 +146,15 @@
        {identityid :identityid}params
        {departname :departname}params
        {deptype :deptype}params
+       minage (:minage params)
+       maxage (:maxage params)
+       datatype (:datatype params)
        {page :page}params
        {rows :rows}params
-       cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname) " and checkouttime is null")
+       minagecond (if (> (count minage) 0)  (str " and age > '" minage "'"))
+       maxagecond (if (> (count maxage) 0)  (str " and age <= '" maxage "'"))
+       typecond (if (> (count datatype) 0)  (str " and type = '" datatype "'"))
+       cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname)  minagecond maxagecond typecond)           ;" and checkouttime is null"
        getresult (common/fenye rows page "t_oldpeopledep" "*" cond " order by opd_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "checkintime")})))
 
