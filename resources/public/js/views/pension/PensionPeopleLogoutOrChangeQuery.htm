@@ -24,26 +24,6 @@
                     str=$(str).append('<a action=&quot;change&quot;title=&quot;变更&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>&nbsp;&nbsp;');
                     return str.html();
                 }">操作</th>
-                <!--<th data-options="field:'aulevel',width:127,
-                formatter: function(value,row,index){
-                        if(value == '' || value == null){
-                            return approvalProcess[4]
-                        }else{
-                            return approvalProcess[value]
-                        }
-                    }">状态</th>-->
-                <!--<th data-options="field:'auflag',width:100">流程信息</th>
-                <th data-options="field:'audesc',width:180">处理意见</th>-->
-                <!--<th data-options="field:'name',width:340,align:'left',
-                formatter:function(v,r,i)
-                {
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
-                    return str.html();
-                }">人员信息</th>-->
-                <!--<th data-options="field:'auuser',width:127">办理人</th>-->
-                <!--<th data-options="field:'bsnyue',width:127">业务期</th>-->
-                <!--<th data-options="field:'opiniontime',width:230">时间</th>-->
                 <th data-options="field:'name',width:100,align:'center',
                 formatter:function(v,r,i)
                 {
@@ -53,13 +33,66 @@
                 }">姓名</th>
                 <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
                 <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
+                <th data-options="field:'age',width:150,align:'center'">年龄</th>
                 <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
+                <th data-options="field:'economy',width:200,align:'center',
+                    formatter: function(value,row,index){
+                    return economyArr[value]
+                    }">老人类型
+                </th>
                 <th data-options="field:'address',width:200,align:'left'">住址</th>
             </tr>
             </thead>
         </table>
 
-        <div tb>
+        <div tb style="padding-bottom: 0px">
+            <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
+            <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 25px;">
+                <table cellspacing="0" cellpadding="0" style="float: left;padding-bottom: 3px">
+                    <tr>
+                        <td>
+                            老人类型 :
+                            <select opt="ppselect" style="background: none repeat scroll 0 0 #ffffff;height: 20px">
+                                <option value=""></option>
+                                <option value="0">低保特困职工</option>
+                                <option value="1">低保边缘户</option>
+                                <option value="2">低收入</option>
+                                <option value="3">无退休工资</option>
+                                <option value="4">有退休工资</option>
+                                <option value="5">特殊贡献</option>
+                            </select>
+                            &nbsp;&nbsp;
+                        </td>
+
+                        <td>
+                            姓名 :
+                            <input opt="name" type="text" style="width:114px">
+                            &nbsp;&nbsp;
+                        </td>
+
+                        <td>
+                            身份证 :
+                            <input opt="identityid" type="text">
+                            &nbsp;&nbsp;
+                        </td>
+
+                        <td>
+                            年龄：
+                            <input style="width: 50px;text-align: center" opt="minage"> --
+                            <input style="width: 50px;text-align: center" opt="maxage">岁
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
+                    <td>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input class="highcharstoolbarbutton" type="button" value="查询" style="border: 1px solid #F7F2F2;">
+                    </td>
+                </table>
+            </div>
+        </div>
+    </div>
+        <!--<div tb>
             <table cellspacing="0" cellpadding="0" style="float: right">
                 <tr>
 
@@ -82,7 +115,7 @@
                 </tr>
             </table>
             <div class="clear"></div>
-        </div>
+        </div>-->
 
     </div>
 </div>

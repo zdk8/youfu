@@ -69,8 +69,10 @@ define(function(){
             local.find('.searchbtn').click(function(){
                 peopleinfodatarid.datagrid('load',{
                     oldtype:ppselect.val(),
-                    name:name.searchbox('getValue'),
-                    identityid:identityid.searchbox('getValue')
+                    name:name.val(),
+                    identityid:identityid.val(),
+                    minage:local.find('[opt=minage]').val(),
+                    maxage:local.find('[opt=maxage]').val()
                 })
             })
         }

@@ -16,7 +16,13 @@
                pagination:true">
             <thead>
             <tr>
-                <th data-options="field:'name',width:60">姓名</th>
+                <th data-options="field:'name',width:60,align:'center',
+                formatter:function(v,r,i)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                    return str.html();
+                }">姓名</th>
                 <th data-options="field:'identityid',width:100">身份证号</th>
                 <th data-options="field:'telephone',width:80">联系电话</th>
                 <th data-options="field:'address',width:180">家庭地址</th>

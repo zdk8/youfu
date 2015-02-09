@@ -46,6 +46,14 @@ define(function(){
             })
             .prev().hide();     //原来的圆点样式设置为不可见
     }
+    var addRadioCssNoOperation = function(local) {
+        var selectRadio = ":input[type=radio] + label";
+        local.find(selectRadio).each(function () {
+            if ($(this).prev()[0].checked){
+                $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
+            }
+        }).prev().hide();     //原来的圆点样式设置为不可见
+    }
     var getCheckBox=function(w,enumtype,name,record) {
         $.ajax({
             url: 'getenumbytype',
@@ -264,9 +272,22 @@ define(function(){
     }
     /*查看详细信息*/
     function showInformation(local,option){
+        addRadioCssNoOperation(local);
         baseRender(local, option.queryParams.data);
-        local.find('[opt=save]').hide()
         local.find('form').form('load', option.queryParams.data);
+        var districtidval = option.queryParams.data.districtid;
+        local.find('[opt=districtid]').combotree("setValue",getDivistionTotalname(districtidval));
+        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']').attr("checked","checked");
+        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']+label').addClass("checked");
+        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']').attr("checked","checked");
+        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']+label').addClass("checked");
+        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']').attr("checked","checked");
+        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']+label').addClass("checked");
+        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']').attr("checked","checked");
+        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']+label').addClass("checked");
+        local.find('[opt=save]').hide();
+        local.find('[opt=update]').hide();
+        local.find('[opt=change]').hide();
     }
     /*变更人员信息*/
     function changeInfo(local,option){

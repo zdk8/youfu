@@ -112,10 +112,13 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                     toolbar:local.find('div[tb]')
                 })
 
-            local.find('.searchbtn').click(function(){
+            local.find('.highcharstoolbarbutton').click(function(){
                 localDataGrid.datagrid('load',{
-                    name:local.find('[opt=name]').searchbox('getValue'),
-                    identityid:local.find('[opt=identityid]').searchbox('getValue')
+                    datatype:local.find('[opt=ppselect]').val(),
+                    name:local.find('[opt=name]').val(),
+                    identityid:local.find('[opt=identityid]').val(),
+                    minage:local.find('[opt=minage]').val(),
+                    maxage:local.find('[opt=maxage]').val()
                 })
             })
         }
