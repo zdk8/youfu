@@ -9,7 +9,8 @@ define(function(){
             {text: '处理',hidden:'hidden',opt:'dealwith'},
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '删除',hidden:'hidden',opt:'delete'},
-            {text: '保存',hidden:'hidden',opt:'save'}
+            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '保存',hidden:'hidden',opt:'save2'}
 //            {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
@@ -72,6 +73,7 @@ define(function(){
         local.find('[opt=dealwith]').hide();
         local.find('[opt=delete]').hide();
         local.find('[opt=save]').hide();
+        local.find('[opt=save2]').hide();
         var datas = option.queryParams.data;
         var pensionform = local.find('[opt=pensionform]');      //老人信息主表
         pensionform.form('load',datas)        //填充表单
@@ -126,11 +128,14 @@ define(function(){
         /*根据身份证获取基本信息*/
         getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
             gender:local.find('[opt=gender]'),age:local.find('[opt=age]'),agetype:null});
-        local.find('[opt=dealwith]').hide()
-        local.find('[opt=update]').hide()
-        local.find('[opt=delete]').hide()
+        local.find('[opt=dealwith]').hide();
+        local.find('[opt=update]').hide();
+        local.find('[opt=delete]').hide();
+        local.find('[opt=save2]').hide();
         var savebtn = local.find('[opt=save]');               //保存按钮
         savebtn.show().click(function(){
+            local.find('[opt=save]').hide()
+            local.find('[opt=save2]').show()
             local.find('[opt=pensionform]').form('submit', {
                 url:'saveold',
                 onSubmit: function (params) {
@@ -141,6 +146,8 @@ define(function(){
                 success: function (data) {
                     if(data == "true"){
                         cj.slideShow('保存成功');
+                        local.find('[opt=save]').show()
+                        local.find('[opt=save2]').hide()
                         $("#tabs").tabs("close","老年基本信息录入");
                     }else{
                         cj.slideShow('<label style="color: red">保存失败</label>');
@@ -166,6 +173,7 @@ define(function(){
         }
         var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
         local.find('[opt=save]').hide();
+        local.find('[opt=save2]').hide();
         local.find('[opt=update]').hide();
         local.find('[opt=delete]').hide();
         dealwithbtn.show().click(function(){
