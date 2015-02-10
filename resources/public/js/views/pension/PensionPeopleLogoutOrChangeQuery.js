@@ -116,7 +116,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
             var ppselect = local.find('[opt=ppselect]');
             ppselect.change(function () {
                 localDataGrid.datagrid('load',{
-                    oldtype:ppselect.val()
+                    datatype:ppselect.val()
                 })
             })
 

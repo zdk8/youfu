@@ -9,6 +9,7 @@
                pageSize:cj.getDataGridAttr('pageSize'),
                pageList:cj.getDataGridAttr('pageList'),
                singleSelect:true,
+               striped:true,
                loadMsg:'',
                pagination:true">
     <thead data-options="frozen:true">
@@ -21,7 +22,8 @@
                 }">操作
         </th>
         <th rowspan="2" data-options="field:'bsnyue'">业务期</th>
-        <th rowspan="2" data-options="field:'name',width:70,
+        <th rowspan="2" data-options="field:'name'">姓名</th>
+        <!--<th rowspan="2" data-options="field:'name',width:70,
             formatter:function(v,r,i)
                 {
                     var str='<div></div>';
@@ -29,7 +31,7 @@
                     return str.html();
                 }">
             姓名
-        </th>
+        </th>-->
         <th rowspan="2" data-options="field:'identityid',width:170">身份证号码</th>
         <th rowspan="2" data-options="field:'monthsubsidy',width:60">每月补助<br>(/元)</th>
         <th rowspan="2" data-options="field:'subsidy_money',width:60">住院补助<br>(/元)</th>
