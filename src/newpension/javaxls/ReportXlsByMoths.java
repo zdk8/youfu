@@ -336,7 +336,6 @@ public class ReportXlsByMoths {
 
                 HSSFCell cell_assesstype = rownum.createCell((short) 9);         //人员类型
                 String economyval = dataval.get(":economy").toString();
-                System.out.println("人员类型:"+economyval);
                 if (economyval.length() > 0){
                     cell_assesstype.setCellValue(economyval);
                 }
