@@ -1,7 +1,6 @@
 <!--入住人员管理-->
 <table opt="ruzhurymanagement" data-options="
                method:'post',
-               toolbar:'#tb_rzrygl',
                fit:true,
                fitColumns:true,
                border:false,
@@ -13,8 +12,6 @@
                loadMsg:''">
     <thead>
     <tr>
-        <!--<th data-options="field:'ck',checkbox:true"></th>
-        <th data-options="field:'opd_id',hidden:true"></th>-->
         <th data-options="field:'ro',width:55,align:'center',formatter:function(value,rowData,rowIndex)
             {
                 var str='<div></div>';
@@ -34,47 +31,40 @@
         <th data-options="field:'identityid',width:145,align:'center'">身份证</th>
         <th data-options="field:'address',width:145,align:'center'">家庭住址</th>
         <th data-options="field:'checkintime',width:145,align:'center'">入住时间</th>
-
-        <!--str=$(str).append('<a action=&quot;update&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-update-pl16&quot;>修改</span></span></a>');
-                str=$(str).append('<a action=&quot;delete&quot;  class=&quot;opiconbg&quot;><span><span class=&quot;icon-logout-pl16&quot;>删除</span></span></a>');-->
     </tr>
     </thead>
 </table>
-<!--<div id="tb_rzrygl" style="padding: 5px;padding-bottom:2px;background-color: #ffffff">-->
-<div id="tb_rzrygl">
-    <!--<div>
-        机构名称:<input type="text" opt="departname">
-        姓名:<input type="text" opt="name">
-        身份证:<input type="text" opt="identityid">
-        <input class="buttoncss" opt="refresh" type="button" value="查询">
+<div tb style="padding-bottom: 0px">
+    <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
+    <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 25px;">
+        <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
+            <tr>
+                <td>
+                    机构名称 :
+                    <input opt="departname" type="text">
+                    &nbsp;&nbsp;
+                </td>
+
+                <td>
+                    姓名 :
+                    <input opt="name" type="text" size="10">
+                    &nbsp;&nbsp;
+                </td>
+
+                <td>
+                    身份证 :
+                    <input opt="identityid" type="text">
+                </td>
+
+                <td>
+                    <span class="searchbtn" opt="refresh">&nbsp;</span>
+                </td>
+
+            </tr>
+        </table>
     </div>
-    <hr style="color: rgba(183,176,162,0.20);border-color: #FAF2F2;border: 1px dashed;"/>-->
-    <table cellspacing="0" cellpadding="0" style="float: right;">
-        <tr>
-
-            <td><label class="gray7">搜索条件:</label></td>
-
-            <td style="width: 200px;text-align: right">
-                <input opt="departname" class="easyui-searchbox" data-options="prompt:'机构名称',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>
-            <td style="width: 200px;text-align: right">
-                <input opt="name" class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>
-            <td style="width: 200px;text-align: right">
-                <input opt="identityid" class="easyui-searchbox" data-options="prompt:'身份证',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>
-
-            <td>
-                <span class="searchbtn" opt="refresh">&nbsp;</span>
-            </td>
-
-        </tr>
-    </table>
-    <div class="clear"></div>
 </div>
+
 
 
 

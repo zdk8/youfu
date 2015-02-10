@@ -51,7 +51,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                 })
 
 
-            local.find('.highcharstoolbarbutton').click(function(){
+            local.find('.searchbtn').click(function(){
                 localDataGrid.datagrid('load',{
                     name:local.find('[opt=name]').val(),
                     identityid:local.find('[opt=identityid]').val()

@@ -32,7 +32,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                 year=Number(year)+1;
                 yearvalue.val(year);
             });
-            local.find('.highcharstoolbarbutton').click(function(){
+            local.find('.searchbtn').click(function(){
                 localDataGrid.datagrid('load',{
                     year:yearvalue.val(),
                     name:local.find('[opt=name]').val(),

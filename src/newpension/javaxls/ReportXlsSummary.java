@@ -202,8 +202,8 @@ public class ReportXlsSummary {
             }
         }*/
         Map datasval = getDatas(datas);
-        System.out.println("数据："+datasval+"长度:"+datasval.size());
-        System.out.println("单个："+((Map)datasval.get(0)).get(":十二"));
+//        System.out.println("数据："+datasval+"长度:"+datasval.size());
+//        System.out.println("单个："+((Map)datasval.get(0)).get(":十二"));
         String[] months = {":一",":二",":三",":四",":五",":六",":七",":八",":九",":十",":十一",":十二"};
         int rowindex = 4;     //表体值从第4行开始
         int opsum = 0;        //人数总数
@@ -231,28 +231,43 @@ public class ReportXlsSummary {
             cellnum.setCellStyle(style);
 
             HSSFCell cell_address1 = rownum.createCell((short) 1);      //街道名称
-            cell_address1.setCellValue(dataval.get(":dvname").toString());
+            String dvname = dataval.get(":dvname").toString();
+            if (dvname.length() > 0){
+                cell_address1.setCellValue(dvname);
+            }
             cell_address1.setCellStyle(style);
 
             HSSFCell cell_name = rownum.createCell((short) 2);           //人数
-            cell_name.setCellValue(dataval.get(":opsum").toString());
+            String opsumval = dataval.get(":opsum").toString();
+            if (opsumval.length() > 0){
+                cell_name.setCellValue(opsumval);
+            }
             cell_name.setCellStyle(style);
             int colindex = 3;
             int rowmoney = 0;           //横向计算
             for(int m=0;m<months.length;m++){                            //月份
                 HSSFCell cell_month = rownum.createCell((short) colindex++);
-                cell_month.setCellValue(dataval.get(months[m]).toString());
+                String monthval = dataval.get(months[m]).toString();
+                if (monthval.length() > 0){
+                    cell_month.setCellValue(monthval);
+                    rowmoney+=Integer.parseInt(monthval);
+                }
                 cell_month.setCellStyle(style);
-                rowmoney+=Integer.parseInt(dataval.get(months[m]).toString());
             }
 
             HSSFCell cell_zybt = rownum.createCell((short) 15);         //住院补贴
-            cell_zybt.setCellValue(dataval.get(":subsidy_money").toString());
+            String subsidymoneyval = dataval.get(":subsidy_money").toString();
+            if (subsidymoneyval.length() > 0){
+                cell_zybt.setCellValue(subsidymoneyval);
+            }
             cell_zybt.setCellStyle(style);
 
 
             /*竖向计算*/
-            opsum +=Integer.parseInt(dataval.get(":opsum").toString());
+            String opsumv = dataval.get(":opsum").toString();
+            if (opsumv.length() > 0){
+                opsum +=Integer.parseInt(opsumv);
+            }
             monthsum1 +=Integer.parseInt(dataval.get(":一").toString());
             monthsum2 +=Integer.parseInt(dataval.get(":二").toString());
             monthsum3 +=Integer.parseInt(dataval.get(":三").toString());

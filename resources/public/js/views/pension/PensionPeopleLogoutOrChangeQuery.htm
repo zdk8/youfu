@@ -48,12 +48,11 @@
         <div tb style="padding-bottom: 0px">
             <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
             <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 25px;">
-                <table cellspacing="0" cellpadding="0" style="float: left;padding-bottom: 3px">
+                <table cellspacing="0" cellpadding="0" style="float: left">
                     <tr>
                         <td>
-                            老人类型 :
-                            <select opt="ppselect" style="background: none repeat scroll 0 0 #ffffff;height: 20px;font-size: 10px;">
-                                <option value=""></option>
+                            <select opt="ppselect">
+                                <option value="">所有老人</option>
                                 <option value="0">低保特困职工</option>
                                 <option value="1">低保边缘户</option>
                                 <option value="2">低收入</option>
@@ -61,9 +60,11 @@
                                 <option value="4">有退休工资</option>
                                 <option value="5">特殊贡献</option>
                             </select>
-                            &nbsp;&nbsp;
                         </td>
-
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
+                    <tr>
                         <td>
                             姓名 :
                             <input opt="name" type="text" style="width:114px">
@@ -81,42 +82,15 @@
                             <input style="width: 50px;text-align: center" opt="minage"> --
                             <input style="width: 50px;text-align: center" opt="maxage">岁
                         </td>
+
+                        <td>
+                            <span class="searchbtn" >&nbsp;</span>
+                        </td>
                     </tr>
-                </table>
-                <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
-                    <td>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input class="highcharstoolbarbutton" type="button" value="查询" style="border: 1px solid #F7F2F2;">
-                    </td>
                 </table>
             </div>
         </div>
     </div>
-        <!--<div tb>
-            <table cellspacing="0" cellpadding="0" style="float: right">
-                <tr>
-
-                    <td><label class="gray7">搜索条件:</label></td>
-
-                    <td style="width: 200px;text-align: right">
-                        <input opt="name" class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
-                               type="keyword" style="width:200px" >
-                    </td>
-
-                    <td style="width: 200px;text-align: right">
-                        <input opt="identityid" class="easyui-searchbox" data-options="prompt:'身份证',iconCls:'icon-log'"
-                               type="keyword" style="width:200px" >
-                    </td>
-
-                    <td>
-                        <span class="searchbtn" >&nbsp;</span>
-                    </td>
-
-                </tr>
-            </table>
-            <div class="clear"></div>
-        </div>-->
-
     </div>
 </div>
 

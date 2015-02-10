@@ -68,7 +68,7 @@ define(function(){
         })
         refresh.click(function(){
             ylstgl.datagrid('load',{
-                departname:departname.searchbox('getValue')
+                departname:departname.val()
             });
         })
 

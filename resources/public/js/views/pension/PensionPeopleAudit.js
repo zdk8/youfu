@@ -98,8 +98,8 @@ define(function(){
         /*搜索*/
         local.find('.searchbtn').click(function(){
             ppaudit.datagrid('load',{
-                name:name.searchbox('getValue'),
-                identityid:identityid.searchbox('getValue')
+                name:name.val(),
+                identityid:identityid.val()
             })
         })
 

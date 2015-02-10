@@ -112,7 +112,15 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                     toolbar:local.find('div[tb]')
                 })
 
-            local.find('.highcharstoolbarbutton').click(function(){
+            /*老人类型选择*/
+            var ppselect = local.find('[opt=ppselect]');
+            ppselect.change(function () {
+                localDataGrid.datagrid('load',{
+                    oldtype:ppselect.val()
+                })
+            })
+
+            local.find('.searchbtn').click(function(){
                 localDataGrid.datagrid('load',{
                     datatype:local.find('[opt=ppselect]').val(),
                     name:local.find('[opt=name]').val(),

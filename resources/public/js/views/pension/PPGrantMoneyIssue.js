@@ -220,9 +220,9 @@ define(['views/pension/PPGrantMoneyIssueDlg'],function(issuefile){
 
         local.find('.searchbtn').click(function(){
             ppgrantmoneyissue.datagrid('load',{
-                name:local.find('[opt=name]').searchbox('getValue'),
-                identityid:local.find('[opt=identityid]').searchbox('getValue'),
-                bsnyue:local.find('[opt=bsnyue]').searchbox('getValue')
+                name:local.find('[opt=name]').val(),
+                identityid:local.find('[opt=identityid]').val(),
+                bsnyue:local.find('[opt=bsnyue]').val()
             })
         })
 

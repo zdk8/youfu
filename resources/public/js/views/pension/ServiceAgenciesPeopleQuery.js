@@ -1,7 +1,7 @@
 define(function(){
     var render = function(local,option){
         var fwrygl = local.find('[opt=furymanagement]');        //服务人员管理
-        var refresh = local.find('[opt=refresh]');               //刷新
+        var refresh = local.find('.searchbtn');               //刷新
         var departname = local.find('[opt=departname]');        //机构名称
         var name = local.find('[opt=name]');                     //姓名
         var identityid = local.find('[opt=identityid]');        //身份证
@@ -87,12 +87,13 @@ define(function(){
                         })(i)
                     }
                 }
-            }
+            },
+            toolbar:local.find('div[tb]')
         })
         refresh.click(function(){
             fwrygl.datagrid('load',{
-                departname:departname.searchbox("getValue"),
-                servicername:name.searchbox("getValue")
+                departname:departname.val(),
+                servicername:name.val()
             });
         })
     }

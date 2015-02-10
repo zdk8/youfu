@@ -73,15 +73,16 @@ define(function(){
                         })(i)
                     }
                 }
-            }
+            },
+            toolbar:local.find('div[tb]')
         })
         refresh.click(function(){
 //            rzrygl.datagrid('reload');
             rzrygl.datagrid('load',{
                 deptype:'jigou',
-                departname:departname.searchbox("getValue"),
-                name:name.searchbox("getValue"),
-                identityid:identityid.searchbox("getValue")
+                departname:departname.val(),
+                name:name.val(),
+                identityid:identityid.val()
             });
         })
     }

@@ -24,8 +24,8 @@ define(function(){
         local.find('[opt=searchbtn]').click(function(){
             ppgrantmoneyissuedlg.datagrid('load',{
                 bsnyue:bsnyue.datebox('getValue'),
-                name:name.searchbox('getValue'),
-                identityid:identityid.searchbox('getValue')
+                name:name.val(),
+                identityid:identityid.val()
             })
         })
         window.setTimeout(function(){

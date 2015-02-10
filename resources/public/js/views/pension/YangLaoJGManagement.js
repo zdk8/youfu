@@ -76,7 +76,7 @@ define(function(){
         refresh.click(function(){
             yljggl.datagrid('load',{
                 deptype:'jigou',
-                departname:departname.searchbox('getValue')
+                departname:departname.val()
             });
         })
 

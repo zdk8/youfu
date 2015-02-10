@@ -72,7 +72,7 @@ define(function(){
         refresh.click(function(){
             yljjgl.datagrid('load',{
                 deptype:'jujia',
-                departname:departname.searchbox('getValue')
+                departname:departname.val()
             });
         })
     }

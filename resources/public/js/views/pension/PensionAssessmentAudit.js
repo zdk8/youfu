@@ -94,8 +94,8 @@ define(['views/pension/PensionServiceAudit','views/pension/PensionServiceAss'],f
 
         local.find('.searchbtn').click(function(){
             paaudit.datagrid('load',{
-                name:local.find('[opt=name]').searchbox('getValue'),
-                identityid:local.find('[opt=identityid]').searchbox('getValue')
+                name:local.find('[opt=name]').val(),
+                identityid:local.find('[opt=identityid]').val()
             })
         })
         operationlogFunc(operationlog);             //操作日志

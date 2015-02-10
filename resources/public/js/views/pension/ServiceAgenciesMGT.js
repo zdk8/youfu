@@ -111,7 +111,7 @@ define(function(){
 
             local.find('.searchbtn').click(function(){
                 localDataGrid.datagrid('load',{
-                    departname:local.find('[opt=departname]').searchbox('getValue')
+                    departname:local.find('[opt=departname]').val()
                 })
             })
 
