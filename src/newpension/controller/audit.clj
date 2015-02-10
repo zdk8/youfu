@@ -854,7 +854,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        sumcol (apply str (interpose "," (map #(str "sum(" % ") as " % " ") f)))
        get-mreportsql (apply str (unionsql sf ym))
        get-moneysql (str "select jja_id," col "from (" get-mreportsql ") group by jja_id")
-       get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress,  (case jm.economy   when '0' then '低保特困职工' when '1' then '低保边缘户' when '2' then '低收入' when '3' then '无退休工资' when '4' then '有退休工资' when '5' then '特殊贡献' else ''   end) as economy,s.*,jm.servicetime,jm.districtid,h.subsidy_money,dv.dvname  from ( " get-moneysql ") s
+       get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress,  s.*,jm.servicetime,(case jm.economy   when '0' then '低保特困职工' when '1' then '低保边缘户' when '2' then '低收入' when '3' then '无退休工资' when '4' then '有退休工资' when '5' then '特殊贡献' else ''   end) as economy,jm.districtid,h.subsidy_money,dv.dvname  from ( " get-moneysql ") s
                            left join  (select j.jja_id,j.name,j.identityid,j.address,j.districtid,j.economy,a.servicername,a.servicephone,a.serviceaddress,a.servicetime from t_jjylapply j
                                          left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime from t_jjylassessment t
                                                  left join t_depservice ds on t.s_id = ds.s_id) a
