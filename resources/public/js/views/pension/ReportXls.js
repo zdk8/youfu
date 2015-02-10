@@ -33,8 +33,8 @@ define(function(){
             columns: [[
                 { title: '被服务对象',colspan:3},
                 { title: '服务人员',colspan:3},
-                { field: 'birthd1',title: '服务等级', rowspan:2,width: 90},
-                { field: 'assesstype',title: '人员类型', rowspan:2,width: 90},
+                { field: 'economy1',title: '服务等级', rowspan:2,width: 90},
+                { field: 'economy',title: '人员类型', rowspan:2,width: 90},
                 { field: 'servicetime',title: '服务<br>时间', rowspan:2,width: 50},
                 { field: 'subsidy_money',title: '住院补助', rowspan:2,width: 90},
                 { field: 'address1',title: '补助金额', rowspan:2,width: 90}
@@ -121,8 +121,8 @@ define(function(){
             }
             monthvalue.val(str.toString());
             monthvaluenum.val(strnum.toString());
-            strmonth.push({ field: 'birthd1',title: '服务等级', rowspan:2,width: 90})
-            strmonth.push({ field: 'assesstype',title: '人员类型', rowspan:2,width: 90})
+            strmonth.push({ field: 'economy1',title: '服务等级', rowspan:2,width: 90})
+            strmonth.push({ field: 'economy',title: '人员类型', rowspan:2,width: 90})
             strmonth.push({ field: 'servicetime',title: '服务<br>时间', rowspan:2,width: 50})
             strmonth.push({ field: 'subsidy_money',title: '住院补助', rowspan:2,width: 90})
 

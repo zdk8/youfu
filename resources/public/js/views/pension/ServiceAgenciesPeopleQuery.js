@@ -27,14 +27,14 @@ define(function(){
                                 var action = $(this).attr("action");
                                 if(action == "cancellation"){             //注销
                                     var departname = record.departname;         //机构名称
-                                    var testmsg = "是否注销人员【<label style='color: darkslategrey;font-weight: bold'>"+record.name+"</label>】?"
+                                    var testmsg = "是否注销人员【<label style='color: darkslategrey;font-weight: bold'>"+record.servicername+"</label>】?"
                                     $.messager.confirm('温馨提示', testmsg, function(r){
                                         if (r){
                                             $.ajax({
                                                 url:'pension/oldpeoplecheckout',
                                                 type:'post',
                                                 data:{
-                                                    opd_id:record.opd_id
+                                                    opd_id:record.s_id
                                                 },
                                                 success:function(data){
                                                     if(data.success){

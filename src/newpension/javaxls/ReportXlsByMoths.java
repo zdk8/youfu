@@ -139,6 +139,7 @@ public class ReportXlsByMoths {
         cellfwdj.setCellStyle(style);
         sheet.addMergedRegion(new CellRangeAddress(2, 3, 9, 9));
         HSSFCell cellrylx = row2.createCell((short) 9);
+        sheet.setColumnWidth(9,4*1000);
         cellrylx.setCellValue("人员类型");
         cellrylx.setCellStyle(style);
         sheet.addMergedRegion(new CellRangeAddress(2, 3, 10, 10));
@@ -327,12 +328,17 @@ public class ReportXlsByMoths {
 
                 HSSFCell cell_servicephone1 = rownum.createCell((short) 8);       //服务等级
                 cell_servicephone1.setCellValue("中度");
+                /*String economyval = dataval.get(":economy").toString();
+                if (economyval.length() > 0){
+                    cell_servicephone1.setCellValue(economyval);
+                }*/
                 cell_servicephone1.setCellStyle(style);
 
                 HSSFCell cell_assesstype = rownum.createCell((short) 9);         //人员类型
-                String assesstype = dataval.get(":assesstype").toString();
-                if (assesstype.length() > 0){
-                    cell_assesstype.setCellValue(assesstype);
+                String economyval = dataval.get(":economy").toString();
+                System.out.println("人员类型:"+economyval);
+                if (economyval.length() > 0){
+                    cell_assesstype.setCellValue(economyval);
                 }
                 cell_assesstype.setCellStyle(style);
 
