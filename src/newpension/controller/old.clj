@@ -786,3 +786,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (println "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))
 ))
+
+
+
+(defn set-oldmap [request]
+  (let[params (:params request)
+        workid (:workid params)
+        ismap (:ismap params)]
+    (db/update-setoldmap ismap workid)
+    (resp/json {:success true :message "map set success"})))

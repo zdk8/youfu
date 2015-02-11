@@ -255,6 +255,11 @@
     (set-fields old)
     (where {:lr_id id})))
 
+(defn update-setoldmap [ismap mapguid]
+  (update olds
+    (set-fields {:ismap ismap})
+    (where {:mapguid mapguid})))
+
 ;;修改养老家庭成员信息
 (defn update-oldsorel [oldsorel lrgx_id]
   (update t_oldsocrel

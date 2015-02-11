@@ -223,6 +223,7 @@
   (POST "/depart/departstatistic" request (depart/depart-statistic3 request))                                                ;;机构统计分析2
 
  ; (GET "/test/testtime" request (audit/testtime request))
+  (POST "/old/setoldmap" request (old/set-oldmap request))                                                                       ;;设置地图
 
 
 
