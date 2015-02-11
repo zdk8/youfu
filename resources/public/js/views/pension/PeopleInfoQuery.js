@@ -11,7 +11,8 @@ define(function(){
                 var viewbtns=local.find('[action=view]');
                 var deletebtns=local.find('[action=delete]');
                 var grantbtns=local.find('[action=grant]');
-                var btns_arr=[viewbtns,deletebtns,grantbtns];
+                var mapbtn = local.find('[action=map]');                //地图
+                var btns_arr=[viewbtns,deletebtns,grantbtns,mapbtn];
                 var rows=data.rows;
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
@@ -30,8 +31,14 @@ define(function(){
                                         }
                                     })
                                     //viewRoleInfo(record);
-                                }else if($(this).attr("action")=='delete'){
-                                    //deleteRoleInfo(record);
+                                }else if($(this).attr("action")=='map'){
+                                    var ywtype = "PT_LNR"
+                                    //var mapguid = record.mapguid;
+                                    window.open (mapURL+'map#task?ywtype='+ywtype+'&'+
+                                        'mapguid='+record.mapguid,
+                                        'newwindow', 'height='+window.screen.availHeight+', width='+window.screen.availWidth+', top=0, left=0, toolbar=no, ' +
+                                        'menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
+
                                 }else if($(this).attr("action")=='grant'){
                                     //grant(record);
                                 }

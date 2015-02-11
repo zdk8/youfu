@@ -16,6 +16,13 @@
             <thead>
             <tr>
                 <th data-options="field:'lr_id',hidden:true" ></th>
+                <th data-options="field:'ro',width:40,align:'center',formatter:function(value,rowData,rowIndex)
+                    {
+                        var str='<div></div>';
+                        str=$(str).append('<a action=&quot;map&quot;title=&quot;地图&quot;><span><span class=&quot;icon-map-pl1&quot;></span></span></a>');
+                        return str.html();
+                    }">操作
+                </th>
                 <th data-options="field:'name',width:100,align:'center',
                 formatter:function(v,r,i)
                 {

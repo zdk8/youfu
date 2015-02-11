@@ -8,53 +8,6 @@ define(['views/pension/PPGrantMoneyIssueDlg'],function(issuefile){
     function addgrantmoneyFunc(local){
         var addgrantmoney = local.find('[opt=addgrantmoney]');
         addgrantmoney.click(function(){
-            /*require(['text!views/pension/PPGrantMoneyIssueDlg.htm','views/pension/PPGrantMoneyIssueDlg'],
-                function(html,jsfile){
-                    $.layer({
-                        type: 1,
-                        title: '资金发放【月发放】',
-                        maxmin: true,
-                        shadeClose: true, //开启点击遮罩关闭层
-                        area : ['800px' , '460px'],
-                        offset : ['100px', ''],
-                        //iframe: {src: 'gethtml?name=PPGrantMoneyIssueDlg.html'}
-                        page: {html: html}
-                    });
-                    var timer = window.setInterval(function () {
-                        var local=$(html)
-                        if (local && local.find('[opt=ppgrantmoneyissuedlg]').length) {
-                            window.clearInterval(timer);
-                            jsfile.render(local,{queryParams:{
-                                data:data,
-                                actionType:"view"
-                        }});
-                    }else{
-                    console.log('oops....info1_table is not ready ')
-                }
-                }, 200)
-                })*/
-            /*$.layer({
-                type: 2,
-                title: '资金发放【月发放】',
-                maxmin: true,
-                shadeClose: true, //开启点击遮罩关闭层
-                area : ['800px' , '460px'],
-                offset : ['100px', ''],
-                iframe: {src: 'gethtml?name=PPGrantMoneyIssueDlg.html'}
-            });*/
-            /*var timer = window.setInterval(function () {
-                var local=issuefile.find('[opt=ppgrantmoneyissuedlg]')
-                if (issuefile.find('[opt=ppgrantmoneyissuedlg]').length) {
-                    window.clearInterval(timer);
-                    *//*issuefile.render(local,{queryParams:{
-                        title:title,
-                        data:data,
-                        actionType:"view"
-                    }});*//*
-                }else{
-                    console.log('oops....info1_table is not ready ')
-                }
-            }, 200);*/
             require(['commonfuncs/popwin/win','text!views/pension/PPGrantMoneyIssueDlg.htm','views/pension/PPGrantMoneyIssueDlg'],
                 function(win,htmfile,jsfile){
                     win.render({

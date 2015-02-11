@@ -39,5 +39,5 @@ var onlyPage=!true;
 //select t.*, t.rowid from T_ENUMS t WHERE t.ENUM_GROUP_GUID='759AB90C-E2BC-E210-BDCC-B8EB0793557E' --and enum_name like '交%'
 
 /*地图接口*/
-//var mapURL = "http://192.168.2.11:3000/"
-var mapURL = "http://10.40.190.20:8008/hymap/"
+var mapURL = "http://192.168.2.9:3000/"
+//var mapURL = "http://10.40.190.20:8008/hymap/"
