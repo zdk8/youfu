@@ -11,7 +11,7 @@
                [clj-time.local :as l]
                [clj-time.coerce :as c]
                [noir.io :as io]
-               [clojure.string :as str]
+               [clojure.string :as strs]
                [clojure.data.json :as json]
                [newpension.layout :as layout]))
 
@@ -279,6 +279,25 @@
        cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid) minagecond maxagecond typecond )
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
+
+(defn setexcel-auditdata [request]
+  (let[params (:params request)
+        colstxt (:colstxt params)
+        colsfieldls (:colsfield params)
+        genderrep (str "(case gender   when '1' then '男' when '0' then '女'  else '空'   END) as gender")
+        economyrep (str "(case economy   when '0' then '低保特困职工' when '1' then '低保边缘户' when '2' then '低收入' when '3' then '无退休工资' when '4' then '有退休工资' when '5' then '特殊贡献' else '未划分'   END)  as economy")
+        colsfield  (strs/replace (strs/replace colsfieldls "gender" genderrep) "economy" economyrep)
+        datatype (:datatype params)
+        name (:name params)
+        identityid (:identityid params)
+        minage (:minage params)
+        maxage (:maxage params)
+        minagecond (if (> (count minage) 0)  (str " and age > " minage ))
+        maxagecond (if (> (count maxage) 0)  (str " and age <= " maxage ))
+        typecond (if (> (count datatype) 0)  (str " and economy = '" datatype "'"))
+        cond (str " ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid) minagecond maxagecond typecond )
+        resultsql (str "select " colsfield " from " t_jjylapply " where " cond)]
+    (common/time-before-list(db/get-results-bysql resultsql) "birthd")))
 
 
 (defn remove-submit [request]
@@ -846,8 +865,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
   (let[params (:params request)
        months (:months params)
        nums (:nums params)
-       f (str/split months #",")
-       sf (str/split nums #",")
+       f (strs/split months #",")
+       sf (strs/split nums #",")
        year (:year params)
        ym (vec(map #(str year %)sf))
        col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
@@ -906,8 +925,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        nums (:nums params)
        rows (:rows params)
        page (:page params)
-       f (str/split months #",")
-       sf (str/split nums #",")
+       f (strs/split months #",")
+       sf (strs/split nums #",")
        year (:year params)
        ym (vec(map #(str year %)sf))
        col (apply str (interpose "," (map #(str "sum(a" %1 ") as " %2 " ") sf f)))
