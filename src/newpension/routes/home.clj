@@ -212,6 +212,7 @@
   (POST "/audit/getmoneyreport" request (audit/get-moneyreporttab request))                                           ;;excel导出人员补助信息
   (POST "/audit/getyearmoneyreport" request (audit/get-yearmoneyreporttab request))                                    ;;excel导出地区补助信息
   (GET "/audit/getauditdatareport" request (audit/setexcel-auditdata request))                                                ;;居家养老数据导出excel
+  (GET "/old/getoldpeopledata" request (old/getoldpeopledata request))
 
 
 

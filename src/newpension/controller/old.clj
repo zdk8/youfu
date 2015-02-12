@@ -6,6 +6,7 @@
             [noir.response :as resp]
             [newpension.layout :as layout]
             [noir.session :as session]
+            [clojure.string :as strs]
             [newpension.common.common :as common]
             [clojure.data.json :as json]
             ))
@@ -125,6 +126,25 @@
         ;(:body (resp/json {:total c :rows (subvec(db/search-oldpeople name identityid) (* (dec p) r) c)})))
       (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "birthd") })
       ))
+
+(defn getoldpeopledata [request]
+  (let[params (:params request)
+       colsfieldls (:colsfield params)
+       genderrep (str "(case gender   when '1' then '男' when '0' then '女'  else '空'   END) as gender")
+       datatyperep (str "(case datatype   when 's' then '三低老人' when 'f' then '居家养老' when 'j' then '机构养老' else '未划分'   END) as datatype")
+       colsfield  (strs/replace (strs/replace colsfieldls "gender" genderrep) "datatype" datatyperep)
+       datatype (:datatype params)
+       name (:name params)
+       identityid (:identityid params)
+       minage (:minage params)
+       maxage (:maxage params)
+       minagecond (if (> (count minage) 0)  (str " and age > " minage ))
+       maxagecond (if (> (count maxage) 0)  (str " and age <= " maxage ))
+       typecond (if (> (count datatype) 0)  (str " and datatype = '" datatype "'"))
+       cond (str (common/likecond "name" name) (common/likecond "identityid" identityid) typecond minagecond maxagecond)
+       resultsql (str "select " colsfield " from " t_oldpeople " where 1=1 " cond)
+       ]
+    (common/time-before-list (db/get-results-bysql resultsql) "birthd")))
 
 ;;根据关键字查询
 (defn get-oldname

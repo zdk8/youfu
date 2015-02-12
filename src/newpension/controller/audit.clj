@@ -282,7 +282,7 @@
 
 (defn setexcel-auditdata [request]
   (let[params (:params request)
-        colstxt (:colstxt params)
+       ; colstxt (:colstxt params)
         colsfieldls (:colsfield params)
         genderrep (str "(case gender   when '1' then '男' when '0' then '女'  else '空'   END) as gender")
         economyrep (str "(case economy   when '0' then '低保特困职工' when '1' then '低保边缘户' when '2' then '低收入' when '3' then '无退休工资' when '4' then '有退休工资' when '5' then '特殊贡献' else '未划分'   END)  as economy")
