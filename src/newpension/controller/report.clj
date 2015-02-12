@@ -207,10 +207,14 @@
     (let [params (:params request)
           colstxt (:colstxt params)
           colsfield (:colsfield params)
-          title (:datatype params)
+          title (:title params)
+          implfunc (:implfunc params)
           out (new java.io.ByteArrayOutputStream)
           wb (new org.apache.poi.hssf.usermodel.HSSFWorkbook)
-          datas (audit/setexcel-auditdata request)
+          datas (if (= implfunc "fwpg") (audit/setexcel-auditdata request)  ;服务评估
+                    (= implfunc "sjk")                                      ;数据库
+            )
+;          datas (audit/setexcel-auditdata request)
           ]
       (if (>(count datas)0)(xls-reportauto colstxt colsfield title (into-array datas) out) (xls-reportauto-null colstxt title out))
       (write-response (.toByteArray out) "xls")

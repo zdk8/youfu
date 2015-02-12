@@ -133,8 +133,7 @@ public class ReportXlsAuto {
         if (bodyfield.length() > 0){
             bodyfieldarr = mainclass.setBodyFieldArr(bodyfield);
         }
-        String tle = mainclass.getTitles().get(title);
-        mainclass.setHeadXls(sheet,wb,bodytxtarr,tle);   //表头
+        mainclass.setHeadXls(sheet,wb,bodytxtarr,title);   //表头
         mainclass.setBodyXls(sheet, wb,bodytxtarr);   //表体
         mainclass.setValueXls(sheet,wb,bodyfieldarr,datas);   //值
         return wb;
@@ -150,23 +149,9 @@ public class ReportXlsAuto {
         if (bodytxt.length() > 0){
             bodytxtarr = mainclass.setBodyTxtArr(bodytxt);
         }
-        String tle = mainclass.getTitles().get(title);
-        mainclass.setHeadXls(sheet,wb,bodytxtarr,tle);   //表头
+        mainclass.setHeadXls(sheet,wb,bodytxtarr,title);   //表头
         mainclass.setBodyXls(sheet,wb,bodytxtarr);   //表体
         return wb;
-    }
-
-    /*表头map*/
-    public Map<String,String> getTitles(){
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("","所有老人");
-        map.put("0","低保特困职工");
-        map.put("1","低保边缘户");
-        map.put("2","低收入");
-        map.put("3","无退休工资");
-        map.put("4","有退休工资");
-        map.put("5","特殊贡献");
-        return map;
     }
 
 

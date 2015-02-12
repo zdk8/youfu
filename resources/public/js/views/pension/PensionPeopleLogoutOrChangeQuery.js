@@ -149,7 +149,9 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                     "&name="+local.find('[opt=name]').val()+
                     "&identityid="+local.find('[opt=identityid]').val()+
                     "&minage="+local.find('[opt=minage]').val()+
-                    "&maxage="+local.find('[opt=maxage]').val();
+                    "&maxage="+local.find('[opt=maxage]').val()+
+                    "&title="+local.find('[opt=ppselect] option:selected').text()+
+                    "&implfunc=fwpg";
             })
         }
     }

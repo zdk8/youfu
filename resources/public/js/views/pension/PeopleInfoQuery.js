@@ -82,6 +82,30 @@ define(function(){
                     maxage:local.find('[opt=maxage]').val()
                 })
             })
+
+            /*导出xls*/
+            local.find('[opt=exportexcel]').click(function(){
+                var cols = peopleinfodatarid.datagrid('getColumnFields');
+                var colsarr = new Array();
+                var colstxtarr = new Array();
+                for(var i=0;i<cols.length;i++){
+                    var colstxt = peopleinfodatarid.datagrid('getColumnOption',cols[i]).title;
+                    if(colstxt && colstxt != "操作"){
+                        colstxtarr.push(colstxt);
+                    }
+                    if(cols[i] != "ro"){
+                        colsarr.push(cols[i]);
+                    }
+                }
+                window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsarr+
+                "&datatype="+local.find('[opt=ppselect]').val()+
+                "&name="+local.find('[opt=name]').val()+
+                "&identityid="+local.find('[opt=identityid]').val()+
+                "&minage="+local.find('[opt=minage]').val()+
+                "&maxage="+local.find('[opt=maxage]').val()
+                "&title="+local.find('[opt=ppselect] option:selected').text()+
+                "&implfunc=sjk";
+            })
         }
     }
 })

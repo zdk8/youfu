@@ -15,7 +15,7 @@
                pagination:true">
             <thead>
             <tr>
-                <th data-options="field:'lr_id',hidden:true" ></th>
+                <!--<th data-options="field:'lr_id',hidden:true" ></th>-->
                 <th data-options="field:'ro',width:40,align:'center',formatter:function(value,rowData,rowIndex)
                     {
                         var str='<div></div>';
@@ -76,6 +76,11 @@
 
                     <td>
                         <span class="searchbtn" >&nbsp;</span>
+                    </td>
+
+                    <td>
+                        &nbsp;&nbsp;
+                        <input class="highcharstoolbarbutton" type="button" opt="exportexcel" value="导出Excel">
                     </td>
                 </tr>
             </table>
