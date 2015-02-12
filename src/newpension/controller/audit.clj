@@ -296,7 +296,7 @@
         maxagecond (if (> (count maxage) 0)  (str " and age <= " maxage ))
         typecond (if (> (count datatype) 0)  (str " and economy = '" datatype "'"))
         cond (str " ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid) minagecond maxagecond typecond )
-        resultsql (str "select " colsfield " from " t_jjylapply " where " cond)]
+        resultsql (str "select " colsfield " from " t_jjylapply " where " cond " order by jja_id desc")]
     (common/time-before-list(db/get-results-bysql resultsql) "birthd")))
 
 
