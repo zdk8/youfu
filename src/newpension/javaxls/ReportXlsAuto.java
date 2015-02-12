@@ -44,12 +44,12 @@ public class ReportXlsAuto {
     }
 
     /*设置表头*/
-    public void setHeadXls(HSSFSheet sheet,HSSFWorkbook wb,String[] bodyTxtArr){
+    public void setHeadXls(HSSFSheet sheet,HSSFWorkbook wb,String[] bodyTxtArr,String title){
         Calendar date=Calendar.getInstance();
         HSSFRow row = sheet.createRow((int) 0);  //创建第0行
         HSSFCell cell = row.createCell((short) 0);//创建单元格0
         sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, bodyTxtArr.length-1));//合并列
-        cell.setCellValue("海盐县");//标题
+        cell.setCellValue("海盐县居家养老【"+title+"】人员列表");//标题
 
         HSSFFont font = wb.createFont();  //字体
         font.setFontHeightInPoints((short) 16);
@@ -65,50 +65,6 @@ public class ReportXlsAuto {
     }
     /*设置表体*/
     public void setBodyXls(HSSFSheet sheet,HSSFWorkbook wb,String[] bodyTxtArr){
-        /*表体头(左)样式*/
-        HSSFCellStyle stylebodyleft = wb.createCellStyle();
-        stylebodyleft.setAlignment(HSSFCellStyle.ALIGN_LEFT);
-        stylebodyleft.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-        /*表体头(右)样式*/
-        HSSFCellStyle stylebodyright = wb.createCellStyle();
-        stylebodyright.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
-        stylebodyright.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-
-
-        /*公共样式*/
-        HSSFCellStyle style = wb.createCellStyle();
-        style.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
-        style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-        style.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-        style.setBorderTop(HSSFCellStyle.BORDER_THIN);
-        style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-        style.setBorderRight(HSSFCellStyle.BORDER_THIN);
-//        String bodytxt = getBodytxt();
-        HSSFRow row1 = sheet.createRow((int) 1);  //创建第1行
-        if (bodyTxtArr.length > 0){
-            for (int i=0;i<bodyTxtArr.length;i++){
-                HSSFCell cell = row1.createCell((short) i);
-                cell.setCellValue(bodyTxtArr[i].toString());
-                cell.setCellStyle(style);
-            }
-        }
-
-        /*HSSFRow row2 = sheet.createRow((int) 2);  //创建第2行
-
-        sheet.addMergedRegion(new CellRangeAddress(2,3,0,0));//合并行
-        sheet.setColumnWidth(0,1500);//设置宽度
-        HSSFCell cellxh = row2.createCell((short) 0);
-        cellxh.setCellValue("序\n号");
-        cellxh.setCellStyle(style);
-
-
-        *//*边框标黑*//*
-        row3.createCell((short) 11+monthsarr.length).setCellStyle(style);
-        row3.createCell((short) 12+monthsarr.length).setCellStyle(style);*/
-    }
-    //表体值
-    public void setValueXls(HSSFSheet sheet,HSSFWorkbook wb,String[] bodyfield){
-        /*样式一*/
         HSSFFont font = wb.createFont();  //字体
         font.setFontHeightInPoints((short) 11);
         font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
@@ -120,20 +76,24 @@ public class ReportXlsAuto {
         style_bold.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style_bold.setBorderRight(HSSFCellStyle.BORDER_THIN);
         style_bold.setFont(font);
-        /*样式二*/
-        HSSFFont font2 = wb.createFont();  //字体
-        font2.setFontHeightInPoints((short) 10);
-        font2.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-        font2.setColor(HSSFColor.BLUE_GREY.index);
-        HSSFCellStyle style_bold2 = wb.createCellStyle();
-        style_bold2.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
-        style_bold2.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-        style_bold2.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-        style_bold2.setBorderTop(HSSFCellStyle.BORDER_THIN);
-        style_bold2.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-        style_bold2.setBorderRight(HSSFCellStyle.BORDER_THIN);
-        style_bold2.setFont(font2);
-        /*样式三*/
+
+        HSSFRow row1 = sheet.createRow((int) 1);  //创建第1行
+        if (bodyTxtArr.length > 0){
+            for (int i=0;i<bodyTxtArr.length;i++){
+                String txtval = bodyTxtArr[i].toString();
+                if (txtval.equals("身份证号")){
+                    sheet.setColumnWidth(i,6*1000);//设置宽度
+                }else{
+                    sheet.setColumnWidth(i,4*1000);//设置宽度
+                }
+                HSSFCell cell = row1.createCell((short) i);
+                cell.setCellValue(txtval);
+                cell.setCellStyle(style_bold);
+            }
+        }
+    }
+    //表体值
+    public void setValueXls(HSSFSheet sheet,HSSFWorkbook wb,String[] bodyfield,Map[] datas){
         HSSFCellStyle style = wb.createCellStyle();
         style.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
         style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
@@ -142,88 +102,74 @@ public class ReportXlsAuto {
         style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
 
-        int rowindex = 2;     //表体值从第4行开始
-        if (bodyfield.length > 0){
-            for (int i=0;i<bodyfield.length;i++){
-                /*HSSFCell cell = row1.createCell((short) i);
-                cell.setCellValue(bodyfield[i].toString());
-                cell.setCellStyle(style);*/
-            }
-        }
-
-        /*Map datasval = getDatas(datas);  //数据
-
-        int rowindex = 4;     //表体值从第4行开始
-
-        for (int i=0;i<datasval.size();i++){
+        int rowindex = 2;     //表体值从第2行开始
+        Map datasval = getDatas(datas);  //数据
+        for (int i=0;i<datasval.size();i++){        //行
             HSSFRow rownum = sheet.createRow((int) rowindex++);
             Map dataval = (Map)datasval.get(i);
-
-            HSSFCell cellnum = rownum.createCell((short) 0);
-            int rowval = i+1;
-            cellnum.setCellValue(rowval);
-            cellnum.setCellStyle(style);
-            *//*被服务对象*//*
-            HSSFCell cell_address1 = rownum.createCell((short) 1);
-            String dvname1 = dataval.get(":dvname").toString();
-            if (dvname1.length() > 0){
-                cell_address1.setCellValue(dvname1);
+            for (int j=0;j<bodyfield.length;j++){   //列
+                HSSFCell cellnum = rownum.createCell((short) j);
+                String name = ":"+bodyfield[j];
+                String val = dataval.get(name).toString();
+                if (val.length() > 0){
+                    cellnum.setCellValue(val);
+                }
+                cellnum.setCellStyle(style);
             }
-        }*/
+        }
     }
     /*xls导出报表*/
-    public static Workbook getReport(String bodytxt,String bodyfield) throws Exception{
-
+    public static Workbook getReport(String bodytxt,String bodyfield,String title,Map[] datas) throws Exception{
         // 创建webbook的Excel工作薄
         HSSFWorkbook wb = new HSSFWorkbook();
         // 创建一个sheet
-        HSSFSheet sheet = wb.createSheet("11");
+        HSSFSheet sheet = wb.createSheet("人员列表");
         ReportXlsAuto mainclass = new ReportXlsAuto();
-        String[] bodytxtarr = mainclass.setBodyTxtArr(bodytxt);
-        String[] bodyfieldarr = mainclass.setBodyFieldArr(bodyfield);
-        mainclass.setHeadXls(sheet,wb,bodytxtarr);   //表头
+        String[] bodytxtarr = {};
+        String[] bodyfieldarr = {};
+        if (bodytxt.length() > 0){
+            bodytxtarr = mainclass.setBodyTxtArr(bodytxt);
+        }
+        if (bodyfield.length() > 0){
+            bodyfieldarr = mainclass.setBodyFieldArr(bodyfield);
+        }
+        String tle = mainclass.getTitles().get(title);
+        mainclass.setHeadXls(sheet,wb,bodytxtarr,tle);   //表头
         mainclass.setBodyXls(sheet, wb,bodytxtarr);   //表体
-//        mainclass.setValueXls(sheet,wb,bodyfield,datas);   //值
-        mainclass.setValueXls(sheet,wb,bodyfieldarr);   //值
+        mainclass.setValueXls(sheet,wb,bodyfieldarr,datas);   //值
         return wb;
     }
     /*xls导出空报表*/
-    public static Workbook getReportNull(String year,String months) throws Exception{
-        String[] monthsarr = {};//存放月份数组
-        System.out.println("数组:"+monthsarr);
-        String title = "xx月";
-        ReportXlsAuto mainclass = new ReportXlsAuto();
-        Map<String,Integer> map = mainclass.getMonths();
-        if (months.length()>0){
-            monthsarr = months.split(",");
-            title = map.get(monthsarr[0])+"-"+map.get(monthsarr[monthsarr.length-1])+"月";
-        }
+    public static Workbook getReportNull(String bodytxt,String title) throws Exception{
         // 创建webbook的Excel工作薄
         HSSFWorkbook wb = new HSSFWorkbook();
         // 创建一个sheet
-        HSSFSheet sheet = wb.createSheet(title);
-//        mainclass.setHeadXls(sheet,wb,monthsarr,year,title);   //表头
-//        mainclass.setBodyXls(sheet,wb,monthsarr);   //表体
+        HSSFSheet sheet = wb.createSheet("人员列表");
+        ReportXlsAuto mainclass = new ReportXlsAuto();
+        String[] bodytxtarr = {};
+        if (bodytxt.length() > 0){
+            bodytxtarr = mainclass.setBodyTxtArr(bodytxt);
+        }
+        String tle = mainclass.getTitles().get(title);
+        mainclass.setHeadXls(sheet,wb,bodytxtarr,tle);   //表头
+        mainclass.setBodyXls(sheet,wb,bodytxtarr);   //表体
         return wb;
     }
 
-    /*月份map*/
-    public Map<String,Integer> getMonths(){
-        Map<String,Integer> map = new HashMap<String,Integer>();
-        map.put("一",1);
-        map.put("二",2);
-        map.put("三",3);
-        map.put("四",4);
-        map.put("五",5);
-        map.put("六",6);
-        map.put("七",7);
-        map.put("八",8);
-        map.put("九",9);
-        map.put("十",10);
-        map.put("十一",11);
-        map.put("十二",12);
+    /*表头map*/
+    public Map<String,String> getTitles(){
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("","所有老人");
+        map.put("0","低保特困职工");
+        map.put("1","低保边缘户");
+        map.put("2","低收入");
+        map.put("3","无退休工资");
+        map.put("4","有退休工资");
+        map.put("5","特殊贡献");
         return map;
     }
+
+
 
     public static void main(String args[]) throws Exception{
         ReportXlsAuto cetd = new ReportXlsAuto();
@@ -235,7 +181,7 @@ public class ReportXlsAuto {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
         System.out.println(new Date().getTime());
         Map[] maptest = new HashMap[]{};
-        System.out.println(cetd.getMonths());
+//        System.out.println(cetd.getMonths());
         try {
             FileOutputStream fout = new FileOutputStream("C:\\Users\\Administrator\\Downloads\\"+new Date().getTime()+".xls");
 //            getReport("2015",arr,maptest).write(fout);

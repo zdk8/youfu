@@ -198,28 +198,21 @@
        :body (.getMessage ex)}))
   )
 ;;动态字段导出
-;(def wb (new org.apache.poi.hssf.usermodel.HSSFWorkbook))
-(defn xls-reportauto [bodytxt colsfield out]
-;  (let []
-;    (.setXls (new ReportXlsAuto) bodytxt)
-;    )
-  (.write (ReportXlsAuto/getReport bodytxt colsfield) out)
-  )
+(defn xls-reportauto [bodytxt colsfield title datas out]
+  (.write (ReportXlsAuto/getReport bodytxt colsfield title datas) out))
+(defn xls-reportauto-null [bodytxt title out]
+  (.write (ReportXlsAuto/getReportNull bodytxt title) out))
 (defn xls-report-auto [request]
   (try
     (let [params (:params request)
           colstxt (:colstxt params)
           colsfield (:colsfield params)
+          title (:datatype params)
           out (new java.io.ByteArrayOutputStream)
           wb (new org.apache.poi.hssf.usermodel.HSSFWorkbook)
-;          datas (audit/get-yearmoneyreport request)
+          datas (audit/setexcel-auditdata request)
           ]
-      (xls-reportauto colstxt colsfield out)
-;      (str colstxt colsfield)
-;      (if (>(count datas)0)(xls-report-summary year (into-array datas) out) (xls-report-summary-null year out))
-;      (xls-report-summary-null year out)
-;      (str "true")
-;      (resp/json {:wb wb} )
+      (if (>(count datas)0)(xls-reportauto colstxt colsfield title (into-array datas) out) (xls-reportauto-null colstxt title out))
       (write-response (.toByteArray out) "xls")
       )
     (catch Exception ex
@@ -227,12 +220,6 @@
        :headers {"Content-Type" "text/html"}
        :body (.getMessage ex)}))
   )
-;(defn reportxls []
-;  (let [out (new java.io.ByteArrayOutputStream)]
-;    (.write (ReportXlsAuto/getReport ) out)
-;    (write-response (.toByteArray out) "xls")
-;    )
-;  )
 
 
 

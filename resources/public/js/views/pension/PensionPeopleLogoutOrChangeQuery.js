@@ -144,88 +144,12 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                         colsarr.push(cols[i]);
                     }
                 }
-                /*$.ajax({
-                    url:"report-xls-auto",
-                    data:{
-                        colstxt:colstxtarr.toString(),
-                        colsfield:colsarr.toString()
-                    },
-                    type:"post",
-                    success:function(data){
-                        console.log(data)
-                        if(data == "true"){
-                            window.location.href="reportxls";
-                        }
-                    }
-                })*/
                 window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsarr+
                     "&datatype="+local.find('[opt=ppselect]').val()+
                     "&name="+local.find('[opt=name]').val()+
                     "&identityid="+local.find('[opt=identityid]').val()+
                     "&minage="+local.find('[opt=minage]').val()+
                     "&maxage="+local.find('[opt=maxage]').val();
-                /*require(['commonfuncs/popwin/win','text!views/pension/ReportXlsAuto.htm','views/pension/ReportXlsAuto'],
-                    function(win,htmfile,jsfile){
-                        win.render({
-                            title:'请选择字段',
-                            width:620,
-                            height:435,
-                            html:htmfile,
-                            buttons:[
-                                {text:'取消',handler:function(html,parent){
-                                    parent.trigger('close');
-                                }},{
-                                    text:'导出',
-                                    handler:function(html,parent){
-                                        var selectRadio = ":input[type=radio] + label";
-                                        parent.find(selectRadio).each(function () {
-                                            if ($(this).prev()[0].checked){
-                                                console.log($(this).prev().val())
-                                            }
-                                        })
-                                        pp = parent;
-                                        name1 = parent.find('[name=name]')
-                                    }
-                                }
-                            ],
-                            renderHtml:function(local,submitbtn,parent){
-                                jsfile.render(local,{
-                                    parent:parent
-                                })
-                            }
-                        })
-                    }
-                )*/
-                /*require(['text!views/pension/ReportXlsAuto.htm','views/pension/ReportXlsAuto'],
-                    function(htmfile,jsfile){
-                        var pageii = $.layer({
-                            type: 1,   //0-4的选择,（1代表page层）
-                            area: ['700px', '500px'],
-                            //shade: [0],  //不显示遮罩
-                            border: [0], //不显示边框
-                            title: [
-                                '请选择字段',
-                                //自定义标题风格，如果不需要，直接title: '标题' 即可
-                                'border:none; background:#61BA7A; color:#fff;'
-                            ],
-                            bgcolor: '#eee', //设置层背景色
-                            page: {
-                                html: htmfile
-                            },
-                            shift: 'top' //从上动画弹出
-                        });
-                        if(pageii){
-                            jsfile.render($(htmfile),{})
-                        }
-                        //jsfile.render(result2_table,{plocal:local})
-                    }
-                )*/
-
-                /*if(pageii > 0){
-                    lll = local.find('.btns')
-                }*/
-                //layer.close(pageii);
-
             })
         }
     }
