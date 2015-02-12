@@ -83,7 +83,7 @@ public class ReportXlsAuto {
                 String txtval = bodyTxtArr[i].toString();
                 if (txtval.equals("身份证号")){
                     sheet.setColumnWidth(i,6*1000);//设置宽度
-                }else if (txtval.equals("住址")){
+                }else if (txtval.equals("家庭住址")){
                     sheet.setColumnWidth(i,8*1000);//设置宽度
                 }else{
                     sheet.setColumnWidth(i,4*1000);//设置宽度

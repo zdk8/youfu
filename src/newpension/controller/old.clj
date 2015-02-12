@@ -274,7 +274,7 @@
 
     (db/update-approveby-lrid  lr_id "t_oldpeople")                                    ;;修改审核表的状态
     (db/add-approve appdata)                                                 ;;添加新的审核表历史状态
-    (str "修改成功")))
+    (str "true")))
 
 
 

@@ -97,6 +97,7 @@ define(function(){
                         }else{
                             params.districtid = option.queryParams.data.districtid
                         }
+                        params.lr_id = option.queryParams.data.lr_id
                     }
                     return isValid;
                 },
