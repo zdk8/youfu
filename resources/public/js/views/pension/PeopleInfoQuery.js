@@ -83,28 +83,85 @@ define(function(){
                 })
             })
 
+
             /*导出xls*/
             local.find('[opt=exportexcel]').click(function(){
-                var cols = peopleinfodatarid.datagrid('getColumnFields');
-                var colsarr = new Array();
-                var colstxtarr = new Array();
-                for(var i=0;i<cols.length;i++){
-                    var colstxt = peopleinfodatarid.datagrid('getColumnOption',cols[i]).title;
-                    if(colstxt && colstxt != "操作"){
-                        colstxtarr.push(colstxt);
-                    }
-                    if(cols[i] != "ro"){
-                        colsarr.push(cols[i]);
+                var closobj = peopleinfodatarid.datagrid('options').columns[0];
+                var colsfieldarr = new Array();     //列头字段
+                var colstxtarr = new Array();       //列头文本
+                for(var o=0;o<closobj.length;o++){
+                    if(closobj[o].field != "ro"){
+                        if(!closobj[o].hidden){
+                            colsfieldarr.push(closobj[o].field);
+                            colstxtarr.push(closobj[o].title);
+                        }
                     }
                 }
-                window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsarr+
+                layer.load(1);
+                window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsfieldarr+
                 "&datatype="+local.find('[opt=ppselect]').val()+
                 "&name="+local.find('[opt=name]').val()+
                 "&identityid="+local.find('[opt=identityid]').val()+
                 "&minage="+local.find('[opt=minage]').val()+
-                "&maxage="+local.find('[opt=maxage]').val()
+                "&maxage="+local.find('[opt=maxage]').val()+
                 "&title="+local.find('[opt=ppselect] option:selected').text()+
                 "&implfunc=sjk";
+            });
+
+            local.find('[opt=addfield]').click(function(){
+                var closobj = peopleinfodatarid.datagrid('options').columns[0];
+                var colsfieldarr = new Array();     //列头字段
+                var colstxtarr = new Array();       //列头文本
+                for(var o=0;o<closobj.length;o++){
+                    if(closobj[o].field != "ro"){
+                        //if(!closobj[o].hidden){
+                            colsfieldarr.push(closobj[o].field);
+                            colstxtarr.push(closobj[o].title);
+                        //}
+                    }
+                }
+                require(['commonfuncs/popwin/win','text!views/pension/ReportXlsAuto.htm','views/pension/ReportXlsAuto'],
+                    function(win,htmfile,jsfile){
+                        win.render({
+                            title:'选择字段',
+                            width:620,
+                            height:435,
+                            html:htmfile,
+                            buttons:[
+                                {text:'取消',handler:function(html,parent){
+                                    parent.trigger('close');
+                                }},{
+                                    text:'确定',
+                                    handler:function(html,parent){
+                                        pp = parent;
+                                        //peopleinfodatarid.datagrid('hideColumn','name'); //隐藏
+                                        var selectRadio = ":input[type=radio] + label";
+                                        parent.find(selectRadio).each(function () {
+                                            if ($(this).prev()[0].checked){
+                                                for(var o=0;o<closobj.length;o++){
+                                                    if(closobj[o].hidden){
+                                                        peopleinfodatarid.datagrid('showColumn',$(this).prev().val()); //显示
+                                                    }
+                                                }
+                                            }else{
+                                                for(var o=0;o<closobj.length;o++){
+                                                    if(!closobj[o].hidden){
+                                                        peopleinfodatarid.datagrid('hideColumn',$(this).prev().val()); //隐藏
+                                                    }
+                                                }
+                                            }
+                                        })
+                                    }
+                                }
+                            ],
+                            renderHtml:function(local,submitbtn,parent){
+                                jsfile.render(local,{
+                                    parent:parent
+                                })
+                            }
+                        })
+                    }
+                )
             })
         }
     }

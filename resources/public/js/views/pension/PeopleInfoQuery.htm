@@ -7,7 +7,6 @@
                fit:true,
                border:false,
                rownumbers:true,
-               fitColumns:true,
                pageSize:cj.getDataGridAttr('pageSize'),
                pageList:cj.getDataGridAttr('pageList'),
                singleSelect:true,
@@ -15,15 +14,13 @@
                pagination:true">
             <thead>
             <tr>
-                <!--<th data-options="field:'lr_id',hidden:true" ></th>-->
-                <th data-options="field:'ro',width:40,align:'center',formatter:function(value,rowData,rowIndex)
+                <th data-options="field:'ro',width:80,align:'center',formatter:function(value,rowData,rowIndex)
                     {
                         var str='<div></div>';
                         str=$(str).append('<a action=&quot;map&quot;title=&quot;地图&quot;><span><span class=&quot;icon-map-pl1&quot;></span></span></a>');
                         return str.html();
-                    }">操作
-                </th>
-                <th data-options="field:'name',width:100,align:'center',
+                    }"><a href="javascript:void(0)" opt="addfield">添加</a>操作</th>
+                <th data-options="field:'name',width:90,align:'center',
                 formatter:function(v,r,i)
                 {
                     var str='<div></div>';
@@ -31,9 +28,10 @@
                     return str.html();
                 }">姓名</th>
                 <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
-                <th data-options="field:'age',width:150,align:'center'">年龄</th>
+                <th data-options="field:'age',width:40,align:'center',hidden:true">年龄</th>
                 <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
                 <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
+                <th data-options="field:'type',width:100,align:'center',formatter: cj.enumFormatter('oldtype')">人员类别</th>
                 <th data-options="field:'address',width:200,align:'left'">住址</th>
             </tr>
             </thead>

@@ -86,7 +86,7 @@ define(function(){
         }
         local.find('[opt=update]').show().click(function(){
             pensionform.form('submit', {
-                url:'audit/updateapply111',
+                url:'updateold',
                 dataType:"json",
                 onSubmit: function (params) {
                     var isValid = $(this).form('validate');

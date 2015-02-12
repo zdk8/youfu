@@ -7,6 +7,7 @@
             [newpension.controller.audit :as audit]
             [newpension.controller.zhfont :as zhfont]
             [noir.response :as resp]
+            [newpension.controller.old :as old]
             )
   (:import [newpension.javaxls XlsReport]
            [newpension.javaxls ReportXlsByMoths]
@@ -211,8 +212,8 @@
           implfunc (:implfunc params)
           out (new java.io.ByteArrayOutputStream)
           wb (new org.apache.poi.hssf.usermodel.HSSFWorkbook)
-          datas (if (= implfunc "fwpg") (audit/setexcel-auditdata request)  ;服务评估
-                    (= implfunc "sjk")                                      ;数据库
+          datas (cond (= implfunc "fwpg") (audit/setexcel-auditdata request)  ;服务评估
+                    (= implfunc "sjk")  (old/getoldpeopledata request)     ;数据库
             )
 ;          datas (audit/setexcel-auditdata request)
           ]

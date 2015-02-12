@@ -5,6 +5,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
             var refreshGrid=function() {
                 localDataGrid.datagrid('reload');
             };
+            //local.find('.datagrid-header-rownumber').html('<a href="javascript:void(0)" opt="addfield">添加</a>');
 
             localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
@@ -49,18 +50,6 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                                                     }
                                                 }, 200);
                                             }
-                                            /*cj.showContent({                                          //详细信息(tab标签)
-                                                title:title,
-                                                htmfile:'text!views/pension/PensionServiceApply.htm',
-                                                jsfile:'views/pension/PensionServiceApply',
-                                                queryParams:{
-                                                    actiontype:'information',         //（详细信息）操作方式
-                                                    data:record,
-                                                    title:title,
-                                                    refresh:refreshGrid
-                                                }
-                                            })*/
-                                            //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='logout'){         //注销
                                             var title = "【"+record.name+'】人员注销'
                                             if($("#tabs").tabs('getTab',title)){
@@ -132,19 +121,19 @@ define(['views/pension/PensionServiceAss'],function(psafile){
 
             /*导出xls*/
             local.find('[opt=exportexcel]').click(function(){
-                var cols = localDataGrid.datagrid('getColumnFields');
-                var colsarr = new Array();
+                var closobj = localDataGrid.datagrid('options').columns[0];
+                var colsfieldarr = new Array();
                 var colstxtarr = new Array();
-                for(var i=0;i<cols.length;i++){
-                    var colstxt = localDataGrid.datagrid('getColumnOption',cols[i]).title;
-                    if(colstxt && colstxt != "操作"){
-                        colstxtarr.push(colstxt);
-                    }
-                    if(cols[i] != "ro"){
-                        colsarr.push(cols[i]);
+                for(var o=0;o<closobj.length;o++){
+                    if(closobj[o].field != "ro"){
+                        if(!closobj[o].hidden){
+                            colsfieldarr.push(closobj[o].field);
+                            colstxtarr.push(closobj[o].title);
+                        }
                     }
                 }
-                window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsarr+
+                layer.load(1);
+                window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsfieldarr+
                     "&datatype="+local.find('[opt=ppselect]').val()+
                     "&name="+local.find('[opt=name]').val()+
                     "&identityid="+local.find('[opt=identityid]').val()+
