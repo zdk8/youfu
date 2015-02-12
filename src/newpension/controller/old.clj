@@ -259,19 +259,24 @@
         brief (str "姓名：" (:name params) " 身份证："(:identityid params)  )
         appdata {:bstablepk lr_id :bstablename "t_oldpeople" :status "1" :aulevel "0" :auflag "修改数据" :bstime (common/get-nowtime)
                  :appoperators username :auuser loginname :messagebrief brief :bstablepkname "lr_id"}]
-    (db/update-old (into {} (cons (conj checkinfo (select-keys  olds (vec (keys checkinfo)))) (select-keys olds oldinfo))) (:lr_id (:params request)))      ;;修改养老信息表
-    (db/create-userlog opseno                    ;;新增对应的操作日志
-      (str digest " 信息修改") (:lr_id (:params request)) "mHLcDiwTflgEshNKIiOV" dvcode loginname username)
-    (if (= (:status (:params request)) "驳回")            ;;判断要修改养老信息的状态
+    ;(println lr_id  "    "  (select-keys olds oldinfo))
+    ;(println (conj (conj checkinfo (select-keys  olds (vec (keys checkinfo)))) (select-keys olds oldinfo)))
+    (db/update-old (conj (conj checkinfo (select-keys  olds (vec (keys checkinfo)))) (select-keys olds oldinfo)) lr_id)      ;;修改养老信息表
+    ;(db/create-userlog opseno                    ;;新增对应的操作日志
+     ; (str digest " 信息修改") (:lr_id (:params request)) "mHLcDiwTflgEshNKIiOV" dvcode loginname username)
+    #_(if (= (:status (:params request)) "驳回")            ;;判断要修改养老信息的状态
       (do (db/update-oldstatus "自由" (:lr_id (:params request)))  ;;驳回的状态下
         (db/create-userlog (inc (:max (db/get-max "userlog")))    ;;新增对应的操作日志
           (str digest " 驳回处理") auditid "txFUV5pFpWVLv6Th4vQl" dvcode loginname username)
         (db/update-audit "0" "0" dvcode "驳回已处理" loginname    ;;修改对应的审核表
           (inc (:max (db/get-max "userlog"))) "0" auditid opseno))
       (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由的状态下，修改对应审核表
+
     (db/update-approveby-lrid  lr_id "t_oldpeople")                                    ;;修改审核表的状态
     (db/add-approve appdata)                                                 ;;添加新的审核表历史状态
     (str "修改成功")))
+
+
 
 ;;修改养老家庭成员信息
 (defn update-oldsorel [reuqest]
