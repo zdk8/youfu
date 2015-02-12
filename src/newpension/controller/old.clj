@@ -271,7 +271,7 @@
       (db/update-audit "0" "0" "" "" "" "" "0" auditid opseno))    ;;自由的状态下，修改对应审核表
     (db/update-approveby-lrid  lr_id "t_oldpeople")                                    ;;修改审核表的状态
     (db/add-approve appdata)                                                 ;;添加新的审核表历史状态
-    (str "修改成功")))
+    (str "true")))
 
 ;;修改养老家庭成员信息
 (defn update-oldsorel [reuqest]
