@@ -1,9 +1,13 @@
 define(function(){
     var render = function(local,option){
-
         cal = local;
-        addRadioCssComm(local);
 
+
+
+
+
+        //local.find('.table_form').html(option.html);
+        addRadioCssComm(local);
 
     }
 
