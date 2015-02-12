@@ -6,10 +6,14 @@
             [clj-excel.core :as myexcel]
             [newpension.controller.audit :as audit]
             [newpension.controller.zhfont :as zhfont]
+            [noir.response :as resp]
             )
   (:import [newpension.javaxls XlsReport]
            [newpension.javaxls ReportXlsByMoths]
            [newpension.javaxls ReportXlsSummary]
+           [newpension.javaxls ReportXlsAuto]
+           [org.apache.poi.ss.usermodel Workbook]
+           [org.apache.poi.hssf.usermodel.*]
            )
 
   )
@@ -173,11 +177,9 @@
   )
 ;;汇总表
 (defn xls-report-summary [year datas out]
-  (.write (ReportXlsSummary/getReport year datas) out)
-  )
+  (.write (ReportXlsSummary/getReport year datas) out))
 (defn xls-report-summary-null [year out]
-  (.write (ReportXlsSummary/getReportNull year) out)
-  )
+  (.write (ReportXlsSummary/getReportNull year) out))
 (defn xls-report-by-summary [request]
   (try
     (let [reportxls (new ReportXlsByMoths)
@@ -187,7 +189,7 @@
           datas (audit/get-yearmoneyreport request)
           ]
       (if (>(count datas)0)(xls-report-summary year (into-array datas) out) (xls-report-summary-null year out))
-      (xls-report-summary-null year out)
+;      (xls-report-summary-null year out)
       (write-response (.toByteArray out) "xls")
       )
     (catch Exception ex
@@ -195,6 +197,42 @@
        :headers {"Content-Type" "text/html"}
        :body (.getMessage ex)}))
   )
+;;动态字段导出
+;(def wb (new org.apache.poi.hssf.usermodel.HSSFWorkbook))
+(defn xls-reportauto [bodytxt colsfield out]
+;  (let []
+;    (.setXls (new ReportXlsAuto) bodytxt)
+;    )
+  (.write (ReportXlsAuto/getReport bodytxt colsfield) out)
+  )
+(defn xls-report-auto [request]
+  (try
+    (let [params (:params request)
+          colstxt (:colstxt params)
+          colsfield (:colsfield params)
+          out (new java.io.ByteArrayOutputStream)
+          wb (new org.apache.poi.hssf.usermodel.HSSFWorkbook)
+;          datas (audit/get-yearmoneyreport request)
+          ]
+      (xls-reportauto colstxt colsfield out)
+;      (str colstxt colsfield)
+;      (if (>(count datas)0)(xls-report-summary year (into-array datas) out) (xls-report-summary-null year out))
+;      (xls-report-summary-null year out)
+;      (str "true")
+;      (resp/json {:wb wb} )
+      (write-response (.toByteArray out) "xls")
+      )
+    (catch Exception ex
+      {:status 500
+       :headers {"Content-Type" "text/html"}
+       :body (.getMessage ex)}))
+  )
+;(defn reportxls []
+;  (let [out (new java.io.ByteArrayOutputStream)]
+;    (.write (ReportXlsAuto/getReport ) out)
+;    (write-response (.toByteArray out) "xls")
+;    )
+;  )
 
 
 

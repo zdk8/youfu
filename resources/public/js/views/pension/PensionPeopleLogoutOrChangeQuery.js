@@ -144,7 +144,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                         colsarr.push(cols[i]);
                     }
                 }
-                $.ajax({
+                /*$.ajax({
                     url:"report-xls-auto",
                     data:{
                         colstxt:colstxtarr.toString(),
@@ -157,8 +157,13 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                             window.location.href="reportxls";
                         }
                     }
-                })
-                //window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsarr;
+                })*/
+                window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsarr+
+                    "&datatype="+local.find('[opt=ppselect]').val()+
+                    "&name="+local.find('[opt=name]').val()+
+                    "&identityid="+local.find('[opt=identityid]').val()+
+                    "&minage="+local.find('[opt=minage]').val()+
+                    "&maxage="+local.find('[opt=maxage]').val();
                 /*require(['commonfuncs/popwin/win','text!views/pension/ReportXlsAuto.htm','views/pension/ReportXlsAuto'],
                     function(win,htmfile,jsfile){
                         win.render({
