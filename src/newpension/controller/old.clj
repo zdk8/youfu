@@ -791,7 +791,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 (defn set-oldmap [request]
   (let[params (:params request)
-        workid (:workid params)
+        mapguid (:mapguid params)
         ismap (:ismap params)]
-    (db/update-setoldmap ismap workid)
+    (println "MMMMMMMMMMMMMM" mapguid  "   " ismap)
+    (db/update-setoldmap ismap mapguid)
     (resp/json {:success true :message "map set success"})))
