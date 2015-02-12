@@ -244,4 +244,7 @@
   ;;/report-xls/my-test2   调用的是clj-excel.core
   (GET "/report-xls-months" req (report/xls-report-by-months req))        ;;导出月份报表
   (GET "/report-xls-summary" req (report/xls-report-by-summary req))        ;;导出汇总表
+  (GET "/report-xls-auto" req (report/xls-report-auto req))        ;;导出xls,自动列
+;  (POST "/report-xls-auto" req (report/xls-report-auto req))        ;;导出xls,自动列
+;  (GET "/reportxls" req (report/reportxls))
   )
