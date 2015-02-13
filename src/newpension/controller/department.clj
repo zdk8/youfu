@@ -158,6 +158,18 @@
        getresult (common/fenye rows page "t_oldpeopledep" "*" cond " order by opd_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "checkintime")})))
 
+(defn oldepartreport [request]
+  (let[params (:params request)
+       colsfield (:colsfield params)
+       datatype (:datatype params)
+       departname (:departname params)
+       identityid (:identityid params)
+       name (:name params)
+       cond (str " deptype = '" datatype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname))
+       resultsql (str "select " colsfield " from " t_oldpeopledep " where " cond)
+       ]
+    (common/time-before-list (db/get-results-bysql resultsql) "checkintime")))
+
 (defn oldpeople-checkout [request]
   (let[{params :params}request
        {opd_id :opd_id} params
