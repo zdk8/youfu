@@ -104,8 +104,56 @@ define(function(){
             "&departname="+departname.val()+
             "&identityid="+local.find('[opt=identityid]').val()+
             "&name="+name.val()+
+            "&title=入住人员"+
             "&implfunc=rzry";
         });
+
+        /*添加字段*/
+        local.find('[opt=addfield]').click(function(){
+            var closobj = rzrygl.datagrid('options').columns[0];
+            require(['commonfuncs/popwin/win','text!views/pension/RuZhuRYXlsFields.htm','views/pension/RuZhuRYXlsFields'],
+                function(win,htmfile,jsfile){
+                    win.render({
+                        title:'选择字段',
+                        width:620,
+                        height:435,
+                        html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},{
+                                text:'确定',
+                                handler:function(html,parent){
+                                    var selectRadio = ":input[type=radio] + label";
+                                    parent.find(selectRadio).each(function () {
+                                        if ($(this).prev()[0].checked){
+                                            for(var o=0;o<closobj.length;o++){
+                                                if(closobj[o].hidden){
+                                                    rzrygl.datagrid('showColumn',$(this).prev().val()); //显示
+                                                }
+                                            }
+                                        }else{
+                                            for(var o=0;o<closobj.length;o++){
+                                                if(!closobj[o].hidden){
+                                                    rzrygl.datagrid('hideColumn',$(this).prev().val()); //隐藏
+                                                }
+                                            }
+                                        }
+                                        parent.trigger('close');
+                                    })
+                                }
+                            }
+                        ],
+                        renderHtml:function(local,submitbtn,parent){
+                            jsfile.render(local,{
+                                parent:parent,
+                                closobj:closobj
+                            })
+                        }
+                    })
+                }
+            )
+        })
     }
 
     return {

@@ -8,6 +8,7 @@
             [newpension.controller.zhfont :as zhfont]
             [noir.response :as resp]
             [newpension.controller.old :as old]
+            [newpension.controller.department :as depart]
             )
   (:import [newpension.javaxls XlsReport]
            [newpension.javaxls ReportXlsByMoths]
@@ -214,6 +215,7 @@
           wb (new org.apache.poi.hssf.usermodel.HSSFWorkbook)
           datas (cond (= implfunc "fwpg") (audit/setexcel-auditdata request)  ;服务评估
                     (= implfunc "sjk")  (old/getoldpeopledata request)     ;数据库
+                    (= implfunc "rzry")  (depart/oldepartreport request)     ;养老机构
             )
 ;          datas (audit/setexcel-auditdata request)
           ]
