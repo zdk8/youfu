@@ -77,7 +77,6 @@ define(function(){
             toolbar:local.find('div[tb]')
         })
         refresh.click(function(){
-//            rzrygl.datagrid('reload');
             rzrygl.datagrid('load',{
                 deptype:'jigou',
                 departname:departname.val(),
@@ -85,6 +84,28 @@ define(function(){
                 identityid:identityid.val()
             });
         })
+
+        /*导出xls*/
+        local.find('[opt=exportexcel]').click(function(){
+            var closobj = rzrygl.datagrid('options').columns[0];
+            var colsfieldarr = new Array();     //列头字段
+            var colstxtarr = new Array();       //列头文本
+            for(var o=0;o<closobj.length;o++){
+                if(closobj[o].field != "ro"){
+                    if(!closobj[o].hidden){
+                        colsfieldarr.push(closobj[o].field);
+                        colstxtarr.push(closobj[o].title);
+                    }
+                }
+            }
+            layer.load(1);
+            window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsfieldarr+
+            "&datatype=jigou"+
+            "&departname="+departname.val()+
+            "&identityid="+local.find('[opt=identityid]').val()+
+            "&name="+name.val()+
+            "&implfunc=rzry";
+        });
     }
 
     return {

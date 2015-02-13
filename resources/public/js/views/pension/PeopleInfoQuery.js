@@ -107,20 +107,10 @@ define(function(){
                 "&title="+local.find('[opt=ppselect] option:selected').text()+
                 "&implfunc=sjk";
             });
-
+            /*添加字段*/
             local.find('[opt=addfield]').click(function(){
                 var closobj = peopleinfodatarid.datagrid('options').columns[0];
-                var colsfieldarr = new Array();     //列头字段
-                var colstxtarr = new Array();       //列头文本
-                for(var o=0;o<closobj.length;o++){
-                    if(closobj[o].field != "ro"){
-                        //if(!closobj[o].hidden){
-                            colsfieldarr.push(closobj[o].field);
-                            colstxtarr.push(closobj[o].title);
-                        //}
-                    }
-                }
-                require(['commonfuncs/popwin/win','text!views/pension/ReportXlsAuto.htm','views/pension/ReportXlsAuto'],
+                require(['commonfuncs/popwin/win','text!views/pension/PeopleInfoXlsFields.htm','views/pension/PeopleInfoXlsFields'],
                     function(win,htmfile,jsfile){
                         win.render({
                             title:'选择字段',
@@ -133,8 +123,6 @@ define(function(){
                                 }},{
                                     text:'确定',
                                     handler:function(html,parent){
-                                        pp = parent;
-                                        //peopleinfodatarid.datagrid('hideColumn','name'); //隐藏
                                         var selectRadio = ":input[type=radio] + label";
                                         parent.find(selectRadio).each(function () {
                                             if ($(this).prev()[0].checked){
@@ -150,13 +138,15 @@ define(function(){
                                                     }
                                                 }
                                             }
+                                            parent.trigger('close');
                                         })
                                     }
                                 }
                             ],
                             renderHtml:function(local,submitbtn,parent){
                                 jsfile.render(local,{
-                                    parent:parent
+                                    parent:parent,
+                                    closobj:closobj
                                 })
                             }
                         })

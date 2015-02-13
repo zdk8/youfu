@@ -7,7 +7,6 @@
                fit:true,
                border:false,
                rownumbers:true,
-               fitColumns:true,
                pageSize:cj.getDataGridAttr('pageSize'),
                pageList:cj.getDataGridAttr('pageList'),
                singleSelect:true,
@@ -16,14 +15,13 @@
                pagination:true">
             <thead>
             <tr>
-                <!--<th data-options="field:'lr_id',hidden:true" ></th>-->
                 <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
                     str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;><span><span class=&quot;icon-cancell-pl1&quot;></span></span></a>&nbsp;&nbsp;');
                     str=$(str).append('<a action=&quot;change&quot;title=&quot;变更&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>&nbsp;&nbsp;');
                     return str.html();
-                }">操作</th>
+                }"><a href="javascript:void(0)" opt="addfield">添加</a>操作</th>
                 <th data-options="field:'name',width:100,align:'center',
                 formatter:function(v,r,i)
                 {
@@ -32,14 +30,32 @@
                     return str.html();
                 }">姓名</th>
                 <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
+                <th data-options="field:'nation',width:60,align:'center',hidden:true,
+                    formatter: cj.enumFormatter('oldnation')">名族</th>
+                <th data-options="field:'age',width:60,align:'center'">年龄</th>
                 <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
-                <th data-options="field:'age',width:150,align:'center'">年龄</th>
                 <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
                 <th data-options="field:'economy',width:200,align:'center',
                     formatter: function(value,row,index){
                     return economyArr[value]
                     }">老人类型</th>
-                <th data-options="field:'address',width:200,align:'left'">住址</th>
+                <th data-options="field:'address',width:200,align:'center'">家庭住址</th>
+                <th data-options="field:'birthplace',width:150,align:'center'">籍贯</th>
+                <th data-options="field:'culture',width:100,align:'center',hidden:true,
+                    formatter: function(value,row,index){
+                            return getCulture[value]
+                    }">文化程度</th>
+                <th data-options="field:'marriage',width:100,align:'center',hidden:true,
+                    formatter: function(value,row,index){
+                            return getMarriage[value]
+                    }">婚姻状况</th>
+                <th data-options="field:'live',width:100,align:'center',hidden:true,
+                    formatter: function(value,row,index){
+                            return getMarriage[value]
+                    }">居住</th>
+                <th data-options="field:'postcode',width:100,align:'center',hidden:true">邮编</th>
+                <th data-options="field:'telephone',width:100,align:'center',hidden:true">住宅电话</th>
+                <th data-options="field:'mobilephone',width:100,align:'center',hidden:true">手机</th>
             </tr>
             </thead>
         </table>
