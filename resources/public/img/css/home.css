@@ -372,7 +372,7 @@ textarea.bdsilver{
 }
 
 /*radio checkbox样式*/
-.newRadio input+label {
+/*.newRadio input+label {
     padding-left: 26px;
     background: url(../form/UnCheck.png) no-repeat;
     font-size: 13px;
@@ -381,7 +381,7 @@ textarea.bdsilver{
     padding-left: 26px;
     background: url(../form/CheckIt.bmp) no-repeat;
     color: #008800;
-}
+}*/
 
 input:disabled{
     background-color:#ffffff;
