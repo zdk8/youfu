@@ -94,6 +94,11 @@
        tf (.format df nowdate)]
     (str tf)))
 
+(defn format-time [time type]
+  (let[df (new SimpleDateFormat "yyyy-MM-dd")
+        ldf (new SimpleDateFormat "yyyy-MM-dd HH:mm:ss")]
+    (if (= type "l") (.format ldf time) (.format df time))))
+
 (defn fenye [rows page tablename colnames cond  order]
   (let[r   (read-string rows)
        p  (read-string page)

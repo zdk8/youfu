@@ -9,6 +9,7 @@
             [clojure.string :as strs]
             [newpension.common.common :as common]
             [clojure.data.json :as json]
+            ;[newpension.controller.report :as report]
             ))
 
 (def oldinfo [:jk_qibq :xq_aih :jk_jiyl :address :hjj_hjj :jz_erdianh :jz_lxdh :age :status :jk_gms :culture
@@ -213,7 +214,8 @@
         digest (str "姓名" (:name (:params request))
                  " 身份证" (:identityid (:params request))
                  " 性别" (if (= (:gender (:params request)) "1") "男" "女"))
-        tprkey (inc (:max (db/get-max "olds")))         ;;获取自增外键
+       ; tprkey (inc (:max (db/get-max "olds")))         ;;获取自增外键
+       tprkey (:nextval (first(db/get-results-bysql "select seq_t_oldpeople.nextval  from dual")))
         functionid "mHLcDiwTflgEshNKIiOV"
         dvcode (:dvcode (:params request))
         loginname (:loginname (:params request))
@@ -821,3 +823,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (println "MMMMMMMMMMMMMM" mapguid  "   " ismap)
     (db/update-setoldmap ismap mapguid)
     (resp/json {:success true :message "map set success"})))
+
+
+
+
+(defn insert-olddata [sql]
+  (db/insert-results-bysql  sql))
+
+
+

@@ -66,7 +66,8 @@
 
   (GET "/upload" [] (upload-page))
   (GET "/testpost" [](testpost-page))
-  (POST "/photo/addphoto" [file] (depart/add-photo file))
+  ;(POST "/photo/addphoto" [file] (depart/add-photo file))
+  (POST "/photo/addphoto" [file] (report/test-myexcel file))
   (GET "/get-file/:file-name" [file-name]
     (depart/server-file file-name))
   (GET "/myimage/:user-id/:file-name" [user-id file-name]
@@ -229,6 +230,7 @@
  ; (GET "/test/testtime" request (audit/testtime request))
   (POST "/old/setoldmap" request (old/set-oldmap request))                                                                       ;;设置地图
 
+  (GET "/test/testgetmyexcel" path (report/test-myexcel path))
 
 
 

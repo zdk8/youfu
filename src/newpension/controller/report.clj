@@ -1,5 +1,6 @@
 (ns newpension.controller.report
   (:use compojure.core)
+  (:use clojure.java.io)
   (:require [newpension.models.gen :as gen]
             [ring.util.response :as response]
             [clj-pdf.core :refer [pdf template]]
@@ -9,6 +10,7 @@
             [noir.response :as resp]
             [newpension.controller.old :as old]
             [newpension.controller.department :as depart]
+            [newpension.common.common :as common]
             )
   (:import [newpension.javaxls XlsReport]
            [newpension.javaxls ReportXlsByMoths]
@@ -17,6 +19,7 @@
            [org.apache.poi.ss.usermodel Workbook]
            [org.apache.poi.hssf.usermodel.*]
            )
+  (:import [org.apache.poi.hssf.usermodel HSSFWorkbook])
 
   )
 
@@ -228,5 +231,35 @@
        :body (.getMessage ex)}))
   )
 
+
+(defn test-myexcel [file]
+  (let[data (rest(get  (myexcel/lazy-workbook (myexcel/workbook-hssf (:tempfile file))) "Sheet1"))     ;{:birthd (nth % 3)}
+       ;dealdata (map #(conj {:districtid (str(nth % 0))} {:name (str(nth % 1))}{:identityid (str(nth % 2))}{:gender (if (= (nth % 4) "男") "1" (if (= (nth % 4) "女") "0" (nth % 4)))} {:age (str(nth % 5))}{:address (str(nth % 6))}) data)
+      ; testdata [{:districtid "330424103" :name "test1" :identityid "330424193203052000" :gender 1 :age 18 :address "海盐县于城镇庄家村委会"}{:districtid "330424103" :name "test2" :identityid "330424193203052000" :gender 1 :age 18 :address "海盐县于城镇庄家村委会"}]
+       dealdata (map #(str "insert into t_oldpeople (districtid, name, identityid,birthd, gender, age, address) values ('" (nth % 0) "','" (nth % 1)"','"(nth % 2) "',to_date ( '" (common/format-time (nth % 3) "") "' , 'YYYY-MM-DD' )," (if (= (nth % 4) "男") "1" (if (= (nth % 4) "女") "0" (nth % 4))) "," (nth % 5) ",'" (nth % 6) "')") data)
+       oldsql (apply str (interpose ";\n" dealdata))
+
+       ]
+    (println (common/format-time (nth (first data) 3) ""))
+    (println oldsql)
+    (println dealdata)
+
+    (dorun (map #(old/insert-olddata %) dealdata))
+    )
+
+  ;(let [pathurl "D:\\test.xls"]
+   ;; (resp/json (myexcel/lazy-workbook (myexcel/workbook-hssf "D:\\test.xls")))
+ ;(resp/json (myexcel/lazy-workbook (new HSSFWorkbook file)))
+  ;(println (input-stream file))
+ ; (new HSSFWorkbook (input-stream file))
+  ;(println (class (get  (myexcel/lazy-workbook (myexcel/workbook-hssf (:tempfile file))) "Sheet1")))
+  ;(println (get  (myexcel/lazy-workbook (myexcel/workbook-hssf (:tempfile file))) "Sheet1"))
+
+  ;(resp/json file)
+  (str "success")
+  )
+
+(defn analyze-file [file]
+  (myexcel/lazy-workbook (myexcel/workbook-hssf (:tempfile file))))
 
 
