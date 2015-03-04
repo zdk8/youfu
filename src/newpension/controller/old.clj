@@ -132,7 +132,7 @@
   (let[params (:params request)
        colsfieldls (:colsfield params)
        genderrep (str "(case gender   when '1' then '男' when '0' then '女'  else '空'   END) as gender")
-       datatyperep (str "(case datatype   when 's' then '三低老人' when 'f' then '居家养老' when 'j' then '机构养老' else '未划分'   END) as datatype")
+       datatyperep (str "(case datatype   when 's' then '三低老人' when 'f' then '居家养老' when 'j' then '机构养老' when 'k' then '老人卡' else '未划分'   END) as datatype")
        colsfield  (strs/replace (strs/replace colsfieldls "gender" genderrep) "datatype" datatyperep)
        datatype (:datatype params)
        name (:name params)
@@ -791,7 +791,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        typevalue (cond
                              (= datatype "s") "三低老人"
                              (= datatype "f") "居家养老"
-                            (= datatype "j")  "机构养老")
+                            (= datatype "j")  "机构养老"
+                           (= datatype "k")  "老年卡")
        agegroup (if (and (= nl "nl")(= (count minage) 0) (= (count maxage) 0))
                   (str " (CASE WHEN age <= 60 THEN '60岁以下'
 	                                    WHEN age > 60 AND age <= 70 THEN '60-70岁'
@@ -805,7 +806,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                                  12   " substr(districtid,0,12)  "
                                  nil))
        xbgroup (if (= xb "xb") (str " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")   nil)                   ;性别分组
-       lbgroup (if (= lb "lb") (str " (case datatype   when 's' then '三低老人' when 'f' then '居家养老' when 'j' then '机构养老' else '未划分'   END)  "))
+       lbgroup (if (= lb "lb") (str " (case datatype   when 's' then '三低老人' when 'f' then '居家养老' when 'j' then '机构养老' when 'k' then '老人卡' else '未划分'   END)  "))
        groups (str (if agegroup (str agegroup ",")) (if dqgroup (str dqgroup ",")) (if xbgroup (str xbgroup ",")) (if lbgroup (str lbgroup ",")))                            ;组合分组
        groupwith (if (> (count groups) 0) (subs groups 0 (dec(count groups)))  (str " substr(districtid,0,6) "))
        opstatissql (str "SELECT s.*,dv.dvname FROM (select " (if agegroup agegroup (str " '" agevalue "' ")) " as agevalue ," (if dqgroup dqgroup (if (>(count districtid)0) districtid "330424") ) " as districtid, " (if xbgroup xbgroup (str " '" gendervalue "' ")) " as gender, " (if lbgroup lbgroup (str " '" typevalue "' ")) " as oldtype, count(*) as opsum
@@ -828,7 +829,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 
 (defn insert-olddata [sql]
-  (db/insert-results-bysql  sql))
+  (db/insert-old-data  sql))
 
 
 

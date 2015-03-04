@@ -1,6 +1,6 @@
 (ns newpension.models.db
   (:use korma.core
-        [korma.db :only [defdb with-db]])
+        [korma.db :only [defdb with-db transaction]])
   (:import (java.sql Timestamp))
   (:require [newpension.models.schema :as schema]
                [hvitmiddleware.core :as hvitmd]
@@ -844,6 +844,10 @@
 
 (defn insert-results-bysql[totalsql]
   (exec-raw [totalsql []] ))
+
+(defn insert-old-data [sql]                   "导入老人卡数据，进行事务锁定"
+  (transaction
+    (dorun(map #(insert-results-bysql %) sql))))
 
 
 
