@@ -380,6 +380,29 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     ) )
 
 
+(defn get-odp-signdata [request]
+  (let[params (:params request)
+       dep_id (:dep_id params)
+       rows (:rows params)
+       page (:page params)
+       conddepart (if dep_id "" (str " and dep_id = " dep_id))
+       getsql (str "select '0' as warn ,sign.* from
+(select o.*,s.os_id,s.signdate from
+(select t.*  from t_oldpeopledep t where checkouttime is null " conddepart ") o
+left join (select * from t_oldsign where trunc(signdate)=trunc(sysdate)) s
+on o.opd_id = s.opd_id)  sign
+where opd_id in (select opd_id from t_oldsign where signdate >= trunc(sysdate - 2) )
+union all
+select '1' as warn ,sign.* from
+(select o.*,s.os_id,s.signdate from
+(select t.*  from t_oldpeopledep t where checkouttime is null " conddepart ") o
+left join (select * from t_oldsign where trunc(signdate)=trunc(sysdate)) s
+on o.opd_id = s.opd_id)  sign
+where opd_id not in (select opd_id from t_oldsign where signdate >= trunc(sysdate - 2) )")]
+    (resp/json (common/fenye rows page (str "(" getsql ")") "*" "" "" ))))
+
+
+
 
 (defn testfun [request]
   (println (l/local-now))

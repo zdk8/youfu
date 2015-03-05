@@ -236,12 +236,12 @@
   (let[data (rest(get  (myexcel/lazy-workbook (myexcel/workbook-hssf (:tempfile file))) "Sheet1"))     ;{:birthd (nth % 3)}
        ;dealdata (map #(conj {:districtid (str(nth % 0))} {:name (str(nth % 1))}{:identityid (str(nth % 2))}{:gender (if (= (nth % 4) "男") "1" (if (= (nth % 4) "女") "0" (nth % 4)))} {:age (str(nth % 5))}{:address (str(nth % 6))}) data)
       ; testdata [{:districtid "330424103" :name "test1" :identityid "330424193203052000" :gender 1 :age 18 :address "海盐县于城镇庄家村委会"}{:districtid "330424103" :name "test2" :identityid "330424193203052000" :gender 1 :age 18 :address "海盐县于城镇庄家村委会"}]
-       dealdata (map #(str "insert into t_oldpeople (districtid, name, identityid,birthd, gender, age, address,datatype) values ('" (nth % 0) "','" (nth % 1)"','"(nth % 2) "',to_date ( '" (common/format-time (nth % 3) "") "' , 'YYYY-MM-DD' )," (if (= (nth % 4) "男") "1" (if (= (nth % 4) "女") "0" (nth % 4))) "," (nth % 5) ",'" (nth % 6) "','k')") data)
-       oldsql (apply str (interpose ";\n" dealdata))
+       dealdata (map #(str "insert into t_oldpeople (districtid, name, identityid,birthd, gender, age, address,datatype,operator_date) values ('" (nth % 0) "','" (nth % 1)"','"(nth % 2) "',to_date ( '" (common/format-time (nth % 3) "") "' , 'YYYY-MM-DD' )," (if (= (nth % 4) "男") "1" (if (= (nth % 4) "女") "0" (nth % 4))) "," (nth % 5) ",'" (nth % 6) "','k',to_date ( '" (common/format-time (common/get-nowtime) "") "' , 'YYYY-MM-DD' ))") data)
+       ;oldsql (apply str (interpose ";\n" dealdata))
 
        ]
-    (println (common/format-time (nth (first data) 3) ""))
-    (println oldsql)
+    ;(println (common/format-time (nth (first data) 3) ""))
+    ;(println oldsql)
     (println dealdata)
 
     (old/insert-olddata dealdata)

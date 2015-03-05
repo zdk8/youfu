@@ -216,6 +216,10 @@
   (GET "/old/getoldpeopledata" request (old/getoldpeopledata request))
   (GET "/depart/oldepartreport" request (depart/oldepartreport request))
 
+  (POST "/depart/getopdsigin" request (depart/get-odp-signdata request))                                               ;;获取签到人员数据
+
+
+
 
 
   ;(POST "/old/opstatistic" request (old/opstatistic request))                                                                  ;;老人信息统计
