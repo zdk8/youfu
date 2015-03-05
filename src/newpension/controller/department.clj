@@ -385,7 +385,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        dep_id (:dep_id params)
        rows (:rows params)
        page (:page params)
-       conddepart (if dep_id "" (str " and dep_id = " dep_id))
+       conddepart (if (> (count dep_id) 0) (str " and dep_id = " dep_id)  "")
        getsql (str "select '0' as warn ,sign.* from
 (select o.*,s.os_id,s.signdate from
 (select t.*  from t_oldpeopledep t where checkouttime is null " conddepart ") o
