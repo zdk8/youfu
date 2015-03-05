@@ -153,6 +153,34 @@ define(function(){
                     }
                 )
             })
+
+
+            /*导入xls*/
+            local.find('[opt=importexcel]').click(function(){
+                //layer.load(1);
+                var textfield = local.find('[name=textfield]').val();
+                if(textfield == "双击浏览按钮" || textfield.trim().length == 0){
+                    cj.slideShow('<label style="color: red">请先选择文件</label>');
+                }else{
+                    local.find('[opt=importfile]').form('submit',{
+                        url:"photo/addphoto",
+                        onSubmit:function(){
+                            showProcess(true, '温馨提示', '正在提交数据...');
+                        },
+                        success: function (data) {
+                            if(data == "success"){
+                                showProcess(false)
+                                if(showProcess(false)){
+                                    cj.slideShow('数据导入成功');
+                                    peopleinfodatarid.datagrid("reload")
+                                }
+                            }else{
+                                showProcess(false)
+                            }
+                        }
+                    })
+                }
+            });
         }
     }
 })

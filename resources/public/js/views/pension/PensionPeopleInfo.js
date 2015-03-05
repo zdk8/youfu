@@ -156,6 +156,11 @@ define(function(){
                 }
             });
         })
+
+        /*图片上传*/
+        local.find('[opt=personimg]').click(function(){
+            console.log(1)
+        })
     }
 
     /*处理时进入页面(actionType=info)*/
