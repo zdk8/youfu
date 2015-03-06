@@ -1,5 +1,4 @@
-<!--入住人员管理-->
-<table opt="ruzhurymanagement" data-options="
+<table opt="signpp" data-options="
                method:'post',
                fit:true,
                border:false,
@@ -11,12 +10,19 @@
                loadMsg:''">
     <thead>
     <tr>
-        <th data-options="field:'ro',width:80,align:'center',formatter:function(value,rowData,rowIndex)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;cancellation&quot;title=&quot;注销&quot;><span><span class=&quot;icon-cancell-pl1&quot;></span></span></a>&nbsp;&nbsp;');
-                return str.html();
-            }"><a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;操作</th>
+        <th field="ck" checkbox="true"></th>
+        <th data-options="field:'signdate',width:80,align:'center',
+        formatter:function(value,rowData,rowIndex){
+                if(value != null){
+                    var str='<div></div>';
+                    str=$(str).append('<a>已签到</a>');
+                    return str.html();
+                }else{
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><span><span class=&quot;icon-sign&quot;></span></span></a>');
+                    return str.html();
+                }
+            }">签到</th>
         <th data-options="field:'departname',width:160,align:'center'">机构名称</th>
         <th data-options="field:'name',width:145,align:'center',
             formatter:function(v,r,i)
@@ -91,8 +97,3 @@
         </table>
     </div>
 </div>
-
-
-
-
-

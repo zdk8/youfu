@@ -15,13 +15,9 @@ define(function(){
             },
             type:'post',
             onLoadSuccess:function(data){
-               /* var updates = local.find('[action=update]');           //修改
-                var del = local.find('[action=delete]');                //删除
-                var addrzry = local.find('[action=addrzry]');                //添加入住人员*/
                 var viewbtn = local.find("[action=view]")
                 var cancellation = local.find('[action=cancellation]');     //注销入住人员
                 var rows=data.rows;
-//                var btns_arr=[updates,del,addrzry];
                 var btns_arr=[viewbtn,cancellation];
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
@@ -50,7 +46,7 @@ define(function(){
                                             })
                                         }
                                     });
-                                }else if(action = "view"){
+                                }else if(action == "view"){
                                     var title = "【"+record.name+'】详细信息';
                                     if($("#tabs").tabs('getTab',title)){
                                         $("#tabs").tabs('select',title)
@@ -68,6 +64,8 @@ define(function(){
                                             }
                                         })
                                     }
+                                }else if(action == "sign"){
+                                   console.log("签到")
                                 }
                             });
                         })(i)
@@ -153,6 +151,11 @@ define(function(){
                     })
                 }
             )
+        })
+
+        /*全部签到*/
+        local.find('[opt=signbtn]').click(function () {
+            console.log("全部签到")
         })
     }
 

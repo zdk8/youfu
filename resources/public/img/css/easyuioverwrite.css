@@ -169,6 +169,14 @@ element.style {
     background: url('../../img/cancell_show_max.png') no-repeat left center;
     padding-left: 17px;
 }
+.icon-sign {
+    background: url('../../img/sign_min.png') no-repeat left center;
+    padding-left: 16px;
+}
+.icon-sign:hover {
+    background: url('../../img/sign_max.png') no-repeat left center;
+    padding-left: 17px;
+}
 
 .icon-map-pl1 {
     background: url('../../img/map_show.png') no-repeat left center;
