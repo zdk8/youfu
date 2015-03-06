@@ -217,6 +217,7 @@
   (GET "/depart/oldepartreport" request (depart/oldepartreport request))
 
   (POST "/depart/getopdsigin" request (depart/get-odp-signdata request))                                               ;;获取签到人员数据
+  (POST "/depart/opdsign" request (depart/oldsign request))
 
 
 
@@ -235,6 +236,7 @@
   (POST "/old/setoldmap" request (old/set-oldmap request))                                                                       ;;设置地图
 
   (GET "/test/testgetmyexcel" path (report/test-myexcel path))
+
 
 
 

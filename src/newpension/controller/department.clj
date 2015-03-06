@@ -401,6 +401,13 @@ on o.opd_id = s.opd_id)  sign
 where opd_id not in (select opd_id from t_oldsign where signdate >= trunc(sysdate - 2) )")]
     (resp/json (common/fenye rows page (str "(" getsql ")") "*" "" "" ))))
 
+(defn oldsign [request]
+  (let[params (:params request)
+       opd_id (:opd_id params)
+       signdata {:opd_id opd_id :signdata (common/get-nowtime)}]
+    (db/opdsign signdata)
+    (str "success")))
+
 
 
 

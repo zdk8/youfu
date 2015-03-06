@@ -165,6 +165,12 @@
   (table :t_hospitalsubsidy)
   (database dboracle))
 
+;;机构签到表
+(defentity t_oldsign
+  (pk :os_id)
+  (table :t_oldsign)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -807,6 +813,11 @@
   (update t_hospitalsubsidy
     (set-fields hsdata)
     (where {:hs_id hs_id})))
+
+;;入住人员签到
+(defn opdsign [datasign]
+  (insert t_oldsign
+    (values datasign)))
 
 
 ;;资金发放
