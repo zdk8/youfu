@@ -426,7 +426,7 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
 (defn opd-select-design [request]
   (let[params (:params request)
        opd_ids(:os_id params)
-       signdata (map #(zipmap [:datesign :opd_id ] (conj % (common/get-nowtime) )) (partition 1 1 opd_ids))]
+       signdata (map #(zipmap [:signdate :opd_id ] (conj % (common/get-nowtime) )) (partition 1 1 opd_ids))]
     (println signdata)
     (db/select-opdsign signdata)
     (resp/json signdata)))
