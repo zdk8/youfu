@@ -11,18 +11,50 @@
     <thead>
     <tr>
         <th field="ck" checkbox="true"></th>
+        <th data-options="field:'ro',width:100,align:'center',
+        formatter:function(value,rowData,rowIndex)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><span><span class=&quot;icon-sign&quot;></span>签到</span></a>');
+                str=$(str).append('<a action=&quot;signcancle&quot;title=&quot;取消签到&quot;><span><span class=&quot;icon-sign&quot;></span>取消</span></a>');
+                return str.html();
+            }">操作</th>
         <th data-options="field:'signdate',width:80,align:'center',
-        formatter:function(value,rowData,rowIndex){
-                if(value != null){
-                    var str='<div></div>';
-                    str=$(str).append('<a>已签到</a>');
-                    return str.html();
+            formatter:function(value,rowData,rowIndex){
+                        if(value != null){
+                            var str='<div></div>';
+                            str=$(str).append('已签到');
+                            return str.html();
+                        }else{
+                            var str='<div></div>';
+                            str=$(str).append('未签到');
+                            return str.html();
+                        }
+                    }">签到</th>
+        <!--<th data-options="field:'signdate',width:80,align:'center',
+        formatter:function(v,r,i){
+                var str='<div></div>';
+                if(v != null){
+                    str=$(str).append('<a action=&quot;signcancle&quot;title=&quot;取消签到&quot;>已签到</a>');
                 }else{
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><span><span class=&quot;icon-sign&quot;></span></span></a>');
-                    return str.html();
+                    str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><span><span class=&quot;icon-sign&quot;></span>'+v+'</span></a>');
                 }
-            }">签到</th>
+                return str.html();
+            }">签到</th>-->
+        <!--var str='<div></div>';
+                    str=$(str).append('<a action=&quot;sign&quot;>'+v+'</a>');
+                    return str.html();-->
+        <!--<th data-options="field:'signdate',width:80,align:'center',
+            formatter:function(v,r,i){
+
+             if(v == null){
+                    return sign[0]
+             }else{
+                    return sign[1]
+                }
+
+
+                }">签到</th>-->
         <th data-options="field:'departname',width:160,align:'center'">机构名称</th>
         <th data-options="field:'name',width:145,align:'center',
             formatter:function(v,r,i)
