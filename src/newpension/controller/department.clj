@@ -408,7 +408,7 @@ where opd_id not in (select opd_id from t_oldsign where signdate >= trunc(sysdat
     (db/opdsign signdata)
     (str "success")))
 
-(defn opddesigncancle [params]
+(defn opddesigncancle [request]
   (let[params (:params request)
        os_id (:os_id params)]
     (db/delete-opd os_id)
