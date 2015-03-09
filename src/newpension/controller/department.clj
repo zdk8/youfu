@@ -404,7 +404,7 @@ where opd_id not in (select opd_id from t_oldsign where signdate >= trunc(sysdat
 (defn oldsign [request]
   (let[params (:params request)
        opd_id (:opd_id params)
-       signdata {:opd_id opd_id :signdata (common/get-nowtime)}]
+       signdata {:opd_id opd_id :signdate (common/get-nowtime)}]
     (db/opdsign signdata)
     (str "success")))
 
