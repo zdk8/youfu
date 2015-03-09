@@ -819,6 +819,9 @@
   (insert t_oldsign
     (values datasign)))
 
+(defn delete-opd [os_id]
+  (delete t_oldsign
+    (where {:os_id os_id})))
 
 ;;资金发放
 (defn sendmoney [testdata]
