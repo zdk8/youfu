@@ -823,6 +823,11 @@
   (delete t_oldsign
     (where {:os_id os_id})))
 
+(defn select-opdsign [signdata]
+  (transaction
+    (dorun
+      (map #(opdsign %) signdata))))
+
 ;;资金发放
 (defn sendmoney [testdata]
  ; (println (vector? testdata)"SSSSSSSSS" testdata )
@@ -858,6 +863,8 @@
 
 (defn insert-results-bysql[totalsql]
   (exec-raw [totalsql []] ))
+
+
 
 (defn insert-old-data [sql]                   "导入老人卡数据，进行事务锁定"
   (transaction

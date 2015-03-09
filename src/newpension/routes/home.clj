@@ -220,6 +220,7 @@
   (POST "/depart/opdsign" request (depart/oldsign request))                                                                   ;;单个签到
   (POST "/depart/opddesigncancle" request (depart/opddesigncancle request))                                      ;;取消单个签到
   (POST "/depart/opddesignall" request (depart/opd-design-all request))
+  (POST "/depart/opdselectsign" request (depart/opd-select-design request))
 
 
 
