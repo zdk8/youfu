@@ -219,7 +219,7 @@
   (POST "/depart/getopdsigin" request (depart/get-odp-signdata request))                                               ;;获取签到人员数据
   (POST "/depart/opdsign" request (depart/oldsign request))                                                                   ;;单个签到
   (POST "/depart/opddesigncancle" request (depart/opddesigncancle request))                                      ;;取消单个签到
-
+  (POST "/depart/opddesignall" request (depart/opd-design-all request))
 
 
 

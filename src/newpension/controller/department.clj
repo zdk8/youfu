@@ -414,6 +414,15 @@ where opd_id not in (select opd_id from t_oldsign where signdate >= trunc(sysdat
     (db/delete-opd os_id)
     (str "success")))
 
+(defn opd-design-all [request]
+  (let[params (:params request)
+       dep_id (:dep_id params)
+       signall-sql (str "INSERT INTO T_OLDSIGN(opd_id,signdate)
+SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
+(SELECT opd_id FROM T_OLDSIGN WHERE trunc(signdate) = trunc(SYSDATE) AND dep_id = " dep_id ")")]
+    (db/insert-results-bysql signall-sql)
+    (str "success")))
+
 
 (defn testfun [request]
   (println (l/local-now))
