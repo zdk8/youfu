@@ -400,7 +400,10 @@
 
         var setMenuLevelTwoClickEvent=function($dropdownas){
             //var $dropdownas=$('#menu_newpension li.dropdown a');
+            var flag = 0;
             $dropdownas.click(function(e){
+                flag+=1;
+                console.log("flag:"+flag)
                 var me = $(this);
                 var $li = $(this).parent();
                 $dropdownas.each(function(){
@@ -426,14 +429,18 @@
                                 }
                             }
                             if(nosignp.length > 0){
-                                var dlg = $.messager.show({
-                                    title:'温馨提示',
-                                    msg:'<div style="width:400px;height: 10px;"><marquee direction=left behavior=scroll onmouseover=this.stop() onmouseout=this.start()><label style="color: red;">【'+nosignp+'】未签到</label></marquee></div>',
-                                    timeout:false,
-                                    showType:'show',
-                                    width:'400px',
-                                    height:'20px'
-                                });
+                                var dlg;
+                                if(flag == 1){
+                                    dlg = $.messager.show({
+                                        title:'温馨提示',
+                                        msg:'<div style="width:400px;height: 10px;"><marquee direction=left behavior=scroll onmouseover=this.stop() onmouseout=this.start()><label style="color: red;">【'+nosignp+'】未签到</label></marquee></div>',
+                                        timeout:false,
+                                        showType:'show',
+                                        width:'400px',
+                                        height:'20px'
+                                    });
+                                }
+                                dd = dlg;
                             }
 
                             console.log(cj.getUserMsg())

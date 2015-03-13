@@ -36,6 +36,24 @@
                     </td>
                 </tr>
 
+                <tr>
+                    <th>用户类型 :</th>
+                    <td>
+                        <select name="usertype">
+                            <option value="0" selected="selected">政府</option>
+                            <option value="1">养老机构</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>养老机构 :</th>
+                    <td>
+                        <input class="easyui-combobox" name="depid" style="width:200px;"
+                               data-options="loader:getYLJG(), editable:false, valueField:'id', textField:'text' ">
+                    </td>
+                </tr>
+
 
                 <tr>
                     <th>描述 :</th>
