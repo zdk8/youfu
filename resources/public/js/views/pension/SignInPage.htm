@@ -31,30 +31,18 @@
                             return str.html();
                         }
                     }">签到</th>
-        <!--<th data-options="field:'signdate',width:80,align:'center',
-        formatter:function(v,r,i){
-                var str='<div></div>';
-                if(v != null){
-                    str=$(str).append('<a action=&quot;signcancle&quot;title=&quot;取消签到&quot;>已签到</a>');
-                }else{
-                    str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><span><span class=&quot;icon-sign&quot;></span>'+v+'</span></a>');
-                }
-                return str.html();
-            }">签到</th>-->
-        <!--var str='<div></div>';
-                    str=$(str).append('<a action=&quot;sign&quot;>'+v+'</a>');
-                    return str.html();-->
-        <!--<th data-options="field:'signdate',width:80,align:'center',
-            formatter:function(v,r,i){
-
-             if(v == null){
-                    return sign[0]
-             }else{
-                    return sign[1]
-                }
-
-
-                }">签到</th>-->
+        <th data-options="field:'warn',width:80,align:'center',
+            formatter:function(value,rowData,rowIndex){
+                        if(value == '0'){
+                            var str='<div></div>';
+                            str=$(str).append('正常');
+                            return str.html();
+                        }else{
+                            var str='<div></div>';
+                            str=$(str).append('不正常');
+                            return str.html();
+                        }
+                    }">预警</th>
         <th data-options="field:'departname',width:160,align:'center'">机构名称</th>
         <th data-options="field:'name',width:145,align:'center',
             formatter:function(v,r,i)
@@ -93,7 +81,16 @@
         <table style="float: left;">
             <tr>
                 <td>
-                    <input class="highcharstoolbarbutton" type="button" opt="signbtn" value="全部签到">
+                    <span>
+                        状态 :
+                        <label style="background-color:#ffeaa0;width: 30px;height: 30px;">已签到</label>
+                        <label style="background-color:yellow;width: 30px;height: 30px;">未签到</label>
+                        <label style="background-color:#1a32ff;width: 30px;height: 30px;">预警</label>
+                    </span>
+                    <span>
+                        <input class="highcharstoolbarbutton" type="button" opt="signbtn" value="签到">
+                        <input class="highcharstoolbarbutton" type="button" opt="signallbtn" value="一键签到">
+                    </span>
                 </td>
             </tr>
         </table>

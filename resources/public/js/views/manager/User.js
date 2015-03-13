@@ -17,8 +17,8 @@ define(function(){
                 }, 'json');
             };
             var viewUserInfo=function(record){
-                require(['commonfuncs/popwin/win','text!views/manager/UserForm.htm'],
-                    function(win,htmfile){
+                require(['commonfuncs/popwin/win','text!views/manager/UserForm.htm','views/manager/UserForm'],
+                    function(win,htmfile,jsfile){
                         win.render({
                             title:'用户信息',
                             width:524,
@@ -66,6 +66,10 @@ define(function(){
                                         poplocal.find('[opt=tip]').text(data.totalname);
                                     },'json')
                                 }
+
+                                jsfile.render(local,{
+                                    parent:parent
+                                })
                             }
                         })
                     })

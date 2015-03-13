@@ -49,21 +49,19 @@ define(function(){
                 for(var i=0;i<rows.length;i++) {
                     for (var j = 0; j < btns_arr.length; j++) {
                         if(rows[i].signdate != null){
-                            console.log(rows[i].signdate)
-                            //signcanclebtn.show();
-                            $(btns_arr[j][i]).show();
-                            var action = $(this).attr("action");
-                            console.log(action)
-                            //signbtn.hide();
+                            if($(btns_arr[j][i]).attr("action") == "signcancle"){
+                                $(btns_arr[j][i]).show();
+                            }
                         }else{
-                            //signcanclebtn.hide();
+                            if($(btns_arr[j][i]).attr("action") == "sign"){
+                                $(btns_arr[j][i]).show();
+                            }
                         }
                         (function (index) {
                             var record = rows[index];
                             $(btns_arr[j][i]).click(function () {
                                 var action = $(this).attr("action");
                                 if (action == "view") {
-                                    console.log(record.opd_id)
                                     var title = "【" + record.name + '】详细信息';
                                     if ($("#tabs").tabs('getTab', title)) {
                                         $("#tabs").tabs('select', title)
@@ -81,8 +79,6 @@ define(function(){
                                         })
                                     }
                                 }else if (action == "sign") {
-                                    console.log(index)
-                                    console.log(record.opd_id)
                                     showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                     $.ajax({
                                         url:'depart/opdsign',
@@ -95,14 +91,13 @@ define(function(){
                                                 showProcess(false);
                                                 if(showProcess(false)){
                                                     cj.slideShow('签到成功');
-                                                    //signpp.datagrid("refreshRow",1)
                                                     refreshGrid();
                                                 }
                                             }else{
                                                 showProcess(false);
                                                 if(showProcess(false)){
                                                     cj.slideShow('<label style="color:red">签到失败</label>');
-                                                    //refreshGrid();
+                                                    refreshGrid();
                                                 }
                                             }
                                         },
@@ -145,13 +140,13 @@ define(function(){
                     }
                 }
             },
-            /*onAfterEdit:function(index,row){
-                row.editing = false;
-                signpp.datagrid('refreshRow', index);
-            },*/
             rowStyler:function(index,row){
-                if (row.signdate == null){
-                    return 'background-color:pink;color:blue;font-weight:bold;';
+                if (row.warn == "1"){
+                    return 'background-color:#1a32ff;font-weight:bold;';
+                }else if(row.signdate == null){
+                    return 'background-color:yellow;font-weight:bold;';
+                }else{
+                    return 'background-color:#ffeaa0;font-weight:bold;';
                 }
             },
             toolbar:local.find('div[tb]')
@@ -167,35 +162,94 @@ define(function(){
                         opdidarr.push(row.opd_id)
                     }
                 }
-                $.ajax({
-                    url:'depart/opdselectsign',
-                    type:'post',
-                    data:{
-                        os_id:opdidarr
-                    },
-                    success:function(data){
-                        if(data == "success"){
-                            showProcess(false);
-                            if(showProcess(false)){
-                                cj.slideShow('取消签到');
-                                refreshGrid();
+                if(opdidarr.length > 0){
+                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    $.ajax({
+                        url:'depart/opdselectsign',
+                        type:'post',
+                        data:{
+                            os_id:opdidarr
+                        },
+                        success:function(data){
+                            if(data == "success"){
+                                showProcess(false);
+                                if(showProcess(false)){
+                                    cj.slideShow('签到完成');
+                                    refreshGrid();
+                                }
+                            }else{
+                                showProcess(false);
+                                if(showProcess(false)){
+                                    cj.slideShow('<label style="color:red">签到失败</label>');
+                                    refreshGrid();
+                                }
                             }
-                        }else{
+                        },
+                        error:function(a,b,c){
                             showProcess(false);
-                            if(showProcess(false)){
-                                cj.slideShow('<label style="color:red">取消失败</label>');
-                                refreshGrid();
-                            }
+                            cj.slideShow('<label style="color:red">服务器错误</label>');
                         }
-                    },
-                    error:function(a,b,c){
-                        showProcess(false);
-                        cj.slideShow('<label style="color:red">服务器错误</label>');
-                    }
-                })
-                console.log(opdidarr)
+                    })
+                }
             }
         })
+        /*一键签到*/
+        local.find('[opt=signallbtn]').click(function () {
+            $.messager.confirm('温馨提示', '确定要全部签到么?', function(r){
+                if (r){
+                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    $.ajax({
+                        url:'depart/opddesignall',
+                        type:'post',
+                        data:{
+                            dep_id:90
+                        },
+                        success:function(data){
+                            if(data == "success"){
+                                showProcess(false);
+                                if(showProcess(false)){
+                                    cj.slideShow('签到完成');
+                                    refreshGrid();
+                                }
+                            }else{
+                                showProcess(false);
+                                if(showProcess(false)){
+                                    cj.slideShow('<label style="color:red">签到失败</label>');
+                                    refreshGrid();
+                                }
+                            }
+                        },
+                        error:function(a,b,c){
+                            showProcess(false);
+                            cj.slideShow('<label style="color:red">服务器错误</label>');
+                        }
+                    })
+                }
+            });
+        })
+        /*导出xls*/
+        local.find('[opt=exportexcel]').click(function(){
+            var closobj = signpp.datagrid('options').columns[0];
+            var colsfieldarr = new Array();     //列头字段
+            var colstxtarr = new Array();       //列头文本
+            for(var o=0;o<closobj.length;o++){
+                if(closobj[o].field != "ro" && closobj[o].field != "warn" &&
+                    closobj[o].field != "signdate" && closobj[o].field != "ck"){
+                    if(!closobj[o].hidden){
+                        colsfieldarr.push(closobj[o].field);
+                        colstxtarr.push(closobj[o].title);
+                    }
+                }
+            }
+            layer.load(1);
+            window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsfieldarr+
+            "&datatype=jigou"+
+            "&departname="+""+
+            "&identityid="+local.find('[opt=identityid]').val()+
+            "&name="+""+
+            "&title=入住人员"+
+            "&implfunc=rzry";
+        });
     }
 
     return {

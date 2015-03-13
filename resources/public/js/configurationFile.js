@@ -251,3 +251,28 @@ var addCheckCssComm = function(local) {
         }
     }).prev().hide();     //原来的圆点样式设置为不可见
 }
+
+/*获取养老机构*/
+var getYLJG = function(){
+    return function(param,success,error){
+        $.ajax({
+            url: 'pension/getalldepartment2',
+            type:'post',
+            data: {
+                deptype:'jigou'
+            },
+            success: function(data){
+                var items = $.map(data, function(item){
+                    return {
+                        id: item.dep_id,
+                        text: item.departname
+                    };
+                });
+                success(items);
+            },
+            error: function(){
+                error.apply(this, arguments);
+            }
+        });
+    }
+}

@@ -183,6 +183,7 @@
         .indexbackground_2{
             background: url(img/pension02/bodybackground.jpg) center;
         }
+
     </style>
 
 </head>
@@ -399,7 +400,10 @@
 
         var setMenuLevelTwoClickEvent=function($dropdownas){
             //var $dropdownas=$('#menu_newpension li.dropdown a');
+            var flag = 0;
             $dropdownas.click(function(e){
+                flag+=1;
+                console.log("flag:"+flag)
                 var me = $(this);
                 var $li = $(this).parent();
                 $dropdownas.each(function(){
@@ -408,6 +412,41 @@
                 });
                 $(this).addClass('menuselected').parents('.dropdown').prev().find('a').addClass('menulevelone-selected');
                 leftMenuClick($li);
+                if(me.text() == "签到页面"){
+                    $.ajax({
+                        url:'depart/getopdsigin',
+                        type:'post',
+                        data:{
+                            page:1,
+                            rows:15
+                        },
+                        success:function(data){
+                            var nosignp = new Array();
+                            var rows = data.rows;
+                            for(var r=0;r<rows.length;r++){
+                                if(rows[r].warn == "1"){
+                                    nosignp.push(rows[r].name)
+                                }
+                            }
+                            if(nosignp.length > 0){
+                                var dlg;
+                                if(flag == 1){
+                                    dlg = $.messager.show({
+                                        title:'温馨提示',
+                                        msg:'<div style="width:400px;height: 10px;"><marquee direction=left behavior=scroll onmouseover=this.stop() onmouseout=this.start()><label style="color: red;">【'+nosignp+'】未签到</label></marquee></div>',
+                                        timeout:false,
+                                        showType:'show',
+                                        width:'400px',
+                                        height:'20px'
+                                    });
+                                }
+                                dd = dlg;
+                            }
+
+                            console.log(cj.getUserMsg())
+                        }
+                    })
+                }
             }).hover(function(e){
                 $dropdownas.removeClass('dropdown-li-a-hover');
                 $(this).addClass('dropdown-li-a-hover')
@@ -553,6 +592,36 @@
             });
         }else{
             swapFunction($(this).attr('opt'));
+            /*养老机构*/
+            if($($(this)[0]).attr('opt') == "6NOpHUzyXoUhObvUHHNr"){
+                /*$.ajax({
+                    url:'depart/getopdsigin',
+                    type:'post',
+                    data:{
+                        page:1,
+                        rows:15
+                    },
+                    success:function(data){
+                        var nosignp = new Array();
+                        var rows = data.rows;
+                        for(var r=0;r<rows.length;r++){
+                            if(rows[r].warn == "1"){
+                                nosignp.push(rows[r].name)
+                            }
+                        }
+                        $.messager.show({
+                            title:'温馨提示',
+                            msg:'<div style="width:700px;height: 10px;"><marquee direction=left behavior=scroll onmouseover=this.stop() onmouseout=this.start()><label style="color: red;">【'+nosignp+'】未签到</label></marquee></div>',
+                            timeout:false,
+                            showType:'show',
+                            width:'700px',
+                            height:'20px'
+                        });
+                        console.log(cj.getUserMsg())
+                    }
+                })*/
+
+            }
         }
     });
     $('#current-user-msg a,#headnavul a').hover(function(){
