@@ -38,10 +38,12 @@
 (defn getall-department [request]
   (let[{params :params}request
        {deptype :deptype}params
+       dep_id (str (:depid (session/get :usermsg)))
        {departname :departname}params
        {page :page}params
        {rows :rows}params
-        cond (str " and deptype = '" deptype "' "  (common/likecond "departname" departname))
+        depidcond (if (> (count dep_id) 0) (str " and dep_id = " dep_id ))
+        cond (str " and deptype = '" deptype "' "  (common/likecond "departname" departname) depidcond)
         getresult (common/fenye rows page t_pensiondepartment "*" cond "")
        ]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "runtime")})))
@@ -150,12 +152,14 @@
        minage (:minage params)
        maxage (:maxage params)
        datatype (:datatype params)
+       dep_id (str (:depid (session/get :usermsg)))
        {page :page}params
        {rows :rows}params
        minagecond (if (> (count minage) 0)  (str " and age > " minage  ))
        maxagecond (if (> (count maxage) 0)  (str " and age <= " maxage ))
        typecond (if (> (count datatype) 0)  (str " and type = '" datatype "'"))
-       cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname)  minagecond maxagecond typecond)           ;" and checkouttime is null"
+       depidcond (if (> (count dep_id) 0) (str "and dep_id = " dep_id))
+       cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname)  minagecond maxagecond typecond depidcond)           ;" and checkouttime is null"
        getresult (common/fenye rows page "t_oldpeopledep" "*" cond " order by opd_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "checkintime")})))
 
