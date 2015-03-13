@@ -10,6 +10,7 @@
                [clj-time.local :as l]
                [clj-time.coerce :as c]
                [noir.io :as io]
+               [noir.session :as session]
                [ring.util.response :refer [file-response]]
                [newpension.layout :as layout])
 
@@ -382,7 +383,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 (defn get-odp-signdata [request]
   (let[params (:params request)
-       dep_id (:dep_id params)
+       dep_id (str (:depid (session/get :usermsg)))
        rows (:rows params)
        page (:page params)
        conddepart (if (> (count dep_id) 0) (str " and dep_id = " dep_id)  "")
@@ -399,7 +400,10 @@ select '1' as warn ,sign.* from
 left join (select * from t_oldsign where trunc(signdate)=trunc(sysdate)) s
 on o.opd_id = s.opd_id)  sign
 where opd_id not in (select opd_id from t_oldsign where signdate >= trunc(sysdate - 2) )")]
-    (resp/json (common/fenye rows page (str "(" getsql ")") "*" "" "" ))))
+    ;(println (str (:depid (session/get :usermsg))))
+    (resp/json (common/fenye rows page (str "(" getsql ")") "*" "" "" ))
+    ;(str "ddddd")
+    ))
 
 (defn oldsign [request]
   (let[params (:params request)
