@@ -388,9 +388,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 (defn get-odp-signdata [request]
   (let[params (:params request)
        dep_id (str (:depid (session/get :usermsg)))
+       name   (:name params)
+       identityid   (:identityid params)
        rows (:rows params)
        page (:page params)
        conddepart (if (> (count dep_id) 0) (str " and dep_id = " dep_id)  "")
+       searchcond (str (common/likecond "name" name) (common/likecond "identityid" identityid))
        getsql (str "select '0' as warn ,sign.* from
 (select o.*,s.os_id,s.signdate from
 (select t.*  from t_oldpeopledep t where checkouttime is null " conddepart ") o
@@ -403,9 +406,10 @@ select '1' as warn ,sign.* from
 (select t.*  from t_oldpeopledep t where checkouttime is null " conddepart ") o
 left join (select * from t_oldsign where trunc(signdate)=trunc(sysdate)) s
 on o.opd_id = s.opd_id)  sign
-where opd_id not in (select opd_id from t_oldsign where signdate >= trunc(sysdate - 2) )")]
+where opd_id not in (select opd_id from t_oldsign where signdate >= trunc(sysdate - 2) )")
+       signdatas (common/fenye rows page (str "(" getsql ")") "*" searchcond "" )]
     ;(println (str (:depid (session/get :usermsg))))
-    (resp/json (common/fenye rows page (str "(" getsql ")") "*" "" "" ))
+    (resp/json {:total (:total signdatas) :rows (common/time-before-list (:rows signdatas) "checkintime")})
     ;(str "ddddd")
     ))
 
