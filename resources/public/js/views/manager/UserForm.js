@@ -2,7 +2,6 @@ define(function(){
 
 
     function render(local){
-        console.log(1)
 
     }
 

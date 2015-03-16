@@ -41,7 +41,8 @@
   (layout/render "addneed.html"))
 (defn dm-page []
   (layout/render "dm.html"
-    {:usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)}
+    {:usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)
+     :loginname (:username (session/get :usermsg))}
     ))
 (defn dm2-page []
   (layout/render "dm2.html"))

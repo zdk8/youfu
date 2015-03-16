@@ -21,7 +21,7 @@
         var dvname='北山街道';
     </script>
     <style type="text/css">
-        html, body {
+        /*html, body {
             font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
             color: black;
             margin: 0;
@@ -63,7 +63,7 @@
         #headnavul .li-skinitem {
             float: left;
             font-size: 12px;
-            /* line-height: 30px; */
+            *//* line-height: 30px; *//*
             margin-left: 10px;
             margin-bottom: 0px;
             text-align: center;
@@ -77,13 +77,184 @@
 
         .separate{
             color:#808080;
+        }*/
+
+        html, body {
+            font: 12px/20px "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
+            color: black;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            font-size: 12px;
+            font-family: Verdana,Arial,Helvetica,sans-serif;
+            background-color: #1671b7;
+        }
+
+        #header {
+            background-image: url(img/pension03/header.png);
+            position: absolute;
+            width:100%;
+            height: 90px;
+            z-index: 9;
+        }
+        .cs-north-logo {
+            height: 60px;
+            margin: 5px 0px 0px 5px;
+            display: inline-block;
+            color: #000000;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            background: url(img/pension03/log.png) no-repeat;
+            width: 100%;
+        }
+        #headnavul {
+            float: left;
+            padding: 0;
+            position: absolute;
+            background: url(img/pension03/navbg.png) no-repeat;
+            margin-top:-22px;
+            margin-left: 500px;
+            width: 748px;
+            list-style: none outside none;
+        }
+        #headnavul .li-skinitem {
+            float: left;
+            font-size: 12px;
+            margin-left: 50px;
+            margin-bottom: 0px;
+            line-height: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 0;
+        }
+        #headnavul .li-skinitem a {
+            cursor:pointer;
+            padding-left: 30px;
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+
+
+        .clear{
+            clear: both;
+        }
+
+        .separate{
+            color:#808080;
+        }
+
+        /******************自定义左边栏********************************/
+
+        #menu_newpension{
+            padding-top: 30px;
+        }
+        #menu_newpension ul,#menu_newpension li{
+            margin:0; padding:0; list-sytle:none;
+            display: block;/*此处设置很重要*/
+        }
+
+
+        li.jianju{
+            height: 15px;
+        }
+        li.menulevelone{
+            font-size: 14px;
+            font-weight: bolder;
+            height: 40px;
+            line-height: 40px;
+            background: url(img/pension03/menulevelone.png) no-repeat;
+        }
+
+
+        li.menulevelone>a,li.dropdown a{
+            text-decoration: none;
+            display: block;
+            color: #82d0fd;
+            padding-left: 50px;
+        }
+        li.menulevelone>a{
+            color: #eeecf7;
+        }
+
+        li.dropdown li{
+            height: 46px;
+            line-height: 46px;
+        }
+        #menu_newpension .menuselected{
+            color: #ffffff;
+            font-weight: bolder;
+            height: 46px;
+            line-height: 46px;
+            background: url(img/pension03/menuleveltwo.png) no-repeat;
+        }
+        #menu_newpension .menulevelone-selected{
+            color: #e0b542;
+        }
+        .menulevelone{
+            cursor: pointer;
+        }
+        li.dropdown a.dropdown-li-a-hover{
+            color: #e0b542;
+            cursor: pointer;
+        }
+
+
+        #current-user-msg{
+            margin-top: -10px;
+            font-size: 12px;
+            height: 35px;
+            line-height: 35px;
+            float: right;
+            padding: 0;
+            padding-right: 10px;
+            color: #FFFFFF;
+            font-weight: normal;
+        }
+        #current-user-msg ul{
+            list-style: none  none;
+            height: 30px;
+            line-height: 30px;
+        }
+        #current-user-msg li{
+            float: left;
+            padding-left: 20px;
+            text-align: center;
+        }
+        #current-user-msg li a{
+            cursor:pointer;
+            padding-left: 25px;
+            display: block;
+
+        }
+        #logout{
+            color: #ffffff;
+            text-decoration:none;
+        }
+
+        .hight-color{
+            color: #ffa500;
+        }
+        .hight-color-2{
+            color: #008000;
+        }
+
+        .indexbackground_2{
+            background: url(img/pension02/bodybackground.jpg) center;
         }
 
     </style>
 
 </head>
 <body>
-<div id="header">
+<!--<div id="header">
     <div class="cs-north-logo"></div>
     <ul id="headnavul">
         <li class="li-skinitem" ><img src="img/head/1.png"/><a id="welcomename">欢迎您:{{username}}</a></li>
@@ -94,6 +265,42 @@
             <a opt="logout" style="text-decoration: none;cursor:pointer" href="/logout">退出</a>
         </li>
         <li class="li-skinitem"><span id="currentDate"></span></li>
+    </ul>
+</div>-->
+<div id="header">
+    <div class="cs-north-logo">
+        <div id="current-user-msg">
+            <ul>
+                <li><a>欢迎您:<span id="myusername">{{loginname}}</span></a></li>
+                <li><a id="currentDate" style="background: url(img/pension03/currentDate.png) center no-repeat;width: 309px;text-align: center;padding-left: 5px;">2014年11月29日 星期六 农历甲午年 十月初八</a></li>
+                <li class="li-skinitem">
+                    <a style="background: url(img/pension03/resetpassword.png) no-repeat;">修改密码</a></li>
+                <li class="li-skinitem">
+                    <a id="logout" style="background: url(img/pension03/fanhui.png) no-repeat;" href="logout">退出</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <ul id="headnavul">
+        <li class="li-skinitem" style="margin-left: 60px;">
+            <a opt="a9DTN0LmDWT0eGTZc4St" style="background: url(img/pension03/icon_shujuku.png)  no-repeat;cursor:pointer">数据库</a>
+        </li>
+        <li class="li-skinitem" style="margin-left: 30px;">
+            <a opt="bR8kBGp0A6lTmPkgOFxI" style="background: url(img/pension03/icon_pinggu.png) no-repeat;">服务评估</a>
+        </li>
+        <li class="li-skinitem" style="margin-left: 30px;">
+            <a opt="0a93c53c4f6d476e9a2a7383691a3c37" style="background: url(img/pension03/icon_pinggu.png) no-repeat;">住院补助</a>
+        </li>
+        <li class="li-skinitem" style="margin-left: 30px;">
+            <a opt="6NOpHUzyXoUhObvUHHNr" style="background: url(img/pension03/icon_yanglaojigou.png) no-repeat">养老机构</a>
+        </li>
+        <li class="li-skinitem" style="margin-left: 30px;">
+            <a opt="KqYaHUodlGekYv9sanhD" style="background: url(img/pension03/icon_zijinfafang.png) no-repeat;cursor:pointer">资金发放</a>
+        </li>
+        <li class="li-skinitem" style="margin-left: 30px;">
+            <a opt="closeAllTabs" style="background: url(img/pension03/icon_guanbi.png) no-repeat;cursor:pointer">关闭</a>
+        </li>
     </ul>
 </div>
 <div class="easyui-layout" data-options="fit:true,border:false">
