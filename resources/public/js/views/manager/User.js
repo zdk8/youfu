@@ -22,7 +22,7 @@ define(function(){
                         win.render({
                             title:'用户信息',
                             width:524,
-                            html:$(htmfile).eq(0),
+                            html:/*$(htmfile).eq(0)*/htmfile,
                             buttons:[
                                 {text:'取消',handler:function(html,parent){
                                     parent.trigger('close');
@@ -30,6 +30,18 @@ define(function(){
                                 {text:'保存',handler:function(html,parent){ }}
                             ],
                             renderHtml:function(poplocal,submitbtn,parent){
+                                var regionid;
+                                if(record) {
+                                    $.post('getuserbyid',{
+                                        id:record.userid
+                                    },function(data){
+                                        poplocal.find('form').form('load', data);//加载数据到表单
+                                        var districtnameval = getDivistionTotalname(data.regionid)
+                                        regionid = data.regionid;
+                                        poplocal.find('[opt=districtidmanager]').combotree("setValue",districtnameval)
+                                        //poplocal.find('[opt=tip]').text(data.totalname);
+                                    },'json')
+                                }
                                 if(mynode){
                                     poplocal.find('[opt=tip]').text(mynode.totalname);
                                     poplocal.find('[name=regionid]').val(mynode.dvcode);
@@ -46,6 +58,11 @@ define(function(){
                                                 if(!poplocal.find('[name=userid]').val()){
                                                     param.flag=-1;
                                                 }
+                                                if(!isNaN(poplocal.find("[opt=districtidmanager]").combotree("getValue"))){          //是否是数字
+                                                    param.regionid = poplocal.find("[opt=districtidmanager]").combotree("getValue")
+                                                }else{
+                                                    param.regionid = regionid
+                                                }
                                                 return isValid;
                                             },
                                             success: function (data) {
@@ -58,14 +75,7 @@ define(function(){
                                         })
                                     });
                                 }
-                                if(record) {
-                                    $.post('getuserbyid',{
-                                        id:record.userid
-                                    },function(data){
-                                        poplocal.find('form').form('load', data);//加载数据到表单
-                                        poplocal.find('[opt=tip]').text(data.totalname);
-                                    },'json')
-                                }
+
 
                                 jsfile.render(local,{
                                     parent:parent

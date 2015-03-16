@@ -31,8 +31,10 @@
 
                 <tr>
                     <th>区域代码 :</th>
-                    <td><input type="text" name="regionid" class="input-text" >
-                        <div opt="tip" name="totalname" style="display: inline"> 请先选择地区再添加用户</div>
+                    <td>
+                        <!--<input type="text" name="regionid" class="input-text" >
+                        <div opt="tip" name="totalname" style="display: inline"> 请先选择地区再添加用户</div>-->
+                        <input class="easyui-combotree" opt="districtidmanager" style="width: 200px;">
                     </td>
                 </tr>
 
@@ -64,3 +66,32 @@
         </form>
     </div>
 </div>
+<script>
+    $(function(){
+        var districtidmanager = $('[opt=districtidmanager]');
+        districtidmanager.combotree({
+            panelHeight:300,
+            url:'getdivisiontree',
+            method: 'get',
+            onLoadSuccess:function(load,data){
+                /*if(!this.firstloaded){
+                 divisiontree.combotree('setValue', data[0].id)
+                 .combotree('setText', data[0].text);
+                 this.firstloaded=true;
+                 }*/
+            },
+            onBeforeExpand: function (node) {
+                districtidmanager.combotree("tree").tree("options").url
+                        = 'getdivisiontree?dvhigh=' + node.id;
+            },
+            onHidePanel: function () {
+                districtidmanager.combotree('setValue',
+                        districtidmanager.combotree('tree').tree('getSelected').id)
+                        .combobox('setText',
+                        districtidmanager.combotree('tree').tree('getSelected').totalname);
+            }
+        });
+
+
+    })
+</script>

@@ -26,7 +26,6 @@ define(function(){
                 alert("未签到")
             }
         }*/
-
         var signpp = local.find('[opt=signpp]');
         var refreshGrid = function(){
             signpp.datagrid("reload")
@@ -141,11 +140,11 @@ define(function(){
                 }
             },
             rowStyler:function(index,row){
-                if (row.warn == "1"){
-                    return 'background-color:#1a32ff;font-weight:bold;';
-                }else if(row.signdate == null){
+                if (row.warn == "1"){  //预警
+                    return 'background-color:#5A4453;font-weight:bold;';
+                }else if(row.signdate == null){  //未签到
                     return 'background-color:yellow;font-weight:bold;';
-                }else{
+                }else{              //正常
                     return 'background-color:#ffeaa0;font-weight:bold;';
                 }
             },
