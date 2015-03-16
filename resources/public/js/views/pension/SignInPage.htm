@@ -15,8 +15,8 @@
         formatter:function(value,rowData,rowIndex)
             {
                 var str='<div></div>';
-                str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><span><span class=&quot;icon-sign&quot;></span>签到</span></a>');
-                str=$(str).append('<a action=&quot;signcancle&quot;title=&quot;取消签到&quot;><span><span class=&quot;icon-sign&quot;></span>取消</span></a>');
+                str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><span>签到</span></a>');
+                str=$(str).append('<a action=&quot;signcancle&quot;title=&quot;取消签到&quot;><span>取消</span></a>');
                 return str.html();
             }">操作</th>
         <th data-options="field:'signdate',width:80,align:'center',
@@ -83,9 +83,9 @@
                 <td>
                     <span>
                         状态 :
-                        <label style="background-color:#ffeaa0;width: 30px;height: 30px;">已签到</label>
-                        <label style="background-color:yellow;width: 30px;height: 30px;">未签到</label>
-                        <label style="background-color:#5A4453;color:white;width: 30px;height: 30px;">预警</label>
+                        <label style="background-color:#1c22ff;color:white;width: 30px;height: 30px;">已签到</label>
+                        <label style="background-color:white;width: 30px;height: 30px;">未签到</label>
+                        <label style="background-color:red;color:white;width: 30px;height: 30px;">预警</label>
                     </span>
                     <span>
                         <input class="highcharstoolbarbutton" type="button" opt="signbtn" value="签到">
@@ -96,11 +96,13 @@
         </table>
         <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
             <tr>
-                <td>
+               <!-- <td>
+                    <div opt="jgmc">
                     机构名称 :
                     <input opt="departname" type="text">
                     &nbsp;&nbsp;
-                </td>
+                    </div>
+                </td>-->
 
                 <td>
                     姓名 :

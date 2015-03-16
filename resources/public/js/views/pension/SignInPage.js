@@ -44,6 +44,7 @@ define(function(){
                 var rows=data.rows;
                 var btns_arr=[signbtn,viewbtn,signcanclebtn];
                 signbtn.hide();
+                signbtn.attr('hiden',true)
                 signcanclebtn.hide();
                 for(var i=0;i<rows.length;i++) {
                     for (var j = 0; j < btns_arr.length; j++) {
@@ -141,14 +142,21 @@ define(function(){
             },
             rowStyler:function(index,row){
                 if (row.warn == "1"){  //预警
-                    return 'background-color:#5A4453;font-weight:bold;';
+                    return 'color:red;';
                 }else if(row.signdate == null){  //未签到
-                    return 'background-color:yellow;font-weight:bold;';
+                    //return 'color:#1c22ff;';
                 }else{              //正常
-                    return 'background-color:#ffeaa0;font-weight:bold;';
+                    return 'color:#1c22ff;';
                 }
             },
             toolbar:local.find('div[tb]')
+        })
+
+        local.find('[opt=refresh]').click(function(){
+            signpp.datagrid('load',{
+                name:local.find('[opt=name]').val(),
+                identityid:local.find('[opt=identityid]').val()
+            });
         })
         /*批量签到*/
         local.find('[opt=signbtn]').click(function () {
