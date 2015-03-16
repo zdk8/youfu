@@ -784,6 +784,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        lb (:lb params)
        rows (:rows params)
        page (:page params)
+       userdistrictid (:regionid (session/get :usermsg))
        minagecond (if (> (count minage) 0) (str " and age > " minage)  )
        maxagecond   (if (> (count maxage) 0) (str " and age <= " maxage)  )
        ;starttimecond   (if (> (count starttime) 0) (str " and OPERATOR_DATE >= to_date('" starttime "','yyyy-mm-dd') ")  )
@@ -791,7 +792,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
        gendercond (if (> (count gender) 0 ) (str " and gender = '" gender "' ") )
        economycond (if (> (count economy) 0 )   (str " and economy = '" economy "' "))
-       tjconds (str minagecond maxagecond  districtidcond gendercond economycond)            ;分组查询条件
+       tjconds (str minagecond maxagecond  districtidcond gendercond economycond (common/likecond "userdistrictid" userdistrictid))            ;分组查询条件
        agevalue (cond
                   (and  (> (count minage) 0) (> (count maxage) 0))  (str  minage "-"maxage"岁")
                   (and (> (count minage) 0) (= (count maxage) 0))  (str minage "岁以上")
