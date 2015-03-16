@@ -52,37 +52,20 @@ define(function(){
                                         })
                                     }
                                 }else if(action == "dealwith"){                   //处理
-                                    require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
-                                        function(win,htmfile,jsfile){
-                                            win.render({
-                                                title:'处理',
-                                                width:395,
-                                                height:250,
-                                                html:htmfile,
-                                                buttons:[
-                                                    {text:'取消',handler:function(html,parent){
-                                                        parent.trigger('close');
-                                                    }},
-                                                    {
-                                                        text:'保存',
-                                                        handler:function(html,parent){ }}
-                                                ],
-                                                renderHtml:function(local,submitbtn,parent){
-                                                    jsfile.render(local,{
-                                                        submitbtn:submitbtn,
-                                                        act:'c',
-                                                        refresh:refreshGrid,
-                                                        title:null,
-                                                        data:record,
-                                                        parent:parent,
-                                                        onCreateSuccess:function(data){
-                                                            parent.trigger('close');
-                                                        }
-                                                    })
-                                                }
-                                            })
+                                    var userlength = cj.getUserMsg().regionid.length;
+                                    var aul = record.aulevel;
+                                    showDlg(refreshGrid,record)
+                                    /*if(userlength == 12){
+                                        $.messager.alert('温馨提示','对不起,你没有该权限!','info');
+                                    }else if(userlength == 9){
+                                        if(aul == 1 || aul == 4 || aul == 5){
+                                            showDlg(refreshGrid,record)
+                                        }else{
+                                            $.messager.alert('温馨提示','对不起,你没有审批权限!','info');
                                         }
-                                    )
+                                    }else if(userlength == 6){
+                                        showDlg(refreshGrid,record)
+                                    }*/
                                 }
                             });
                         })(i)
@@ -103,6 +86,40 @@ define(function(){
             })
         })
 
+    }
+
+    var showDlg = function(refreshGrid,record){
+        require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
+            function(win,htmfile,jsfile){
+                win.render({
+                    title:'处理',
+                    width:395,
+                    height:250,
+                    html:htmfile,
+                    buttons:[
+                        {text:'取消',handler:function(html,parent){
+                            parent.trigger('close');
+                        }},
+                        {
+                            text:'保存',
+                            handler:function(html,parent){ }}
+                    ],
+                    renderHtml:function(local,submitbtn,parent){
+                        jsfile.render(local,{
+                            submitbtn:submitbtn,
+                            act:'c',
+                            refresh:refreshGrid,
+                            title:null,
+                            data:record,
+                            parent:parent,
+                            onCreateSuccess:function(data){
+                                parent.trigger('close');
+                            }
+                        })
+                    }
+                })
+            }
+        )
     }
 
 

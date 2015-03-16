@@ -39,101 +39,22 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                                             })
                                             //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='assessment'){         //评估
-                                            var title = "【"+record.name+'】信息评估'
-                                            if($("#tabs").tabs('getTab',title)){
-                                                $("#tabs").tabs('select',title)
-                                            }else{
-                                                $("#tabs").tabs('add', {
-                                                    title: title,
-                                                    href: 'getPensionServiceAssHtml?jja_id='+record.jja_id,
-                                                    closable: true
-                                                })
-                                                var timer = window.setInterval(function () {
-                                                    var local=$("#tabs").tabs('getTab',title)
-                                                    if (local && local.find('[opt=info1_table]').length) {
-                                                        window.clearInterval(timer);
-                                                        psafile.render(local,{queryParams:{
-                                                            title:title,
-                                                            data:data,
-                                                            refresh:refreshGrid,
-                                                            actionType:"assessment"
-                                                        }});
-                                                    }else{
-                                                        console.log('oops....info1_table is not ready ')
-                                                    }
-                                                }, 200);
-                                                /*$.ajax({
-                                                    url:"audit/getassessbyid",
-                                                    type:"post",
-                                                    data:{
-                                                        jja_id:record.jja_id
-                                                    },
-                                                    dataType: 'json',
-                                                    success:function(data){
-                                                        if(data){
-                                                            $("#tabs").tabs('add', {
-                                                                title: title,
-                                                                href: 'testhtml?jja_id='+record.jja_id,
-                                                                closable: true
-                                                            })
-                                                            var timer = window.setInterval(function () {
-                                                                var local=$("#tabs").tabs('getTab',title)
-                                                                if (local && local.find('[opt=info1_table]').length) {
-                                                                    window.clearInterval(timer);
-                                                                    Test.render(local,{queryParams:{
-                                                                        title:title,
-                                                                        data:data,
-                                                                        refresh:refreshGrid
-                                                                    }});
-                                                                }else{
-                                                                    console.log('oops....info1_table is not ready ')
-                                                                }
-                                                            }, 200);
-                                                        }
-                                                    }
-                                                })*/
+                                            var userlength = cj.getUserMsg().regionid.length;
+                                            var aul = record.aulevel;
+                                            showDlg(refreshGrid,record,data);
+                                            /*if(userlength == 12){
+                                                $.messager.alert('温馨提示','对不起,你没有该权限!','info');
+                                            }else if(userlength == 9){
+                                                console.log(aul)
+                                                if(aul == 1 || aul == null || aul == 0){
+                                                    showDlg(refreshGrid,record)
+                                                }else{
+                                                    $.messager.alert('温馨提示','对不起,你没有审批权限!','info');
+                                                }
+                                            }else if(userlength == 6){
+                                                showDlg(refreshGrid,record)
+                                            }*/
 
-                                                /*cj.showHtmlIframe({             //详细信息(tab标签)、评估
-                                                    title:title,
-                                                    htmfile:'PensionAssessmentInfo',
-                                                    jsfile:'views/pension/PensionAssessmentInfo',
-                                                    queryParams:{
-                                                        actiontype:'assessment',         //（处理）操作方式
-                                                        data:data,
-                                                        record:record,
-                                                        title:title,
-                                                        refresh:refreshGrid
-                                                    }
-                                                })*/
-//                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                                                /*$.ajax({
-                                                    url:"audit/getassessbyid",
-                                                    type:"post",
-                                                    data:{
-                                                        jja_id:record.jja_id
-                                                    },
-                                                    dataType: 'json',
-                                                    success:function(data){
-                                                        if(data){
-                                                            cj.showContent({            //详细信息(tab标签)、评估
-                                                                title:title,
-                                                                htmfile:'text!views/pension/PensionAssessmentInfo.htm',
-                                                                jsfile:'views/pension/PensionAssessmentInfo',
-                                                                queryParams:{
-                                                                    actiontype:'assessment',         //（处理）操作方式
-                                                                    data:data[0],
-                                                                    record:record,
-                                                                    title:title,
-                                                                    refresh:refreshGrid
-                                                                }
-                                                            })
-                                                            setTimeout(function(){
-                                                                showProcess(false);
-                                                            },1000)
-                                                        }
-                                                    }
-                                                })*/
-                                            }
                                         }else if($(this).attr("action")=='grant'){
                                             //grant(record);
                                         }
@@ -157,6 +78,33 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                     identityid:local.find('[opt=identityid]').val()
                 })
             })
+
+            var showDlg = function(refreshGrid,record,data){
+                var title = "【"+record.name+'】信息评估'
+                if($("#tabs").tabs('getTab',title)){
+                    $("#tabs").tabs('select',title)
+                }else{
+                    $("#tabs").tabs('add', {
+                        title: title,
+                        href: 'getPensionServiceAssHtml?jja_id='+record.jja_id,
+                        closable: true
+                    })
+                    var timer = window.setInterval(function () {
+                        var local=$("#tabs").tabs('getTab',title)
+                        if (local && local.find('[opt=info1_table]').length) {
+                            window.clearInterval(timer);
+                            psafile.render(local,{queryParams:{
+                                title:title,
+                                data:data,
+                                refresh:refreshGrid,
+                                actionType:"assessment"
+                            }});
+                        }else{
+                            console.log('oops....info1_table is not ready ')
+                        }
+                    }, 200);
+                }
+            }
         }
     }
 })
