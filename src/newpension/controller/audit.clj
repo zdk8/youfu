@@ -18,7 +18,7 @@
 (def applykeys [:districtname :districtid :name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
             :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime
             :countyaudit :audittime :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime
-            :familynum :allowanceid :old_type :live_type :life_ability])
+            :familynum :allowanceid :old_type :live_type :life_ability :userdistrictid])
 (def opofapply [:name :identityid :gender :birthd :nation :culture :marriage :live :economy :age :registration :address :telephone :mobilephone])
 (def  assess  [:jja_id :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_xingz :sh_lout :sh_chuany :sh_dab :sh_xiaob :sh_zongf :sh_pingguf :sh_jiel :sh_pingguy
          :jj_shour :jj_fenl :jj_leix :jj_pingguf :jj_pingguy :jz_fenl :jz_zhaol :jz_pingguf :jz_pingguy :nl_fenl :nl_pingguf :nl_pingguy :gx_laom :gx_youf :gx_youf_kind
@@ -51,6 +51,7 @@
 (def t_jjyldepartment "t_jjyldepartment")
 (def t_depservice "t_depservice")
 (def t_hospitalsubsidy "t_hospitalsubsidy")
+(def jjapprove (str "(select j.userdistrictid,t.* from approve t,T_JJYLAPPLY j WHERE j.JJA_ID = t.BSTABLEPK AND t.BSTABLENAME = 't_jjylapply')"))
 
 
 (defn add-audit-apply [request]                                                                        "添加申请"
@@ -58,7 +59,8 @@
        identityid (:identityid params)
        checkold (count (db/get-oldpeople identityid))
        opdata (select-keys params opofapply)
-       applydata (select-keys params applykeys)]
+       userdistrictid (:regionid (session/get :usermsg))                                              ;REGIONID
+       applydata (conj (select-keys params applykeys) {:userdistrictid userdistrictid})]
     (println "TTTTTTT" checkold  "OOOOOOO"  opdata  (= checkold 0))
     (if (= checkold 0) (old/create-old request))                                           ;如果老人数据没有此数据，将其添加到老人数据库中
     (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
@@ -87,8 +89,9 @@
        rows (:rows params)
        page (:page params)
        name (:name params)
+       userdistrictid (:regionid (session/get :usermsg))
        identityid (:identityid params)
-       cond (str " and ( ishandle is null or ishandle = 'r' )" (common/likecond "name" name) (common/likecond "identityid" identityid))
+       cond (str " and ( ishandle is null or ishandle = 'r' ) and userdistrictid like '%" userdistrictid "%' "  (common/likecond "name" name) (common/likecond "identityid" identityid))
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
@@ -183,10 +186,16 @@
   (let[params (:params request)
        rows (:rows params)
        page (:page params)
+       userdistrictid (:regionid (session/get :usermsg))
+       usercond  (cond
+                               (= (count userdistrictid) 6)  (str " and aulevel != '7' and aulevel != '8' ")              ;县级可以操作审核审批数据
+                               (= (count userdistrictid) 9)  (str " and aulevel != '7' and aulevel != '8' and aulevel != '2' and aulevel != '5' ")               ;镇街级只能查看审核数据
+                               (= (count userdistrictid) 12)  (str " and aulevel != 's' "))                                             ;社区级查看不了审核数据
        name (:name params)
        identityid (:identityid params)
-       cond (str " and bstablename = 't_jjylapply' and status = '1' AND aulevel != '7' AND aulevel != '8' " " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
-       getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
+       useridcond (if (> (count userdistrictid) 0) (str " and userdistrictid like '%" userdistrictid "%' "))
+       cond (str " and bstablename = 't_jjylapply' and status = '1'  " usercond useridcond " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
+       getresult (common/fenye rows page jjapprove "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
 
@@ -273,10 +282,11 @@
        minage (:minage params)
        maxage (:maxage params)
        datatype (:datatype params)
+       userdistrictid (:regionid (session/get :usermsg))
        minagecond (if (> (count minage) 0)  (str " and age > " minage ))
        maxagecond (if (> (count maxage) 0)  (str " and age <= " maxage ))
        typecond (if (> (count datatype) 0)  (str " and economy = '" datatype "'"))
-       cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "identityid" identityid) minagecond maxagecond typecond )
+       cond (str " and ishandle = 'y'" (common/likecond "name" name) (common/likecond "userdistrictid" userdistrictid) (common/likecond "identityid" identityid) minagecond maxagecond typecond )
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
@@ -323,9 +333,14 @@
        rows (:rows params)
        page (:page params)
        name (:name params)
+       userdistrictid (:regionid (session/get :usermsg))
+       useridcond (cond
+                    (= (count userdistrictid) 6)  (str " and (aulevel = 7 or aulevel = 8) ")
+                    (= (count userdistrictid) 9)  (str " and aulevel = 7 ")
+                    :else (str " and aulevel = 's' "))
        identityid (:identityid params)
-       cond (str " and bstablename = 't_jjylapply' and status = '1' AND (aulevel = 7 OR aulevel = 8)"  " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
-       getresult (common/fenye rows page approve "*" cond " order by sh_id desc ")]
+       cond (str " and bstablename = 't_jjylapply' and status = '1' " useridcond " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
+       getresult (common/fenye rows page jjapprove "*" cond " order by sh_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
 (defn getall-auditrm [request]
@@ -333,8 +348,9 @@
        rows (:rows params)
        page (:page params)
        name (:name params)
+       userdistrictid (:regionid (session/get :usermsg))
        identityid (:identityid params)
-       cond (str (common/likecond "name" name) (common/likecond "identityid" identityid))
+       cond (str (common/likecond "name" name) (common/likecond "identityid" identityid) (common/likecond "userdistrictid" userdistrictid))
        getresult (common/fenye rows page (str "(SELECT *  from t_jjylapply  WHERE ishandle = 'n')")  "*" cond " order by jja_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult)  "rm_audittime")})))
 
