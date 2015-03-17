@@ -129,7 +129,7 @@ define(function(){
                         }else{
                             showProcess(false);
                             //layer.load('正在提交数据...',1)
-                            cj.slideShow('<label style="color: red">提交失败！</label>')
+                            cj.slideShow('<label style="color: red">提交失败！请确认身份证号是否选择</label>')
                         }
                     },
                     onLoadError: function () {
