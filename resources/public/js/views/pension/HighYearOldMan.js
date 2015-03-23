@@ -55,7 +55,7 @@ define(function () {
         addToolBar(local);
         local.find('[opt=save]').show().click(function () {
             local.find('[opt=highyearoldform]').form('submit',{
-                url:'adb',
+                url:'old/oldestpeople',
                 onSubmit: function (param) {
 
                 },
