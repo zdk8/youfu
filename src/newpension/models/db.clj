@@ -171,6 +171,12 @@
   (table :t_oldsign)
   (database dboracle))
 
+;;高龄老人表
+(defentity t_oldestpeople
+  (pk :gn_id)
+  (table :t_oldestpeople)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -827,6 +833,11 @@
   (transaction
     (dorun
       (map #(opdsign %) signdata))))
+
+;;高龄老人
+(defn add-oldestpeople [oldestdata]
+  (insert t_oldestpeople
+    (values oldestdata)))
 
 ;;资金发放
 (defn sendmoney [testdata]

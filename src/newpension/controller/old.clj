@@ -18,7 +18,7 @@
               :hjj_type :jz_yidianh :xq_tez :jk_tingl :jz_erxingm :jk_chux :jk_chuany :marriage :operators
               :vocation :jz_yiweiz :jz_erweiz :jz_sheqyy :jk_xuey :jk_jib :districtid :jk_dingx :xq_tec
               :gender :live :retirewage :registration :jk_xiz :economy :jz_yixingm :mobilephone :jz_zhibdh :nation
-              ])
+              :statusnum :datatype :mapguid :ismap])
 
 (def checkinfo {:fwlx_jjyl "" :fwlx_fwj "" :fwlx_mftj "":fwlx_dylnb "":fwlx_jgyl "" :fwlx_tyfw "" :fwlx_hjj ""
                 :fwlx_qt "" :jk_rcws_st "" :jk_rcws_xl "" :jk_rcws_xt "" :jk_rcws_sy "" :jk_rcws_xj "" :jk_rcws_tx ""
@@ -33,8 +33,10 @@
                         :jz_wuy  :jz_menwdh  :jz_zhibdh  :jz_sheqyy  :jz_yis  :jk_xuex  :jk_xuey  :jk_qibq  :jk_gms  :jk_shil  :jk_tingl  :jk_huod  :jk_chux  :jk_jiyl  :jk_chuany
                         :jk_dingx  :jk_xiz  :jk_jib  :jk_bs_gaoxy  :jk_bs_tangnb  :jk_bs_fengs  :jk_bs_xinzb  :jk_bs_chid  :jk_bs_guz  :jk_bs_qit  :xq_tez  :xq_aih  :xq_tec
                         :xq_huod  :xq_canjiast  :xq_jiaos  :status  :operator_date  :operators  :active  :fwlx_jjyl  :fwlx_fwj  :fwlx_mftj  :fwlx_dylnb  :fwlx_jgyl  :fwlx_tyfw
-                        :fwlx_hjj  :fwlx_qt  :retirewage  :jk_rcws_st  :jk_rcws_xl  :jk_rcws_xt  :jk_rcws_sy  :jk_rcws_xj  :jk_rcws_tx  :jk_rcws_xzj  :jk_rcws_xy  :pensionimgpath  :prseno  :jz_lxdh  :statusnum])
+                        :fwlx_hjj  :fwlx_qt  :retirewage  :jk_rcws_st  :jk_rcws_xl  :jk_rcws_xt  :jk_rcws_sy  :jk_rcws_xj  :jk_rcws_tx  :jk_rcws_xzj  :jk_rcws_xy  :pensionimgpath
+                        :prseno  :jz_lxdh  :statusnum :datatype :mapguid :ismap])
 (def approve [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators ])
+(def oldestpeople [:gn_id :name :gender :identityid :age :marriage :culture :address :telephone :vocation :hobby :healthy :children :living :contactdates :contactphone1 :contactphone2 :economicsources :medical :need :least])
 
 (def v_oldapprove "v_oldapprove")
 (def t_oldpeople "t_oldpeople")
@@ -209,6 +211,7 @@
 ;;养老信息录入，参数为养老信息录入页面提交的所有信息
 (defn create-old [request]
   (let [params (:params request)
+         datatype (:datatype params)
          {olds :params} request
         opseno (inc (:max (db/get-max "userlog")))        ;;获取自增主键
         digest (str "姓名" (:name (:params request))
@@ -229,7 +232,7 @@
                               (conj {:lr_id tprkey}
                                 (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date"))))
     (db/create-old (conj (select-keys olds (vec (keys checkinfo)))   ;;新增养老信息
-                     (conj {:lr_id tprkey}
+                     (conj {:lr_id tprkey :datatype (if (= (count datatype) 0) "s" datatype)}
                        (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date"))))
     ;(cons (select-keys olds (vec (keys checkinfo)))    ;;新增养老信息
      ; (cons [:lr_id tprkey]
@@ -814,6 +817,16 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (println "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))
 ))
+
+
+
+(defn add-oldestpeople [request]
+  (let[params (:params request)
+        oldestdata (select-keys params oldestpeople)
+        olddata (conj request {:params (conj params {:datatype "g"})})]
+    (create-old olddata)                                               ;;添加到基础老人表
+    (db/add-oldestpeople oldestdata)
+    (str "success")))
 
 
 

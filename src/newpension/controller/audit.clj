@@ -60,9 +60,10 @@
        checkold (count (db/get-oldpeople identityid))
        opdata (select-keys params opofapply)
        userdistrictid (:regionid (session/get :usermsg))                                              ;REGIONID
-       applydata (conj (select-keys params applykeys) {:userdistrictid userdistrictid})]
+       applydata (conj (select-keys params applykeys) {:userdistrictid userdistrictid})
+       olddata (conj request {:params (conj params {:datatype "f"})})]
     (println "TTTTTTT" checkold  "OOOOOOO"  opdata  (= checkold 0))
-    (if (= checkold 0) (old/create-old request))                                           ;如果老人数据没有此数据，将其添加到老人数据库中
+    (if (= checkold 0) (old/create-old olddata))                                           ;如果老人数据没有此数据，将其添加到老人数据库中
     (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
 ;    (resp/json {:success true :message "apply success"})
     (str "true")

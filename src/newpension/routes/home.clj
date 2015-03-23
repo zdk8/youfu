@@ -223,6 +223,8 @@
   (POST "/depart/opddesignall" request (depart/opd-design-all request))
   (POST "/depart/opdselectsign" request (depart/opd-select-design request))
 
+  (POST "/old/oldestpeople" request (old/add-oldestpeople request))                                          ;;高龄老人
+
 
 
 
