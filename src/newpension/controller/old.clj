@@ -36,7 +36,8 @@
                         :fwlx_hjj  :fwlx_qt  :retirewage  :jk_rcws_st  :jk_rcws_xl  :jk_rcws_xt  :jk_rcws_sy  :jk_rcws_xj  :jk_rcws_tx  :jk_rcws_xzj  :jk_rcws_xy  :pensionimgpath
                         :prseno  :jz_lxdh  :statusnum :datatype :mapguid :ismap])
 (def approve [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators ])
-(def oldestpeople [:gn_id :name :gender :identityid :age :marriage :culture :address :telephone :vocation :hobby :healthy :children :living :contactdates :contactphone1 :contactphone2 :economicsources :medical :need :least])
+(def oldestpeople [:gn_id :name :gender :identityid :age :marriage :culture :address :telephone :vocation :hobby :healthy  :living :contactdates :contactphone1 :contactphone2
+                   :economicsources :medical :need :least :son :son_num :daughter :daughter_num  :grandson :grandson_num  :other :other_num])
 
 (def v_oldapprove "v_oldapprove")
 (def t_oldpeople "t_oldpeople")
