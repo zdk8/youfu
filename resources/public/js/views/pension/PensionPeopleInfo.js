@@ -135,21 +135,28 @@ define(function(){
         local.find('[opt=save2]').hide();
         var savebtn = local.find('[opt=save]');               //保存按钮
         savebtn.show().click(function(){
-            local.find('[opt=save]').hide()
-            local.find('[opt=save2]').show()
+            //local.find('[opt=save]').hide()
+            //local.find('[opt=save2]').show()
             local.find('[opt=pensionform]').form('submit', {
                 url:'saveold',
                 onSubmit: function (params) {
+                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     params.districtid = districtid.combobox("getValue")
-                    /*var isValid = $(this).form('validate');
-                    return isValid;*/
+                    var isValid = $(this).form('validate');
+                    if (!isValid){
+                        showProcess(false);
+                    }
+                    return isValid;
                 },
                 success: function (data) {
                     if(data == "true"){
+                        showProcess(false);
                         cj.slideShow('保存成功');
-                        local.find('[opt=save]').show()
-                        local.find('[opt=save2]').hide()
-                        $("#tabs").tabs("close","老年基本信息录入");
+                        //local.find('[opt=save]').show()
+                        //local.find('[opt=save2]').hide()
+                        if(showProcess(false)){
+                            $("#tabs").tabs("close","老年基本信息录入");
+                        }
                     }else{
                         cj.slideShow('<label style="color: red">保存失败</label>');
                     }

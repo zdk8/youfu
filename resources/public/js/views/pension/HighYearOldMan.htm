@@ -15,14 +15,14 @@
             <tr>
                 <td class="formtdtext" style="width: 100px">行政区划</td>
                 <td colspan="3">
-                    <input style="width: 300px;" opt="districtid" class="input-text"
+                    <input style="width: 300px;" opt="districtid" class="easyui-combobox"
                            data-options="required:true, valueField:''">
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext" style="width: 100px">姓名<span style="color: red">*</span></td>
                 <td style="width: 350px">
-                    <input class="easyui-validatebox  input-text" name="name"
+                    <input class="easyui-validatebox  input-text" name="name" required="true" missingMessage="不能为空"
                            data-options="required:true">
                 </td>
                 <td class="formtdtext" style="width: 100px">身份证号码<span style="color: red">*</span></td>
@@ -58,14 +58,18 @@
                 <td opt="marriage">
                     <input type="radio" name="marriage" value="0"><label>未婚</label>
                     <input type="radio" name="marriage" value="1"><label>已婚</label>
-                    <input type="radio" name="marriage" value="2"><label>丧偶</label>
-                    <input type="radio" name="marriage" value="3"><label>离婚</label>
+                    <input type="radio" name="marriage" value="2"><label>离婚</label>
+                    <input type="radio" name="marriage" value="3"><label>分居</label>
+                    <input type="radio" name="marriage" value="4"><label>丧偶</label>
                 </td>
                 <td class="formtdtext">文化程度</td>
                 <td opt="culture">
                     <input type="radio" name="culture" value="0"><label>文盲</label>
-                    <input type="radio" name="culture" value="1"><label>略识字</label>
-                    <input type="radio" name="culture" value="2"><label>能读字,最高学历</label>
+                    <input type="radio" name="culture" value="1"><label>小学</label>
+                    <input type="radio" name="culture" value="2"><label>初中</label>
+                    <input type="radio" name="culture" value="3"><label>高中</label>
+                    <input type="radio" name="culture" value="4"><label>大专以上</label>
+                    <input type="radio" name="culture" value="5"><label>其他</label>
                 </td>
             </tr>
             <tr>
@@ -96,10 +100,10 @@
             <tr>
                 <td class="formtdtext">子女情况</td>
                 <td colspan="3" opt="children">
-                    <input type="radio" name="children" value="0"><label>儿子</label><input class="on_line" size="10">
-                    <input type="radio" name="children" value="1"><label>女儿</label><input class="on_line" size="10">
-                    <input type="radio" name="children" value="2"><label>孙(女)</label><input class="on_line" size="10">
-                    <input type="radio" name="children" value="3"><label>其他</label><input class="on_line" size="10">
+                    <input type="checkbox" name="son" value="1"><label>儿子</label><input name="son_num" class="on_line" size="10">
+                    <input type="checkbox" name="daughter" value="1"><label>女儿</label><input name="daughter_num" class="on_line" size="10">
+                    <input type="checkbox" name="grandson" value="1"><label>孙(女)</label><input name="grandson_num" class="on_line" size="10">
+                    <input type="checkbox" name="other" value="1"><label>其他</label><input name="other_num" class="on_line" size="10">
                 </td>
             </tr>
             <tr>
@@ -109,18 +113,18 @@
                     <input type="radio" name="living" value="1"><label>配偶同住</label>
                     <input type="radio" name="living" value="2"><label>子女同住</label>
                     <input type="radio" name="living" value="3"><label>第三代同住</label>
-                    <input type="radio" name="living" value="3"><label>配偶子女同住</label>
-                    <input type="radio" name="living" value="3"><label>其他</label>
+                    <input type="radio" name="living" value="4"><label>配偶子女同住</label>
+                    <input type="radio" name="living" value="5"><label>其他</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">和亲人见面<br>或电话联系</td>
                 <td colspan="3">
-                    <input type="radio" name="contactdates" opt="a" value="0"><label>每天</label>
-                    <input type="radio" name="contactdates" opt="b" value="0"><label>隔天</label>
-                    <input type="radio" name="contactdates" opt="c" value="0"><label>2、3天</label>
-                    <input type="radio" name="contactdates" opt="d" value="0"><label>一星期</label>
-                    <input type="radio" name="contactdates" opt="d" value="0"><label>其他</label>
+                    <input type="radio" name="contactdates" value="0"><label>每天</label>
+                    <input type="radio" name="contactdates" value="1"><label>隔天</label>
+                    <input type="radio" name="contactdates" value="2"><label>2、3天</label>
+                    <input type="radio" name="contactdates" value="3"><label>一星期</label>
+                    <input type="radio" name="contactdates" value="4"><label>其他</label>
                 </td>
             </tr>
             <tr>
@@ -136,30 +140,30 @@
             <tr>
                 <td class="formtdtext">经济来源</td>
                 <td colspan="3">
-                    <input type="radio" name="economicsources" opt="a" value="0"><label>子女提供</label>
-                    <input type="radio" name="economicsources" opt="b" value="0"><label>退休工资</label>
-                    <input type="radio" name="economicsources" opt="c" value="0"><label>拆迁补偿</label>
-                    <input type="radio" name="economicsources" opt="d" value="0"><label>养老保险</label>
-                    <input type="radio" name="economicsources" opt="d" value="0"><label>其他</label>
+                    <input type="radio" name="economicsources" value="0"><label>子女提供</label>
+                    <input type="radio" name="economicsources" value="1"><label>退休工资</label>
+                    <input type="radio" name="economicsources" value="2"><label>拆迁补偿</label>
+                    <input type="radio" name="economicsources" value="3"><label>养老保险</label>
+                    <input type="radio" name="economicsources" value="4"><label>其他</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">医疗费用</td>
                 <td colspan="3">
-                    <input type="radio" name="medical" opt="a" value="0"><label>公费</label>
-                    <input type="radio" name="medical" opt="b" value="0"><label>子女</label>
-                    <input type="radio" name="medical" opt="c" value="0"><label>合作医疗</label>
-                    <input type="radio" name="medical" opt="d" value="0"><label>商业医疗</label>
-                    <input type="radio" name="medical" opt="d" value="0"><label>其他</label>
+                    <input type="radio" name="medical" value="0"><label>公费</label>
+                    <input type="radio" name="medical" value="1"><label>子女</label>
+                    <input type="radio" name="medical" value="2"><label>合作医疗</label>
+                    <input type="radio" name="medical" value="3"><label>商业医疗</label>
+                    <input type="radio" name="medical" value="4"><label>其他</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">您最需要的服务</td>
                 <td colspan="3">
-                    <input type="radio" name="need" opt="a" value="0"><label>生活需求</label>
-                    <input type="radio" name="need" opt="b" value="0"><label>精神需求</label>
-                    <input type="radio" name="need" opt="c" value="0"><label>健康需求</label>
-                    <input type="radio" name="need" opt="d" value="0"><label>其他</label>
+                    <input type="radio" name="need" value="0"><label>生活需求</label>
+                    <input type="radio" name="need" value="1"><label>精神需求</label>
+                    <input type="radio" name="need" value="2"><label>健康需求</label>
+                    <input type="radio" name="need" value="3"><label>其他</label>
                 </td>
             </tr>
             <tr>
