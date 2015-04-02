@@ -60,6 +60,10 @@ define(function(){
                     }
                 }
             },
+            rowStyler:function(rowIndex,rowData){
+                //console.log("diffDate: "+rowData.diffDate);
+                //return 'color:black;font-family:宋体;font-size:20';
+            },
             striped:true,
             toolbar:local.find('div[tb]')
         })
