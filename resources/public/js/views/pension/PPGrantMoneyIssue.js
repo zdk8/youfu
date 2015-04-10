@@ -61,8 +61,8 @@ define(['views/pension/PPGrantMoneyIssueDlg'],function(issuefile){
                                                             url:"audit/sendallmoney",
                                                             data:{
                                                                 bsnyue:bsnyueval,
-                                                                name:parent.find('[opt=name]').searchbox("getValue"),
-                                                                identityid:parent.find('[opt=identityid]').searchbox("getValue")
+                                                                name:parent.find('[opt=name]').val(),
+                                                                identityid:parent.find('[opt=identityid]').val()
                                                             },
                                                             type:"post",
                                                             dataType:"json",

@@ -13,6 +13,8 @@
             [newpension.controller.department :as depart]
             [newpension.controller.audit :as audit]
             [newpension.controller.report :as report]
+            [ring.util.response :refer [redirect file-response]]
+            [noir.response :as resp]
             ))
 
 (defn home-page []
@@ -64,7 +66,6 @@
   (layout/render "testpost.html"))
 
 (defroutes home-routes
-
   (GET "/upload" [] (upload-page))
   (GET "/testpost" [](testpost-page))
   ;(POST "/photo/addphoto" [file] (depart/add-photo file))
