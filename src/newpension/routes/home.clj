@@ -242,6 +242,8 @@
 
   (GET "/test/testgetmyexcel" path (report/test-myexcel path))
 
+  (GET "/getdivisionbyid" [highid] (old/getdivisionbyid highid))
+
 
 
 

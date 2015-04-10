@@ -36,8 +36,11 @@
                         :fwlx_hjj  :fwlx_qt  :retirewage  :jk_rcws_st  :jk_rcws_xl  :jk_rcws_xt  :jk_rcws_sy  :jk_rcws_xj  :jk_rcws_tx  :jk_rcws_xzj  :jk_rcws_xy  :pensionimgpath
                         :prseno  :jz_lxdh  :statusnum :datatype :mapguid :ismap])
 (def approve [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators ])
-(def oldestpeople [:gn_id :name :gender :identityid :age :marriage :culture :address :telephone :vocation :hobby :healthy  :living :contactdates :contactphone1 :contactphone2
-                   :economicsources :medical :need :least :son :son_num :daughter :daughter_num  :grandson :grandson_num  :other :other_num])
+(def oldestpeople [:gn_id :name :gender :marriage :culture :address :telephone :districtid :gn_number :birthd :nation :registration :gntype :disease :zn_name1 :zn_phone1
+                   :zn_workplace1 :zn_name2 :zn_phone2 :zn_workplace2 :zn_name3 :zn_phone3 :zn_workplace3 :zn_name4 :zn_phone4 :zn_workplace4 :emptyreason
+                   :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :visittime :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other
+                   :monthincome :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend
+                   :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :lack :ispair :volunteername :volunteerphone :former :formdata])
 
 (def v_oldapprove "v_oldapprove")
 (def t_oldpeople "t_oldpeople")
@@ -842,8 +845,15 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 
 
+
+
 (defn insert-olddata [sql]
   (db/insert-old-data  sql))
+
+
+(defn getdivisionbyid [highid]
+  (println (str "select t.*,t.DVNAME AS text from division t WHERE dvhigh =  " highid))
+  (resp/json (db/get-results-bysql (str "select t.*,t.DVNAME AS text from division t WHERE dvhigh =  " highid))))
 
 
 
