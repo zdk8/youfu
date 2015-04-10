@@ -104,6 +104,7 @@ define(function () {
                         cj.slideShow('保存成功');
                     }else{
                         cj.slideShow('<label style="color: red">保存失败</label>');
+                        showProcess(false);
                     }
                 }
             })
