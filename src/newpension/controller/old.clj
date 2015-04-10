@@ -829,7 +829,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
         oldestdata (select-keys params oldestpeople)
         olddata (conj request {:params (conj params {:datatype "g"})})]
     (create-old olddata)                                               ;;添加到基础老人表
-    (db/add-oldestpeople oldestdata)
+    (db/add-oldestpeople (common/timefmt-bef-insert (common/time-before-insert oldestdata "birthd") "formdata"))
     (str "success")))
 
 
