@@ -37,6 +37,7 @@
         .cs-north-logo {
             height: 60px;
             margin: 5px 0px 0px 5px;
+            /*margin: 25px 0px 0px 5px;*/
             display: inline-block;
             color: #000000;
             font-size: 22px;
@@ -128,7 +129,7 @@
             height: 46px;
             line-height: 46px;
             /*background: url(img/pension03/menuleveltwo.png) no-repeat;*/
-            background-color: #C1E8E0;
+            background-color: #A3AAC2;
         }
         #menu_newpension .menulevelone-selected{
             color: #e0b542;
@@ -191,7 +192,10 @@
 <body>
 <div id="header">
     <div class="cs-north-logo">
-        <div id="current-user-msg">
+        <!--<span >
+            <label style="font-size: 40px;color:white;height:30px;padding-bottom: 30px;">平湖市养老管理信息系统</label>
+        </span>-->
+        <div id="current-user-msg" >
             <ul>
                 <li><a>欢迎您:<span id="myusername">{{username}}</span></a></li>
                 <li><a id="currentDate" style="background: url(img/pension03/currentDate.png) center no-repeat;width: 309px;text-align: center;padding-left: 5px;">2014年11月29日 星期六 农历甲午年 十月初八</a></li>
@@ -338,6 +342,8 @@
 
 
         var setMenuLevelTwoClickEvent=function($dropdownas){
+            ddd =$dropdownas
+            console.log(1)
             //var $dropdownas=$('#menu_newpension li.dropdown a');
             var flag = 0;
             $dropdownas.click(function(e){
@@ -369,7 +375,7 @@
                             }
                             if(nosignp.length > 0){
                                 var dlg;
-                                if(flag == 1){
+//                                if(flag == 1){
                                     dlg = $.messager.show({
                                         title:'温馨提示',
                                         msg:'<div style="width:400px;height: 10px;"><marquee direction=left behavior=scroll onmouseover=this.stop() onmouseout=this.start()><label style="color: red;">【'+nosignp+'】未签到</label></marquee></div>',
@@ -378,10 +384,9 @@
                                         width:'400px',
                                         height:'20px'
                                     });
-                                }
+//                                }
                                 dd = dlg;
                             }
-
                             console.log(cj.getUserMsg())
                         }
                     })
