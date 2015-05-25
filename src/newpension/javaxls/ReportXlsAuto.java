@@ -156,26 +156,4 @@ public class ReportXlsAuto {
         return wb;
     }
 
-
-
-    public static void main(String args[]) throws Exception{
-        ReportXlsAuto cetd = new ReportXlsAuto();
-//        String[] arr = {"?","??","??","??","??","??"};
-        String arr = "一,二,三,四";
-//        String arr = "";
-//        cetd.getMonths(arr);
-
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-        System.out.println(new Date().getTime());
-        Map[] maptest = new HashMap[]{};
-//        System.out.println(cetd.getMonths());
-        try {
-            FileOutputStream fout = new FileOutputStream("C:\\Users\\Administrator\\Downloads\\"+new Date().getTime()+".xls");
-//            getReport("2015",arr,maptest).write(fout);
-//            getReport(arr);  //д??
-            fout.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-}  
+}
