@@ -80,20 +80,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="old.clj" pinned="false" current-in-tab="false">
+      <file leaf-file-name="old.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.970589" vertical-offset="18877" max-vertical-offset="20064">
-              <caret line="875" column="65" selection-start-line="875" selection-start-column="65" selection-end-line="875" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.7571669" vertical-offset="607" max-vertical-offset="20064">
+              <caret line="48" column="6" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.clj" pinned="false" current-in-tab="true">
+      <file leaf-file-name="common.clj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/common/common.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4015625" vertical-offset="953" max-vertical-offset="2684">
+            <state vertical-scroll-proportion="0.0" vertical-offset="821" max-vertical-offset="2684">
               <caret line="55" column="34" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="34" />
               <folding />
             </state>
@@ -697,7 +697,7 @@
       <workItem from="1432525935752" duration="1223000" />
       <workItem from="1432537806649" duration="27000" />
       <workItem from="1432538586365" duration="3129000" />
-      <workItem from="1432602334357" duration="5106000" />
+      <workItem from="1432602334357" duration="5284000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1408084702298</created>
@@ -2229,11 +2229,17 @@
       <option name="project" value="LOCAL" />
       <updated>1432607332975</updated>
     </task>
-    <option name="localTasksCounter" value="256" />
+    <task id="LOCAL-00256" summary="date oldestpeople 20150326&#10;">
+      <created>1432607469450</created>
+      <option name="number" value="00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1432607469450</updated>
+    </task>
+    <option name="localTasksCounter" value="257" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13946000" />
+    <option name="totallyTimeSpent" value="14124000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -2287,7 +2293,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="old tj 20150207&#10;" />
     <MESSAGE value="jjyl tj 20150207&#10;" />
     <MESSAGE value="jgtj 20150209&#10;" />
     <MESSAGE value="jgtj2 20150209&#10;" />
@@ -2312,7 +2317,8 @@
     <MESSAGE value="oldestpeople 20150326&#10;" />
     <MESSAGE value="add oldestpeople 20150326&#10;" />
     <MESSAGE value="get oldestpeople 20150326&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="get oldestpeople 20150326&#10;" />
+    <MESSAGE value="date oldestpeople 20150326&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="date oldestpeople 20150326&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2677,18 +2683,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
+    <entry file="file://$PROJECT_DIR$/src/newpension/common/common.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.970589" vertical-offset="18877" max-vertical-offset="20064">
-          <caret line="875" column="65" selection-start-line="875" selection-start-column="65" selection-end-line="875" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="821" max-vertical-offset="2684">
+          <caret line="55" column="34" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/common/common.clj">
+    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4015625" vertical-offset="953" max-vertical-offset="2684">
-          <caret line="55" column="34" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.7571669" vertical-offset="607" max-vertical-offset="20064">
+          <caret line="48" column="6" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
           <folding />
         </state>
       </provider>
