@@ -266,4 +266,6 @@
   (GET "/report-xls-auto" req (report/xls-report-auto req))        ;;导出xls,自动列
 ;  (POST "/report-xls-auto" req (report/xls-report-auto req))        ;;导出xls,自动列
 ;  (GET "/reportxls" req (report/reportxls))
+
+  (GET "/getdivisionid" req (old/test-getdivisionid req))
   )

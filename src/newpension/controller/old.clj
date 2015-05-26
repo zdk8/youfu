@@ -45,6 +45,13 @@
 (def v_oldapprove "v_oldapprove")
 (def t_oldpeople "t_oldpeople")
 
+(defn test-getdivisionid [req]
+  (let[params (:params req)
+       dvname (:dvname params)
+        sql (str "select * from division where dvname like '%" dvname "%'")]
+    (println sql)
+  (resp/json (db/get-results-bysql sql))))
+
 (defn getdistrictname [request]
   (let[params (:params request)
        districtid (:districtid params)]

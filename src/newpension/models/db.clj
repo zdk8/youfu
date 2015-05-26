@@ -896,3 +896,8 @@
 (defn sendallmoney [datasql]
   (insert t_dolemoney2
     (values (get-results-bysql datasql))))
+
+
+(defn test-getdivisionid [dvname]
+  (select division
+    (where {:dvname [like dvname]})))
