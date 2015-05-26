@@ -850,6 +850,11 @@
   (insert t_emptynestpeople
     (values endata)))
 
+(defn update-emptynestpeople [endata kc_id]
+  (update t_emptynestpeople
+    (set-fields endata)
+    (where {:kc_id kc_id})))
+
 ;;资金发放
 (defn sendmoney [testdata]
  ; (println (vector? testdata)"SSSSSSSSS" testdata )

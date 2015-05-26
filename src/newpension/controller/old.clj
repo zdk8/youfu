@@ -870,11 +870,28 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        rows (:rows params)
        ;identityid (:identityid params)
        name (:name params)
-       cond (str (common/likecond "name" name))
+       cond (str (common/likecond "name" name) (str " and isdel is null "))
        getresult (common/fenye rows page " t_emptynestpeople " "*" cond " order by kc_id desc")
        ]
     (resp/json {:total (:total getresult)  :rows (common/time-formatymd-before-list (:rows getresult) "birthd")})))
 
+(defn update-emptynestpeople
+  "更新空巢老人数据"
+  [request]
+  (let[params (:params request)
+       kc_id (:kc_id params)
+       endata (select-keys params emptynestpeople)]
+    (db/update-emptynestpeople (common/timefmt-bef-insert endata "birthd") kc_id)
+    (str "success")))
+
+(defn del-emptynestpeople
+  "注销空巢老人数据"
+  [request]
+  (let[params (:params request)
+       kc_id (:kc_id params)
+       endata {:isdel "y"}]                     ;;将数据注销表示设置为：y
+    (db/update-emptynestpeople endata kc_id)
+    (str "success")))
 
 
 (defn insert-olddata [sql]

@@ -227,6 +227,8 @@
   (POST "/old/oldestpeople" request (old/add-oldestpeople request))                                          ;;高龄老人
   (POST "/old/addenpeople" request (old/add-emptynestpeople request))                                ;;空巢老人数据添加
   (POST "/old/getenpeople" request (old/get-emptynestpeople request))                                ;;查找空巢老人数据
+  (POST "/old/updateenpeople" request (old/update-emptynestpeople request))                          ;;更新空巢老人数据
+  (POST "/old/delenpeople" request (old/del-emptynestpeople request))                                ;;注销空巢老人数据
 
 
 
