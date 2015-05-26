@@ -41,16 +41,19 @@
                    :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :visittime :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other
                    :monthincome :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend
                    :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :lack :ispair :volunteername :volunteerphone :former :formdata])
+(def emptynestpeople [:kc_id :gn_number :name :gender :marriage :culture :address :telephone :districtid :birthd :nation :registration :gntype :disease :zn_name1 :zn_phone1 :zn_workplace1 :zn_name2 :zn_phone2 :zn_workplace2 :zn_name3 :zn_phone3 :zn_workplace3 :zn_name4 :zn_phone4 :zn_workplace4 :emptyreason :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :visittime :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other :monthincome :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :ispair :volunteername :volunteerphone :zq_barrierfree :zq_pensionagency :zq_homecare :zq_volunteers :zq_other :zq_othervalue])
 
 (def v_oldapprove "v_oldapprove")
 (def t_oldpeople "t_oldpeople")
 
+;;测试函数
 (defn test-getdivisionid [req]
   (let[params (:params req)
        dvname (:dvname params)
         sql (str "select * from division where dvname like '%" dvname "%'")]
     (println sql)
   (resp/json (db/get-results-bysql sql))))
+
 
 (defn getdistrictname [request]
   (let[params (:params request)
@@ -839,8 +842,6 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (db/add-oldestpeople (common/timefmt-bef-insert (common/timefmt-bef-insert oldestdata "birthd") "formdata"))
     (str "success")))
 
-
-
 (defn set-oldmap [request]
   (let[params (:params request)
         mapguid (:mapguid params)
@@ -849,8 +850,30 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (db/update-setoldmap ismap mapguid)
     (resp/json {:success true :message "map set success"})))
 
+(defn add-emptynestpeople
+  "添加空巢老人数据"
+  [request]
+  (let[params (:params request)
+       endata (select-keys params emptynestpeople)
+       olddata (conj request {:params (conj params {:datatype "e"})})               ;将空巢老人数据添加到老年人数据库中，空巢老人数据标识为e
+       ]
+    (create-old olddata)
+    (db/add-emptynestpeople (common/timefmt-bef-insert endata "birthd"))
+    (str "success")
+    ))
 
-
+(defn get-emptynestpeople
+  "查找空巢老人数据"
+  [request]
+  (let[params (:params request)
+       page (:page params)
+       rows (:rows params)
+       ;identityid (:identityid params)
+       name (:name params)
+       cond (str (common/likecond "name" name))
+       getresult (common/fenye rows page " t_emptynestpeople " "*" cond " order by kc_id desc")
+       ]
+    (resp/json {:total (:total getresult)  :rows (common/time-formatymd-before-list (:rows getresult) "birthd")})))
 
 
 

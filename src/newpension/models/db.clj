@@ -177,6 +177,12 @@
   (table :t_oldestpeople)
   (database dboracle))
 
+;；空巢老人表
+(defentity t_emptynestpeople
+  (pk :kc_id)
+  (table :t_emptynestpeople)
+  (database dboracle))
+
  ;;数据库操作函数
  ;;用户登录
 ;(defn get-user
@@ -838,6 +844,11 @@
 (defn add-oldestpeople [oldestdata]
   (insert t_oldestpeople
     (values oldestdata)))
+
+;;空巢老人数据
+(defn add-emptynestpeople [endata]
+  (insert t_emptynestpeople
+    (values endata)))
 
 ;;资金发放
 (defn sendmoney [testdata]
