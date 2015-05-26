@@ -873,7 +873,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        cond (str (common/likecond "name" name) (str " and isdel is null "))
        getresult (common/fenye rows page " t_emptynestpeople " "*" cond " order by kc_id desc")
        ]
-    (resp/json {:total (:total getresult)  :rows (common/time-formatymd-before-list (:rows getresult) "birthd")})))
+    (resp/json {:total (:total getresult)  :rows (common/time-before-list (:rows getresult) "birthd")})))
 
 (defn update-emptynestpeople
   "更新空巢老人数据"
