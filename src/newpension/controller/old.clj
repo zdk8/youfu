@@ -802,7 +802,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                         (and  (> (count minage) 0) (> (count maxage) 0))  (str  minage "-"maxage"岁")
                         (and (> (count minage) 0) (= (count maxage) 0))  (str minage "岁以上")
                         (and (= (count minage) 0) (> (count maxage) 0))  (str maxage "岁以下"))
-        gendervalue (cond
+       gendervalue (cond
                                (= gender "0")  "女"
                                (= gender "1")  "男")
        typevalue (cond
@@ -831,6 +831,33 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     (println "SSSSSSSSSSSSSS" opstatissql)
     (resp/json (common/fenye rows page (str "(" opstatissql ")") "*" ""  ""))
 ))
+
+(defn emptynest-statistic [request]
+  (let[params (:params request)
+       statictype (:statictype params)
+       districtid (:districtid params)
+       ;;查询条件
+       districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
+       ;;合并查询条件
+       tjconds (str districtidcond)
+       ;;根据所选分组设置查找字段
+       envalue (cond
+                 (= statictype "xb")  (conj [] " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) as gender,count(*) as sum ,330424 as districtid ")
+                 (= statictype "xqah") (conj [] " '看电视' as xq,sum(XQ_WATCHTV) as rs,330424 as districtid " " '锻炼' as xq,sum(XQ_exercise) as rs,330424 as districtid " " '下棋' as xq,sum(XQ_chess) as rs,330424 as districtid " " '没有爱好' as xq,sum(XQ_nohobby) as rs,330424 as districtid " " '其他爱好' as xq,sum(XQ_other) as rs,330424 as districtid ")
+                 )
+       ;;根据所选分组设置分组
+       engroup (cond
+                (= statictype "xb")  (str " group by (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")
+                (= statictype "xqah") (str " ")
+                )
+
+       ;;将所有信息合成SQL语句
+       enstatictsql (apply str (interpose " union all "(map #(str " SELECT s.*,dv.dvname FROM (select " %
+                       " from (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t )
+                      where 1=1 " tjconds  engroup ") s LEFT JOIN division dv ON s.districtid = dv.dvcode ") envalue)))
+       ]
+    (resp/json (db/get-results-bysql enstatictsql))
+    ))
 
 
 
