@@ -1,6 +1,6 @@
 define(function(){
     var render = function(local,option){
-        addRadioCssComm(local);
+        //addRadioCssComm(local);
 
         var selectChecked = ":input[type=checkbox] + label";
         local.find(selectChecked).each(function () {

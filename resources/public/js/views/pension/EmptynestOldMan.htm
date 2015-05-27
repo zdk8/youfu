@@ -11,7 +11,7 @@
 <div  class="easyui-panel newRadio" opt="formcontentpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
-    <form opt="highyearoldform" method="post">
+    <form opt="emptynestoldform" method="post">
         <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
             <tr>
                 <td class="formtdtext" style="width: 100px">行政区划 :</td>
@@ -26,13 +26,17 @@
                     <input class="easyui-validatebox  input-text" name="name" required="true" missingMessage="不能为空"
                            data-options="required:true">
                 </td>
-                <td class="formtdtext" style="width: 100px">身份证号码<span style="color: red">*</span> :</td>
+                <!--<td class="formtdtext" style="width: 100px">身份证号码<span style="color: red">*</span> :</td>
                 <td>
-                    <!--<input name="identityid" class="input-text" style="width: 159px">-->
                     <input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 159px"
                            data-options="required:true,
                                    invalidMessage:'请输入正确的身份证号',
                                    validType:'identityid'">
+                </td>-->
+                <td class="formtdtext">出生年月 :</td>
+                <td>
+                    <input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd">
+                    <!--<span><input opt="tip_age" name="age" class="on_line" size="2">岁</span>-->
                 </td>
             </tr>
             <tr>
@@ -46,27 +50,15 @@
                                 valueField:'id',
                                 textField:'text'">
                 </td>
-                <td class="formtdtext">出生年月 :</td>
+                <td class="formtdtext">年龄 :</td>
                 <td>
-                    <input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd">
-                    <span><input opt="tip_age" name="age" class="on_line" size="2">岁</span>
+                    <input opt="tip_age" class="input-text" name="age">
                 </td>
-
             </tr>
             <tr>
                 <td class="formtdtext">籍贯 :</td>
                 <td>
                     <input class="input-text" name="registration" style="width: 300px;">
-                </td>
-                <td class="formtdtext">联系电话 :</td>
-                <td>
-                    <input class="input-text easyui-validatebox" name="telephone" data-options="validType:['maxLength[25]']">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">家庭地址 :</td>
-                <td>
-                    <input class="input-text" name="address" style="width: 300px;">
                 </td>
                 <td class="formtdtext">民族 :</td>
                 <td>
@@ -82,34 +74,44 @@
                 </td>
             </tr>
             <tr>
+                <td class="formtdtext">家庭地址 :</td>
+                <td>
+                    <input class="input-text" name="address" style="width: 300px;">
+                </td>
+                <td class="formtdtext">联系电话 :</td>
+                <td>
+                    <input class="input-text easyui-validatebox" name="telephone" data-options="validType:['maxLength[25]']">
+                </td>
+            </tr>
+            <tr>
                 <td class="formtdtext">类别 :</td>
                 <td colspan="3" opt="gntype">
-                    <input type="radio" name="gntype" value="0"><label>低保</label>
-                    <input type="radio" name="gntype" value="1"><label>低保边缘户</label>
-                    <input type="radio" name="gntype" value="2"><label>低收入户</label>
-                    <input type="radio" name="gntype" value="3"><label>失独</label>
-                    <input type="radio" name="gntype" value="4"><label>重残</label>
-                    <input type="radio" name="gntype" value="5"><label>其他</label>
+                    <input type="radio" name="gntype" value="1"><label>低保</label>
+                    <input type="radio" name="gntype" value="2"><label>低保边缘户</label>
+                    <input type="radio" name="gntype" value="3"><label>低收入户</label>
+                    <input type="radio" name="gntype" value="4"><label>失独</label>
+                    <input type="radio" name="gntype" value="5"><label>重残</label>
+                    <input type="radio" name="gntype" value="6"><label>其他</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">文化程度 :</td>
                 <td opt="culture">
-                    <input type="radio" name="culture" value="0"><label>文盲</label>
-                    <input type="radio" name="culture" value="1"><label>小学</label>
-                    <input type="radio" name="culture" value="2"><label>初中</label>
-                    <input type="radio" name="culture" value="3"><label>高中</label>
-                    <input type="radio" name="culture" value="4"><label>大专以上</label>
+                    <input type="radio" name="culture" value="1"><label>文盲</label>
+                    <input type="radio" name="culture" value="2"><label>小学</label>
+                    <input type="radio" name="culture" value="3"><label>初中</label>
+                    <input type="radio" name="culture" value="4"><label>高中</label>
+                    <input type="radio" name="culture" value="5"><label>大专以上</label>
                     <!--<input type="radio" name="culture" value="5"><label>其他</label>-->
                 </td>
                 <td class="formtdtext">婚姻状况 :</td>
                 <td opt="marriage">
-                    <input type="radio" name="marriage" value="0"><label>未婚</label>
-                    <input type="radio" name="marriage" value="1"><label>已婚</label>
-                    <input type="radio" name="marriage" value="2"><label>离婚</label>
-                    <input type="radio" name="marriage" value="3"><label>分居</label>
-                    <input type="radio" name="marriage" value="4"><label>丧偶</label>
-                    <input type="radio" name="marriage" value="4"><label>其他</label>
+                    <input type="radio" name="marriage" value="1"><label>未婚</label>
+                    <input type="radio" name="marriage" value="2"><label>已婚</label>
+                    <input type="radio" name="marriage" value="3"><label>离婚</label>
+                    <input type="radio" name="marriage" value="4"><label>分居</label>
+                    <input type="radio" name="marriage" value="5"><label>丧偶</label>
+                    <input type="radio" name="marriage" value="6"><label>其他</label>
                 </td>
             </tr>
             <tr>
@@ -177,99 +179,99 @@
             <tr>
                 <td class="formtdtext">空巢原因 :</td>
                 <td colspan="3" opt="emptyreason">
-                    <input type="radio" name="emptyreason" value="0"><label>经济原因</label>
-                    <input type="radio" name="emptyreason" value="1"><label>家庭成员关系原因</label>
-                    <input type="radio" name="emptyreason" value="2"><label>生活习惯</label>
-                    <input type="radio" name="emptyreason" value="3"><label>其他</label>
+                    <input type="radio" name="emptyreason" value="1"><label>经济原因</label>
+                    <input type="radio" name="emptyreason" value="2"><label>家庭成员关系原因</label>
+                    <input type="radio" name="emptyreason" value="3"><label>生活习惯</label>
+                    <input type="radio" name="emptyreason" value="4"><label>其他</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">兴趣爱好 :</td>
                 <td colspan="3" opt="xq">
-                    <input type="checkbox" name="xq_watchtv" value="0"><label>看电视</label>
-                    <input type="checkbox" name="xq_exercise" value="0"><label>散步等锻炼身体</label>
-                    <input type="checkbox" name="xq_chess" value="0"><label>棋类、牌类活动</label>
-                    <input type="checkbox" name="xq_nohobby" value="0"><label>无业余爱好</label>
-                    <input type="checkbox" name="xq_other" value="0"><label>其他</label>
+                    <input type="checkbox" name="xq_watchtv" value="1"><label>看电视</label>
+                    <input type="checkbox" name="xq_exercise" value="1"><label>散步等锻炼身体</label>
+                    <input type="checkbox" name="xq_chess" value="1"><label>棋类、牌类活动</label>
+                    <input type="checkbox" name="xq_nohobby" value="1"><label>无业余爱好</label>
+                    <input type="checkbox" name="xq_other" value="1"><label>其他</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">子女探望频率 :</td>
                 <td colspan="3" opt="visittime">
-                    <input type="radio" name="visittime" value="0"><label>一两天</label>
-                    <input type="radio" name="visittime" value="1"><label>一周</label>
-                    <input type="radio" name="visittime" value="2"><label>两周</label>
-                    <input type="radio" name="visittime" value="3"><label>一个月</label>
-                    <input type="radio" name="visittime" value="4"><label>二个月</label>
-                    <input type="radio" name="visittime" value="5"><label>一个季度</label>
-                    <input type="radio" name="visittime" value="6"><label>半年</label>
-                    <input type="radio" name="visittime" value="7"><label>一年及以上</label>
+                    <input type="radio" name="visittime" value="1"><label>一两天</label>
+                    <input type="radio" name="visittime" value="2"><label>一周</label>
+                    <input type="radio" name="visittime" value="3"><label>两周</label>
+                    <input type="radio" name="visittime" value="4"><label>一个月</label>
+                    <input type="radio" name="visittime" value="5"><label>二个月</label>
+                    <input type="radio" name="visittime" value="6"><label>一个季度</label>
+                    <input type="radio" name="visittime" value="7"><label>半年</label>
+                    <input type="radio" name="visittime" value="8"><label>一年及以上</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">经济来源 :</td>
                 <td colspan="3" opt="jj">
-                    <input type="checkbox" name="jj_childprovide" value="0"><label>子女提供</label>
-                    <input type="checkbox" name="jj_retirepay" value="0"><label>退休工资</label>
-                    <input type="checkbox" name="jj_remolition" value="0"><label>拆迁补偿</label>
-                    <input type="checkbox" name="jj_pension" value="0"><label>养老保险</label>
-                    <input type="checkbox" name="jj_assistance" value="0"><label>社会救助</label>
-                    <input type="checkbox" name="jj_deposit" value="0"><label>存款、红利及租金等</label>
-                    <input type="checkbox" name="jj_other" value="0"><label>其他</label>
+                    <input type="checkbox" name="jj_childprovide" value="1"><label>子女提供</label>
+                    <input type="checkbox" name="jj_retirepay" value="1"><label>退休工资</label>
+                    <input type="checkbox" name="jj_remolition" value="1"><label>拆迁补偿</label>
+                    <input type="checkbox" name="jj_pension" value="1"><label>养老保险</label>
+                    <input type="checkbox" name="jj_assistance" value="1"><label>社会救助</label>
+                    <input type="checkbox" name="jj_deposit" value="1"><label>存款、红利及租金等</label>
+                    <input type="checkbox" name="jj_other" value="1"><label>其他</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">个人月收入(元) :</td>
                 <td colspan="3" opt="monthincome">
-                    <input type="radio" name="monthincome" value="0"><label>没有</label>
-                    <input type="radio" name="monthincome" value="1"><label>不足200</label>
-                    <input type="radio" name="monthincome" value="2"><label>200~499</label>
-                    <input type="radio" name="monthincome" value="3"><label>500~999</label>
-                    <input type="radio" name="monthincome" value="4"><label>1000~1499</label>
-                    <input type="radio" name="monthincome" value="5"><label>1500~2000</label>
-                    <input type="radio" name="monthincome" value="6"><label>2000及以上</label>
+                    <input type="radio" name="monthincome" value="1"><label>没有</label>
+                    <input type="radio" name="monthincome" value="2"><label>不足200</label>
+                    <input type="radio" name="monthincome" value="3"><label>200~499</label>
+                    <input type="radio" name="monthincome" value="4"><label>500~999</label>
+                    <input type="radio" name="monthincome" value="5"><label>1000~1499</label>
+                    <input type="radio" name="monthincome" value="6"><label>1500~2000</label>
+                    <input type="radio" name="monthincome" value="7"><label>2000及以上</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">近期哪些活动有困<br>难 :</td>
                 <td colspan="3" opt="kn">
-                    <input type="checkbox" name="kn_eat" value="0"><label>吃饭</label>
-                    <input type="checkbox" name="kn_bathe" value="0"><label>洗澡</label>
-                    <input type="checkbox" name="kn_floor" value="0"><label>上下楼梯</label>
-                    <input type="checkbox" name="kn_housework" value="0"><label>简单家务</label>
-                    <input type="checkbox" name="kn_walk" value="0"><label>室内行走</label>
-                    <input type="checkbox" name="kn_transit" value="0"><label>乘公共交通工具</label>
-                    <input type="checkbox" name="kn_toilet" value="0"><label>上厕所</label>
-                    <input type="checkbox" name="kn_bed" value="0"><label>上下床</label>
-                    <input type="checkbox" name="kn_nothing" value="0"><label>以上都没有</label>
+                    <input type="checkbox" name="kn_eat" value="1"><label>吃饭</label>
+                    <input type="checkbox" name="kn_bathe" value="1"><label>洗澡</label>
+                    <input type="checkbox" name="kn_floor" value="1"><label>上下楼梯</label>
+                    <input type="checkbox" name="kn_housework" value="1"><label>简单家务</label>
+                    <input type="checkbox" name="kn_walk" value="1"><label>室内行走</label>
+                    <input type="checkbox" name="kn_transit" value="1"><label>乘公共交通工具</label>
+                    <input type="checkbox" name="kn_toilet" value="1"><label>上厕所</label>
+                    <input type="checkbox" name="kn_bed" value="1"><label>上下床</label>
+                    <input type="checkbox" name="kn_nothing" value="1"><label>以上都没有</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">您需要社区或志愿者提供哪些服务 :</td>
                 <td colspan="3" opt="fw">
-                    <input type="checkbox" name="fw_housekeeping" value="0"><label>家政服务</label>
-                    <input type="checkbox" name="fw_treatment" value="0"><label>送医送药上门</label>
-                    <input type="checkbox" name="fw_meal" value="0"><label>送饭（外卖)</label>
-                    <input type="checkbox" name="fw_tend" value="0"><label>日间照料中心</label>
-                    <input type="checkbox" name="fw_doctor" value="0"><label>陪同看病</label>
-                    <input type="checkbox" name="fw_dailyshop" value="0"><label>代购日常物品</label>
-                    <input type="checkbox" name="fw_aid" value="0"><label>紧急救助</label>
+                    <input type="checkbox" name="fw_housekeeping" value="1"><label>家政服务</label>
+                    <input type="checkbox" name="fw_treatment" value="1"><label>送医送药上门</label>
+                    <input type="checkbox" name="fw_meal" value="1"><label>送饭（外卖)</label>
+                    <input type="checkbox" name="fw_tend" value="1"><label>日间照料中心</label>
+                    <input type="checkbox" name="fw_doctor" value="1"><label>陪同看病</label>
+                    <input type="checkbox" name="fw_dailyshop" value="1"><label>代购日常物品</label>
+                    <input type="checkbox" name="fw_aid" value="1"><label>紧急救助</label>
                     <br>
-                    <input type="checkbox" name="fw_hotline" value="0"><label>老年人服务热线</label>
-                    <input type="checkbox" name="fw_entertainment" value="0"><label>文化娱乐</label>
-                    <input type="checkbox" name="fw_law" value="0"><label>法律服务</label>
-                    <input type="checkbox" name="fw_chat" value="0"><label>聊天解闷</label>
-                    <input type="checkbox" name="fw_nothing" value="0"><label>以上都不需要</label>
+                    <input type="checkbox" name="fw_hotline" value="1"><label>老年人服务热线</label>
+                    <input type="checkbox" name="fw_entertainment" value="1"><label>文化娱乐</label>
+                    <input type="checkbox" name="fw_law" value="1"><label>法律服务</label>
+                    <input type="checkbox" name="fw_chat" value="1"><label>聊天解闷</label>
+                    <input type="checkbox" name="fw_nothing" value="1"><label>以上都不需要</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext">您认为晚年生活最缺什么？ :</td>
                 <td colspan="3" opt="lack">
-                    <input type="radio" name="lack" value="0"><label>无障碍设施服务</label>
-                    <input type="radio" name="lack" value="1"><label>入住养老机构</label>
-                    <input type="radio" name="lack" value="2"><label>居家养老服务</label>
-                    <input type="radio" name="lack" value="3"><label>志愿者结对服务</label>
-                    <input type="radio" name="lack" value="4"><label>其他</label><input class="on_line">
+                    <input type="checkbox" name="zq_barrierfree" value="1"><label>无障碍设施服务</label>
+                    <input type="checkbox" name="zq_pensionagency" value="1"><label>入住养老机构</label>
+                    <input type="checkbox" name="zq_homecare" value="1"><label>居家养老服务</label>
+                    <input type="checkbox" name="zq_volunteers" value="1"><label>志愿者结对服务</label>
+                    <input type="checkbox" name="zq_other" value="1"><label>其他</label><input name="zq_othervalue" class="on_line" disabled="true">
                 </td>
             </tr>
             <tr>

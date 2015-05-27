@@ -20,30 +20,16 @@ define(function(){
                             var record=rows[index];
                             $(btns_arr[j][i]).click(function(){
                                 if($(this).attr("action")=='view'){
-                                    if(record.datatype == "g"){
-                                        cj.showContent({                                          //详细信息(tab标签)
-                                            title:record.name+'详细信息',
-                                            htmfile:'text!views/pension/HighYearOldMan.htm',
-                                            jsfile:'views/pension/HighYearOldMan',
-                                            queryParams:{
-                                                actiontype:'update',         //（处理）操作方式
-                                                data:record,                   //填充数据
-                                                refresh:peopleinfodatarid                //刷新
-                                            }
-                                        })
-                                    }else{
-                                        cj.showContent({                                          //详细信息(tab标签)
-                                            title:record.name+'详细信息',
-                                            htmfile:'text!views/pension/PensionPeopleInfo.htm',
-                                            jsfile:'views/pension/PensionPeopleInfo',
-                                            queryParams:{
-                                                actiontype:'update',         //（处理）操作方式
-                                                data:record,                   //填充数据
-                                                refresh:peopleinfodatarid                //刷新
-                                            }
-                                        })
-                                    }
-                                    //viewRoleInfo(record);
+                                    cj.showContent({                                          //详细信息(tab标签)
+                                        title:record.name+'详细信息',
+                                        htmfile:'text!views/pension/EmptynestOldMan.htm',
+                                        jsfile:'views/pension/EmptynestOldMan',
+                                        queryParams:{
+                                            actiontype:'update',         //（处理）操作方式
+                                            data:record,                   //填充数据
+                                            refresh:peopleinfodatarid                //刷新
+                                        }
+                                    })
                                 }else if($(this).attr("action")=='map'){
                                     var ywtype = "PT_LNR"
                                     //var mapguid = record.mapguid;
@@ -52,7 +38,29 @@ define(function(){
                                         'newwindow', 'height='+window.screen.availHeight+', width='+window.screen.availWidth+', top=0, left=0, toolbar=no, ' +
                                         'menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
 
-                                }else if($(this).attr("action")=='grant'){
+                                }else if($(this).attr("action")=='delete'){
+                                    $.messager.confirm('是否删除',
+                                        '确定删除？',
+                                        function(r){
+                                            if (r){
+                                                $.ajax({
+                                                    url:"old/delenpeople",
+                                                    data:{
+                                                        kc_id:record.kc_id
+                                                    },
+                                                    type:"post",
+                                                    success:function(data){
+                                                        if(data == "success"){
+                                                            peopleinfodatarid.datagrid('reload');
+                                                            cj.slideShow('删除成功!')
+                                                        }else{
+                                                            cj.slideShow('<label style="color: red">删除失败!</label>')
+                                                        }
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    );
                                     //grant(record);
                                 }
                             });
@@ -75,7 +83,7 @@ define(function(){
             var refreshGrid=function() {
                 localDataGrid.datagrid('reload');
             };
-            localDataGrid=searcholdpeople(local,'old/search-oldpeople','');
+            localDataGrid=searcholdpeople(local,'old/getenpeople','');
 
 
 
@@ -172,32 +180,7 @@ define(function(){
             })
 
 
-            /*导入xls*/
-            local.find('[opt=importexcel]').click(function(){
-                //layer.load(1);
-                var textfield = local.find('[name=textfield]').val();
-                if(textfield == "双击浏览按钮" || textfield.trim().length == 0){
-                    cj.slideShow('<label style="color: red">请先选择文件</label>');
-                }else{
-                    local.find('[opt=importfile]').form('submit',{
-                        url:"photo/addphoto",
-                        onSubmit:function(){
-                            showProcess(true, '温馨提示', '正在提交数据...');
-                        },
-                        success: function (data) {
-                            if(data == "success"){
-                                showProcess(false)
-                                if(showProcess(false)){
-                                    cj.slideShow('数据导入成功');
-                                    peopleinfodatarid.datagrid("reload")
-                                }
-                            }else{
-                                showProcess(false)
-                            }
-                        }
-                    })
-                }
-            });
+
         }
     }
 })

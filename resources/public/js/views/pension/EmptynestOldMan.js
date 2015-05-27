@@ -35,7 +35,7 @@ define(function () {
                 local.find('[name='+f1+']').attr('disabled',false)
             }
         }).click(function () {               //为第个元素注册点击事件
-            var s = $($(this).prev()[0]).attr('name')
+            var s = $($(this).prev()[0]).attr('name');
             var f = s+"_num";
             s = ":input[name=" + s + "]+label"
             var isChecked=$(this).prev()[0].checked;
@@ -46,8 +46,11 @@ define(function () {
             });
             if(isChecked){
                 //如果单选已经为选中状态,则什么都不做
-                local.find('[name='+f+']').attr('disabled',true)
+                local.find('[name='+f+']').attr('disabled',true);
+                local.find('[name=zq_othervalue]').attr('disabled',true);//晚年最缺其他类型
+                local.find('[name=zq_othervalue]').val("");
             }else{
+                local.find('[name=zq_othervalue]').attr('disabled',false);//晚年最缺其他类型
                 local.find('[name='+f+']').attr('disabled',false)
                 $(this).prev()[0].checked = true;
                 $(this).addClass("checked");
@@ -75,8 +78,8 @@ define(function () {
         var districtid = local.find('[opt=districtid]');      //行政区划值
         getdivision(districtid);                   //加载行政区划
         /*根据身份证获取基本信息*/
-        getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
-            gender:local.find('[opt=gender]'),age:local.find('[opt=tip_age]'),agetype:""})
+        /*getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
+            gender:local.find('[opt=gender]'),age:local.find('[opt=tip_age]'),agetype:""})*/
         addRadioCss(local);
         addCheckboxCss(local);
         addToolBar(local);
@@ -87,8 +90,8 @@ define(function () {
     /*保存*/
     function saveFunc(local,option){
         local.find('[opt=save]').show().click(function () {
-            local.find('[opt=highyearoldform]').form('submit',{
-                url:'old/oldestpeople',
+            local.find('[opt=emptynestoldform]').form('submit',{
+                url:'old/addenpeople',
                 onSubmit: function (param) {
                     showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     param.districtid = local.find('[opt=districtid]').combobox("getValue")
@@ -113,19 +116,45 @@ define(function () {
     /*修改*/
     function updateFunc(local,option){
         var datas = option.queryParams.data;
-        local.find('[opt=highyearoldform]').form('load',datas);
+        dda = datas;
+        local.find('[opt=emptynestoldform]').form('load',datas);
         var districtnameval = getDivistionTotalname(datas.districtid)
         var districtid = local.find('[opt=districtid]');      //行政区划
         districtid.combobox("setValue",districtnameval)  //填充行政区划
-        local.find('[opt=update]').show();
-        for(var i=0;i<keyarray.length;i++){
-            local.find('input[name='+keyarray[i]+'][type=checkbox][value='+datas[keyarray[i]]+']').attr("checked","checked");
-            local.find('input[name='+keyarray[i]+'][type=checkbox][value='+datas[keyarray[i]]+']+label').addClass("checked");
-        }
         for(var key in datas){
             local.find('input[name='+key+'][type=radio][value='+datas[key]+']').attr("checked","checked");
             local.find('input[name='+key+'][type=radio][value='+datas[key]+']+label').addClass("checked");
+            local.find('input[name='+key+'][type=checkbox][value='+datas[key]+']').attr("checked","checked");
+            local.find('input[name='+key+'][type=checkbox][value='+datas[key]+']+label').addClass("checked");
         }
+        local.find('[opt=update]').show().click(function () {
+            local.find('[opt=emptynestoldform]').form('submit',{
+                url:'old/updateenpeople',
+                onSubmit: function (param) {
+                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    if(!isNaN(local.find("[opt=districtid]").combobox("getValue"))){          //是否是数字
+                        param.districtid = local.find("[opt=districtid]").combobox("getValue")
+                    }else{
+                        param.districtid = datas.districtid
+                    }
+                    param.kc_id = datas.kc_id;
+                    var isValid = $(this).form('validate');
+                    if (!isValid){
+                        showProcess(false);
+                    }
+                    return isValid;
+                },
+                success: function (data) {
+                    if(data == "success"){
+                        showProcess(false);
+                        cj.slideShow('保存成功');
+                    }else{
+                        cj.slideShow('<label style="color: red">保存失败</label>');
+                        showProcess(false);
+                    }
+                }
+            })
+        });
     }
 
     function render(l,o){

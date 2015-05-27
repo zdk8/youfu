@@ -133,15 +133,21 @@ define(function(){
             })
             var localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
-                    url:'old/opstatistic',
+                    url:'old/enpeoplestatistic',
                     queryParams: {
-                        intelligentsp:null
+                        statictype:"xzqh"
                     },
+                    /*columns:[[
+                        {field:'dvname',title:'地区',width:100},
+                        {field:'gender',title:'性别',width:100},
+                        {field:'agevalue',title:'年龄',width:100},
+                        {field:'sum',title:'人数',width:100,align:'right'}
+                    ]],*/
                     onLoadSuccess:function(data){
-                        var detailbtns=local.find('[action=detail]');
+                       /* var detailbtns=local.find('[action=detail]');
                         var xueyangbtns=local.find('[action=xueyang]');
                         var trendgbtns=local.find('[action=trend]');
-                        var btns_arr=[detailbtns,xueyangbtns,trendgbtns];
+                        var btns_arr=[detailbtns,xueyangbtns,trendgbtns];*/
                         var rows=data.rows;
 
                         var fields=[];
@@ -251,31 +257,46 @@ define(function(){
             var districtid = local.find('[opt=districtid]');      //行政区划值
             getdivision(districtid);
 
-            /*查询*/
+
+
+
+            /*统计*/
             local.find('[opt=query]').bind('click',function(){
+                var type_tjval = local.find('[opt=type_tj]').combobox('getValue').trim();
+                var districtidval = local.find('[opt=districtid]').combobox('getValue').trim();
+                var genderval = local.find('[opt=gender]').combobox('getValue').trim();
+                var minage = local.find('[opt=minage]').val().trim();
+                var maxage = local.find('[opt=maxage]').val().trim();
+
+                var colsfields = {
+                    type_tj:type_tjval.length == 0 ?null:"type_tj"
+                }
                 var data={
-                    districtid:districtid.combotree('getValue'),
-                    datatype:local.find('[opt=ppselect]').val(),
-                    gender:local.find('[opt=sex]').combobox('getValue'),
-                    minage:local.find('[opt=minage]').val(),
-                    maxage:local.find('[opt=maxage]').val(),
-                    dq:local.find('input[name=diqu]:checked').val(),
-                    lb:local.find('input[name=leibie]:checked').val(),
-                    xb:local.find('input[name=sex]:checked').val(),
-                    nl:local.find('input[name=age]:checked').val()
+                    statictype:type_tjval,
+                    districtid:districtidval,
+                    gender:genderval,
+                    minage:minage,
+                    maxage:maxage
                 }
 
+               /* localDataGrid.datagrid({
+                    columns:[[
+                        {field:'dvname',title:'地区1',width:100},
+                        {field:'gender',title:'性别1',width:100},
+                        {field:'agevalue',title:'年龄1',width:100},
+                        {field:'opsum',title:'人数',width:100,align:'right'}
+                    ]]
+                });*/
                 localDataGrid.datagrid('reload',data);
                 ieMaxRowHeight();
 
 
-//        $.post('/old/opstatistic',data)
             });
 
 
 
             //清除所有条件
-            local.find('[opt=clear]').bind('click',function(){
+            /*local.find('[opt=clear]').bind('click',function(){
                 local.find('[opt=districtid]').combotree('clear');
                 local.find('[opt=ppselect]').val('clear')
                 local.find('[opt=sex]').combobox('clear');
@@ -285,11 +306,10 @@ define(function(){
                     $(this).prev()[0].checked = false;
                     $(this).removeClass("checked");
                 })
-            })
-
-            local.find('[opt=seniorTJ]').click(function () {
-                console.log(23)
-                require(['commonfuncs/popwin/win','text!views/pension/EmptynestOldManSeniorQuery.htm','views/pension/EmptynestOldManSeniorQuery'],
+            })*/
+            //高级统计
+            local.find('[opt=seniortj]').click(function () {
+                require(['commonfuncs/popwin/win','text!views/pension/EmptynestOldManSeniorFields.htm','views/pension/EmptynestOldManSeniorFields'],
                     function(win,htmfile,jsfile){
                         win.render({
                             title:'高级统计',
@@ -302,23 +322,26 @@ define(function(){
                                 }},{
                                     text:'确定',
                                     handler:function(html,parent){
-                                        var selectRadio = ":input[type=radio] + label";
-                                        parent.find(selectRadio).each(function () {
-                                            if ($(this).prev()[0].checked){
-                                                for(var o=0;o<closobj.length;o++){
-                                                    if(closobj[o].hidden){
-                                                        peopleinfodatarid.datagrid('showColumn',$(this).prev().val()); //显示
-                                                    }
-                                                }
-                                            }else{
-                                                for(var o=0;o<closobj.length;o++){
-                                                    if(!closobj[o].hidden){
-                                                        peopleinfodatarid.datagrid('hideColumn',$(this).prev().val()); //隐藏
-                                                    }
-                                                }
+                                        parent.find('[opt=formfields]').form('submit',{
+                                            url:'www',
+                                            onSubmit: function (param) {
+                                                var type_tjval = local.find('[opt=type_tj]').combobox('getValue').trim();
+                                                var districtidval = local.find('[opt=districtid]').combobox('getValue').trim();
+                                                var genderval = local.find('[opt=gender]').combobox('getValue').trim();
+                                                var minage = local.find('[opt=minage]').val().trim();
+                                                var maxage = local.find('[opt=maxage]').val().trim();
+                                                param.statictype = type_tjval;
+                                                param.districtid = districtidval;
+                                                param.gender = genderval;
+                                                param.minage = minage;
+                                                param.maxage = maxage
+                                            },
+                                            success: function (data) {
+                                                console.log(data)
+                                                localDataGrid.datagrid('reload',{statictype:""});
                                             }
-                                            parent.trigger('close');
                                         })
+                                        parent.trigger('close');
                                     }
                                 }
                             ],

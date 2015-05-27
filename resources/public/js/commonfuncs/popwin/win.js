@@ -38,7 +38,7 @@ define(function(){
         layer.load(1)
         window.setTimeout(function(){
             result.show();
-        },1000)
+        },500)
 
 
 
