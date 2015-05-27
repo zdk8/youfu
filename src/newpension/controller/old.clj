@@ -836,27 +836,54 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
   (let[params (:params request)
        statictype (:statictype params)
        districtid (:districtid params)
+       districtvalue (if (> (count districtid) 0) districtid "330424")   ;如果districtid为空，设置默认为330424
        ;;查询条件
        districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
        ;;合并查询条件
        tjconds (str districtidcond)
+       ;;根据所选分组分组处理数据字段
+       encol (cond
+               (= statictype "xzqh" ) (condp = (count districtvalue)                                                   ;地区分组
+                                        6   (str " substr(districtid,0,9) ")
+                                        9   (str " substr(districtid,0,12) ")
+                                        12   " substr(districtid,0,12)  "
+                                        nil)
+               (= statictype "xb")    (str " (case gender   when '1' then '男' when '0' then '女'  else '未明确'   END) ")
+               (= statictype "nl")    (str " (CASE WHEN age2 <= 60 THEN '60 岁以下'
+                                            WHEN age2 > 60 AND age2 <= 70 THEN '60-70岁'
+                                            WHEN age2 > 70 AND age2<= 80 THEN '70-80岁'
+                                            WHEN age2 > 80 AND age2 <= 90 THEN '80-90岁'
+                                            WHEN age2 > 90 THEN '90岁以上'
+                                            ELSE '年龄未知' END)")
+               (= statictype "lb")    (str " (case GNTYPE   when '1' then '低保' when '2' then '低保边缘户' when '3' then '低收入户' when '4' then '失独' when '5' then '重残' when '6' then '其他' else '未明确'   END) ")
+               (= statictype "hy")    (str " (case MARRIAGE   when '1' then '未婚' when '2' then '已婚' when '3' then '离婚' when '4' then '分居' when '5' then '丧偶' when '6' then '其他'  else '未明确'   END) ")
+               (= statictype "wh")    (str " (case CULTURE   when '1' then '文盲' when '2' then '小学 ' when '3' then '初中' when '4' then '高中' when '5' then '大专以上' else '未明确'   END) ")
+               (= statictype "kcyy")  (str " (case EMPTYREASON   when '1' then '经济原因' when '2' then '家庭成员关系原因 ' when '3' then '生活习惯' when '4' then '其他'  else '未明确'   END) ")
+               (= statictype "twpl")  (str " (case VISITTIME   when '1' then '一两天' when '2' then '一周' when '3' then '两周' when '4' then '一个月' when '5' then '二个月' when '6' then '一个季度' when '7' then '半年' when '8' then '一年及以上' else '未明确'   END) ")
+               (= statictype "grysr") (str " (case MONTHINCOME   when '1' then '无收入' when '2' then '不足200' when '3' then '200~499' when '4' then '500~999' when '5' then '1000~1499' when '6' then '1500~2000' when '7' then '2000及以上'  else '未明确'   END) ")
+               :else nil
+               )
        ;;根据所选分组设置查找字段
        envalue (cond
-                 (= statictype "xb")  (conj [] " (case gender   when '1' then '男' when '0' then '女'  else '空'   END) as gender,count(*) as sum ,330424 as districtid ")
-                 (= statictype "xqah") (conj [] " '看电视' as xq,sum(XQ_WATCHTV) as rs,330424 as districtid " " '锻炼' as xq,sum(XQ_exercise) as rs,330424 as districtid " " '下棋' as xq,sum(XQ_chess) as rs,330424 as districtid " " '没有爱好' as xq,sum(XQ_nohobby) as rs,330424 as districtid " " '其他爱好' as xq,sum(XQ_other) as rs,330424 as districtid ")
+                 (= statictype "xqah") (conj [] (str " '看电视' as statictype,sum(XQ_WATCHTV) as sum," districtvalue " as districtid ") (str " '锻炼' as statictype,sum(XQ_exercise) as sum," districtvalue " as districtid " ) (str " '下棋' as statictype,sum(XQ_chess) as sum," districtvalue " as districtid ") (str " '没有爱好' as statictype,sum(XQ_nohobby) as sum," districtvalue " as districtid ") (str " '其他爱好' as statictype,sum(XQ_other) as sum," districtvalue " as districtid "))
+                 (= statictype "jjly") (conj [] (str " '子女提供' as statictype,sum(JJ_CHILDPROVIDE) as sum," districtvalue " as districtid ") (str " '退休工资' as statictype,sum(JJ_RETIREPAY) as sum," districtvalue " as districtid " ) (str " '拆迁补偿' as statictype,sum(JJ_REMOLITION) as sum," districtvalue " as districtid ") (str " '养老保险' as statictype,sum(JJ_PENSION) as sum," districtvalue " as districtid ") (str " '社会救助' as statictype,sum(JJ_ASSISTANCE) as sum," districtvalue " as districtid ") (str " '存款红利及租金' as statictype,sum(JJ_DEPOSIT) as sum," districtvalue " as districtid ") (str " '其他 ' as statictype,sum(JJ_OTHER) as sum," districtvalue " as districtid "))
+                 (= statictype "knhd") (conj [] (str " '吃饭' as statictype,sum(KN_EAT) as sum," districtvalue " as districtid ") (str " '洗澡' as statictype,sum(KN_BATHE) as sum," districtvalue " as districtid " ) (str " '上下楼梯' as statictype,sum(KN_FLOOR) as sum," districtvalue " as districtid ") (str " '简单家务' as statictype,sum(KN_HOUSEWORK) as sum," districtvalue " as districtid ") (str " '室内行走' as statictype,sum(KN_WALK) as sum," districtvalue " as districtid ") (str " '乘公共交通工具' as statictype,sum(KN_TRANSIT) as sum," districtvalue " as districtid ")(str " '上厕所 ' as statictype,sum(KN_TOILET) as sum," districtvalue " as districtid ")(str " '上下床' as statictype,sum(KN_BED) as sum," districtvalue " as districtid ")(str " '以上都没有' as statictype,sum(KN_NOTHING) as sum," districtvalue " as districtid "))
+                 (= statictype "xyfw") (conj [] (str " '家政服务' as statictype,sum(FW_HOUSEKEEPING) as sum," districtvalue " as districtid ") (str " '送医送药上门' as statictype,sum(FW_TREATMENT) as sum," districtvalue " as districtid " ) (str " '送饭' as statictype,sum(FW_MEAL) as sum," districtvalue " as districtid ") (str " '日间照料中心' as statictype,sum(FW_TEND) as sum," districtvalue " as districtid ") (str " '陪同看病' as statictype,sum(FW_DOCTOR) as sum," districtvalue " as districtid ")(str " '代购日常物品 ' as statictype,sum(FW_DAILYSHOP) as sum," districtvalue " as districtid ")(str " '紧急救助  ' as statictype,sum(FW_AID) as sum," districtvalue " as districtid ")(str " '老年人服务热线  ' as statictype,sum(FW_HOTLINE) as sum," districtvalue " as districtid ")(str " '文化娱乐  ' as statictype,sum(FW_ENTERTAINMENT) as sum," districtvalue " as districtid ")(str " '法律服务  ' as statictype,sum(FW_LAW) as sum," districtvalue " as districtid ")(str " '聊天解闷  ' as statictype,sum(FW_CHAT) as sum," districtvalue " as districtid ")(str " '以上都不需要  ' as statictype,sum(FW_NOTHING) as sum," districtvalue " as districtid "))
+                 (= statictype "shzq")  (conj [] (str " '无障碍设施服务' as statictype,sum(ZQ_BARRIERFREE) as sum," districtvalue " as districtid ") (str " '入住养老机构' as statictype,sum(ZQ_PENSIONAGENCY) as sum," districtvalue " as districtid " ) (str " '居家养老服务' as statictype,sum(ZQ_HOMECARE) as sum," districtvalue " as districtid ") (str " '志愿者结对服务' as statictype,sum(ZQ_VOLUNTEERS) as sum," districtvalue " as districtid ") (str " '其他' as statictype,sum(ZQ_OTHER) as sum," districtvalue " as districtid "))
+                 :else (conj [] (str encol " as statictype,count(*) as sum ," districtvalue " as districtid "))
                  )
-       ;;根据所选分组设置分组
-       engroup (cond
-                (= statictype "xb")  (str " group by (case gender   when '1' then '男' when '0' then '女'  else '空'   END) ")
-                (= statictype "xqah") (str " ")
-                )
+       ;;如果是单选分类，就进行group by分类
+       engroup  (if encol  (str " group by " encol)  "")
 
        ;;将所有信息合成SQL语句
        enstatictsql (apply str (interpose " union all "(map #(str " SELECT s.*,dv.dvname FROM (select " %
                        " from (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t )
                       where 1=1 " tjconds  engroup ") s LEFT JOIN division dv ON s.districtid = dv.dvcode ") envalue)))
+       resultsql (if (= statictype "xzqh" ) (str "SELECT r.sum,r.dvname, dv2.dvname as statictype from( " enstatictsql " ) r     LEFT JOIN division dv2    ON r.statictype = dv2.dvcode")
+                                            enstatictsql)
        ]
     (resp/json (db/get-results-bysql enstatictsql))
+    ;(str resultsql)
     ))
 
 
