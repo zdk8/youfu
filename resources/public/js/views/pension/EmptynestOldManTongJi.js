@@ -9,6 +9,7 @@ define(function(){
         return false;
     }
     var format=function(d,series){
+        console.log(d)
         var data=[];
         for(var i in d){
             for(var p in d[i]){
@@ -129,7 +130,7 @@ define(function(){
             addRadioCssComm(local);
             var dvnames=[];
             dvnames.push({
-                datename:'dvname',valuename:'opsum',datatype:'oldtype',sex:'gender',age:'agevalue'
+                datename:'dvname',valuename:'sum',datatype:'statictype',sex:'gender',age:'agevalue'
             })
             var localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
@@ -144,10 +145,10 @@ define(function(){
                         {field:'sum',title:'人数',width:100,align:'right'}
                     ]],*/
                     onLoadSuccess:function(data){
-                       /* var detailbtns=local.find('[action=detail]');
+                        var detailbtns=local.find('[action=detail]');
                         var xueyangbtns=local.find('[action=xueyang]');
                         var trendgbtns=local.find('[action=trend]');
-                        var btns_arr=[detailbtns,xueyangbtns,trendgbtns];*/
+                        var btns_arr=[detailbtns,xueyangbtns,trendgbtns];
                         var rows=data.rows;
 
                         var fields=[];
@@ -198,8 +199,9 @@ define(function(){
 
                         }
 
-
+                        dd  =data
                         var obj  = format(data.rows,dvnames)
+
                         /*加载图形*/
                         renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local)
                     },
@@ -322,8 +324,11 @@ define(function(){
                                 }},{
                                     text:'确定',
                                     handler:function(html,parent){
+
+                                        //ff = parent.find('[opt=formfields]').form()
+                                        //console.log(parent.find('[opt=formfields]').form())
                                         parent.find('[opt=formfields]').form('submit',{
-                                            url:'www',
+                                            url:'old/enpeoplestatistic',
                                             onSubmit: function (param) {
                                                 var type_tjval = local.find('[opt=type_tj]').combobox('getValue').trim();
                                                 var districtidval = local.find('[opt=districtid]').combobox('getValue').trim();
@@ -337,8 +342,7 @@ define(function(){
                                                 param.maxage = maxage
                                             },
                                             success: function (data) {
-                                                console.log(data)
-                                                localDataGrid.datagrid('reload',{statictype:""});
+                                                localDataGrid.datagrid('reload',data);
                                             }
                                         })
                                         parent.trigger('close');
