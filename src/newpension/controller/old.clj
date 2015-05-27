@@ -834,14 +834,23 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 (defn emptynest-statistic [request]
   (let[params (:params request)
-       statictype (:statictype params)
-       districtid (:districtid params)
+       choicecols (select-keys params (:kccols common/selectcols))     ;其他条件
+       statictype1 (:statictype params)   ;统计类型
+       statictype (if (> (count statictype1) 0) statictype1 "xzqh")
+       districtid (:districtid params)     ;地名（条件）
+       minage (:minage params)             ;最小年龄（条件）
+       maxage (:maxage params)             ;最大年龄（条件）
+
        districtvalue (if (> (count districtid) 0) districtid "330424")   ;如果districtid为空，设置默认为330424
        ;;查询条件
        districtidcond (if (> (count districtid) 0) (str " and districtid like '" districtid "%' ")  )
+       minagecond (if (> (count minage) 0) (str " and age2 > " minage)  )
+       maxagecond (if (> (count maxage) 0) (str " and age2 <= " maxage) )
+       choicecond  (apply str (map #(if (> (count(second %)) 0) (str " and "  (name(first %)) " = " (second %))) choicecols))
        ;;合并查询条件
-       tjconds (str districtidcond)
+       tjconds (str districtidcond minagecond maxagecond choicecond)
        ;;根据所选分组分组处理数据字段
+
        encol (cond
                (= statictype "xzqh" ) (condp = (count districtvalue)                                                   ;地区分组
                                         6   (str " substr(districtid,0,9) ")
@@ -878,11 +887,12 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        ;;将所有信息合成SQL语句
        enstatictsql (apply str (interpose " union all "(map #(str " SELECT s.*,dv.dvname FROM (select " %
                        " from (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t )
-                      where 1=1 " tjconds  engroup ") s LEFT JOIN division dv ON s.districtid = dv.dvcode ") envalue)))
+                      where 1=1 " tjconds  engroup " ) s LEFT JOIN division dv ON s.districtid = dv.dvcode order by statictype asc ") envalue)))
        resultsql (if (= statictype "xzqh" ) (str "SELECT r.sum,r.dvname, dv2.dvname as statictype from( " enstatictsql " ) r     LEFT JOIN division dv2    ON r.statictype = dv2.dvcode")
                                             enstatictsql)
        ]
-    (resp/json (db/get-results-bysql enstatictsql))
+    (println "TTTTTTTTTTTTTT"  resultsql)
+    (resp/json (db/get-results-bysql resultsql))
     ;(str resultsql)
     ))
 
