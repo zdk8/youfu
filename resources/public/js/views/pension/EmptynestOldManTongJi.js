@@ -9,7 +9,6 @@ define(function(){
         return false;
     }
     var format=function(d,series){
-        console.log(d)
         var data=[];
         for(var i in d){
             for(var p in d[i]){
@@ -32,12 +31,15 @@ define(function(){
             if(dateOjb){
                 var tmparr=[];
                 var categoriesDateX = [];
+                dd =dateSex
                 for(var i=0;i< dateOjb.dvalue.length;i++){
                     var istype =dateType.dvalue[i] == null?"":"-"+dateType.dvalue[i];
-                    var issex =dateSex.dvalue[i] == null?"":"-"+dateSex.dvalue[i];
-                    var isage =dateAge.dvalue[i] == null?"":"-"+dateAge.dvalue[i];
+                    //var issex =dateSex.dvalue[i] == null?"":"-"+dateSex.dvalue[i];
+                    var issex ="2";
+                    var isage ="3";
+                    //var isage =dateAge.dvalue[i] == null?"":"-"+dateAge.dvalue[i];
                     tmparr.push([
-                        "【"+dateOjb.dvalue[i]+istype+issex+isage+"】:"+valueOjb.dvalue[i]+"(人)",
+                        "【"+dateOjb.dvalue[i]+istype+"】:"+valueOjb.dvalue[i]+"(人)",
                         valueOjb.dvalue[i]])
                     categoriesDateX.push(dateOjb.dvalue[i])
                 }
@@ -135,15 +137,6 @@ define(function(){
             var localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
                     url:'old/enpeoplestatistic',
-                    queryParams: {
-                        statictype:"xzqh"
-                    },
-                    /*columns:[[
-                        {field:'dvname',title:'地区',width:100},
-                        {field:'gender',title:'性别',width:100},
-                        {field:'agevalue',title:'年龄',width:100},
-                        {field:'sum',title:'人数',width:100,align:'right'}
-                    ]],*/
                     onLoadSuccess:function(data){
                         var detailbtns=local.find('[action=detail]');
                         var xueyangbtns=local.find('[action=xueyang]');
@@ -205,15 +198,6 @@ define(function(){
                         /*加载图形*/
                         renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local)
                     },
-                    //striped:true,
-                    rowStyler2: function(index,row){
-                        if (row.listprice>80){
-                            return 'background-color:#6293BB;color:#fff;'; // return inline style
-                            // the function can return predefined css class and inline style
-                            // return {class:'r1', style:{'color:#fff'}};
-                        }
-                        return 'background-color:#fff;';
-                    },
                     onClickRow:function(index,row){
                         var table=local.find('.datagrid-body>table');
                         var currentTR=table.find('tr').eq(index);
@@ -234,10 +218,38 @@ define(function(){
                         var mygroupfirstrow=$(myfirsttd(currentTR,index));
                         var len=mygroupfirstrow.find('td').eq(0).attr('rowspan')||1;
 
-                        console.log(len);
                         table.find('tr').removeClass('highGroupRow');
                         myrowsaction(mygroupfirstrow,len);
 
+                    },
+                    onDblClickRow: function (index,row) {
+                        var type_tjval = local.find('[opt=type_tj]').combobox('getValue').trim();
+                        var districtidval = local.find('[opt=districtid]').combobox('getValue').trim();
+                        var genderval = local.find('[opt=gender]').combobox('getValue').trim();
+                        var minage = local.find('[opt=minage]').val().trim();
+                        var maxage = local.find('[opt=maxage]').val().trim();
+                        var rowval = row.statictype;
+                        require(['commonfuncs/popwin/win','text!views/pension/EmptynestOldManTongJiInfo.htm','views/pension/EmptynestOldManTongJiInfo'],
+                            function(win,htmfile,jsfile){
+                                win.render({
+                                    title:'详细信息',
+                                    width:620,
+                                    height:435,
+                                    html:htmfile,
+                                    renderHtml:function(local,submitbtn,parent){
+                                        jsfile.render(local,{
+                                            parent:parent,
+                                            type_tjval:type_tjval,
+                                            districtidval:districtidval,
+                                            genderval:genderval,
+                                            minage:minage,
+                                            maxage:maxage,
+                                            rowval:rowval
+                                        })
+                                    }
+                                })
+                            }
+                        )
                     },
                     toolbar:local.find('div[tb]')
                 });
@@ -298,19 +310,15 @@ define(function(){
 
 
             //清除所有条件
-            /*local.find('[opt=clear]').bind('click',function(){
-                local.find('[opt=districtid]').combotree('clear');
-                local.find('[opt=ppselect]').val('clear')
-                local.find('[opt=sex]').combobox('clear');
+            local.find('[opt=clear]').bind('click',function(){
+                local.find('[opt=districtid]').combobox('clear');
+                local.find('[opt=type_tj]').combobox('clear')
+                local.find('[opt=gender]').combobox('clear');
                 local.find('[opt=minage]').val('');
                 local.find('[opt=maxage]').val('');
-                local.find(':input[type=radio] + label').each(function () {
-                    $(this).prev()[0].checked = false;
-                    $(this).removeClass("checked");
-                })
-            })*/
+            })
             //高级统计
-            local.find('[opt=seniortj]').click(function () {
+            /*local.find('[opt=seniortj]').click(function () {
                 require(['commonfuncs/popwin/win','text!views/pension/EmptynestOldManSeniorFields.htm','views/pension/EmptynestOldManSeniorFields'],
                     function(win,htmfile,jsfile){
                         win.render({
@@ -324,9 +332,6 @@ define(function(){
                                 }},{
                                     text:'确定',
                                     handler:function(html,parent){
-
-                                        //ff = parent.find('[opt=formfields]').form()
-                                        //console.log(parent.find('[opt=formfields]').form())
                                         parent.find('[opt=formfields]').form('submit',{
                                             url:'old/enpeoplestatistic',
                                             onSubmit: function (param) {
@@ -339,26 +344,28 @@ define(function(){
                                                 param.districtid = districtidval;
                                                 param.gender = genderval;
                                                 param.minage = minage;
-                                                param.maxage = maxage
+                                                param.maxage = maxage;
                                             },
                                             success: function (data) {
-                                                localDataGrid.datagrid('reload',data);
+                                                var datas = eval('('+data+')')
+                                                parent.trigger('close');
+                                                localDataGrid.datagrid('loadData',datas);
                                             }
                                         })
-                                        parent.trigger('close');
+
                                     }
                                 }
                             ],
                             renderHtml:function(local,submitbtn,parent){
                                 jsfile.render(local,{
-                                    parent:parent/*,
-                                    closobj:closobj*/
+                                    parent:parent,
+                                    closobj:closobj
                                 })
                             }
                         })
                     }
                 )
-            })
+            })*/
         }
 
     }

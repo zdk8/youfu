@@ -133,7 +133,7 @@ define(function(){
                 "&implfunc=sjk";
             });
             /*添加字段*/
-            local.find('[opt=addfield]').click(function(){
+            /*local.find('[opt=addfield]').click(function(){
                 var closobj = peopleinfodatarid.datagrid('options').columns[0];
                 require(['commonfuncs/popwin/win','text!views/pension/PeopleInfoXlsFields.htm','views/pension/PeopleInfoXlsFields'],
                     function(win,htmfile,jsfile){
@@ -177,10 +177,7 @@ define(function(){
                         })
                     }
                 )
-            })
-
-
-
+            })*/
         }
     }
 })
