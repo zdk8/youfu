@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="statistic2 oldestpeople 20150327&#10;">
+    <list default="true" id="b10e0399-5f0e-4bb6-936a-eee849fea935" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/routes/home.clj" afterPath="$PROJECT_DIR$/src/newpension/routes/home.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/controller/old.clj" afterPath="$PROJECT_DIR$/src/newpension/controller/old.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -73,8 +74,8 @@
       <file leaf-file-name="home.clj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5082" max-vertical-offset="6182">
-              <caret line="231" column="54" selection-start-line="231" selection-start-column="54" selection-end-line="231" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4818" max-vertical-offset="6182">
+              <caret line="232" column="56" selection-start-line="232" selection-start-column="56" selection-end-line="232" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -83,8 +84,8 @@
       <file leaf-file-name="old.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79931587" vertical-offset="19143" max-vertical-offset="21472">
-              <caret line="902" column="52" selection-start-line="902" selection-start-column="52" selection-end-line="902" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.6778976" vertical-offset="19253" max-vertical-offset="21912">
+              <caret line="898" column="64" selection-start-line="898" selection-start-column="64" selection-end-line="898" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -152,8 +153,8 @@
         <option value="D:/ReportXlsAuto.java" />
         <option value="$PROJECT_DIR$/src/newpension/javaxls/ReportXlsAuto.java" />
         <option value="$PROJECT_DIR$/src/newpension/models/db.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
         <option value="$PROJECT_DIR$/src/newpension/common/common.clj" />
+        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
         <option value="$PROJECT_DIR$/src/newpension/controller/old.clj" />
       </list>
     </option>
@@ -657,7 +658,7 @@
       <workItem from="1432687389920" duration="2055000" />
       <workItem from="1432689503462" duration="23000" />
       <workItem from="1432690348105" duration="19510000" />
-      <workItem from="1432775336002" duration="1656000" />
+      <workItem from="1432775336002" duration="9791000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1408084702298</created>
@@ -2219,11 +2220,17 @@
       <option name="project" value="LOCAL" />
       <updated>1432718904400</updated>
     </task>
-    <option name="localTasksCounter" value="261" />
+    <task id="LOCAL-00261" summary="statistic2 oldestpeople 20150328&#10;">
+      <created>1432777070718</created>
+      <option name="number" value="00261" />
+      <option name="project" value="LOCAL" />
+      <updated>1432777070718</updated>
+    </task>
+    <option name="localTasksCounter" value="262" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48690000" />
+    <option name="totallyTimeSpent" value="56825000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -2232,13 +2239,14 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28525123" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32359308" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22835498" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27056277" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.109307356" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17291667" sideWeight="0.66774714" order="0" side_tool="false" content_ui="combo" />
@@ -2253,7 +2261,6 @@
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32359308" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31442463" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2277,7 +2284,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="jgtj3 20150209&#10;" />
     <MESSAGE value="jgtjall 20150209&#10;" />
     <MESSAGE value="report 20150210&#10;" />
     <MESSAGE value="report2 20150210&#10;" />
@@ -2302,7 +2308,8 @@
     <MESSAGE value="statistic oldestpeople 20150327&#10;" />
     <MESSAGE value="statistic1 oldestpeople 20150327&#10;" />
     <MESSAGE value="statistic2 oldestpeople 20150327&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="statistic2 oldestpeople 20150327&#10;" />
+    <MESSAGE value="statistic2 oldestpeople 20150328&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="statistic2 oldestpeople 20150328&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2656,14 +2663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4884" max-vertical-offset="6182">
-          <caret line="231" column="54" selection-start-line="231" selection-start-column="54" selection-end-line="231" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/common/common.clj">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="99" max-vertical-offset="2728">
@@ -2672,10 +2671,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4818" max-vertical-offset="6182">
+          <caret line="232" column="56" selection-start-line="232" selection-start-column="56" selection-end-line="232" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79931587" vertical-offset="19143" max-vertical-offset="21472">
-          <caret line="902" column="52" selection-start-line="902" selection-start-column="52" selection-end-line="902" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.6778976" vertical-offset="19253" max-vertical-offset="21912">
+          <caret line="898" column="64" selection-start-line="898" selection-start-column="64" selection-end-line="898" selection-end-column="64" />
           <folding />
         </state>
       </provider>
