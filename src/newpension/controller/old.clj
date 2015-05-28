@@ -912,6 +912,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 (defn get-emptynest-detail [request]
   (let[params (:params request)
+
        ]
     (println params)
     (str "success")))
