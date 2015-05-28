@@ -12,9 +12,9 @@ define(function(){
                 url:'old/getemptydetail',
                 method:'post',
                 queryParams: {
-                    type_tjval:option.type_tjval,
-                    districtidval:option.districtidval,
-                    genderval:option.genderval,
+                    statictype:option.type_tjval,
+                    districtid:option.districtidval,
+                    gender:option.genderval,
                     minage:option.minage,
                     maxage:option.maxage,
                     staticvalue:option.rowval.staticvalue
