@@ -859,11 +859,11 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                                         9   (str " substr(districtid,0,12) ")
                                         12   " substr(districtid,0,12)  ")
                (= statictype "xb")    (str " (case gender   when '1' then '男' when '0' then '女'  else '未明确'   END) ")
-               (= statictype "nl")    (str " (CASE WHEN age2 <= 60 THEN '60 岁以下'
-                                            WHEN age2 > 60 AND age2 <= 70 THEN '60-70岁'
-                                            WHEN age2 > 70 AND age2<= 80 THEN '70-80岁'
-                                            WHEN age2 > 80 AND age2 <= 90 THEN '80-90岁'
-                                            WHEN age2 > 90 THEN '90岁以上'
+               (= statictype "nl")    (str " (CASE WHEN age2 < 60 THEN '60 岁以下'
+                                            WHEN age2 >= 60 AND age2 < 70 THEN '60-70岁'
+                                            WHEN age2 >= 70 AND age2< 80 THEN '70-80岁'
+                                            WHEN age2 >= 80 AND age2 < 90 THEN '80-90岁'
+                                            WHEN age2 >= 90 THEN '90岁以上'
                                             ELSE '年龄未知' END)")
                (= statictype "lb")    (str " (case GNTYPE   when '1' then '低保' when '2' then '低保边缘户' when '3' then '低收入户' when '4' then '失独' when '5' then '重残' when '6' then '其他' else '未明确'   END) ")
                (= statictype "hy")    (str " (case MARRIAGE   when '1' then '未婚' when '2' then '已婚' when '3' then '离婚' when '4' then '分居' when '5' then '丧偶' when '6' then '其他'  else '未明确'   END) ")
@@ -912,10 +912,40 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
 (defn get-emptynest-detail [request]
   (let[params (:params request)
-
+       statictype (:statictype params)
+       districtid (:districtid params)
+       gender (:gender params)
+       minage (:minage params)
+       maxage (:maxage params)
+       staticvalue (:staticvalue params)
+       page (:page params)
+       rows (:rows params)
+       staticcond (cond
+                    (= statictype "xzqh")  (if (= staticvalue "330424") (str " and districtid = 330424 ") (str " and districtid like '" staticvalue "%' "))
+                    (= statictype "xb")    (if (= (count staticvalue) 0) (str " and gender is null ") (str " and gender = " staticvalue))
+                    (= statictype "nl")  (cond
+                                           (= staticvalue "60 岁以下") (str " and age2 < 60 ")
+                                           (= staticvalue "60-70岁") (str " and age2 >= 60 and age2 < 70 ")
+                                           (= staticvalue "70-80岁") (str " and age2 >= 70 and age2 < 80 ")
+                                           (= staticvalue "80-90岁") (str " and age2 >= 80 and age2 < 90 ")
+                                           (= staticvalue "90岁以上") (str " and age2 >= 90 ")
+                                           :else " and age2 is null ")
+                    (= statictype "lb") (if (= (count staticvalue) 0) (str " and GNTYPE is null ") (str " and GNTYPE = " staticvalue))
+                    (= statictype "hy") (if (= (count staticvalue) 0) (str " and MARRIAGE is null ") (str " and MARRIAGE = " staticvalue))
+                    (= statictype "wh") (if (= (count staticvalue) 0) (str " and CULTURE is null ") (str " and CULTURE = " staticvalue))
+                    (= statictype "kcyy") (if (= (count staticvalue) 0) (str " and EMPTYREASON is null ") (str " and EMPTYREASON = " staticvalue))
+                    (= statictype "twpl") (if (= (count staticvalue) 0) (str " and VISITTIME is null ") (str " and VISITTIME = " staticvalue))
+                    (= statictype "grysr") (if (= (count staticvalue) 0) (str " and MONTHINCOME is null ") (str " and MONTHINCOME = " staticvalue))
+                    :else (str " and " staticvalue " = 1 ")
+                    )
+       gendercond (if (or (= (count gender) 0)  (= statictype "xb")) " " (str " and gender = " gender) )
+       minagecond (if (> (count minage) 0) (str " and age2 >= " minage))
+       maxagecond (if (> (count maxage) 0) (str " and age2 < " maxage))
+       selectcond (str staticcond gendercond minagecond maxagecond)
+       getresult (common/fenye rows page " (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t ) " "*" selectcond " order by kc_id desc")
        ]
-    (println params)
-    (str "success")))
+    (println getresult)
+    (resp/json {:total (:total getresult)  :rows (common/time-before-list (:rows getresult) "birthd")})))
 
 
 
