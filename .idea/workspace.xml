@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8193e22a-9f43-4d47-8b02-5ae5ee9e6a9e" name="Default" comment="lhd">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldMan.htm" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldMan.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.js" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/java/XlsReport.java" afterPath="$PROJECT_DIR$/src/newpension/java/XlsReport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/handler.clj" afterPath="$PROJECT_DIR$/src/newpension/handler.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/models/schema.clj" afterPath="$PROJECT_DIR$/src/newpension/models/schema.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -174,23 +170,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmptynestOldManTongJiInfo.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="EmptynestOldManTongJiInfo.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="1414">
-              <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.5918699" vertical-offset="42" max-vertical-offset="1414">
+              <caret line="29" column="59" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
               <folding>
-                <marker date="1432794283390" expanded="true" signature="4269:4279" placeholder="..." />
+                <marker date="1432794696478" expanded="true" signature="4263:4273" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.clj" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.clj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31869918" vertical-offset="3052" max-vertical-offset="3934">
-              <caret line="232" column="47" selection-start-line="232" selection-start-column="47" selection-end-line="232" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3052" max-vertical-offset="3934">
+              <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -287,8 +283,8 @@
         <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManQuery.htm" />
         <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManQuery.js" />
         <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldMan.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js" />
         <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.js" />
+        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js" />
       </list>
     </option>
   </component>
@@ -1241,7 +1237,7 @@
       <workItem from="1432601029075" duration="26506000" />
       <workItem from="1432687827251" duration="16256000" />
       <workItem from="1432773874441" duration="196000" />
-      <workItem from="1432774549226" duration="10327000" />
+      <workItem from="1432774549226" duration="11221000" />
     </task>
     <task id="LOCAL-00001" summary="lhd">
       <created>1422862447205</created>
@@ -1627,11 +1623,23 @@
       <option name="project" value="LOCAL" />
       <updated>1432779511647</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="lhd">
+      <created>1432794400048</created>
+      <option name="number" value="00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1432794400050</updated>
+    </task>
+    <task id="LOCAL-00066" summary="lhd">
+      <created>1432794708359</created>
+      <option name="number" value="00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1432794708359</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="780461000" />
+    <option name="totallyTimeSpent" value="781355000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1386" height="788" extended-state="0" />
@@ -2097,16 +2105,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="1414">
-          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-          <folding>
-            <marker date="1432794283390" expanded="true" signature="4269:4279" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2171" max-vertical-offset="4438">
@@ -2129,9 +2127,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31869918" vertical-offset="3052" max-vertical-offset="3934">
-          <caret line="232" column="47" selection-start-line="232" selection-start-column="47" selection-end-line="232" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3052" max-vertical-offset="3934">
+          <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5918699" vertical-offset="42" max-vertical-offset="1414">
+          <caret line="29" column="59" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
+          <folding>
+            <marker date="1432794696478" expanded="true" signature="4263:4273" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
