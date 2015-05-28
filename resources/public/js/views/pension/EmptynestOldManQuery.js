@@ -4,9 +4,6 @@ define(function(){
         peopleinfodatarid.datagrid({
             url:func,
             method:'post',
-            queryParams: {
-                oldtype:oldtype
-            },
             onLoadSuccess:function(data){
                 var viewbtns=local.find('[action=view]');
                 var deletebtns=local.find('[action=delete]');
@@ -68,41 +65,88 @@ define(function(){
                     }
                 }
             },
-            rowStyler:function(rowIndex,rowData){
-                //console.log("diffDate: "+rowData.diffDate);
-                //return 'color:black;font-family:宋体;font-size:20';
-            },
             striped:true,
             toolbar:local.find('div[tb]')
         })
     }
     return {
         render:function(local,option){
-            var peopleinfodatarid = local.find('.easyui-datagrid-noauto');      //查询界面datagrid
+            /*var peopleinfodatarid = local.find('.easyui-datagrid-noauto');      //查询界面datagrid
             var localDataGrid;
             var refreshGrid=function() {
                 localDataGrid.datagrid('reload');
             };
-            localDataGrid=searcholdpeople(local,'old/getenpeople','');
+            localDataGrid=searcholdpeople(local,'old/getenpeople','');*/
 
 
-
-            /*老人类型选择*/
-            var ppselect = local.find('[opt=ppselect]');
-            ppselect.change(function () {
-                peopleinfodatarid.datagrid('load',{
-                    oldtype:ppselect.val()
-                })
+            var peopleinfodatarid = local.find('.easyui-datagrid-noauto');      //查询界面datagrid
+            peopleinfodatarid.datagrid({
+                url:'old/getenpeople',
+                method:'post',
+                onLoadSuccess:function(data){
+                    var viewbtns=local.find('[action=view]');
+                    var deletebtns=local.find('[action=delete]');
+                    var grantbtns=local.find('[action=grant]');
+                    var btns_arr=[viewbtns,deletebtns,grantbtns];
+                    var rows=data.rows;
+                    for(var i=0;i<rows.length;i++){
+                        for(var j=0;j<btns_arr.length;j++){
+                            (function(index){
+                                var record=rows[index];
+                                $(btns_arr[j][i]).click(function(){
+                                    if($(this).attr("action")=='view'){
+                                        cj.showContent({                                          //详细信息(tab标签)
+                                            title:record.name+'详细信息',
+                                            htmfile:'text!views/pension/EmptynestOldMan.htm',
+                                            jsfile:'views/pension/EmptynestOldMan',
+                                            queryParams:{
+                                                actiontype:'update',         //（处理）操作方式
+                                                data:record,                   //填充数据
+                                                refresh:peopleinfodatarid                //刷新
+                                            }
+                                        })
+                                    }else if($(this).attr("action")=='delete'){
+                                        $.messager.confirm('是否删除',
+                                            '确定删除？',
+                                            function(r){
+                                                if (r){
+                                                    $.ajax({
+                                                        url:"old/delenpeople",
+                                                        data:{
+                                                            kc_id:record.kc_id
+                                                        },
+                                                        type:"post",
+                                                        success:function(data){
+                                                            if(data == "success"){
+                                                                peopleinfodatarid.datagrid('reload');
+                                                                cj.slideShow('删除成功!')
+                                                            }else{
+                                                                cj.slideShow('<label style="color: red">删除失败!</label>')
+                                                            }
+                                                        }
+                                                    })
+                                                }
+                                            }
+                                        );
+                                    }
+                                });
+                            })(i);
+                        }
+                    }
+                },
+                striped:true,
+                toolbar:local.find('div[tb]')
             })
 
+
+
             var name = local.find('[opt=name]');                        //姓名
-            var identityid = local.find('[opt=identityid]');        //身份证
+            var gender = local.find('[opt=gender]');        //性别
             /*搜索*/
             local.find('.searchbtn').click(function(){
                 peopleinfodatarid.datagrid('load',{
-                    oldtype:ppselect.val(),
                     name:name.val(),
-                    identityid:identityid.val(),
+                    gender:gender.combobox('getValue'),
                     minage:local.find('[opt=minage]').val(),
                     maxage:local.find('[opt=maxage]').val()
                 })
@@ -110,7 +154,7 @@ define(function(){
 
 
             /*导出xls*/
-            local.find('[opt=exportexcel]').click(function(){
+            /*local.find('[opt=exportexcel]').click(function(){
                 var closobj = peopleinfodatarid.datagrid('options').columns[0];
                 var colsfieldarr = new Array();     //列头字段
                 var colstxtarr = new Array();       //列头文本
@@ -131,7 +175,7 @@ define(function(){
                 "&maxage="+local.find('[opt=maxage]').val()+
                 "&title="+local.find('[opt=ppselect] option:selected').text()+
                 "&implfunc=sjk";
-            });
+            });*/
             /*添加字段*/
             /*local.find('[opt=addfield]').click(function(){
                 var closobj = peopleinfodatarid.datagrid('options').columns[0];

@@ -29,9 +29,9 @@
                 <th data-options="field:'ro',width:80,align:'center',formatter:function(value,rowData,rowIndex)
                     {
                         var str='<div></div>';
-                        str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;><span><span class=&quot;icon-del-pl15&quot;></span></span></a>');
+                        str=$(str).append('<a action=&quot;map&quot;title=&quot;地图&quot;><span><span class=&quot;icon-map-pl1&quot;></span></span></a>');
                         return str.html();
-                    }">操作</th><!--<a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;-->
+                    }"><a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;操作</th>
                 <th data-options="field:'name',width:90,align:'center',
                 formatter:function(v,r,i)
                 {
@@ -43,8 +43,8 @@
                 <th data-options="field:'nation',width:60,align:'center',formatter: cj.enumFormatter('oldnation')">名族</th>
                 <th data-options="field:'age',width:40,align:'center',hidden:true">年龄</th>
                 <th data-options="field:'birthd',width:120,align:'center'">出生年月</th>
-                <!--<th data-options="field:'identityid',width:190,align:'center'">身份证号</th>-->
-                <!--<th data-options="field:'type',width:100,align:'center',formatter: cj.enumFormatter('oldtype')">人员类别</th>-->
+                <th data-options="field:'identityid',width:190,align:'center'">身份证号</th>
+                <th data-options="field:'type',width:100,align:'center',formatter: cj.enumFormatter('oldtype')">人员类别</th>
                 <th data-options="field:'address',width:200,align:'center'">家庭住址</th>
                 <th data-options="field:'registration',width:190,align:'center'">户籍地</th>
                 <th data-options="field:'mobilephone',width:120,align:'center'">手机号码</th>
@@ -61,37 +61,69 @@
         </table>
 
         <div tb style="padding-bottom: 0px">
-            <table cellspacing="0" cellpadding="0" style="float: right">
-                <tr>
-                    <td>
-                        姓名 :
-                        <input opt="name" type="text" style="width:114px">
-                    </td>
+            <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
+            <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 2px;padding-top: 2px;">
+                <table cellspacing="0" cellpadding="0" style="float: left">
+                    <tr>
+                        <td>
+                            <select opt="ppselect">
+                                <option value="">所有老人</option>
+                                <option value="f">服务评估老人</option>
+                                <option value="j">养老机构老人</option>
+                                <option value="s">三低老人</option>
+                                <option value="k">老人卡</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div class="file-box">
+                                <form opt="importfile" method="post" enctype="multipart/form-data">
+                                    <input type='text' name='textfield' id='textfield' class='txt' value="双击浏览按钮"/>
+                                    <input type='button' class='btn' value='浏览...' />&nbsp;
+                                    <input type="file" name="file" class="file" size="28"
+                                           onchange="document.getElementById('textfield').value=this.value.substring(this.value.lastIndexOf('\\')+1)" />
+                                    <input type="button" opt="importexcel" class="btn" value="导入老人卡" />
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" style="float: right">
+                    <tr>
+                        <td>
+                            姓名 :
+                            <input opt="name" type="text" style="width:114px">
+                        </td>
 
-                    <td>
-                        身份证 :
-                        <input opt="identityid" type="text">
-                    </td>
+                        <td>
+                            性别 :
+                            <input opt="gender" class="easyui-combobox "
+                                   name="gender"
+                                   data-options="
+                                    loader:cj.getLoader('gender'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+                        </td>
 
-                    <td>
-                        年龄：
-                        <input style="width: 50px;text-align: center" opt="minage"> --
-                        <input style="width: 50px;text-align: center" opt="maxage">岁
-                    </td>
+                        <td>
+                            年龄：
+                            <input style="width: 50px;text-align: center" opt="minage"> --
+                            <input style="width: 50px;text-align: center" opt="maxage">岁
+                        </td>
 
-                    <td>
-                        <span class="searchbtn" >&nbsp;</span>
-                    </td>
+                        <td>
+                            <span class="searchbtn" >&nbsp;</span>
+                        </td>
 
-                    <td>
-                        <!--&nbsp;&nbsp;-->
-                        <input class="highcharstoolbarbutton" type="button" opt="exportexcel" value="导出Excel">
-                        <!--<input class="highcharstoolbarbutton" type="button" opt="importexcel" value="导入">-->
+                        <td>
+                            <!--&nbsp;&nbsp;-->
+                            <!--<input class="highcharstoolbarbutton" type="button" opt="exportexcel" value="导出Excel">-->
+                            <!--<input class="highcharstoolbarbutton" type="button" opt="importexcel" value="导入">-->
 
-                    </td>
-                </tr>
-            </table>
-            <div class="clear"></div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="clear"></div>
             </div>
         </div>
 

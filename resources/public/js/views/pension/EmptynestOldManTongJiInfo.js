@@ -21,10 +21,7 @@ define(function(){
                 },
                 onLoadSuccess:function(data){
                     var viewbtns=local.find('[action=view]');
-                    var deletebtns=local.find('[action=delete]');
-                    var grantbtns=local.find('[action=grant]');
-                    var mapbtn = local.find('[action=map]');                //地图
-                    var btns_arr=[viewbtns,deletebtns,grantbtns,mapbtn];
+                    var btns_arr=[viewbtns];
                     var rows=data.rows;
                     for(var i=0;i<rows.length;i++){
                         for(var j=0;j<btns_arr.length;j++){
@@ -42,38 +39,6 @@ define(function(){
                                                 refresh:peopleinfodatarid                //刷新
                                             }
                                         })
-                                    }else if($(this).attr("action")=='map'){
-                                        var ywtype = "PT_LNR"
-                                        //var mapguid = record.mapguid;
-                                        window.open (mapURL+'map#task?ywtype='+ywtype+'&'+
-                                            'mapguid='+record.mapguid,
-                                            'newwindow', 'height='+window.screen.availHeight+', width='+window.screen.availWidth+', top=0, left=0, toolbar=no, ' +
-                                            'menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
-
-                                    }else if($(this).attr("action")=='delete'){
-                                        $.messager.confirm('是否删除',
-                                            '确定删除？',
-                                            function(r){
-                                                if (r){
-                                                    $.ajax({
-                                                        url:"old/delenpeople",
-                                                        data:{
-                                                            kc_id:record.kc_id
-                                                        },
-                                                        type:"post",
-                                                        success:function(data){
-                                                            if(data == "success"){
-                                                                peopleinfodatarid.datagrid('reload');
-                                                                cj.slideShow('删除成功!')
-                                                            }else{
-                                                                cj.slideShow('<label style="color: red">删除失败!</label>')
-                                                            }
-                                                        }
-                                                    })
-                                                }
-                                            }
-                                        );
-                                        //grant(record);
                                     }
                                 });
                             })(i);
