@@ -900,20 +900,20 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 
        ;;将所有信息合成SQL语句
        enstatictsql (apply str (interpose " union all "(map #(str " SELECT s.*,dv.dvname FROM (select " %
-                       " from (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t )
+                       " from (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t where isdel is null )
                       where 1=1 " tjconds  engroup " ) s LEFT JOIN division dv ON s.districtid = dv.dvcode") envalue)))
        resultsql (if (= statictype "xzqh" ) (str "SELECT r.sum,r.dvname,r.districtid,r.staticvalue, dv2.dvname as statictype from( " enstatictsql " ) r     LEFT JOIN division dv2    ON r.statictype = dv2.dvcode order by statictype asc ")
                                             (str "select * from ("enstatictsql  ")order by statictype asc" ))
        ]
-    (println "TTTTTTTTTTTTTT"  resultsql)
     (resp/json (db/get-results-bysql resultsql))
     ;(str resultsql)
     ))
 
-(defn get-emptynest-detail [request]
+(defn get-emptynest-detail
+  "查看空巢老人统计数据详细信息"
+  [request]
   (let[params (:params request)
        statictype (:statictype params)
-       districtid (:districtid params)
        gender (:gender params)
        minage (:minage params)
        maxage (:maxage params)
@@ -942,9 +942,8 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        minagecond (if (> (count minage) 0) (str " and age2 >= " minage))
        maxagecond (if (> (count maxage) 0) (str " and age2 < " maxage))
        selectcond (str staticcond gendercond minagecond maxagecond)
-       getresult (common/fenye rows page " (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t ) " "*" selectcond " order by kc_id desc")
+       getresult (common/fenye rows page " (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t where isdel is null ) " "*" selectcond " order by kc_id desc")
        ]
-    (println getresult)
     (resp/json {:total (:total getresult)  :rows (common/time-before-list (:rows getresult) "birthd")})))
 
 
