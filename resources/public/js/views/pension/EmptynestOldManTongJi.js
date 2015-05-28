@@ -223,12 +223,12 @@ define(function(){
 
                     },
                     onDblClickRow: function (index,row) {
+                        rro = row;
                         var type_tjval = local.find('[opt=type_tj]').combobox('getValue').trim();
                         var districtidval = local.find('[opt=districtid]').combobox('getValue').trim();
                         var genderval = local.find('[opt=gender]').combobox('getValue').trim();
                         var minage = local.find('[opt=minage]').val().trim();
                         var maxage = local.find('[opt=maxage]').val().trim();
-                        var rowval = row.statictype;
                         require(['commonfuncs/popwin/win','text!views/pension/EmptynestOldManTongJiInfo.htm','views/pension/EmptynestOldManTongJiInfo'],
                             function(win,htmfile,jsfile){
                                 win.render({
@@ -244,7 +244,7 @@ define(function(){
                                             genderval:genderval,
                                             minage:minage,
                                             maxage:maxage,
-                                            rowval:rowval
+                                            rowval:row
                                         })
                                     }
                                 })

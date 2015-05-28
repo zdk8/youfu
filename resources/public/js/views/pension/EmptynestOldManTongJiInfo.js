@@ -17,7 +17,7 @@ define(function(){
                     genderval:option.genderval,
                     minage:option.minage,
                     maxage:option.maxage,
-                    rowval:option.rowval
+                    staticvalue:option.rowval.staticvalue
                 },
                 onLoadSuccess:function(data){
                     var viewbtns=local.find('[action=view]');
