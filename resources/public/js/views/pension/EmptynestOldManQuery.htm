@@ -22,6 +22,7 @@
                pageSize:cj.getDataGridAttr('pageSize'),
                pageList:cj.getDataGridAttr('pageList'),
                singleSelect:true,
+               fitColumns:true,
                loadMsg:'',
                pagination:true">
             <thead>
@@ -29,33 +30,22 @@
                 <th data-options="field:'ro',width:80,align:'center',formatter:function(value,rowData,rowIndex)
                     {
                         var str='<div></div>';
-                        str=$(str).append('<a action=&quot;map&quot;title=&quot;地图&quot;><span><span class=&quot;icon-map-pl1&quot;></span></span></a>');
+                        str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;><span><span class=&quot;icon-del-pl15&quot;></span></span></a>');
                         return str.html();
-                    }"><a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;操作</th>
+                    }">操作</th>
                 <th data-options="field:'name',width:90,align:'center',
-                formatter:function(v,r,i)
-                {
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
-                    return str.html();
-                }">姓名</th>
+                    formatter:function(v,r,i)
+                    {
+                        var str='<div></div>';
+                        str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                        return str.html();
+                    }">姓名</th>
                 <th data-options="field:'gender',width:60,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
                 <th data-options="field:'nation',width:60,align:'center',formatter: cj.enumFormatter('oldnation')">名族</th>
-                <th data-options="field:'age',width:40,align:'center',hidden:true">年龄</th>
+                <th data-options="field:'age',width:40,align:'center'">年龄</th>
                 <th data-options="field:'birthd',width:120,align:'center'">出生年月</th>
-                <th data-options="field:'identityid',width:190,align:'center'">身份证号</th>
-                <th data-options="field:'type',width:100,align:'center',formatter: cj.enumFormatter('oldtype')">人员类别</th>
-                <th data-options="field:'address',width:200,align:'center'">家庭住址</th>
+                <th data-options="field:'address',width:250,align:'center'">家庭住址</th>
                 <th data-options="field:'registration',width:190,align:'center'">户籍地</th>
-                <th data-options="field:'mobilephone',width:120,align:'center'">手机号码</th>
-                <th data-options="field:'live',width:100,align:'center',hidden:true">居住环境</th>
-                <th data-options="field:'marriage',width:100,align:'center',hidden:true">婚姻状况</th>
-                <th data-options="field:'economy',width:100,align:'center',hidden:true">家庭经济条件</th>
-                <th data-options="field:'vocation',width:100,align:'center',hidden:true">曾从事职业</th>
-                <th data-options="field:'culture',width:100,align:'center',hidden:true">文化程度</th>
-                <th data-options="field:'retirewage',width:100,align:'center',hidden:true">退休工资</th>
-                <th data-options="field:'telephone',width:100,align:'center',hidden:true">住宅电话</th>
-                <th data-options="field:'hjj_hjj',width:100,align:'center',hidden:true">老人呼叫机</th>
             </tr>
             </thead>
         </table>
@@ -63,40 +53,16 @@
         <div tb style="padding-bottom: 0px">
             <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
             <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 2px;padding-top: 2px;">
-                <table cellspacing="0" cellpadding="0" style="float: left">
-                    <tr>
-                        <td>
-                            <select opt="ppselect">
-                                <option value="">所有老人</option>
-                                <option value="f">服务评估老人</option>
-                                <option value="j">养老机构老人</option>
-                                <option value="s">三低老人</option>
-                                <option value="k">老人卡</option>
-                            </select>
-                        </td>
-                        <td>
-                            <div class="file-box">
-                                <form opt="importfile" method="post" enctype="multipart/form-data">
-                                    <input type='text' name='textfield' id='textfield' class='txt' value="双击浏览按钮"/>
-                                    <input type='button' class='btn' value='浏览...' />&nbsp;
-                                    <input type="file" name="file" class="file" size="28"
-                                           onchange="document.getElementById('textfield').value=this.value.substring(this.value.lastIndexOf('\\')+1)" />
-                                    <input type="button" opt="importexcel" class="btn" value="导入老人卡" />
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
                 <table cellspacing="0" cellpadding="0" style="float: right">
                     <tr>
                         <td>
                             姓名 :
-                            <input opt="name" type="text" style="width:114px">
+                            <input opt="name" type="text" style="width:114px;height: 18px;border-color: #95B8E7">
                         </td>
 
                         <td>
                             性别 :
-                            <input opt="gender" class="easyui-combobox "
+                            <input opt="gender" class="easyui-combobox" style="width: 100px"
                                    name="gender"
                                    data-options="
                                     loader:cj.getLoader('gender'),
@@ -107,8 +73,8 @@
 
                         <td>
                             年龄：
-                            <input style="width: 50px;text-align: center" opt="minage"> --
-                            <input style="width: 50px;text-align: center" opt="maxage">岁
+                            <input style="width: 50px;text-align: center;height: 18px;border-color: #95B8E7" opt="minage"> --
+                            <input style="width: 50px;text-align: center;height: 18px;border-color: #95B8E7" opt="maxage">岁
                         </td>
 
                         <td>
@@ -129,5 +95,5 @@
 
     </div>
 </div>
-<input type="file" style="display: none" opt="fileInput" />
+<!--<input type="file" style="display: none" opt="fileInput" />-->
 
