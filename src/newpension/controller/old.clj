@@ -887,9 +887,9 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        ;;将所有信息合成SQL语句
        enstatictsql (apply str (interpose " union all "(map #(str " SELECT s.*,dv.dvname FROM (select " %
                        " from (select floor(months_between(sysdate,t.birthd)/12) as age2,t.*  from t_emptynestpeople t )
-                      where 1=1 " tjconds  engroup " ) s LEFT JOIN division dv ON s.districtid = dv.dvcode order by statictype asc ") envalue)))
-       resultsql (if (= statictype "xzqh" ) (str "SELECT r.sum,r.dvname, dv2.dvname as statictype from( " enstatictsql " ) r     LEFT JOIN division dv2    ON r.statictype = dv2.dvcode")
-                                            enstatictsql)
+                      where 1=1 " tjconds  engroup " ) s LEFT JOIN division dv ON s.districtid = dv.dvcode") envalue)))
+       resultsql (if (= statictype "xzqh" ) (str "SELECT r.sum,r.dvname,r.districtid, dv2.dvname as statictype from( " enstatictsql " ) r     LEFT JOIN division dv2    ON r.statictype = dv2.dvcode order by statictype asc ")
+                                            (str "select * from ("enstatictsql  ")order by statictype asc" ))
        ]
     (println "TTTTTTTTTTTTTT"  resultsql)
     (resp/json (db/get-results-bysql resultsql))
