@@ -265,7 +265,9 @@
 (defn set-string [ptvalues]
   (map #(str %) ptvalues))
 
-(defn excelimport [file]
+(defn excelimport
+  "数据导入（excel），数据格式要求严格，需要对整数的字符串进行处理，不然会当作整数来处理，会遇到各种导入的不完全一致的情况"
+  [file]
   (let[exldata (get (myexcel/lazy-workbook (myexcel/workbook-hssf (:tempfile file))) "Sheet1")    ;{:birthd (nth % 3)}
        ;dealdata (map #(conj {:districtid (str(nth % 0))} {:name (str(nth % 1))}{:identityid (str(nth % 2))}{:gender (if (= (nth % 4) "男") "1" (if (= (nth % 4) "女") "0" (nth % 4)))} {:age (str(nth % 5))}{:address (str(nth % 6))}) data)
        ; testdata [{:districtid "330424103" :name "test1" :identityid "330424193203052000" :gender 1 :age 18 :address "海盐县于城镇庄家村委会"}{:districtid "330424103" :name "test2" :identityid "330424193203052000" :gender 1 :age 18 :address "海盐县于城镇庄家村委会"}]
@@ -274,7 +276,7 @@
        data (rest exldata)
        keydata (map #(keyword %) (first exldata))
 
-       updata (map #(zipmap keydata ( set-string %)) data)
+       updata (map #(zipmap keydata %) data)
 
        ]
     ;(println (common/format-time (nth (first data) 3) ""))
