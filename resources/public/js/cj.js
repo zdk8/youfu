@@ -184,10 +184,10 @@ var cj=(function(){
     /*枚举*/
     /*统计类型*/
     var type_tj = [{"id":"xzqh","text":"行政区划","selected":true},{"id":"xb","text":"性别"},{"id":"nl","text":"年龄"},
-        /*{"id":"mz","text":"民族"},*/{"id":"lb","text":"类别"},{"id":"hy","text":"婚姻状况"},{"id":"wh","text":"文化程度"},
-        {"id":"kcyy","text":"空巢原因"},{"id":"xqah","text":"兴趣爱好"},{"id":"twpl","text":"子女探望频率"},
-        {"id":"jjly","text":"经济来源"},{"id":"grysr","text":"个人月收入"},{"id":"knhd","text":"近期活动"},
-        {"id":"xyfw","text":"需要服务"},{"id":"shzq","text":"晚年最缺"}];
+        /*{"id":"mz","text":"民族"},*/{"id":"lb","text":"类别"},{"id":"hy","text":"婚姻状况"},{"id":"zn","text":"有无子女"},
+        {"id":"wh","text":"文化程度"},{"id":"kcyy","text":"空巢原因"},{"id":"xqah","text":"兴趣爱好"},
+        {"id":"twpl","text":"子女探望频率"},{"id":"jjly","text":"经济来源"},{"id":"grysr","text":"个人月收入"},
+        {"id":"knhd","text":"近期活动"},{"id":"xyfw","text":"需要服务"},{"id":"shzq","text":"晚年最缺"}];
     /*子类型*/
     var lb = [{"id":1,"text":"低保"},{"id":2,"text":"低保边缘户"},{"id":3,"text":"低收入户"},{"id":4,"text":"失独"},
         {"id":5,"text":"重残"},{"id":6,"text":"其他"}];

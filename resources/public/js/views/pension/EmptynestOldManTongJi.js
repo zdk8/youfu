@@ -223,7 +223,6 @@ define(function(){
 
                     },
                     onDblClickRow: function (index,row) {
-                        rro = row;
                         var type_tjval = local.find('[opt=type_tj]').combobox('getValue').trim();
                         var districtidval = local.find('[opt=districtid]').combobox('getValue').trim();
                         var genderval = local.find('[opt=gender]').combobox('getValue').trim();
