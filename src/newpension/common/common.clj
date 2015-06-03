@@ -13,7 +13,7 @@
                ))
 
 
-(def selectcols {:kccols [:nation :gntype :marriage :culture :emptyreason :visittime :monthincome :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :zq_barrierfree :zq_pensionagency :zq_homecare :zq_volunteers :zq_other :gender]
+(def selectcols {:kccols [:nation :gntype :marriage :culture :emptyreason :visittime :monthincome :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :zq_barrierfree :zq_pensionagency :zq_homecare :zq_volunteers :zq_other :gender :havechildren]
                  })
 
 
