@@ -1,7 +1,9 @@
 (ns newpension.models.db
   (:use korma.core
         [korma.db :only [defdb with-db transaction]])
-  (:import (java.sql Timestamp))
+  (:import (java.sql Timestamp)
+           (java.text SimpleDateFormat)
+           (java.text DateFormat))
   (:require [newpension.models.schema :as schema]
                [hvitmiddleware.core :as hvitmd]
             ))
@@ -917,3 +919,25 @@
 (defn test-getdivisionid [dvname]
   (select division
     (where {:dvname [like dvname]})))
+
+(defn  time-before-insert [results timekey]    "before insert"
+  (let [sdf (new SimpleDateFormat "yyyy-MM-dd")]
+    ;(println  results  "   TMTMTMTMTTMTTTTMTTTTT  "  timekey)
+    (if (or  (= (timekey  results) "") (nil? (timekey  results)))
+      (dissoc results timekey)
+      (conj results {timekey  (new Timestamp (.getTime (.parse sdf (timekey results))))}{})
+      )))
+
+(defn insert-kcdata [data]
+  (let [indata (time-before-insert data (keyword "BIRTHD") )]
+    (println indata)
+    (insert "T_EMPTYNESTPEOPLE"
+      (values indata))
+    )
+)
+
+(defn baisuidata [datas]
+  (transaction
+    (dorun (map #(insert-kcdata % ) datas)))
+
+  )

@@ -272,4 +272,7 @@
 ;  (GET "/reportxls" req (report/reportxls))
 
   (GET "/getdivisionid" req (old/test-getdivisionid req))
+
+  (POST "/test/importexcel" [file] (report/excelimport file))                               ;;postgis 数据导入测试
+
   )
