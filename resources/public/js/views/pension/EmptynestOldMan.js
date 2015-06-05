@@ -116,16 +116,16 @@ define(function () {
     /*修改*/
     function updateFunc(local,option){
         var datas = option.queryParams.data;
-        dda = datas;
         local.find('[opt=emptynestoldform]').form('load',datas);
         var districtnameval = getDivistionTotalname(datas.districtid)
         var districtid = local.find('[opt=districtid]');      //行政区划
         districtid.combobox("setValue",districtnameval)  //填充行政区划
         for(var key in datas){
-            local.find('input[name='+key+'][type=radio][value='+datas[key]+']').attr("checked","checked");
-            local.find('input[name='+key+'][type=radio][value='+datas[key]+']+label').addClass("checked");
-            local.find('input[name='+key+'][type=checkbox][value='+datas[key]+']').attr("checked","checked");
-            local.find('input[name='+key+'][type=checkbox][value='+datas[key]+']+label').addClass("checked");
+            console.log(datas[key])
+            local.find('input[name='+key+'][type=radio][value="'+datas[key]+'"]').attr("checked","checked");
+            local.find('input[name='+key+'][type=radio][value="'+datas[key]+'"]+label').addClass("checked");
+            local.find('input[name='+key+'][type=checkbox][value="'+datas[key]+'"]').attr("checked","checked");
+            local.find('input[name='+key+'][type=checkbox][value="'+datas[key]+'"]+label').addClass("checked");
         }
         local.find('[opt=update]').show().click(function () {
             local.find('[opt=emptynestoldform]').form('submit',{
