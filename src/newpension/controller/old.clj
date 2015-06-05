@@ -878,6 +878,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                (= statictype "kcyy")  (str " (case EMPTYREASON   when '1' then '经济原因' when '2' then '家庭成员关系原因 ' when '3' then '生活习惯' when '4' then '其他'  else '未明确'   END) ")
                (= statictype "twpl")  (str " (case VISITTIME   when '1' then '一两天' when '2' then '一周' when '3' then '两周' when '4' then '一个月' when '5' then '二个月' when '6' then '一个季度' when '7' then '半年' when '8' then '一年及以上' else '未明确'   END) ")
                (= statictype "grysr") (str " (case MONTHINCOME   when '1' then '无收入' when '2' then '不足200' when '3' then '200~499' when '4' then '500~999' when '5' then '1000~1499' when '6' then '1500~2000' when '7' then '2000及以上'  else '未明确'   END) ")
+               (= statictype "zn")    (str " (case havechildren   when '1' then '有子女' when '0' then '无子女'  else '未明确'   END) ")
                :else nil
                )
        ;;为查找统计数据信息添加数值
@@ -891,6 +892,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                  (= statictype "kcyy")   (if (> (count encol) 0) " emptyreason " " null ")
                  (= statictype "twpl")   (if (> (count encol) 0) " visittime " " null ")
                  (= statictype "grysr")  (if (> (count encol) 0) " monthincome " " null ")
+                 (= statictype "zn")     (if (> (count encol) 0) " havechildren " " null ")
                  :else " null "
                  )
        ;;根据所选分组设置查找字段
@@ -943,6 +945,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
                     (= statictype "kcyy") (if (= (count staticvalue) 0) (str " and EMPTYREASON is null ") (str " and EMPTYREASON = " staticvalue))
                     (= statictype "twpl") (if (= (count staticvalue) 0) (str " and VISITTIME is null ") (str " and VISITTIME = " staticvalue))
                     (= statictype "grysr") (if (= (count staticvalue) 0) (str " and MONTHINCOME is null ") (str " and MONTHINCOME = " staticvalue))
+                    (= statictype "zn")    (if (= (count staticvalue) 0) (str " and havechildren is null ") (str " and havechildren = " staticvalue))
                     :else (str " and " staticvalue " = 1 ")
                     )
        gendercond (if (or (= (count gender) 0)  (= statictype "xb")) " " (str " and gender = " gender) )
