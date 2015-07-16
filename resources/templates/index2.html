@@ -43,7 +43,24 @@
                     <div class="left_top">
                         <label>菜&nbsp;&nbsp;&nbsp;&nbsp;单</label>
                     </div>
-                    <div opt="menu"></div>
+                    <div opt="menu">
+                        <!--<div class="div2 div2bag"><div class="jbsz"></div>养老信息录入</div>
+                        <input type="hidden" value="a9DTN0LmDWT0eGTZc4St">
+                        <div class="div3" style="display: block;">
+                            <li class="">
+                                <label opt="pension.PensionPeopleAudit">老年基本信息审核</label>
+                            </li>
+                            <li class="">
+                                <label opt="pension.PeopleInfoQuery">老年信息查询</label>
+                            </li>
+                            <li class="">
+                                <label opt="pension.statisticsom">老年信息统计</label>
+                            </li>
+                            <li class="">
+                                <label opt="pension.HighYearOldMan">高龄老人录入</label>
+                            </li>
+                        </div>-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,13 +69,49 @@
         <div class="easyui-layout" data-options="fit:true">
             <div data-options="region:'north',height:50,border:false">
                 <div class="centertip">
-                    <span>养老信息</span>&nbsp;>&nbsp;<span>老年信息查询</span>
+                    &nbsp;<span>主页</span>
                 </div>
             </div>
             <div data-options="region:'center',border:false" style="padding:5px;">
                 <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
                     <div title="主页" data-options="border:false" style="padding:10px;">
-                        <div style="border: 1px solid red;height: 99%">主页面</div>
+                        <div class="easyui-layout" data-options="fit:true">
+                            <div data-options="region:'north',border:false"
+                                 style="height:50px;padding:0 5px 0 5px;">
+                                    <div style="border: 1px solid #e5e5e5;
+                                            width: auto;height: 85%;background-color: #eff3f8;padding-top: 5px">
+                                            <div style="height: 30px;padding-top: 5px">
+                                                &nbsp;<span>姓名 </span><span><input type="text" size="5" style="height: 20px"></span>
+                                            </div>
+                                    </div>
+                            </div>
+                            <div data-options="region:'center',border:false" style="padding:5px;">
+                                <table class="easyui-datagrid" data-options="fit:true,
+                                                                fitColumns:true,pagination:true">
+                                    <thead>
+                                    <tr>
+                                        <th data-options="field:'code',width:100,align:'center'">姓名</th>
+                                        <th data-options="field:'name',width:100,align:'center'">出生年月</th>
+                                        <th data-options="field:'price',width:100,align:'center'">身份证号</th>
+                                        <th data-options="field:'price',width:100,align:'center',
+                                            formatter:function(value,rowData,rowIndex){
+                                            var str='<div></div>';
+                                            str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;>删除</a>');
+                                            return str.html();
+                                        }">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>夏留金</td><td>1950-04-11</td><td>330424194406182017</td><td>2323</td>
+                                    </tr>
+                                    <tr>
+                                        <td>鲍天松</td><td>1959-04-02</td><td>330424195904022010</td><td>2323</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -75,15 +128,15 @@
                 var htmarr = new Array();
                 if(data.length>0){
                     for(var i=0;i<data.length;i++){
-                        var menubg;
+                       /* var menubg;
                         if(data[i].img){
                             menubg = data[i].img;
                         }else{
                             menubg = "menu2.png"
-                        }
+                        }*/
                         var htm ='<div class="div2"><div class="jbsz"></div>'+data[i].title+'</div>' +
                                 '<input type="hidden" value='+data[i].functionid+'>'+
-                                '<div class="div3"></div>';
+                                '<div class="div3" opt="'+data[i].title+'"></div>';
                         htmarr.push(htm);
                     }
                     $('.left .div1 [opt=menu]').html(htmarr);
@@ -92,7 +145,6 @@
                 }
             }
         })
-
         $(document).on('click','.div2', function () {
             var $this = $(this);
             var node = $this.next().val();
@@ -127,20 +179,21 @@
         var gettabs = function (title,htm) {
             return $('#tabs').tabs('add',{
                 title:title,
-                content:htm,
+                content:'<div style="height: 95.6%;margin: 10px;">'+htm+'</div>',
                 closable:true
             }).tabs('getTab',title);
         }
         $(document).on('click','.div3 li', function () {
+            var tip1 = $(this).parent().attr('opt');
+            var tip2 = $(this).text();
+            var span = '&nbsp;<span>'+tip1+'</span>&nbsp;>&nbsp;<span>'+tip2+'</span>';
+            $('.centertip').html(span);
             $(this).addClass("div3bag").siblings().removeClass("div3bag");
             var intface = $(this).find('label').attr('opt');
             var tabs = $('#tabs');
             var title = $(this).text();
-            inn = intface;
             var funcarr = intface.replace('.','/');
             if(!tabs.tabs('exists',title)){
-                /*gettabs(title,'<div style="border: 1px solid red;height: 95.6%;margin: 10px;">主页面</div>');
-                return;*/
                 require(['text!views/'+funcarr+'.htm','views/'+funcarr], function (htm,js) {
                     var tab = gettabs(title,htm);
                     if(js && js.render){
@@ -149,6 +202,24 @@
                 })
             }else{
                 tabs.tabs('select',title);
+            }
+        })
+        /*叶签变化时导航栏的变化*/
+        $('#tabs').tabs({
+            onSelect: function (title) {
+                var span;
+                if(title == "主页"){
+                    span = '&nbsp;<span>'+title+'</span>';
+                }else{
+                    var lng = $('.div3').find('label');
+                    for(var i=0;i<lng.length;i++){
+                        if($(lng[i]).text() == title){
+                            var tip1 = $(lng[i]).parent().parent().attr('opt');
+                            span = '&nbsp;<span>'+tip1+'</span>&nbsp;>&nbsp;<span>'+title+'</span>';
+                        }
+                    }
+                }
+                $('.centertip').html(span);
             }
         })
     });

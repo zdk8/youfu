@@ -66,3 +66,53 @@
     color: #0080d8;
     background: -webkit-linear-gradient(top,#ffffff 0,#ffffff 100%);
 }
+
+/*datagird样式调整*/
+.datagrid-header, .datagrid-td-rownumber {
+    background-color: #6fb3e0;
+    background: linear-gradient(to bottom,#6fb3e0 0,#6fb3e0 100%);
+    background-repeat: repeat-x;
+}
+.datagrid-header .datagrid-cell {
+    height: 25px;
+    color: #ffffff;
+    padding-top: 4px;
+    font-weight: bold;
+    background-color: #6fb3e0;
+}
+.datagrid-row-over,
+.datagrid-header td.datagrid-header-over {
+    /*background: #6fb3e0;*/
+    color: #000000;
+    cursor: default;
+}
+.datagrid .datagrid-pager {
+    display: block;
+    margin: 0;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    background-color: #eff3f8;
+    height: 50px;
+}
+.datagrid-header-row, .datagrid-row {
+    height: 30px;
+}
+.datagrid-row-selected {
+    background: #dbeff2;
+    color: #000000;
+}
+.panel-header, .panel-body {
+    border-color: #e5e5e5;
+}
+.pagination-info {
+    float: right;
+    margin: 0 6px 0 0;
+    padding: 0;
+    height: 50px;
+    line-height: 50px;
+    font-size: 12px;
+}
+.pagination table {
+    float: left;
+    height: 50px;
+}

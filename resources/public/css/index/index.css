@@ -40,6 +40,7 @@ a,a:hover{color:#000;text-decoration:none;}
     position:absolute;
     left:0;top:0;
     font:12px/180% "微软雅黑";
+    background-color: #f6f6f6;
 }
 
 .left_top{
@@ -99,12 +100,32 @@ a,a:hover{color:#000;text-decoration:none;}
 
 /*#####center#######*/
 .centertip{
-    height: 30px;
+    height: 25px;
     border-bottom: 1px solid #F2F2F2;
-    padding-top: 10px;
+    padding-top: 16px;
     font-size: 14px;
     background: #F6F6F6;
 }
 .centertip span{
     color: #0080d8;
+}
+
+
+/************表单上方或者下方的悬浮工具条***************/
+div.form-foot-btns{
+    border-top: 1px solid gainsboro;
+}
+div.form-foot-btns ul
+{
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+    text-align: center;
+    list-style-type: none;
+}
+div.form-foot-btns ul li
+{
+    margin-left: 5px;
+    display:inline;
+    list-style-type:none;
 }
