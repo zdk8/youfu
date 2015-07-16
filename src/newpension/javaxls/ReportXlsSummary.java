@@ -19,7 +19,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class ReportXlsSummary {
-    /*ªÒ»°±ÌÃÂ ˝æ›*/
+    /*Ëé∑ÂèñË°®‰ΩìÊï∞ÊçÆ*/
     public static Map getDatas(Map[] value){
         Map mapall = new HashMap();
         for (int d=0;d<value.length;d++){
@@ -31,14 +31,14 @@ public class ReportXlsSummary {
         }
         return mapall;
     }
-    /*…Ë÷√±ÌÕ∑*/
+    /*ËÆæÁΩÆË°®Â§¥*/
     public void setHeadXls(HSSFSheet sheet,HSSFWorkbook wb,String title){
-        HSSFRow row = sheet.createRow((int) 0);  //¥¥Ω®µ⁄0––
+        HSSFRow row = sheet.createRow((int) 0);  //ÂàõÂª∫Á¨¨0Ë°å
         HSSFCell cell = row.createCell((short) 0);
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 16));//∫œ≤¢¡–
-        cell.setCellValue(title+"ƒÍ1-12‘¬æ”º“—¯¿œ’˛∏Æπ∫¬Ú∑˛ŒÒæ≠∑—ª„◊‹±Ì");
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 16));//ÂêàÂπ∂Âàó
+        cell.setCellValue(title+"Âπ¥1-12ÊúàÂ±ÖÂÆ∂ÂÖªËÄÅÊîøÂ∫úË¥≠‰π∞ÊúçÂä°ÁªèË¥πÊ±áÊÄªË°®");
 
-        HSSFFont font = wb.createFont();  //◊÷ÃÂ
+        HSSFFont font = wb.createFont();  //Â≠ó‰Ωì
         font.setFontHeightInPoints((short) 16);
         font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         HSSFCellStyle style = wb.createCellStyle();
@@ -50,28 +50,28 @@ public class ReportXlsSummary {
         row.setHeight((short) 500);
 
     }
-    /*…Ë÷√±ÌÃÂ*/
+    /*ËÆæÁΩÆË°®‰Ωì*/
     public void setBodyXls(HSSFSheet sheet,HSSFWorkbook wb){
-        /*—˘ Ω(left)*/
+        /*Ê†∑Âºè(left)*/
         HSSFCellStyle stylebodyleft = wb.createCellStyle();
         stylebodyleft.setAlignment(HSSFCellStyle.ALIGN_LEFT);
         stylebodyleft.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-        /*—˘ Ω(right)*/
+        /*Ê†∑Âºè(right)*/
         HSSFCellStyle stylebodyright = wb.createCellStyle();
         stylebodyright.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
         stylebodyright.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
 
-        HSSFRow row1 = sheet.createRow((int) 1);             //¥¥Ω®µ⁄1––
+        HSSFRow row1 = sheet.createRow((int) 1);             //ÂàõÂª∫Á¨¨1Ë°å
         sheet.addMergedRegion(new CellRangeAddress(1,1,0,4));
         HSSFCell cellbzdw = row1.createCell((short) 0);
-        cellbzdw.setCellValue("±‡÷∆µ•Œª£∫∫£—Œœÿ≤∆’˛æ÷…Á±£ø∆");
+        cellbzdw.setCellValue("ÁºñÂà∂Âçï‰ΩçÔºöÊµ∑ÁõêÂéøË¥¢ÊîøÂ±ÄÁ§æ‰øùÁßë");
         cellbzdw.setCellStyle(stylebodyleft);
         sheet.addMergedRegion(new CellRangeAddress(1,1,15,16));
         HSSFCell celljedw = row1.createCell((short) 15);
-        celljedw.setCellValue("Ω∂Óµ•Œª£∫‘™");
+        celljedw.setCellValue("ÈáëÈ¢ùÂçï‰ΩçÔºöÂÖÉ");
         celljedw.setCellStyle(stylebodyright);
 
-        /*π´π≤—˘ Ω*/
+        /*ÂÖ¨ÂÖ±Ê†∑Âºè*/
         HSSFFont font = wb.createFont();
         font.setFontHeightInPoints((short) 12);
         font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
@@ -84,29 +84,29 @@ public class ReportXlsSummary {
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
         style.setFont(font);
 
-        HSSFRow row2 = sheet.createRow((int) 2);  //¥¥Ω®µ⁄2––
+        HSSFRow row2 = sheet.createRow((int) 2);  //ÂàõÂª∫Á¨¨2Ë°å
 
         sheet.addMergedRegion(new CellRangeAddress(2,3,0,0));
         sheet.setColumnWidth(0,1500);
         HSSFCell cellxh = row2.createCell((short) 0);
-        cellxh.setCellValue("–Ú\n∫≈");
+        cellxh.setCellValue("Â∫è\nÂè∑");
         cellxh.setCellStyle(style);
 
 
         sheet.addMergedRegion(new CellRangeAddress(2,3,1,1));
         sheet.setColumnWidth(1,5*1000);
         HSSFCell cellxzjd = row2.createCell((short) 1);
-        cellxzjd.setCellValue("’Ú£®Ω÷µ¿£©√˚≥∆");
+        cellxzjd.setCellValue("ÈïáÔºàË°óÈÅìÔºâÂêçÁß∞");
         cellxzjd.setCellStyle(style);
 
         sheet.addMergedRegion(new CellRangeAddress(2,3,2,2));
         HSSFCell cellrsh = row2.createCell((short) 2);
-        cellrsh.setCellValue("»À  ˝");
+        cellrsh.setCellValue("‰∫∫ Êï∞");
         cellrsh.setCellStyle(style);
 
         sheet.addMergedRegion(new CellRangeAddress(2,2,3,14));
         HSSFCell cellbfwdx = row2.createCell((short) 3);
-        cellbfwdx.setCellValue("‘¬       ∑›");
+        cellbfwdx.setCellValue("Êúà       ‰ªΩ");
         cellbfwdx.setCellStyle(style);
         row2.createCell((short) 4).setCellStyle(style);
         row2.createCell((short) 5).setCellStyle(style);
@@ -120,54 +120,54 @@ public class ReportXlsSummary {
         row2.createCell((short) 13).setCellStyle(style);
         row2.createCell((short) 14).setCellStyle(style);
 
-        HSSFRow row3 = sheet.createRow((int) 3);  //¥¥Ω®µ⁄3––
+        HSSFRow row3 = sheet.createRow((int) 3);  //ÂàõÂª∫Á¨¨3Ë°å
         HSSFCell cellbfyue1 = row3.createCell((short) 3);
-        cellbfyue1.setCellValue("“ª‘¬");
+        cellbfyue1.setCellValue("‰∏ÄÊúà");
         cellbfyue1.setCellStyle(style);
         HSSFCell cellbfyue2 = row3.createCell((short) 4);
-        cellbfyue2.setCellValue("∂˛‘¬");
+        cellbfyue2.setCellValue("‰∫åÊúà");
         cellbfyue2.setCellStyle(style);
         HSSFCell cellbfyue3 = row3.createCell((short) 5);
-        cellbfyue3.setCellValue("»˝‘¬");
+        cellbfyue3.setCellValue("‰∏âÊúà");
         cellbfyue3.setCellStyle(style);
         HSSFCell cellbfyue4 = row3.createCell((short) 6);
-        cellbfyue4.setCellValue("Àƒ‘¬");
+        cellbfyue4.setCellValue("ÂõõÊúà");
         cellbfyue4.setCellStyle(style);
         HSSFCell cellbfyue5 = row3.createCell((short) 7);
-        cellbfyue5.setCellValue("ŒÂ‘¬");
+        cellbfyue5.setCellValue("‰∫îÊúà");
         cellbfyue5.setCellStyle(style);
         HSSFCell cellbfyue6 = row3.createCell((short) 8);
-        cellbfyue6.setCellValue("¡˘‘¬");
+        cellbfyue6.setCellValue("ÂÖ≠Êúà");
         cellbfyue6.setCellStyle(style);
         HSSFCell cellbfyue7 = row3.createCell((short) 9);
-        cellbfyue7.setCellValue("∆ﬂ‘¬");
+        cellbfyue7.setCellValue("‰∏ÉÊúà");
         cellbfyue7.setCellStyle(style);
         HSSFCell cellbfyue8 = row3.createCell((short) 10);
-        cellbfyue8.setCellValue("∞À‘¬");
+        cellbfyue8.setCellValue("ÂÖ´Êúà");
         cellbfyue8.setCellStyle(style);
         HSSFCell cellbfyue9 = row3.createCell((short) 11);
-        cellbfyue9.setCellValue("æ≈‘¬");
+        cellbfyue9.setCellValue("‰πùÊúà");
         cellbfyue9.setCellStyle(style);
         HSSFCell cellbfyue10 = row3.createCell((short) 12);
-        cellbfyue10.setCellValue(" Æ‘¬");
+        cellbfyue10.setCellValue("ÂçÅÊúà");
         cellbfyue10.setCellStyle(style);
         HSSFCell cellbfyue11 = row3.createCell((short) 13);
-        cellbfyue11.setCellValue(" Æ“ª‘¬");
+        cellbfyue11.setCellValue("ÂçÅ‰∏ÄÊúà");
         cellbfyue11.setCellStyle(style);
         HSSFCell cellbfyue12 = row3.createCell((short) 14);
-        cellbfyue12.setCellValue(" Æ∂˛‘¬");
+        cellbfyue12.setCellValue("ÂçÅ‰∫åÊúà");
         cellbfyue12.setCellStyle(style);
 
         sheet.addMergedRegion(new CellRangeAddress(2, 3, 15, 15));
         sheet.setColumnWidth(15,4*1000);
         HSSFCell cellzybz = row2.createCell((short) 15);
-        cellzybz.setCellValue("◊°‘∫≤πÃ˘");
+        cellzybz.setCellValue("‰ΩèÈô¢Ë°•Ë¥¥");
         style.setWrapText(true);
         cellzybz.setCellStyle(style);
         sheet.addMergedRegion(new CellRangeAddress(2, 3, 16, 16));
         sheet.setColumnWidth(16, 4 * 1000);
         HSSFCell cellhjje = row2.createCell((short) 16);
-        cellhjje.setCellValue("∫œº∆Ω∂Ó");
+        cellhjje.setCellValue("ÂêàËÆ°ÈáëÈ¢ù");
         style.setWrapText(true);
         cellhjje.setCellStyle(style);
 
@@ -177,7 +177,7 @@ public class ReportXlsSummary {
         row3.createCell((short) 15).setCellStyle(style);
         row3.createCell((short) 16).setCellStyle(style);
     }
-    //±ÌÃÂ÷µ
+    //Ë°®‰ΩìÂÄº
     public void setValueXls(HSSFSheet sheet,HSSFWorkbook wb,Map[] datas){
         HSSFCellStyle style = wb.createCellStyle();
         style.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
@@ -188,8 +188,8 @@ public class ReportXlsSummary {
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
 
         /*String[][] strval = {
-                {"0","??????","?????","330424194108120811","?????","?????","330424196607160817","?????","?ßÿ?","???","30"},
-                {"1","??????","????","330424194703120816","?????","????","330424196401290835","?????","?ßÿ?","???","30"}
+                {"0","??????","?????","330424194108120811","?????","?????","330424196607160817","?????","?–∂?","???","30"},
+                {"1","??????","????","330424194703120816","?????","????","330424196401290835","?????","?–∂?","???","30"}
         };
 
         int rowindex = 4;
@@ -202,12 +202,12 @@ public class ReportXlsSummary {
             }
         }*/
         Map datasval = getDatas(datas);
-//        System.out.println(" ˝æ›£∫"+datasval+"≥§∂»:"+datasval.size());
-//        System.out.println("µ•∏ˆ£∫"+((Map)datasval.get(0)).get(": Æ∂˛"));
-        String[] months = {":“ª",":∂˛",":»˝",":Àƒ",":ŒÂ",":¡˘",":∆ﬂ",":∞À",":æ≈",": Æ",": Æ“ª",": Æ∂˛"};
-        int rowindex = 4;     //±ÌÃÂ÷µ¥”µ⁄4––ø™ º
-        int opsum = 0;        //»À ˝◊‹ ˝
-        int monthsum1 = 0;    //‘¬◊‹∂Ó
+        System.out.println("Êï∞ÊçÆÔºö"+datasval+"ÈïøÂ∫¶:"+datasval.size());
+        System.out.println("Âçï‰∏™Ôºö"+((Map)datasval.get(0)).get(":ÂçÅ‰∫å"));
+        String[] months = {":‰∏Ä",":‰∫å",":‰∏â",":Âõõ",":‰∫î",":ÂÖ≠",":‰∏É",":ÂÖ´",":‰πù",":ÂçÅ",":ÂçÅ‰∏Ä",":ÂçÅ‰∫å"};
+        int rowindex = 4;     //Ë°®‰ΩìÂÄº‰ªéÁ¨¨4Ë°åÂºÄÂßã
+        int opsum = 0;        //‰∫∫Êï∞ÊÄªÊï∞
+        int monthsum1 = 0;    //ÊúàÊÄªÈ¢ù
         int monthsum2 = 0;
         int monthsum3 = 0;
         int monthsum4 = 0;
@@ -219,33 +219,33 @@ public class ReportXlsSummary {
         int monthsum10 = 0;
         int monthsum11 = 0;
         int monthsum12 = 0;
-        int subsidy_moneysum = 0;  //◊°‘∫≤πÃ˘◊‹∂Ó
-        int moneysum = 0;  //∫œº∆Ω∂Ó◊‹ ˝
+        int subsidy_moneysum = 0;  //‰ΩèÈô¢Ë°•Ë¥¥ÊÄªÈ¢ù
+        int moneysum = 0;  //ÂêàËÆ°ÈáëÈ¢ùÊÄªÊï∞
         for (int i=0;i<datasval.size();i++) {
             HSSFRow rownum = sheet.createRow((int) rowindex++);
             Map dataval = (Map) datasval.get(i);
-            /*–Ú∫≈*/
+            /*Â∫èÂè∑*/
             HSSFCell cellnum = rownum.createCell((short) 0);
             int rowval = i + 1;
             cellnum.setCellValue(rowval);
             cellnum.setCellStyle(style);
 
-            HSSFCell cell_address1 = rownum.createCell((short) 1);      //Ω÷µ¿√˚≥∆
+            HSSFCell cell_address1 = rownum.createCell((short) 1);      //Ë°óÈÅìÂêçÁß∞
             String dvname = dataval.get(":dvname").toString();
             if (dvname.length() > 0){
                 cell_address1.setCellValue(dvname);
             }
             cell_address1.setCellStyle(style);
 
-            HSSFCell cell_name = rownum.createCell((short) 2);           //»À ˝
+            HSSFCell cell_name = rownum.createCell((short) 2);           //‰∫∫Êï∞
             String opsumval = dataval.get(":opsum").toString();
             if (opsumval.length() > 0){
                 cell_name.setCellValue(opsumval);
             }
             cell_name.setCellStyle(style);
             int colindex = 3;
-            int rowmoney = 0;           //∫·œÚº∆À„
-            for(int m=0;m<months.length;m++){                            //‘¬∑›
+            int rowmoney = 0;           //Ê®™ÂêëËÆ°ÁÆó
+            for(int m=0;m<months.length;m++){                            //Êúà‰ªΩ
                 HSSFCell cell_month = rownum.createCell((short) colindex++);
                 String monthval = dataval.get(months[m]).toString();
                 if (monthval.length() > 0){
@@ -255,7 +255,7 @@ public class ReportXlsSummary {
                 cell_month.setCellStyle(style);
             }
 
-            HSSFCell cell_zybt = rownum.createCell((short) 15);         //◊°‘∫≤πÃ˘
+            HSSFCell cell_zybt = rownum.createCell((short) 15);         //‰ΩèÈô¢Ë°•Ë¥¥
             String subsidymoneyval = dataval.get(":subsidy_money").toString();
             if (subsidymoneyval.length() > 0){
                 cell_zybt.setCellValue(subsidymoneyval);
@@ -263,23 +263,23 @@ public class ReportXlsSummary {
             cell_zybt.setCellStyle(style);
 
 
-            /* ˙œÚº∆À„*/
+            /*Á´ñÂêëËÆ°ÁÆó*/
             String opsumv = dataval.get(":opsum").toString();
             if (opsumv.length() > 0){
                 opsum +=Integer.parseInt(opsumv);
             }
-            monthsum1 +=Integer.parseInt(dataval.get(":“ª").toString());
-            monthsum2 +=Integer.parseInt(dataval.get(":∂˛").toString());
-            monthsum3 +=Integer.parseInt(dataval.get(":»˝").toString());
-            monthsum4 +=Integer.parseInt(dataval.get(":Àƒ").toString());
-            monthsum5 +=Integer.parseInt(dataval.get(":ŒÂ").toString());
-            monthsum6 +=Integer.parseInt(dataval.get(":¡˘").toString());
-            monthsum7 +=Integer.parseInt(dataval.get(":∆ﬂ").toString());
-            monthsum8 +=Integer.parseInt(dataval.get(":∞À").toString());
-            monthsum9 +=Integer.parseInt(dataval.get(":æ≈").toString());
-            monthsum10 +=Integer.parseInt(dataval.get(": Æ").toString());
-            monthsum11 +=Integer.parseInt(dataval.get(": Æ“ª").toString());
-            monthsum12 +=Integer.parseInt(dataval.get(": Æ∂˛").toString());
+            monthsum1 +=Integer.parseInt(dataval.get(":‰∏Ä").toString());
+            monthsum2 +=Integer.parseInt(dataval.get(":‰∫å").toString());
+            monthsum3 +=Integer.parseInt(dataval.get(":‰∏â").toString());
+            monthsum4 +=Integer.parseInt(dataval.get(":Âõõ").toString());
+            monthsum5 +=Integer.parseInt(dataval.get(":‰∫î").toString());
+            monthsum6 +=Integer.parseInt(dataval.get(":ÂÖ≠").toString());
+            monthsum7 +=Integer.parseInt(dataval.get(":‰∏É").toString());
+            monthsum8 +=Integer.parseInt(dataval.get(":ÂÖ´").toString());
+            monthsum9 +=Integer.parseInt(dataval.get(":‰πù").toString());
+            monthsum10 +=Integer.parseInt(dataval.get(":ÂçÅ").toString());
+            monthsum11 +=Integer.parseInt(dataval.get(":ÂçÅ‰∏Ä").toString());
+            monthsum12 +=Integer.parseInt(dataval.get(":ÂçÅ‰∫å").toString());
             String zybt = dataval.get(":subsidy_money").toString();
             if (zybt.length() >0){
                 subsidy_moneysum +=Integer.parseInt(dataval.get(":subsidy_money").toString());
@@ -287,14 +287,14 @@ public class ReportXlsSummary {
             }
             moneysum+=rowmoney;
 
-            HSSFCell cell_hjje = rownum.createCell((short) 16);         //∫œº∆Ω∂Ó
+            HSSFCell cell_hjje = rownum.createCell((short) 16);         //ÂêàËÆ°ÈáëÈ¢ù
             cell_hjje.setCellValue(rowmoney);
             cell_hjje.setCellStyle(style);
         }
         int [] monthsum = {monthsum1,monthsum2,monthsum3,monthsum4,monthsum5,monthsum6,monthsum7,
                 monthsum8,monthsum9,monthsum10,monthsum11,monthsum12};
 
-        /*±Í¥÷*/
+        /*Ê†áÁ≤ó*/
         HSSFFont font = wb.createFont();
         font.setFontHeightInPoints((short) 11);
         font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
@@ -307,45 +307,46 @@ public class ReportXlsSummary {
         style_bold.setBorderRight(HSSFCellStyle.BORDER_THIN);
         style_bold.setFont(font);
 
-        int rowlast = 4+datasval.size();        //∫œº∆––
+        int rowlast = 4+datasval.size();        //ÂêàËÆ°Ë°å
         HSSFRow row_last = sheet.createRow(rowlast);
         sheet.addMergedRegion(new CellRangeAddress(rowlast,rowlast,0,1));
         HSSFCell cell_heji = row_last.createCell((short) 0);
-        cell_heji.setCellValue("∫œ    º∆");
+        cell_heji.setCellValue("Âêà    ËÆ°");
         cell_heji.setCellStyle(style_bold);
         row_last.createCell((short) 1).setCellStyle(style_bold);
-        HSSFCell cell_renshu = row_last.createCell((short) 2);      //»À ˝
+        HSSFCell cell_renshu = row_last.createCell((short) 2);      //‰∫∫Êï∞
         cell_renshu.setCellValue(opsum);
         cell_renshu.setCellStyle(style_bold);
         int row_month_index = 3;
-        for(int v=0;v<monthsum.length;v++){                            //‘¬∑›
+        for(int v=0;v<monthsum.length;v++){                            //Êúà‰ªΩ
             HSSFCell cell_month = row_last.createCell((short) row_month_index++);
             cell_month.setCellValue(monthsum[v]);
             cell_month.setCellStyle(style_bold);
         }
-        HSSFCell cell_subsidy_moneysum = row_last.createCell((short) 15); //◊°‘∫≤πÃ˘
+        HSSFCell cell_subsidy_moneysum = row_last.createCell((short) 15); //‰ΩèÈô¢Ë°•Ë¥¥
         cell_subsidy_moneysum.setCellValue(subsidy_moneysum);
         cell_subsidy_moneysum.setCellStyle(style_bold);
-        HSSFCell cell_moneysum = row_last.createCell((short) 16); //∫œº∆Ω∂Ó
+        HSSFCell cell_moneysum = row_last.createCell((short) 16); //ÂêàËÆ°ÈáëÈ¢ù
         cell_moneysum.setCellValue(moneysum);
         cell_moneysum.setCellStyle(style_bold);
     }
-    /*xlsµº≥ˆ*/
+    /*xlsÂØºÂá∫*/
     public static Workbook getReport(String year,Map[] datas) throws Exception{
-        String title = "ª„◊‹±Ì";
-        HSSFWorkbook wb = new HSSFWorkbook();    //¥¥Ω®workbook
-        HSSFSheet sheet = wb.createSheet(title);    //¥¥Ω®sheet
+        System.out.println("RRRRRRRRRRRRRRRRRRRRR"+datas.length);
+        String title = "Ê±áÊÄªË°®";
+        HSSFWorkbook wb = new HSSFWorkbook();    //ÂàõÂª∫workbook
+        HSSFSheet sheet = wb.createSheet(title);    //ÂàõÂª∫sheet
         ReportXlsSummary summary = new ReportXlsSummary();
         summary.setHeadXls(sheet,wb,year);
         summary.setBodyXls(sheet,wb);
         summary.setValueXls(sheet,wb,datas);
         return wb;
     }
-    /*ø’±Ìµº≥ˆ*/
+    /*Á©∫Ë°®ÂØºÂá∫*/
     public static Workbook getReportNull(String year) throws Exception{
-        String title = "ª„◊‹±Ì";
-        HSSFWorkbook wb = new HSSFWorkbook();    //¥¥Ω®workbook
-        HSSFSheet sheet = wb.createSheet(title);    //¥¥Ω®sheet
+        String title = "Ê±áÊÄªË°®";
+        HSSFWorkbook wb = new HSSFWorkbook();    //ÂàõÂª∫workbook
+        HSSFSheet sheet = wb.createSheet(title);    //ÂàõÂª∫sheet
         ReportXlsSummary summary = new ReportXlsSummary();
         summary.setHeadXls(sheet,wb,year);
         summary.setBodyXls(sheet,wb);

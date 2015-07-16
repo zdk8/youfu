@@ -76,4 +76,9 @@
   (GET "/getPensionServiceAuditHtml" req (layout/render "PensionServiceAudit.html"
                                          (let [datas (first(audit/get-assessbyid2 req))]
                                            {:dataall datas :jsondata (json/json-str datas)})))
+
+
+  ;;加载模块
+  (POST "/getfunction" req (myctrl/get-function-byuser req))
+  (POST "/getfunctionmenu" req (myctrl/get-functionmenu req))
   )

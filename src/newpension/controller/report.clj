@@ -172,7 +172,7 @@
           out (new java.io.ByteArrayOutputStream)
           datas (audit/get-moneyreport request)
           ]
-      (if (>(count datas)0)(xls-report-months year months (into-array datas) out) (xls-report-months-null year months out))
+      (if (>(count datas) 0) (xls-report-months year months (into-array datas) out) (xls-report-months-null year months out))
       (write-response (.toByteArray out) "xls")
       )
     (catch Exception ex
@@ -187,14 +187,15 @@
   (.write (ReportXlsSummary/getReportNull year) out))
 (defn xls-report-by-summary [request]
   (try
-    (let [reportxls (new ReportXlsByMoths)
-          params (:params request)
+    (let [params (:params request)
           year (:year params)             ;年份
           out (new java.io.ByteArrayOutputStream)
           datas (audit/get-yearmoneyreport request)
           ]
-      (if (>(count datas)0)(xls-report-summary year (into-array datas) out) (xls-report-summary-null year out))
+;      (if (>(count datas) 0) (xls-report-summary year (into-array datas) out) (xls-report-summary-null year out))
 ;      (xls-report-summary-null year out)
+;      (println "$$$$$$$$$$$$$$" (into-array datas))
+      (xls-report-summary year (into-array datas) out)
       (write-response (.toByteArray out) "xls")
       )
     (catch Exception ex

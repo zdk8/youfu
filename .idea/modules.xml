@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/newpension.iml" filepath="$PROJECT_DIR$/newpension.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../test/test.iml" filepath="$PROJECT_DIR$/../test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pensionmgt.iml" filepath="$PROJECT_DIR$/.idea/pensionmgt.iml" />
     </modules>
   </component>
 </project>

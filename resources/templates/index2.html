@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta name="Keywords" content="养老,系统"/>
+    <meta name="Description" content="养老系统" />
+    <link rel="shortcut icon" href="images/title.png"/>
+    <title>养老</title>
+    <script>
+        <!--兼容windows无console的情况-->
+        if (window.console && window.console.log) {
+        } else {
+            window.console = {};
+            window.console.log = function() {};
+        }
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="css/index/index.css"/>
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="easyui/easyui/themes/default/easyui.css" />
+    <script src="easyui/easyui/jquery.easyui.min.js"></script>
+    <script src="easyui/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/easyuiover.css"/>
+
+    <script type="text/javascript" src="js/require.js" data-main="js/main"></script>
+
+
+
+</head>
+<body>
+<div class="easyui-layout" data-options="fit:true,border:false">
+    <div data-options="region:'north'" class="bghead">
+        <div class="bghead1">&nbsp;养老管理系统</div>
+        <div class="bghead2">
+            <span>欢迎！admin</span>&nbsp;|&nbsp;<span style="cursor: pointer">退&nbsp;出</span>&nbsp;
+        </div>
+    </div>
+    <div data-options="region:'west',border:false" style="width:220px;border-right: 1px solid #e5e5e5">
+        <div style="height: 99.6%;">
+            <div class="left">
+                <div class="div1">
+                    <div class="left_top">
+                        <label>菜&nbsp;&nbsp;&nbsp;&nbsp;单</label>
+                    </div>
+                    <div opt="menu"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false">
+        <div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'north',height:50,border:false">
+                <div class="centertip">
+                    <span>养老信息</span>&nbsp;>&nbsp;<span>老年信息查询</span>
+                </div>
+            </div>
+            <div data-options="region:'center',border:false" style="padding:5px;">
+                <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
+                    <div title="主页" data-options="border:false" style="padding:10px;">
+                        <div style="border: 1px solid red;height: 99%">主页面</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+            url:'getfunction',
+            type:'post',
+            success: function (data) {
+                var htmarr = new Array();
+                if(data.length>0){
+                    for(var i=0;i<data.length;i++){
+                        var menubg;
+                        if(data[i].img){
+                            menubg = data[i].img;
+                        }else{
+                            menubg = "menu2.png"
+                        }
+                        var htm ='<div class="div2"><div class="jbsz"></div>'+data[i].title+'</div>' +
+                                '<input type="hidden" value='+data[i].functionid+'>'+
+                                '<div class="div3"></div>';
+                        htmarr.push(htm);
+                    }
+                    $('.left .div1 [opt=menu]').html(htmarr);
+                }else{
+                    $('.left .div1 [opt=menu]').html('<div style="text-align: center;"><label style="color: red;">无相应功能模块!</label></div>')
+                }
+            }
+        })
+
+        $(document).on('click','.div2', function () {
+            var $this = $(this);
+            var node = $this.next().val();
+            if($(this).next().next().find('li').length == 0){
+                $.ajax({
+                    url:'getfunctionmenu',
+                    type:'post',
+                    data:{
+                        funcid:node
+                    },
+                    success:function(data){
+                        var menuarr = new Array();
+                        if(data.length > 0){
+                            for(var i=0;i<data.length;i++){
+                                var menu = '<li><label opt="'+data[i].location+'">'+data[i].title+'</label></li>';
+                                menuarr.push(menu);
+                            }
+                            $this.next().next().html(menuarr);
+                            menuclick($this);
+                        }
+                    }
+                });
+            }else{
+                menuclick($this);
+            }
+        })
+        var menuclick = function ($this) {
+            $this.next().next('div').slideToggle("slow").siblings(".div3:visible").slideUp("slow");
+            $this.addClass("div2bag").siblings().removeClass("div2bag");
+            $this.next().next().find('li').addClass("div3bag").siblings().removeClass("div3bag");
+        }
+        var gettabs = function (title,htm) {
+            return $('#tabs').tabs('add',{
+                title:title,
+                content:htm,
+                closable:true
+            }).tabs('getTab',title);
+        }
+        $(document).on('click','.div3 li', function () {
+            $(this).addClass("div3bag").siblings().removeClass("div3bag");
+            var intface = $(this).find('label').attr('opt');
+            var tabs = $('#tabs');
+            var title = $(this).text();
+            inn = intface;
+            var funcarr = intface.replace('.','/');
+            if(!tabs.tabs('exists',title)){
+                /*gettabs(title,'<div style="border: 1px solid red;height: 95.6%;margin: 10px;">主页面</div>');
+                return;*/
+                require(['text!views/'+funcarr+'.htm','views/'+funcarr], function (htm,js) {
+                    var tab = gettabs(title,htm);
+                    if(js && js.render){
+                        js.render(tab);
+                    }
+                })
+            }else{
+                tabs.tabs('select',title);
+            }
+        })
+    });
+</script>
+
+</body>
+<script src="js/cj.js"></script>
+<script type="text/javascript" src="js/extLocation.js"></script>
+<script type="text/javascript" src="js/configurationFile.js"></script>
+</html>

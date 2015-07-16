@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>绍兴市人民医院体检系统</title>
+    <script type="text/javascript" src="js/extLocation.js"></script>
+    <script type="text/javascript" src="js/configurationFile.js"></script>
+    <!--<script type="text/javascript" src="js/formDisabled.js"></script>-->
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="js/mycalendar.js"></script>
+    <link rel="Stylesheet" type="text/css" href="img/css/home.css">
+    <script type="text/javascript" src="js/commonfuncs/jquery.json-2.4.js"></script>
+    <script type="text/javascript" src="js/require.js" data-main="js/mainapp_newpension"></script>
+    <!--<script type="text/javascript" src="js/jqueryplugin/jquery.iframe-auto-height.plugin.1.9.5.min.js"></script>-->
+    <script>
+
+        document.write('<link rel="stylesheet" type="text/css" id="swicth-style" href="'+extEasyui+
+                'themes/default/easyui.css"><\/>');
+        document.write('<script type="text/javascript"  src="'+extEasyui+
+                'jquery.easyui.min.js"><\/script>');
+        document.write('<script type="text/javascript"  src="'+extEasyui+
+                'locale/easyui-lang-zh_CN.js"><\/script>');
+    </script>
+    <!--<script src="js/urls.js"></script>-->
+    <script src="js/cj.js"></script>
+    <script type="text/javascript">
+
+        var htmlpath="{{htmlpath}}" ;
+        var jspath="{{jspath}}";
+        var id = "{{data}}"
+        console.log(id)
+
+            var require_render=function(htmlfile,jsfile){
+
+                $('body').append(htmlfile);
+                $.parser.parse();
+                jsfile.render($('body'),{
+                    queryParams:{
+                        actiontype:"assessment",
+                        id:id,
+                        data:
+                        {"agentphone":null,"jja_id":681,"oprelation":null,"address":"杭州市西湖区",
+                            "countyaudit":null,"rn":1,"age":4,"culture":"1","rm_countyaudit":null,
+                            "birthd":"2011-12-30","ishandle":null,"telephone":"2345677",
+                            "name":"t1","streetreview":null,"identityid":"341282201112304275",
+                            "communityopinion":null,"postcode":"330099","agent":null,"rm_communityopinion":null,
+                            "rm_streetreview":null,"opiniontime":null,"districtname":null,"lr_id":null,
+                            "marriage":"1","birthplace":"安徽界首市","rm_audittime":null,"agentaddr":null,
+                            "applydate":"2015-01-09","districtid":"330424100","reviewtime":null,
+                            "rm_reason":null,"rm_opiniontime":null,"gender":"1","live":"1",
+                            "registration":"杭州市西湖区","rm_reviewtime":null,"economy":"1",
+                            "agentmobilephone":null,"mobilephone":"15432567859",
+                            "audittime":null,"nation":"1"},"title":"【t1】信息评估"}
+                    });
+
+            };
+
+            require([htmlpath,jspath],require_render);
+
+
+    </script>
+
+</head>
+<body>
+{{htmll}}
+
+</body>
+</html>

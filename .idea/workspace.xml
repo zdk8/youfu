@@ -1,16 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8193e22a-9f43-4d47-8b02-5ae5ee9e6a9e" name="Default" comment="lhd">
+    <list default="true" id="56f0865d-275a-4411-bd12-6807e326f92d" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/images/1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/30.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/QQProtect.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/QQProtect.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/aa2.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/addtab.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/addtab_max.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/application.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/cancell_show.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/cross.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/deletetab.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/deletetab_max.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/images/index/headbg1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/images/index/headbg2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/img/pension03/log1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/sign.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/md/beifen/Info.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/md/beifen/PAinfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/md/beifen/PensionAssessmentInfo.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/md/beifen/PensionAssessmentInfo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/newpension/clj_excel/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/md/beifen/ReportXls.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/md/beifen/ReportXls.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/Test.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/templates/Test.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/views/pension/Test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/templates/TestE.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/css/easyuiover.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/css/index/index.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/templates/index2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/templates/index3.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/md/beifen/infobase.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/templates/tes2t.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/newpension/routes/test.clj" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/tmp/ttt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/templates/upload.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ext/win.htm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/public/js/commonfuncs/ext/win.js" />
+      <change type="DELETED" beforePath="G:\project\yl\pensionmgt\.idea\uiDesigner.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/javaxls/ReportXlsAuto.java" afterPath="$PROJECT_DIR$/src/newpension/javaxls/ReportXlsAuto.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/javaxls/ReportXlsByMoths.java" afterPath="$PROJECT_DIR$/src/newpension/javaxls/ReportXlsByMoths.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/javaxls/ReportXlsSummary.java" afterPath="$PROJECT_DIR$/src/newpension/javaxls/ReportXlsSummary.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/java/XlsReport.java" afterPath="$PROJECT_DIR$/src/newpension/java/XlsReport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/controller/audit.clj" afterPath="$PROJECT_DIR$/src/newpension/controller/audit.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/common/common.clj" afterPath="$PROJECT_DIR$/src/newpension/common/common.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/handler.clj" afterPath="$PROJECT_DIR$/src/newpension/handler.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/routes/home.clj" afterPath="$PROJECT_DIR$/src/newpension/routes/home.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/public/easyui/easyui/jquery.easyui.min.js" afterPath="$PROJECT_DIR$/resources/public/easyui/easyui/jquery.easyui.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/controller/manager.clj" afterPath="$PROJECT_DIR$/src/newpension/controller/manager.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/models/manager.clj" afterPath="$PROJECT_DIR$/src/newpension/models/manager.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/routes/manager.clj" afterPath="$PROJECT_DIR$/src/newpension/routes/manager.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/newpension.iml" afterPath="$PROJECT_DIR$/newpension.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/controller/report.clj" afterPath="$PROJECT_DIR$/src/newpension/controller/report.clj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/newpension/models/schema.clj" afterPath="$PROJECT_DIR$/src/newpension/models/schema.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
-    <ignored path="newpension.iws" />
+    <ignored path="pensionmgt.iws" />
     <ignored path=".idea/workspace.xml" />
-    <ignored path="$PROJECT_DIR$/target/classes/" />
-    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,286 +77,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
-  <component name="Commander">
-    <leftPanel />
-    <rightPanel />
-    <splitter proportion="0.5" />
-  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_TOOLBAR" value="true" />
-    <option name="FLATTEN" value="false" />
-    <option name="GROUP_BY_TYPE" value="true" />
-    <option name="SORT_CHILDREN" value="false" />
-    <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
-  </component>
-  <component name="DebuggerManager">
-    <ui_properties converted="true" />
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </breakpoint_any>
-    <breakpoint_rules converted="true" />
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
-    <favorites_list name="newpension" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="EmptynestOldMan.htm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldMan.htm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.695652" vertical-offset="240" max-vertical-offset="4928">
-              <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#4;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptynestOldManTongJi.htm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.htm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.26087" vertical-offset="210" max-vertical-offset="1302">
-              <caret line="45" column="87" selection-start-line="45" selection-start-column="82" selection-end-line="45" selection-end-column="87" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#div#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptynestOldManTongJi.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2171" max-vertical-offset="4438">
-              <caret line="236" column="47" selection-start-line="236" selection-start-column="47" selection-end-line="236" selection-end-column="47" />
-              <folding>
-                <element signature="e#2229#4003#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptynestOldManQuery.htm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManQuery.htm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.391304" vertical-offset="154" max-vertical-offset="1498">
-              <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptynestOldManQuery.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManQuery.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1093" max-vertical-offset="2632">
-              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-              <folding>
-                <marker date="1432778104207" expanded="true" signature="3574:3584" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptynestOldManTongJiInfo.htm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.htm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.478261" vertical-offset="108" max-vertical-offset="784">
-              <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptynestOldManTongJiInfo.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5918699" vertical-offset="42" max-vertical-offset="1414">
-              <caret line="29" column="59" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
-              <folding>
-                <marker date="1432794696478" expanded="true" signature="4263:4273" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.clj" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3052" max-vertical-offset="3934">
-              <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="old.clj" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="12563" max-vertical-offset="13944">
-              <caret line="914" column="8" selection-start-line="914" selection-start-column="8" selection-end-line="914" selection-end-column="8" />
-              <folding>
-                <marker date="1432794094018" expanded="true" signature="56559:56561" placeholder="(defn emptynest-statistic ...)" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptynestOldManSeniorFields.htm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManSeniorFields.htm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="2268">
-              <caret line="9" column="34" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="34" />
-              <folding>
-                <element signature="n#style#0;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="FindManager">
-    <FindUsagesManager>
-      <setting name="OPEN_NEW_TAB" value="false" />
-    </FindUsagesManager>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitLogSettings">
-    <option name="myDateState">
-      <MyDateState />
-    </option>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PensionAssessmentAudit.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleAudit.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/SignInPage.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/SignInPage.js" />
-        <option value="$PROJECT_DIR$/resources/templates/dm2.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/HospitalSubsidy.js" />
-        <option value="$PROJECT_DIR$/resources/templates/dm.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/mainapp.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/router.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/MainTree.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/FullCalendar.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/controllers/MainViewController.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/TabRightClick.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/TreeClickEvent.js" />
-        <option value="$PROJECT_DIR$/project.clj" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/HighYearOldMan.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PensionAssessmentInfoQuery.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PPGrantMoneyIssue.js" />
-        <option value="$PROJECT_DIR$/resources/templates/upload.html" />
-        <option value="$PROJECT_DIR$/src/newpension/handler.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/routes/test.clj" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PeopleInfoQuery.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PeopleInfoQuery.js" />
-        <option value="$PROJECT_DIR$/resources/templates/login.html" />
-        <option value="$PROJECT_DIR$/src/newpension/common/common.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/models/schema.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/controller/old.clj" />
-        <option value="$PROJECT_DIR$/src/newpension/controller/manager.clj" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/manager/Role.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/HighYearOldMan.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/HighYearOldMan.htm" />
-        <option value="$PROJECT_DIR$/resources/public/img/css/formtable02.css" />
-        <option value="$PROJECT_DIR$/src/newpension/javaxls/ReportXlsAuto.java" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManSeniorQuery.js" />
-        <option value="$PROJECT_DIR$/resources/templates/dm3.html" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldMan.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManSeniorQuery.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManSeniorFields.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManSeniorFields.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js" />
-        <option value="$PROJECT_DIR$/src/newpension/routes/home.clj" />
-        <option value="$PROJECT_DIR$/resources/public/js/cj.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManQuery.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManQuery.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldMan.htm" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.js" />
-        <option value="$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js" />
-      </list>
-    </option>
+    <favorites_list name="pensionmgt" />
   </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState />
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1386" />
-    <option name="height" value="788" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -325,116 +121,32 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="routes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javaxls" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -444,29 +156,25 @@
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
+              <option name="myItemId" value="pensionmgt" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -475,410 +183,25 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commonfuncs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="newpension" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commonfuncs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="popwin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/aaaaatable.sql" />
-    <property name="FullScreen" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
-    <property name="project.structure.side.proportion" value="0.45770568" />
     <property name="GoToClass.includeLibraries" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="File.Encoding" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="recentsLimit" value="5" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://G:/pension/newpension/resources/public/js/cj.js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\pension\newpension\resources\public\js\views\pension" />
-      <recent name="G:\pension\newpension\resources\public\img\pension03" />
-      <recent name="G:\pension\newpension\resources\public\css" />
-      <recent name="G:\pension\newpension\resources\public\img" />
-      <recent name="G:\pension\newpension\resources\public\js\commonfuncs" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="newpension.javaxls" />
-      <recent name="newpension.javaxls.reportxls" />
-    </key>
-  </component>
-  <component name="RestoreUpdateTree">
-    <UpdateInfo date="Moments ago" ActionInfo="_Update">
-      <UpdatedFiles>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated from server" />
-          <option name="myStatusName" value="Changed on server" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CHANGED_ON_SERVER" />
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Updated" />
-            <option name="myStatusName" value="Changed" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="UPDATED" />
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/newpension/controller/old.clj</PATH>
-            <PATH vcs="Git" revision="">$PROJECT_DIR$/src/newpension/routes/home.clj</PATH>
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Created" />
-            <option name="myStatusName" value="Created" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="CREATED" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Deleted" />
-            <option name="myStatusName" value="Deleted" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="true" />
-            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" value="Restored" />
-            <option name="myStatusName" value="Will be restored" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" value="RESTORED" />
-          </FILE-GROUP>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Modified" />
-          <option name="myStatusName" value="Modified" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MODIFIED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Skipped" />
-          <option name="myStatusName" value="Skipped" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SKIPPED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with conflicts" />
-          <option name="myStatusName" value="Will be merged with conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with tree conflicts" />
-          <option name="myStatusName" value="Merged with tree conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged with property conflicts" />
-          <option name="myStatusName" value="Will be merged with property conflicts" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Merged" />
-          <option name="myStatusName" value="Will be merged" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="MERGED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Not in repository" />
-          <option name="myStatusName" value="Not in repository" />
-          <option name="mySupportsDeletion" value="true" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UNKNOWN" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally added" />
-          <option name="myStatusName" value="Locally added" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_ADDED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Locally removed" />
-          <option name="myStatusName" value="Locally removed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="LOCALLY_REMOVED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Switched" />
-          <option name="myStatusName" value="Switched" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="SWITCHED" />
-        </FILE-GROUP>
-      </UpdatedFiles>
-    </UpdateInfo>
-  </component>
-  <component name="RunManager" selected="Application.ReportXlsAuto">
-    <configuration default="false" name="ReportXlsByMoths" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="newpension.javaxls.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="newpension.javaxls.ReportXlsByMoths" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="newpension" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ReportXlsSummary" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="newpension.javaxls.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="newpension.javaxls.ReportXlsSummary" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="newpension" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ExcelHelper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="newpension.javaxls.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="newpension.javaxls.ExcelHelper" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="newpension" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="Test" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="newpension" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ReportXlsAuto" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="newpension.javaxls.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="newpension.javaxls.ReportXlsAuto" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="newpension" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -890,14 +213,22 @@
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
+        <value defaultName="singleModule" />
       </option>
       <envs />
       <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -922,7 +253,7 @@
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
@@ -938,6 +269,21 @@
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
       <envs />
       <method />
     </configuration>
@@ -960,7 +306,7 @@
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
+        <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
@@ -969,27 +315,7 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
@@ -1113,568 +439,55 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="ClojureScriptRunConfiguration" factoryName="Clojure Script">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="" />
-      <setting name="repl" value="false" />
-      <setting name="main" value="false" />
-      <method />
-    </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.ReportXlsByMoths" />
-      <item index="1" class="java.lang.String" itemvalue="Application.ReportXlsSummary" />
-      <item index="2" class="java.lang.String" itemvalue="Application.ExcelHelper" />
-      <item index="3" class="java.lang.String" itemvalue="Application.Test" />
-      <item index="4" class="java.lang.String" itemvalue="Application.ReportXlsAuto" />
-    </list>
-    <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.ReportXlsAuto" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Test" />
-        <item index="2" class="java.lang.String" itemvalue="Application.ExcelHelper" />
-        <item index="3" class="java.lang.String" itemvalue="Application.ReportXlsSummary" />
-        <item index="4" class="java.lang.String" itemvalue="Application.ReportXlsByMoths" />
-      </list>
-    </recent_temporary>
-    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
-      <Host>localhost</Host>
-      <Port>5050</Port>
-    </configuration>
+    <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
-    <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8193e22a-9f43-4d47-8b02-5ae5ee9e6a9e" name="Default" comment="" />
-      <created>1422856775494</created>
+      <changelist id="56f0865d-275a-4411-bd12-6807e326f92d" name="Default" comment="" />
+      <created>1437012666478</created>
       <option name="number" value="Default" />
-      <updated>1422856775494</updated>
-      <workItem from="1422857678390" duration="902000" />
-      <workItem from="1422858612333" duration="11846000" />
-      <workItem from="1422924914953" duration="29138000" />
-      <workItem from="1423011979778" duration="25404000" />
-      <workItem from="1423098053923" duration="24647000" />
-      <workItem from="1423184500326" duration="20116000" />
-      <workItem from="1423270867209" duration="23243000" />
-      <workItem from="1423443825332" duration="22946000" />
-      <workItem from="1423529885232" duration="21211000" />
-      <workItem from="1423616485152" duration="10372000" />
-      <workItem from="1423634090796" duration="13941000" />
-      <workItem from="1423702366229" duration="25680000" />
-      <workItem from="1423789423640" duration="9710000" />
-      <workItem from="1424999200258" duration="10930000" />
-      <workItem from="1425085631914" duration="3606000" />
-      <workItem from="1425258043284" duration="9039000" />
-      <workItem from="1425344324009" duration="13030000" />
-      <workItem from="1425432245692" duration="5854000" />
-      <workItem from="1425449706758" duration="5884000" />
-      <workItem from="1425517286964" duration="24109000" />
-      <workItem from="1425603731993" duration="8453000" />
-      <workItem from="1425620000314" duration="1363000" />
-      <workItem from="1425622782700" duration="8762000" />
-      <workItem from="1425862878676" duration="23065000" />
-      <workItem from="1425949772925" duration="14439000" />
-      <workItem from="1426036139383" duration="11598000" />
-      <workItem from="1426121622098" duration="18451000" />
-      <workItem from="1426208302718" duration="14766000" />
-      <workItem from="1426467572576" duration="21501000" />
-      <workItem from="1426554167320" duration="9765000" />
-      <workItem from="1426570619500" duration="392000" />
-      <workItem from="1426571043455" duration="7963000" />
-      <workItem from="1426640357974" duration="20269000" />
-      <workItem from="1426726797887" duration="10696000" />
-      <workItem from="1426813126054" duration="4441000" />
-      <workItem from="1427072735509" duration="4119000" />
-      <workItem from="1427089121592" duration="13437000" />
-      <workItem from="1427158533092" duration="12011000" />
-      <workItem from="1427245238685" duration="1691000" />
-      <workItem from="1427333497292" duration="4226000" />
-      <workItem from="1427417806157" duration="16640000" />
-      <workItem from="1427676971868" duration="11978000" />
-      <workItem from="1427764426340" duration="2434000" />
-      <workItem from="1427789759760" duration="706000" />
-      <workItem from="1427855595869" duration="4930000" />
-      <workItem from="1427935964074" duration="6446000" />
-      <workItem from="1428023094703" duration="3519000" />
-      <workItem from="1428368458560" duration="5235000" />
-      <workItem from="1428454697740" duration="9277000" />
-      <workItem from="1428541255148" duration="2083000" />
-      <workItem from="1428627625214" duration="1081000" />
-      <workItem from="1428629006731" duration="10060000" />
-      <workItem from="1428886861710" duration="3441000" />
-      <workItem from="1428972899873" duration="10540000" />
-      <workItem from="1429059798133" duration="575000" />
-      <workItem from="1429147864432" duration="5285000" />
-      <workItem from="1429255814684" duration="5759000" />
-      <workItem from="1429262941906" duration="2186000" />
-      <workItem from="1429516846905" duration="4609000" />
-      <workItem from="1429580488706" duration="14778000" />
-      <workItem from="1430874515387" duration="110000" />
-      <workItem from="1430891879592" duration="2138000" />
-      <workItem from="1430898285001" duration="2545000" />
-      <workItem from="1430959368238" duration="6867000" />
-      <workItem from="1431045910108" duration="6740000" />
-      <workItem from="1431304971639" duration="7901000" />
-      <workItem from="1431391997719" duration="5985000" />
-      <workItem from="1431477822951" duration="8531000" />
-      <workItem from="1431564785949" duration="7276000" />
-      <workItem from="1431650440723" duration="700000" />
-      <workItem from="1431661925367" duration="565000" />
-      <workItem from="1431910139000" duration="588000" />
-      <workItem from="1431912834566" duration="8827000" />
-      <workItem from="1431995974264" duration="1483000" />
-      <workItem from="1432083115626" duration="1334000" />
-      <workItem from="1432169014093" duration="4788000" />
-      <workItem from="1432255200261" duration="685000" />
-      <workItem from="1432261155214" duration="699000" />
-      <workItem from="1432261947582" duration="653000" />
-      <workItem from="1432514114770" duration="14183000" />
-      <workItem from="1432601029075" duration="26506000" />
-      <workItem from="1432687827251" duration="16256000" />
-      <workItem from="1432773874441" duration="196000" />
-      <workItem from="1432774549226" duration="11221000" />
+      <updated>1437012666478</updated>
+      <workItem from="1437012667137" duration="214000" />
     </task>
-    <task id="LOCAL-00001" summary="lhd">
-      <created>1422862447205</created>
-      <option name="number" value="00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1422862447205</updated>
-    </task>
-    <task id="LOCAL-00002" summary="lhd">
-      <created>1422863044592</created>
-      <option name="number" value="00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1422863044592</updated>
-    </task>
-    <task id="LOCAL-00003" summary="lhd">
-      <created>1422869894100</created>
-      <option name="number" value="00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1422869894100</updated>
-    </task>
-    <task id="LOCAL-00004" summary="lhd">
-      <created>1422940065712</created>
-      <option name="number" value="00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1422940065712</updated>
-    </task>
-    <task id="LOCAL-00005" summary="lhd">
-      <created>1422956076658</created>
-      <option name="number" value="00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1422956076658</updated>
-    </task>
-    <task id="LOCAL-00006" summary="lhd">
-      <created>1423016937393</created>
-      <option name="number" value="00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1423016937393</updated>
-    </task>
-    <task id="LOCAL-00007" summary="lhd">
-      <created>1423033279124</created>
-      <option name="number" value="00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1423033279124</updated>
-    </task>
-    <task id="LOCAL-00008" summary="lhd">
-      <created>1423037430500</created>
-      <option name="number" value="00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1423037430500</updated>
-    </task>
-    <task id="LOCAL-00009" summary="lhd">
-      <created>1423038073998</created>
-      <option name="number" value="00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1423038073998</updated>
-    </task>
-    <task id="LOCAL-00010" summary="lhd">
-      <created>1423038961301</created>
-      <option name="number" value="00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1423038961301</updated>
-    </task>
-    <task id="LOCAL-00011" summary="lhd">
-      <created>1423039144316</created>
-      <option name="number" value="00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1423039144316</updated>
-    </task>
-    <task id="LOCAL-00012" summary="lhd">
-      <created>1423103046130</created>
-      <option name="number" value="00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1423103046130</updated>
-    </task>
-    <task id="LOCAL-00013" summary="lhd">
-      <created>1423103086463</created>
-      <option name="number" value="00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1423103086463</updated>
-    </task>
-    <task id="LOCAL-00014" summary="lhd">
-      <created>1423184710002</created>
-      <option name="number" value="00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1423184710002</updated>
-    </task>
-    <task id="LOCAL-00015" summary="lhd">
-      <created>1423204588811</created>
-      <option name="number" value="00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1423204588811</updated>
-    </task>
-    <task id="LOCAL-00016" summary="lhd">
-      <created>1423205610337</created>
-      <option name="number" value="00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1423205610337</updated>
-    </task>
-    <task id="LOCAL-00017" summary="lhd">
-      <created>1423210499906</created>
-      <option name="number" value="00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1423210499906</updated>
-    </task>
-    <task id="LOCAL-00018" summary="lhd">
-      <created>1423211065469</created>
-      <option name="number" value="00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1423211065469</updated>
-    </task>
-    <task id="LOCAL-00019" summary="lhd">
-      <created>1423293009836</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1423293009836</updated>
-    </task>
-    <task id="LOCAL-00020" summary="lhd">
-      <created>1423302175814</created>
-      <option name="number" value="00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1423302175814</updated>
-    </task>
-    <task id="LOCAL-00021" summary="lhd">
-      <created>1423447379237</created>
-      <option name="number" value="00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1423447379237</updated>
-    </task>
-    <task id="LOCAL-00022" summary="lhd">
-      <created>1423450192789</created>
-      <option name="number" value="00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1423450192789</updated>
-    </task>
-    <task id="LOCAL-00023" summary="lhd">
-      <created>1423461036010</created>
-      <option name="number" value="00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1423461036010</updated>
-    </task>
-    <task id="LOCAL-00024" summary="lhd">
-      <created>1423466860013</created>
-      <option name="number" value="00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1423466860013</updated>
-    </task>
-    <task id="LOCAL-00025" summary="lhd">
-      <created>1423470003997</created>
-      <option name="number" value="00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1423470003997</updated>
-    </task>
-    <task id="LOCAL-00026" summary="lhd">
-      <created>1423535022581</created>
-      <option name="number" value="00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1423535022581</updated>
-    </task>
-    <task id="LOCAL-00027" summary="lhd">
-      <created>1423535715991</created>
-      <option name="number" value="00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1423535715991</updated>
-    </task>
-    <task id="LOCAL-00028" summary="lhd">
-      <created>1423550053381</created>
-      <option name="number" value="00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1423550053381</updated>
-    </task>
-    <task id="LOCAL-00029" summary="lhd">
-      <created>1423551803473</created>
-      <option name="number" value="00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1423551803473</updated>
-    </task>
-    <task id="LOCAL-00030" summary="lhd">
-      <created>1423552592162</created>
-      <option name="number" value="00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1423552592162</updated>
-    </task>
-    <task id="LOCAL-00031" summary="lhd">
-      <created>1423641082760</created>
-      <option name="number" value="00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1423641082760</updated>
-    </task>
-    <task id="LOCAL-00032" summary="lhd">
-      <created>1423703699302</created>
-      <option name="number" value="00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1423703699302</updated>
-    </task>
-    <task id="LOCAL-00033" summary="lhd">
-      <created>1423709752695</created>
-      <option name="number" value="00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1423709752695</updated>
-    </task>
-    <task id="LOCAL-00034" summary="lhd">
-      <created>1423713204178</created>
-      <option name="number" value="00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1423713204178</updated>
-    </task>
-    <task id="LOCAL-00035" summary="lhd">
-      <created>1423732364605</created>
-      <option name="number" value="00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1423732364605</updated>
-    </task>
-    <task id="LOCAL-00036" summary="lhd">
-      <created>1423734107151</created>
-      <option name="number" value="00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1423734107151</updated>
-    </task>
-    <task id="LOCAL-00037" summary="lhd">
-      <created>1423734764540</created>
-      <option name="number" value="00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1423734764540</updated>
-    </task>
-    <task id="LOCAL-00038" summary="lhd">
-      <created>1423794424063</created>
-      <option name="number" value="00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1423794424063</updated>
-    </task>
-    <task id="LOCAL-00039" summary="lhd">
-      <created>1423797002306</created>
-      <option name="number" value="00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1423797002306</updated>
-    </task>
-    <task id="LOCAL-00040" summary="lhd">
-      <created>1425258190725</created>
-      <option name="number" value="00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1425258190725</updated>
-    </task>
-    <task id="LOCAL-00041" summary="lhd">
-      <created>1425456593959</created>
-      <option name="number" value="00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1425456593959</updated>
-    </task>
-    <task id="LOCAL-00042" summary="lhd">
-      <created>1425620067805</created>
-      <option name="number" value="00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1425620067805</updated>
-    </task>
-    <task id="LOCAL-00043" summary="lhd">
-      <created>1425886884423</created>
-      <option name="number" value="00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1425886884423</updated>
-    </task>
-    <task id="LOCAL-00044" summary="lhd">
-      <created>1425973401691</created>
-      <option name="number" value="00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1425973401691</updated>
-    </task>
-    <task id="LOCAL-00045" summary="lhd">
-      <created>1426040581076</created>
-      <option name="number" value="00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1426040581076</updated>
-    </task>
-    <task id="LOCAL-00046" summary="lhd">
-      <created>1426208703041</created>
-      <option name="number" value="00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1426208703041</updated>
-    </task>
-    <task id="LOCAL-00047" summary="lhd">
-      <created>1426472754402</created>
-      <option name="number" value="00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1426472754402</updated>
-    </task>
-    <task id="LOCAL-00048" summary="lhd">
-      <created>1426488795353</created>
-      <option name="number" value="00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1426488795353</updated>
-    </task>
-    <task id="LOCAL-00049" summary="lhd">
-      <created>1426494441131</created>
-      <option name="number" value="00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1426494441131</updated>
-    </task>
-    <task id="LOCAL-00050" summary="lhd">
-      <created>1426494891937</created>
-      <option name="number" value="00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1426494891938</updated>
-    </task>
-    <task id="LOCAL-00051" summary="lhd">
-      <created>1426573834451</created>
-      <option name="number" value="00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1426573834451</updated>
-    </task>
-    <task id="LOCAL-00052" summary="lhd">
-      <created>1427097775259</created>
-      <option name="number" value="00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1427097775259</updated>
-    </task>
-    <task id="LOCAL-00053" summary="lhd">
-      <created>1427166258984</created>
-      <option name="number" value="00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1427166258984</updated>
-    </task>
-    <task id="LOCAL-00054" summary="lhd">
-      <created>1427443471066</created>
-      <option name="number" value="00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1427443471067</updated>
-    </task>
-    <task id="LOCAL-00055" summary="lhd">
-      <created>1427706337464</created>
-      <option name="number" value="00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1427706337464</updated>
-    </task>
-    <task id="LOCAL-00056" summary="lhd">
-      <created>1427955240143</created>
-      <option name="number" value="00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1427955240143</updated>
-    </task>
-    <task id="LOCAL-00057" summary="lhd">
-      <created>1427956139814</created>
-      <option name="number" value="00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1427956139815</updated>
-    </task>
-    <task id="LOCAL-00058" summary="lhd">
-      <created>1428636493742</created>
-      <option name="number" value="00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1428636493742</updated>
-    </task>
-    <task id="LOCAL-00059" summary="lhd">
-      <created>1429258880356</created>
-      <option name="number" value="00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1429258880356</updated>
-    </task>
-    <task id="LOCAL-00060" summary="lhd">
-      <created>1432522103778</created>
-      <option name="number" value="00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1432522103778</updated>
-    </task>
-    <task id="LOCAL-00061" summary="lhd">
-      <created>1432601138945</created>
-      <option name="number" value="00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1432601138945</updated>
-    </task>
-    <task id="LOCAL-00062" summary="lhd">
-      <created>1432710929791</created>
-      <option name="number" value="00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1432710929791</updated>
-    </task>
-    <task id="LOCAL-00063" summary="lhd">
-      <created>1432712655051</created>
-      <option name="number" value="00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1432712655051</updated>
-    </task>
-    <task id="LOCAL-00064" summary="lhd">
-      <created>1432779511647</created>
-      <option name="number" value="00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1432779511647</updated>
-    </task>
-    <task id="LOCAL-00065" summary="lhd">
-      <created>1432794400048</created>
-      <option name="number" value="00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1432794400050</updated>
-    </task>
-    <task id="LOCAL-00066" summary="lhd">
-      <created>1432794708359</created>
-      <option name="number" value="00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1432794708359</updated>
-    </task>
-    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="781355000" />
+    <option name="totallyTimeSpent" value="214000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1386" height="788" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34150076" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30898023" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16998468" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28883862" sideWeight="0.49923897" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28883862" sideWeight="0.50076103" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Leiningen" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23124042" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1692,554 +505,9 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="lhd" />
-    <option name="LAST_COMMIT_MESSAGE" value="lhd" />
-  </component>
-  <component name="VssConfiguration">
-    <option name="CLIENT_PATH" value="" />
-    <option name="SRCSAFEINI_PATH" value="" />
-    <option name="USER_NAME" value="" />
-    <option name="PWD" value="" />
-    <CheckoutOptions>
-      <option name="COMMENT" value="" />
-      <option name="DO_NOT_GET_LATEST_VERSION" value="false" />
-      <option name="REPLACE_WRITABLE" value="false" />
-      <option name="RECURSIVE" value="false" />
-    </CheckoutOptions>
-    <CheckinOptions>
-      <option name="COMMENT" value="" />
-      <option name="KEEP_CHECKED_OUT" value="false" />
-      <option name="RECURSIVE" value="false" />
-    </CheckinOptions>
-    <AddOptions>
-      <option name="STORE_ONLY_LATEST_VERSION" value="false" />
-      <option name="CHECK_OUT_IMMEDIATELY" value="false" />
-    </AddOptions>
-    <UndocheckoutOptions>
-      <option name="MAKE_WRITABLE" value="false" />
-      <option name="REPLACE_LOCAL_COPY" value="2" />
-      <option name="RECURSIVE" value="false" />
-    </UndocheckoutOptions>
-    <GetOptions>
-      <option name="REPLACE_WRITABLE" value="0" />
-      <option name="MAKE_WRITABLE" value="false" />
-      <option name="ANSWER_NEGATIVELY" value="false" />
-      <option name="ANSWER_POSITIVELY" value="false" />
-      <option name="RECURSIVE" value="false" />
-      <option name="VERSION" />
-    </GetOptions>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="17" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
-  </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/genFieldTemplate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11146497" vertical-offset="0" max-vertical-offset="628">
-          <caret line="5" column="39" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/javaxls/ReportXlsSummary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.500813" vertical-offset="0" max-vertical-offset="5194">
-          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/javaxls/ReportXlsByMoths.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09105691" vertical-offset="0" max-vertical-offset="6398">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/javaxls/ReportXlsAuto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43089432" vertical-offset="1541" max-vertical-offset="2156">
-          <caret line="139" column="65" selection-start-line="139" selection-start-column="65" selection-end-line="139" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/HighYearOldMan.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49829352" vertical-offset="1570" max-vertical-offset="2156">
-          <caret line="133" column="15" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionAssessmentAudit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327645" vertical-offset="1275" max-vertical-offset="2464">
-          <caret line="105" column="23" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionAssessmentInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327645" vertical-offset="9171" max-vertical-offset="9772">
-          <caret line="669" column="26" selection-start-line="669" selection-start-column="23" selection-end-line="669" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleAudit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59385663" vertical-offset="1108" max-vertical-offset="1988">
-          <caret line="104" column="58" selection-start-line="104" selection-start-column="58" selection-end-line="104" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleAuditDlg.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.06418919" vertical-offset="318" max-vertical-offset="910">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleAuditDlg.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24522293" vertical-offset="42" max-vertical-offset="868">
-          <caret line="14" column="66" selection-start-line="14" selection-start-column="66" selection-end-line="14" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/HighYearOldMan.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.043478" vertical-offset="672" max-vertical-offset="4900">
-          <caret line="76" column="52" selection-start-line="76" selection-start-column="43" selection-end-line="76" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/models/manager.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12845528" vertical-offset="173" max-vertical-offset="2898">
-          <caret line="18" column="56" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/manager.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4699187" vertical-offset="607" max-vertical-offset="3150">
-          <caret line="64" column="38" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/manager.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327645" vertical-offset="491" max-vertical-offset="1176">
-          <caret line="49" column="46" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionAssessmentInfoQuery.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20826447" vertical-offset="0" max-vertical-offset="1442">
-          <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PeopleInfoQuery.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="43.826088" vertical-offset="1008" max-vertical-offset="1862">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PeopleInfoXlsFields.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="644">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PeopleInfoXlsFields.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="798">
-          <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/css/home.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22370617" vertical-offset="5970" max-vertical-offset="9366">
-          <caret line="436" column="17" selection-start-line="436" selection-start-column="17" selection-end-line="436" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/css/formtable02.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30050084" vertical-offset="1234" max-vertical-offset="1862">
-          <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/css/dialog01.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327645" vertical-offset="29" max-vertical-offset="1624">
-          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/css/ywstatus.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3566879" vertical-offset="0" max-vertical-offset="628">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/img/css/icon.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25542572" vertical-offset="29" max-vertical-offset="1190">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/css/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27879798" vertical-offset="29" max-vertical-offset="3976">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/css/screen.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.14023373" vertical-offset="0" max-vertical-offset="599">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/dm3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20781527" vertical-offset="1563" max-vertical-offset="8274">
-          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="966" max-vertical-offset="3598">
-          <caret line="98" column="25" selection-start-line="94" selection-start-column="24" selection-end-line="98" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/ServiceAgenciesMGT.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.0" vertical-offset="0" max-vertical-offset="966">
-          <caret line="23" column="150" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="150" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/ServiceAgenciesMGT.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63577235" vertical-offset="589" max-vertical-offset="1960">
-          <caret line="70" column="65" selection-start-line="70" selection-start-column="65" selection-end-line="70" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PPGrantMoneyIssue.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4493243" vertical-offset="0" max-vertical-offset="1638">
-          <caret line="19" column="61" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PPGrantMoneyIssue.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7627986" vertical-offset="1835" max-vertical-offset="2702">
-          <caret line="163" column="38" selection-start-line="140" selection-start-column="36" selection-end-line="163" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfoTongJi.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0641892" vertical-offset="0" max-vertical-offset="1512">
-          <caret line="45" column="47" selection-start-line="45" selection-start-column="47" selection-end-line="45" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/statisticsom.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30743244" vertical-offset="0" max-vertical-offset="1414">
-          <caret line="13" column="25" selection-start-line="6" selection-start-column="20" selection-end-line="13" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldMan.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.40127388" vertical-offset="840" max-vertical-offset="1722">
-          <caret line="78" column="14" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManSeniorFields.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="644">
-          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/configurationFile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="285" max-vertical-offset="3962">
-          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManSeniorFields.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="2268">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="34" />
-          <folding>
-            <element signature="n#style#0;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionPeopleInfoTongJi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44585988" vertical-offset="0" max-vertical-offset="658">
-          <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/PensionServiceTongJi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="628">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/statisticsom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6019108" vertical-offset="2268" max-vertical-offset="4200">
-          <caret line="135" column="33" selection-start-line="135" selection-start-column="33" selection-end-line="135" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/cj.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09105691" vertical-offset="2534" max-vertical-offset="4886">
-          <caret line="185" column="61" selection-start-line="185" selection-start-column="61" selection-end-line="185" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.26087" vertical-offset="210" max-vertical-offset="1302">
-          <caret line="45" column="87" selection-start-line="45" selection-start-column="82" selection-end-line="45" selection-end-column="87" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#td#2;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#div#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/commonfuncs/popwin/win.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7593496" vertical-offset="65" max-vertical-offset="1442">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="40" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.478261" vertical-offset="108" max-vertical-offset="784">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManQuery.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.391304" vertical-offset="154" max-vertical-offset="1498">
-          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManQuery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1429" max-vertical-offset="2632">
-          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-          <folding>
-            <marker date="1432778104207" expanded="true" signature="3574:3584" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldMan.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.695652" vertical-offset="240" max-vertical-offset="4928">
-          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#1;n#tr#4;n#table#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2171" max-vertical-offset="4438">
-          <caret line="236" column="47" selection-start-line="236" selection-start-column="47" selection-end-line="236" selection-end-column="47" />
-          <folding>
-            <element signature="e#2229#4003#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/controller/old.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="12563" max-vertical-offset="13944">
-          <caret line="914" column="8" selection-start-line="914" selection-start-column="8" selection-end-line="914" selection-end-column="8" />
-          <folding>
-            <marker date="1432794094018" expanded="true" signature="56559:56561" placeholder="(defn emptynest-statistic ...)" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/newpension/routes/home.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3052" max-vertical-offset="3934">
-          <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/public/js/views/pension/EmptynestOldManTongJiInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5918699" vertical-offset="42" max-vertical-offset="1414">
-          <caret line="29" column="59" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
-          <folding>
-            <marker date="1432794696478" expanded="true" signature="4263:4273" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.45770568" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>Detection</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.45770568" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.45770568" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.6</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.45770568" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>newpension</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.45770568" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.6</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.45770568" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Leiningen: lib-noir:lib-noir:0.8.4</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.45770568" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.45770568" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

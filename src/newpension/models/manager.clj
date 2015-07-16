@@ -200,3 +200,24 @@
   (delete xt_roleuser
     (where {:userid userid}))
   (my-insert-role-user userid (clojure.string/split ids #",")))
+
+;;加载模块
+(defn get-function []
+  (with-db dboracle
+    (exec-raw ["select * from xt_function  where nodetype = '1' and parent='dasffffffffffffffdsdsfs' order by orderno asc"] :results))
+  )
+(defn get-function-byuser [userid]
+  (with-db dboracle
+    (exec-raw ["select * from xt_function fc right join
+       (select * from
+         (select * from xt_user u left join xt_roleuser ru on u.userid=ru.userid where u.userid=?) ur
+                 left join
+                 xt_rolefunc rf on ur.roleid=rf.roleid) urf on fc.functionid=urf.functionid where nodetype='1' and fc.functionid='rightsmanagement' or fc.parent='functionmodule' order by orderno desc" [userid]] :results))
+  )
+(defn get-functionmenu [userid funcid]
+  (with-db dboracle
+    (exec-raw ["select f.* from xt_function f right join
+       (select rf.functionid from xt_rolefunc rf where rf.roleid =(select ru.roleid from xt_user u
+                         left join xt_roleuser ru on u.userid=ru.userid  where u.userid=?)) rfu
+       on f.functionid=rfu.functionid where f.parent=? order by orderno asc" [userid funcid]] :results))
+  )

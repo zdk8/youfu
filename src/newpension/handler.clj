@@ -2,6 +2,7 @@
   (:require [compojure.core :refer [defroutes]]
             [newpension.routes.home :refer [home-routes]]
             [newpension.routes.manager :refer [manager-routes]]
+            [newpension.routes.test :refer [test-routes]]
             [newpension.middleware :refer [load-middleware]]
             [newpension.session-manager :as session-manager]
             [noir.response :refer [redirect]]
@@ -50,7 +51,7 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [home-routes manager-routes app-routes]
+           [home-routes manager-routes test-routes app-routes]
            ;; add custom middleware here
            :middleware (load-middleware)
            ;; timeout sessions after 30 minutes

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ReportXlsByMoths {
-    /*»ñÈ¡±íÌåÊı¾İ*/
+    /*è·å–è¡¨ä½“æ•°æ®*/
     public static Map getDatas(Map[] value){
         Map mapall = new HashMap();
         for (int d=0;d<value.length;d++){
@@ -26,48 +26,48 @@ public class ReportXlsByMoths {
         }
         return mapall;
     }
-    /*ÉèÖÃ±íÍ·*/
+    /*è®¾ç½®è¡¨å¤´*/
     public void setHeadXls(HSSFSheet sheet,HSSFWorkbook wb,String[] monthsarr,String year,String title){
         Calendar date=Calendar.getInstance();
-        HSSFRow row = sheet.createRow((int) 0);  //´´½¨µÚ0ĞĞ
-        HSSFCell cell = row.createCell((short) 0);//´´½¨µ¥Ôª¸ñ0
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 12+monthsarr.length));//ºÏ²¢ÁĞ
-        cell.setCellValue("º£ÑÎÏØ"+year+"Äê"+title+"¾Ó¼ÒÑøÀÏÕş¸®¹ºÂò·şÎñ×Ê½ğÏÂ°ÎÇåµ¥");//±êÌâ
+        HSSFRow row = sheet.createRow((int) 0);  //åˆ›å»ºç¬¬0è¡Œ
+        HSSFCell cell = row.createCell((short) 0);//åˆ›å»ºå•å…ƒæ ¼0
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 12+monthsarr.length));//åˆå¹¶åˆ—
+        cell.setCellValue("æµ·ç›å¿"+year+"å¹´"+title+"å±…å®¶å…»è€æ”¿åºœè´­ä¹°æœåŠ¡èµ„é‡‘ä¸‹æ‹”æ¸…å•");//æ ‡é¢˜
 
-        HSSFFont font = wb.createFont();  //×ÖÌå
+        HSSFFont font = wb.createFont();  //å­—ä½“
         font.setFontHeightInPoints((short) 16);
         font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-        HSSFCellStyle style = wb.createCellStyle();  //ÑùÊ½
-        style.setAlignment(HSSFCellStyle.BORDER_MEDIUM); // ×óÓÒ¶ÔÆë
-        style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER); //ÉÏÏÂ¶ÔÆë
+        HSSFCellStyle style = wb.createCellStyle();  //æ ·å¼
+        style.setAlignment(HSSFCellStyle.BORDER_MEDIUM); // å·¦å³å¯¹é½
+        style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER); //ä¸Šä¸‹å¯¹é½
         style.setFont(font);
 
-        cell.setCellStyle(style);//ÉèÖÃÑùÊ½
+        cell.setCellStyle(style);//è®¾ç½®æ ·å¼
         row.setHeight((short) 500);
 
     }
-    /*ÉèÖÃ±íÌå*/
+    /*è®¾ç½®è¡¨ä½“*/
     public void setBodyXls(HSSFSheet sheet,HSSFWorkbook wb,String[] monthsarr){
-        /*±íÌåÍ·(×ó)ÑùÊ½*/
+        /*è¡¨ä½“å¤´(å·¦)æ ·å¼*/
         HSSFCellStyle stylebodyleft = wb.createCellStyle();
         stylebodyleft.setAlignment(HSSFCellStyle.ALIGN_LEFT);
         stylebodyleft.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-        /*±íÌåÍ·(ÓÒ)ÑùÊ½*/
+        /*è¡¨ä½“å¤´(å³)æ ·å¼*/
         HSSFCellStyle stylebodyright = wb.createCellStyle();
         stylebodyright.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
         stylebodyright.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
 
-        HSSFRow row1 = sheet.createRow((int) 1);             //´´½¨µÚ1ĞĞ
-        sheet.addMergedRegion(new CellRangeAddress(1,1,0,4));//ºÏ²¢ÁĞ
+        HSSFRow row1 = sheet.createRow((int) 1);             //åˆ›å»ºç¬¬1è¡Œ
+        sheet.addMergedRegion(new CellRangeAddress(1,1,0,4));//åˆå¹¶åˆ—
         HSSFCell cellbzdw = row1.createCell((short) 0);
-        cellbzdw.setCellValue("±àÖÆµ¥Î»£ºº£ÑÎÏØÃñÕş¾Ö");
+        cellbzdw.setCellValue("ç¼–åˆ¶å•ä½ï¼šæµ·ç›å¿æ°‘æ”¿å±€");
         cellbzdw.setCellStyle(stylebodyleft);
-        sheet.addMergedRegion(new CellRangeAddress(1,1,10,12+monthsarr.length));//ºÏ²¢ÁĞ
+        sheet.addMergedRegion(new CellRangeAddress(1,1,10,12+monthsarr.length));//åˆå¹¶åˆ—
         HSSFCell celljedw = row1.createCell((short) 10);
-        celljedw.setCellValue("½ğ¶îµ¥Î»£ºÔª");
+        celljedw.setCellValue("é‡‘é¢å•ä½ï¼šå…ƒ");
         celljedw.setCellStyle(stylebodyright);
 
-        /*¹«¹²ÑùÊ½*/
+        /*å…¬å…±æ ·å¼*/
         HSSFCellStyle style = wb.createCellStyle();
         style.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
         style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
@@ -76,31 +76,31 @@ public class ReportXlsByMoths {
         style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
 
-        HSSFRow row2 = sheet.createRow((int) 2);  //´´½¨µÚ2ĞĞ
+        HSSFRow row2 = sheet.createRow((int) 2);  //åˆ›å»ºç¬¬2è¡Œ
 
-        sheet.addMergedRegion(new CellRangeAddress(2,3,0,0));//ºÏ²¢ĞĞ
-        sheet.setColumnWidth(0,1500);//ÉèÖÃ¿í¶È
+        sheet.addMergedRegion(new CellRangeAddress(2,3,0,0));//åˆå¹¶è¡Œ
+        sheet.setColumnWidth(0,1500);//è®¾ç½®å®½åº¦
         HSSFCell cellxh = row2.createCell((short) 0);
-        cellxh.setCellValue("Ğò\nºÅ");
+        cellxh.setCellValue("åº\nå·");
         cellxh.setCellStyle(style);
 
         sheet.addMergedRegion(new CellRangeAddress(2,3,1,1));
         HSSFCell cellxzjd = row2.createCell((short) 1);
-        cellxzjd.setCellValue("ÏçÕò½ÖµÀ");
+        cellxzjd.setCellValue("ä¹¡é•‡è¡—é“");
         cellxzjd.setCellStyle(style);
 
         sheet.addMergedRegion(new CellRangeAddress(2,2,2,4));
         HSSFCell cellbfwdx = row2.createCell((short) 2);
-        cellbfwdx.setCellValue("±» ·ş Îñ ¶Ô Ïó");
+        cellbfwdx.setCellValue("è¢« æœ åŠ¡ å¯¹ è±¡");
         cellbfwdx.setCellStyle(style);
         row2.createCell((short) 3).setCellStyle(style);
         row2.createCell((short) 4).setCellStyle(style);
         row2.createCell((short) 6).setCellStyle(style);
         row2.createCell((short) 7).setCellStyle(style);
 
-        HSSFRow row3 = sheet.createRow((int) 3);  //´´½¨µÚ3ĞĞ
+        HSSFRow row3 = sheet.createRow((int) 3);  //åˆ›å»ºç¬¬3è¡Œ
         HSSFCell cellbfwdx_xm = row3.createCell((short) 2);
-        cellbfwdx_xm.setCellValue("ĞÕ Ãû");
+        cellbfwdx_xm.setCellValue("å§“ å");
         cellbfwdx_xm.setCellStyle(style);
         row3.createCell((short) 0).setCellStyle(style);
         row3.createCell((short) 1).setCellStyle(style);
@@ -110,72 +110,72 @@ public class ReportXlsByMoths {
 
         HSSFCell cellbfwdx_sfzh = row3.createCell((short) 3);
         sheet.setColumnWidth(3,5*1000);
-        cellbfwdx_sfzh.setCellValue("Éí·İÖ¤ºÅ");
+        cellbfwdx_sfzh.setCellValue("èº«ä»½è¯å·");
         cellbfwdx_sfzh.setCellStyle(style);
         HSSFCell cellbfwdx_jtzz = row3.createCell((short) 4);
         sheet.setColumnWidth(4,6*1000);
-        cellbfwdx_jtzz.setCellValue("¼ÒÍ¥µØÖ·");
+        cellbfwdx_jtzz.setCellValue("å®¶åº­åœ°å€");
         cellbfwdx_jtzz.setCellStyle(style);
 
         sheet.addMergedRegion(new CellRangeAddress(2,2,5,7));
         HSSFCell cellfwry = row2.createCell((short) 5);
-        cellfwry.setCellValue("·ş  Îñ  ÈË  Ô±");
+        cellfwry.setCellValue("æœ  åŠ¡  äºº  å‘˜");
         cellfwry.setCellStyle(style);
         HSSFCell cellfwry_xm = row3.createCell((short) 5);
-        cellfwry_xm.setCellValue("ĞÕ Ãû");
+        cellfwry_xm.setCellValue("å§“ å");
         cellfwry_xm.setCellStyle(style);
         HSSFCell cellfwry_sfzh = row3.createCell((short) 6);
         sheet.setColumnWidth(6,5*1000);
-        cellfwry_sfzh.setCellValue("Éí·İÖ¤ºÅ");
+        cellfwry_sfzh.setCellValue("èº«ä»½è¯å·");
         cellfwry_sfzh.setCellStyle(style);
         HSSFCell cellfwry_jtdz = row3.createCell((short) 7);
         sheet.setColumnWidth(7,6*1000);
-        cellfwry_jtdz.setCellValue("¼ÒÍ¥µØÖ·");
+        cellfwry_jtdz.setCellValue("å®¶åº­åœ°å€");
         cellfwry_jtdz.setCellStyle(style);
 
         sheet.addMergedRegion(new CellRangeAddress(2,3,8,8));
         HSSFCell cellfwdj = row2.createCell((short) 8);
-        cellfwdj.setCellValue("·şÎñµÈ¼¶");
+        cellfwdj.setCellValue("æœåŠ¡ç­‰çº§");
         cellfwdj.setCellStyle(style);
         sheet.addMergedRegion(new CellRangeAddress(2, 3, 9, 9));
         HSSFCell cellrylx = row2.createCell((short) 9);
         sheet.setColumnWidth(9,4*1000);
-        cellrylx.setCellValue("ÈËÔ±ÀàĞÍ");
+        cellrylx.setCellValue("äººå‘˜ç±»å‹");
         cellrylx.setCellStyle(style);
         sheet.addMergedRegion(new CellRangeAddress(2, 3, 10, 10));
         HSSFCell cellzfgmfubz = row2.createCell((short) 10);
-        cellzfgmfubz.setCellValue("Õş¸®¹ºÂò·şÎñ±ê×¼(Ğ¡Ê±)");
+        cellzfgmfubz.setCellValue("æ”¿åºœè´­ä¹°æœåŠ¡æ ‡å‡†(å°æ—¶)");
         style.setWrapText(true);
         cellzfgmfubz.setCellStyle(style);
-        /*ÔÂ·İ*/
+        /*æœˆä»½*/
         if (monthsarr.length>0){
             for (int i=0;i<monthsarr.length;i++){
                 sheet.addMergedRegion(new CellRangeAddress(2, 3, 11+i, 11+i));
                 HSSFCell cellzybz = row2.createCell((short) 11+i);
-                cellzybz.setCellValue(monthsarr[i]+"ÔÂ");
+                cellzybz.setCellValue(monthsarr[i]+"æœˆ");
                 cellzybz.setCellStyle(style);
-                /*±ß¿ò±êºÚ*/
+                /*è¾¹æ¡†æ ‡é»‘*/
                 row3.createCell((short) 11+i).setCellStyle(style);
             }
         }
         sheet.addMergedRegion(new CellRangeAddress(2, 3, 11+monthsarr.length, 11+monthsarr.length));
         HSSFCell cellzybz = row2.createCell((short) 11+monthsarr.length);
-        cellzybz.setCellValue("×¡Ôº²¹Öú");
+        cellzybz.setCellValue("ä½é™¢è¡¥åŠ©");
         style.setWrapText(true);
         cellzybz.setCellStyle(style);
         sheet.addMergedRegion(new CellRangeAddress(2, 3, 12+monthsarr.length, 12+monthsarr.length));
         HSSFCell cellbzje = row2.createCell((short) 12+monthsarr.length);
-        cellbzje.setCellValue("²¹Öú½ğ¶î");
+        cellbzje.setCellValue("è¡¥åŠ©é‡‘é¢");
         style.setWrapText(true);
         cellbzje.setCellStyle(style);
-        /*±ß¿ò±êºÚ*/
+        /*è¾¹æ¡†æ ‡é»‘*/
         row3.createCell((short) 11+monthsarr.length).setCellStyle(style);
         row3.createCell((short) 12+monthsarr.length).setCellStyle(style);
     }
-    //±íÌåÖµ
+    //è¡¨ä½“å€¼
     public void setValueXls(HSSFSheet sheet,HSSFWorkbook wb,String[] monthsarr,Map[] datas){
-        /*ÑùÊ½Ò»*/
-        HSSFFont font = wb.createFont();  //×ÖÌå
+        /*æ ·å¼ä¸€*/
+        HSSFFont font = wb.createFont();  //å­—ä½“
         font.setFontHeightInPoints((short) 11);
         font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         HSSFCellStyle style_bold = wb.createCellStyle();
@@ -186,8 +186,8 @@ public class ReportXlsByMoths {
         style_bold.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style_bold.setBorderRight(HSSFCellStyle.BORDER_THIN);
         style_bold.setFont(font);
-        /*ÑùÊ½¶ş*/
-        HSSFFont font2 = wb.createFont();  //×ÖÌå
+        /*æ ·å¼äºŒ*/
+        HSSFFont font2 = wb.createFont();  //å­—ä½“
         font2.setFontHeightInPoints((short) 10);
         font2.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         font2.setColor(HSSFColor.BLUE_GREY.index);
@@ -199,7 +199,7 @@ public class ReportXlsByMoths {
         style_bold2.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style_bold2.setBorderRight(HSSFCellStyle.BORDER_THIN);
         style_bold2.setFont(font2);
-        /*ÑùÊ½Èı*/
+        /*æ ·å¼ä¸‰*/
         HSSFCellStyle style = wb.createCellStyle();
         style.setAlignment(HSSFCellStyle.BORDER_MEDIUM);
         style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
@@ -208,9 +208,9 @@ public class ReportXlsByMoths {
         style.setBorderLeft(HSSFCellStyle.BORDER_THIN);
         style.setBorderRight(HSSFCellStyle.BORDER_THIN);
 
-        Map datasval = getDatas(datas);  //Êı¾İ
+        Map datasval = getDatas(datas);  //æ•°æ®
 
-        int rowindex = 4;     //±íÌåÖµ´ÓµÚ4ĞĞ¿ªÊ¼
+        int rowindex = 4;     //è¡¨ä½“å€¼ä»ç¬¬4è¡Œå¼€å§‹
 
         for (int i=0;i<datasval.size();i++){
             HSSFRow rownum = sheet.createRow((int) rowindex++);
@@ -220,34 +220,34 @@ public class ReportXlsByMoths {
             int rowval = i+1;
             cellnum.setCellValue(rowval);
             cellnum.setCellStyle(style);
-            /*±»·şÎñ¶ÔÏó*/
+            /*è¢«æœåŠ¡å¯¹è±¡*/
             HSSFCell cell_address1 = rownum.createCell((short) 1);
             String dvname1 = dataval.get(":dvname").toString();
             if (dvname1.length() > 0){
                 cell_address1.setCellValue(dvname1);
             }
             cell_address1.setCellStyle(style);
-            if (dataval.get(":dvname").toString().contains("Ğ¡¼Æ") || dataval.get(":dvname").toString().contains("×Ü¼Æ")){
+            if (dataval.get(":dvname").toString().contains("å°è®¡") || dataval.get(":dvname").toString().contains("æ€»è®¡")){
                 String title = "";
                 HSSFCellStyle stylevar = wb.createCellStyle();
-                if (dataval.get(":dvname").toString().contains("Ğ¡¼Æ")){
-                    title = "Ğ¡¼Æ";
+                if (dataval.get(":dvname").toString().contains("å°è®¡")){
+                    title = "å°è®¡";
                     stylevar = style_bold2;
-                }else if (dataval.get(":dvname").toString().contains("×Ü¼Æ")){
-                    title = "×Ü¼Æ";
+                }else if (dataval.get(":dvname").toString().contains("æ€»è®¡")){
+                    title = "æ€»è®¡";
                     stylevar = style_bold;
                 }
-                HSSFCell cell_xiaoji = rownum.createCell((short) 0);              //Ğ¡¼Æ
+                HSSFCell cell_xiaoji = rownum.createCell((short) 0);              //å°è®¡
                 sheet.addMergedRegion(new CellRangeAddress(rowindex - 1, rowindex - 1, 0, 3));
                 cell_xiaoji.setCellValue(title);
                 cell_xiaoji.setCellStyle(stylevar);
                 rownum.createCell((short) 1).setCellStyle(stylevar);
                 rownum.createCell((short) 2).setCellStyle(stylevar);
                 rownum.createCell((short) 3).setCellStyle(stylevar);
-                HSSFCell cell_renshu = rownum.createCell((short) 4);              //ÈËÊı
-                cell_renshu.setCellValue("ÈËÊı");
+                HSSFCell cell_renshu = rownum.createCell((short) 4);              //äººæ•°
+                cell_renshu.setCellValue("äººæ•°");
                 cell_renshu.setCellStyle(stylevar);
-                HSSFCell cell_renshuval = rownum.createCell((short) 5);              //ÈËÊıÖµ
+                HSSFCell cell_renshuval = rownum.createCell((short) 5);              //äººæ•°å€¼
                 sheet.addMergedRegion(new CellRangeAddress(rowindex - 1, rowindex - 1, 5, 10));
                 String servicername = dataval.get(":servicername").toString();
                 if (servicername.length() > 0){
@@ -259,8 +259,8 @@ public class ReportXlsByMoths {
                 rownum.createCell((short) 8).setCellStyle(stylevar);
                 rownum.createCell((short) 9).setCellStyle(stylevar);
                 rownum.createCell((short) 10).setCellStyle(stylevar);
-                int rowmoney = 0;           //ºáÏò¼ÆËã
-                //ÔÂ·İÖµ
+                int rowmoney = 0;           //æ¨ªå‘è®¡ç®—
+                //æœˆä»½å€¼
                 if (monthsarr.length>0){
                     for (int m=0;m<monthsarr.length;m++){
                         HSSFCell cell_yuefen1 = rownum.createCell((short) 11+m);
@@ -275,81 +275,81 @@ public class ReportXlsByMoths {
                     rowmoney +=Integer.parseInt(dataval.get(":subsidy_money").toString());
                 }
 
-                HSSFCell cell_zybz = rownum.createCell((short) 11+monthsarr.length); //×¡Ôº²¹Öú
+                HSSFCell cell_zybz = rownum.createCell((short) 11+monthsarr.length); //ä½é™¢è¡¥åŠ©
                 String subsidy_money = dataval.get(":subsidy_money").toString();
                 if (subsidy_money.length() > 0){
                     cell_zybz.setCellValue(subsidy_money);
                 }
                 cell_zybz.setCellStyle(stylevar);
-                HSSFCell cell_bzje = rownum.createCell((short) 12+monthsarr.length); //²¹Öú½ğ¶î
+                HSSFCell cell_bzje = rownum.createCell((short) 12+monthsarr.length); //è¡¥åŠ©é‡‘é¢
                 cell_bzje.setCellValue(rowmoney);
                 cell_bzje.setCellStyle(stylevar);
             }else{
-                HSSFCell cell_name = rownum.createCell((short) 2);              //ĞÕÃû
+                HSSFCell cell_name = rownum.createCell((short) 2);              //å§“å
                 String name = dataval.get(":name").toString();
                 if (name.length() > 0){
                     cell_name.setCellValue(name);
                 }
                 cell_name.setCellStyle(style);
-                HSSFCell cell_identityid = rownum.createCell((short) 3);        //Éí·İÖ¤ºÅ
+                HSSFCell cell_identityid = rownum.createCell((short) 3);        //èº«ä»½è¯å·
                 String identityid = dataval.get(":identityid").toString();
                 if (identityid.length() > 0){
                     cell_identityid.setCellValue(identityid);
                 }
                 cell_identityid.setCellStyle(style);
 
-                HSSFCell cell_address = rownum.createCell((short) 4);           //¼ÒÍ¥µØÖ·
+                HSSFCell cell_address = rownum.createCell((short) 4);           //å®¶åº­åœ°å€
                 String address = dataval.get(":address").toString();
                 if (address.length() > 0){
                     cell_address.setCellValue(address);
                 }
                 cell_address.setCellStyle(style);
-                //·şÎñÈËÔ±
-                HSSFCell cell_servicername = rownum.createCell((short) 5);        //ĞÕÃû
+                //æœåŠ¡äººå‘˜
+                HSSFCell cell_servicername = rownum.createCell((short) 5);        //å§“å
                 String servicername = dataval.get(":servicername").toString();
                 if (servicername.length() > 0){
                     cell_servicername.setCellValue(servicername);
                 }
                 cell_servicername.setCellStyle(style);
 
-                HSSFCell cell_servicephone = rownum.createCell((short) 6);        //Éí·İÖ¤ºÅ
+                HSSFCell cell_servicephone = rownum.createCell((short) 6);        //èº«ä»½è¯å·
                 String servicephone = dataval.get(":servicephone").toString();
                 if (servicephone.length() > 0){
                     cell_servicephone.setCellValue(servicephone);
                 }
                 cell_servicephone.setCellStyle(style);
 
-                HSSFCell cell_serviceaddress = rownum.createCell((short) 7);     //¼ÒÍ¥µØÖ·
+                HSSFCell cell_serviceaddress = rownum.createCell((short) 7);     //å®¶åº­åœ°å€
                 String serviceaddress = dataval.get(":serviceaddress").toString();
                 if (serviceaddress.length() > 0){
                     cell_serviceaddress.setCellValue(serviceaddress);
                 }
                 cell_serviceaddress.setCellStyle(style);
 
-                HSSFCell cell_servicephone1 = rownum.createCell((short) 8);       //·şÎñµÈ¼¶
-                cell_servicephone1.setCellValue("ÖĞ¶È");
+                HSSFCell cell_servicephone1 = rownum.createCell((short) 8);       //æœåŠ¡ç­‰çº§
+                cell_servicephone1.setCellValue("ä¸­åº¦");
                 /*String economyval = dataval.get(":economy").toString();
                 if (economyval.length() > 0){
                     cell_servicephone1.setCellValue(economyval);
                 }*/
                 cell_servicephone1.setCellStyle(style);
 
-                HSSFCell cell_assesstype = rownum.createCell((short) 9);         //ÈËÔ±ÀàĞÍ
+                HSSFCell cell_assesstype = rownum.createCell((short) 9);         //äººå‘˜ç±»å‹
                 String economyval = dataval.get(":economy").toString();
                 if (economyval.length() > 0){
                     cell_assesstype.setCellValue(economyval);
                 }
                 cell_assesstype.setCellStyle(style);
 
-                HSSFCell cell_servicetime = rownum.createCell((short) 10);       //Õş¸®¹ºÂò·şÎñ±ê×¼(Ğ¡Ê±)
+                HSSFCell cell_servicetime = rownum.createCell((short) 10);       //æ”¿åºœè´­ä¹°æœåŠ¡æ ‡å‡†(å°æ—¶)
                 String servicetime = dataval.get(":servicetime").toString();
                 if (servicetime.length() > 0){
                     cell_servicetime.setCellValue(servicetime);
                 }
                 cell_servicetime.setCellStyle(style);
 
-                int rowmoney = 0;           //ºáÏò¼ÆËã
-                //ÔÂ·İÖµ
+                int rowmoney = 0;           //æ¨ªå‘è®¡ç®—
+                //æœˆä»½å€¼
                 if (monthsarr.length>0){
                     for (int m=0;m<monthsarr.length;m++){
                         HSSFCell cell_yuefen = rownum.createCell((short) 11+m);
@@ -368,81 +368,81 @@ public class ReportXlsByMoths {
                     rowmoney +=Integer.parseInt(zybt);
                 }
 
-                HSSFCell cell_zybz = rownum.createCell((short) 11+monthsarr.length); //×¡Ôº²¹Öú
+                HSSFCell cell_zybz = rownum.createCell((short) 11+monthsarr.length); //ä½é™¢è¡¥åŠ©
                 String subsidymoney = dataval.get(":subsidy_money").toString();
                 if (subsidymoney.length() > 0){
                     cell_zybz.setCellValue(subsidymoney);
                 }
                 cell_zybz.setCellStyle(style);
-                HSSFCell cell_bzje = rownum.createCell((short) 12+monthsarr.length); //²¹Öú½ğ¶î
+                HSSFCell cell_bzje = rownum.createCell((short) 12+monthsarr.length); //è¡¥åŠ©é‡‘é¢
                 cell_bzje.setCellValue(rowmoney);
                 cell_bzje.setCellStyle(style_bold);
             }
 
         }
     }
-    /*xlsµ¼³ö±¨±í*/
+    /*xlså¯¼å‡ºæŠ¥è¡¨*/
     public static Workbook getReport(String year,String months,Map[] datas) throws Exception{
-        String[] monthsarr = {};//´æ·ÅÔÂ·İÊı×é
-        System.out.println("Êı×é:"+monthsarr);
-        String title = "xxÔÂ";
+        String[] monthsarr = {};//å­˜æ”¾æœˆä»½æ•°ç»„
+        System.out.println("æ•°ç»„:"+monthsarr);
+        String title = "xxæœˆ";
         ReportXlsByMoths mainclass = new ReportXlsByMoths();
         Map<String,Integer> map = mainclass.getMonths();
         if (months.length()>0){
             monthsarr = months.split(",");
-            title = map.get(monthsarr[0])+"-"+map.get(monthsarr[monthsarr.length-1])+"ÔÂ";
+            title = map.get(monthsarr[0])+"-"+map.get(monthsarr[monthsarr.length-1])+"æœˆ";
         }
-        // ´´½¨webbookµÄExcel¹¤×÷±¡
+        // åˆ›å»ºwebbookçš„Excelå·¥ä½œè–„
         HSSFWorkbook wb = new HSSFWorkbook();
-        // ´´½¨Ò»¸ösheet
+        // åˆ›å»ºä¸€ä¸ªsheet
         HSSFSheet sheet = wb.createSheet(title);
-        mainclass.setHeadXls(sheet,wb,monthsarr,year,title);   //±íÍ·
-        mainclass.setBodyXls(sheet,wb,monthsarr);   //±íÌå
-        mainclass.setValueXls(sheet,wb,monthsarr,datas);   //Öµ
+        mainclass.setHeadXls(sheet,wb,monthsarr,year,title);   //è¡¨å¤´
+        mainclass.setBodyXls(sheet,wb,monthsarr);   //è¡¨ä½“
+        mainclass.setValueXls(sheet,wb,monthsarr,datas);   //å€¼
         return wb;
     }
-    /*xlsµ¼³ö¿Õ±¨±í*/
+    /*xlså¯¼å‡ºç©ºæŠ¥è¡¨*/
     public static Workbook getReportNull(String year,String months) throws Exception{
-        String[] monthsarr = {};//´æ·ÅÔÂ·İÊı×é
-        System.out.println("Êı×é:"+monthsarr);
-        String title = "xxÔÂ";
+        String[] monthsarr = {};//å­˜æ”¾æœˆä»½æ•°ç»„
+        System.out.println("æ•°ç»„:"+monthsarr);
+        String title = "xxæœˆ";
         ReportXlsByMoths mainclass = new ReportXlsByMoths();
         Map<String,Integer> map = mainclass.getMonths();
         if (months.length()>0){
             monthsarr = months.split(",");
-            title = map.get(monthsarr[0])+"-"+map.get(monthsarr[monthsarr.length-1])+"ÔÂ";
+            title = map.get(monthsarr[0])+"-"+map.get(monthsarr[monthsarr.length-1])+"æœˆ";
         }
-        // ´´½¨webbookµÄExcel¹¤×÷±¡
+        // åˆ›å»ºwebbookçš„Excelå·¥ä½œè–„
         HSSFWorkbook wb = new HSSFWorkbook();
-        // ´´½¨Ò»¸ösheet
+        // åˆ›å»ºä¸€ä¸ªsheet
         HSSFSheet sheet = wb.createSheet(title);
-        mainclass.setHeadXls(sheet,wb,monthsarr,year,title);   //±íÍ·
-        mainclass.setBodyXls(sheet,wb,monthsarr);   //±íÌå
+        mainclass.setHeadXls(sheet,wb,monthsarr,year,title);   //è¡¨å¤´
+        mainclass.setBodyXls(sheet,wb,monthsarr);   //è¡¨ä½“
         return wb;
     }
 
-    /*ÔÂ·İmap*/
+    /*æœˆä»½map*/
     public Map<String,Integer> getMonths(){
         Map<String,Integer> map = new HashMap<String,Integer>();
-        map.put("Ò»",1);
-        map.put("¶ş",2);
-        map.put("Èı",3);
-        map.put("ËÄ",4);
-        map.put("Îå",5);
-        map.put("Áù",6);
-        map.put("Æß",7);
-        map.put("°Ë",8);
-        map.put("¾Å",9);
-        map.put("Ê®",10);
-        map.put("Ê®Ò»",11);
-        map.put("Ê®¶ş",12);
+        map.put("ä¸€",1);
+        map.put("äºŒ",2);
+        map.put("ä¸‰",3);
+        map.put("å››",4);
+        map.put("äº”",5);
+        map.put("å…­",6);
+        map.put("ä¸ƒ",7);
+        map.put("å…«",8);
+        map.put("ä¹",9);
+        map.put("å",10);
+        map.put("åä¸€",11);
+        map.put("åäºŒ",12);
         return map;
     }
 
     public static void main(String args[]) throws Exception{
         ReportXlsByMoths cetd = new ReportXlsByMoths();
 //        String[] arr = {"?","??","??","??","??","??"};
-        String arr = "Ò»,¶ş,Èı,ËÄ";
+        String arr = "ä¸€,äºŒ,ä¸‰,å››";
 //        String arr = "";
 //        cetd.getMonths(arr);
 
@@ -452,8 +452,9 @@ public class ReportXlsByMoths {
         System.out.println(cetd.getMonths());
         try {
             FileOutputStream fout = new FileOutputStream("C:\\Users\\Administrator\\Downloads\\"+new Date().getTime()+".xls");
-            getReport("2015",arr,maptest).write(fout);
-//            getReport(arr);  //§Õ??
+//            getReport("2015",arr,maptest).write(fout);
+//            getReport(arr);  //Ğ´??
+            getReportNull("2015","");
             fout.close();
         }catch (Exception e){
             e.printStackTrace();

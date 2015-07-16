@@ -218,3 +218,16 @@
   (resp/json {:success (session/get :username) :date (session/get :date) :loginname (session/get  :loginname) :username (session/get  :username)}))
 (defn my-session-remove []
   (resp/json {:success (session/remove! :username)}))
+
+;;加载模块
+(defn get-function-byuser [req]
+;  (resp/json (basemd/get-function-byuser (:userid (first (session/get :usermsg)))))
+    (resp/json (basemd/get-function));;权限放开
+  )
+(defn get-functionmenu [req]
+  (let [{params :params} req
+        funcid (get params :funcid)
+        userid (:userid (session/get :usermsg))
+        ]
+    (resp/json (basemd/get-functionmenu userid funcid))
+    ))

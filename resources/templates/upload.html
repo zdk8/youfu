@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+    <script>
+        document.write('<link rel="stylesheet" type="text/css" id="swicth-style" href="easyui/easyui/themes/default/easyui.css"><\/>');
+        document.write('<script type="text/javascript"  src="easyui/easyui/jquery.easyui.min.js"><\/script>');
+        document.write('<script type="text/javascript"  src="easyui/easyui/locale/easyui-lang-zh_CN.js"><\/script>');
+    </script>
+</head>
+<body>
+<table class="easyui-datagrid" id="dgg"
+       data-options="
+       fitColumns:true,
+       fit:true,
+       pagination:true,
+       toolbar:'#upload',
+       singleSelect:true">
+    <thead>
+    <tr>
+        <th data-options="field:'name',width:100,formatter:function(v,r,i)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                    return str.html();
+                }">名称</th>
+        <th data-options="field:'type',width:100">类型</th>
+        <th data-options="field:'size',width:100">大小</th>
+    </tr>
+    </thead>
+</table>
+
+<div id="upload">
+    <h2>文件上传</h2>
+    <form opt="upfrom" enctype="multipart/form-data" method="POST">
+        <input id="file" name="file" type="file" />
+        <input type="button" value="upload" opt="upbtn"/>
+    </form>
+</div>
+
+<script>
+    $(function () {
+        $('[opt=upbtn]').click(function () {
+            $('[opt=upfrom]').form('submit',{
+                url:'upload',
+                onSubmit: function () {
+                    
+                },
+                success: function (data) {
+                    var da = eval('('+data+')')
+                    var name = da.filename.substr(0,da.filename.indexOf('.'));
+                    var type = da.filename.substr(da.filename.indexOf('.'));
+                    var size = da.size/1024+'kb';
+                    var data = [
+                        {name:name, type:type,size:size}
+                    ];
+                    $('#dgg').datagrid({
+                        data: data
+                    });
+                }
+            })
+        })
+
+    })
+
+</script>
+
+</body>
+</html>

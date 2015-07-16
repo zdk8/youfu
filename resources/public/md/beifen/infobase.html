@@ -1,0 +1,212 @@
+<table class="formtable">
+    <tr>
+        <td class="formtdtext">家庭住址</td>
+        <td colspan="3"><input class="easyui-validatebox" name="address" style="width: 300px"></td>
+        <td class="formtdtext">人员类型</td>
+        <td>
+            <input class="easyui-combobox "
+                   opt="type"
+                   name="type"
+                   style="width: 100px"
+                   data-options="
+                                loader:cj.getLoader('oldtype'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text',
+            ">
+        </td>
+    </tr>
+    <tr>
+        <td class="formtdtext">户籍地</td>
+        <td colspan="5"><input class="easyui-validatebox" name="registration" style="width: 300px"></td>
+    </tr>
+    <tr>
+        <td class="formtdtext">居住环境</td>
+        <td>
+            <input class="easyui-combobox "
+                   name="live"
+                   style="width: 100px"
+                   data-options="
+                                loader:cj.getLoader('liveplace'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+        </td>
+        <td class="formtdtext">婚姻状况</td>
+        <td>
+            <input class="easyui-combobox "
+                   name="marriage"
+                   style="width: 100px"
+                   data-options="
+                                loader:cj.getLoader('marriage'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+        </td>
+        <td class="formtdtext">家庭经济条件</td>
+        <td>
+            <input class="easyui-combobox "
+                   name="economy"
+                   style="width: auto"
+                   data-options="
+                                loader:cj.getLoader('economy'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+        </td>
+    </tr>
+    <tr>
+        <td class="formtdtext">曾从事职业</td>
+        <td><input class="easyui-validatebox" name="vocation"></td>
+        <td class="formtdtext">文化程度</td>
+        <td>
+            <input class="easyui-combobox "
+                   name="culture"
+                   style="width: 100px"
+                   data-options="
+                                loader:cj.getLoader('culture'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+        </td>
+        <td class="formtdtext">手机号码</td>
+        <td><input class="easyui-validatebox" name="mobilephone"></td>
+    </tr>
+    <tr>
+        <td class="formtdtext">退休工资</td>
+        <td><input class="easyui-validatebox" name="retirewage"></td>
+        <td class="formtdtext">住宅电话</td>
+        <td><input class="easyui-validatebox" name="telephone"></td>
+        <td class="formtdtext">老人呼叫机</td>
+        <td><input class="easyui-validate" name="hjj_hjj"></td>
+    </tr>
+    <tr>
+        <td class="formtdtext">呼叫机种类</td>
+        <td>
+            <input class="easyui-combobox "
+                   name="hjj_kind"
+                   style="width: 100px"
+                   data-options="
+                                loader:cj.getLoader('hjjkind'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+        </td>
+        <td class="formtdtext">呼叫机类型</td>
+        <td>
+            <input class="easyui-combobox "
+                   name="hjj_type"
+                   style="width: 100px"
+                   data-options="
+                                loader:cj.getLoader('hjjtype'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+        </td>
+        <td class="formtdtext">呼叫手机号</td>
+        <td><input class="easyui-validatebox" name="hjj_phone"></td>
+    </tr>
+    <!--<fieldset style="width: 900px;margin: 0px auto">
+      <legend>家庭成员列表</legend>
+      <div opt="familymembersdiv">
+          <table class="easyui-datagrid"  opt="familymembersgrid" id="familymembersgrid1" style="width: 900px"
+                 data-options="rownumbers:true,toolbar:'#pensionmembertb',singleSelect:true,showFooter:true">
+
+              <thead data-options="frozen:true">
+              <tr>
+                  <th data-options="field:'bottom',width:40,align:'center',editor:'icon-remove'">
+                      <a data-options="plain:true">选择</a>
+                  </th>
+              </tr>
+              </thead>
+              <thead>
+              <tr>
+                  <th class=""
+                      data-options="
+                      field:'guanx',
+                      align:'center',
+                      width:100,
+                      editor:{
+                           type:'combobox',
+                           options:{
+                              required:true,
+                              loader:cj.getLoader('relation'),
+                              method:'get' ,
+                              editable:false,
+                              width:60,
+                              valueField: 'id',
+                              textField: 'text'}}">关系<span style="color: red">*</span></th>
+                  <th data-options="required:true,field:'gx_name',width:90,align:'center',editor:{
+                      type:'validatebox',
+                      options:{required:true}
+                     } ">姓名<span style="color: red">*</span></th>
+                  <th opt="gxidentityid" data-options="field:'gx_identityid',width:150,align:'center',editor:{
+                              type:'validatebox',
+                              options:{
+                                  required:true,
+                                  invalidMessage:'请输入正确的身份证号',
+                                  validType:'identityid'
+                              }
+                          }">身份证号<span style="color: red">*</span></th>
+                  <th class="" data-options="field:'gx_gender',align:'center',width:60,editor:{
+                              type:'combobox',
+                              options:{
+                                  required:true,
+                                  loader:cj.getLoader('gender'),
+                                  method:'get' ,
+                                  editable:false,
+                                  width:60,
+                                  valueField: 'id',
+                                  textField: 'text'
+                              }
+                          }">性别<span style="color: red">*</span></th>
+                  <th data-options="field:'gx_birth',width:90,align:'center',editor:'text'">出生日期</th>
+                  <th  data-options="field:'gx_telephone',width:160,align:'center',editor:'text'">宅电</th>
+                  <th data-options="field:'gx_mobilephone',width:160,align:'center',editor:'text'">手机</th>
+                  <th  data-options="field:'gx_economy',width:100,align:'center',editor:'text'">月收入</th>
+                  <th class="" data-options="field:'gx_culture',align:'center',width:60,editor:{
+                              type:'combobox',
+                              options:{
+                                 loader:cj.getLoader('culture'),
+                                  method:'get' ,
+                                  editable:false,
+                                  width:60,
+                                  valueField: 'id',
+                                  textField: 'text'
+                              }
+                          }">文化程度</th>
+                  <th  data-options="field:'gx_registration',width:100,align:'center',editor:'text'">籍贯</th>
+                  &lt;!&ndash;<th  data-options="field:'gx_nation',width:100,align:'center',editor:'text'">&ndash;&gt;
+                <th class="" data-options="field:'gx_nation',align:'center',width:60,editor:{
+							type:'combobox',
+							options:{
+                                loader:cj.getLoader('NATION'),
+                                method:'get' ,
+                                editable:false,
+                                width:60,
+                                valueField: 'id',
+                                textField: 'text'
+							}
+						}">民族</th>
+                <th  data-options="field:'gx_work',width:100,align:'center',editor:'text'">工作地点</th>
+
+                <th data-options="field:'prseno',width:160,align:'center',editor:'text',hidden:true">prseno</th>
+                <th data-options="field:'lrgx_id',width:160,align:'center',editor:'text',hidden:true">lrgx_id</th>
+                <th data-options="field:'lr_id',width:160,align:'center',editor:'text',hidden:true">lr_id</th>
+            </tr>
+            </thead>
+        </table>
+        <div opt="familymembertb" style="height:auto">
+            <a opt="newfamilymemeradd_btn" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+            <a opt="delfamilymemer_btn" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+        </div>
+    </div>
+</fieldset>-->
+</table>
+

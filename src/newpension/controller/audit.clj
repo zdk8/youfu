@@ -933,7 +933,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 	                        ON dv.dvcode = substr(jm.districtid,0,9)" )
        get-yearmrsql (str "SELECT dvname,count(*) as opsum,SUM(一) as 一,SUM(二) as 二,SUM(三) as 三,SUM(四) as 四,SUM(五) as 五,SUM(六) as 六,SUM(七) as 七,SUM(八) as 八,SUM(九) as 九,SUM(十) as 十,SUM(十一) as 十一,SUM(十二) as 十二,SUM(subsidy_money) AS subsidy_money FROM ("
                        get-resultsql ") GROUP BY dvname")]
-    (println get-yearmrsql)
+;    (println get-yearmrsql)
     (db/get-results-bysql get-yearmrsql)
     ))
 

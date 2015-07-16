@@ -275,4 +275,6 @@
 
   (POST "/test/importexcel" [file] (report/excelimport file))                               ;;postgis 数据导入测试
 
+  (GET "/index2" [] (layout/render "index2.html"))
+
   )

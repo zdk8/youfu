@@ -1,0 +1,149 @@
+
+<!--        <input class="mytest" value="1">
+        <tr>
+            <td>低收入</td>
+            <td><input name="jj_shour" type="radio" value="10" /><label>10分</label></td>
+            <td>本人收入<input class="input-text" name="shouru">元/月</td>
+        </tr>
+        <tr>
+            <td>低保护缘户</td>
+            <td><input name="jj_shour" type="radio" value="20" /><label>20分</label></td>
+            <td>本人收入<input class="input-text" name="shouru">元/月</td>
+        </tr>-->
+
+
+        <style>
+            #date{text-align:center;}
+            .td {cursor:pointer;}
+        </style>
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<object id="WebBrowser" classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 height="0" width="0">
+</object>
+        <script>
+            function GetDate(){
+                ddd = new Date();
+                var date=new Date();
+                var year=date.getFullYear();
+                var month=date.getMonth();
+                var str='';
+                str+='<table id="date" opt="datekj" border="0" style="background-color: darkgray">';
+                str+='<tr>';
+                str+='<td><a href="javascript:void(0)" onclick="DelYear()">< <</a></td>';
+                str+='<td colspan="2"><input id="year" style="width: 50px" value='+year+'>年</td>';
+                str+='<td><a href="javascript:void(0)" onclick="AddYear()">> ></a></td>';
+                str+='</tr>';
+                for(i=0;i<3;i++){
+                    str+='<tr>';
+                    str+='<td onclick="ChangeMonth(this)" class="td">'+Number(1+i*4)+'月</td>';
+                    str+='<td onclick="ChangeMonth(this)" class="td">'+Number(2+i*4)+'月</td>';
+                    str+='<td onclick="ChangeMonth(this)" class="td">'+Number(3+i*4)+'月</td>';
+                    str+='<td onclick="ChangeMonth(this)" class="td">'+Number(4+i*4)+'月</td>';
+                    str+='</tr>';
+                }
+//                str+='</table>';
+                str+='<tr>' +
+                        '<td colspan="4" style="background-color: rgba(245,168,230,0. 8)">' +
+                            '<label style="font-size: 13px" opt="closedate">关闭</label>' +
+                        '</td>' +
+                     '</tr>' +
+                     '</table>';
+                str=str.replace('<td onclick="ChangeMonth(this)" class="td">','<td onclick="ChangeMonth(this)" class="td" style="color:red">');
+                document.write(str);
+            }
+            function AddYear(){
+                var year=document.getElementById("year").value;
+                year=Number(year)+1;
+                document.getElementById("year").value=year;
+            }
+            function DelYear(){
+                var year=document.getElementById("year").value;
+                year=Number(year)-1;
+                document.getElementById("year").value=year;
+            }
+            function ChangeMonth(obj){
+                var trs=document.getElementById("date").getElementsByTagName("tr");
+                for(i=1;i<trs.length;i++){
+                    var tds=trs[i].getElementsByTagName("td");
+                    for(j=0;j<tds.length;j++){
+                        tds[j].style.color="";
+                    }
+                }
+                obj.style.color="red";
+            }
+        </script>
+
+        <div style="width:100%; text-align:center;">
+            <input type="button" value="控件" opt="kongjian">
+            <input type="button" value="导出当前页" onclick="excel()">
+            <input type="button" value="打印" onclick="return userPrint()">
+        </div>
+<script>
+    GetDate()
+    $('[opt=kongjian]').click(function(){
+        alert(11)
+    })
+
+</script>
+        <script>
+            function userPrint()
+            {
+                document.WebBrowser.Execwb(7,1);//打印预览
+                return false;
+            }
+
+        </script>
+
+
+<script>
+
+    function excel() {
+
+
+    var curTbl = document.getElementById("report1");
+
+    var oXL = new ActiveXObject("Excel.Application");
+
+    var oWB = oXL.Workbooks.Add();
+
+    var oSheet = oWB.ActiveSheet;
+
+    var sel = document.body.createTextRange();
+
+    sel.moveToElementText(curTbl);
+
+    sel.select();
+
+    sel.execCommand("Copy");
+
+    oSheet.Paste();
+
+    oXL.Visible = true;
+
+
+    }
+
+</script>
+
+<script language=javascript>
+    function preview() {
+        window.clipboardData.setData("Text",document.all('table1').outerHTML);
+        try
+        {
+            var ExApp = new ActiveXObject("Excel.Application")
+            var ExWBk = ExApp.workbooks.add()
+            var ExWSh = ExWBk.worksheets(1)
+            ExApp.DisplayAlerts = false
+            ExApp.visible = true
+            }
+        catch(e)
+        {
+            alert("您的电脑没有安装Microsoft Excel软件！")
+            return false
+            }
+         ExWBk.worksheets(1).Paste;
+         }
+    19.</script>
+
+
+
+
