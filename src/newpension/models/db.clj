@@ -911,6 +911,32 @@
     (exec-raw [(hvitmd/get-oraclequery-total {:table tablename :predicate conditions}) []] :results)))
 
 
+(defn adddata-by-tablename
+  "根据表名和数据进行数据添加"
+  [tablename datas]
+  (insert tablename
+    (values datas)))
+
+(defn updatedata-by-tablename
+  "根据表名，条件进行更新数据"
+  [tablename data conds]
+  (update tablename
+    (set-fields data)
+    (where conds)))
+
+(defn deletedata-by-tablename
+  "根据id删除数据"
+  [tablename conds]
+  (delete tablename
+    (where conds)))
+
+(defn selectdatas-by-tablename
+  "根据条件和表名查找数据"
+  [tablename conds]
+  (select tablename
+    (where conds)))
+
+
 (defn sendallmoney [datasql]
   (insert t_dolemoney2
     (values (get-results-bysql datasql))))

@@ -444,6 +444,15 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
     (db/select-opdsign signdata)
     (str "success")))
 
+(defn add-carecenter
+  "新增照料中心"
+  [request]
+  (let[params (:params request)
+       caredata (select-keys params (:carecenter common/selectcols))
+       ]
+    (db/adddata-by-tablename "t_carecenter" (common/dateformat-bf-insert caredata "runtime"))
+    (str "success")))
+
 
 (defn testfun [request]
   (println (l/local-now))

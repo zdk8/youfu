@@ -174,6 +174,8 @@
   (POST "/pension/evaluateoldpeople" request (old/evaluate-oldpeople request))                  ;;评估
  ;; (POST "/pension/getassessment" request (old/get-assessment request))                             ;;获取未评估的数据
 
+
+
   (POST "/audit/addauditapply" request (audit/add-audit-apply request))                           ;;居家养老服务申请
   (POST "/audit/getapplybyid" request (audit/get-apply-byid request))                              ;;根据id查找
   (POST "/audit/getallapply" request (audit/getall-apply request))                                     ;;查找未处理的申请
@@ -223,6 +225,8 @@
   (POST "/depart/opddesigncancle" request (depart/opddesigncancle request))                                      ;;取消单个签到
   (POST "/depart/opddesignall" request (depart/opd-design-all request))
   (POST "/depart/opdselectsign" request (depart/opd-select-design request))
+
+  (POST "/depart/addcarecenter" request (depart/add-carecenter request))                                  ;;新增照料中心
 
   (POST "/old/oldestpeople" request (old/add-oldestpeople request))                                          ;;高龄老人
   (POST "/old/addenpeople" request (old/add-emptynestpeople request))                                ;;空巢老人数据添加

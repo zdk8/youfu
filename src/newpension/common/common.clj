@@ -14,6 +14,7 @@
 
 
 (def selectcols {:kccols [:nation :gntype :marriage :culture :emptyreason :visittime :monthincome :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :zq_barrierfree :zq_pensionagency :zq_homecare :zq_volunteers :zq_other :gender :havechildren]
+                       :carecenter     [:name :register :phone :contact :address :busline :coordinates :buildarea :function :runtime]
                  })
 
 
@@ -118,3 +119,18 @@
   (if  (= (count (str condvalue)) 0)
     " "
     (str " and " condname " like '%" condvalue "%' ")))
+
+
+(defn dateformat-bf-insert
+  "数据插入数据库前对时间进行格式化函数"
+  [results & keys]
+  (if (= 0 (count keys)) results
+    (recur  (timefmt-bef-insert results (first keys)) (rest keys)))
+  )
+
+(defn dateymd-bf-list
+  "数据展示前对时间进行格式化处理函数"
+  [results & keys]
+  (if (= 0 (count keys)) results
+    (recur (time-before-list results (first keys)) (rest keys)))
+  )
