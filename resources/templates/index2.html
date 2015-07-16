@@ -179,7 +179,8 @@
         var gettabs = function (title,htm) {
             return $('#tabs').tabs('add',{
                 title:title,
-                content:'<div style="height: 95.6%;margin: 10px;">'+htm+'</div>',
+//                content:'<div style="height: 95.6%;margin: 10px;border: 1px solid red">'+htm+'</div>',
+                content:htm,
                 closable:true
             }).tabs('getTab',title);
         }

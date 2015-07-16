@@ -1,22 +1,39 @@
-<div style="border: 1px solid #e5e5e5;height: 50px;margin-bottom: 10px;background-color: #dbeff2">111</div>
-<div style="border: 1px solid #e5e5e5;height: 88%;">
-    <table class="easyui-datagrid" data-options="fit:true">
-        <thead>
-        <tr>
-            <th data-options="field:'code'">Code</th>
-            <th data-options="field:'name'">Name</th>
-            <th data-options="field:'price'">Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>001</td><td>name1</td><td>2323</td>
-        </tr>
-        <tr>
-            <td>002</td><td>name2</td><td>4612</td>
-        </tr>
-        </tbody>
-    </table>
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',border:false"
+         style="height:65px;padding:10px 15px 0 15px;">
+        <div style="border: 1px solid #e5e5e5;
+                                            width: auto;height: 85%;background-color: #eff3f8;">
+            <div style="height: 35px;padding-top: 12px;border: 1px solid red">
+                &nbsp;<span>姓名 </span><span><input type="text" size="5" style="height: 20px"></span>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
+        <table class="easyui-datagrid" data-options="fit:true,
+                                                                fitColumns:true,pagination:true">
+            <thead>
+            <tr>
+                <th data-options="field:'code',width:100,align:'center'">姓名</th>
+                <th data-options="field:'name',width:100,align:'center'">出生年月</th>
+                <th data-options="field:'price',width:100,align:'center'">身份证号</th>
+                <th data-options="field:'price',width:100,align:'center',
+                                            formatter:function(value,rowData,rowIndex){
+                                            var str='<div></div>';
+                                            str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;>删除</a>');
+                                            return str.html();
+                                        }">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>夏留金</td><td>1950-04-11</td><td>330424194406182017</td><td>2323</td>
+            </tr>
+            <tr>
+                <td>鲍天松</td><td>1959-04-02</td><td>330424195904022010</td><td>2323</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
