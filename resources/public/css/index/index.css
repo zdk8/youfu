@@ -28,8 +28,15 @@
 
 
 /*#####west######*/
-/*a,img{border:0;}*/
-a,a:hover{color:#000;text-decoration:none;}
+a,img{
+    border:0;
+    color:#000;
+    text-decoration:none;
+}
+a:hover{
+    color:#104b67;
+    border-bottom: 1px solid #6fb3e0;
+}
 
 .left{
     width: 100%;
@@ -108,6 +115,22 @@ a,a:hover{color:#000;text-decoration:none;}
 }
 .centertip span{
     color: #0080d8;
+}
+
+/*查询栏*/
+/*###########按钮############*/
+.inputtext{
+    height: 20px;border: 1px solid #e5e5e5;
+}
+.btn{
+    background-color: #6fb3e0;
+    color: #ffffff;
+    border: 1px solid #6fb3e0;
+    cursor: pointer;height: 22px;width: 60px;
+}
+.btn:active{
+    position: relative;
+    top: 1px;
 }
 
 

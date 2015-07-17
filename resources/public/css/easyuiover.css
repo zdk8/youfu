@@ -68,7 +68,7 @@
 }
 
 /*datagird样式调整*/
-.datagrid-header, .datagrid-td-rownumber {
+.datagrid-header {
     background-color: #6fb3e0;
     background: linear-gradient(to bottom,#6fb3e0 0,#6fb3e0 100%);
     background-repeat: repeat-x;
