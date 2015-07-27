@@ -73,7 +73,7 @@ define(function(){
             var name = local.find('[opt=name]');                        //姓名
             var gender = local.find('[opt=gender]');        //性别
             /*搜索*/
-            local.find('.searchbtn').click(function(){
+            local.find('[opt=query]').click(function(){
                 peopleinfodatarid.datagrid('load',{
                     name:name.val(),
                     gender:gender.combobox('getValue'),

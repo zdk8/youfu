@@ -30,8 +30,8 @@ define(function(){
                                             var title = "【"+record.name+'】服务申请详细信息'
                                             cj.showContent({                                          //详细信息(tab标签)
                                                 title:title,
-                                                htmfile:'text!views/pension/PensionServiceApply.htm',
-                                                jsfile:'views/pension/PensionServiceApply',
+                                                htmfile:'text!views/pension/serviceassinfo/PensionServiceApply.htm',
+                                                jsfile:'views/pension/serviceassinfo/PensionServiceApply',
                                                 queryParams:{
                                                     actiontype:'information',         //（详细信息）操作方式
                                                     data:record,
@@ -48,8 +48,8 @@ define(function(){
 //                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                                 cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
-                                                    htmfile:'text!views/pension/ServiceAgenciesForm.htm',
-                                                    jsfile:'views/pension/ServiceAgenciesForm',
+                                                    htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesForm.htm',
+                                                    jsfile:'views/pension/serviceassinfo/ServiceAgenciesForm',
                                                     queryParams:{
                                                         actiontype:'update',         //（处理）操作方式
                                                         data:record,
@@ -84,8 +84,8 @@ define(function(){
 //                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                                 cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
-                                                    htmfile:'text!views/pension/ServiceAgenciesPeople.htm',
-                                                    jsfile:'views/pension/ServiceAgenciesPeople',
+                                                    htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesPeople.htm',
+                                                    jsfile:'views/pension/serviceassinfo/ServiceAgenciesPeople',
                                                     queryParams:{
                                                         actiontype:'addfwry',         //（处理）操作方式
                                                         data:record,
@@ -109,7 +109,7 @@ define(function(){
                     toolbar:local.find('div[tb]')
                 })
 
-            local.find('.searchbtn').click(function(){
+            local.find('[opt=query]').click(function(){
                 localDataGrid.datagrid('load',{
                     departname:local.find('[opt=departname]').val()
                 })
@@ -120,8 +120,8 @@ define(function(){
                 var title = "添加服务机构"
                 cj.showContent({                                          //添加服务机构
                     title:title,
-                    htmfile:'text!views/pension/ServiceAgenciesForm.htm',
-                    jsfile:'views/pension/ServiceAgenciesForm',
+                    htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesForm.htm',
+                    jsfile:'views/pension/serviceassinfo/ServiceAgenciesForm',
                     queryParams:{
                         actiontype:'add',         //（处理）操作方式
                         data:"",

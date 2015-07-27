@@ -1,4 +1,4 @@
-define(['views/pension/PensionServiceAss'],function(psafile){
+define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
     return {
         render:function(local,option){
             var localDataGrid;
@@ -40,8 +40,8 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                                                         if(data){
                                                             cj.showContent({                                          //详细信息(tab标签)
                                                                 title:title,
-                                                                htmfile:'text!views/pension/HospitalSubsidy.htm',
-                                                                jsfile:'views/pension/HospitalSubsidy',
+                                                                htmfile:'text!views/pension/hospitalinfo/HospitalSubsidy.htm',
+                                                                jsfile:'views/pension/hospitalinfo/HospitalSubsidy',
                                                                 queryParams:{
                                                                     actiontype:'info',         //（处理）操作方式
                                                                     record:record,
@@ -71,8 +71,8 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                                                         if(data){
                                                             cj.showContent({                                          //详细信息(tab标签)
                                                                 title:title,
-                                                                htmfile:'text!views/pension/HospitalSubsidy.htm',
-                                                                jsfile:'views/pension/HospitalSubsidy',
+                                                                htmfile:'text!views/pension/hospitalinfo/HospitalSubsidy.htm',
+                                                                jsfile:'views/pension/hospitalinfo/HospitalSubsidy',
                                                                 queryParams:{
                                                                     actiontype:'zybzdealwith',         //（处理）操作方式
                                                                     record:record,
@@ -97,11 +97,10 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                             }
                         }
                     },
-                    striped:true,
-                    toolbar:local.find('div[tb]')
+                    striped:true
                 })
 
-            local.find('.searchbtn').click(function(){
+            local.find('[opt=query]').click(function(){
                 localDataGrid.datagrid('load',{
                     name:local.find('[opt=name]').val(),
                     identityid:local.find('[opt=identityid]').val()

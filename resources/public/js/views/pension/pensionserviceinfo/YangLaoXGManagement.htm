@@ -1,7 +1,20 @@
 <!--养老星光管理-->
-<table opt="yanlaoxgmanagement" data-options="
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',border:false"
+         style="height:65px;padding:10px 15px 0 15px;">
+        <div style="border: 1px solid #e5e5e5;width: auto;height: 85%;background-color: #eff3f8;">
+            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                &nbsp;<span>机构名称 </span><span><input type="text" size="15" class="inputtext"></span>
+                <span style="float: right;margin-top: 3px">
+                    <input type="button" value="查询" class="btns" opt="query">
+                    <input class="btns" opt="addylxg" type="button" value="添加星光老年之家机构" style="width: 150px;">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
+        <table opt="yanlaoxgmanagement" data-options="
                method:'post',
-               toolbar:'#tb_xggl',
                fit:true,
                fitColumns:true,
                border:false,
@@ -11,53 +24,24 @@
                singleSelect:true,
                pagination:true,
                loadMsg:''">
-    <thead>
-    <tr>
-        <!--<th data-options="field:'ck',checkbox:true"></th>
-        <th data-options="field:'dep_id',hidden:true"></th>-->
-        <th data-options="field:'ro',width:145,align:'center',formatter:function(value,rowData,rowIndex)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>');
-                str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;><span><span class=&quot;icon-del-pl15&quot;></span></span></a>');
-                return str.html();
-            }">操作
-        </th>
-        <th data-options="field:'departname',width:145,align:'center'">机构名称</th>
-        <th data-options="field:'telephone',width:145,align:'center'">联系电话</th>
-        <th data-options="field:'people',width:145,align:'center'">联系人</th>
-        <th data-options="field:'address',width:145,align:'center'">联系地址</th>
-        <th data-options="field:'busline',width:145,align:'center'">公交线路</th>
-    </tr>
-    </thead>
-</table>
-<div id="tb_xggl" style="padding-bottom: 3px;">
-    <table cellspacing="0" cellpadding="0" style="float: left">
-        <tr>
-            <td><input class="buttontype" opt="addylxg" type="button" value="添加星光老年之家机构"></td>
-        </tr>
-    </table>
-    <table cellspacing="0" cellpadding="0" style="float: right;">
-        <tr>
-
-            <!--<td><label class="gray7">搜索条件:</label></td>-->
-
-            <td>
-                机构名称 :
-                <input opt="departname" type="text" style="height: 18px;border-color: #95B8E7">
-                &nbsp;&nbsp;
-            </td>
-            <!--<td style="width: 200px;text-align: right">
-                <input opt="departname" class="easyui-searchbox" data-options="prompt:'机构名称',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>-->
-
-            <td>
-                <span class="searchbtn" opt="refresh">&nbsp;</span>
-            </td>
-
-        </tr>
-    </table>
-    <div class="clear"></div>
+            <thead>
+            <tr>
+                <th data-options="field:'departname',width:145,align:'center'">机构名称</th>
+                <th data-options="field:'people',width:80,align:'center'">联系人</th>
+                <th data-options="field:'telephone',width:145,align:'center'">联系电话</th>
+                <th data-options="field:'address',width:145,align:'center'">联系地址</th>
+                <th data-options="field:'busline',width:145,align:'center'">公交线路</th>
+                <th data-options="field:'ro',width:145,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;><span><span class=&quot;icondealwith&quot;>修改</span></span></a>&nbsp;|&nbsp;');
+                    str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;><span><span class=&quot;icondealwith&quot;>删除</span></span></a>');
+                    return str.html();
+                }">操作</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 </div>
+
 

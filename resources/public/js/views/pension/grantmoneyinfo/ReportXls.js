@@ -5,17 +5,7 @@ define(function(){
         var reportsummary = local.find('[opt=reportsummary]'); //汇总表
         var reportmonths = local.find('[opt=reportmonths]'); //月份表
         var month_span = local.find('[opt=month_span]'); //月份条件
-        tabchange.change(function(){
-            if(tabchange.val() == "0"){         //汇总表
-                month_span.hide();
-                reportmonths.hide();
-                reportsummary.show();
-            }else if(tabchange.val() == "1"){   //月份表
-                month_span.show();
-                reportmonths.show();
-                reportsummary.hide();
-            }
-        });
+
         var date = new Date();
         /*年*/
         var yearvalue = local.find('[opt=yearvalue]');
@@ -33,18 +23,18 @@ define(function(){
             columns: [[
                 { title: '被服务对象',colspan:3},
                 { title: '服务人员',colspan:3},
-                { field: 'economy1',title: '服务等级', rowspan:2,width: 90},
-                { field: 'economy',title: '人员类型', rowspan:2,width: 90},
-                { field: 'servicetime',title: '服务<br>时间', rowspan:2,width: 50},
-                { field: 'subsidy_money',title: '住院补助', rowspan:2,width: 90},
-                { field: 'address1',title: '补助金额', rowspan:2,width: 90}
+                { field: 'economy1',title: '服务等级', rowspan:2,width: 90,align:'center'},
+                { field: 'economy',title: '人员类型', rowspan:2,width: 90,align:'center'},
+                { field: 'servicetime',title: '服务时间', rowspan:2,width: 80,align:'center'},
+                { field: 'subsidy_money',title: '住院补助', rowspan:2,width: 90,align:'center'},
+                { field: 'address1',title: '补助金额', rowspan:2,width: 90,align:'center'}
             ],[
-                { field: 'name',title: '姓名', width: 70 },
-                { field: 'identityid',title: '身份证号', width: 170 },
-                { field: 'address',title: '家庭地址', width: 200 },
-                { field: 'servicername',title: '姓名', width: 70 },
-                { field: 'servicephone',title: '身份证号', width: 170 },
-                { field: 'serviceaddress',title: '家庭地址', width: 200 }
+                { field: 'name',title: '姓名', width: 70,align:'center'},
+                { field: 'identityid',title: '身份证号', width: 170,align:'center'},
+                { field: 'address',title: '家庭地址', width: 200,align:'center'},
+                { field: 'servicername',title: '姓名', width: 70,align:'center'},
+                { field: 'servicephone',title: '身份证号', width: 170,align:'center'},
+                { field: 'serviceaddress',title: '家庭地址', width: 200,align:'center'}
             ]],
             onLoadSuccess:function(data){
             }
@@ -55,6 +45,21 @@ define(function(){
                 year:date.getFullYear()
             },
             onLoadSuccess:function(data){
+            }
+        });
+
+        tabchange.change(function(){
+            if(tabchange.val() == "0"){         //汇总表
+                month_span.hide();
+                reportmonths.hide();
+                reportsummary.show();
+            }else if(tabchange.val() == "1"){   //月份表
+                month_span.show();
+                reportmonths.show();
+                /*setTimeout(function(){
+                    reportmonths.datagrid('reload');
+                },500);*/
+                reportsummary.hide();
             }
         });
 
@@ -117,14 +122,14 @@ define(function(){
             for(var i=0;i<=poorval;i++){
                 str.push(month[parseInt(month1.val())+i])
                 strnum.push(monthnum[parseInt(month1.val())+i])
-                strmonth.push({ field: month[parseInt(month1.val())+i],title: month[parseInt(month1.val())+i]+'月', rowspan:2,width: 60})
+                strmonth.push({ field: month[parseInt(month1.val())+i],title: month[parseInt(month1.val())+i]+'月', rowspan:2,width: 60,align:'center'})
             }
             monthvalue.val(str.toString());
             monthvaluenum.val(strnum.toString());
-            strmonth.push({ field: 'economy1',title: '服务等级', rowspan:2,width: 90})
-            strmonth.push({ field: 'economy',title: '人员类型', rowspan:2,width: 90})
-            strmonth.push({ field: 'servicetime',title: '服务<br>时间', rowspan:2,width: 50})
-            strmonth.push({ field: 'subsidy_money',title: '住院补助', rowspan:2,width: 90})
+            strmonth.push({ field: 'economy1',title: '服务等级', rowspan:2,width: 90,align:'center'})
+            strmonth.push({ field: 'economy',title: '人员类型', rowspan:2,width: 90,align:'center'})
+            strmonth.push({ field: 'servicetime',title: '服务时间', rowspan:2,width: 80,align:'center'})
+            strmonth.push({ field: 'subsidy_money',title: '住院补助', rowspan:2,width: 90,align:'center'})
 
             reportmonthstab.datagrid({
                 url:'audit/getmoneyreport',
@@ -134,12 +139,12 @@ define(function(){
                     year:yearvalue.val()
                 },
                 columns: [strmonth,[
-                    { field: 'name',title: '姓名', width: 70 },
-                    { field: 'identityid',title: '身份证号', width: 170 },
-                    { field: 'address',title: '家庭地址', width: 200 },
-                    { field: 'servicername',title: '姓名', width: 70 },
-                    { field: 'servicephone',title: '身份证号', width: 170 },
-                    { field: 'serviceaddress',title: '家庭地址', width: 200 }
+                    { field: 'name',title: '姓名', width: 70,align:'center'},
+                    { field: 'identityid',title: '身份证号', width: 170,align:'center'},
+                    { field: 'address',title: '家庭地址', width: 200,align:'center'},
+                    { field: 'servicername',title: '姓名', width: 70,align:'center'},
+                    { field: 'servicephone',title: '身份证号', width: 170,align:'center'},
+                    { field: 'serviceaddress',title: '家庭地址', width: 200,align:'center'}
                 ]],
                 onLoadSuccess:function(data){
                     //console.log(data)

@@ -2,8 +2,8 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '提交',hidden:'hidden',opt:'commit'},
-            {text: '处理',hidden:'hidden',opt:'dealwith'}
+            {text: '提交',hidden:'hidden',opt:'commit',class:'btns'},
+            {text: '处理',hidden:'hidden',opt:'dealwith',class:'btns'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -278,7 +278,7 @@ define(function(){
     }
     var render=function(l,o){
         create(l, o);
-        if(o.queryParams) {
+        if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'info':
                     showinfo(l,o);                  //查看详细信息，并可进行修改

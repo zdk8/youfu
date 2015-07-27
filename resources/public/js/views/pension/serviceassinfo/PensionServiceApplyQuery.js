@@ -1,4 +1,4 @@
-define(['views/pension/PensionServiceAss'],function(psafile){
+define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
     return {
         render:function(local,option){
             var localDataGrid;
@@ -28,8 +28,8 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                                             var title = "【"+record.name+'】服务申请详细信息'
                                             cj.showContent({                                          //详细信息(tab标签)
                                                 title:title,
-                                                htmfile:'text!views/pension/PensionServiceApply.htm',
-                                                jsfile:'views/pension/PensionServiceApply',
+                                                htmfile:'text!views/pension/serviceassinfo/PensionServiceApply.htm',
+                                                jsfile:'views/pension/serviceassinfo/PensionServiceApply',
                                                 queryParams:{
                                                     actiontype:'info',         //（详细信息）操作方式
                                                     data:record,
@@ -68,11 +68,10 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                             }
                         }
                     },
-                    striped:true,
-                    toolbar:local.find('div[tb]')
+                    striped:true
                 })
 
-            local.find('.searchbtn').click(function(){
+            local.find('[opt=query]').click(function(){
                 localDataGrid.datagrid('load',{
                     name:local.find('[opt=name]').val(),
                     identityid:local.find('[opt=identityid]').val()

@@ -19,6 +19,7 @@ define(function () {
             addToolBar(local);
             if(option && option.queryParams){
                 if(option.queryParams.actiontype == "add"){
+                    local.find('[name=zl_name]').val(option.queryParams.data.name);
                     local.find('[opt=save]').show().click(function () {
                         local.find('[opt=carepeopleform]').form('submit', {
                             url:'depart/addcarepeople',

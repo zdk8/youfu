@@ -7,7 +7,7 @@ define(function(){
             };
             var datarid = local.find('.easyui-datagrid-noauto');      //查询界面datagrid
             localDataGrid = datarid.datagrid({
-                url:'depat/getcarecenterlist',
+                url:'depart/getcarepeoplelist',
                 method:'post',
                 onLoadSuccess:function(data){
                     var viewbtns=local.find('[action=view]');
@@ -36,8 +36,8 @@ define(function(){
                                     }else if($(this).attr("action")=='addcarep'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.name+'】添加照料人员',
-                                            htmfile:'text!views/pension/carepeople.htm',
-                                            jsfile:'views/pension/carepeople',
+                                            htmfile:'text!views/pension/carecenterinfo/carepeople.htm',
+                                            jsfile:'views/pension/carecenterinfo/carepeople',
                                             queryParams:{
                                                 actiontype:'add',         //（处理）操作方式
                                                 data:record,                   //填充数据
@@ -47,8 +47,8 @@ define(function(){
                                     }else if($(this).attr("action")=='addworkp'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.name+'】添加工作人员',
-                                            htmfile:'text!views/pension/careworker.htm',
-                                            jsfile:'views/pension/careworker',
+                                            htmfile:'text!views/pension/carecenterinfo/careworker.htm',
+                                            jsfile:'views/pension/carecenterinfo/careworker',
                                             queryParams:{
                                                 actiontype:'add',         //（处理）操作方式
                                                 data:record,                   //填充数据
@@ -93,8 +93,8 @@ define(function(){
                 }else{
                     cj.showContent({                                          //详细信息(tab标签)
                         title:title,
-                        htmfile:'text!views/pension/OldCareCenter.htm',
-                        jsfile:'views/pension/OldCareCenter',
+                        htmfile:'text!views/pension/carecenterinfo/OldCareCenter.htm',
+                        jsfile:'views/pension/carecenterinfo/OldCareCenter',
                         queryParams:{
                             actiontype:'add',         //（处理）操作方式
                             title:title,

@@ -1,6 +1,18 @@
 <!--老人注销查询-->
-<div class="easyui-layout"  data-options="fit:true">
-    <div data-options="region:'center'" data-options="fit:true">
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',border:false"
+         style="height:65px;padding:10px 15px 0 15px;">
+        <div style="border: 1px solid #e5e5e5;width: auto;height: 85%;background-color: #eff3f8;">
+            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
+                &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="18" class="inputtext"></span>
+                <span style="float: right;margin-top: 3px">
+                    <input type="button" value="查询" class="btns" opt="query">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
         <table class="easyui-datagrid-noauto" opt="peopleinfoquery"
                data-options="
                method:'post',
@@ -17,13 +29,6 @@
             <thead>
             <tr>
                 <th data-options="field:'lr_id',hidden:true" ></th>
-                <th data-options="field:'ro',width:150,align:'center',formatter:function(value,rowData,rowIndex)
-                {
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>');
-                    return str.html();
-                }">操作
-                </th>
                 <th data-options="field:'aulevel',width:127,
                 formatter: function(value,row,index){
                         if(value == '7'){
@@ -42,73 +47,16 @@
                     return str.html();
                 }">人员信息</th>
                 <th data-options="field:'auuser',width:127">办理人</th>
-                <!--<th data-options="field:'bsnyue',width:127">业务期</th>-->
                 <th data-options="field:'bstime',width:230">时间</th>
-                <!--<th data-options="field:'name',width:100,align:'center',
-                formatter:function(v,r,i)
+                <th data-options="field:'ro',width:150,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                    str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icondealwith&quot;>处理</span></span></a>');
                     return str.html();
-                }">姓名</th>-->
-                <!--<th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
-                <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
-                <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
-                <th data-options="field:'address',width:200,align:'left'">住址</th>-->
+                }">操作</th>
             </tr>
             </thead>
         </table>
-
-        <div tb style="padding-bottom: 0px">
-            <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
-            <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 25px;">
-                <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
-                    <tr>
-
-                        <td>
-                            姓名 :
-                            <input opt="name" type="text" size="10" style="height: 18px;border-color: #95B8E7">
-                            &nbsp;&nbsp;
-                        </td>
-
-                        <td>
-                            身份证 :
-                            <input opt="identityid" type="text" style="height: 18px;border-color: #95B8E7">
-                        </td>
-
-                        <td>
-                            <span class="searchbtn" >&nbsp;</span>
-                        </td>
-
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <!--<div tb>
-            <table cellspacing="0" cellpadding="0" style="float: right">
-                <tr>
-
-                    <td><label class="gray7">搜索条件:</label></td>
-
-                    <td style="width: 200px;text-align: right">
-                        <input opt="name" class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
-                               type="keyword" style="width:200px" >
-                    </td>
-
-                    <td style="width: 200px;text-align: right">
-                        <input opt="identityid" class="easyui-searchbox" data-options="prompt:'身份证',iconCls:'icon-log'"
-                               type="keyword" style="width:200px" >
-                    </td>
-
-                    <td>
-                        <span class="searchbtn" >&nbsp;</span>
-                    </td>
-
-                </tr>
-            </table>
-            <div class="clear"></div>
-        </div>-->
-
     </div>
 </div>
 

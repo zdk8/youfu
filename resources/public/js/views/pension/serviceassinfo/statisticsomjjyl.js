@@ -193,7 +193,10 @@ define(function(){
 
                 var obj  = format(data.rows,dvnames)
                 /*加载图形*/
-                renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local)
+                renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local);
+                local.find('[opt=refresh]').click(function () {
+                    renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local);
+                });
             },
             //striped:true,
             rowStyler2: function(index,row){

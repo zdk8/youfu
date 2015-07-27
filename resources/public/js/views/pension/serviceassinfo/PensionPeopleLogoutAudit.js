@@ -1,4 +1,4 @@
-define(['views/pension/PensionServiceAss'],function(psafile){
+define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
     return {
         render:function(local,option){
             var localDataGrid;
@@ -70,8 +70,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                             }
                         }
                     },
-                    striped:true,
-                    toolbar:local.find('div[tb]')
+                    striped:true
                 })
 
             function getapplybyidFunc(params){
@@ -87,8 +86,8 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                         if(data){
                             cj.showContent({                                          //详细信息(tab标签)
                                 title:params.title,
-                                htmfile:'text!views/pension/PensionPeopleLogout.htm',
-                                jsfile:'views/pension/PensionPeopleLogout',
+                                htmfile:'text!views/pension/serviceassinfo/PensionPeopleLogout.htm',
+                                jsfile:'views/pension/serviceassinfo/PensionPeopleLogout',
                                 queryParams:{
                                     actiontype:'logoutdealwith',         //（处理）操作方式
                                     data:data[0],
@@ -106,7 +105,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                 })
             }
 
-            local.find('.searchbtn').click(function(){
+            local.find('[opt=query]').click(function(){
                 localDataGrid.datagrid('load',{
                     name:local.find('[opt=name]').val(),
                     identityid:local.find('[opt=identityid]').val()

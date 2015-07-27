@@ -1,5 +1,21 @@
 <!--入住人员管理-->
-<table opt="ruzhurymanagement" data-options="
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',border:false"
+         style="height:65px;padding:10px 15px 0 15px;">
+        <div style="border: 1px solid #e5e5e5;width: auto;height: 85%;background-color: #eff3f8;">
+            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                &nbsp;<span>机构名称 </span><span><input opt="departname" type="text" size="15" class="inputtext"></span>
+                &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
+                &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="18" class="inputtext"></span>
+                <span style="float: right;margin-top: 3px">
+                    <input type="button" value="查询" class="btns" opt="query">
+                    <input class="btns" type="button" opt="exportexcel" value="导出Excel" style="width: 80px;">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
+        <table opt="ruzhurymanagement" data-options="
                method:'post',
                fit:true,
                border:false,
@@ -9,78 +25,45 @@
                singleSelect:false,
                pagination:true,
                loadMsg:''">
-    <thead>
-    <tr>
-        <th data-options="field:'ro',width:80,align:'center',formatter:function(value,rowData,rowIndex)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;cancellation&quot;title=&quot;注销&quot;><span><span class=&quot;icon-cancell-pl1&quot;></span></span></a>&nbsp;&nbsp;');
-                return str.html();
-            }"><a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;操作</th>
-        <th data-options="field:'departname',width:160,align:'center'">机构名称</th>
-        <th data-options="field:'name',width:145,align:'center',
-            formatter:function(v,r,i)
+            <thead>
+            <tr>
+                <th data-options="field:'departname',width:160,align:'center'">机构名称</th>
+                <th data-options="field:'name',width:80,align:'center',
+                formatter:function(v,r,i)
+                    {
+                        var str='<div></div>';
+                        str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                        return str.html();
+                    }">姓名</th>
+                <th data-options="field:'age',width:60,align:'center'">年龄</th>
+                <th data-options="field:'sex',width:60,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
+                <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
+                <th data-options="field:'address',width:200,align:'center'">家庭住址</th>
+                <th data-options="field:'checkintime',width:145,align:'center'">入住时间</th>
+                <th data-options="field:'registration',width:145,align:'center'">户籍地</th>
+                <th data-options="field:'type',width:100,align:'center',hidden:true,
+                formatter: cj.enumFormatter('oldtype')">人员类别</th>
+                    <th data-options="field:'marriage',width:100,align:'center',hidden:true,
+                formatter: cj.enumFormatter('marriage')">婚姻状况</th>
+                <th data-options="field:'culture',width:100,align:'center',hidden:true,
+                formatter: cj.enumFormatter('culture')">文化程度</th>
+                <th data-options="field:'liveplace',width:100,align:'center',hidden:true,
+                formatter: cj.enumFormatter('liveplace')">居住环境</th>
+                <th data-options="field:'yesorno',width:100,align:'center',hidden:true,
+                formatter: cj.enumFormatter('yesorno')">是否需要护理</th>
+                <th data-options="field:'contact',width:100,align:'center',hidden:true">联系人</th>
+                <th data-options="field:'phone',width:100,align:'center',hidden:true">联系电话</th>
+                <th data-options="field:'cellphone',width:100,align:'center',hidden:true">手机</th>
+                <th data-options="field:'health',width:100,align:'center',hidden:true,
+                formatter: cj.enumFormatter('health')">身体状况</th>
+                <th data-options="field:'ro',width:80,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                    str=$(str).append('<a action=&quot;cancellation&quot;title=&quot;注销&quot;><span><span class=&quot;icondealwith&quot;>注销</span></span></a>&nbsp;&nbsp;');
                     return str.html();
-                }">姓名</th>
-        <th data-options="field:'age',width:60,align:'center'">年龄</th>
-        <th data-options="field:'sex',width:60,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
-        <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
-        <th data-options="field:'address',width:200,align:'center'">家庭住址</th>
-        <th data-options="field:'checkintime',width:145,align:'center'">入住时间</th>
-        <th data-options="field:'registration',width:145,align:'center'">户籍地</th>
-        <th data-options="field:'type',width:100,align:'center',hidden:true,
-            formatter: cj.enumFormatter('oldtype')">人员类别</th>
-        <th data-options="field:'marriage',width:100,align:'center',hidden:true,
-            formatter: cj.enumFormatter('marriage')">婚姻状况</th>
-        <th data-options="field:'culture',width:100,align:'center',hidden:true,
-            formatter: cj.enumFormatter('culture')">文化程度</th>
-        <th data-options="field:'liveplace',width:100,align:'center',hidden:true,
-            formatter: cj.enumFormatter('liveplace')">居住环境</th>
-        <th data-options="field:'yesorno',width:100,align:'center',hidden:true,
-            formatter: cj.enumFormatter('yesorno')">是否需要护理</th>
-        <th data-options="field:'contact',width:100,align:'center',hidden:true">联系人</th>
-        <th data-options="field:'phone',width:100,align:'center',hidden:true">联系电话</th>
-        <th data-options="field:'cellphone',width:100,align:'center',hidden:true">手机</th>
-        <th data-options="field:'health',width:100,align:'center',hidden:true,
-            formatter: cj.enumFormatter('health')">身体状况</th>
-    </tr>
-    </thead>
-</table>
-<div tb style="padding-bottom: 0px">
-    <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
-    <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 25px;">
-        <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
-            <tr>
-                <td>
-                    机构名称 :
-                    <input opt="departname" type="text">
-                    &nbsp;&nbsp;
-                </td>
-
-                <td>
-                    姓名 :
-                    <input opt="name" type="text" size="10">
-                    &nbsp;&nbsp;
-                </td>
-
-                <td>
-                    身份证 :
-                    <input opt="identityid" type="text">
-                </td>
-
-                <td>
-                    <span class="searchbtn" opt="refresh">&nbsp;</span>
-                </td>
-
-                <td>
-                    &nbsp;&nbsp;
-                    <input class="highcharstoolbarbutton" type="button" opt="exportexcel" value="导出Excel">
-                </td>
-
+                }"><a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;操作</th>
             </tr>
+            </thead>
         </table>
     </div>
 </div>

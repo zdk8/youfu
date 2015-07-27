@@ -1,4 +1,4 @@
-define(['views/pension/PensionServiceAss'],function(psafile){
+define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
     return {
         render:function(local,option){
             var localDataGrid;
@@ -58,8 +58,8 @@ define(['views/pension/PensionServiceAss'],function(psafile){
 //                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                                 cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
-                                                    htmfile:'text!views/pension/PensionPeopleLogout.htm',
-                                                    jsfile:'views/pension/PensionPeopleLogout',
+                                                    htmfile:'text!views/pension/serviceassinfo/PensionPeopleLogout.htm',
+                                                    jsfile:'views/pension/serviceassinfo/PensionPeopleLogout',
                                                     queryParams:{
                                                         actiontype:'logout',         //（处理）操作方式
                                                         data:record,
@@ -76,8 +76,8 @@ define(['views/pension/PensionServiceAss'],function(psafile){
 //                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                                 cj.showContent({                                          //变更详细信息(tab标签)
                                                     title:title,
-                                                    htmfile:'text!views/pension/PensionServiceApply.htm',
-                                                    jsfile:'views/pension/PensionServiceApply',
+                                                    htmfile:'text!views/pension/serviceassinfo/PensionServiceApply.htm',
+                                                    jsfile:'views/pension/serviceassinfo/PensionServiceApply',
                                                     queryParams:{
                                                         actiontype:'change',         //（处理）操作方式
                                                         data:record,
@@ -109,7 +109,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                 })
             })
 
-            local.find('.searchbtn').click(function(){
+            local.find('[opt=query]').click(function(){
                 localDataGrid.datagrid('load',{
                     datatype:local.find('[opt=ppselect]').val(),
                     name:local.find('[opt=name]').val(),

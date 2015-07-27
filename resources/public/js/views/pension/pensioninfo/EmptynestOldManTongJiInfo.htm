@@ -1,20 +1,3 @@
-<!--<style type="text/css">
-    body{ font-size:14px;}
-    input{ vertical-align:middle; margin:0; padding:0}
-    .file-box{ position:relative;width:340px}
-    .txt{ height:22px; border:1px solid #cdcdcd; width:150px;}
-    .btn{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;}
-    .btn:active {
-        position: relative;
-        top: 1px;
-    }
-    .file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px }
-</style>
-<div class="easyui-layout"  data-options="fit:true">
-    <div data-options="region:'center'" data-options="fit:true">
-
-    </div>
-</div>-->
 <table class="easyui-datagrid-noauto" opt="peopleinfoquery"
        data-options="
                method:'post',
@@ -26,25 +9,29 @@
                singleSelect:true,
                loadMsg:'',
                pagination:true">
+    <thead frozen="true">
+        <tr>
+            <th data-options="field:'name',width:90,align:'center',
+                    formatter:function(v,r,i)
+                    {
+                        var str='<div></div>';
+                        str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                        return str.html();
+                    }">姓名</th>
+        </tr>
+    </thead>
     <thead>
-    <tr>
-        <th data-options="field:'name',width:90,align:'center',
-                formatter:function(v,r,i)
-                {
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
-                    return str.html();
-                }">姓名</th>
-        <th data-options="field:'gender',width:60,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
-        <th data-options="field:'nation',width:60,align:'center',formatter: cj.enumFormatter('oldnation')">名族</th>
-        <th data-options="field:'age',width:40,align:'center',hidden:true">年龄</th>
-        <th data-options="field:'birthd',width:120,align:'center'">出生年月</th>
-        <!--<th data-options="field:'identityid',width:190,align:'center'">身份证号</th>-->
-        <!--<th data-options="field:'type',width:100,align:'center',formatter: cj.enumFormatter('oldtype')">人员类别</th>-->
-        <th data-options="field:'address',width:200,align:'center'">家庭住址</th>
-        <th data-options="field:'registration',width:190,align:'center'">户籍地</th>
-        <th data-options="field:'mobilephone',width:120,align:'center'">手机号码</th>
-    </tr>
+        <tr>
+            <th data-options="field:'gender',width:60,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
+            <th data-options="field:'nation',width:60,align:'center',formatter: cj.enumFormatter('oldnation')">名族</th>
+            <th data-options="field:'age',width:40,align:'center',hidden:true">年龄</th>
+            <th data-options="field:'birthd',width:120,align:'center'">出生年月</th>
+            <!--<th data-options="field:'identityid',width:190,align:'center'">身份证号</th>-->
+            <!--<th data-options="field:'type',width:100,align:'center',formatter: cj.enumFormatter('oldtype')">人员类别</th>-->
+            <th data-options="field:'address',width:200,align:'center'">家庭住址</th>
+            <th data-options="field:'registration',width:190,align:'center'">户籍地</th>
+            <th data-options="field:'mobilephone',width:120,align:'center'">手机号码</th>
+        </tr>
     </thead>
 </table>
 

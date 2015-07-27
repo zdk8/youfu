@@ -1,7 +1,7 @@
 define(function(){
     var render = function(local,option){
         var rzrygl = local.find('[opt=ruzhurymanagement]');        //入住人员管理
-        var refresh = local.find('[opt=refresh]');               //刷新
+        var refresh = local.find('[opt=query]');               //刷新
         var departname = local.find('[opt=departname]');        //机构名称
         var name = local.find('[opt=name]');                     //姓名
         var identityid = local.find('[opt=identityid]');        //身份证
@@ -53,8 +53,8 @@ define(function(){
                                     }else{
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:title,
-                                            htmfile:'text!views/pension/RuZhuRYDlg.htm',
-                                            jsfile:'views/pension/RuZhuRYDlg',
+                                            htmfile:'text!views/pension/pensionserviceinfo/RuZhuRYDlg.htm',
+                                            jsfile:'views/pension/pensionserviceinfo/RuZhuRYDlg',
                                             queryParams:{
                                                 actiontype:'view',         //（处理）操作方式
 //                                                data:data,                   //填充数据
@@ -109,7 +109,7 @@ define(function(){
         /*添加字段*/
         local.find('[opt=addfield]').click(function(){
             var closobj = rzrygl.datagrid('options').columns[0];
-            require(['commonfuncs/popwin/win','text!views/pension/RuZhuRYXlsFields.htm','views/pension/RuZhuRYXlsFields'],
+            require(['commonfuncs/popwin/win','text!views/pension/pensionserviceinfo/RuZhuRYXlsFields.htm','views/pension/pensionserviceinfo/RuZhuRYXlsFields'],
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'选择字段',

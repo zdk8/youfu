@@ -6,8 +6,7 @@ define(function(){
             queryParams:{
                 bsnyue: ""
             },
-            onLoadSuccess:function(){},
-            toolbar:local.find('div[tb]')
+            onLoadSuccess:function(){}
         });
         var bsnyue = local.find('[opt=bsnyue]');        //业务期
         bsnyue.datebox({
@@ -21,7 +20,7 @@ define(function(){
         var identityid = local.find('[opt=identityid]');        //身份证
         bsnyue.datebox('setValue',formatterYM(new Date()))
         //搜索
-        local.find('[opt=searchbtn]').click(function(){
+        local.find('[opt=query]').click(function(){
             ppgrantmoneyissuedlg.datagrid('load',{
                 bsnyue:bsnyue.datebox('getValue'),
                 name:name.val(),

@@ -1,4 +1,4 @@
-define(['views/pension/PensionServiceAss'],function(psafile){
+define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
     return {
         render:function(local,option){
             var localDataGrid;
@@ -32,7 +32,7 @@ define(['views/pension/PensionServiceAss'],function(psafile){
                 year=Number(year)+1;
                 yearvalue.val(year);
             });
-            local.find('.searchbtn').click(function(){
+            local.find('[opt=query]').click(function(){
                 localDataGrid.datagrid('load',{
                     year:yearvalue.val(),
                     name:local.find('[opt=name]').val(),

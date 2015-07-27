@@ -37,7 +37,9 @@
     <div data-options="region:'north'" class="bghead">
         <div class="bghead1">&nbsp;养老管理系统</div>
         <div class="bghead2">
-            <span>欢迎！{{username}}</span>&nbsp;|&nbsp;<span style="cursor: pointer">退&nbsp;出</span>&nbsp;
+            <span>欢迎！{{username}}</span>&nbsp;|
+            <span style="cursor: pointer" opt="closeAllTabs">关&nbsp;闭</span>&nbsp;|
+            <span style="cursor: pointer">退&nbsp;出</span>&nbsp;
         </div>
     </div>
     <div data-options="region:'west',border:false" style="width:220px;border-right: 1px solid #e5e5e5">
@@ -220,6 +222,14 @@
                 $('.centertip').find('span').html(span);
             }
         })
+        /*关闭所有页签*/
+        $('[opt=closeAllTabs]').click(function () {
+            $(".tabs li").each(function(index, obj) {
+                //获取所有可关闭的选项卡
+                var tab = $(".tabs-closable", this).text();
+                $(".easyui-tabs").tabs('close', tab);
+            });
+        });
     });
 </script>
 

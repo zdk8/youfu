@@ -1,6 +1,54 @@
 <!--老人注销查询-->
-<div class="easyui-layout"  data-options="fit:true">
-    <div data-options="region:'center'" data-options="fit:true">
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',border:false"
+         style="height:65px;padding:10px 15px 0 15px;">
+        <div style="border: 1px solid #e5e5e5;width: auto;height: 85%;background-color: #eff3f8;">
+            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                <table cellspacing="0" cellpadding="0" style="float: left">
+                    <tr>
+                        <td>
+                            <select opt="ppselect">
+                                <option value="">所有老人</option>
+                                <option value="0">低保特困职工</option>
+                                <option value="1">低保边缘户</option>
+                                <option value="2">低收入</option>
+                                <option value="3">无退休工资</option>
+                                <option value="4">有退休工资</option>
+                                <option value="5">特殊贡献</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
+                    <tr>
+                        <td>
+                            姓名
+                            <input opt="name" type="text" size="5" class="inputtext">
+                            &nbsp;&nbsp;
+                        </td>
+
+                        <td>
+                            身份证
+                            <input opt="identityid" type="text" size="15" class="inputtext">
+                            &nbsp;&nbsp;
+                        </td>
+
+                        <td>
+                            年龄
+                            <input type="text" size="5" class="inputtext" opt="minage"> --
+                            <input type="text" size="5" class="inputtext" opt="maxage">岁
+                        </td>
+                        <td>
+                            &nbsp;&nbsp;
+                            <input type="button" value="查询" class="btns" opt="query">
+                            <input class="btns" type="button" opt="exportexcel" value="导出Excel" style="width: 80px;">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
         <table class="easyui-datagrid-noauto" opt="peopleinfoquery"
                data-options="
                method:'post',
@@ -13,28 +61,23 @@
                loadMsg:'',
                striped:true,
                pagination:true">
+            <thead frozen="true">
+                <th data-options="field:'name',width:80,align:'center',
+                    formatter:function(v,r,i)
+                    {
+                        var str='<div></div>';
+                        str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                        return str.html();
+                    }">姓名</th>
+            </thead>
             <thead>
             <tr>
-                <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
-                {
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;><span><span class=&quot;icon-cancell-pl1&quot;></span></span></a>&nbsp;&nbsp;');
-                    str=$(str).append('<a action=&quot;change&quot;title=&quot;变更&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>&nbsp;&nbsp;');
-                    return str.html();
-                }"><a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;操作</th>
-                <th data-options="field:'name',width:100,align:'center',
-                formatter:function(v,r,i)
-                {
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
-                    return str.html();
-                }">姓名</th>
                 <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
                 <th data-options="field:'nation',width:60,align:'center',hidden:true,
                     formatter: cj.enumFormatter('oldnation')">名族</th>
                 <th data-options="field:'age',width:60,align:'center'">年龄</th>
-                <th data-options="field:'birthd',width:150,align:'center'">出生年月</th>
-                <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
+                <th data-options="field:'birthd',width:120,align:'center'">出生年月</th>
+                <th data-options="field:'identityid',width:170,align:'center'">身份证号</th>
                 <th data-options="field:'economy',width:200,align:'center',
                     formatter: function(value,row,index){
                     return economyArr[value]
@@ -56,61 +99,16 @@
                 <th data-options="field:'postcode',width:100,align:'center',hidden:true">邮编</th>
                 <th data-options="field:'telephone',width:100,align:'center',hidden:true">住宅电话</th>
                 <th data-options="field:'mobilephone',width:100,align:'center',hidden:true">手机</th>
+                <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
+                {
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;><span><span class=&quot;icondealwith&quot;>注销</span></span></a>&nbsp;&nbsp;');
+                    str=$(str).append('<a action=&quot;change&quot;title=&quot;变更&quot;><span><span class=&quot;icondealwith&quot;>变更</span></span></a>&nbsp;&nbsp;');
+                    return str.html();
+                }"><a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;操作</th>
             </tr>
             </thead>
         </table>
-
-        <div tb style="padding-bottom: 0px">
-            <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
-            <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 25px;">
-                <table cellspacing="0" cellpadding="0" style="float: left">
-                    <tr>
-                        <td>
-                            <select opt="ppselect">
-                                <option value="">所有老人</option>
-                                <option value="0">低保特困职工</option>
-                                <option value="1">低保边缘户</option>
-                                <option value="2">低收入</option>
-                                <option value="3">无退休工资</option>
-                                <option value="4">有退休工资</option>
-                                <option value="5">特殊贡献</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
-                    <tr>
-                        <td>
-                            姓名 :
-                            <input opt="name" type="text" style="width:114px;height: 18px;border-color: #95B8E7">
-                            &nbsp;&nbsp;
-                        </td>
-
-                        <td>
-                            身份证 :
-                            <input opt="identityid" type="text" style="height: 18px;border-color: #95B8E7">
-                            &nbsp;&nbsp;
-                        </td>
-
-                        <td>
-                            年龄：
-                            <input style="width: 50px;text-align: center;height: 18px;border-color: #95B8E7" opt="minage"> --
-                            <input style="width: 50px;text-align: center;height: 18px;border-color: #95B8E7" opt="maxage">岁
-                        </td>
-
-                        <td>
-                            <span class="searchbtn" >&nbsp;</span>
-                        </td>
-
-                        <td>
-                            &nbsp;&nbsp;
-                            <input class="highcharstoolbarbutton" type="button" opt="exportexcel" value="导出Excel">
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
     </div>
 </div>
 

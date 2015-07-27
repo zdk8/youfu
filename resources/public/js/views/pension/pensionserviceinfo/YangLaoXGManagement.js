@@ -1,7 +1,7 @@
 define(function(){
     var render = function(local,option){
         var ylxggl = local.find('[opt=yanlaoxgmanagement]');        //养老机构管理
-        var refresh = local.find('[opt=refresh]');                   //刷新
+        var refresh = local.find('[opt=query]');                   //刷新
         var departname = local.find('[opt=departname]');            //机构名称
         var refreshGrid = function(){
             ylxggl.datagrid("reload")
@@ -88,8 +88,8 @@ define(function(){
             }else{
                 cj.showContent({                                          //详细信息(tab标签)
                     title:title,
-                    htmfile:'text!views/pension/YangLaoXGDlg.htm',
-                    jsfile:'views/pension/YangLaoXGDlg',
+                    htmfile:'text!views/pension/pensionserviceinfo/YangLaoXGDlg.htm',
+                    jsfile:'views/pension/pensionserviceinfo/YangLaoXGDlg',
                     queryParams:{
                         actiontype:'add',         //（处理）操作方式
                         title:title,
@@ -97,36 +97,6 @@ define(function(){
                     }
                 })
             }
-            /*require(['commonfuncs/popwin/win','text!views/pension/YangLaoXGDlg.htm','views/pension/YangLaoXGDlg'],
-                function(win,htmfile,jsfile){
-                    win.render({
-                        title:'添加养老机构',
-                        width:700,
-                        height:258,
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},
-                            {
-                                text:'保存',
-                                handler:function(html,parent){ }}
-                        ],
-                        renderHtml:function(local,submitbtn,parent){
-                            jsfile.render(local,{
-                                submitbtn:submitbtn,
-                                act:'c',
-                                parent:parent,
-                                refresh:refresh,         //刷新按钮
-                                actiontype:'add',       //操作方式
-                                onCreateSuccess:function(data){
-                                    parent.trigger('close');
-                                }
-                            })
-                        }
-                    })
-                }
-            )*/
         })
     }
     /*修改星光养老机构*/
@@ -137,8 +107,8 @@ define(function(){
         }else{
             cj.showContent({                                          //详细信息(tab标签)
                 title:title,
-                htmfile:'text!views/pension/YangLaoXGDlg.htm',
-                jsfile:'views/pension/YangLaoXGDlg',
+                htmfile:'text!views/pension/pensionserviceinfo/YangLaoXGDlg.htm',
+                jsfile:'views/pension/pensionserviceinfo/YangLaoXGDlg',
                 queryParams:{
                     actiontype:'update',         //（处理）操作方式
                     data:data,
@@ -147,37 +117,6 @@ define(function(){
                 }
             })
         }
-        /*require(['commonfuncs/popwin/win','text!views/pension/YangLaoXGDlg.htm','views/pension/YangLaoXGDlg'],
-            function(win,htmfile,jsfile){
-                win.render({
-                    title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
-                    width:700,
-                    height:258,
-                    html:htmfile,
-                    buttons:[
-                        {text:'取消',handler:function(html,parent){
-                            parent.trigger('close');
-                        }},
-                        {
-                            text:'保存',
-                            handler:function(html,parent){ }}
-                    ],
-                    renderHtml:function(local,submitbtn,parent){
-                        jsfile.render(local,{
-                            submitbtn:submitbtn,
-                            act:'c',
-                            parent:parent,
-                            refresh:refresh,         //刷新按钮
-                            actiontype:'update',       //操作方式
-                            data:data,                   //填充数据
-                            onCreateSuccess:function(data){
-                                parent.trigger('close');
-                            }
-                        })
-                    }
-                })
-            }
-        )*/
     }
 
 

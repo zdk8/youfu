@@ -1,5 +1,5 @@
 /*审核处理*/
-define(['views/pension/PensionServiceAudit','views/pension/PensionServiceAss'],function(auditfile,assfile){
+define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/serviceassinfo/PensionServiceAss'],function(auditfile,assfile){
     function render(local,option){
         var paaudit = local.find('[opt=paaudit]');               //审核datagrid
         var dealwith = local.find('[opt=dealwith]');             //处理
@@ -10,9 +10,6 @@ define(['views/pension/PensionServiceAudit','views/pension/PensionServiceAss'],f
         /*加载审核人员*/
         paaudit.datagrid({
             url:"audit/getassessaudit",
-            /*queryParams:{
-                functionid:'mHLcDiwTflgEshNKIiOV'
-            },*/
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
@@ -76,11 +73,10 @@ define(['views/pension/PensionServiceAudit','views/pension/PensionServiceAss'],f
                     }
                 }
             },
-            striped:true,
-            toolbar:local.find('div[tb]')
+            striped:true
         })
 
-        local.find('.searchbtn').click(function(){
+        local.find('[opt=query]').click(function(){
             paaudit.datagrid('load',{
                 name:local.find('[opt=name]').val(),
                 identityid:local.find('[opt=identityid]').val()

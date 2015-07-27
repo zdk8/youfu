@@ -31,7 +31,6 @@ define(function(){
             if(dateOjb){
                 var tmparr=[];
                 var categoriesDateX = [];
-                dd =dateSex
                 for(var i=0;i< dateOjb.dvalue.length;i++){
                     var istype =dateType.dvalue[i] == null?"":"-"+dateType.dvalue[i];
                     //var issex =dateSex.dvalue[i] == null?"":"-"+dateSex.dvalue[i];
@@ -192,11 +191,13 @@ define(function(){
 
                         }
 
-                        dd  =data
                         var obj  = format(data.rows,dvnames)
 
                         /*加载图形*/
-                        renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local)
+                        renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local);
+                        local.find('[opt=refresh]').click(function () {
+                            renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local);
+                        });
                     },
                     onClickRow:function(index,row){
                         var table=local.find('.datagrid-body>table');
@@ -228,7 +229,7 @@ define(function(){
                         var genderval = local.find('[opt=gender]').combobox('getValue').trim();
                         var minage = local.find('[opt=minage]').val().trim();
                         var maxage = local.find('[opt=maxage]').val().trim();
-                        require(['commonfuncs/popwin/win','text!views/pension/EmptynestOldManTongJiInfo.htm','views/pension/EmptynestOldManTongJiInfo'],
+                        require(['commonfuncs/popwin/win','text!views/pension/pensioninfo/EmptynestOldManTongJiInfo.htm','views/pension/pensioninfo/EmptynestOldManTongJiInfo'],
                             function(win,htmfile,jsfile){
                                 win.render({
                                     title:'详细信息',

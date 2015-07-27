@@ -1,8 +1,6 @@
 <div  class="easyui-panel newRadio" opt="formcontentpanel"
       style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
       data-options="fit:true,border:false">
-<!--<div class="d-content" style="max-height: 579px; overflow: auto; height: auto;">-->
-    <!--<div class="dialog_content">-->
         <form opt="rzrydlg" method="post">
             <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
                 <tbody>
@@ -14,17 +12,17 @@
                     </td>
                 </tr>
                 <tr>
-                    <th width="100">身份证<span style="color: red">*</span>:</th>
+                    <th class="formtdtext" width="100">身份证<span style="color: red">*</span>:</th>
                     <td><input type="text" name="identityid" class="input-text easyui-validatebox" ></td>
 
-                    <th>老人姓名 :</th>
+                    <th class="formtdtext">老人姓名 :</th>
                     <td><input type="text" name="name" class="input-text easyui-validatebox" ></td>
                 </tr>
                 <tr>
-                    <th>老人年龄 :</th>
+                    <th class="formtdtext">老人年龄 :</th>
                     <td><input type="text" name="age" class="input-text easyui-validatebox"></td>
 
-                    <th>性别 :</th>
+                    <th class="formtdtext">性别 :</th>
                     <td><input type="text" name="sex" opt="sex"
                                class="easyui-combobox lazy-combobox input-text"
                                data-options="
@@ -34,18 +32,18 @@
                                 textField:'text'"></td>
                 </tr>
                 <tr>
-                    <th>家庭住址 :</th>
+                    <th class="formtdtext">家庭住址 :</th>
                     <td>
                         <input class="easyui-validatebox input-text" name="address">
                     </td>
 
-                    <th>户籍地 :</th>
+                    <th class="formtdtext">户籍地 :</th>
                     <td>
                         <input class="easyui-validatebox input-text" name="registration">
                     </td>
                 </tr>
                 <tr>
-                    <th>人员类别 :</th>
+                    <th class="formtdtext">人员类别 :</th>
                     <td>
                         <input type="text"
                                class="easyui-combobox lazy-combobox input-text"
@@ -58,7 +56,7 @@
                                 textField:'text'">
                     </td>
 
-                    <th>婚姻状况 :</th>
+                    <th class="formtdtext">婚姻状况 :</th>
                     <td>
                         <input type="text"
                                class="easyui-combobox lazy-combobox input-text"
@@ -72,7 +70,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>文化程度 :</th>
+                    <th class="formtdtext">文化程度 :</th>
                     <td>
                         <input type="text"
                                class="easyui-combobox lazy-combobox input-text"
@@ -85,7 +83,7 @@
                                 textField:'text'">
                     </td>
 
-                    <th>经济状况 :</th>
+                    <th class="formtdtext">经济状况 :</th>
                     <td>
                         <input type="checkbox" name="jjzk_baofang" value="0"><label>离休</label>
                         <input type="checkbox" name="jjzk_lixiu" value="0"><label>包房</label>
@@ -102,7 +100,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>居住环境 :</th>
+                    <th class="formtdtext">居住环境 :</th>
                     <td>
                         <input type="text"
                                class="easyui-combobox lazy-combobox input-text"
@@ -115,7 +113,7 @@
                                 textField:'text'">
                     </td>
 
-                    <th>是否需要护理 :</th>
+                    <th class="formtdtext">是否需要护理 :</th>
                     <td>
                         <input type="text"
                                class="easyui-combobox lazy-combobox input-text"
@@ -130,17 +128,17 @@
                 </tr>
 
                 <tr>
-                    <th>联系人 :</th>
+                    <th class="formtdtext">联系人 :</th>
                     <td><input type="text" name="contact" class="input-text easyui-validatebox"></td>
 
-                    <th>联系电话 :</th>
+                    <th class="formtdtext">联系电话 :</th>
                     <td><input type="text" name="phone" class="input-text easyui-validatebox"></td>
                 </tr>
                 <tr>
-                    <th>手机 :</th>
+                    <th class="formtdtext">手机 :</th>
                     <td><input type="text" name="cellphone" class="input-text easyui-validatebox"></td>
 
-                    <th>身体状况 :</th>
+                    <th class="formtdtext">身体状况 :</th>
                     <td><input type="text" name="health" class="easyui-combobox lazy-combobox input-text"
                                data-options="
                                 loader:cj.getLoader('health'),
@@ -152,7 +150,7 @@
                 </tr>
 
                 <tr>
-                    <th>备注 :</th>
+                    <th class="formtdtext">备注 :</th>
                     <td colspan="3">
                         <textarea name="comments" style="width: 97%;height: 16px"placeholder="填写备注信息"></textarea>
                     </td>
@@ -173,6 +171,4 @@
                 </tbody>
             </table>
         </form>
-    <!--</div>-->
-<!--</div>-->
 </div>

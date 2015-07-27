@@ -59,8 +59,8 @@ define(function () {
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '保存',hidden:'hidden',opt:'save'},
-            {text: '修改',hidden:'hidden',opt:'update'}
+            {text: '保存',hidden:'hidden',opt:'save',class:'btns'},
+            {text: '修改',hidden:'hidden',opt:'update',class:'btns'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -130,7 +130,7 @@ define(function () {
 
     function render(l,o){
         create(l,o);
-        if(o.queryParams){
+        if(o && o.queryParams){
             switch (o.queryParams.actiontype){
                 case 'update':
                     updateFunc(l, o);

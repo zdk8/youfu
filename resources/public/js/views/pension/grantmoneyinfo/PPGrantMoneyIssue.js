@@ -1,4 +1,4 @@
-define(['views/pension/PPGrantMoneyIssueDlg'],function(issuefile){
+define(['views/pension/grantmoneyinfo/PPGrantMoneyIssueDlg'],function(issuefile){
     function render(local,option){
         lazgrantoldready(local);            //加载已享受资金发放人员
         addgrantmoneyFunc(local);
@@ -8,7 +8,7 @@ define(['views/pension/PPGrantMoneyIssueDlg'],function(issuefile){
     function addgrantmoneyFunc(local){
         var addgrantmoney = local.find('[opt=addgrantmoney]');
         addgrantmoney.click(function(){
-            require(['commonfuncs/popwin/win','text!views/pension/PPGrantMoneyIssueDlg.htm','views/pension/PPGrantMoneyIssueDlg'],
+            require(['commonfuncs/popwin/win','text!views/pension/grantmoneyinfo/PPGrantMoneyIssueDlg.htm','views/pension/grantmoneyinfo/PPGrantMoneyIssueDlg'],
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'资金发放【月发放】',
@@ -171,7 +171,7 @@ define(['views/pension/PPGrantMoneyIssueDlg'],function(issuefile){
             toolbar:local.find('div[tb]')
         });
 
-        local.find('.searchbtn').click(function(){
+        local.find('[opt=query]').click(function(){
             ppgrantmoneyissue.datagrid('load',{
                 name:local.find('[opt=name]').val(),
                 identityid:local.find('[opt=identityid]').val(),

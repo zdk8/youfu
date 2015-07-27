@@ -1,6 +1,21 @@
 <!--老人注销查询-->
-<div class="easyui-layout"  data-options="fit:true">
-    <div data-options="region:'center'" data-options="fit:true">
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',border:false"
+         style="height:65px;padding:10px 15px 0 15px;">
+        <div style="border: 1px solid #e5e5e5;width: auto;height: 85%;background-color: #eff3f8;">
+            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                &nbsp;<span>年份 <a href="javascript:void(0)" opt="yeardel">< <</a>
+                                <input opt="yearvalue" size="5" style="text-align: center;" class="inputtext">年
+                                <a href="javascript:void(0)" opt="yearadd">> ></a></span>
+                &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
+                &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="18" class="inputtext"></span>
+                <span style="float: right;margin-top: 3px">
+                    <input type="button" value="查询" class="btns" opt="query">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
         <table class="easyui-datagrid-noauto" opt="peopleinfoquery"
                data-options="
                method:'post',
@@ -16,51 +31,14 @@
                pagination:true">
             <thead>
             <tr>
-                <th data-options="field:'name',width:80">姓名</th>
-                <th data-options="field:'identityid',width:180">身份证号</th>
-                <th data-options="field:'address',width:180">家庭地址</th>
-                <th data-options="field:'hospital_days',width:60">住院天数(/天)</th>
-                <th data-options="field:'subsidy_money',width:127">补助金额(/元)</th>
+                <th data-options="field:'name',width:80,align:'center'">姓名</th>
+                <th data-options="field:'identityid',width:180,align:'center'">身份证号</th>
+                <th data-options="field:'address',width:180,align:'center'">家庭地址</th>
+                <th data-options="field:'hospital_days',width:60,align:'center'">住院天数(/天)</th>
+                <th data-options="field:'subsidy_money',width:80,align:'center'">补助金额(/元)</th>
             </tr>
             </thead>
         </table>
-
-        <div tb style="padding-bottom: 0px">
-            <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
-                <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 25px;">
-                    <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
-                    <tr>
-                        <td>
-                            <span>
-                                年份 :
-                                <a href="javascript:void(0)" opt="yeardel">< <</a>
-                                <input opt="yearvalue" size="5" style="text-align: center;height: 18px;border-color: #95B8E7">年
-                                <a href="javascript:void(0)" opt="yearadd">> ></a>
-                            </span>
-                            &nbsp;&nbsp;
-                        </td>
-
-                        <td>
-                            姓名 :
-                            <input opt="name" type="text" size="10" style="height: 18px;border-color: #95B8E7">
-                            &nbsp;&nbsp;
-                        </td>
-
-                        <td>
-                            身份证 :
-                            <input opt="identityid" type="text" style="height: 18px;border-color: #95B8E7">
-                        </td>
-
-                        <td>
-                            <span class="searchbtn" >&nbsp;</span>
-                        </td>
-
-                    </tr>
-                </table>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 

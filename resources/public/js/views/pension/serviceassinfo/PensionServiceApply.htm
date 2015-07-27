@@ -6,21 +6,21 @@
         <input type="hidden" name="jja_id">
         <table width="80%" style="margin: 0 auto;margin-top: 10px;" cellpadding="2" cellspacing="1" class="table_form">
             <tr>
-                <td class="formtdtext" style="width: 100px">行政区划</td>
+                <td class="formtdtext" style="width: 100px">行政区划<label></label></td>
                 <td colspan="3">
                     <input style="width: 300px;" opt="districtid" class="input-text"
                            data-options="required:true, valueField:''">
                 </td>
             </tr>
             <tr>
-                <td class="formtdtext" style="width: 100px">姓名<span style="color: red">*</span></td>
+                <td class="formtdtext" style="width: 100px">姓名<label></label></td>
                 <td style="width: 350px">
                     <input class="easyui-validatebox  input-text" name="name"
-                           data-options="required:true">
+                           data-options="required:true"><span style="color: red">*</span>
                 </td>
-                <td class="formtdtext" style="width: 100px">身份证号码<span style="color: red">*</span></td>
+                <td class="formtdtext" style="width: 100px">身份证号码<label></label></td>
                 <td>
-                    <input name="identityid" class="input-text" style="width: 159px">
+                    <input opt="identityid" name="identityid" class="input-text" style="width: 159px"><span style="color: red">*</span>
                     <!--<input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 159px"
                            data-options="required:true,
                                    invalidMessage:'请输入正确的身份证号',
@@ -28,7 +28,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="formtdtext">性别</td>
+                <td class="formtdtext">性别<label></label></td>
                 <td>
                     <input opt="gender" class="easyui-combobox "
                            name="gender"
@@ -38,7 +38,7 @@
                                 valueField:'id',
                                 textField:'text'">
                 </td>
-                <td class="formtdtext">出生年月</td>
+                <td class="formtdtext">出生年月<label></label></td>
                 <td><input opt="birthdate" class="easyui-datebox" name="birthd" data-options="formatter:myformatter,parser:myparser" id="birthd">
                     <span opt="tip_age"></span>
                 </td>
@@ -46,7 +46,7 @@
             </tr>
             <tr>
 
-                <td class="formtdtext">民族</td>
+                <td class="formtdtext">民族<label></label></td>
                 <td>
                     <input name="nation" class="easyui-combobox"
                            data-options="
@@ -55,7 +55,7 @@
                                 valueField:'id',
                                 textField:'text'">
                 </td>
-                <td class="formtdtext">文化程度</td>
+                <td class="formtdtext">文化程度<label></label></td>
                 <td opt="culture">
                     <input type="radio" name="culture" value="0"><label>文盲</label>
                     <input type="radio" name="culture" value="1"><label>略识字</label>
@@ -63,12 +63,12 @@
                 </td>
             </tr>
             <tr>
-                <td class="formtdtext">籍贯</td>
+                <td class="formtdtext">籍贯<label></label></td>
                 <td>
                     <input name="birthplace" class="input-text">
                     <a opt="getjiguan" style="cursor: pointer;font-size: 8px;">默认籍贯</a>
                 </td>
-                <td class="formtdtext">婚姻状况</td>
+                <td class="formtdtext">婚姻状况<label></label></td>
                 <td opt="marriage">
                     <input type="radio" name="marriage" value="0"><label>未婚</label>
                     <input type="radio" name="marriage" value="1"><label>已婚</label>
@@ -78,7 +78,7 @@
             </tr>
             <tr>
 
-                <td class="formtdtext">居住</td>
+                <td class="formtdtext">居住<label></label></td>
                 <td colspan="3" opt="liveplace">
                     <input type="radio" name="live" value="0"><label>与子女同住</label>
                     <input type="radio" name="live" value="1"><label>与亲友同住</label>
@@ -88,7 +88,7 @@
             </tr>
             <tr>
 
-                <td class="formtdtext">经济条件</td>
+                <td class="formtdtext">经济条件<label></label></td>
                 <td colspan="3" opt="hyfwjingji">
                     <input type="radio" name="economy" value="0"><label>低保特困职工</label>
                     <input type="radio" name="economy" value="1"><label>低保边缘户</label>
@@ -100,7 +100,7 @@
             </tr>
             <tr>
 
-                <td class="formtdtext">年龄</td>
+                <td class="formtdtext">年龄<label></label></td>
                 <td colspan="3">
                     <input type="radio" name="agerange" opt="a" value="0"><label>80岁以下</label>
                     <input type="radio" name="agerange" opt="b" value="0"><label>80-90岁</label>
@@ -110,7 +110,7 @@
             </tr>
             <tr>
 
-                <td class="formtdtext">户籍所在地</td>
+                <td class="formtdtext">户籍所在地<label></label></td>
                 <td colspan="3">
                     <!--<input class="input-text" name="registration" opt="registration" style="width: 300px;">-->
                     <input class="input-text" name="registration" style="width: 300px;">
@@ -119,20 +119,20 @@
             </tr>
             <tr>
 
-                <td class="formtdtext">居住地址</td>
+                <td class="formtdtext">居住地址<label></label></td>
                 <td colspan="3">
                     <!--<input class="input-text" name="address" opt="address" style="width: 300px;">-->
                     <input class="input-text" name="address" style="width: 300px;">
                 </td>
             </tr>
             <tr>
-                <td class="formtdtext" rowspan="2">邮编</td>
+                <td class="formtdtext" rowspan="2">邮编<label></label></td>
                 <td rowspan="2"><input class="input-text easyui-validatebox" name="postcode"  data-options="validType:['maxLength[6]']"></td>
-                <td class="formtdtext">住宅电话</td>
+                <td class="formtdtext">住宅电话<label></label></td>
                 <td><input class="input-text easyui-validatebox" name="telephone" data-options="validType:['maxLength[25]']"></td>
             </tr>
             <tr>
-                <td class="formtdtext">手机</td>
+                <td class="formtdtext">手机<label></label></td>
                 <td><input class="input-text easyui-validatebox" name="mobilephone" data-options="validType:['maxLength[15]']"></td>
             </tr>
             <!--<tr>
@@ -152,12 +152,11 @@
                 <td><input class="input-text easyui-validatebox" name="agentmobilephone" data-options="validType:['maxLength[15]']"></td>
             </tr>-->
             <tr>
-                <td class="formtdtext">申请时间</td>
+                <td class="formtdtext">申请时间<label></label></td>
                 <td colspan="3">
                     <input class="input-text easyui-datebox" name="applydate" opt="applydate" readonly
                            data-options="formatter:myformatter,parser:myparser">
                 </td>
-                <!--<td class="formtdtext"></td>-->
             </tr>
         </table>
     </form>

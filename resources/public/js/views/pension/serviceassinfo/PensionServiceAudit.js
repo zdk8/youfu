@@ -2,7 +2,7 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '处理',hidden:'hidden',opt:'dealwith'}
+            {text: '处理',hidden:'hidden',opt:'dealwith',class:'btns'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({

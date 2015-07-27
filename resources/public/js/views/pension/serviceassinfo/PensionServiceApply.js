@@ -1,13 +1,11 @@
 define(function(){
-
-
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '提交',hidden:'hidden',opt:'save'},
-            {text: '提交',hidden:'hidden',opt:'save2'},
-            {text: '修改',hidden:'hidden',opt:'update'},
-            {text: '变更',hidden:'hidden',opt:'change'}
+            {text: '提交',hidden:'hidden',opt:'save',class:'btns'},
+            {text: '提交',hidden:'hidden',opt:'save2',class:'btns'},
+            {text: '修改',hidden:'hidden',opt:'update',class:'btns'},
+            {text: '变更',hidden:'hidden',opt:'change',class:'btns'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -129,33 +127,6 @@ define(function(){
             }
         });
 
-
-        /*var $registration=local.find('[opt=registration]')
-        $registration.combotree({
-            url:'get-divisionlist?dvhigh=330424',
-            method: 'get',
-            onBeforeExpand: function (node) {
-                $registration.combotree("tree").tree("options").url
-                    ="get-divisionlist?dvhigh=" + node.parentid;
-            },
-            onHidePanel: function () {
-                $registration.combotree('setValue',
-                    $registration.combotree('tree').tree('getSelected').divisionpath);
-            }
-        });
-        var $address=local.find('[opt=address]')
-        $address.combotree({
-            url:'get-divisionlist?dvhigh=330424',
-            method: 'get',
-            onBeforeExpand: function (node) {
-                $address.combotree("tree").tree("options").url
-                    ="get-divisionlist?dvhigh=" + node.parentid;
-            },
-            onHidePanel: function () {
-                $address.combotree('setValue',
-                    $address.combotree('tree').tree('getSelected').divisionpath);
-            }
-        });*/
         var doinitage_radio=function(age){
             var age=age;
             if(age<80){
@@ -353,7 +324,7 @@ define(function(){
 
     var render=function(l,o){
         create(l, o);
-        if(o.queryParams) {
+        if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'info':
                     showinfo(l,o);                  //查看详细信息，并可进行修改

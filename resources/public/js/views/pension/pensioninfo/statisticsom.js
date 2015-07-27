@@ -195,7 +195,10 @@ define(function(){
 
                 var obj  = format(data.rows,dvnames)
                 /*加载图形*/
-                renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local)
+                renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local);
+                local.find('[opt=refresh]').click(function () {
+                    renderAchart(obj.seriesData, { titleText: '', seriesName:'bbbbb',yAxisTitleText:'数量'},local);
+                });
             },
             //striped:true,
             rowStyler2: function(index,row){
@@ -225,8 +228,6 @@ define(function(){
               }
               var mygroupfirstrow=$(myfirsttd(currentTR,index));
               var len=mygroupfirstrow.find('td').eq(0).attr('rowspan')||1;
-
-              console.log(len);
               table.find('tr').removeClass('highGroupRow');
               myrowsaction(mygroupfirstrow,len);
 

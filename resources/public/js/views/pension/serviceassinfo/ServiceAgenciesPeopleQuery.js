@@ -53,8 +53,8 @@ define(function(){
                                     }else{
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:title,
-                                            htmfile:'text!views/pension/ServiceAgenciesPeople.htm',
-                                            jsfile:'views/pension/ServiceAgenciesPeople',
+                                            htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesPeople.htm',
+                                            jsfile:'views/pension/serviceassinfo/ServiceAgenciesPeople',
                                             queryParams:{
                                                 actiontype:'update',         //（处理）操作方式
 //                                                data:data,                   //填充数据
@@ -71,8 +71,8 @@ define(function(){
                                     }else{
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:title,
-                                            htmfile:'text!views/pension/ServiceAgenciesPeople.htm',
-                                            jsfile:'views/pension/ServiceAgenciesPeople',
+                                            htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesPeople.htm',
+                                            jsfile:'views/pension/serviceassinfo/ServiceAgenciesPeople',
                                             queryParams:{
                                                 actiontype:'update',         //（处理）操作方式
 //                                                data:data,                   //填充数据

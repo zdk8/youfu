@@ -1,7 +1,7 @@
 define(function(){
     var render = function(local,option){
         var ylstgl = local.find('[opt=yanlaostmanagement]');        //养老食堂管理
-        var refresh = local.find('[opt=refresh]');        //刷新
+        var refresh = local.find('[opt=query]');        //刷新
         var departname = local.find('[opt=departname]');        //机构名称
         var refreshGrid = function(){
             ylstgl.datagrid("reload")
@@ -25,18 +25,6 @@ define(function(){
                                     var data = record;
                                     var departname = record.departname;                         //机构名称
                                     updateylstFun(local,departname,data,refreshGrid)                //修改养老机构
-                                    /*cj.showContent({
-                                     title:record.biaozhunmingcheng+'修改',
-                                     htmfile:'text!views/dmxt/PlaceCommon.htm',
-                                     jsfile:'views/dmxt/PlaceCommon',
-                                     queryParams:{
-                                     id:record.id,
-                                     actionType:"update"*//*,
-                                     tablename:tablename,
-                                     wholename:wholename,
-                                     headname:record.leibiemingcheng*//*
-                                     }
-                                     })*/
                                 }
                                 /*删除*/
                                 if($(this).attr("action") == "delete"){
@@ -84,8 +72,8 @@ define(function(){
             }else{
                 cj.showContent({                                          //详细信息(tab标签)
                     title:title,
-                    htmfile:'text!views/pension/YangLaoSTDlg.htm',
-                    jsfile:'views/pension/YangLaoSTDlg',
+                    htmfile:'text!views/pension/pensionserviceinfo/YangLaoSTDlg.htm',
+                    jsfile:'views/pension/pensionserviceinfo/YangLaoSTDlg',
                     queryParams:{
                         actiontype:'add',         //（处理）操作方式
                         title:title,
@@ -93,36 +81,6 @@ define(function(){
                     }
                 })
             }
-            /*require(['commonfuncs/popwin/win','text!views/pension/YangLaoSTDlg.htm','views/pension/YangLaoSTDlg'],
-                function(win,htmfile,jsfile){
-                    win.render({
-                        title:'添加老年人食堂',
-                        width:700,
-                        height:258,
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},
-                            {
-                                text:'保存',
-                                handler:function(html,parent){ }}
-                        ],
-                        renderHtml:function(local,submitbtn,parent){
-                            jsfile.render(local,{
-                                submitbtn:submitbtn,
-                                act:'c',
-                                parent:parent,
-                                refresh:refresh,         //刷新按钮
-                                actiontype:'add',       //操作方式
-                                onCreateSuccess:function(data){
-                                    parent.trigger('close');
-                                }
-                            })
-                        }
-                    })
-                }
-            )*/
         })
     }
     /*修改老年食堂*/
@@ -133,8 +91,8 @@ define(function(){
         }else{
             cj.showContent({                                          //详细信息(tab标签)
                 title:title,
-                htmfile:'text!views/pension/YangLaoSTDlg.htm',
-                jsfile:'views/pension/YangLaoSTDlg',
+                htmfile:'text!views/pension/pensionserviceinfo/YangLaoSTDlg.htm',
+                jsfile:'views/pension/pensionserviceinfo/YangLaoSTDlg',
                 queryParams:{
                     actiontype:'update',         //（处理）操作方式
                     data:data,
@@ -143,37 +101,6 @@ define(function(){
                 }
             })
         }
-        /*require(['commonfuncs/popwin/win','text!views/pension/YangLaoSTDlg.htm','views/pension/YangLaoSTDlg'],
-            function(win,htmfile,jsfile){
-                win.render({
-                    title:'<label style="font-weight: bold;color: rgba(39,42,40,0.83)">编辑-'+departname+'</label>',
-                    width:700,
-                    height:258,
-                    html:htmfile,
-                    buttons:[
-                        {text:'取消',handler:function(html,parent){
-                            parent.trigger('close');
-                        }},
-                        {
-                            text:'保存',
-                            handler:function(html,parent){ }}
-                    ],
-                    renderHtml:function(local,submitbtn,parent){
-                        jsfile.render(local,{
-                            submitbtn:submitbtn,
-                            act:'c',
-                            parent:parent,
-                            refresh:refresh,         //刷新按钮
-                            actiontype:'update',       //操作方式
-                            data:data,                   //填充数据
-                            onCreateSuccess:function(data){
-                                parent.trigger('close');
-                            }
-                        })
-                    }
-                })
-            }
-        )*/
     }
 
 
