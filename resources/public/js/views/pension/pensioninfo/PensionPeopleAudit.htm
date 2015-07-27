@@ -6,7 +6,7 @@
                 &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
                 &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
                 <span style="float: right;margin-top: 3px">
-                    <input type="button" value="查询" class="btn" opt="query">
+                    <input type="button" value="查询" class="btns" opt="query">
                 </span>
             </div>
         </div>
@@ -14,65 +14,49 @@
     <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
         <table class="easyui-datagrid-noauto"
                data-options="fit:true,
-                    fitColumns:true,
+                    fitColumns:false,
                     method:'post',
                     singleSelect:true,
                     loadMsg:'',
                     pagination:true">
-            <thead>
+            <thead frozen="true">
             <tr>
                 <th data-options="field:'lr_id',hidden:true">老人表主键</th>
-                <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>');
-                return str.html();
-            }">操作</th>
-                <th data-options="field:'aulevel',width:127,
-        formatter: function(value,row,index){
-                if(value == 0){
-                    return approvalProcess[4]
-                }else{
-                    return approvalProcess[value]
-                }
-			}">状态</th>
-                <th data-options="field:'auflag',width:180">流程信息</th>
-                <th data-options="field:'audesc',width:180">处理意见</th>
-                <th data-options="field:'name',width:127,
-        formatter:function(v,r,i)
-                {
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
-                    return str.html();
-                }">姓名</th>
-                <th data-options="field:'identityid',width:210">身份证</th>
-                <th data-options="field:'gender',width:74,
-        formatter: function(value,row,index){
-                return getGender[value]
-			}">性别</th>
-                <th data-options="field:'auuser',width:127">办理人</th>
-                <!--<th data-options="field:'bsnyue',width:127">业务期</th>-->
-                <th data-options="field:'bstime',width:230">时间</th>
-
-                <!--<th data-options="field:'code',width:100,align:'center'">姓名</th>
-                <th data-options="field:'name',width:100,align:'center'">出生年月</th>
-                <th data-options="field:'price',width:100,align:'center'">身份证号</th>
-                <th data-options="field:'price',width:100,align:'center',
-                                            formatter:function(value,rowData,rowIndex){
-                                            var str='<div></div>';
-                                            str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;>删除</a>');
-                                            return str.html();
-                                        }">操作</th>-->
+                <th data-options="field:'name',width:80,align:'center',
+                formatter:function(v,r,i){
+                            var str='<div></div>';
+                            str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
+                            return str.html();
+                        }">姓名</th>
             </tr>
             </thead>
-            <!--<tbody>
+            <thead>
             <tr>
-                <td>夏留金</td><td>1950-04-11</td><td>330424194406182017</td><td>2323</td>
+                <th data-options="field:'identityid',width:170,align:'center'">身份证</th>
+                <th data-options="field:'aulevel',width:100,align:'center',
+                formatter: function(value,row,index){
+                        if(value == 0){
+                            return approvalProcess[4]
+                        }else{
+                            return approvalProcess[value]
+                        }
+                    }">状态</th>
+                <th data-options="field:'auflag',width:100,align:'center'">流程信息</th>
+                <th data-options="field:'audesc',width:180,align:'center'">处理意见</th>
+                <th data-options="field:'gender',width:74,align:'center',
+                formatter: function(value,row,index){
+                        return getGender[value]
+                    }">性别</th>
+                <th data-options="field:'auuser',width:127,align:'center'">办理人</th>
+                <th data-options="field:'bstime',width:140,align:'center'">时间</th>
+                <th data-options="field:'ro',width:100,align:'center',
+                formatter:function(value,rowData,rowIndex){
+                    var str='<div></div>';
+                    str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icondealwith&quot;>处理</span></span></a>');
+                    return str.html();
+                }">操作</th>
             </tr>
-            <tr>
-                <td>鲍天松</td><td>1959-04-02</td><td>330424195904022010</td><td>2323</td>
-            </tr>
-            </tbody>-->
+            </thead>
         </table>
     </div>
 </div>
@@ -95,7 +79,7 @@
         <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
             {
                 var str='<div></div>';
-                str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icon-add-pl16&quot;></span></span></a>');
+                str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icon-add-pl16&quot;>处理</span></span></a>');
                 return str.html();
             }">操作</th>
         <th data-options="field:'aulevel',width:127,

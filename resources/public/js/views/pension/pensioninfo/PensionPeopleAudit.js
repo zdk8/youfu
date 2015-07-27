@@ -38,8 +38,8 @@ define(function(){
                                             success:function(data){
                                                 cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
-                                                    htmfile:'text!views/pension/PensionPeopleInfo.htm',
-                                                    jsfile:'views/pension/PensionPeopleInfo',
+                                                    htmfile:'text!views/pension/pensioninfo/PensionPeopleInfo.htm',
+                                                    jsfile:'views/pension/pensioninfo/PensionPeopleInfo',
                                                     queryParams:{
                                                         actiontype:'info',         //（处理）操作方式
                                                         data:data,                   //填充数据
@@ -54,7 +54,38 @@ define(function(){
                                 }else if(action == "dealwith"){                   //处理
                                     var userlength = cj.getUserMsg().regionid.length;
                                     var aul = record.aulevel;
-                                    showDlg(refreshGrid,record)
+                                    require(['commonfuncs/popwin/win','text!views/pension/pensioninfo/PensionPeopleAuditDlg.htm','views/pension/pensioninfo/PensionPeopleAuditDlg'],
+                                        function(win,htmfile,jsfile){
+                                            win.render({
+                                                title:'处理',
+                                                width:395,
+                                                height:250,
+                                                html:htmfile,
+                                                buttons:[
+                                                    {text:'取消',handler:function(html,parent){
+                                                        parent.trigger('close');
+                                                    }},
+                                                    {
+                                                        text:'保存',
+                                                        handler:function(html,parent){ }}
+                                                ],
+                                                renderHtml:function(local,submitbtn,parent){
+                                                    jsfile.render(local,{
+                                                        submitbtn:submitbtn,
+                                                        act:'c',
+                                                        refresh:refreshGrid,
+                                                        title:null,
+                                                        data:record,
+                                                        parent:parent,
+                                                        onCreateSuccess:function(data){
+                                                            parent.trigger('close');
+                                                        }
+                                                    })
+                                                }
+                                            })
+                                        }
+                                    )
+                                    //showDlg(refreshGrid,record)
                                     /*if(userlength == 12){
                                         $.messager.alert('温馨提示','对不起,你没有该权限!','info');
                                     }else if(userlength == 9){
@@ -79,7 +110,7 @@ define(function(){
         var name = local.find('[opt=name]');                        //姓名
         var identityid = local.find('[opt=identityid]');        //身份证
         /*搜索*/
-        local.find('.searchbtn').click(function(){
+        local.find('[opt=query]').click(function(){
             ppaudit.datagrid('load',{
                 name:name.val(),
                 identityid:identityid.val()
@@ -89,7 +120,7 @@ define(function(){
     }
 
     var showDlg = function(refreshGrid,record){
-        require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
+        require(['commonfuncs/popwin/win','text!views/pension/pensioninfo/PensionPeopleAuditDlg.htm','views/pension/pensioninfo/PensionPeopleAuditDlg'],
             function(win,htmfile,jsfile){
                 win.render({
                     title:'处理',

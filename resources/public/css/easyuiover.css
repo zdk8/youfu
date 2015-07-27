@@ -116,3 +116,13 @@
     float: left;
     height: 50px;
 }
+
+/*下拉框*/
+.combo {
+    border-color: #e5e5e5;
+    background-color: #ffffff;
+    height: 24px;
+}
+.combo-arrow {
+    background-color: #e5e5e5;
+}

@@ -64,8 +64,7 @@ define(function(){
                 //console.log("diffDate: "+rowData.diffDate);
                 //return 'color:black;font-family:宋体;font-size:20';
             },
-            striped:true,
-            toolbar:local.find('div[tb]')
+            striped:true
         })
     }
     return {
@@ -90,7 +89,7 @@ define(function(){
             var name = local.find('[opt=name]');                        //姓名
             var identityid = local.find('[opt=identityid]');        //身份证
             /*搜索*/
-            local.find('.searchbtn').click(function(){
+            local.find('[opt=query]').click(function(){
                 peopleinfodatarid.datagrid('load',{
                     oldtype:ppselect.val(),
                     name:name.val(),
@@ -114,7 +113,6 @@ define(function(){
                         }
                     }
                 }
-                layer.load(1);
                 window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsfieldarr+
                 "&datatype="+local.find('[opt=ppselect]').val()+
                 "&name="+local.find('[opt=name]').val()+
@@ -127,7 +125,7 @@ define(function(){
             /*添加字段*/
             local.find('[opt=addfield]').click(function(){
                 var closobj = peopleinfodatarid.datagrid('options').columns[0];
-                require(['commonfuncs/popwin/win','text!views/pension/PeopleInfoXlsFields.htm','views/pension/PeopleInfoXlsFields'],
+                require(['commonfuncs/popwin/win','text!views/pension/pensioninfo/PeopleInfoXlsFields.htm','views/pension/pensioninfo/PeopleInfoXlsFields'],
                     function(win,htmfile,jsfile){
                         win.render({
                             title:'选择字段',

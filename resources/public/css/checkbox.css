@@ -1,0 +1,74 @@
+/*自定义的复选框*/
+.checkbox {
+    width: 12px;
+    height: 12px;
+    position: relative;
+    margin: 12px auto;
+}
+.checkbox label {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    position: absolute;
+    margin: 6px auto;
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.5), 1px 1px 1px black;
+}
+.checkbox label:after {
+    content: '';
+    width: 6px;
+    height: 3px;
+    position: absolute;
+    top: 4px;
+    left: 3px;
+    border: 2px solid #607b53;
+    border-top: none;
+    border-right: none;
+    background: transparent;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.checkbox label:hover::after {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+    opacity: 0.3;
+}
+.checkbox input[type=checkbox] {
+    visibility: hidden;
+}
+.checkbox input[type=checkbox]:checked + label:after {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+}
+
+/*radio checkbox打钗样式*/
+.newRadio input+label {
+    padding-left: 26px;
+    background: url(../img/form/UnCheck.png) no-repeat;
+    font-size: 13px;
+}
+.newRadio input+label.checked {
+    padding-left: 26px;
+    background: url(../img/form/CheckIt.bmp) no-repeat;
+    color: #008800;
+}
+.newRadio input+label.over {
+    color: #0000FF;
+}
+
+.pingfen{
+    border-top:0px;
+    border-right:0px;
+    border-left:0px;
+    text-align: center;
+    border-bottom: 1px solid red;
+}
+.pingfen_zongfen{
+    border-top:0px;
+    border-right:0px;
+    border-left:0px;
+    text-align: center;
+    border-bottom: 1px solid red;
+}

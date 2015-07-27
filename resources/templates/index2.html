@@ -23,16 +23,21 @@
     <script src="easyui/easyui/locale/easyui-lang-zh_CN.js"></script>
     <link rel="stylesheet" type="text/css" href="css/easyuiover.css"/>
 
+    <script type="text/javascript" src="js/scripts/layer/layer.js"></script>
+
     <script type="text/javascript" src="js/require.js" data-main="js/main"></script>
     <script type="text/javascript" src="js/mycalendar.js"></script>
 
+
+
 </head>
 <body>
+<div id="usermsg" style="display: none">{{usermsg}}</div>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'north'" class="bghead">
         <div class="bghead1">&nbsp;养老管理系统</div>
         <div class="bghead2">
-            <span>欢迎！admin</span>&nbsp;|&nbsp;<span style="cursor: pointer">退&nbsp;出</span>&nbsp;
+            <span>欢迎！{{username}}</span>&nbsp;|&nbsp;<span style="cursor: pointer">退&nbsp;出</span>&nbsp;
         </div>
     </div>
     <div data-options="region:'west',border:false" style="width:220px;border-right: 1px solid #e5e5e5">
@@ -68,8 +73,8 @@
                                                 &nbsp;<span>身份证号 </span><span><input type="text" size="15" class="inputtext"></span>
                                                 &nbsp;<span>年龄 </span><span><input type="text" size="5" class="inputtext"> -- <input type="text" size="5" class="inputtext"></span>
                                                 <span style="float: right;margin-top: 3px">
-                                                    <input type="button" value="查询" class="btn">
-                                                    <input type="button" value="导出" class="btn">
+                                                    <input type="button" value="查询" class="btns">
+                                                    <input type="button" value="导出" class="btns">
                                                 </span>
                                             </div>
                                     </div>
@@ -109,7 +114,9 @@
 </div>
 
 <script type="text/javascript">
+    var usermsg;
     $(document).ready(function(){
+        usermsg=eval('('+$('#usermsg').text()+')');
         $('[opt=currentDate]').text(mycalendar.RunGLNL());
         $.ajax({
             url:'getfunction',
@@ -220,4 +227,11 @@
 <script src="js/cj.js"></script>
 <!--<script type="text/javascript" src="js/extLocation.js"></script>-->
 <script type="text/javascript" src="js/configurationFile.js"></script>
+<link rel="stylesheet" type="text/css" href="js/commonfuncs/popwin/win.css">
+<link rel="Stylesheet" type="text/css" href="css/table.css">
+
+<link rel="Stylesheet" type="text/css" href="css/checkbox.css">
+
+<script type="text/javascript" src="js/highcharts/highcharts.js"></script>
+
 </html>

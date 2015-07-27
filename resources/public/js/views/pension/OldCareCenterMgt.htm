@@ -1,0 +1,54 @@
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',border:false"
+         style="height:65px;padding:10px 15px 0 15px;">
+        <div style="border: 1px solid #e5e5e5;width: auto;height: 85%;background-color: #eff3f8;">
+            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                &nbsp;<span>名称 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
+                &nbsp;<span>联系人 </span><span><input opt="contact" type="text" size="15" class="inputtext"></span>
+                &nbsp;<span>开办时间 </span><span><input opt="runtime" type="text" class="easyui-datebox" size="15" style="height: 26px;"></span>
+                <span style="float: right;margin-top: 3px">
+                    <input type="button" value="查询" class="btns" opt="query">
+                    <input type="button" value="新增照料中心" class="btns" opt="addcarecenter" style="width: 100px;">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
+        <table class="easyui-datagrid-noauto"
+               data-options="fit:true,
+                    fitColumns:true,
+                    method:'post',
+                    singleSelect:true,
+                    loadMsg:'',
+                    pagination:true">
+            <thead frozen="true">
+                <tr>
+                    <th data-options="field:'name',width:80,align:'center',
+                    formatter:function(v,r,i){
+                                var str='<div></div>';
+                                str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
+                                return str.html();
+                            }">名称</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th data-options="field:'contact',width:80,align:'center'">联系人</th>
+                    <th data-options="field:'address',width:200,align:'center'">联系地址</th>
+                    <th data-options="field:'phone',width:100,align:'center'">联系电话</th>
+                    <th data-options="field:'runtime',width:170,align:'center'">开办时间</th>
+                    <th data-options="field:'ro',width:180,align:'center',formatter:function(value,rowData,rowIndex)
+                        {
+                            var str='<div></div>';
+                            str=$(str).append('<a action=&quot;addcarep&quot;title=&quot;添加照料人员&quot;><span><span class=&quot;icondealwith&quot;>添加照料人员</span></span></a>&nbsp;|&nbsp;');
+                            str=$(str).append('<a action=&quot;addworkp&quot;title=&quot;添加工作人员&quot;><span><span class=&quot;icondealwith&quot;>添加工作人员</span></span></a>&nbsp;|&nbsp;');
+                            str=$(str).append('<a action=&quot;map&quot;title=&quot;地图&quot;><span><span class=&quot;icondealwith&quot;>地图</span></span></a>');
+                            return str.html();
+                        }">操作</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+

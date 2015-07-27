@@ -19,8 +19,10 @@ define(function(){
             }
         });
 
-        console.log(toolBar.find('[opt=dealwith]').show());
-
+        //console.log(toolBar.find('[opt=dealwith]').show());
+        local.find('.webox').layout().draggable({
+            handle:local.find('.pop-win-north-title')
+        });
 
     }
 

@@ -6,11 +6,11 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=35;
         var toolBar=cj.getFormToolBar([
-            {text: '处理',hidden:'hidden',opt:'dealwith'},
-            {text: '修改',hidden:'hidden',opt:'update'},
-            {text: '删除',hidden:'hidden',opt:'delete'},
-            {text: '保存',hidden:'hidden',opt:'save'},
-            {text: '保存',hidden:'hidden',opt:'save2'}
+            {text: '处理',hidden:'hidden',opt:'dealwith',class:'btns'},
+            {text: '修改',hidden:'hidden',opt:'update',class:'btns'},
+            {text: '删除',hidden:'hidden',opt:'delete',class:'btns'},
+            {text: '保存',hidden:'hidden',opt:'save',class:'btns'},
+            {text: '保存',hidden:'hidden',opt:'save2',class:'btns'}
 //            {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);
@@ -140,24 +140,29 @@ define(function(){
             local.find('[opt=pensionform]').form('submit', {
                 url:'saveold',
                 onSubmit: function (params) {
-                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    //showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    layer.load();
                     params.districtid = districtid.combobox("getValue")
                     var isValid = $(this).form('validate');
                     if (!isValid){
                         showProcess(false);
+                        layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
                     if(data == "true"){
-                        showProcess(false);
-                        cj.slideShow('保存成功');
+                        //showProcess(false);
+                        layer.closeAll('loading');
+                        //cj.slideShow('保存成功');
+                        layer.alert('保存成功!', {icon: 6,title:'温馨提示'});
                         //local.find('[opt=save]').show()
                         //local.find('[opt=save2]').hide()
                         if(showProcess(false)){
                             $("#tabs").tabs("close","老年基本信息录入");
                         }
                     }else{
+                        layer.closeAll('loading');
                         cj.slideShow('<label style="color: red">保存失败</label>');
                     }
                 }
@@ -227,7 +232,7 @@ define(function(){
 
     var render=function(l,o){
         create(l,o);
-        if(o.queryParams) {
+        if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'update1':
                     (function(){alert('hahaha')})();

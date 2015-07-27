@@ -85,6 +85,7 @@ a:hover{
 .div3{
     display:none;
     font-size:13px;
+    background-color: #fffef6;
 }
 .div3 ul{margin:0;padding:0;}
 .div3 li{
@@ -122,15 +123,29 @@ a:hover{
 .inputtext{
     height: 20px;border: 1px solid #e5e5e5;
 }
-.btn{
+.btns{
     background-color: #6fb3e0;
     color: #ffffff;
     border: 1px solid #6fb3e0;
     cursor: pointer;height: 22px;width: 60px;
 }
-.btn:active{
+.btns:hover{
+    background-color: #2D93CA;
+}
+.btns:active{
     position: relative;
     top: 1px;
+}
+
+/*列表编辑处*/
+.icondealwith{
+    background-color: darkorange;
+    color: #ffffff;
+    border: 1px solid darkorange;
+}
+.icon-add-field {
+    background: url('../../img/add.png') no-repeat left center;
+    padding-left: 16px;
 }
 
 

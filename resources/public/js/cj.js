@@ -371,7 +371,6 @@ var cj=(function(){
             return $btnarea;
         },getUserMsg:function(){
             return usermsg;
-//            return "";
         },
         getLocalEnum: function (type) {
             return function(param,success,error){
