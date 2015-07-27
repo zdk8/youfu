@@ -452,7 +452,10 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
        ]
     (db/adddata-by-tablename "t_carecenter" (common/dateformat-bf-insert caredata "runtime"))
     (str "success")))
-(defn get-carecenter-list [request]
+
+(defn get-carecenter-list
+  "获取照料中心列表"
+  [request]
   (let [params (:params request)
         name (:name params)
         page (:page params)
@@ -460,6 +463,7 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         conds (str (common/likecond "name" name))
         getresult (common/fenye rows page "t_carecenter" "*" conds "")]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "runtime")})))
+
 (defn add-carepeople
   "为照料中心添加照料人员"
   [request]
@@ -467,6 +471,17 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         cpdata (select-keys params (:carepeople common/selectcols))]
     (db/adddata-by-tablename "t_carepeople" cpdata)
     (str "success")))
+
+(defn get-carepeople-list [request]
+  (let [params (:params request)
+        name (:name params)
+        zl_id (:zl_id params)
+        page (:page params)
+        rows (:rows params)
+        conds (str (common/likecond "name" name) (if (> (count zl_id) 0) (str " and zl_id = " zl_id)) )
+        getresult (common/fenye rows page "t_carepeople" "*" conds "")]
+    (resp/json {:total (:total getresult) :rows (:rows getresult)})))
+
 (defn add-careworker
   "为照料中心添加工作人员"
   [request]
@@ -475,12 +490,72 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
     (db/adddata-by-tablename "t_careworker" cwdata)
     (str "success")))
 
+(defn get-careworker-list [request]
+  (let [params (:params request)
+        zl_name (:zl_name params)
+        zl_id (:zl_id params)
+        page (:page params)
+        rows (:rows params)
+        conds (str (common/likecond "zl_name" zl_name) (if (> (count zl_id) 0) (str " and zl_id = " zl_id)) )
+        getresult (common/fenye rows page "t_careworker" "*" conds "")]
+    (resp/json {:total (:total getresult) :rows (:rows getresult)})))
 
-(defn add-bigevent [request]
+(defn add-bigevent
+  "新增大型活动"
+  [request]
   (let [params (:params request)
         bedata (select-keys params (:bigevent common/selectcols))]
     (db/adddata-by-tablename "t_bigevent" (common/dateformat-bf-insert bedata "starttime"))
     (str "success")))
+
+(defn get-bigevent-list [request]
+  (let [params (:params request)
+        zl_id (:zl_id params)
+        activityname (:activityname params)
+        page (:page params)
+        rows (:rows params)
+        conds (str (common/likecond "activityname" activityname) (if (> (count zl_id) 0) (str " and zl_id = " zl_id)))
+        getresult (common/fenye rows page "t_bigevent" "*" conds "")
+        ]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "starttime")})))
+
+(defn add-homevisit
+  "新增上访记录"
+  [request]
+  (let [params (:params request)
+        hvdata (select-keys params (:homevisit common/selectcols))]
+    (db/adddata-by-tablename "t_bigevent" (common/dateformat-bf-insert hvdata "recordtime"))
+    (str "success")))
+
+(defn get-homevist-list [request]
+  (let [params (:params request)
+        zl_id (:zl_id params)
+        page (:page params)
+        rows (:rows params)
+        conds (str (if (> (count zl_id) 0) (str " and zl_id = " zl_id)))
+        getresult (common/fenye rows page "t_homevist" "*" conds "")
+        ]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "recordtime")})))
+
+(defn add-departentry
+  "机构出门登记"
+  [request]
+  (let [params (:params request)
+        dedata (select-keys params (:departentry common/selectcols))]
+    (db/adddata-by-tablename "departentry" (conj dedata {:outtime (common/get-nowtime)}))
+    (str "success")))
+
+(defn get-departentry-list [request]
+  (let [params (:params request)
+        dep_id (:dep_id params)
+        opdname (:opdname params)
+        rows (:rows params)
+        page (:page params)
+        conds (str (common/likecond "opdname" opdname) (if (> (count dep_id) 0) (str " and dep_id = " dep_id)))
+        getresult (common/fenye rows page "t_departentry" "*" conds "")
+        ]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "intime" "outtime")})))
+
 
 
 
