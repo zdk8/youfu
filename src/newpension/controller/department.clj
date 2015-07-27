@@ -464,6 +464,14 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         getresult (common/fenye rows page "t_carecenter" "*" conds "")]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "runtime")})))
 
+(defn update-carecenter [request]
+  (let [params (:params request)
+        zl_id (:zl_id params)
+        zldata (select-keys params (:carecenter common/selectcols))
+        ]
+    (db/updatedata-by-tablename "t_carecenter" (common/dateformat-bf-insert zldata "runtime")  {:zl_id zl_id})
+    (str "success")))
+
 (defn add-carepeople
   "为照料中心添加照料人员"
   [request]
@@ -482,6 +490,14 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         getresult (common/fenye rows page "t_carepeople" "*" conds "")]
     (resp/json {:total (:total getresult) :rows (:rows getresult)})))
 
+(defn update-carepeople [request]
+  (let [params (:params request)
+        cp_id (:cp_id params)
+        cpdata (select-keys params common/selectcols)
+        ]
+    (db/updatedata-by-tablename "t_carepeople" cpdata {:cp_id cp_id})
+    (str "success")))
+
 (defn add-careworker
   "为照料中心添加工作人员"
   [request]
@@ -499,6 +515,13 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         conds (str (common/likecond "zl_name" zl_name) (if (> (count zl_id) 0) (str " and zl_id = " zl_id)) )
         getresult (common/fenye rows page "t_careworker" "*" conds "")]
     (resp/json {:total (:total getresult) :rows (:rows getresult)})))
+
+(defn update-careworker [request]
+  (let [params (:params request)
+        cw_id (:cw_id params)
+        cwdata (select-keys params (:careworker common/selectcols) )]
+    (db/updatedata-by-tablename "t_careworker" cwdata {:cw_id cw_id})
+    (str "success")))
 
 (defn add-bigevent
   "新增大型活动"
@@ -519,6 +542,13 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         ]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "starttime")})))
 
+(defn update-bigevent [request]
+  (let [params (:params request)
+        be_id (:be_id params)
+        bedata (select-keys params (:bigevent common/selectcols))]
+    (db/updatedata-by-tablename "t_bigevent" (common/dateformat-bf-insert bedata "starttime")  {:be_id be_id})
+    (str "success")))
+
 (defn add-homevisit
   "新增上访记录"
   [request]
@@ -536,6 +566,13 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         getresult (common/fenye rows page "t_homevist" "*" conds "")
         ]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "recordtime")})))
+
+(defn update-homevisit [request]
+  (let [params (:params request)
+        hv_id (:hv_id params)
+        hvdata (select-keys params (:homevisit common/selectcols))]
+    (db/updatedata-by-tablename "t_homevisit" (common/dateformat-bf-insert hvdata "recordtime")  {:hv_id hv_id})
+    (str "success")))
 
 (defn add-departentry
   "机构出门登记"
