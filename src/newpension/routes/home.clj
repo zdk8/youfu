@@ -227,6 +227,10 @@
   (POST "/depart/opdselectsign" request (depart/opd-select-design request))
 
   (POST "/depart/addcarecenter" request (depart/add-carecenter request))                                  ;;新增照料中心
+  (POST "/depat/getcarecenterlist" request (depart/get-carecenter-list request))
+  (POST "/depart/addcarepeople" request (depart/add-carepeople request))                       ;;添加照料人员
+  (POST "/depart/addcareworker" request (depart/add-careworker request))                      ;;添加照料工作人员
+  (POST "/depart/addbigevent" request (depart/add-bigevent request))                          ;;添加大型活动
 
   (POST "/old/oldestpeople" request (old/add-oldestpeople request))                                          ;;高龄老人
   (POST "/old/addenpeople" request (old/add-emptynestpeople request))                                ;;空巢老人数据添加
@@ -279,6 +283,6 @@
 
   (POST "/test/importexcel" [file] (report/excelimport file))                               ;;postgis 数据导入测试
 
-  (GET "/index2" [] (layout/render "index2.html"))
+  (GET "/index2" [] (layout/render "index2.html" {:username (:username (session/get :usermsg)) :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)}))
 
   )

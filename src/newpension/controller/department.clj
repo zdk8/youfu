@@ -452,6 +452,37 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
        ]
     (db/adddata-by-tablename "t_carecenter" (common/dateformat-bf-insert caredata "runtime"))
     (str "success")))
+(defn get-carecenter-list [request]
+  (let [params (:params request)
+        name (:name params)
+        page (:page params)
+        rows (:rows params)
+        conds (str (common/likecond "name" name))
+        getresult (common/fenye rows page "t_carecenter" "*" conds "")]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "runtime")})))
+(defn add-carepeople
+  "为照料中心添加照料人员"
+  [request]
+  (let [params (:params request)
+        cpdata (select-keys params (:carepeople common/selectcols))]
+    (db/adddata-by-tablename "t_carepeople" cpdata)
+    (str "success")))
+(defn add-careworker
+  "为照料中心添加工作人员"
+  [request]
+  (let [params (:params request)
+        cwdata (select-keys params (:careworker common/selectcols))]
+    (db/adddata-by-tablename "t_careworker" cwdata)
+    (str "success")))
+
+
+(defn add-bigevent [request]
+  (let [params (:params request)
+        bedata (select-keys params (:bigevent common/selectcols))]
+    (db/adddata-by-tablename "t_bigevent" (common/dateformat-bf-insert bedata "starttime"))
+    (str "success")))
+
+
 
 
 (defn testfun [request]

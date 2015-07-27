@@ -13,9 +13,22 @@
                ))
 
 
-(def selectcols {:kccols [:nation :gntype :marriage :culture :emptyreason :visittime :monthincome :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :zq_barrierfree :zq_pensionagency :zq_homecare :zq_volunteers :zq_other :gender :havechildren]
-                       :carecenter     [:name :register :phone :contact :address :busline :coordinates :buildarea :function :runtime]
+(def selectcols {;;空巢老人
+                 :kccols [:nation :gntype :marriage :culture :emptyreason :visittime :monthincome :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :zq_barrierfree :zq_pensionagency :zq_homecare :zq_volunteers :zq_other :gender :havechildren]
+                 ;;照料中心
+                 :carecenter     [:name :register :phone :contact :address :busline :coordinates :buildarea :function :runtime]
+                 ;;照料人员
+                 :carepeople [:name :age :identityid :zl_id :zl_name :districtid :address :gender :contact :phone :cellphone :isleave]
+                 ;;照料中心大型活动
+                 :bigevent [:starttime :zl_id :zl_name :activityname :activityaddress :matter :participants :personnel :activiyphoto]
+                 ;;上访记录信息（照料中心工作人员上门访问照料人员）
+                 :homevisit [:recordtime :recondpeople :recondpersonnel :zl_id :recordcontent :recordphoto ]
+                 ;;照料中心工作人员
+                 :careworker [:zl_id :zl_name :gender :wphone :waddress :isleave]
+                 ;;机构入住人员进出管理
+                 :departentry [:opd_id :dep_id :opdname :register :intime :outtime :outreason]
                  })
+
 
 
 (defn uploadfile [file]
