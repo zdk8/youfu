@@ -1,0 +1,38 @@
+<div opt="formcontentpanel" style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
+     data-options="fit:true,border:false" class="easyui-panel">
+    <form opt="homevisitform" method="post" class="common-form" style="margin-top: 10px;">
+        <table width="80%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+            <tbody>
+            <tr>
+                <td class="formtdtext" >上访日期<label></label></td>
+                <td colspan="5">
+                    <input name="recordtime" class="easyui-datebox">
+                </td>
+                <td rowspan="4" style="text-align: center;">
+                    <div id="homepersonimg" style="width: 150px;height: 120px;cursor: pointer;margin-left: 150px;" opt="personimg">
+                        <img name="pensionimgpath" src="img/noperson.gif" value="" alt="用户照片" width="150px" height="120px">
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="formtdtext" >人员<label></label></td>
+                <td>
+                    <textarea name="recondpeople" style="width: 300px" class="input-text"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext" >上门工作人员<label></label></td>
+                <td>
+                    <textarea name="recondpersonnel" style="width: 300px" class="input-text"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td class="formtdtext" >内容<label></label></td>
+                <td>
+                    <textarea name="recordcontent" style="width: 300px" class="input-text"></textarea>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+</form>

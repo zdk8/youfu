@@ -171,7 +171,38 @@ define(function(){
 
         /*图片上传*/
         local.find('[opt=personimg]').click(function(){
-            console.log(1)
+            require(['commonfuncs/popwin/win','text!views/pension/fileupload/FileForm.htm','views/pension/fileupload/FileForm'],
+                function(win,htmfile,jsfile){
+                    win.render({
+                        title:"上传图片",
+                        width:400,
+                        height:200,
+                        html:htmfile,
+                        buttons:[
+                            {text:'取消',handler:function(html,parent){
+                                parent.trigger('close');
+                            }},
+                            {
+                                text:'保存',
+                                handler:function(html,parent){
+                                }
+                            }
+                        ],
+                        renderHtml:function(localc,submitbtn,parent){
+                            jsfile.render(localc,{
+                                submitbtn:submitbtn,
+                                parent:parent,
+                                plocal:local,
+                                //filetype:filetype,
+                                //refresh:refreshDatagrid,
+                                onCreateSuccess:function(data){
+                                    parent.trigger('close');
+                                }
+                            })
+                        }
+                    })
+                }
+            )
         })
     }
 

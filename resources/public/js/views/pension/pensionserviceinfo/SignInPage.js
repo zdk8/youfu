@@ -68,8 +68,8 @@ define(function(){
                                     } else {
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title: title,
-                                            htmfile: 'text!views/pension/RuZhuRYDlg.htm',
-                                            jsfile: 'views/pension/RuZhuRYDlg',
+                                            htmfile: 'text!views/pension/pensionserviceinfo/RuZhuRYDlg.htm',
+                                            jsfile: 'views/pension/pensionserviceinfo/RuZhuRYDlg',
                                             queryParams: {
                                                 actiontype: 'view',         //（处理）操作方式
                                                 record: record,
@@ -148,11 +148,10 @@ define(function(){
                 }else{              //正常
                     return 'color:#1c22ff;';
                 }
-            },
-            toolbar:local.find('div[tb]')
+            }
         })
 
-        local.find('[opt=refresh]').click(function(){
+        local.find('[opt=query]').click(function(){
             signpp.datagrid('load',{
                 name:local.find('[opt=name]').val(),
                 identityid:local.find('[opt=identityid]').val()

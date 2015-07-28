@@ -24,6 +24,12 @@
     <link rel="stylesheet" type="text/css" href="css/easyuiover.css"/>
 
     <script type="text/javascript" src="js/scripts/layer/layer.js"></script>
+    <script>
+        //加载扩展模块
+        layer.config({
+            extend: 'extend/layer.ext.js'
+        });
+    </script>
 
     <script type="text/javascript" src="js/require.js" data-main="js/main"></script>
     <script type="text/javascript" src="js/mycalendar.js"></script>
@@ -39,7 +45,7 @@
         <div class="bghead2">
             <span>欢迎！{{username}}</span>&nbsp;|
             <span style="cursor: pointer" opt="closeAllTabs">关&nbsp;闭</span>&nbsp;|
-            <span style="cursor: pointer">退&nbsp;出</span>&nbsp;
+            <span style="cursor: pointer"><a href="logout" style="color: white;">退&nbsp;出</a></span>&nbsp;
         </div>
     </div>
     <div data-options="region:'west',border:false" style="width:220px;border-right: 1px solid #e5e5e5">
@@ -243,5 +249,7 @@
 <link rel="Stylesheet" type="text/css" href="css/checkbox.css">
 
 <script type="text/javascript" src="js/highcharts/highcharts.js"></script>
+
+<script src="js/scripts/jquery-form.js"></script>
 
 </html>

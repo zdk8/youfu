@@ -1,0 +1,53 @@
+<div align="center">
+    <div style="margin-top: 15px;">
+    <form opt="fileuploadform" method="post" action="fileupload"><!--enctype="multipart/form-data"-->
+        <input name="pc_id" style="display: none;">
+        <input name="filetype" style="display: none;">
+        <input name="fileext" style="display: none;">
+        <table class="table_form">
+            <tr>
+                <td style="text-align: right">文件 :</td>
+                <td>
+                    <div style="border: 1px solid #ccc;height: 26px;width:251px;text-align: center;margin-right: 5px;">
+                        <input opt="inputVal"
+                               type="file"
+                               name="file"
+                               style="width:251px;border:0;height: 24px;" value="" maxlength="64"
+                               onchange="preview(this)">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">输入文件名称 :</td>
+                <td>
+                    <input opt="inputMsg" class="inputtext"
+                           type="text"
+                           name="filenamemsg"
+                           style="width:251px;" maxlength="64">
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function preview(file)
+    {
+        var prevDiv = document.getElementById('personimg');
+//        var prevDiv = $('[opt=preview]');
+        if (file.files && file.files[0])
+        {
+            var reader = new FileReader();
+            reader.onload = function(evt){
+                prevDiv.innerHTML = '<img style="width:150px;height:120px;" src="' + evt.target.result + '" />';
+                //tt = evt
+                // console.log(evt)
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+        else
+        {
+            prevDiv.innerHTML = '<div class="img" style="width:150px;height:120px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+    }
+</script>

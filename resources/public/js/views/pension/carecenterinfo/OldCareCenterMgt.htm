@@ -40,6 +40,7 @@
                     <th data-options="field:'ro',width:180,align:'center',formatter:function(value,rowData,rowIndex)
                         {
                             var str='<div></div>';
+                            str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;><span><span class=&quot;icondealwith&quot;>修改</span></span></a>&nbsp;|&nbsp;');
                             str=$(str).append('<a action=&quot;addcarep&quot;title=&quot;添加照料人员&quot;><span><span class=&quot;icondealwith&quot;>添加照料人员</span></span></a>&nbsp;|&nbsp;');
                             str=$(str).append('<a action=&quot;addworkp&quot;title=&quot;添加工作人员&quot;><span><span class=&quot;icondealwith&quot;>添加工作人员</span></span></a>&nbsp;|&nbsp;');
                             str=$(str).append('<a action=&quot;map&quot;title=&quot;地图&quot;><span><span class=&quot;icondealwith&quot;>地图</span></span></a>');

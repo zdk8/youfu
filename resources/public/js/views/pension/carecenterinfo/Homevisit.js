@@ -14,11 +14,11 @@ define(function () {
             }
         });
     };
-    /*新增工作人员*/
-    var addCareWorker = function (local,option) {
+    /*新增*/
+    var addHomeVisit = function (local, option) {
         local.find('[opt=save]').show().click(function () {
-            local.find('[opt=careworkerform]').form('submit', {
-                url:'depart/addcareworker',
+            local.find('[opt=homevisitform]').form('submit', {
+                url:'depart/addhomevisit',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
@@ -40,50 +40,49 @@ define(function () {
             });
         });
     }
-    /*查看*/
-    var viewCareWorker = function (local,option) {
-        local.find('[opt=careworkerform]').form('load',option.queryParams.data);
-        local.find('[opt=close]').show().click(function () {
-            $('#tabs').tabs('close',option.title);
-        });
-    }
-    /*修改*/
-    var updateCareWorker = function (local,option) {
-        local.find('[opt=careworkerform]').form('load',option.queryParams.data);
-        local.find('[opt=update]').show().click(function () {
-            local.find('[opt=careworkerform]').form('submit', {
-                url:'depart/updatecareworker',
-                onSubmit: function (params) {
-                    layer.load();
-                    var isValid = $(this).form('validate');
-                    if (!isValid){
-                        layer.closeAll('loading');
-                    }
-                    params.zl_id = option.queryParams.data.zl_id;
-                    params.cw_id = option.queryParams.data.cw_id;
-                    return isValid;
-                },
-                success: function (data) {
-                    if(data == "success"){
-                        layer.closeAll('loading');
-                        layer.alert('修改成功!', {icon: 6,title:'温馨提示'});
-                        option.queryParams.refresh();
-                    }else{
-                        layer.closeAll('loading');
-                        layer.alert('修改失败!', {icon: 5,title:'温馨提示'});
-                    }
-                }
-            });
-        });
-    }
-
     return {
-        render: function (local,option) {
+        render: function (local, option) {
             addToolBar(local);
+            /*图片上传*/
+            local.find('[opt=personimg]').click(function(){
+                require(['commonfuncs/popwin/win','text!views/pension/carecenterinfo/FileForm.htm','views/pension/carecenterinfo/FileForm'],
+                    function(win,htmfile,jsfile){
+                        win.render({
+                            title:"上传图片",
+                            width:400,
+                            height:200,
+                            html:htmfile,
+                            buttons:[
+                                {text:'取消',handler:function(html,parent){
+                                    parent.trigger('close');
+                                }},
+                                {
+                                    text:'保存',
+                                    handler:function(html,parent){
+                                    }
+                                }
+                            ],
+                            renderHtml:function(localc,submitbtn,parent){
+                                jsfile.render(localc,{
+                                    submitbtn:submitbtn,
+                                    parent:parent,
+                                    plocal:local,
+                                    //filetype:filetype,
+                                    //refresh:refreshDatagrid,
+                                    onCreateSuccess:function(data){
+                                        parent.trigger('close');
+                                    }
+                                })
+                            }
+                        })
+                    }
+                )
+            })
+
             if(option && option.queryParams){
                 switch (option.queryParams.actiontype){
                     case 'add':
-                        addCareWorker(local,option);
+                        addHomeVisit(local,option);
                         break;
                     case 'view':
                         viewCareWorker(local,option);
@@ -94,6 +93,8 @@ define(function () {
                     default :
                         break;
                 }
+            }else{
+                addHomeVisit(local,option);
             }
         }
     }
