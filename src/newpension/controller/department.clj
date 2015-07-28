@@ -554,7 +554,7 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
   [request]
   (let [params (:params request)
         hvdata (select-keys params (:homevisit common/selectcols))]
-    (db/adddata-by-tablename "t_bigevent" (common/dateformat-bf-insert hvdata "recordtime"))
+    (db/adddata-by-tablename "t_homevisit" (common/dateformat-bf-insert hvdata "recordtime"))
     (str "success")))
 
 (defn get-homevist-list [request]
