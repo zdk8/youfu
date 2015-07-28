@@ -6,6 +6,7 @@
             [newpension.controller.need :as need]
             [newpension.controller.genHtmlCode :as gen]
             [newpension.controller.money :as money]
+
             [noir.session :as session]
 
             [clojure.data.json :as json]
@@ -300,6 +301,13 @@
 
   (POST "/test/importexcel" [file] (report/excelimport file))                               ;;postgis 数据导入测试
 
-  (GET "/index2" [] (layout/render "index2.html" {:username (:username (session/get :usermsg)) :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)}))
+  (GET "/phone" [] (layout/render "testphoto.html"))
+
+  (GET "/index2" [] (if (session/get :usermsg)
+                       (layout/render "index2.html" {:username (:username (session/get :usermsg)) :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)})
+                       (layout/render "login.html")
+                       ))
+
+;  (POST "/fileupload" file (file/getfilesysfile file))
 
   )

@@ -493,7 +493,7 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
 (defn update-carepeople [request]
   (let [params (:params request)
         cp_id (:cp_id params)
-        cpdata (select-keys params common/selectcols)
+        cpdata (select-keys params (:carepeople common/selectcols))
         ]
     (db/updatedata-by-tablename "t_carepeople" cpdata {:cp_id cp_id})
     (str "success")))
