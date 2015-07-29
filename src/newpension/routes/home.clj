@@ -234,6 +234,7 @@
   (POST "/depart/addcarepeople" request (depart/add-carepeople request))                       ;;添加照料人员
   (POST "/depart/getcarepeoplelist" request (depart/get-carepeople-list request))          ;;获取照料人员列表
   (POST "/depart/updatecarepeople" request (depart/update-carepeople request))              ;;更新照料人员信息
+  (POST "/depart/leavecarepeople" request (depart/leave-carepeople request))              ;;照料人员离开
 
   (POST "/depart/addcareworker" request (depart/add-careworker request))                      ;;添加照料工作人员
   (POST "/depart/getcareworkerlist" request (depart/get-careworker-list request))            ;;获取照料信息工作人员列表
@@ -246,6 +247,8 @@
   (POST "/depart/addhomevisit" request (depart/add-homevisit request))                     ;;添加上门访问记录
   (POST "/depart/gethomevistlist" request (depart/get-homevist-list request))                      ;;获取上门访问列表
   (POST "/depart/updatehomevisit" request (depart/update-homevisit request))                 ;;更行上访记录信息
+
+  (POST "/depart/getsigncarepeople" request (depart/get-sign-carepeople request))
 
   (POST "/depart/adddepartentry" request (depart/add-departentry request))              ;;机构出入登记
   (POST "/depart/getdepartentrylist" request (depart/get-departentry-list request))      ;;获取机构出入记录列表

@@ -498,6 +498,13 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
     (db/updatedata-by-tablename "t_carepeople" cpdata {:cp_id cp_id})
     (str "success")))
 
+(defn leave-carepeople [request]
+  (let [params (:params request)
+        cp_id (:cp_id params)
+        ]
+    (db/updatedata-by-tablename "t_carepeople" {:isleave "1"} {:cp_id cp_id})
+    (str "success")))
+
 (defn add-careworker
   "为照料中心添加工作人员"
   [request]
@@ -573,6 +580,28 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         hvdata (select-keys params (:homevisit common/selectcols))]
     (db/updatedata-by-tablename "t_homevisit" (common/dateformat-bf-insert hvdata "recordtime")  {:hv_id hv_id})
     (str "success")))
+
+(defn get-sign-carepeople [request]
+  (let [params (:params request)
+        name (:name params)
+        rows (:rows params)
+        page (:page params)
+        conds (str (common/likecond "name" name))
+        get-sign-sql (str "select '0' as warn ,sign.* from
+(select o.*,s.s_id,s.signdate from
+(select t.*  from t_carepeople t where ISLEAVE is null ) o
+left join (select * from t_cpsign where trunc(signdate)=trunc(sysdate)) s
+on o.CP_ID = s.CP_ID)  sign
+where CP_ID in (select CP_ID from t_cpsign where signdate >= trunc(sysdate - 2) )
+union all
+select '1' as warn ,sign.* from
+(select o.*,s.s_id,s.signdate from
+(select t.*  from t_carepeople t where ISLEAVE is null ) o
+left join (select * from t_cpsign where trunc(signdate)=trunc(sysdate)) s
+on o.CP_ID = s.CP_ID)  sign
+where CP_ID not in (select CP_ID from t_cpsign where signdate >= trunc(sysdate - 2) )")
+        signdatas (common/fenye rows page (str "(" get-sign-sql ")") "*" conds "" )]
+    (resp/json {:total (:total signdatas) :rows (common/time-before-list (:rows signdatas) "checkintime")})))
 
 (defn add-departentry
   "机构出门登记"
