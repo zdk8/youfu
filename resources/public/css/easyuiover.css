@@ -106,6 +106,10 @@
     background: #dbeff2;
     color: #000000;
 }
+.datagrid-header-row td{
+    background-color:#6fb3e0;
+    color:#fff
+}
 .panel-header, .panel-body {
     border-color: #e5e5e5;
 }

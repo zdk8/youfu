@@ -113,6 +113,24 @@ define(function(){
                     })
                 }
             })
+            /*新增活动*/
+            local.find('[opt=addbigevent]').click(function(){
+                var title = "新增活动"
+                if($("#tabs").tabs('getTab',title)){
+                    $("#tabs").tabs('select',title)
+                }else{
+                    cj.showContent({                                          //详细信息(tab标签)
+                        title:title,
+                        htmfile:'text!views/pension/carecenterinfo/Bigevent.htm',
+                        jsfile:'views/pension/carecenterinfo/Bigevent',
+                        queryParams:{
+                            actiontype:'add',         //（处理）操作方式
+                            title:title,
+                            refresh:refreshGrid
+                        }
+                    })
+                }
+            })
 
         }
     }
