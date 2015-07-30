@@ -248,7 +248,11 @@
   (POST "/depart/gethomevistlist" request (depart/get-homevist-list request))                      ;;获取上门访问列表
   (POST "/depart/updatehomevisit" request (depart/update-homevisit request))                 ;;更行上访记录信息
 
-  (POST "/depart/getsigncarepeople" request (depart/get-sign-carepeople request))
+  (POST "/depart/getsigncarepeople" request (depart/get-sign-carepeople request))         ;;获取照料人员签到列表
+  (POST "/depart/signcarepeople" request (depart/sign-carepeople request))                  ;;单个签到
+  (POST "/depart/cancelcarepeoplesign" request (depart/cancle-carepeople-sign request))     ;;取消签到
+  (POST "/depart/carepeopleallsign" request (depart/carepeople-all-sign request))              ;;全部签到
+  (POST "/depart/carepeopleselectsign" request (depart/carepeople-select-sign request))          ;;选择签到
 
   (POST "/depart/adddepartentry" request (depart/add-departentry request))              ;;机构出入登记
   (POST "/depart/getdepartentrylist" request (depart/get-departentry-list request))      ;;获取机构出入记录列表

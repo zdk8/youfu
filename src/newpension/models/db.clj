@@ -173,6 +173,12 @@
   (table :t_oldsign)
   (database dboracle))
 
+;;照料中心签到表
+(defentity t_cpsign
+           (pk :s_id)
+           (table :t_cpsign)
+           (database dboracle))
+
 ;;高龄老人表
 (defentity t_oldestpeople
   (pk :gn_id)
@@ -841,6 +847,15 @@
   (transaction
     (dorun
       (map #(opdsign %) signdata))))
+
+(defn cpsign [datasign]
+  (insert t_cpsign
+          (values datasign)))
+
+(defn select-cpsign [signdata]
+  (transaction
+    (dorun
+      (map #(cpsign %) signdata))))
 
 ;;高龄老人
 (defn add-oldestpeople [oldestdata]

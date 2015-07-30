@@ -603,6 +603,37 @@ where CP_ID not in (select CP_ID from t_cpsign where signdate >= trunc(sysdate -
         signdatas (common/fenye rows page (str "(" get-sign-sql ")") "*" conds "" )]
     (resp/json {:total (:total signdatas) :rows (common/time-before-list (:rows signdatas) "checkintime")})))
 
+(defn sign-carepeople [request]
+  (let [params (:params request)
+        cp_id (:cp_id params)
+        signdata {:cp_id cp_id :signdate (common/get-nowtime)}]
+    (db/adddata-by-tablename "t_cpsign" signdata))
+  (str "success"))
+
+(defn cancle-carepeople-sign [request]
+  (let [params (:params request)
+        cp_id (:cp_id params)]
+    (db/deletedata-by-tablename "t_cpsign" {:cp_id cp_id}))
+  (str "success"))
+
+(defn carepeople-all-sign [request]
+  (let[params (:params request)
+       zl_id (:zl_id params)
+       depcond (if (> (count zl_id) 0) (str " and zl_id = " zl_id))
+       signall-sql (str "INSERT INTO T_CPSIGN(cp_id,signdate)
+SELECT cp_id,SYSDATE AS signdate FROM  T_CAREPEOPLE WHERE  CP_id NOT IN
+(SELECT CP_id FROM T_CPSIGN WHERE trunc(signdate) = trunc(SYSDATE) )  " depcond " and ISLEAVE is null ")]
+    (db/insert-results-bysql signall-sql)
+    (str "success")))
+
+(defn carepeople-select-sign [request]
+  (let[params (:params request)
+       cp_ids(:cp_id params)
+       signdata (map #(zipmap [:signdate :opd_id ] (conj % (common/get-nowtime) )) (partition 1 1 cp_ids))]
+    (println signdata)
+    (db/select-opdsign signdata)
+    (str "success")))
+
 (defn add-departentry
   "机构出门登记"
   [request]
