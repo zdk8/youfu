@@ -32,7 +32,7 @@ define(function(){
         }
 
         signpp.datagrid({
-            url:'depart/getcarepeoplelist',
+            url:'depart/getsigncarepeople',
             type:'post',
             queryParams:{
                 dep_id:''

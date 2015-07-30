@@ -12,9 +12,8 @@ define(function(){
                 onLoadSuccess:function(data){
                     var viewbtns=local.find('[action=view]');
                     var updatebtns=local.find('[action=update]');
-                    var deletebtns=local.find('[action=delete]');
-                    var mapbtn = local.find('[action=map]');                //地图
-                    var btns_arr=[viewbtns,updatebtns,deletebtns,mapbtn];
+                    var logoutbtns=local.find('[action=logout]');
+                    var btns_arr=[viewbtns,updatebtns,logoutbtns];
                     var rows=data.rows;
                     for(var i=0;i<rows.length;i++){
                         for(var j=0;j<btns_arr.length;j++){
@@ -42,14 +41,28 @@ define(function(){
                                                 refresh:refreshGrid                //刷新
                                             }
                                         })
-                                    }else if($(this).attr("action")=='map'){
-                                        var ywtype = "PT_LNR"
-                                        //var mapguid = record.mapguid;
-                                        window.open (mapURL+'map#task?ywtype='+ywtype+'&'+
-                                            'mapguid='+record.mapguid,
-                                            'newwindow', 'height='+window.screen.availHeight+', width='+window.screen.availWidth+', top=0, left=0, toolbar=no, ' +
-                                            'menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
-
+                                    }else if($(this).attr("action")=='logout'){
+                                        layer.confirm('确定要注销么？', {icon: 3,title:'温馨提示'}, function(index){
+                                            layer.close(index);
+                                            layer.load();
+                                            $.ajax({
+                                                url:'depart/leavecarepeople',
+                                                type:'post',
+                                                data:{
+                                                    cp_id:record.cp_id
+                                                },
+                                                success: function (data) {
+                                                    if(data == "success"){
+                                                        layer.closeAll('loading');
+                                                        layer.alert('注销成功!', {icon: 6,title:'温馨提示'});
+                                                        refreshGrid();
+                                                    }else{
+                                                        layer.closeAll('loading');
+                                                        layer.alert('注销失败!', {icon: 5,title:'温馨提示'});
+                                                    }
+                                                }
+                                            })
+                                        });
                                     }
                                 });
                             })(i);
