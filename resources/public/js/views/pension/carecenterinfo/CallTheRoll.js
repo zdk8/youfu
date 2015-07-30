@@ -81,10 +81,10 @@ define(function(){
                                 }else if (action == "sign") {
                                     showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                     $.ajax({
-                                        url:'depart/opdsign',
+                                        url:'depart/signcarepeople',
                                         type:'post',
                                         data:{
-                                            opd_id:record.opd_id
+                                            cp_id:record.cp_id
                                         },
                                         success:function(data){
                                             if(data == "success"){
@@ -109,10 +109,10 @@ define(function(){
                                 }else if (action == "signcancle") {
                                     showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                                     $.ajax({
-                                        url:'depart/opddesigncancle',
+                                        url:'depart/cancelcarepeoplesign',
                                         type:'post',
                                         data:{
-                                            os_id:record.os_id
+                                            cp_id:record.cp_id
                                         },
                                         success:function(data){
                                             if(data == "success"){
@@ -165,16 +165,16 @@ define(function(){
                 for(var i=0; i<rows.length; i++){
                     var row = rows[i];
                     if(!row.signdate){
-                        opdidarr.push(row.opd_id)
+                        opdidarr.push(row.cp_id)
                     }
                 }
                 if(opdidarr.length > 0){
                     showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     $.ajax({
-                        url:'depart/opdselectsign',
+                        url:'depart/carepeopleselectsign',
                         type:'post',
                         data:{
-                            os_id:opdidarr
+                            cp_id:opdidarr
                         },
                         success:function(data){
                             if(data == "success"){
@@ -205,11 +205,8 @@ define(function(){
                 if (r){
                     showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     $.ajax({
-                        url:'depart/opddesignall',
+                        url:'depart/carepeopleallsign',
                         type:'post',
-                        data:{
-                            dep_id:90
-                        },
                         success:function(data){
                             if(data == "success"){
                                 showProcess(false);

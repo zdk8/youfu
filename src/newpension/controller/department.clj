@@ -629,9 +629,9 @@ SELECT cp_id,SYSDATE AS signdate FROM  T_CAREPEOPLE WHERE  CP_id NOT IN
 (defn carepeople-select-sign [request]
   (let[params (:params request)
        cp_ids(:cp_id params)
-       signdata (map #(zipmap [:signdate :opd_id ] (conj % (common/get-nowtime) )) (partition 1 1 cp_ids))]
-    (println signdata)
-    (db/select-opdsign signdata)
+       signdata (map #(zipmap [:signdate :cp_id ] (conj % (common/get-nowtime) )) (partition 1 1 cp_ids))
+       ]
+    (db/select-cpsign signdata)
     (str "success")))
 
 (defn add-departentry
