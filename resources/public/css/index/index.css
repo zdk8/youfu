@@ -5,17 +5,22 @@
 }
 .bghead1{
     width: 200px;
-    margin-top: 30px;
+    margin-top: 8px;
     font-size: 20px;
     font-weight: bold;
     color: #ffffff;
+}
+.logo{
+    background: url("../../images/index/logo.png") no-repeat;
+    /*height: 50px;*/
+    /*width: 50px;*/
 }
 .bghead2{
     background: url("../../images/index/headbg2.png") no-repeat;
     /*border: 1px solid red;*/
     width: 450px;
     height: 40px;
-    margin-top: -53px;
+    margin-top: -83px;
     float: right;
 
     text-align: right;

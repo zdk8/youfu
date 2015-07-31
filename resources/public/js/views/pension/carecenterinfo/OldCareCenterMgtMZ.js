@@ -5,9 +5,9 @@ define(function(){
             url:'depart/getcarepeoplelist',
             method:'post',
             onLoadSuccess:function(data) {
-                var viewbtns = local.find('[action=view]');
-                var updatebtns = local.find('[action=update]');
-                var logoutbtns = local.find('[action=logout]');
+                var viewbtns = local.find('[action=view_cp]');
+                var updatebtns = local.find('[action=update_cp]');
+                var logoutbtns = local.find('[action=logout_cp]');
                 var btns_arr = [viewbtns, updatebtns, logoutbtns];
                 var rows = data.rows;
                 for (var i = 0; i < rows.length; i++) {
@@ -15,7 +15,7 @@ define(function(){
                         (function (index) {
                             var record = rows[index];
                             $(btns_arr[j][i]).click(function () {
-                                if ($(this).attr("action") == 'view') {
+                                if ($(this).attr("action") == 'view_cp') {
                                     cj.showContent({                                          //详细信息(tab标签)
                                         title: '【' + record.name + '】照料人员详细信息',
                                         htmfile: 'text!views/pension/carecenterinfo/carepeople.htm',
@@ -25,7 +25,7 @@ define(function(){
                                             data: record                  //填充数据
                                         }
                                     })
-                                } else if ($(this).attr("action") == 'update') {
+                                } else if ($(this).attr("action") == 'update_cp') {
                                     cj.showContent({                                          //详细信息(tab标签)
                                         title: '【' + record.name + '】照料人员修改',
                                         htmfile: 'text!views/pension/carecenterinfo/carepeople.htm',
@@ -36,7 +36,7 @@ define(function(){
                                             refresh: refreshGrid                //刷新
                                         }
                                     })
-                                } else if ($(this).attr("action") == 'logout') {
+                                } else if ($(this).attr("action") == 'logout_cp') {
                                     layer.confirm('确定要注销么？', {icon: 3, title: '温馨提示'}, function (index) {
                                         layer.close(index);
                                         layer.load();
@@ -67,14 +67,14 @@ define(function(){
         })
     }
     /*工作人员*/
-    var worker = function (local,datagrid) {
+    var worker = function (local, datagrid) {
         datagrid.datagrid({
             url: 'depart/getcareworkerlist',
             method: 'post',
             onLoadSuccess: function (data) {
-                var viewbtns = local.find('[action=view]');
-                var updatebtns = local.find('[action=update]');
-                var deletebtns = local.find('[action=delete]');
+                var viewbtns = local.find('[action=view_w]');
+                var updatebtns = local.find('[action=update_w]');
+                var deletebtns = local.find('[action=delete_w]');
                 var mapbtn = local.find('[action=map]');                //地图
                 var btns_arr = [viewbtns, updatebtns, deletebtns, mapbtn];
                 var rows = data.rows;
@@ -83,7 +83,7 @@ define(function(){
                         (function (index) {
                             var record = rows[index];
                             $(btns_arr[j][i]).click(function () {
-                                if ($(this).attr("action") == 'view') {
+                                if ($(this).attr("action") == 'view_w') {
                                     cj.showContent({                                          //详细信息(tab标签)
                                         title: '【' + record.zl_name + '】工作人员详细信息',
                                         htmfile: 'text!views/pension/carecenterinfo/careworker.htm',
@@ -93,7 +93,7 @@ define(function(){
                                             data: record                  //填充数据
                                         }
                                     })
-                                } else if ($(this).attr("action") == 'update') {
+                                } else if ($(this).attr("action") == 'update_w') {
                                     cj.showContent({                                          //详细信息(tab标签)
                                         title: '【' + record.zl_name + '】工作人员信息修改',
                                         htmfile: 'text!views/pension/carecenterinfo/careworker.htm',
@@ -111,13 +111,63 @@ define(function(){
                 }
             }
         })
+    };
+    /*大型活动*/
+    var bigEvent = function (local,datagrid) {
+        datagrid.datagrid({
+            url: 'depart/getbigeventlist',
+            method: 'post',
+            onLoadSuccess: function (data) {
+                var viewbtns = local.find('[action=view_be]');
+                var updatebtns = local.find('[action=update_be]');
+                var deletebtns = local.find('[action=delete_be]');
+                var mapbtn = local.find('[action=map]');                //地图
+                var btns_arr = [viewbtns, updatebtns, deletebtns, mapbtn];
+                var rows = data.rows;
+                for (var i = 0; i < rows.length; i++) {
+                    for (var j = 0; j < btns_arr.length; j++) {
+                        (function (index) {
+                            var record = rows[index];
+                            $(btns_arr[j][i]).click(function () {
+                                if ($(this).attr("action") == 'view_be') {
+                                    console.log(22)
+                                    cj.showContent({                                          //详细信息(tab标签)
+                                        title: '【' + record.zl_name + '】活动详细信息',
+                                        htmfile: 'text!views/pension/carecenterinfo/Bigevent.htm',
+                                        jsfile: 'views/pension/carecenterinfo/Bigevent',
+                                        queryParams: {
+                                            actiontype: 'view',         //（处理）操作方式
+                                            data: record                  //填充数据
+                                        }
+                                    })
+                                } else if ($(this).attr("action") == 'update_be') {
+                                    console.log(3232)
+                                    cj.showContent({                                          //详细信息(tab标签)
+                                        title: '【' + record.zl_name + '】活动信息修改',
+                                        htmfile: 'text!views/pension/carecenterinfo/Bigevent.htm',
+                                        jsfile: 'views/pension/carecenterinfo/Bigevent',
+                                        queryParams: {
+                                            actiontype: 'update',         //（处理）操作方式
+                                            data: record                   //填充数据
+                                            //refresh: refreshGrid                //刷新
+                                        }
+                                    })
+                                }
+                            });
+                        })(i);
+                    }
+                }
+            }
+        })
     }
     return {
         render:function(local,option){
             var carepeopledatagrid = local.find('[opt=carepeopledatagrid]');
             var workerdatagrid = local.find('[opt=workerdatagrid]');
+            var bigeventdatagrid = local.find('[opt=bigeventdatagrid]');
             carePeople(local,carepeopledatagrid);
             worker(local,workerdatagrid);
+            bigEvent(local,bigeventdatagrid);
 
             var localDataGrid;
             var refreshGrid=function() {
@@ -128,12 +178,12 @@ define(function(){
                 url:'depart/getcarecenterlist',
                 method:'post',
                 onLoadSuccess:function(data){
-                    var viewbtns=local.find('[action=view]');
-                    var updatebtns=local.find('[action=update]');
-                    var addcarepbtns=local.find('[action=addcarep]');
-                    var addworkpbtns=local.find('[action=addworkp]');
-                    var deletebtns=local.find('[action=delete]');
-                    var mapbtn = local.find('[action=map]');                //地图
+                    var viewbtns=local.find('[action=view_cc]');
+                    var updatebtns=local.find('[action=update_cc]');
+                    var addcarepbtns=local.find('[action=addcarep_cc]');
+                    var addworkpbtns=local.find('[action=addworkp_cc]');
+                    var deletebtns=local.find('[action=delete_cc]');
+                    var mapbtn = local.find('[action=map_cc]');                //地图
                     var btns_arr=[viewbtns,updatebtns,addcarepbtns,addworkpbtns,deletebtns,mapbtn];
                     var rows=data.rows;
                     for(var i=0;i<rows.length;i++){
@@ -141,7 +191,7 @@ define(function(){
                             (function(index){
                                 var record=rows[index];
                                 $(btns_arr[j][i]).click(function(){
-                                    if($(this).attr("action")=='view'){
+                                    if($(this).attr("action")=='view_cc'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.name+'】详细信息',
                                             htmfile:'text!views/pension/carecenterinfo/OldCareCenter.htm',
@@ -152,7 +202,7 @@ define(function(){
                                                 refresh:refreshGrid                //刷新
                                             }
                                         })
-                                    }else if($(this).attr("action")=='update'){
+                                    }else if($(this).attr("action")=='update_cc'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.name+'】信息修改',
                                             htmfile:'text!views/pension/carecenterinfo/OldCareCenter.htm',
@@ -163,7 +213,7 @@ define(function(){
                                                 refresh:refreshGrid                //刷新
                                             }
                                         })
-                                    }else if($(this).attr("action")=='addcarep'){
+                                    }else if($(this).attr("action")=='addcarep_cc'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.name+'】添加照料人员',
                                             htmfile:'text!views/pension/carecenterinfo/carepeople.htm',
@@ -173,7 +223,7 @@ define(function(){
                                                 data:record                   //填充数据
                                             }
                                         })
-                                    }else if($(this).attr("action")=='addworkp'){
+                                    }else if($(this).attr("action")=='addworkp_cc'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.name+'】添加工作人员',
                                             htmfile:'text!views/pension/carecenterinfo/careworker.htm',
@@ -183,7 +233,7 @@ define(function(){
                                                 data:record                   //填充数据
                                             }
                                         })
-                                    }else if($(this).attr("action")=='map'){
+                                    }else if($(this).attr("action")=='map_cc'){
                                         var ywtype = "PT_LNR"
                                         //var mapguid = record.mapguid;
                                         window.open (mapURL+'map#task?ywtype='+ywtype+'&'+
@@ -200,8 +250,13 @@ define(function(){
                 onClickRow: function (index,row) {
                     local.find('[opt=zl_id]').val(row.zl_id);
                     carepeopledatagrid.datagrid('load',{
-                        name:local.find('[opt=name_cp]').val(),
-                        identityid:local.find('[opt=identityid_cp]').val()
+                        zl_id:row.zl_id
+                    })
+                    workerdatagrid.datagrid('load',{
+                        zl_id:row.zl_id
+                    })
+                    bigeventdatagrid.datagrid('load',{
+                        zl_id:row.zl_id
                     })
                 },
                 rowStyler:function(rowIndex,rowData){
@@ -261,6 +316,7 @@ define(function(){
             local.find('[opt=query_carepeople]').click(function(){
                 console.log(local.find('[opt=zl_id]').val())
                 carepeopledatagrid.datagrid('load',{
+                    zl_id:local.find('[opt=zl_id]').val(),
                     name:local.find('[opt=name_cp]').val(),
                     identityid:local.find('[opt=identityid_cp]').val()
                 })

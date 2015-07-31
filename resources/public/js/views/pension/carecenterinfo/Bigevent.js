@@ -3,7 +3,8 @@ define(function () {
         var toolBarHeight=35;
         var toolBar=cj.getFormToolBar([
             {text: '修改',hidden:'hidden',opt:'update'},
-            {text: '保存',hidden:'hidden',opt:'save'}
+            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '关闭',hidden:'hidden',opt:'close'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -13,7 +14,13 @@ define(function () {
             }
         });
     };
-    var addGigEvent = function (local,option) {
+    var viewBigEvent = function (local,option) {
+        local.find('[opt=bigeventinfo]').form('load',option.queryParams.data);
+        local.find('[opt=close]').show().click(function () {
+            $('#tabs').tabs('close',option.title);
+        });
+    }
+    var addBigEvent = function (local,option) {
         local.find('[opt=save]').show().click(function () {
             local.find('[opt=bigeventinfo]').form('submit', {
                 url:'depart/addbigevent',
@@ -45,8 +52,11 @@ define(function () {
             local.find('[opt=update]').hide();
             if(option && option.queryParams){
                 switch(option.queryParams.actiontype){
+                    case 'view':
+                        viewBigEvent(local,option);
+                        break;
                     case 'add':
-                        addGigEvent(local,option);
+                        addBigEvent(local,option);
                         break;
                     default :
                         break;
