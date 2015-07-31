@@ -6,11 +6,11 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=35;
         var toolBar=cj.getFormToolBar([
-            {text: '处理',hidden:'hidden',opt:'dealwith',class:'btns'},
-            {text: '修改',hidden:'hidden',opt:'update',class:'btns'},
-            {text: '删除',hidden:'hidden',opt:'delete',class:'btns'},
-            {text: '保存',hidden:'hidden',opt:'save',class:'btns'},
-            {text: '保存',hidden:'hidden',opt:'save2',class:'btns'}
+            {text: '处理',hidden:'hidden',opt:'dealwith'},
+            {text: '修改',hidden:'hidden',opt:'update'},
+            {text: '删除',hidden:'hidden',opt:'delete'},
+            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '保存',hidden:'hidden',opt:'save2'}
 //            {text: '操作日志',hidden:'hidden',opt:'log'}
         ]);
         local.append(toolBar);

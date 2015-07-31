@@ -1,0 +1,149 @@
+<style>
+    #filemnglinknav{
+        /*height: 38px;*/
+        margin-top: 9px;
+    }
+    #filemnglinknav ul{text-align:center;}
+    #filemnglinknav ul li{
+        display:inline;cursor: pointer;
+        /*line-height: 38px;*/
+        /*border: 1px solid #ff0000;*/
+        font-size: 16px;
+        background-color: #d3d3d3;
+    }
+</style>
+
+<div class="easyui-layout" data-options="fit:true" style="background-color: white">
+    <div data-options="region:'north'" style="height:40px;border-bottom: 1px solid #d5ffd1;background-color: #f7f7f7">
+        <div id="filemnglinknav">
+            <ul>
+                <!--<li><a opt="newfolder"  class="opiconbg">新建文件夹</a></li>-->
+                <li>
+                    <a opt="uploadfile" href="javaScript:;">上传文件</a>
+                    <!--<a class="pFile-ico pFile-ico-file"></a>-->
+                    <!--<input class="btn btn-inverse" type="button" value="上传文件" opt="uploadfile"/>-->
+                </li>
+                <!--<li><a opt="renamefile" class="opiconbg">重命名</a></li>-->
+                <!--<li><a opt="deletefile" class="opiconbg">删 除</a></li>-->
+                <!--<li><a opt="movefile" class="opiconbg">移 动</a></li>-->
+            </ul>
+        </div>
+    </div>
+
+    <div data-options="region:'west'" style="width:200px;background-color:#eef;padding-top: 1px;">
+        <div class="filefolder">
+            <div style="text-align: center;"><d>文  件  目  录</d></div>
+            <ul>
+                <li class="filefolderli-hover">
+                    <span opt="approve">审批表</span>
+                </li>
+                <li>
+                    <span opt="prove">权属证明</span>
+                </li>
+                <li>
+                    <span opt="idcard">身份证</span>
+                </li>
+                <li>
+                    <span opt="icon">规划图纸</span>
+                </li>
+                <li>
+                    <span opt="other">其他材料</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-options="region:'center'">
+        <!--<table class="easyui-datagridnoauto" style="background-color: white"
+               data-options="singleSelect:true,fit:true,fitColumns:true,pagination:!true,border:!false,
+               method:'post'">
+            <thead>
+            <tr>
+                <th data-options="field:'ck',checkbox:true"></th>
+                <th data-options="field:'uuu',width:120,
+                    formatter:function(value,rowData,rowIndex){
+                        var str='<div></div>';
+                        var fs=rowData.filepath.split('/');
+                        var index=fs.length>0?fs.length-1:0;
+                        var f=fs[index];
+
+                        str=$(str).append('<a action=&quot;view&quot; class=&quot;opiconbgnil&quot;><span><span class=&quot;icon-nil icon-pl16&quot;></span>'+f+'</span></a>');
+                        return str.html();
+                    }">文件名称</th>
+                <th data-options="field:'oo',width:120,align:'right',
+                    formatter222222:function(value,rowData,rowIndex){
+                        var str='<div></div>';
+                        str=$(str).append('<a action=&quot;preview&quot;>预览</a>');
+                        return str.html();
+                    }">操作</th>
+                <th data-options="field:'filesize',width:40,align:'left',
+                    formatter:function(v,rowData,rowIndex){
+                        if(!v){return;}
+                        if(v>1024*1024){return new Number(v/1024/1024).toFixed(2)+&quot;M&quot;}
+                        if(v>1024){return new Number(v/1024).toFixed(2)+&quot;K&quot;}
+                        else{return v + &quot;B&quot;}
+                    }">大小</th>
+                <th data-options="field:'strcreatedate',width:60,align:'left',
+                    formatter:function(v,rowData,rowIndex){
+                        return v.substr(0,v.length-3);
+                    }">时间</th>
+            </tr>
+            </thead>
+        </table>-->
+        <table class="easyui-datagridnoauto"
+               data-options="fit:true,border:false,
+                           rownumbers:true,
+                           fitColumns:false,
+                           loadMsg:'',
+                           singleSelect:false,
+                           pagination:true">
+            <thead>
+            <tr>
+                <th data-options="field:'ck',checkbox:true"></th>
+                <th data-options="field:'file_name',width:200,align:'center'">文件名</th>
+                <th data-options="field:'file_size',width:150,align:'center',
+                    formatter:function(v,rowData,rowIndex){
+                            if(!v){return;}
+                            if(v>1024*1024){return new Number(v/1024/1024).toFixed(2)+&quot;M&quot;}
+                            if(v>1024){return new Number(v/1024).toFixed(2)+&quot;K&quot;}
+                            else{return v + &quot;B&quot;}
+                        }">文件大小</th>
+                <th data-options="field:'file_type',width:100,align:'center'">文件类型</th>
+                <th data-options="field:'loaddate',width:150,align:'center'">上传时间</th>
+                <!--<th data-options="field:'ro',width:220,align:'center',
+                        formatter:function(v,r,i){
+                            var str='<div></div>';
+                            str=$(str).append('<a action=&quot;view&quot;title=&quot;预览&quot;href=&quot;javaScript:void(0)&quot;class=&quot;btn btn-mini btn-warning&quot;>预览</a>&nbsp;|&nbsp;');
+                            str=$(str).append('<a action=&quot;download&quot;title=&quot;下载&quot;href=&quot;javaScript:void(0)&quot;class=&quot;btn btn-mini btn-warning&quot;>下载</a>&nbsp;|&nbsp;');
+                            str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:void(0)&quot;class=&quot;btn btn-mini btn-warning&quot;>删除</a>');
+                            return str.html();
+                        }">操作</th>-->
+                <th data-options="field:'oo',width:120,align:'right',
+                    formatter:function(value,rowData,rowIndex){
+                        var str='<div></div>';
+
+                            str=$(str).append('<a action=&quot;view&quot;class=&quot;pFile-ico pFile-ico-preview&quot;title=&quot;预览&quot;></a>&nbsp;&nbsp;');
+
+                        str=$(str).append('<a action=&quot;download&quot;class=&quot;pFile-ico pFile-ico-download&quot;title=&quot;下载&quot;></a>&nbsp;&nbsp;');
+                        str=$(str).append('<a action=&quot;del&quot;class=&quot;pFile-ico pFile-ico-del&quot;title=&quot;删除&quot;></a>');
+                        return str.html();
+                    }">操作</th>
+            </tr>
+            </thead><!--if(rowData.file_type=='.png' || rowData.file_type=='.jpg'){--><!-- }-->
+        </table>
+    </div>
+    <div tb style="height: 20px;">
+        <div id="filemngpathnav" style="float: left;line-height: 20px;width: 145px;">
+            <span style="float: left"><span style="float: left;color: #1c6a9e">当前路径:</span><span opt="currentpath" style="float: left;color: #1c6a9e"></span></span>
+            <ul style="float: left">
+            </ul>
+        </div>
+
+        <!--<div style="float: left;display: inline-block">
+            <span style="float: left;line-height: 20px;">文件名:</span>
+            <input id="keywordTxt" value="">
+            <span style="line-height: 20px;"><a href="javaScript:;">搜索</a></span>
+        </div>-->
+
+    </div>
+</div>

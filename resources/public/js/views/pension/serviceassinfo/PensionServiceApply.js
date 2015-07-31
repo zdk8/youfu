@@ -2,10 +2,10 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '提交',hidden:'hidden',opt:'save',class:'btns'},
-            {text: '提交',hidden:'hidden',opt:'save2',class:'btns'},
-            {text: '修改',hidden:'hidden',opt:'update',class:'btns'},
-            {text: '变更',hidden:'hidden',opt:'change',class:'btns'}
+            {text: '提交',hidden:'hidden',opt:'save'},
+            {text: '提交',hidden:'hidden',opt:'save2'},
+            {text: '修改',hidden:'hidden',opt:'update'},
+            {text: '变更',hidden:'hidden',opt:'change'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({

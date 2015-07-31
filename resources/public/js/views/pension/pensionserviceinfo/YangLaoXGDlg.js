@@ -2,8 +2,8 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '保存',hidden:'hidden',opt:'save',class:'btns'},
-            {text: '修改',hidden:'hidden',opt:'update',class:'btns'}
+            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '修改',hidden:'hidden',opt:'update'}
         ]);
         local.append(toolBar);
         local.find('div[opt=formcontentpanel]').panel({
@@ -15,6 +15,8 @@ define(function(){
     };
     function render(local,option){
         addToolBar(local)
+        local.find('[opt=save]').hide();
+        local.find('[opt=update]').hide();
         var ylxgdlg = local.find('[opt=ylxgdlg]');      //表单
 //        var determine = option.submitbtn;               //确定按钮
         var actiontype = option.queryParams.actiontype;             //操作方式

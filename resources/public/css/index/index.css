@@ -167,6 +167,19 @@ div.form-foot-btns ul li
     display:inline;
     list-style-type:none;
 }
+div.form-foot-btns ul li a{
+    background-color: #6fb3e0;
+    color: #ffffff;
+    border: 1px solid #6fb3e0;
+    cursor: pointer;height: 22px;width: 60px;
+}
+div.form-foot-btns ul li a:hover{
+    background-color: #2D93CA;
+}
+div.form-foot-btns ul li a:active{
+    position: relative;
+    top: 1px;
+}
 
 /*工具栏背景*/
 .highcharstoolbar{
