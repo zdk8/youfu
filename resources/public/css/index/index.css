@@ -9,6 +9,8 @@
     font-size: 20px;
     font-weight: bold;
     color: #ffffff;
+    padding-top: 4px;
+    margin-left: 5px;
 }
 .logo{
     background: url("../../images/index/logo.png") no-repeat;
