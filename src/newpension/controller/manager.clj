@@ -103,9 +103,14 @@
   (let [results (first (basemd/get-function-by-id id))]
     (resp/json results)))
 
-(defn get-user-by-regionid [id]
-  (let [results (basemd/get-user-by-regionid id)]
-    (resp/json results)))
+(defn get-user-by-regionid [req]
+  (let [{params :params} req
+        {node :node} params
+        {username :username} params
+         results (basemd/get-user-by-regionid node username)]
+    (resp/json results)
+    )
+  )
 (defn get-user-by-id [id]
   (let [results (first (basemd/get-user-by-id id))]
     (resp/json results)))
@@ -180,8 +185,9 @@
         ]
     (resp/json {:success true})))
 (defn del-user-by-id [id]
-  (basemd/delete-user id)
-  (resp/json {:success true})
+  (resp/json (basemd/delete-user id))
+;  (println "RRRRRRRRRRRRR" (basemd/delete-user id))
+;  (resp/json {:success true})
   )
 
 
@@ -189,7 +195,8 @@
 (defn get-role [req]
   (let [{params :params} req
         {userid :userid} params
-         results (if userid (basemd/get-role-by-userid userid) (basemd/get-role userid))]
+        {rolename :rolename} params
+         results (if userid (basemd/get-role-by-userid userid) (basemd/get-role rolename))]
     (resp/json results)))
 
 (defn create-role [req]
@@ -221,8 +228,8 @@
 
 ;;加载模块
 (defn get-function-byuser [req]
-;  (resp/json (basemd/get-function-byuser (:userid (first (session/get :usermsg)))))
-    (resp/json (basemd/get-function));;权限放开
+  (resp/json (basemd/get-function-byuser (:userid (session/get :usermsg))))
+;    (resp/json (basemd/get-function));;权限放开
   )
 (defn get-functionmenu [req]
   (let [{params :params} req

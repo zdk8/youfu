@@ -144,20 +144,38 @@
     (set-fields user)
     (where {:userid userid})))
 (defn delete-user [userid]
-  (delete xt_user
-    (where {:userid userid})))
-(defn get-user-by-regionid [id]
+  (let [res1 (with-db dboracle
+               (exec-raw ["select roleid from xt_roleuser where userid = ?" [userid]] :results))]
+    (if (> (count res1) 0)
+      (if (:roleid (first res1))
+        (str "该用户下已经分配角色")
+        (delete xt_user
+          (where {:userid userid}))
+        )
+      (delete xt_user
+        (where {:userid userid}))
+      )
+    )
+
+;  (if (> (count (with-db dboracle
+;    (exec-raw ["select * from xt_roleuser where userid = ?" [userid]] :results))) 0)
+;    (str "该用户下已经分配角色")
+;    (delete xt_user
+;      (where {:userid userid}))
+;    )
+  )
+(defn get-user-by-regionid [userid username]
   (with-db dboracle
     (exec-raw [(str "select u.*,d.totalname from xt_user u,division d where u.regionid like '"
-                 id "%' and u.regionid=d.dvcode")] :results)))
+                 userid "%' and u.username like '" username "%' and u.regionid=d.dvcode")] :results)))
 (defn get-user-by-id [id]
   (with-db dboracle
     (exec-raw [(str "select u.*,d.totalname from xt_user u,division d where u.userid = '"
                  id "' and u.regionid=d.dvcode")] :results)))
 
-(defn get-role [id]
+(defn get-role [rolename]
   (with-db dboracle
-    (exec-raw ["select * from xt_role" []] :results)))
+    (exec-raw [(str "select * from xt_role where rolename like '" rolename "%'")] :results)))
 (defn get-role-by-userid [userid]
   (with-db dboracle
     (exec-raw ["select r.*,ru.userid from xt_role r left join (select * from xt_roleuser where userid=?) ru on r.roleid=ru.roleid" [userid]] :results)))
@@ -212,7 +230,7 @@
        (select * from
          (select * from xt_user u left join xt_roleuser ru on u.userid=ru.userid where u.userid=?) ur
                  left join
-                 xt_rolefunc rf on ur.roleid=rf.roleid) urf on fc.functionid=urf.functionid where nodetype='1' and fc.functionid='rightsmanagement' or fc.parent='functionmodule' order by orderno desc" [userid]] :results))
+                 xt_rolefunc rf on ur.roleid=rf.roleid) urf on fc.functionid=urf.functionid where nodetype='1' and fc.functionid='jfkdajklfajldjflsf' or fc.parent='dasffffffffffffffdsdsfs' order by orderno asc" [userid]] :results))
   )
 (defn get-functionmenu [userid funcid]
   (with-db dboracle
