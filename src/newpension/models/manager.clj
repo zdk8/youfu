@@ -164,10 +164,16 @@
 ;      (where {:userid userid}))
 ;    )
   )
-(defn get-user-by-regionid [userid username]
-  (with-db dboracle
-    (exec-raw [(str "select u.*,d.totalname from xt_user u,division d where u.regionid like '"
-                 userid "%' and u.username like '" username "%' and u.regionid=d.dvcode")] :results)))
+;(defn get-user-by-regionid [sql userid username start end]
+;  (with-db dboracle
+;;    (exec-raw [(str "select u.*,d.totalname from xt_user u,division d where u.regionid like '"
+;;                 userid "%' and u.username like '" username "%' and u.regionid=d.dvcode")] :results))
+;    (exec-raw [(str "select *
+;                        from (select u.*, rownum rn
+;                                from (" sql ") u
+;                               where rownum <= " end ") where rn >=" start)] :results)
+;  ))
+
 (defn get-user-by-id [id]
   (with-db dboracle
     (exec-raw [(str "select u.*,d.totalname from xt_user u,division d where u.userid = '"

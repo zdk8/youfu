@@ -5,6 +5,8 @@
             [noir.response :as resp]
             [noir.session :as session]
             [taoensso.timbre :as timbre]
+
+            [newpension.models.db :as db]
             ))
 
 
@@ -105,12 +107,20 @@
 
 (defn get-user-by-regionid [req]
   (let [{params :params} req
+        {page :page} params
+        {rows :rows} params
+        r   (read-string rows)
+        p  (read-string page)
+        start  (inc(* r (dec p)))
+        end (* r p)
         {node :node} params
         {username :username} params
-         results (basemd/get-user-by-regionid node username)]
-    (resp/json results)
-    )
-  )
+        totalsql  (str "select u.*,d.totalname from xt_user u,division d where u.regionid like '"
+                    node "%' and u.username like '" username "%' and u.regionid=d.dvcode")
+        total (count (db/get-results-bysql totalsql))
+        results (db/getall-results start end totalsql)]
+    (resp/json {:total total :rows results})
+    ))
 (defn get-user-by-id [id]
   (let [results (first (basemd/get-user-by-id id))]
     (resp/json results)))
