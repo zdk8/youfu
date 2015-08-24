@@ -6,9 +6,9 @@ requirejs.config({
     urlArgs: "dc_=" +  (new Date()).getTime()
 
 });
-require(['router','layoutinit'], function(Router,layoutinit){
+require(['../../js/router','layoutinit'], function(Router,layoutinit){
 
-    Router.startRouting();
+    Router.startRouting("menu_newpension");
     layoutinit.inithead();
     layoutinit.initroutnavigation();
     layoutinit.initindextime();

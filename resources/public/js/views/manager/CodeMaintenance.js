@@ -37,7 +37,7 @@ define(function(){
                                     if($(this).attr("action")=='view'){
                                         //view(option,record)
                                     }else if($(this).attr("action")=='add'){
-                                        require(['commonfuncs/popwin/win','text!views/pop/xt_combodt.htm','views/pop/xt_combodt'],function(win,htmfile,jsfile){
+                                        require(['commonfuncs/popwin/win','text!views/manager/code/xt_combodt.htm','views/manager/code/xt_combodt'],function(win,htmfile,jsfile){
                                             win.render({
                                                 title:'添加',
                                                 width:424,
@@ -79,7 +79,7 @@ define(function(){
             js.bindEvent(local,localDataGrid,['aaa101'])
         })
         local.find('[opt=addtype]').bind('click',function(){
-            require(['commonfuncs/popwin/win','text!views/pop/xt_combo.htm','views/pop/xt_combo'],function(win,htmfile,jsfile){
+            require(['commonfuncs/popwin/win','text!views/manager/code/xt_combo.htm','views/manager/code/xt_combo'],function(win,htmfile,jsfile){
                 win.render({
                     title:'添加',
                     width:424,
@@ -104,7 +104,7 @@ define(function(){
         return localDataGrid;
     }
     var comboupdate=function(option,record,local,localDataGrid){
-        require(['commonfuncs/popwin/win','text!views/pop/xt_combo.htm','views/pop/xt_combo'],function(win,htmfile,jsfile){
+        require(['commonfuncs/popwin/win','text!views/manager/code/xt_combo.htm','views/manager/code/xt_combo'],function(win,htmfile,jsfile){
             win.render({
                 title:'更新',
                 width:424,
@@ -178,7 +178,7 @@ define(function(){
             if(!local.find('div[tb]>[opt=value]').text().length){
                 alert('请选择');return;
             }
-            require(['commonfuncs/popwin/win','text!views/pop/xt_combodt.htm','views/pop/xt_combodt'],function(win,htmfile,jsfile){
+            require(['commonfuncs/popwin/win','text!views/manager/code/xt_combodt.htm','views/manager/code/xt_combodt'],function(win,htmfile,jsfile){
                 win.render({
                     title:'添加',
                     width:424,
@@ -205,7 +205,7 @@ define(function(){
     }
     var combodtupdate=function(option,record,local,localDataGrid){
         var parentlocal=local;
-        require(['commonfuncs/popwin/win','text!views/pop/xt_combodt.htm','views/pop/xt_combodt'],function(win,htmfile,jsfile){
+        require(['commonfuncs/popwin/win','text!views/manager/code/xt_combodt.htm','views/manager/code/xt_combodt'],function(win,htmfile,jsfile){
             win.render({
                 title:'更新',
                 width:424,

@@ -20,11 +20,12 @@ define(function(){
                             var record=rows[index];
                             $(btns_arr[j][i]).click(function(){
                                 if($(this).attr("action")=='view'){
+                                    layer.load();
                                     if(record.datatype == "g"){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:record.name+'详细信息',
-                                            htmfile:'text!views/pension/HighYearOldMan.htm',
-                                            jsfile:'views/pension/HighYearOldMan',
+                                            htmfile:'text!views/pension/pensioninfo/HighYearOldMan.htm',
+                                            jsfile:'views/pension/pensioninfo/HighYearOldMan',
                                             queryParams:{
                                                 actiontype:'update',         //（处理）操作方式
                                                 data:record,                   //填充数据
@@ -34,8 +35,8 @@ define(function(){
                                     }else{
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:record.name+'详细信息',
-                                            htmfile:'text!views/pension/PensionPeopleInfo.htm',
-                                            jsfile:'views/pension/PensionPeopleInfo',
+                                            htmfile:'text!views/pension/pensioninfo/PensionPeopleInfo.htm',
+                                            jsfile:'views/pension/pensioninfo/PensionPeopleInfo',
                                             queryParams:{
                                                 actiontype:'update',         //（处理）操作方式
                                                 data:record,                   //填充数据

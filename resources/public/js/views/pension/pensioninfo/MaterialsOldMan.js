@@ -112,6 +112,7 @@ define(function () {
     }
     /*修改*/
     function updateFunc(local,option){
+        layer.closeAll('loading');
         var datas = option.queryParams.data;
         local.find('[opt=highyearoldform]').form('load',datas);
         var districtnameval = getDivistionTotalname(datas.districtid)

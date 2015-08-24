@@ -278,10 +278,10 @@
 
   (GET "/phone" [] (layout/render "testphoto.html"))
 
-  (GET "/index2" [] (if (session/get :usermsg)
-                       (layout/render "index2.html" {:username (:username (session/get :usermsg)) :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)})
-                       (layout/render "login.html")
-                       ))
+;  (GET "/index2" [] (if (session/get :usermsg)
+;                       (layout/render "index2.html" {:username (:username (session/get :usermsg)) :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)})
+;                       (layout/render "login.html")
+;                       ))
 
 ;  (POST "/fileupload" file (file/getfilesysfile file))
 

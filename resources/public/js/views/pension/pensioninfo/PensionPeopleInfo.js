@@ -67,6 +67,7 @@ define(function(){
 
     /*查看并修改*/
     var actionInfo=function(local,option) {
+        layer.closeAll('loading');
         addCheckboxCss(local);
         var districtid = local.find('[opt=districtid]');      //行政区划
         getdivision(districtid);

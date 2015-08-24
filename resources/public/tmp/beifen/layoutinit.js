@@ -16,7 +16,7 @@ define(function(){
     }
 
     function needtodoclick(){
-        require(['commonfuncs/TreeClickEvent'],function(TreeClickEvent){
+        require(['../../js/commonfuncs/TreeClickEvent'],function(TreeClickEvent){
             TreeClickEvent.ShowContent('text!views/dbgl/needtodopanel.htm','views/dbgl/needtodopanel','待办事务');
         });
     }
@@ -55,7 +55,7 @@ define(function(){
         }
 
 
-        require(['commonfuncs/UpdateItemNum','commonfuncs/AjaxForm'],function(updateitem,ajaxform){
+        require(['../../js/commonfuncs/UpdateItemNum','commonfuncs/AjaxForm'],function(updateitem,ajaxform){
 //            $('#welcomename').text("欢迎您:"+displayname+'('+dvname+')');
 //            updateitem.updateitemnum($('#onlinenums'),onlinenums,"(",")");
             var params = {

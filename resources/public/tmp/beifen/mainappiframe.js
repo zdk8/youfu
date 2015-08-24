@@ -7,7 +7,7 @@ requirejs.config({
 
 });
 var widgetcmp=pagename.replace(/\./g,'/');
-require(['text!views/'+widgetcmp+'.htm','views/'+widgetcmp,'commonfuncs/validate/Init'],function(htm,js,validateInit){
+require(['text!views/'+widgetcmp+'.htm','views/'+widgetcmp,'../../js/commonfuncs/validate/Init'],function(htm,js,validateInit){
     new validateInit();
     var localtab = $('body').append(htm);
     $.parser.parse(localtab.parent());
