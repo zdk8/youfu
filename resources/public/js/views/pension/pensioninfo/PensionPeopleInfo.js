@@ -227,7 +227,7 @@ define(function(){
         local.find('[opt=update]').hide();
         local.find('[opt=delete]').hide();
         dealwithbtn.show().click(function(){
-            require(['commonfuncs/popwin/win','text!views/pension/PensionPeopleAuditDlg.htm','views/pension/PensionPeopleAuditDlg'],
+            require(['commonfuncs/popwin/win','text!views/pension/pensioninfo/PensionPeopleAuditDlg.htm','views/pension/pensioninfo/PensionPeopleAuditDlg'],
                 function(win,htmfile,jsfile){
                     win.render({
                         title:'处理',
