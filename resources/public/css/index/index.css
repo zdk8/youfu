@@ -233,7 +233,7 @@ ol.flowstep-6 {
     font-size: 18px;
 }
 .flowstep-6 .step-no {
-    background: url(../../images/process/gostatus.png)  50% -102px;
+    background: url(../../images/process/gostatus.png) 50% -102px;
 }
 .flowstep-6 .step-last .step-no {
     /*background-position: 50% -136px;*/
@@ -242,7 +242,7 @@ ol.flowstep-6 {
     color: transparent;
     _color:tomato; /*For IE6-*/
     _filter:chroma(color=tomato);/*For IE6-*/
-    background: url(../../images/process/gostatus.png)  50% -170px;
+    background: url(../../images/process/gostatus.png) 50% -170px;
 }
 .flowstep-6 .step-first .step-no {
     /*background-position: 50% -204px;*/
