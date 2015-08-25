@@ -16,9 +16,9 @@
                [newpension.layout :as layout]))
 
 (def applykeys [:districtname :districtid :name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
-            :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime
-            :countyaudit :audittime :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime
-            :familynum :allowanceid :old_type :live_type :life_ability :userdistrictid])
+                :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime
+                :countyaudit :audittime :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime
+                :familynum :allowanceid :old_type :live_type :life_ability :userdistrictid :type])
 (def opofapply [:name :identityid :gender :birthd :nation :culture :marriage :live :economy :age :registration :address :telephone :mobilephone])
 (def  assess  [:jja_id :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_xingz :sh_lout :sh_chuany :sh_dab :sh_xiaob :sh_zongf :sh_pingguf :sh_jiel :sh_pingguy
          :jj_shour :jj_fenl :jj_leix :jj_pingguf :jj_pingguy :jz_fenl :jz_zhaol :jz_pingguf :jz_pingguy :nl_fenl :nl_pingguf :nl_pingguy :gx_laom :gx_youf :gx_youf_kind
