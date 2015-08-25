@@ -25,23 +25,6 @@
 (defn update-page []
   (layout/render "update.html"))
 
-(defn addold-page []
-  (layout/render "addold.html" {:username (:username (session/get :usermsg))}))
-
-(defn old-page []
-  (layout/render "old.html"))
-
-(defn log-page [functionid]
-  (layout/render "log.html" {:functionid functionid}))
-
-(defn audit-page [functionid funcid]
-  (layout/render "audit.html" {:functionid functionid :funcid funcid :username (:username (session/get :usermsg))}))
-
-(defn need-page []
-  (layout/render "need.html"))
-
-(defn addneed-page []
-  (layout/render "addneed.html"))
 (defn dm-page []
   (layout/render "dm.html"
     {:usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)
@@ -77,26 +60,11 @@
     (depart/mytest user-id file-name))
 
   (POST "/getdistrictname" request (old/getdistrictname request))
-;  (GET "/dm" [] (dm-page));;;123456790
   (GET "/" request (old/home request)) ;;登录页面
   (GET "/index" request (old/home request))  ;;退出后跳到登录页面
-  (GET "/dm" request (dm-page))
-  (GET "/dm2" request (dm2-page))
-  (GET "/dm3" request (dm3-page request))
-  (POST "/loginbtn" request (old/loginbtn request))  ;;用户登录
   (GET "/loginbtn2" request (old/loginbtn2 request))  ;;用户登录
   (POST "/loginbtn2" request (old/loginbtn2 request))  ;;用户登录
-  (POST "/logout" request (old/logout request))      ;;退出登录
   (GET "/logout" request (old/logout request))      ;;退出登录
-  (GET "/addold" [] (addold-page))   ;;养老信息录入页面
-  (GET "/logs" [functionid] (log-page functionid))      ;;操作日志页面
-  (GET "/audits" [functionid funcid] (audit-page functionid funcid))     ;;待办业务页面
-  (GET "/olds" [] (old-page))      ;;养老信息查询页面
-  (GET "/need" [] (need-page))      ;;人员评估信息查询页面
-  (GET "/addneed" [] (addneed-page))      ;;人员评估信息录入页面
-  (GET "/GrantMoneyMng" [] (layout/render "GrantMoneyMng.html"))  ;;资金发放页面
-;  (GET "/YangLaoJGManagement" [] (layout/render "YangLaoJGManagement.htm"))  ;;养老老机构
-;  (GET "/YangLaoJGDlg" [] (layout/render "YangLaoJGDlg.html"))  ;;养老老机构
 
   (POST "/saveold" request (old/create-old request))  ;;养老信息录入
   (POST "/insert-oldsocrel" fields (old/insert-oldsocrel fields)) ;;新增养老家庭成员信息
@@ -310,10 +278,10 @@
 
   (GET "/phone" [] (layout/render "testphoto.html"))
 
-  (GET "/index2" [] (if (session/get :usermsg)
-                       (layout/render "index2.html" {:username (:username (session/get :usermsg)) :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)})
-                       (layout/render "login.html")
-                       ))
+;  (GET "/index2" [] (if (session/get :usermsg)
+;                       (layout/render "index2.html" {:username (:username (session/get :usermsg)) :usermsg (json/json-str (dissoc (session/get :usermsg) :passwd)  :escape-unicode false)})
+;                       (layout/render "login.html")
+;                       ))
 
 ;  (POST "/fileupload" file (file/getfilesysfile file))
 

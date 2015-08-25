@@ -40,11 +40,12 @@ define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/servic
                                                 assfile.render(local,{queryParams:{
                                                     title:title,
                                                     data:data,
+                                                    record:record,
                                                     refresh:refreshGrid,
                                                     actionType:"view"
                                                 }});
                                             }else{
-                                                console.log('oops....info1_table is not ready ')
+                                                //console.log('oops....info1_table is not ready ')
                                             }
                                         }, 200);
                                         /*getassessbyidFunc({jja_id:record.bstablepk,title:title,record:record,
@@ -53,7 +54,6 @@ define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/servic
                                 }else if(action == "dealwith"){                   //处理
                                     var userlength = cj.getUserMsg().regionid.length;
                                     var aul = record.aulevel;
-                                    console.log(aul)
                                     if(userlength == 12){
                                         $.messager.alert('温馨提示','对不起,你没有该权限!','info');
                                     }else if(userlength == 9){

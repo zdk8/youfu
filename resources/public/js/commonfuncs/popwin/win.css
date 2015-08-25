@@ -1,13 +1,17 @@
 .pop-win-north-title {
     display: inline-block;
     line-height: 30px;
-    padding-left: 20px;
+    padding-left: 10px;
+    color: #ffffff;
 }
 .pop-win-north-close{
     float: right;
-    background: url(../../../img/popwindowclosebackground.png) no-repeat;
+    background: url(../../../images/win/close.png) no-repeat;
     width: 20px;
     height: 30px;
+    cursor: pointer;
+    right: 2px;
+
 }
 
 .background {
@@ -25,7 +29,7 @@
     z-index: 999;
     padding: 0;
     border: solid 1px chartreuse;
-    background: rgba(10, 10, 10, 0.5);
+    /*background: rgba(10, 10, 10, 0.5);*/
 }
 div.weboxbuttons ul
 {
@@ -45,14 +49,9 @@ div.weboxbuttons ul li
 div.weboxbuttons ul li a, div.weboxbuttons ul li a:visited
 {
     cursor: pointer;
-    /*border: 1px #4e667d solid;*/
     text-decoration: none;
     white-space: nowrap;
-    background-image: url("../../../toolbtn.jpg");
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 6px;
-    padding-top: 2px;
+    padding: 2px 20px 6px 20px;
     background-color: #6fb3e0;
     color: #ffffff;
 }

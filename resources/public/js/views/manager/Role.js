@@ -23,7 +23,8 @@ define(function(){
                             title:'角色信息',
                             width:524,
                             height:200,
-                            html:$(htmfile).eq(0),
+                            //html:$(htmfile).eq(0),
+                            html:htmfile,
                             buttons:[
                                 {text:'取消',handler:function(html,parent){
                                     parent.trigger('close');
@@ -46,7 +47,7 @@ define(function(){
                                                 return isValid;
                                             },
                                             success: function (data) {
-                                                var obj = $.evalJSON(data);
+                                                var obj = eval('('+data+')');
                                                 if(obj.success) {
                                                     parent.trigger('close');
                                                     refreshGrid();
@@ -99,7 +100,7 @@ define(function(){
                     url:'getrole',
                     queryParams: {
                         intelligentsp:null,
-                        userid:option.queryParams?option.queryParams.userid:null
+                        userid:option && option.queryParams?option.queryParams.userid:null
                     },
                     onLoadSuccess:function(data){
                         var viewbtns=local.find('[action=view]');
@@ -130,8 +131,7 @@ define(function(){
                             }
                         }
                     },
-                    striped:true,
-                    toolbar:local.find('div[tb]')
+                    striped:true
                 })
 
             //添加用户的弹出表单
@@ -139,8 +139,9 @@ define(function(){
                 viewRoleInfo();
             })
 
-            if(option.submitbtn) {
+            if(option && option.submitbtn) {
                 option.submitbtn.bind('click',function(){
+                    layer.load();
                     var checkedrows=localDataGrid.datagrid('getChecked');
                     var ids=""
                     for(var i= 0,len=checkedrows.length;i<len;i++) {
@@ -148,10 +149,17 @@ define(function(){
                         ids += checkedrows[i].roleid;
                     }
                     $.post('saveroleuser', {userid:option.queryParams.userid,roleids:ids}, function (data) {
+                        layer.closeAll('loading');
                         option.parent.trigger('close');
                     }, 'json');
                 })
             }
+            
+            local.find('[opt=query]').click(function () {
+                localDataGrid.datagrid('load',{
+                    rolename:local.find('[opt=rolename]').val()
+                });
+            });
 
         }
     }

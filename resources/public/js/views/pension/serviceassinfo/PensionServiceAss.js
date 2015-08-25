@@ -108,7 +108,12 @@ define(function(){
     }
     /*评估*/
     var assessmentFunc = function(local,option){
-        local.find('[opt=dealwith]').hide()
+        local.find('[opt=dealwith]').hide();
+        var status = '<li class="step-first step-pass"><div class="step-name">新增申请</div><div class="step-no">&nbsp;</div></li>' +
+            '<li><div class="step-name step-name-b">待评估</div><div class="step-no">2</div></li>' +
+            '<li><div class="step-name">待街道审核</div><div class="step-no">3</div></li>' +
+            '<li class="step-last"><div class="step-name ">待民政局审核</div><div class="step-no">4</div></li>';
+        local.find('.flowstep-6').html(status);
         /*保存*/
         local.find('[opt=save]').show().click(function(){
             var jjfenl = local.find('[name=jj_fenl]');//经济条件提交时判断
@@ -217,9 +222,12 @@ define(function(){
     }
     /*处理*/
     var viewInfoFunc = function(local,option){
-        local.find('[opt=dealwith]').hide()
-        local.find('[opt=save]').hide()
-        local.find('[opt=commit]').hide()
+        require(['commonfuncs/process/status'], function (js) {
+            js.render(local,{aulevel:option.queryParams.record.aulevel});
+        });
+        local.find('[opt=dealwith]').hide();
+        local.find('[opt=save]').hide();
+        local.find('[opt=commit]').hide();
     }
     return {
       render:function(local,option){

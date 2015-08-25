@@ -1,12 +1,10 @@
 <div class="easyui-layout"  data-options="fit:true">
-   <!-- <div data-options="region:'north'" style="height:50px"></div>
-    <div data-options="region:'south'" style="height:50px;"></div>-->
-    <div data-options="region:'east'" style="width:100px;"></div>
-    <div data-options="region:'center'" style="padding:20px" data-options="fit:true">
+    <!--<div data-options="region:'east'" style="width:100px;"></div>-->
+    <div data-options="region:'center'" style="padding:0 20px 0 20px;" data-options="fit:true">
         <form method="post">
         <div class="weboxbuttons"><ul></ul></div>
         <input type="hidden" name="functionid">
-            <div class="d-content" style="max-height: 579px; overflow: auto; height: auto;">
+            <div class="d-content" style="max-height: 579px; margin-top:10px;overflow: auto; height: auto;">
                 <div class="dialog_content">
                     <form id="info_form" action="test?a=edit&amp;m=mechanism"
                           method="post">
@@ -93,9 +91,14 @@
         </form>
     </div>
     <div data-options="region:'west',lines:true" style="width:300px;">
-        <div><span>&nbsp;</span><a opt="log"  style="height: 20px;width: 100px"></a></div>
-        <a opt="expandAll">展开所有</a>
-        <a opt="collapseAll">收缩所有</a>
+        <!--<div style="border:1px solid red;"><span>&nbsp;</span><a opt="log"  style="height: 20px;width: 100px"></a></div>-->
+        <!--<a opt="expandAll" class="btns">展开所有</a>
+        <a opt="collapseAll" class="btns">收缩所有</a>-->
+        <div style="padding-bottom: 3px;padding-top: 2px;">
+            <span>&nbsp;</span>
+            <a opt="expandAll" class="icondealwith" style="cursor: pointer;">展开所有</a>
+            <a opt="collapseAll" class="icondealwith" style="cursor: pointer;">收缩所有</a>
+        </div>
         <ul opt="functiontree"></ul>
     </div>
 </div>

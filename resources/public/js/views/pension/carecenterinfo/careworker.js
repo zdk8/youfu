@@ -25,6 +25,7 @@ define(function () {
                     if (!isValid){
                         layer.closeAll('loading');
                     }
+                    params.zl_id = option.queryParams.data.zl_id;
                     return isValid;
                 },
                 success: function (data) {

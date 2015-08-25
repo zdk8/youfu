@@ -12,9 +12,19 @@ define(function(){
                 localDataGrid.datagrid('reload');
             };
             var deleteUserInfo=function(record) {
-                $.post('deluserbyid', {id:record.userid}, function (data) {
-                    refreshGrid();
-                }, 'json');
+                layer.confirm('确定要删除么？', {icon: 3,title:'温馨提示'}, function(index){
+                    layer.close(index);
+                    layer.load();
+                    $.post('deluserbyid', {id:record.userid}, function (data) {
+                        if(data == 1){
+                            layer.closeAll('loading');
+                            refreshGrid();
+                        }else{
+                            layer.alert('该用户已经分配了角色，请先将用户与角色的关系解除再进行删除!', {icon: 6,title:'温馨提示'});
+                            layer.closeAll('loading');
+                        }
+                    }, 'json');
+                });
             };
             var viewUserInfo=function(record){
                 require(['commonfuncs/popwin/win','text!views/manager/UserForm.htm','views/manager/UserForm'],
@@ -48,12 +58,14 @@ define(function(){
 
 
                                     $(submitbtn).bind('click', function () {
+                                        layer.load();
                                         poplocal.find('form').form('submit', {
                                             url: 'saveuser',
                                             onSubmit: function (param) {
                                                 var isValid = $(this).form('validate');
                                                 if (!isValid) {
-                                                    $.messager.progress('close');
+                                                    //$.messager.progress('close');
+                                                    layer.closeAll('loading');
                                                 }
                                                 if(!poplocal.find('[name=userid]').val()){
                                                     param.flag=-1;
@@ -66,9 +78,10 @@ define(function(){
                                                 return isValid;
                                             },
                                             success: function (data) {
-                                                var obj = $.evalJSON(data);
+                                                var obj = eval('('+data+')');
                                                 if(obj.success) {
                                                     parent.trigger('close');
+                                                    layer.closeAll('loading');
                                                     refreshGrid();
                                                 }
                                             }
@@ -88,7 +101,7 @@ define(function(){
                 require(['commonfuncs/popwin/win','text!views/manager/Role.htm','views/manager/Role'],
                     function(win,htmfile,jsfile){
                         win.render({
-                            title:'添加角色信息',
+                            title:'添加角色',
                             width:524,
                             height:500,
                             html:$(htmfile),
@@ -111,7 +124,7 @@ define(function(){
 
 
             var $mytree=$('#Divisiontree').tree({
-                checkbox:true,
+                checkbox:false,
                 url:'getdivisiontree',
                 animate:true,
                 onClick:function(node){
@@ -159,14 +172,20 @@ define(function(){
                             }
                         }
                     },
-                    striped:true,
-                    toolbar:local.find('div[tb]')
+                    striped:true
                 })
 
             //添加用户的弹出表单
             local.find('[opt=adduser]').bind('click',function(){
                 viewUserInfo();
             })
+            
+            local.find('[opt=query]').click(function () {
+                localDataGrid.datagrid('load',{
+                    username:local.find('[opt=username]').val(),
+                    node:mynode.dvcode.substr(mynode.dvcode.length-2,mynode.dvcode.length-1)=="00"?mynode.dvcode.substr(0,mynode.dvcode.length-2):mynode.dvcode
+                });
+            });
         }
     }
 })

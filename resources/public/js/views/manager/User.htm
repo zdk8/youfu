@@ -1,69 +1,55 @@
 <div class="easyui-layout"  data-options="fit:true">
-   <!-- <div data-options="region:'north'" style="height:50px"></div>
-    <div data-options="region:'south'" style="height:50px;"></div>
-    <div data-options="region:'east'" style="width:100px;"></div>-->
     <div data-options="region:'center'" data-options="fit:true">
-        <table class="easyui-datagrid-noauto"
-               data-options="
-               method:'post',
-               fit:true,
-               border:false,
-               rownumbers:true,
-               fitColumns:true,
-              pageSize:cj.getDataGridAttr('pageSize'),
-               pageList:cj.getDataGridAttr('pageList'),
-               singleSelect:true,
-               pagination:true">
-            <thead>
-            <tr>
-                <th data-options="field:'username',width:100,align:'center',formatter:function(v,r,i)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;view&quot;>'+v+'('+r.loginname+')</a>');
-                return str.html();
-            }">用户名称</th>
-                <th data-options="field:'totalname',width:120,align:'center'">区域名称</th>
-                <th data-options="field:'regionid',width:50,align:'left'">区域代码</th>
-                <th data-options="field:'createdate',width:100,align:'center',formatter:cj.dateFormatter(),hidden:true">创建时间</th>
-                <th data-options="field:'delete',width:50,align:'center',formatter:function(v,r,i)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;delete&quot;>删除</a>');
-                str=$(str).append('<a action=&quot;addrole&quot;>添加角色</a>');
-                return str.html();
-            }">操作</th>
-            </tr>
-            </thead>
-        </table>
-
-        <div tb>
-            <table cellspacing="0" cellpadding="0" style="float: right">
-                <tr>
-
-                    <td><label class="gray7">搜索条件:</label></td>
-
-                    <td style="width: 210px;text-align: right">
-                        <input class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
-                               type="keyword" style="width:200px" >
-                    </td>
-
-                    <td>
-                        <span class="searchbtn" >&nbsp;</span>
-                    </td>
-
-                    <td>
-                        <div class="datagrid-btn-separator"></div>
-                    </td>
-                    <td>
-                        <a opt="adduser">新增用户</a>
-                    </td>
-                </tr>
-            </table>
-            <div class="clear"></div>
+        <div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'north',border:false"
+                 style="height:65px;padding:10px 15px 0 15px;">
+                <div style="border: 1px solid #e5e5e5;width: auto;height: 85%;min-width:500px;min-height:40px;background-color: #eff3f8;">
+                    <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                        &nbsp;<span>用户名称 </span><span><input opt="username" type="text" size="5" class="inputtext"></span>
+                <span style="float: right;margin-top: 3px">
+                    <input type="button" value="查询" class="btns" opt="query">
+                    <input type="button" value="新增用户" style="width: 70px;" class="btns" opt="adduser">
+                </span>
+                    </div>
+                </div>
+            </div>
+            <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
+                <table class="easyui-datagrid-noauto"
+                       data-options="
+                       method:'post',
+                       fit:true,
+                       border:false,
+                       rownumbers:true,
+                       fitColumns:true,
+                       pageSize:cj.getDataGridAttr('pageSize'),
+                       pageList:cj.getDataGridAttr('pageList'),
+                       singleSelect:true,
+                       pagination:true">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'username',width:100,align:'center',formatter:function(v,r,i)
+                        {
+                            var str='<div></div>';
+                            str=$(str).append('<a action=&quot;view&quot;>'+v+'('+r.loginname+')</a>');
+                            return str.html();
+                        }">用户名称(登录名)</th>
+                        <th data-options="field:'totalname',width:100,align:'center'">区域名称</th>
+                        <th data-options="field:'regionid',width:50,align:'center'">区域代码</th>
+                        <th data-options="field:'createdate',width:100,align:'center',formatter:cj.dateFormatter(),hidden:true">创建时间</th>
+                        <th data-options="field:'delete',width:50,align:'center',formatter:function(v,r,i)
+                        {
+                            var str='<div></div>';
+                            str=$(str).append('<a action=&quot;delete&quot;>删除</a>&nbsp;|&nbsp;');
+                            str=$(str).append('<a action=&quot;addrole&quot;>添加角色</a>');
+                            return str.html();
+                        }">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
-
     </div>
-    <div data-options="region:'west',lines:true" style="width:300px;">
+    <div data-options="region:'west',lines:true" style="width:250px;">
         <ul id="Divisiontree"></ul>
     </div>
 </div>

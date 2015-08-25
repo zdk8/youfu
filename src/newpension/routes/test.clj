@@ -48,5 +48,7 @@
 
   (GET "/info1" [] (info "hello"))
 
+  (GET "/Test" [] (layout/render "Test.html"))
+
 
   )

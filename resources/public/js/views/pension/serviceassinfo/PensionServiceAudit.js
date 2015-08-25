@@ -93,6 +93,16 @@ define(function(){
     }
     /*处理*/
     var dealwithInfoFunc = function(local,option){
+        /*var status = '<li class="step-first step-pass"><div class="step-name">新增申请</div><div class="step-no">&nbsp;</div></li>' +
+            '<li class="step-pass"><div class="step-name">已评估</div><div class="step-no">&nbsp;</div></li>' +
+            '<li><div class="step-name step-name-b">待街道审核</div><div class="step-no">3</div></li>' +
+            '<li class="step-last"><div class="step-name ">待民政局审核</div><div class="step-no">4</div></li>';*/
+        require(['text!commonfuncs/process/status.htm','commonfuncs/process/status'], function (htm,js) {
+            //local.find('.flowstep-6').html(htm);
+            js.render(local,{aulevel:option.queryParams.record.aulevel});
+        });
+        //local.find('.flowstep-6').html(status);
+
         var aulevel = option.queryParams.record.aulevel;              //评估信息流程等级
         var streetreview = local.find('textarea[name=streetreview]'); //审核框
         var countyaudit = local.find('textarea[name=countyaudit]'); //审批框
