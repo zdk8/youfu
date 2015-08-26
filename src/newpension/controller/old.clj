@@ -978,6 +978,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        identityid   (:identityid params)                                     ;获取身份证信息
        ishave    (count (first (db/selectdatas-by-tablename "t_oldpeople" {:identityid identityid})))           ;查找老人数据库是否存在该身份证的老人
        olddata (conj request {:params (conj params {:datatype "f"})})]
+    (println "OOOOOOOO" oldestdata identityid olddata)
     ;(create-old olddata)                                               ;;添加到基础老人表
     ; (db/add-oldestpeople (common/timefmt-bef-insert (common/timefmt-bef-insert oldestdata "birthd") "formdata"))
     (if (> (count identityid) 0)

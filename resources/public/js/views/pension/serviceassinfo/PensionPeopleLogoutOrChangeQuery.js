@@ -146,7 +146,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
             /*添加字段*/
             local.find('[opt=addfield]').click(function(){
                 var closobj = localDataGrid.datagrid('options').columns[0];
-                require(['commonfuncs/popwin/win','text!views/pension/PensionServiceXlsFields.htm','views/pension/PensionServiceXlsFields'],
+                require(['commonfuncs/popwin/win','text!views/pension/serviceassinfo/PensionServiceXlsFields.htm','views/pension/serviceassinfo/PensionServiceXlsFields'],
                     function(win,htmfile,jsfile){
                         win.render({
                             title:'选择字段',

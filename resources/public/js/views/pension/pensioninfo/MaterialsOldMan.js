@@ -88,7 +88,7 @@ define(function () {
     function saveFunc(local,option){
         local.find('[opt=save]').show().click(function () {
             local.find('[opt=highyearoldform]').form('submit',{
-                url:'old/oldestpeople',
+                url:'old/addoldcarepeople',
                 onSubmit: function (param) {
                     showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     param.districtid = local.find('[opt=districtid]').combobox("getValue")
