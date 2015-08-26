@@ -147,3 +147,17 @@
   (if (= 0 (count keys)) results
     (recur (time-before-list results (first keys)) (rest keys)))
   )
+
+(defn dateformat-bf-insert
+  "数据插入数据库前对时间进行格式化函数"
+  [results & keys]
+  (if (= 0 (count keys)) results
+                         (recur  (timefmt-bef-insert results (first keys)) (rest keys)))
+  )
+
+(defn dateymd-bf-list
+  "数据展示前对时间进行格式化处理函数"
+  [results & keys]
+  (if (= 0 (count keys)) results
+                         (recur (time-before-list results (first keys)) (rest keys)))
+  )

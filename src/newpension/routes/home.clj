@@ -232,6 +232,7 @@
   (POST "/old/delenpeople" request (old/del-emptynestpeople request))                                ;;注销空巢老人数据
   (POST "/old/enpeoplestatistic" request (old/emptynest-statistic request))                          ;;空巢老人数据统计分析
   (POST "/old/getemptydetail" request (old/get-emptynest-detail request))                            ;;获取空巢老人每项具体数据
+  (POST "/old/addoldcarepeople" request (old/add-oldcarepeople request))                              ;;新增优抚老人数据
 
 
   ;(POST "/old/opstatistic" request (old/opstatistic request))                                                                  ;;老人信息统计

@@ -41,6 +41,11 @@
                    :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :visittime :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other
                    :monthincome :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend
                    :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :lack :ispair :volunteername :volunteerphone :former :formdata])
+(def oldcarepeople [:name :gender :marriage :culture :address :telephone :districtid :gn_number :birthd :nation :registration :gntype :disease :zn_name1 :zn_phone1
+                   :zn_workplace1 :zn_name2 :zn_phone2 :zn_workplace2 :zn_name3 :zn_phone3 :zn_workplace3 :zn_name4 :zn_phone4 :zn_workplace4 :emptyreason
+                   :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :visittime :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other
+                   :monthincome :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend
+                   :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :lack :ispair :volunteername :volunteerphone :former :formdata])
 (def emptynestpeople [:kc_id :gn_number :name :gender :marriage :culture :address :telephone :districtid :birthd :nation :registration :gntype :disease :zn_name1 :zn_phone1 :zn_workplace1 :zn_name2 :zn_phone2 :zn_workplace2 :zn_name3 :zn_phone3 :zn_workplace3 :zn_name4 :zn_phone4 :zn_workplace4 :emptyreason :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :visittime :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other :monthincome :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :ispair :volunteername :volunteerphone :zq_barrierfree :zq_pensionagency :zq_homecare :zq_volunteers :zq_other :zq_othervalue :age :havechildren])
 
 (def v_oldapprove "v_oldapprove")
@@ -965,6 +970,19 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
         olddata (conj request {:params (conj params {:datatype "g"})})]
     (create-old olddata)                                               ;;添加到基础老人表
     (db/add-oldestpeople (common/timefmt-bef-insert (common/timefmt-bef-insert oldestdata "birthd") "formdata"))
+    (str "success")))
+
+(defn add-oldcarepeople [request]
+  (let[params (:params request)
+       oldestdata (select-keys params oldcarepeople)
+       identityid   (:identityid params)                                     ;获取身份证信息
+       ishave    (count (first (db/selectdatas-by-tablename "t_oldpeople" {:identityid identityid})))           ;查找老人数据库是否存在该身份证的老人
+       olddata (conj request {:params (conj params {:datatype "f"})})]
+    ;(create-old olddata)                                               ;;添加到基础老人表
+    ; (db/add-oldestpeople (common/timefmt-bef-insert (common/timefmt-bef-insert oldestdata "birthd") "formdata"))
+    (if (> (count identityid) 0)
+      (if (> ishave 0) (db/updatedata-by-tablename "t_oldpeople" {:datatype "f"} {:identityid identityid}) (db/adddata-by-tablename "t_olepeople" olddata))) ;;老人库中存在该身份证信息，更新数据库数据类型，否则添加新的数据
+    (db/adddata-by-tablename "t_oldcarepeople" (common/dateformat-bf-insert oldestdata "birthd" "formdata"))      ;添加优抚老人数据
     (str "success")))
 
 (defn set-oldmap [request]
