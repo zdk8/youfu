@@ -170,12 +170,12 @@ define(function(){
         local.find('[opt=save]').show().bind('click',function(){
             local.find('[opt=save]').hide();
             local.find('[opt=save2]').show();
+            console.log(121)
             local.find('[opt=pensionform]').form('submit', {
-                url:'audit/addauditapply',
+                url:'audit/addauditapply1',
                 onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
-                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                         params.districtid = districtid.combobox("getValue")
                     }else{
                         local.find('[opt=save]').show();

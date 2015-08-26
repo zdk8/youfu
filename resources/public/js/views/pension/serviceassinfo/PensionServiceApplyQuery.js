@@ -99,7 +99,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                                 actionType:"assessment"
                             }});
                         }else{
-                            console.log('oops....info1_table is not ready ')
+                            //console.log('oops....info1_table is not ready ')
                         }
                     }, 200);
                 }

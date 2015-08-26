@@ -42,11 +42,12 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                                                         psafile.render(local,{queryParams:{
                                                             title:title,
                                                             data:data,
+                                                            record:record,
                                                             refresh:refreshGrid,
                                                             actionType:"view"
                                                         }});
                                                     }else{
-                                                        console.log('oops....info1_table is not ready ')
+                                                        //console.log('oops....info1_table is not ready ')
                                                     }
                                                 }, 200);
                                             }
@@ -124,6 +125,8 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                 var closobj = localDataGrid.datagrid('options').columns[0];
                 var colsfieldarr = new Array();
                 var colstxtarr = new Array();
+                colsfieldarr.push('name');
+                colstxtarr.push('姓名');
                 for(var o=0;o<closobj.length;o++){
                     if(closobj[o].field != "ro"){
                         if(!closobj[o].hidden){
@@ -132,7 +135,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                         }
                     }
                 }
-                layer.load(1);
+                //layer.load(1);
                 window.location.href="report-xls-auto?colstxt="+colstxtarr+"&colsfield="+colsfieldarr+
                     "&datatype="+local.find('[opt=ppselect]').val()+
                     "&name="+local.find('[opt=name]').val()+
@@ -151,7 +154,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                         win.render({
                             title:'选择字段',
                             width:620,
-                            height:435,
+                            height:235,
                             html:htmfile,
                             buttons:[
                                 {text:'取消',handler:function(html,parent){
