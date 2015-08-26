@@ -254,10 +254,10 @@
         brief (str "姓名：" (:name params) " 身份证："(:identityid params)  )
         appdata {:bstablepk tprkey :bstablename "t_oldpeople" :status "1" :aulevel "0" :auflag "新增数据" :bstime (common/get-nowtime)
                  :appoperators username :auuser loginname  :messagebrief brief :bstablepkname "lr_id"}]
-    (println "ssssss" opseno  auditid)
-    (println "DDDDDDDDDDDD" (conj (select-keys olds (vec (keys checkinfo)))  {:opseno opseno}  ;;新增养老信息
-                              (conj {:lr_id tprkey}
-                                (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date"))))
+    ;(println "ssssss" opseno  auditid)
+    ;(println "DDDDDDDDDDDD" (conj (select-keys olds (vec (keys checkinfo)))  {:opseno opseno}  ;;新增养老信息
+    ;                          (conj {:lr_id tprkey}
+    ;                            (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date"))))
     (db/create-old (conj (select-keys olds (vec (keys checkinfo)))   ;;新增养老信息
                      (conj {:lr_id tprkey :datatype (if (= (count datatype) 0) "s" datatype)}
                        (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys olds oldinfo) "birthd")"operator_date"))))
@@ -982,7 +982,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
     ;(create-old olddata)                                               ;;添加到基础老人表
     ; (db/add-oldestpeople (common/timefmt-bef-insert (common/timefmt-bef-insert oldestdata "birthd") "formdata"))
     (if (> (count identityid) 0)
-      (if (> ishave 0) (db/updatedata-by-tablename "t_oldpeople" {:datatype "f"} {:identityid identityid}) (db/adddata-by-tablename "t_olepeople" olddata))) ;;老人库中存在该身份证信息，更新数据库数据类型，否则添加新的数据
+      (if (> ishave 0) (db/updatedata-by-tablename "t_oldpeople" {:datatype "f"} {:identityid identityid}) (create-old olddata))) ;;老人库中存在该身份证信息，更新数据库数据类型，否则添加新的数据
     (db/adddata-by-tablename "t_oldcarepeople" (common/dateformat-bf-insert oldestdata "birthd" "formdata"))      ;添加优抚老人数据
     (str "success")))
 
