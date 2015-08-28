@@ -56,7 +56,7 @@
             <tr>
                 <td class="formtdtext" style="width: 100px">身份证号码<label></label></td>
                 <td colspan="2">
-                    <input opt="identityid" name="identityid" class="input-text" style="width: 159px"><span style="color: red">*</span>
+                    <input name="identityid" class="easyui-validatebox input-text" data-options="required:true" style="width: 159px"><span style="color: red">*</span>
                     <!--<input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 159px"
                                        data-options="required:true,
                                    invalidMessage:'请输入正确的身份证号',
@@ -209,22 +209,27 @@
             </tr>
             <tr>
                 <td class="formtdtext" style="text-align: center;">所在村(社区)意见</td>
-                <td colspan="7" style="text-align: center;">
-                    <textarea style="width: 90%;"></textarea>
+                <td colspan="7" style="text-align: left;">
+                    <textarea class="input-text" style="width: 97%;height: 50px;" name="communityopinion"></textarea>
                 </td>
             </tr>
+            <!--
             <tr>
                 <td class="formtdtext" style="text-align: center;">所在镇(街道)审核意见</td>
-                <td colspan="7" style="text-align: center;">
-                    <textarea style="width: 90%;"></textarea>
+                <td colspan="7" style="text-align: left;">
+                    <textarea class="input-text" style="width: 97%;height: 50px;" name="streetreview" readonly></textarea>
+                    <input type="radio" name="shenghe" value="0"><label>符合评估标准</label>
+                    <input type="radio" name="shenghe" value="1"><label>建议再次评估</label>
                 </td>
             </tr>
             <tr>
                 <td class="formtdtext" style="text-align: center;">市民政局审批意见</td>
-                <td colspan="7" style="text-align: center;">
-                    <textarea style="width: 90%;"></textarea>
+                <td colspan="7" style="text-align: left;">
+                    <textarea class="input-text" style="width: 97%;height: 50px;" name="streetreview" readonly></textarea>
+                    <input type="radio" name="shenghe" value="0"><label>符合评估标准</label>
+                    <input type="radio" name="shenghe" value="1"><label>建议再次评估</label>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td class="formtdtext" colspan="7" style="text-align: right;">申请时间<label></label></td>
                 <td>

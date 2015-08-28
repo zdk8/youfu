@@ -241,32 +241,35 @@ define(function(){
         var districtid = local.find('[opt=districtid]');      //行政区划值
         /*保存*/
         local.find('[opt=save]').show().bind('click',function(){
+            layer.load();
             local.find('[opt=save]').hide();
             local.find('[opt=save2]').show();
             local.find('[opt=pensionform]').form('submit', {
-                url:'audit/addauditapply1',
+                url:'audit/addauditapply',
                 onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
-                        params.districtid = districtid.combobox("getValue")
+                        params.districtid = districtid.combobox("getValue");
+                        params.apply_type = "1";        //1、2类型的申请
                     }else{
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
+                        layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
                     if(data == "true"){
-                        showProcess(false);
-                        cj.slideShow('保存成功');
+                        layer.closeAll('loading');
+                        cj.slideShow('提交完成');
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
-                        if(showProcess(false)){
-                            $("#tabs").tabs('close',"居家养老服务申请")
+                        if(layer.closeAll('loading')){
+                            $("#tabs").tabs('close',"服务申请_1&2")
                         }
                     }else{
-                        showProcess(false);
-                        cj.slideShow('<label style="color: red">保存失败</label>');
+                        layer.closeAll('loading');
+                        cj.slideShow('<label style="color: red">提交失败</label>');
                     }
                 }
             });
@@ -274,20 +277,32 @@ define(function(){
     }
     /*修改*/
     function showinfo(local,option){
+        layer.closeAll('loading');
         addRadioCss(local);
         baseRender(local, option.queryParams.data);
         var districtid = local.find('[opt=districtid]');      //行政区划值
         local.find('form').form('load', option.queryParams.data);
         var districtnameval = getDivistionTotalname(option.queryParams.data.districtid)
         districtid.combotree("setValue",districtnameval)  //填充行政区划
-        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']').attr("checked","checked");
-        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']+label').addClass("checked");
-        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']').attr("checked","checked");
-        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']+label').addClass("checked");
-        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']').attr("checked","checked");
-        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']+label').addClass("checked");
-        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']').attr("checked","checked");
-        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']+label').addClass("checked");
+        local.find('input[name=old_type][type=radio][value='+option.queryParams.data.old_type+']').attr("checked","checked");
+        local.find('input[name=old_type][type=radio][value='+option.queryParams.data.old_type+']+label').addClass("checked");
+        local.find('input[name=live_type][type=radio][value='+option.queryParams.data.live_type+']').attr("checked","checked");
+        local.find('input[name=live_type][type=radio][value='+option.queryParams.data.live_type+']+label').addClass("checked");
+        local.find('input[name=life_ability][type=radio][value='+option.queryParams.data.life_ability+']').attr("checked","checked");
+        local.find('input[name=life_ability][type=radio][value='+option.queryParams.data.life_ability+']+label').addClass("checked");
+        local.find('input[name=household][type=radio][value='+option.queryParams.data.household+']').attr("checked","checked");
+        local.find('input[name=household][type=radio][value='+option.queryParams.data.household+']+label').addClass("checked");
+
+        local.find('input[name=fw_type][type=radio][value='+option.queryParams.data.fw_type+']').attr("checked","checked");
+        local.find('input[name=fw_type][type=radio][value='+option.queryParams.data.fw_type+']+label').addClass("checked");
+        var fwtype = option.queryParams.data.fw_type;
+        if(fwtype == "0"){//机构养老
+            local.find('input[name=jg_money][type=radio][value='+option.queryParams.data.jg_money+']').attr("checked","checked");
+            local.find('input[name=jg_money][type=radio][value='+option.queryParams.data.jg_money+']+label').addClass("checked");
+        }else if(fwtype == "1"){//居家养老
+            local.find('input[name=jj_time][type=radio][value='+option.queryParams.data.jj_time+']').attr("checked","checked");
+            local.find('input[name=jj_time][type=radio][value='+option.queryParams.data.jj_time+']+label').addClass("checked");
+        }
 
         local.find('[opt=save]').hide();
         local.find('[opt=save2]').hide();
@@ -325,6 +340,7 @@ define(function(){
     }
     /*查看详细信息*/
     function showInformation(local,option){
+        layer.closeAll('loading');
         addRadioCssNoOperation(local);
         baseRender(local, option.queryParams.data);
         local.find('form').form('load', option.queryParams.data);
@@ -398,6 +414,7 @@ define(function(){
     }
 
     var render=function(l,o){
+        layer.closeAll('loading');
         create(l, o);
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){

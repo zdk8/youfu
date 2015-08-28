@@ -56,7 +56,7 @@
             <tr>
                 <td class="formtdtext" style="width: 100px">身份证号码<label></label></td>
                 <td colspan="2">
-                    <input opt="identityid" name="identityid" class="input-text" style="width: 159px"><span style="color: red">*</span>
+                    <input opt="identityid" name="identityid" class="easyui-validatebox input-text" data-options="required:true" style="width: 159px"><span style="color: red">*</span>
                     <!--<input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 159px"
                                        data-options="required:true,
                                    invalidMessage:'请输入正确的身份证号',
@@ -180,7 +180,7 @@
                 <td class="formtdtext" colspan="2" style="text-align: center;">申请机构养老补贴金额</td>
                 <td colspan="4" style="text-align: center;">
                     <input type="radio" name="jg_money" value="0"><label>每年12000元</label>
-                    <input type="radio" name="jg_money" value="0"><label>每年6000元</label>
+                    <input type="radio" name="jg_money" value="1"><label>每年6000元</label>
                 </td>
             </tr>
             <tr>
@@ -190,8 +190,8 @@
                 <td class="formtdtext" colspan="2" style="text-align: center;">申请居家养老政府购买服务时间</td>
                 <td colspan="4" style="text-align: center;">
                     <input type="radio" name="jj_time" value="0"><label>每月60小时</label>
-                    <input type="radio" name="jj_time" value="0"><label>每月30小时</label>
-                    <input type="radio" name="jj_time" value="0"><label>每月15小时</label>
+                    <input type="radio" name="jj_time" value="1"><label>每月30小时</label>
+                    <input type="radio" name="jj_time" value="2"><label>每月15小时</label>
                 </td>
             </tr>
             <tr>

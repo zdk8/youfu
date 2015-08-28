@@ -23,7 +23,7 @@ define(function(){
             }
         }).click(function () {               //为第个元素注册点击事件
                 var s = $($(this).prev()[0]).attr('name')
-                if(s == "shenghe" || s == "shengpi"){
+                if(s == "shenghe" || s == "shengpi" || s == "sh_jiel_zj"){
                     console.log(s)
                 }else{
                     s = ":input[name=" + s + "]+label"
@@ -316,6 +316,21 @@ define(function(){
               showServicemgt(local)     //显示机构
               local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']').attr("checked","checked");
               local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']+label').addClass("checked");
+
+              var sh_pingguf = datas.sh_pingguf;
+              if(sh_pingguf == 0){
+                  local.find(':input[name=sh_jiel_zj]:eq(0)').attr("checked","checked");
+                  local.find(':input[name=sh_jiel_zj]:eq(0)+label').addClass("checked");
+              }else if(sh_pingguf > 0 &&sh_pingguf <= 10){
+                  local.find(':input[name=sh_jiel_zj]:eq(1)').attr("checked","checked");
+                  local.find(':input[name=sh_jiel_zj]:eq(1)+label').addClass("checked");
+              }else if(sh_pingguf > 10 &&sh_pingguf <= 50){
+                  local.find(':input[name=sh_jiel_zj]:eq(2)').attr("checked","checked");
+                  local.find(':input[name=sh_jiel_zj]:eq(2)+label').addClass("checked");
+              }else{
+                  local.find(':input[name=sh_jiel_zj]:eq(3)').attr("checked","checked");
+                  local.find(':input[name=sh_jiel_zj]:eq(3)+label').addClass("checked");
+              }
           }else if(option.queryParams.actionType == "view"){  //查看详细信息
               var datas = eval('('+local.find('[opt=jsondata]').val()+')');
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划

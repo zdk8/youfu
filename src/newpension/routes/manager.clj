@@ -70,12 +70,15 @@
     (GET "/remove" [] (myctrl/my-session-remove)))
 
   (GET "/gethtml" [name] (layout/render name))
-  (GET "/getPensionServiceAssHtml" req (layout/render "PensionServiceAss.html"
+  (GET "/getPensionServiceAssHtml" req (layout/render "PensionServiceAss_1&2.html"
                                          (let [datas (first(audit/get-assessbyid2 req))]
                                             {:dataall datas :jsondata (json/json-str datas)})))
-  (GET "/getPensionServiceAuditHtml" req (layout/render "PensionServiceAudit.html"
+  (GET "/getPensionServiceAuditHtml" req (layout/render "PensionServiceAudit_1&2.html"
                                          (let [datas (first(audit/get-assessbyid2 req))]
                                            {:dataall datas :jsondata (json/json-str datas)})))
+  (GET "/getPensionServiceAuditHtml_3" req (layout/render "PensionServiceAudit_3.html"
+                                           (let [datas (first(audit/get-assessbyid2 req))]
+                                             {:dataall datas :jsondata (json/json-str datas)})))
 
 
   ;;加载模块

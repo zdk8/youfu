@@ -23,17 +23,25 @@ define(function(){
                 if(sh_zongf == 0){
                     local.find(':input[name=sh_jiel]:eq(0)').attr("checked","checked");
                     local.find(':input[name=sh_jiel]:eq(0)+label').addClass("checked");
+                    parentlocal.find(':input[name=sh_jiel_zj]:eq(0)').attr("checked","checked");
+                    parentlocal.find(':input[name=sh_jiel_zj]:eq(0)+label').addClass("checked");
                 }else if(sh_zongf > 0 &&sh_zongf <= 10){
                     local.find(':input[name=sh_jiel]:eq(1)').attr("checked","checked");
                     local.find(':input[name=sh_jiel]:eq(1)+label').addClass("checked");
+                    parentlocal.find(':input[name=sh_jiel_zj]:eq(1)').attr("checked","checked");
+                    parentlocal.find(':input[name=sh_jiel_zj]:eq(1)+label').addClass("checked");
                 }else if(sh_zongf > 10 &&sh_zongf <= 50){
                     local.find(':input[name=sh_jiel]:eq(2)').attr("checked","checked");
                     local.find(':input[name=sh_jiel]:eq(2)+label').addClass("checked");
+                    parentlocal.find(':input[name=sh_jiel_zj]:eq(2)').attr("checked","checked");
+                    parentlocal.find(':input[name=sh_jiel_zj]:eq(2)+label').addClass("checked");
                 }else{
                     local.find(':input[name=sh_jiel]:eq(3)').attr("checked","checked");
                     local.find(':input[name=sh_jiel]:eq(3)+label').addClass("checked");
+                    parentlocal.find(':input[name=sh_jiel_zj]:eq(3)').attr("checked","checked");
+                    parentlocal.find(':input[name=sh_jiel_zj]:eq(3)+label').addClass("checked");
                 }
-                parentlocal.find('fieldset[opt=result1]').find(':input[name=sum_sh_pingguf]').val(sh_zongf/2)
+                parentlocal.find('fieldset[opt=result1]').find(':input[name=sum_sh_pingguf]').val(sh_zongf/2);
                 calculate(parentlocal);     //计算评估总分
             })
         })

@@ -168,33 +168,37 @@ define(function(){
         var districtid = local.find('[opt=districtid]');      //行政区划值
         /*保存*/
         local.find('[opt=save]').show().bind('click',function(){
+            layer.load();
             local.find('[opt=save]').hide();
             local.find('[opt=save2]').show();
-            console.log(121)
             local.find('[opt=pensionform]').form('submit', {
-                url:'audit/addauditapply1',
+                url:'audit/addauditapply',
                 onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
-                        params.districtid = districtid.combobox("getValue")
+                        params.districtid = districtid.combobox("getValue");
+                        params.apply_type = "3";            //第3类型的申请
                     }else{
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
+                        layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
                     if(data == "true"){
-                        showProcess(false);
-                        cj.slideShow('保存成功');
+                        layer.closeAll('loading');
+                        cj.slideShow('提交完成');
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
-                        if(showProcess(false)){
-                            $("#tabs").tabs('close',"居家养老服务申请")
+                        if(layer.closeAll('loading')){
+                            $("#tabs").tabs('close',"服务申请_3")
                         }
                     }else{
-                        showProcess(false);
-                        cj.slideShow('<label style="color: red">保存失败</label>');
+                        layer.closeAll('loading');
+                        cj.slideShow('<label style="color: red">提交失败</label>');
+                        local.find('[opt=save]').show();
+                        local.find('[opt=save2]').hide();
                     }
                 }
             });

@@ -196,10 +196,10 @@ var getBaseInfoByIdentityid = function(params){
 var calculate=function(local){
     var value=0;
     local.find('table[opt=result1_table] td>:input[class=pingfen]').each(function(){
-        value+=Number($(this).val())
+        value+=Number($(this).val());
     })
-    local.find('table[opt=result1_table] :input[name=pinggusum]').val(value)
-    local.find(':input[opt=pinggusum]').val(value)
+    local.find('table[opt=result1_table] :input[name=pinggusum]').val(value);
+    local.find(':input[opt=pinggusum]').val(value);
 }
 /*为radio添加样式*/
 var addRadioCssComm = function(local) {

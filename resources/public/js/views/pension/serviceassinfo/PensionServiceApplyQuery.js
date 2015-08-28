@@ -25,18 +25,19 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                                     var record=rows[index];
                                     $(btns_arr[j][i]).click(function(){
                                         if($(this).attr("action")=='view'){
-                                            var title = "【"+record.name+'】服务申请详细信息'
+                                            layer.load();
+                                            var title = "【"+record.name+'】服务申请详细信息';
                                             cj.showContent({                                          //详细信息(tab标签)
                                                 title:title,
-                                                htmfile:'text!views/pension/serviceassinfo/PensionServiceApply.htm',
-                                                jsfile:'views/pension/serviceassinfo/PensionServiceApply',
+                                                htmfile:'text!views/pension/serviceassinfo/PensionServiceApply_1&2.htm',
+                                                jsfile:'views/pension/serviceassinfo/PensionServiceApply_1&2',
                                                 queryParams:{
                                                     actiontype:'info',         //（详细信息）操作方式
                                                     data:record,
                                                     title:title,
                                                     refresh:refreshGrid
                                                 }
-                                            })
+                                            });
                                             //viewRoleInfo(record);
                                         }else if($(this).attr("action")=='assessment'){         //评估
                                             var userlength = cj.getUserMsg().regionid.length;
@@ -95,6 +96,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                             psafile.render(local,{queryParams:{
                                 title:title,
                                 data:data,
+                                record:record,
                                 refresh:refreshGrid,
                                 actionType:"assessment"
                             }});

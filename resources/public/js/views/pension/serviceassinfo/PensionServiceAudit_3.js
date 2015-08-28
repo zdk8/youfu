@@ -150,8 +150,47 @@ define(function(){
     return {
       render:function(local,option){
           addToolBar(local);
-          addRadioCss(local)
-//          datas = eval('('+local.find('[opt=jsondata]').val()+')');
+          addRadioCss(local);
+          var datas = eval('('+local.find('[opt=jsondata]').val()+')');
+          var districtid = local.find('[opt=districtid]');      //行政区划值
+          var districtnameval = getDivistionTotalname(datas.districtid)
+          districtid.combotree("setValue",districtnameval)  //填充行政区划
+          local.find('input[name=old_type][type=radio][value='+datas.old_type+']').attr("checked","checked");
+          local.find('input[name=old_type][type=radio][value='+datas.old_type+']+label').addClass("checked");
+          local.find('input[name=live_type][type=radio][value='+datas.live_type+']').attr("checked","checked");
+          local.find('input[name=live_type][type=radio][value='+datas.live_type+']+label').addClass("checked");
+          local.find('input[name=life_ability][type=radio][value='+datas.life_ability+']').attr("checked","checked");
+          local.find('input[name=life_ability][type=radio][value='+datas.life_ability+']+label').addClass("checked");
+          local.find('input[name=household][type=radio][value='+datas.household+']').attr("checked","checked");
+          local.find('input[name=household][type=radio][value='+datas.household+']+label').addClass("checked");
+          local.find('input[name=gt_isretire1][type=radio][value='+datas.gt_isretire1+']').attr("checked","checked");
+          local.find('input[name=gt_isretire1][type=radio][value='+datas.gt_isretire1+']+label').addClass("checked");
+          local.find('input[name=gt_isretire2][type=radio][value='+datas.gt_isretire2+']').attr("checked","checked");
+          local.find('input[name=gt_isretire2][type=radio][value='+datas.gt_isretire2+']+label').addClass("checked");
+          local.find('input[name=gt_isretire3][type=radio][value='+datas.gt_isretire3+']').attr("checked","checked");
+          local.find('input[name=gt_isretire3][type=radio][value='+datas.gt_isretire3+']+label').addClass("checked");
+          local.find('input[name=sy_isretire1][type=radio][value='+datas.sy_isretire1+']').attr("checked","checked");
+          local.find('input[name=sy_isretire1][type=radio][value='+datas.sy_isretire1+']+label').addClass("checked");
+          local.find('input[name=sy_isretire2][type=radio][value='+datas.sy_isretire2+']').attr("checked","checked");
+          local.find('input[name=sy_isretire2][type=radio][value='+datas.sy_isretire2+']+label').addClass("checked");
+          local.find('input[name=sy_isretire3][type=radio][value='+datas.sy_isretire3+']').attr("checked","checked");
+          local.find('input[name=sy_isretire3][type=radio][value='+datas.sy_isretire3+']+label').addClass("checked");
+
+          local.find('[opt=gender]').combobox('setValue',datas.gender);
+          local.find('[opt=nation]').combobox('setValue',datas.nation);
+
+          /*类别证号处理*/
+          var oldtype = local.find('input[name=old_type][type=radio]:checked').val();
+          if(oldtype == '0'){//低保
+              local.find('[name=allowanceid]').val(datas.allowanceid);
+              local.find('[name=lowmarginid]').val('');
+          }else if(oldtype == '1'){//低保边缘户
+              local.find('[name=allowanceid]').val('');
+              local.find('[name=lowmarginid]').val(datas.lowmarginid);
+          }else{
+              local.find('[name=allowanceid]').val('');
+              local.find('[name=lowmarginid]').val('');
+          }
           var result2_table =  local.find('[opt=result2_table]');    //result2
           var result2_div=local.find('[opt=result2_div]');
           result2_div.show();
@@ -174,10 +213,14 @@ define(function(){
                       }
                   }
               })
-          calculate(local);     //计算评估总分
+          //calculate(local);     //计算评估总分
           if(option.queryParams.actionType == "dealwith"){  //处理
               var datas = eval('('+local.find('[opt=jsondata]').val()+')');
-              showServicemgt(local);
+
+              /*var districtid = local.find('[opt=districtid]');      //行政区划值
+              var districtnameval = getDivistionTotalname(datas.districtid)
+              districtid.combotree("setValue",districtnameval)  //填充行政区划*/
+              //showServicemgt(local);
               var aulevel = option.queryParams.record.aulevel;   //审核审批等级
               if(aulevel == "1" || aulevel == "4"){
                   local.find('textarea[name=countyaudit]').attr("readonly","readonly");
@@ -187,8 +230,19 @@ define(function(){
                   RadioCssEnabel(local,"shengpi");
               }
               dealwithInfoFunc(local,option)   //审核审批方法
-              local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']').attr("checked","checked");
-              local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']+label').addClass("checked");
+              //local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']').attr("checked","checked");
+              //local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']+label').addClass("checked");
+
+              var arrs = ['old_type','live_type','life_ability','household','gt_isretire1','gt_isretire2','gt_isretire3',
+                        'sy_isretire1','sy_isretire2','sy_isretire3'];
+              /*for(var i=0;i<arrs.length;i++){
+                  local.find('input[name='+arrs[i]+'][type=radio][value='+datas.old_type+']').attr("checked","checked");
+                  local.find('input[name='+arrs[i]+'][type=radio][value='+datas.old_type+']+label').addClass("checked");
+              }*/
+
+
+
+
           }
 
 

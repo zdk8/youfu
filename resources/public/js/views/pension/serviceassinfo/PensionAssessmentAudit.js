@@ -1,5 +1,5 @@
 /*审核处理*/
-define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/serviceassinfo/PensionServiceAss'],function(auditfile,assfile){
+define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/serviceassinfo/PensionServiceAudit_3','views/pension/serviceassinfo/PensionServiceAss'],function(auditfile,auditfile_3,assfile){
     function render(local,option){
         var paaudit = local.find('[opt=paaudit]');               //审核datagrid
         var dealwith = local.find('[opt=dealwith]');             //处理
@@ -23,36 +23,71 @@ define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/servic
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "view"){                                       //详细信息(处理)
-                                    var title = "【"+record.messagebrief.
-                                                            substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'】服务评估详细信息'
-                                    if($("#tabs").tabs('getTab',title)){
-                                        $("#tabs").tabs('select',title)
+                                    console.log(record)
+                                    if(record.datatype == "3"){                 //第三类型申请审核
+                                        var title = "【"+record.messagebrief.
+                                                substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'】服务评估详细信息'
+                                        if($("#tabs").tabs('getTab',title)){
+                                            $("#tabs").tabs('select',title)
+                                        }else{
+                                            $("#tabs").tabs('add', {
+                                                title: title,
+                                                href: 'getPensionServiceAuditHtml_3?jja_id='+record.bstablepk+'&datatype=3',
+                                                closable: true
+                                            })
+                                            var timer = window.setInterval(function () {
+                                                var local=$("#tabs").tabs('getTab',title)
+                                                if (local && local.find('[opt=form_3]').length) {
+                                                    window.clearInterval(timer);
+                                                    auditfile_3.render(local,{queryParams:{
+                                                        title:title,
+                                                        data:data,
+                                                        record:record,
+                                                        refresh:refreshGrid,
+                                                        actionType:"view"
+                                                    }});
+                                                }else{
+                                                    //console.log('oops....info1_table is not ready ')
+                                                }
+                                            }, 200);
+                                        }
                                     }else{
-                                        $("#tabs").tabs('add', {
-                                            title: title,
-                                            href: 'getPensionServiceAssHtml?jja_id='+record.bstablepk,
-                                            closable: true
-                                        })
-                                        var timer = window.setInterval(function () {
-                                            var local=$("#tabs").tabs('getTab',title)
-                                            if (local && local.find('[opt=info1_table]').length) {
-                                                window.clearInterval(timer);
-                                                assfile.render(local,{queryParams:{
-                                                    title:title,
-                                                    data:data,
-                                                    record:record,
-                                                    refresh:refreshGrid,
-                                                    actionType:"view"
-                                                }});
-                                            }else{
-                                                //console.log('oops....info1_table is not ready ')
-                                            }
-                                        }, 200);
-                                        /*getassessbyidFunc({jja_id:record.bstablepk,title:title,record:record,
-                                                            aulevel:record.aulevel,refresh:refreshGrid})*/
+                                        var title = "【"+record.messagebrief.
+                                                substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'】服务评估详细信息'
+                                        if($("#tabs").tabs('getTab',title)){
+                                            $("#tabs").tabs('select',title)
+                                        }else{
+                                            $("#tabs").tabs('add', {
+                                                title: title,
+                                                href: 'getPensionServiceAssHtml?jja_id='+record.bstablepk,
+                                                closable: true
+                                            })
+                                            var timer = window.setInterval(function () {
+                                                var local=$("#tabs").tabs('getTab',title)
+                                                if (local && local.find('[opt=info1_table]').length) {
+                                                    window.clearInterval(timer);
+                                                    assfile.render(local,{queryParams:{
+                                                        title:title,
+                                                        data:data,
+                                                        record:record,
+                                                        refresh:refreshGrid,
+                                                        actionType:"view"
+                                                    }});
+                                                }else{
+                                                    //console.log('oops....info1_table is not ready ')
+                                                }
+                                            }, 200);
+                                        }
                                     }
+
                                 }else if(action == "dealwith"){                   //处理
-                                    var userlength = cj.getUserMsg().regionid.length;
+                                    console.log(record.datatype)
+                                    if(record.datatype == "3"){                 //第三类型申请审核
+                                        openAudit_3(refreshGrid,record);
+                                    }else{
+                                        showDlg(refreshGrid,record);
+                                    }
+                                    /*var userlength = cj.getUserMsg().regionid.length;
                                     var aul = record.aulevel;
                                     if(userlength == 12){
                                         $.messager.alert('温馨提示','对不起,你没有该权限!','info');
@@ -65,8 +100,7 @@ define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/servic
                                         }
                                     }else if(userlength == 6){
                                         showDlg(refreshGrid,record)
-                                    }
-
+                                    }*/
                                 }
                             });
                         })(i)
@@ -89,18 +123,45 @@ define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/servic
         var title = "【"+record.messagebrief.
                 substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'】服务评估处理';
         if($("#tabs").tabs('getTab',title)){
-            $("#tabs").tabs('select',title)
+            $("#tabs").tabs('select',title);
         }else{
             $("#tabs").tabs('add', {
                 title: title,
-                href: 'getPensionServiceAuditHtml?jja_id='+record.bstablepk,
+                href: 'getPensionServiceAuditHtml?jja_id='+record.bstablepk+'&datatype=1',
                 closable: true
             })
             var timer = window.setInterval(function () {
                 var local=$("#tabs").tabs('getTab',title)
-                if (local && local.find('[opt=result1]').length) {
+                if (local && local.find('[opt=result3]').length) {
                     window.clearInterval(timer);
                     auditfile.render(local,{queryParams:{
+                        title:title,
+                        record:record,
+                        refresh:refreshGrid,
+                        actionType:"dealwith"
+                    }});
+                }else{
+                    //console.log('oops....result1 is not ready ')
+                }
+            }, 200);
+        }
+    };
+    var openAudit_3 = function(refreshGrid,record){
+        var title = "【"+record.messagebrief.
+                substring(record.messagebrief.indexOf("：")+1,record.messagebrief.indexOf(","))+'】处理';
+        if($("#tabs").tabs('getTab',title)){
+            $("#tabs").tabs('select',title)
+        }else{
+            $("#tabs").tabs('add', {
+                title: title,
+                href: 'getPensionServiceAuditHtml_3?jja_id='+record.bstablepk+'&datatype=3',
+                closable: true
+            })
+            var timer = window.setInterval(function () {
+                var local=$("#tabs").tabs('getTab',title)
+                if (local && local.find('[opt=form_3]').length) {
+                    window.clearInterval(timer);
+                    auditfile_3.render(local,{queryParams:{
                         title:title,
                         record:record,
                         refresh:refreshGrid,

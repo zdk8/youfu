@@ -13,6 +13,7 @@ define(function(){
                 var title=option.title;
                 if(mainTab.tabs('exists',title)){
                     mainTab.tabs('select', title);
+                    layer.closeAll('loading');
                     return;
                 }
                 var getLocaltab = function () {
