@@ -15,10 +15,13 @@
                [clojure.data.json :as json]
                [newpension.layout :as layout]))
 
-(def applykeys [:districtname :districtid :name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone
-                :agent :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime
-                :countyaudit :audittime :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime
-                :familynum :allowanceid :old_type :live_type :life_ability :userdistrictid :type])
+(def applykeys [:name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone :agent
+                :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime :countyaudit :audittime
+                :rm_reason :rm_communityopinion :rm_opiniontime :rm_streetreview :rm_reviewtime :rm_countyaudit :rm_audittime :districtid :districtname :familynum :allowanceid
+                :old_type :live_type :life_ability :userdistrictid :type :gt_name1 :gt_age1 :gt_relation1 :gt_workplace1 :gt_address1 :gt_monthincome1 :gt_name2 :gt_age2 :gt_relation2
+                :gt_workplace2 :gt_address2 :gt_monthincome2 :gt_name3 :gt_age3 :gt_relation3 :gt_workplace3 :gt_address3 :gt_monthincome3 :sy_name1 :sy_age1 :sy_relation1 :sy_workplace1
+                :sy_address1 :sy_monthincome1 :sy_name2 :sy_age2 :sy_relation2 :sy_workplace2 :sy_address2 :sy_monthincome2 :sy_name3 :sy_age3 :sy_relation3 :sy_workplace3 :sy_address3
+                :sy_monthincome3 :servicetime :monthsubsidy :hospitalsubsidy :jdep_id :s_id :fw_type :jg_money :jj_time :lowmarginid :household :gt_isretire1 :gt_phone1 :gt_isretire2 :gt_phone2 :gt_isretire3 :gt_phone3 :sy_isretire1 :sy_phone1 :sy_isretire2 :sy_phone2 :sy_isretire3 :sy_phone3 :applycontent :apply_type])
 (def opofapply [:name :identityid :gender :birthd :nation :culture :marriage :live :economy :age :registration :address :telephone :mobilephone])
 (def  assess  [:jja_id :sh_jings :sh_yid :sh_weis :sh_ruc :sh_xiz :sh_xingz :sh_lout :sh_chuany :sh_dab :sh_xiaob :sh_zongf :sh_pingguf :sh_jiel :sh_pingguy
          :jj_shour :jj_fenl :jj_leix :jj_pingguf :jj_pingguy :jz_fenl :jz_zhaol :jz_pingguf :jz_pingguy :nl_fenl :nl_pingguf :nl_pingguy :gx_laom :gx_youf :gx_youf_kind
@@ -63,7 +66,7 @@
        applydata (conj (select-keys params applykeys) {:userdistrictid userdistrictid})
        olddata (conj request {:params (conj params {:datatype "f"})})]
     (println "TTTTTTT" checkold  "OOOOOOO"  opdata  (= checkold 0))
-    (if (= checkold 0) (old/create-old olddata))                                           ;如果老人数据没有此数据，将其添加到老人数据库中
+    (if (= checkold 0) (old/create-old olddata) )                                           ;如果老人数据没有此数据，将其添加到老人数据库中
     (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
 ;    (resp/json {:success true :message "apply success"})
     (str "true")
