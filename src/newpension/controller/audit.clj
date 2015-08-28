@@ -57,6 +57,27 @@
 (def jjapprove (str "(select j.userdistrictid,t.* from approve t,T_JJYLAPPLY j WHERE j.JJA_ID = t.BSTABLEPK AND t.BSTABLENAME = 't_jjylapply')"))
 
 
+(defn apply3-commit
+  "第三类居家养老服务申请进入审核流程"
+  [params]
+  (let [ishandle (:ishandle params)
+        communityopinion (:communityopinion params)                                         ;;社区意见
+        bstablepk  (:jja_id params)
+        bstablename "t_jjylapply"
+        bstablepkname      "jja_id"
+        status   "1"
+        aulevel    (if (= ishandle "r") "4" "1")
+        auflag   "第三类居家养老服务申请提交"
+        bstime      (common/get-nowtime)
+        auuser   (:username (session/get :usermsg))
+        ;AUDESC
+        ;DVCODE
+        appoperators  auuser
+        messagebrief  (str "姓名：" (:name params) ",身份证："(:identityid params) )
+        approvedata {:bstablepk bstablepk :bstablename bstablename :bstablepkname bstablepkname :status status :aulevel aulevel :auflag auflag :bstime bstime :auuser auuser :appoperators appoperators :messagebrief messagebrief :audesc communityopinion :datatype "3"}
+        ]
+    (db/add-approve approvedata)))
+
 (defn add-audit-apply [request]                                                                        "添加申请"
   (let[params (:params request)
        identityid (:identityid params)
@@ -64,10 +85,12 @@
        opdata (select-keys params opofapply)
        userdistrictid (:regionid (session/get :usermsg))                                              ;REGIONID
        applydata (conj (select-keys params applykeys) {:userdistrictid userdistrictid})
-       olddata (conj request {:params (conj params {:datatype "f"})})]
-    (println "TTTTTTT" checkold  "OOOOOOO"  opdata  (= checkold 0))
+       olddata (conj request {:params (conj params {:datatype "f"})})
+       apply_type (:apply_type params)]
+    ;(println "TTTTTTT" checkold  "OOOOOOO"  opdata  (= checkold 0))
     (if (= checkold 0) (old/create-old olddata) )                                           ;如果老人数据没有此数据，将其添加到老人数据库中
     (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
+    (if (= apply_type "3") (apply3-commit params))                                                    ;如果是第三类，则直接进入审核流程中
 ;    (resp/json {:success true :message "apply success"})
     (str "true")
     ))
@@ -95,7 +118,7 @@
        name (:name params)
        userdistrictid (:regionid (session/get :usermsg))
        identityid (:identityid params)
-       cond (str " and ( ishandle is null or ishandle = 'r' ) and userdistrictid like '%" userdistrictid "%' "  (common/likecond "name" name) (common/likecond "identityid" identityid))
+       cond (str " and ( ishandle is null or ishandle = 'r' ) and userdistrictid like '%" userdistrictid "%' and apply_type = '1' "  (common/likecond "name" name) (common/likecond "identityid" identityid))
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
@@ -185,6 +208,8 @@
 ;    (resp/json {:success true :message "assess complete"})
     (str "true")
     ))
+
+
 
 (defn get-assessaudit [request]                                                                           "查询评估信息中待审核的信息"
   (let[params (:params request)
