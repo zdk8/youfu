@@ -23,11 +23,12 @@ define(function(){
                 $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
             }
         }).click(function () {               //为第个元素注册点击事件
-                var s = $($(this).prev()[0]).attr('name')
+                var s = $($(this).prev()[0]).attr('name');
                 if(s == "agerange"){
                     console.log("不操作")
                 }else{
-                    s = ":input[name=" + s + "]+label"
+                    var s2= s;
+                    s = ":input[name=" + s + "]+label";
                     var isChecked=$(this).prev()[0].checked;
                     local.find(s).each(function (i) {
                         $(this).prev()[0].checked = false;
@@ -40,6 +41,79 @@ define(function(){
                         $(this).prev()[0].checked = true;
                         $(this).addClass("checked");
                         $($(this).prev()[0]).attr("checked","checked");
+                    }
+                    //申请养老类型选择操作
+                    if(s2 == "fw_type"){
+                        var v = local.find(':input[name='+s2+']:checked').val();
+                        if(v == 0){                 //机构养老
+                            /*屏蔽居家养老*/
+                            local.find(':input[name=jj_time] + label').each(function () {
+                                if ($(this).prev()[0].checked){
+                                    $(this).removeClass("checked");
+                                }
+                            }).click(function () {
+                                var s_1 = $($(this).prev()[0]).attr('name');
+                                if(s_1 == "jj_time"){
+                                    $(this).prev()[0].checked = false;
+                                    $(this).removeClass("checked");
+                                    $($(this).prev()[0]).removeAttr("checked");
+                                }
+                            });
+                            /*打开机构养老*/
+                            local.find(':input[name=jg_money] + label').each(function () {
+                            }).click(function () {
+                                var s_2 = $($(this).prev()[0]).attr('name');
+                                if(s_2 == "jg_money"){
+                                    var isChecked=$(this).prev()[0].checked;
+                                    local.find(s_2).each(function (i) {
+                                        $(this).prev()[0].checked = false;
+                                        $(this).removeClass("checked");
+                                        $($(this).prev()[0]).removeAttr("checked");
+                                    });
+                                    if(isChecked){
+                                        //如果单选已经为选中状态,则什么都不做
+                                    }else{
+                                        $(this).prev()[0].checked = true;
+                                        $(this).addClass("checked");
+                                        $($(this).prev()[0]).attr("checked","checked");
+                                    }
+                                }
+                            });
+                        }else{                      //居家养老
+                            /*屏蔽机构养老*/
+                            local.find(':input[name=jg_money] + label').each(function () {
+                                if ($(this).prev()[0].checked){
+                                    $(this).removeClass("checked");
+                                }
+                            }).click(function () {
+                                var s_2 = $($(this).prev()[0]).attr('name');
+                                if(s_2 == "jg_money"){
+                                    $(this).prev()[0].checked = false;
+                                    $(this).removeClass("checked");
+                                    $($(this).prev()[0]).removeAttr("checked");
+                                }
+                            });
+                            /*打开居家养老*/
+                            local.find(':input[name=jj_time] + label').each(function () {
+                            }).click(function () {
+                                var s_1 = $($(this).prev()[0]).attr('name');
+                                if(s_1 == "jj_time"){
+                                    var isChecked=$(this).prev()[0].checked;
+                                    local.find(s_1).each(function (i) {
+                                        $(this).prev()[0].checked = false;
+                                        $(this).removeClass("checked");
+                                        $($(this).prev()[0]).removeAttr("checked");
+                                    });
+                                    if(isChecked){
+                                        //如果单选已经为选中状态,则什么都不做
+                                    }else{
+                                        $(this).prev()[0].checked = true;
+                                        $(this).addClass("checked");
+                                        $($(this).prev()[0]).attr("checked","checked");
+                                    }
+                                }
+                            });
+                        }
                     }
                 }
             })
@@ -153,7 +227,6 @@ define(function(){
             doinitage_radio(record.age);
         }
 
-
     }
 
     function create(local,option){
@@ -171,11 +244,10 @@ define(function(){
             local.find('[opt=save]').hide();
             local.find('[opt=save2]').show();
             local.find('[opt=pensionform]').form('submit', {
-                url:'audit/addauditapply',
+                url:'audit/addauditapply1',
                 onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
-                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                         params.districtid = districtid.combobox("getValue")
                     }else{
                         local.find('[opt=save]').show();

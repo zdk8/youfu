@@ -107,7 +107,7 @@ define(['views/pension/serviceassinfo/PensionServiceAudit','views/pension/servic
                         actionType:"dealwith"
                     }});
                 }else{
-                    console.log('oops....result1 is not ready ')
+                    //console.log('oops....result1 is not ready ')
                 }
             }, 200);
         }

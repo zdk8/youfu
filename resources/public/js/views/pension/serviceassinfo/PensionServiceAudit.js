@@ -20,7 +20,7 @@ define(function(){
             local.find('[opt=servicemgt]').combobox('setValue',getServicemgtTotalname(servicemgtval))
         }
         if(servicepeopleval != ""){
-            local.find('[opt=servicepeople_div]').show()
+            local.find('[opt=servicepeople_div]').show();
             local.find('[opt=servicepeople]').combobox('setValue',getServicepeoplevalTotalname(servicepeopleval))
         }
     }
@@ -177,7 +177,7 @@ define(function(){
           calculate(local);     //计算评估总分
           if(option.queryParams.actionType == "dealwith"){  //处理
               var datas = eval('('+local.find('[opt=jsondata]').val()+')');
-              showServicemgt(local)
+              showServicemgt(local);
               var aulevel = option.queryParams.record.aulevel;   //审核审批等级
               if(aulevel == "1" || aulevel == "4"){
                   local.find('textarea[name=countyaudit]').attr("readonly","readonly");

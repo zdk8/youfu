@@ -106,6 +106,8 @@ define(function(){
                 var closobj = peopleinfodatarid.datagrid('options').columns[0];
                 var colsfieldarr = new Array();     //列头字段
                 var colstxtarr = new Array();       //列头文本
+                colsfieldarr.push('name');
+                colstxtarr.push('姓名');
                 for(var o=0;o<closobj.length;o++){
                     if(closobj[o].field != "ro"){
                         if(!closobj[o].hidden){
@@ -130,8 +132,8 @@ define(function(){
                     function(win,htmfile,jsfile){
                         win.render({
                             title:'选择字段',
-                            width:620,
-                            height:435,
+                            width:640,
+                            height:235,
                             html:htmfile,
                             buttons:[
                                 {text:'取消',handler:function(html,parent){
