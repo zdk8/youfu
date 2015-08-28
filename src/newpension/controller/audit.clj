@@ -84,13 +84,17 @@
        checkold (count (db/get-oldpeople identityid))
        opdata (select-keys params opofapply)
        userdistrictid (:regionid (session/get :usermsg))                                              ;REGIONID
-       applydata (conj (select-keys params applykeys) {:userdistrictid userdistrictid})
+       applydata (common/dateformat-bf-insert (conj (select-keys params applykeys) {:userdistrictid userdistrictid}) "birthd" "applydate")
        olddata (conj request {:params (conj params {:datatype "f"})})
        apply_type (:apply_type params)]
-    ;(println "TTTTTTT" checkold  "OOOOOOO"  opdata  (= checkold 0))
     (if (= checkold 0) (old/create-old olddata) )                                           ;如果老人数据没有此数据，将其添加到老人数据库中
-    (db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
-    (if (= apply_type "3") (apply3-commit params))                                                    ;如果是第三类，则直接进入审核流程中
+    ;(db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
+    ;(if (= apply_type "3") (apply3-commit params))                                                    ;如果是第三类，则直接进入审核流程中
+    (if (= apply_type "3")
+      (let [jjylid (:nextval (first(db/get-results-bysql "select seq_t_jjylapply.nextval  from dual")))]
+        (db/add-apply (conj applydata {:jja_id jjylid}))
+        (apply3-commit (conj params {:jja_id jjylid})))
+      (db/add-apply applydata))
 ;    (resp/json {:success true :message "apply success"})
     (str "true")
     ))
@@ -225,6 +229,7 @@
        useridcond (if (> (count userdistrictid) 0) (str " and userdistrictid like '%" userdistrictid "%' "))
        cond (str " and bstablename = 't_jjylapply' and status = '1'  " usercond useridcond " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
        getresult (common/fenye rows page jjapprove "*" cond " order by sh_id desc ")]
+    (println "CCCCCCCC" cond)
     (resp/json {:total (:total getresult) :rows (common/time-formatymd-before-list (:rows getresult)  "bstime")})))
 
 
