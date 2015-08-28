@@ -73,7 +73,7 @@
         ;AUDESC
         ;DVCODE
         appoperators  auuser
-        messagebrief  (str "姓名：" (:name params) ",身份证："(:identityid params) )
+        messagebrief  (str "姓名：" (:name params) ",身份证："(:identityid params) ",第三类居家养老服务申请")
         approvedata {:bstablepk bstablepk :bstablename bstablename :bstablepkname bstablepkname :status status :aulevel aulevel :auflag auflag :bstime bstime :auuser auuser :appoperators appoperators :messagebrief messagebrief :audesc communityopinion :datatype "3"}
         ]
     (db/add-approve approvedata)))
