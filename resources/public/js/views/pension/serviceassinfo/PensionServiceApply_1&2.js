@@ -2,8 +2,10 @@ define(function(){
     var addToolBar=function(local) {
         var toolBarHeight=30;
         var toolBar=cj.getFormToolBar([
-            {text: '提交',hidden:'hidden',opt:'save'},
-            {text: '提交',hidden:'hidden',opt:'save2'},
+            {text: '保存',hidden:'hidden',opt:'save'},
+            {text: '保存',hidden:'hidden',opt:'save2'},
+            {text: '提交',hidden:'hidden',opt:'commit'},
+            {text: '提交',hidden:'hidden',opt:'commit2'},
             {text: '修改',hidden:'hidden',opt:'update'},
             {text: '变更',hidden:'hidden',opt:'change'}
         ]);
@@ -235,12 +237,50 @@ define(function(){
     /*新增*/
     function addInfo(local,option){
         addRadioCss(local);
+        local.find('[opt=save2]').hide();
         local.find('[opt=update]').hide();
         local.find('[opt=change]').hide();
-        local.find('[opt=save2]').hide();
+        local.find('[opt=commit2]').hide();
         var districtid = local.find('[opt=districtid]');      //行政区划值
+        /*提交*/
+        local.find('[opt=commit]').show().bind('click',function(){
+            layer.load();
+            local.find('[opt=commit]').hide();
+            local.find('[opt=commit2]').show();
+            local.find('[opt=pensionform]').form('submit', {
+                url:'audit/addauditapply',
+                onSubmit: function (params) {
+                    var isValid = $(this).form('validate');
+                    if(isValid){
+                        params.districtid = districtid.combobox("getValue");
+                        params.apply_type = "1";        //1、2类型的申请
+                    }else{
+                        local.find('[opt=commit]').show();
+                        local.find('[opt=commit2]').hide();
+                        layer.closeAll('loading');
+                    }
+                    return isValid;
+                },
+                success: function (data) {
+                    if(data == "true"){
+                        layer.closeAll('loading');
+                        cj.slideShow('提交完成');
+                        local.find('[opt=commit]').show();
+                        local.find('[opt=commit2]').hide();
+                        if(layer.closeAll('loading')){
+                            $("#tabs").tabs('close',"服务申请_1&2")
+                        }
+                    }else{
+                        layer.closeAll('loading');
+                        cj.slideShow('<label style="color: red">提交失败</label>');
+                        local.find('[opt=commit]').show();
+                        local.find('[opt=commit2]').hide();
+                    }
+                }
+            });
+        });
         /*保存*/
-        local.find('[opt=save]').show().bind('click',function(){
+        local.find('[opt=save]').show().bind('click', function () {
             layer.load();
             local.find('[opt=save]').hide();
             local.find('[opt=save2]').show();
@@ -270,6 +310,8 @@ define(function(){
                     }else{
                         layer.closeAll('loading');
                         cj.slideShow('<label style="color: red">提交失败</label>');
+                        local.find('[opt=save]').show();
+                        local.find('[opt=save2]').hide();
                     }
                 }
             });
@@ -304,8 +346,8 @@ define(function(){
             local.find('input[name=jj_time][type=radio][value='+option.queryParams.data.jj_time+']+label').addClass("checked");
         }
 
-        local.find('[opt=save]').hide();
-        local.find('[opt=save2]').hide();
+        local.find('[opt=commit]').hide();
+        local.find('[opt=commit2]').hide();
         local.find('[opt=change]').hide();
         /*修改*/
         local.find('[opt=update]').show().bind('click',function(){
@@ -354,8 +396,8 @@ define(function(){
         local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']+label').addClass("checked");
         local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']').attr("checked","checked");
         local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']+label').addClass("checked");
-        local.find('[opt=save]').hide();
-        local.find('[opt=save2]').hide();
+        local.find('[opt=commit]').hide();
+        local.find('[opt=commit2]').hide();
         local.find('[opt=update]').hide();
         local.find('[opt=change]').hide();
     }
@@ -374,8 +416,8 @@ define(function(){
         local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']+label').addClass("checked");
         local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']').attr("checked","checked");
         local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']+label').addClass("checked");
-        local.find('[opt=save]').hide();
-        local.find('[opt=save2]').hide();
+        local.find('[opt=commit]').hide();
+        local.find('[opt=commit2]').hide();
         local.find('[opt=update]').hide();
         /*变更*/
         local.find('[opt=change]').show().click(function(){

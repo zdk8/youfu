@@ -86,7 +86,7 @@ define(function(){
     /*添加养老机构*/
     var addyljgFun = function(local,refreshGrid){
         local.find('[opt=addyljg]').click(function(){
-            var title = "添加养老机构"
+            var title = "添加养老机构";
             if($("#tabs").tabs('getTab',title)){
                 $("#tabs").tabs('select',title)
             }else{
