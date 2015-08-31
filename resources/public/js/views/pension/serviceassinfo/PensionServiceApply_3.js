@@ -212,7 +212,7 @@ define(function(){
             local.find('[opt=save]').hide();
             local.find('[opt=save2]').show();
             local.find('[opt=pensionform]').form('submit', {
-                url:'audit/addauditapply',
+                url:'audit/updateapply',
                 onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
@@ -228,7 +228,7 @@ define(function(){
                 success: function (data) {
                     if(data == "true"){
                         layer.closeAll('loading');
-                        cj.slideShow('提交完成');
+                        cj.slideShow('保存完成');
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
                         if(layer.closeAll('loading')){
@@ -236,7 +236,7 @@ define(function(){
                         }
                     }else{
                         layer.closeAll('loading');
-                        cj.slideShow('<label style="color: red">提交失败</label>');
+                        cj.slideShow('<label style="color: red">保存失败</label>');
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
                     }

@@ -143,7 +143,7 @@
         jja_id  (:jja_id params)
         applydata (select-keys params applykeys)]
     (if (> (count jja_id) 0) (db/update-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate") jja_id)
-                             (db/adddata-by-tablename "t_jjylapply" (common/dateformat-bf-insert "birthd" "applydate")))                     ;首次保存新增申请数据，更新保存更新申请数据
+                             (db/adddata-by-tablename "t_jjylapply" (common/dateformat-bf-insert applydata "birthd" "applydate")))                     ;首次保存新增申请数据，更新保存更新申请数据
 
 ;    (resp/json {:success true :message "update apply success"})
     (str "true")
