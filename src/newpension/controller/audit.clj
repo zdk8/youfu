@@ -80,6 +80,7 @@
 
 (defn add-audit-apply [request]                                                                        "添加申请"
   (let[params (:params request)
+       jja_id (:jja_id params)
        identityid (:identityid params)
        checkold (count (db/get-oldpeople identityid))
        opdata (select-keys params opofapply)
@@ -90,11 +91,20 @@
     (if (= checkold 0) (old/create-old olddata) )                                           ;如果老人数据没有此数据，将其添加到老人数据库中
     ;(db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
     ;(if (= apply_type "3") (apply3-commit params))                                                    ;如果是第三类，则直接进入审核流程中
-    (if (= apply_type "3")
+    ;(if (= apply_type "3")
+    ;  (let [jjylid (:nextval (first(db/get-results-bysql "select seq_t_jjylapply.nextval  from dual")))]
+    ;    (if (> (count jja_id) 0) (db/updatedata-by-tablename "t_jjylapply" (conj applydata {:jja_id jjylid :ishandle "1"}) {:jja_id jja_id})
+    ;                              (db/add-apply (conj applydata {:jja_id jjylid :ishandle "1"})))
+    ;    (apply3-commit (conj params {:jja_id jjylid})))
+    ;  (db/add-apply applydata))
+    (if (> (count jja_id) 0)                                             ;jja_id是否存在（数据是否首次增加的）
+      (if (= apply_type "3") (do (db/updatedata-by-tablename "t_jjylapply" (conj applydata {:ishandle "1"}) {:jja_id jja_id})
+                                 (apply3-commit (conj params {:jja_id jja_id}))) ;第三类申请进入审核流程
+                             (db/updatedata-by-tablename "t_jjylapply" (conj applydata {:ishandle "p"}) {:jja_id jja_id}))    ;一、二类申请进入评估流程
       (let [jjylid (:nextval (first(db/get-results-bysql "select seq_t_jjylapply.nextval  from dual")))]
-        (db/add-apply (conj applydata {:jja_id jjylid}))
-        (apply3-commit (conj params {:jja_id jjylid})))
-      (db/add-apply applydata))
+        (if (= apply_type "3") (do (db/adddata-by-tablename "t_jjylapply" (conj applydata {:jja_id jjylid :ishandle "1"}))
+                                   (apply3-commit (conj params {:jja_id jjylid})))
+                               (db/add-apply (conj applydata {:jja_id jjylid :ishandle "p"}) ))))
 ;    (resp/json {:success true :message "apply success"})
     (str "true")
     ))
@@ -132,7 +142,9 @@
   (let [params (:params request)
         jja_id  (:jja_id params)
         applydata (select-keys params applykeys)]
-    (db/update-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate") jja_id)
+    (if (> (count jja_id) 0) (db/update-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate") jja_id)
+                             (db/adddata-by-tablename "t_jjylapply" (common/dateformat-bf-insert "birthd" "applydate")))                     ;首次保存新增申请数据，更新保存更新申请数据
+
 ;    (resp/json {:success true :message "update apply success"})
     (str "true")
     ))
