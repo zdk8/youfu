@@ -133,6 +133,12 @@
     (println "CCCCCCCCCCC" conds)
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "birthd" "applydate")})))
 
+(defn delete-apply-byid [request]
+  (let [params (:params request)
+        jja_id (:jja_id params)]
+    (db/deletedata-by-tablename "t_jjylapply" {:jja_id jja_id})
+    (str "true")))
+
 (defn get-apply-byid [request]                                                                          "根据id查询申请信息"
   (let[params (:params request)
        jja_id (:jja_id params)
