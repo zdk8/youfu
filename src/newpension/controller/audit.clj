@@ -130,6 +130,7 @@
         identityid (:identityid params)
         conds (str " and ishandle is null and userdistrictid like '%" userdistrictid "%' "  (common/likecond "name" name) (common/likecond "identityid" identityid))
         getresult (common/fenye rows page t_jjylapply "*" conds " order by jja_id desc ")]
+    (println "CCCCCCCCCCC" conds)
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "birthd" "applydate")})))
 
 (defn get-apply-byid [request]                                                                          "根据id查询申请信息"
@@ -154,7 +155,9 @@
 (defn  update-apply [request]                                                                           "更新申请信息"
   (let [params (:params request)
         jja_id  (:jja_id params)
-        applydata (select-keys params applykeys)]
+        userdistrictid (:regionid (session/get :usermsg))
+        applydata (conj (select-keys params applykeys) {:userdistrictid userdistrictid})]
+    (println "DDDDDDDDDDDD" applydata)
     (if (> (count jja_id) 0) (db/update-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate") jja_id)
                              (db/adddata-by-tablename "t_jjylapply" (common/dateformat-bf-insert applydata "birthd" "applydate")))                     ;首次保存新增申请数据，更新保存更新申请数据
 
