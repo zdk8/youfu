@@ -145,7 +145,7 @@
        name (:name params)
        userdistrictid (:regionid (session/get :usermsg))
        identityid (:identityid params)
-       cond (str " and ( ishandle is null or ishandle = 'r' ) and userdistrictid like '%" userdistrictid "%' and apply_type = '1' "  (common/likecond "name" name) (common/likecond "identityid" identityid))
+       cond (str " and ( ishandle = 'p' or ishandle = 'r' ) and userdistrictid like '%" userdistrictid "%' and apply_type = '1' "  (common/likecond "name" name) (common/likecond "identityid" identityid))
        getresult (common/fenye rows page t_jjylapply "*" cond " order by jja_id desc ")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list(common/time-before-list (:rows getresult) "birthd") "applydate")})))
 
