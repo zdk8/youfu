@@ -4,9 +4,9 @@ define(function(){
         var toolBar=cj.getFormToolBar([
             {text: '保存',hidden:'hidden',opt:'save'},
             {text: '保存',hidden:'hidden',opt:'save2'},
+            {text: '修改',hidden:'hidden',opt:'update'},
             {text: '提交',hidden:'hidden',opt:'commit'},
             {text: '提交',hidden:'hidden',opt:'commit2'},
-            {text: '修改',hidden:'hidden',opt:'update'},
             {text: '变更',hidden:'hidden',opt:'change'}
         ]);
         local.append(toolBar);
@@ -55,42 +55,6 @@ define(function(){
             }
         }).prev().hide();     //原来的圆点样式设置为不可见
     }
-    var getCheckBox=function(w,enumtype,name,record) {
-        $.ajax({
-            url: 'getenumbytype',
-            dataType: 'jsonp',
-            data: {
-                type:enumtype
-            },
-            success: function(data){
-                var items = $.map(data, function(item){
-                    return {
-                        id: item.enumeratevalue,
-                        text: item.enumeratelabel
-                    };
-                });
-                var result='';
-                var d = items;
-                for(var i in d) {
-                    var checked='';
-                    var myrecord=record||{};
-                    if(d[i].id==myrecord[name]){
-                        checked+='checked="checked"';
-                    }
-                    result+='<input type="radio" '+checked+' name="'+name+'" value="'+d[i].id+'"><label>'+d[i].text+'</label>';
-                }
-                $(w).append(result);
-                $(w).find('input[type=radio]+label').each(function(){
-                    $(this).bind('click',function(){
-                        $(this).prev().attr("checked",'true');
-
-                    })
-                });
-
-            }
-        });
-
-    };
 
     var actionInfo=function(local,option) {
         addToolBar(local);
@@ -194,6 +158,8 @@ define(function(){
                         cj.slideShow('提交完成');
                         local.find('[opt=commit]').show();
                         local.find('[opt=commit2]').hide();
+                        var ref = option.queryParams.refresh;             //刷新
+                        ref();
                         if(layer.closeAll('loading')){
                             $("#tabs").tabs('close',"服务申请_3")
                         }
@@ -231,6 +197,7 @@ define(function(){
                         cj.slideShow('保存完成');
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
+                        option.queryParams.refresh;             //刷新
                         if(layer.closeAll('loading')){
                             $("#tabs").tabs('close',"服务申请_3");
                         }
@@ -246,21 +213,54 @@ define(function(){
     }
     /*修改*/
     function showinfo(local,option){
+        layer.closeAll('loading');
         addRadioCss(local);
-        baseRender(local, option.queryParams.data);
+        var datas = option.queryParams.data;
+        baseRender(local, datas);
         var districtid = local.find('[opt=districtid]');      //行政区划值
-        local.find('form').form('load', option.queryParams.data);
-        var districtnameval = getDivistionTotalname(option.queryParams.data.districtid)
+        local.find('form').form('load', datas);
+        var districtnameval = getDivistionTotalname(datas.districtid)
         districtid.combotree("setValue",districtnameval)  //填充行政区划
-        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']').attr("checked","checked");
-        local.find('input[name=culture][type=radio][value='+option.queryParams.data.culture+']+label').addClass("checked");
-        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']').attr("checked","checked");
-        local.find('input[name=marriage][type=radio][value='+option.queryParams.data.marriage+']+label').addClass("checked");
-        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']').attr("checked","checked");
-        local.find('input[name=live][type=radio][value='+option.queryParams.data.live+']+label').addClass("checked");
-        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']').attr("checked","checked");
-        local.find('input[name=economy][type=radio][value='+option.queryParams.data.economy+']+label').addClass("checked");
 
+        local.find('input[name=old_type][type=radio][value='+datas.old_type+']').attr("checked","checked");
+        local.find('input[name=old_type][type=radio][value='+datas.old_type+']+label').addClass("checked");
+        local.find('input[name=live_type][type=radio][value='+datas.live_type+']').attr("checked","checked");
+        local.find('input[name=live_type][type=radio][value='+datas.live_type+']+label').addClass("checked");
+        local.find('input[name=life_ability][type=radio][value='+datas.life_ability+']').attr("checked","checked");
+        local.find('input[name=life_ability][type=radio][value='+datas.life_ability+']+label').addClass("checked");
+        local.find('input[name=household][type=radio][value='+datas.household+']').attr("checked","checked");
+        local.find('input[name=household][type=radio][value='+datas.household+']+label').addClass("checked");
+        local.find('input[name=gt_isretire1][type=radio][value='+datas.gt_isretire1+']').attr("checked","checked");
+        local.find('input[name=gt_isretire1][type=radio][value='+datas.gt_isretire1+']+label').addClass("checked");
+        local.find('input[name=gt_isretire2][type=radio][value='+datas.gt_isretire2+']').attr("checked","checked");
+        local.find('input[name=gt_isretire2][type=radio][value='+datas.gt_isretire2+']+label').addClass("checked");
+        local.find('input[name=gt_isretire3][type=radio][value='+datas.gt_isretire3+']').attr("checked","checked");
+        local.find('input[name=gt_isretire3][type=radio][value='+datas.gt_isretire3+']+label').addClass("checked");
+        local.find('input[name=sy_isretire1][type=radio][value='+datas.sy_isretire1+']').attr("checked","checked");
+        local.find('input[name=sy_isretire1][type=radio][value='+datas.sy_isretire1+']+label').addClass("checked");
+        local.find('input[name=sy_isretire2][type=radio][value='+datas.sy_isretire2+']').attr("checked","checked");
+        local.find('input[name=sy_isretire2][type=radio][value='+datas.sy_isretire2+']+label').addClass("checked");
+        local.find('input[name=sy_isretire3][type=radio][value='+datas.sy_isretire3+']').attr("checked","checked");
+        local.find('input[name=sy_isretire3][type=radio][value='+datas.sy_isretire3+']+label').addClass("checked");
+
+        local.find('[opt=gender]').combobox('setValue',datas.gender);
+        local.find('[opt=nation]').combobox('setValue',datas.nation);
+
+        /*类别证号处理*/
+        var oldtype = local.find('input[name=old_type][type=radio]:checked').val();
+        if(oldtype == '0'){//低保
+            local.find('[name=allowanceid]').val(datas.allowanceid);
+            local.find('[name=lowmarginid]').val('');
+        }else if(oldtype == '1'){//低保边缘户
+            local.find('[name=allowanceid]').val('');
+            local.find('[name=lowmarginid]').val(datas.lowmarginid);
+        }else{
+            local.find('[name=allowanceid]').val('');
+            local.find('[name=lowmarginid]').val('');
+        }
+
+        local.find('[opt=save]').hide();
+        local.find('[opt=save2]').hide();
         local.find('[opt=commit]').hide();
         local.find('[opt=commit2]').hide();
         local.find('[opt=change]').hide();
@@ -290,6 +290,43 @@ define(function(){
                              var ref = option.queryParams.refresh;             //刷新
                              ref();
                         }
+                    }
+                }
+            });
+        });
+        /*提交*/
+        local.find('[opt=commit]').show().bind('click',function(){
+            layer.load();
+            local.find('[opt=commit]').hide();
+            local.find('[opt=commit2]').show();
+            local.find('[opt=pensionform]').form('submit', {
+                url:'audit/addauditapply',
+                onSubmit: function (params) {
+                    var isValid = $(this).form('validate');
+                    if(isValid){
+                        params.districtid = districtid.combobox("getValue");
+                        params.apply_type = "3";            //第3类型的申请
+                    }else{
+                        local.find('[opt=commit]').show();
+                        local.find('[opt=commit2]').hide();
+                        layer.closeAll('loading');
+                    }
+                    return isValid;
+                },
+                success: function (data) {
+                    if(data == "true"){
+                        layer.closeAll('loading');
+                        cj.slideShow('提交完成');
+                        local.find('[opt=commit]').show();
+                        local.find('[opt=commit2]').hide();
+                        $("#tabs").tabs('close',option.queryParams.title);
+                        var ref = option.queryParams.refresh;             //刷新
+                        ref();
+                    }else{
+                        layer.closeAll('loading');
+                        cj.slideShow('<label style="color: red">提交失败</label>');
+                        local.find('[opt=commit]').show();
+                        local.find('[opt=commit2]').hide();
                     }
                 }
             });

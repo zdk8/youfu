@@ -5,19 +5,18 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
             var refreshGrid=function() {
                 localDataGrid.datagrid('reload');
             };
-
             localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
-                    url:'audit/getallapply',
+                    url:'audit/getapplylist',
                     method:'post',
                     queryParams: {
 
                     },
                     onLoadSuccess:function(data){
                         var viewbtns=local.find('[action=view]');
-                        var assessmentbtns=local.find('[action=assessment]');
+                        var commitbtns=local.find('[action=commit]');
                         var grantbtns=local.find('[action=grant]');
-                        var btns_arr=[viewbtns,assessmentbtns,grantbtns];
+                        var btns_arr=[viewbtns,commitbtns,grantbtns];
                         var rows=data.rows;
                         for(var i=0;i<rows.length;i++){
                             for(var j=0;j<btns_arr.length;j++){
@@ -27,37 +26,35 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                                         if($(this).attr("action")=='view'){
                                             layer.load();
                                             var title = "【"+record.name+'】服务申请详细信息';
-                                            cj.showContent({                                          //详细信息(tab标签)
-                                                title:title,
-                                                htmfile:'text!views/pension/serviceassinfo/PensionServiceApply_1&2.htm',
-                                                jsfile:'views/pension/serviceassinfo/PensionServiceApply_1&2',
-                                                queryParams:{
-                                                    actiontype:'info',         //（详细信息）操作方式
-                                                    data:record,
+                                            if(record.apply_type == '1'){
+                                                cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
-                                                    refresh:refreshGrid
-                                                }
-                                            });
-                                            //viewRoleInfo(record);
-                                        }else if($(this).attr("action")=='assessment'){         //评估
+                                                    htmfile:'text!views/pension/serviceassinfo/PensionServiceApply_1&2.htm',
+                                                    jsfile:'views/pension/serviceassinfo/PensionServiceApply_1&2',
+                                                    queryParams:{
+                                                        actiontype:'info',         //（详细信息）操作方式
+                                                        data:record,
+                                                        title:title,
+                                                        refresh:refreshGrid
+                                                    }
+                                                });
+                                            }else if(record.apply_type == '3'){
+                                                cj.showContent({                                          //详细信息(tab标签)
+                                                    title:title,
+                                                    htmfile:'text!views/pension/serviceassinfo/PensionServiceApply_3.htm',
+                                                    jsfile:'views/pension/serviceassinfo/PensionServiceApply_3',
+                                                    queryParams:{
+                                                        actiontype:'info',         //（详细信息）操作方式
+                                                        data:record,
+                                                        title:title,
+                                                        refresh:refreshGrid
+                                                    }
+                                                });
+                                            }
+                                        }else if($(this).attr("action")=='commit'){         //评估
                                             var userlength = cj.getUserMsg().regionid.length;
                                             var aul = record.aulevel;
                                             showDlg(refreshGrid,record,data);
-                                            /*if(userlength == 12){
-                                                $.messager.alert('温馨提示','对不起,你没有该权限!','info');
-                                            }else if(userlength == 9){
-                                                console.log(aul)
-                                                if(aul == 1 || aul == null || aul == 0){
-                                                    showDlg(refreshGrid,record)
-                                                }else{
-                                                    $.messager.alert('温馨提示','对不起,你没有审批权限!','info');
-                                                }
-                                            }else if(userlength == 6){
-                                                showDlg(refreshGrid,record)
-                                            }*/
-
-                                        }else if($(this).attr("action")=='grant'){
-                                            //grant(record);
                                         }
                                     });
                                 })(i);

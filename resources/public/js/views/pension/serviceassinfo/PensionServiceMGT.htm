@@ -38,13 +38,16 @@
                         return str.html();
                     }">姓名</th>
                 <th data-options="field:'gender',width:80,align:'center',formatter: cj.enumFormatter('gender')">性别</th>
-                <th data-options="field:'familynum',width:150,align:'center'">家庭人口数</th>
+                <th data-options="field:'apply_type',width:150,align:'center',
+                    formatter:function(v,r,i){
+                        return apply_type[v];
+                    }">状态</th>
                 <th data-options="field:'identityid',width:200,align:'center'">身份证号</th>
                 <th data-options="field:'address',width:200,align:'left'">住址</th>
                 <th data-options="field:'ro',width:50,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;assessment&quot;title=&quot;评估&quot;><span><span class=&quot;icondealwith&quot;>评估</span></span></a>');
+                    str=$(str).append('<a action=&quot;commit&quot;title=&quot;提交&quot;><span><span class=&quot;icondealwith&quot;>提交</span></span></a>');
                     return str.html();
                 }">操作</th>
             </tr>

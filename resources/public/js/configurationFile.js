@@ -6,6 +6,8 @@ getCulture=['文盲','略识字','能读字,最高学历'];     //文化程度
 getMarriage=['未婚','已婚','丧偶','离婚'];     //婚姻状况
 getLive=['与子女同住','与亲友同住','与配偶同住','独居'];     //居住
 
+apply_type=['','1、2类服务申请','','3类服务申请'];//申请类型
+
 /*日期时间*/
 var myformatter = function(date){
     var y = date.getFullYear();
