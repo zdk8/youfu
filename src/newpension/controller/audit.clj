@@ -119,6 +119,19 @@
   (common/timefmt-bef-insert(common/timefmt-bef-insert(common/timefmt-bef-insert (common/time-before-list data "birthd")
   "applydate")"opiniontime")"reviewtime")"audittime")"rm_opiniontime")"rm_reviewtime")"rm_audittime"))
 
+(defn get-apply-list
+  "获取未提交的申请列表"
+  [request]
+  (let [params (:params request)
+        rows (:rows params)
+        page (:page params)
+        name (:name params)
+        userdistrictid (:regionid (session/get :usermsg))
+        identityid (:identityid params)
+        conds (str " and ishandle is null and userdistrictid like '%" userdistrictid "%' "  (common/likecond "name" name) (common/likecond "identityid" identityid))
+        getresult (common/fenye rows page t_jjylapply "*" conds " order by jja_id desc ")]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "birthd" "applydate")})))
+
 (defn get-apply-byid [request]                                                                          "根据id查询申请信息"
   (let[params (:params request)
        jja_id (:jja_id params)
