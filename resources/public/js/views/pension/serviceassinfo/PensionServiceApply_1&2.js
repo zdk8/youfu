@@ -270,8 +270,8 @@ define(function(){
                         cj.slideShow('保存完成');
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
-                        //option.queryParams.refresh;             //刷新
-                        oop = option;
+                        var ref = option.queryParams.refresh;             //刷新
+                        ref();
                         if(layer.closeAll('loading')){
                             $("#tabs").tabs('close',"服务申请_1&2")
                         }
@@ -478,6 +478,9 @@ define(function(){
                     break;
                 case 'change':                   //变更
                     changeInfo(l,o);
+                    break;
+                case 'add':
+                    addInfo(l, o);            //新增态
                     break;
                 default :
                     break;

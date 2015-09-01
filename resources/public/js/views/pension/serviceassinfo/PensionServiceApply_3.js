@@ -422,6 +422,9 @@ define(function(){
                 case 'change':                   //变更
                     changeInfo(l,o);
                     break;
+                case 'add':
+                    addInfo(l, o);            //新增态
+                    break;
                 default :
                     break;
             }
