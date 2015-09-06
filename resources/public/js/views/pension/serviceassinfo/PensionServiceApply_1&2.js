@@ -233,9 +233,7 @@ define(function(){
                         local.find('[opt=commit2]').hide();
                         var ref = option.queryParams.refresh;             //刷新
                         ref();
-                        if(layer.closeAll('loading')){
-                            $("#tabs").tabs('close',"服务申请_1&2")
-                        }
+                        $("#tabs").tabs('close',option.queryParams.title);
                     }else{
                         layer.closeAll('loading');
                         cj.slideShow('<label style="color: red">提交失败</label>');
@@ -272,9 +270,7 @@ define(function(){
                         local.find('[opt=save2]').hide();
                         var ref = option.queryParams.refresh;             //刷新
                         ref();
-                        if(layer.closeAll('loading')){
-                            $("#tabs").tabs('close',"服务申请_1&2")
-                        }
+                        $("#tabs").tabs('close',option.queryParams.title);
                     }else{
                         layer.closeAll('loading');
                         cj.slideShow('<label style="color: red">提交失败</label>');
@@ -374,7 +370,7 @@ define(function(){
                         cj.slideShow('提交完成');
                         local.find('[opt=commit]').show();
                         local.find('[opt=commit2]').hide();
-                        $("#tabs").tabs('close',option.queryParams.title)
+                        $("#tabs").tabs('close',option.queryParams.title);
                         var ref = option.queryParams.refresh;             //刷新
                         ref();
                     }else{

@@ -318,19 +318,22 @@ define(function(){
               local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']+label').addClass("checked");
 
               var sh_pingguf = datas.sh_pingguf;
-              if(sh_pingguf == 0){
-                  local.find(':input[name=sh_jiel_zj]:eq(0)').attr("checked","checked");
-                  local.find(':input[name=sh_jiel_zj]:eq(0)+label').addClass("checked");
-              }else if(sh_pingguf > 0 &&sh_pingguf <= 10){
-                  local.find(':input[name=sh_jiel_zj]:eq(1)').attr("checked","checked");
-                  local.find(':input[name=sh_jiel_zj]:eq(1)+label').addClass("checked");
-              }else if(sh_pingguf > 10 &&sh_pingguf <= 50){
-                  local.find(':input[name=sh_jiel_zj]:eq(2)').attr("checked","checked");
-                  local.find(':input[name=sh_jiel_zj]:eq(2)+label').addClass("checked");
-              }else{
-                  local.find(':input[name=sh_jiel_zj]:eq(3)').attr("checked","checked");
-                  local.find(':input[name=sh_jiel_zj]:eq(3)+label').addClass("checked");
+              if(sh_pingguf != null){
+                  if(sh_pingguf == 0){
+                      local.find(':input[name=sh_jiel_zj]:eq(0)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(0)+label').addClass("checked");
+                  }else if(sh_pingguf > 0 &&sh_pingguf <= 10){
+                      local.find(':input[name=sh_jiel_zj]:eq(1)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(1)+label').addClass("checked");
+                  }else if(sh_pingguf > 10 &&sh_pingguf <= 50){
+                      local.find(':input[name=sh_jiel_zj]:eq(2)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(2)+label').addClass("checked");
+                  }else{
+                      local.find(':input[name=sh_jiel_zj]:eq(3)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(3)+label').addClass("checked");
+                  }
               }
+
           }else if(option.queryParams.actionType == "view"){  //查看详细信息
               var datas = eval('('+local.find('[opt=jsondata]').val()+')');
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划

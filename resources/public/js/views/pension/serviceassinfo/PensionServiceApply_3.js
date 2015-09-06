@@ -160,9 +160,7 @@ define(function(){
                         local.find('[opt=commit2]').hide();
                         var ref = option.queryParams.refresh;             //刷新
                         ref();
-                        if(layer.closeAll('loading')){
-                            $("#tabs").tabs('close',"服务申请_3")
-                        }
+                        $("#tabs").tabs('close',option.queryParams.title);
                     }else{
                         layer.closeAll('loading');
                         cj.slideShow('<label style="color: red">提交失败</label>');
@@ -198,9 +196,7 @@ define(function(){
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
                         option.queryParams.refresh;             //刷新
-                        if(layer.closeAll('loading')){
-                            $("#tabs").tabs('close',"服务申请_3");
-                        }
+                        $("#tabs").tabs('close',option.queryParams.title);
                     }else{
                         layer.closeAll('loading');
                         cj.slideShow('<label style="color: red">保存失败</label>');

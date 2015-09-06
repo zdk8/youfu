@@ -18,8 +18,12 @@ define(function(){
                 })
                 local.find(':input[name=sh_zongf]').val(sh_zongf)
                 local.find(':input[name=sh_pingguf]').val(sh_zongf/2)
+
                 local.find(':input[name=sh_jiel]+label').removeClass("checked");
                 local.find(':input[name=sh_jiel]').removeAttr("checked");
+
+                parentlocal.find(':input[name=sh_jiel_zj]+label').removeClass("checked");
+                parentlocal.find(':input[name=sh_jiel_zj]').removeAttr("checked");
                 if(sh_zongf == 0){
                     local.find(':input[name=sh_jiel]:eq(0)').attr("checked","checked");
                     local.find(':input[name=sh_jiel]:eq(0)+label').addClass("checked");

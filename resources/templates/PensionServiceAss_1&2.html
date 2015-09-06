@@ -47,24 +47,25 @@
                                data-options=" loader:cj.getLoader('gender'), editable:false, valueField:'id', textField:'text' ">
 
                     </td>
-                    <td class="formtdtext">出生年月 :</td>
-                    <td>
-                        <input opt="birthdate" name="birthd" class="easyui-datebox" value="{{dataall.birthd}}"
-                               data-options="formatter:myformatter,parser:myparser" readonly>
-                    </td>
-                </tr>
-                <tr>
                     <td class="formtdtext">民族 :</td>
                     <td>
                         <input class="easyui-combobox" name="nation" opt="nation" value="{{dataall.nation}}" readonly
                                data-options=" loader:cj.getLoader('oldnation'), editable:false, valueField:'id', textField:'text' ">
                     </td>
-                    <td class="formtdtext">文化程度 :</td>
+                    <!--<td class="formtdtext">出生年月 :</td>
+                    <td>
+                        <input opt="birthdate" name="birthd" class="easyui-datebox" value="{{dataall.birthd}}"
+                               data-options="formatter:myformatter,parser:myparser" readonly>
+                    </td>-->
+                </tr>
+                <!--<tr>-->
+
+                    <!--<td class="formtdtext">文化程度 :</td>
                     <td>
                         <input class="easyui-combobox" name="culture"  opt="culture" value="{{dataall.culture}}" readonly
                                data-options=" loader:cj.getLoader('culture'), editable:false, valueField:'id', textField:'text' ">
-                    </td>
-                </tr>
+                    </td>-->
+                <!--</tr>-->
             </table>
         </fieldset>
 
@@ -170,8 +171,8 @@
                 <td rowspan="6" style="width: 30px;">评估确认员完成</td>
                 <td style="width: 200px;">评估员姓名</td>
                 <td style="width: 200px;"><input class="input-text" name="pinggy" value="{{dataall.pinggy}}" size="25"></td>
-                <td rowspan="3" style="width: 150px;">确认完成</td>
-                <td rowspan="3">
+                <td rowspan="2" style="width: 150px;">确认完成</td>
+                <td rowspan="2">
                     <ul style="list-style-type:none">
                         <li>首次评估<input type="radio" name="assesstype" value="0"><label></label></li>
                         <li>复检评估<input type="radio" name="assesstype" value="1"><label></label></li>
@@ -184,11 +185,11 @@
                 <td>联络电话</td>
                 <td><input class="input-text" size="25" name="pingguyphone" value="{{pingguyphone}}"></td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td>完成时间</td>
                 <td><input size="25" name="finishdate" class="easyui-datebox" value="{{dataall.finishdate}}"
                            data-options="formatter:myformatter,parser:myparser"></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>所属单位</td>
                 <td colspan="3"><input class="input-text" style="width: 300px" name="pingguydept" value="{{dataall.pingguydept}}"></td>
