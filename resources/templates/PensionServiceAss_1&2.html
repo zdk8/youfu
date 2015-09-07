@@ -183,7 +183,7 @@
 
             <tr>
                 <td>联络电话</td>
-                <td><input class="input-text" size="25" name="pingguyphone" value="{{pingguyphone}}"></td>
+                <td><input class="input-text" size="25" name="pgy_dianhua" value="{{dataall.pgy_dianhua}}"></td>
             </tr>
             <!--<tr>
                 <td>完成时间</td>
@@ -192,7 +192,7 @@
             </tr>-->
             <tr>
                 <td>所属单位</td>
-                <td colspan="3"><input class="input-text" style="width: 300px" name="pingguydept" value="{{dataall.pingguydept}}"></td>
+                <td colspan="3"><input class="input-text" style="width: 300px" name="pgy_danwei" value="{{dataall.pgy_danwei}}"></td>
             </tr>
 
             <tr>
@@ -252,20 +252,20 @@
                     <div style="border: 1px solid #e5e5e5;width: 97%;padding: 3px;">
                     镇（街道）评估工作组评估员对申请人养老服务需求建议:<br>
                     &nbsp;&nbsp;1、入住养老机构，享受养老服务补贴为：
-                    <input type="radio" name="jg_money" value="0"><label>每年12000元</label>
-                    <input type="radio" name="jg_money" value="1"><label>每年6000元</label><br>
+                    <input type="radio" name="jdjy_allowance" value="0"><label>每年12000元</label>
+                    <input type="radio" name="jdjy_allowance" value="1"><label>每年6000元</label><br>
                     &nbsp;&nbsp;2、享受居家养老政府购买服务：<br>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;享受每月服务时间为：
-                    <input type="radio" name="jj_time" value="0"><label>每月60小时</label>
-                    <input type="radio" name="jj_time" value="1"><label>每月30小时</label>
-                    <input type="radio" name="jj_time" value="2"><label>每月15小时</label><br>
+                    <input type="radio" name="jdjy_servicetime" value="0"><label>每月60小时</label>
+                    <input type="radio" name="jdjy_servicetime" value="1"><label>每月30小时</label>
+                    <input type="radio" name="jdjy_servicetime" value="2"><label>每月15小时</label><br>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;享受服务内容为：
-                    <input type="radio" name="jj_time" value="0"><label>生活照料服务</label>
-                    <input type="radio" name="jj_time" value="0"><label>精神慰藉服务</label>
-                    <input type="radio" name="jj_time" value="0"><label>家政服务</label>
-                    <input type="radio" name="jj_time" value="0"><label>医疗保健服务</label>
-                    <input type="radio" name="jj_time" value="0"><label>紧急救助服务</label>
-                    <input type="radio" name="jj_time" value="0"><label>其他服务</label>
+                    <input type="radio" name="jdjy_servicecontent" value="0"><label>生活照料服务</label>
+                    <input type="radio" name="jdjy_servicecontent" value="1"><label>精神慰藉服务</label>
+                    <input type="radio" name="jdjy_servicecontent" value="2"><label>家政服务</label>
+                    <input type="radio" name="jdjy_servicecontent" value="3"><label>医疗保健服务</label>
+                    <input type="radio" name="jdjy_servicecontent" value="4"><label>紧急救助服务</label>
+                    <input type="radio" name="jdjy_servicecontent" value="5"><label>其他服务</label>
                     </div>
                     <div style="width: 97%;padding-top: 2px;text-align: right;">
                         评估时间 :<input size="20" name="finishdate" class="easyui-datebox">

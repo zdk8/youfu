@@ -317,6 +317,15 @@ define(function(){
               local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']').attr("checked","checked");
               local.find('input[name=assesstype][type=radio][value='+datas.assesstype+']+label').addClass("checked");
 
+              local.find('input[name=jdjy_allowance][type=radio][value='+datas.jdjy_allowance+']').attr("checked","checked");
+              local.find('input[name=jdjy_allowance][type=radio][value='+datas.jdjy_allowance+']+label').addClass("checked");
+
+              local.find('input[name=jdjy_servicetime][type=radio][value='+datas.jdjy_servicetime+']').attr("checked","checked");
+              local.find('input[name=jdjy_servicetime][type=radio][value='+datas.jdjy_servicetime+']+label').addClass("checked");
+
+              local.find('input[name=jdjy_servicecontent][type=radio][value='+datas.jdjy_servicecontent+']').attr("checked","checked");
+              local.find('input[name=jdjy_servicecontent][type=radio][value='+datas.jdjy_servicecontent+']+label').addClass("checked");
+
               var sh_pingguf = datas.sh_pingguf;
               if(sh_pingguf != null){
                   if(sh_pingguf == 0){
