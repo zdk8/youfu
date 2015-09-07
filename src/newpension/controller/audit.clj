@@ -5,15 +5,16 @@
   (:require [newpension.models.db :as db]
                [newpension.common.common :as common]
                [newpension.controller.old :as old]
-               [newpension.models.schema :as schema]
+    ; [newpension.models.schema :as schema]
                [noir.response :as resp]
                [noir.session :as session]
-               [clj-time.local :as l]
-               [clj-time.coerce :as c]
-               [noir.io :as io]
+    ;  [clj-time.local :as l]
+    ;  [clj-time.coerce :as c]
+    ;   [noir.io :as io]
                [clojure.string :as strs]
                [clojure.data.json :as json]
-               [newpension.layout :as layout]))
+    ;      [newpension.layout :as layout]
+               ))
 
 (def applykeys [:name :identityid :gender :birthd :nation :culture :birthplace :marriage :live :economy :age :registration :address :postcode :telephone :mobilephone :agent
                 :oprelation :agentaddr :agentphone :agentmobilephone :lr_id :ishandle :applydate :communityopinion :opiniontime :streetreview :reviewtime :countyaudit :audittime
@@ -175,12 +176,15 @@
   (let[params (:params request)
        assessdata (common/timefmt-bef-insert(common/timefmt-bef-insert (common/timefmt-bef-insert (common/timefmt-bef-insert (select-keys params assess) "startdate") "enddate") "operator_date")"finishdate")                                    ;STARTDATE,ENDDATE,OPERATOR_DATE
        suggestdata (select-keys params suggest)                                ;
+       applydata (select-keys params applykeys)
        ss_id (:ss_id params)
        pg_id (:pg_id params)
+       jja_id (:jja_id params)
        ]
-    (println "IIIIIIIIIIIIIIIIIIIIII"  " ss_id:" ss_id  " pg_id:" pg_id  )
-    (if (= (count ss_id) 0) (db/insert-suggest suggestdata)  (db/update-suggest suggestdata ss_id))
+    (println "IIIIIIIIIIIIIIIIIIIIII"  " ss_id:" ss_id  " pg_id:" pg_id  "jja_id:" jja_id)
+    (if (= (count ss_id) 0) (db/insert-suggest suggestdata)  (db/update-suggest suggestdata ss_id))                ;服务评估首次保存新增数据，以后保存数据
     (if (= (count pg_id) 0) (db/insert-assess assessdata) (db/update-assess assessdata pg_id))
+    (if (> (count jja_id) 0) (db/updatedata-by-tablename "t_jjylapply" applydata jja_id))                           ;更新评估中相关字段数据
 ;    (resp/json {:success true :message "assess save success"})
     (str "true")
     ))
@@ -704,8 +708,8 @@ from t_dolemoney t ,T_JJYLAPPLY j WHERE t.JJA_ID = j.JJA_ID "condname condid con
 (defn sendallmoney [request]
   (let[params (:params request)
        name (:name params)
-       rows (:rows params)
-       page (:page params)
+       ; rows (:rows params)
+       ; page (:page params)
        identityid (:identityid params)
        bsnyue (clojure.string/trim (:bsnyue params))
        ywq (if (> (count bsnyue) 0) bsnyue (common/ywq))
