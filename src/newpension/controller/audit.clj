@@ -31,7 +31,7 @@
          :jb_tongf :jb_zhitguz :jb_jianzy :jb_jinzb :jb_leifshigjiey :jb_gandjib :jb_bainz :jb_qinguany :jb_shiwmoxguanjib :jb_tangnbingswangmbingb :jb_shenzjib
          :jb_qit1name :jb_qit2name :jb_qit3name :jb_pingguy :jb_beiz :pinggusum :standard :startdate :enddate :facilitator :content :amount :operator_date :active :zf_pingguf
          :cz_pingguf :jb_pingguf :zf_shiyingfnum :zf_shangpinfnum :zf_zijianfnum :jb_qita1 :jb_qita2 :jb_qita3 :rz_jinqijy :rz_chengxujy :rz_dingxiangnl :rz_panduannl :rz_zongfen
-         :rz_pingguf :rz_jiel :rz_pingguy :pgy_dianhua :pgy_danwei :jb_exingzhl :pinggy :finishdate :assesstype :servicetime :monthsubsidy :hospitalsubsidy :jdep_id :s_id])
+         :rz_pingguf :rz_jiel :rz_pingguy :pgy_dianhua :pgy_danwei :jb_exingzhl :pinggy :finishdate :assesstype :servicetime2 :monthsubsidy2 :hospitalsubsidy2 :jdep_id2 :s_id2])
 (def suggest [:shys_songc :shys_songcbz :shys_zuoc :shys_zuocbz :shqj_chuangy :shqj_chuangybz :shqj_zhenglyw :shqj_zhenglywbz :shqj_fans :shqj_fansbz :shqj_ruc
         :shqj_rucbz :shzy_shangm :shzy_shangmbz :shzy_yus :shzy_yusbz :shws_yiw :shws_yiwbz :shws_chuangs :shws_chuangsbz :shws_shin :shws_shinbz
         :shdb_meiq :shdb_meiqbz :shdb_shoux :shdb_shouxbz :shdb_feiy :shdb_feiybz :shqt_name1 :shqt_fuwu1 :shqt_fuwu1bz :shqt_name2 :shqt_fuwu2 :shqt_fuwu2bz
@@ -184,7 +184,7 @@
     (println "IIIIIIIIIIIIIIIIIIIIII"  " ss_id:" ss_id  " pg_id:" pg_id  "jja_id:" jja_id)
     (if (= (count ss_id) 0) (db/insert-suggest suggestdata)  (db/update-suggest suggestdata ss_id))                ;服务评估首次保存新增数据，以后保存数据
     (if (= (count pg_id) 0) (db/insert-assess assessdata) (db/update-assess assessdata pg_id))
-    (if (> (count jja_id) 0) (db/updatedata-by-tablename "t_jjylapply" applydata jja_id))                           ;更新评估中相关字段数据
+    (if (> (count jja_id) 0) (db/updatedata-by-tablename "t_jjylapply" applydata {:jja_id jja_id}))                           ;更新评估中相关字段数据
 ;    (resp/json {:success true :message "assess save success"})
     (str "true")
     ))
