@@ -48,7 +48,11 @@
                    :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :lack :ispair :volunteername :volunteerphone :former :formdata])
 (def emptynestpeople [:kc_id :gn_number :name :gender :marriage :culture :address :telephone :districtid :birthd :nation :registration :gntype :disease :zn_name1 :zn_phone1 :zn_workplace1 :zn_name2 :zn_phone2 :zn_workplace2 :zn_name3 :zn_phone3 :zn_workplace3 :zn_name4 :zn_phone4 :zn_workplace4 :emptyreason :xq_watchtv :xq_exercise :xq_chess :xq_nohobby :xq_other :visittime :jj_childprovide :jj_retirepay :jj_remolition :jj_pension :jj_assistance :jj_deposit :jj_other :monthincome :kn_eat :kn_bathe :kn_floor :kn_housework :kn_walk :kn_transit :kn_toilet :kn_bed :kn_nothing :fw_housekeeping :fw_treatment :fw_meal :fw_tend :fw_doctor :fw_dailyshop :fw_aid :fw_hotline :fw_entertainment :fw_law :fw_chat :fw_nothing :ispair :volunteername :volunteerphone :zq_barrierfree :zq_pensionagency :zq_homecare :zq_volunteers :zq_other :zq_othervalue :age :havechildren])
 
-(def v_oldapprove "v_oldapprove")
+(def v_oldapprove "(SELECT a.lr_id,a.DISTRICTID,a.NAME,a.IDENTITYID,a.gender,a.AGE,a.OPERATORS,b.* FROM
+(SELECT * FROM T_OLDPEOPLE WHERE status  != '1' OR status IS NULL) a
+LEFT JOIN
+(SELECT * FROM APPROVE WHERE status = '1' AND BSTABLENAME = 't_oldpeople') b
+ON a.LR_ID = b.BSTABLEPK)")
 (def t_oldpeople "t_oldpeople")
 
 ;;测试函数
