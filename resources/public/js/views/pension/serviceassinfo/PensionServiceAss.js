@@ -345,6 +345,32 @@ define(function(){
 
           }else if(option.queryParams.actionType == "view"){  //查看详细信息
               var datas = eval('('+local.find('[opt=jsondata]').val()+')');
+              local.find('input[name=jdjy_allowance][type=radio][value='+datas.jdjy_allowance+']').attr("checked","checked");
+              local.find('input[name=jdjy_allowance][type=radio][value='+datas.jdjy_allowance+']+label').addClass("checked");
+
+              local.find('input[name=jdjy_servicetime][type=radio][value='+datas.jdjy_servicetime+']').attr("checked","checked");
+              local.find('input[name=jdjy_servicetime][type=radio][value='+datas.jdjy_servicetime+']+label').addClass("checked");
+
+              local.find('input[name=jdjy_servicecontent][type=radio][value='+datas.jdjy_servicecontent+']').attr("checked","checked");
+              local.find('input[name=jdjy_servicecontent][type=radio][value='+datas.jdjy_servicecontent+']+label').addClass("checked");
+              local.find('[opt=finishdate]').datebox('setValue',datas.finishdate);
+              var sh_pingguf = datas.sh_pingguf;
+              if(sh_pingguf != null){
+                  if(sh_pingguf == 0){
+                      local.find(':input[name=sh_jiel_zj]:eq(0)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(0)+label').addClass("checked");
+                  }else if(sh_pingguf > 0 &&sh_pingguf <= 10){
+                      local.find(':input[name=sh_jiel_zj]:eq(1)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(1)+label').addClass("checked");
+                  }else if(sh_pingguf > 10 &&sh_pingguf <= 50){
+                      local.find(':input[name=sh_jiel_zj]:eq(2)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(2)+label').addClass("checked");
+                  }else{
+                      local.find(':input[name=sh_jiel_zj]:eq(3)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(3)+label').addClass("checked");
+                  }
+              }
+
               local.find('[opt=districtid]').val(getDivistionTotalname(local.find('[opt=districtidval]').val()))//填充行政区划
               viewInfoFunc(local,option)
               showServicemgt(local)     //显示机构

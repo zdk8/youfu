@@ -176,9 +176,35 @@ define(function(){
               })
           calculate(local);     //计算评估总分
           if(option.queryParams.actionType == "dealwith"){  //处理
-              var datas = eval('('+local.find('[opt=jsondata]').val()+')');
+              datas = eval('('+local.find('[opt=jsondata]').val()+')');
               showServicemgt(local);
               var aulevel = option.queryParams.record.aulevel;   //审核审批等级
+              local.find('input[name=jdjy_allowance][type=radio][value='+datas.jdjy_allowance+']').attr("checked","checked");
+              local.find('input[name=jdjy_allowance][type=radio][value='+datas.jdjy_allowance+']+label').addClass("checked");
+
+              local.find('input[name=jdjy_servicetime][type=radio][value='+datas.jdjy_servicetime+']').attr("checked","checked");
+              local.find('input[name=jdjy_servicetime][type=radio][value='+datas.jdjy_servicetime+']+label').addClass("checked");
+
+              local.find('input[name=jdjy_servicecontent][type=radio][value='+datas.jdjy_servicecontent+']').attr("checked","checked");
+              local.find('input[name=jdjy_servicecontent][type=radio][value='+datas.jdjy_servicecontent+']+label').addClass("checked");
+              local.find('[opt=finishdate]').datebox('setValue',datas.finishdate);
+              var sh_pingguf = datas.sh_pingguf;
+              if(sh_pingguf != null){
+                  if(sh_pingguf == 0){
+                      local.find(':input[name=sh_jiel_zj]:eq(0)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(0)+label').addClass("checked");
+                  }else if(sh_pingguf > 0 &&sh_pingguf <= 10){
+                      local.find(':input[name=sh_jiel_zj]:eq(1)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(1)+label').addClass("checked");
+                  }else if(sh_pingguf > 10 &&sh_pingguf <= 50){
+                      local.find(':input[name=sh_jiel_zj]:eq(2)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(2)+label').addClass("checked");
+                  }else{
+                      local.find(':input[name=sh_jiel_zj]:eq(3)').attr("checked","checked");
+                      local.find(':input[name=sh_jiel_zj]:eq(3)+label').addClass("checked");
+                  }
+              }
+              local.find('[opt=pinggusum]').val(datas.pinggusum);
               if(aulevel == "1" || aulevel == "4"){
                   local.find('textarea[name=countyaudit]').attr("readonly","readonly");
                   RadioCssEnabel(local,"shenghe");

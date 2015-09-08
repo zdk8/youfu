@@ -89,6 +89,7 @@
        applydata (common/dateformat-bf-insert (conj (select-keys params applykeys) {:userdistrictid userdistrictid}) "birthd" "applydate")
        olddata (conj request {:params (conj params {:datatype "f"})})
        apply_type (:apply_type params)]
+    (println "DDDDDDDDDD" params)
     (if (= checkold 0) (old/create-old olddata) )                                           ;如果老人数据没有此数据，将其添加到老人数据库中
     ;(db/add-apply (common/timefmt-bef-insert (common/timefmt-bef-insert applydata "birthd") "applydate"))
     ;(if (= apply_type "3") (apply3-commit params))                                                    ;如果是第三类，则直接进入审核流程中
