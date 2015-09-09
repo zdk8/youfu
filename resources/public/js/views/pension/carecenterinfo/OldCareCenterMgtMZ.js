@@ -33,7 +33,7 @@ define(function(){
                                         queryParams: {
                                             actiontype: 'update',         //（处理）操作方式
                                             data: record,                   //填充数据
-                                            refresh: refreshGrid                //刷新
+                                            refresh: datagrid                //刷新
                                         }
                                     })
                                 } else if ($(this).attr("action") == 'logout_cp') {
@@ -50,7 +50,7 @@ define(function(){
                                                 if (data == "success") {
                                                     layer.closeAll('loading');
                                                     layer.alert('注销成功!', {icon: 6, title: '温馨提示'});
-                                                    refreshGrid();
+                                                    //refreshGrid();
                                                 } else {
                                                     layer.closeAll('loading');
                                                     layer.alert('注销失败!', {icon: 5, title: '温馨提示'});

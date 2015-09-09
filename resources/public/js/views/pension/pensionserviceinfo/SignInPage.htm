@@ -129,8 +129,8 @@
                 formatter:function(value,rowData,rowIndex)
                     {
                         var str='<div></div>';
-                        str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><span>签到</span></a>');
-                        str=$(str).append('<a action=&quot;signcancle&quot;title=&quot;取消签到&quot;><span>取消</span></a>');
+                        str=$(str).append('<a action=&quot;sign&quot;title=&quot;签到&quot;><div class=&quot;sign_btn&quot;></div></a>');
+                        str=$(str).append('<a action=&quot;signcancle&quot;title=&quot;取消签到&quot;><div class=&quot;cancel_btn&quot;></div></a>');
                         return str.html();
                     }">操作</th>
             </tr>

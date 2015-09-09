@@ -37,11 +37,11 @@
                     <th data-options="field:'contact',width:80,align:'center'">联系人</th>
                     <th data-options="field:'phone',width:100,align:'center'">联系电话</th>
                     <!--<th data-options="field:'isleave',width:80,align:'center',formatter: cj.enumFormatter('yesorno')">是否离开</th>-->
-                    <th data-options="field:'ro',width:180,align:'center',formatter:function(value,rowData,rowIndex)
+                    <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
                         {
                             var str='<div></div>';
-                            str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;><span><span class=&quot;icondealwith&quot;>注销</span></span></a>&nbsp;|&nbsp;');
-                            str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;><span><span class=&quot;icondealwith&quot;>修改</span></span></a>');
+                            str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;><div class=&quot;logout_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');
+                            str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;><div class=&quot;update_btn&quot;style=&quot;float:right;margin-left:10px;&quot;></div></a>');
                             return str.html();
                         }">操作</th>
                 </tr>

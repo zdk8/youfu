@@ -99,14 +99,15 @@
                 <th data-options="field:'postcode',width:100,align:'center',hidden:true">邮编</th>
                 <th data-options="field:'telephone',width:100,align:'center',hidden:true">住宅电话</th>
                 <th data-options="field:'mobilephone',width:100,align:'center',hidden:true">手机</th>
-                <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
+                <th data-options="field:'ro',width:150,align:'center',formatter:function(value,rowData,rowIndex)
                 {
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;><span><span class=&quot;icondealwith&quot;>注销</span></span></a>&nbsp;&nbsp;');
-                    str=$(str).append('<a action=&quot;change&quot;title=&quot;变更&quot;><span><span class=&quot;icondealwith&quot;>变更</span></span></a>&nbsp;&nbsp;');
+                    str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;><div class=&quot;logout_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');
+                    str=$(str).append('<a action=&quot;change&quot;title=&quot;变更&quot;><div class=&quot;change_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');
                     return str.html();
                 }"><a href="javascript:void(0)" opt="addfield" title="添加字段"><span><span class="icon-add-field"></span></span></a>&nbsp;&nbsp;操作</th>
             </tr>
+
             </thead>
         </table>
     </div>

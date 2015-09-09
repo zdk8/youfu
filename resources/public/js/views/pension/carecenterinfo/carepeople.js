@@ -69,7 +69,7 @@ define(function () {
                     if(data == "success"){
                         layer.closeAll('loading');
                         layer.alert('修改成功!', {icon: 6,title:'温馨提示'});
-                        option.queryParams.refresh();
+                        (option.queryParams.refresh).datagrid("reload");
                     }else{
                         layer.closeAll('loading');
                         layer.alert('修改失败!', {icon: 5,title:'温馨提示'});

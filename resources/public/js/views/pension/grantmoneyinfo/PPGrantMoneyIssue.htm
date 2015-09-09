@@ -54,7 +54,7 @@
                 <th rowspan="2" data-options="field:'ro',width:70,align:'center',formatter:function(value,rowData,rowIndex)
                     {
                         var str='<div></div>';
-                        str=$(str).append('<a action=&quot;resend&quot;title=&quot;重发&quot;><span><span class=&quot;icondealwith&quot;>重发</span></span></a>');
+                        str=$(str).append('<a action=&quot;resend&quot;title=&quot;重发&quot;><div class=&quot;resend_btn&quot;></div></a>');
                         return str.html();
                     }">操作</th>
                 <!--<th data-options="field:'sh_jings'">生活-进食</th>
@@ -69,55 +69,4 @@
         </table>
     </div>
 </div>
-
-
-
-
-<!--<div tb style="padding-bottom: 3px">
-    <table cellspacing="0" cellpadding="0" style="float: left">
-        <tr>
-            <td>
-                <input class="buttontype" opt="addgrantmoney" type="button" data-options="iconCls:icon-add" value="资金发放">
-            </td>
-        </tr>
-    </table>
-    <table cellspacing="0" cellpadding="0" style="float: right">
-        <tr>
-            &lt;!&ndash;<td><label class="gray7">搜索条件:</label></td>&ndash;&gt;
-            &lt;!&ndash;<td style="width: 200px;text-align: right">
-                <input opt="name" class="easyui-searchbox" data-options="prompt:'姓名',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>
-            <td style="width: 200px;text-align: right">
-                <input opt="identityid" class="easyui-searchbox" data-options="prompt:'身份证',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>
-            <td style="width: 200px;text-align: right">
-                <input opt="bsnyue" class="easyui-searchbox" data-options="prompt:'业务期',iconCls:'icon-log'"
-                       type="keyword" style="width:200px" >
-            </td>&ndash;&gt;
-            <td>
-                姓名 :
-                <input opt="name" type="text" size="10" style="height: 18px;border-color: #95B8E7">
-                &nbsp;&nbsp;
-            </td>
-            <td>
-                身份证 :
-                <input opt="identityid" type="text" style="height: 18px;border-color: #95B8E7">
-                &nbsp;&nbsp;
-            </td>
-            <td>
-                业务期 :
-                <input opt="bsnyue" type="text" size="10" style="height: 18px;border-color: #95B8E7">
-            </td>
-
-            <td>
-                <span class="searchbtn" >&nbsp;</span>
-            </td>
-
-        </tr>
-    </table>
-    <div class="clear"></div>
-</div>-->
-
 

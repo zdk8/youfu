@@ -144,17 +144,6 @@ a:hover{
     top: 1px;
 }
 
-/*列表编辑处*/
-.icondealwith{
-    background-color: darkorange;
-    color: #ffffff;
-    border: 1px solid darkorange;
-}
-.icon-add-field {
-    background: url('../../img/add.png') no-repeat left center;
-    padding-left: 16px;
-}
-
 
 /************表单上方或者下方的悬浮工具条***************/
 div.form-foot-btns{

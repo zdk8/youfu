@@ -52,7 +52,7 @@
                 <th data-options="field:'ro',width:100,align:'center',
                 formatter:function(value,rowData,rowIndex){
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icondealwith&quot;>处理</span></span></a>');
+                    str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><div class=&quot;dealwith_btn&quot;></div></a>');
                     return str.html();
                 }">操作</th>
             </tr>
@@ -60,80 +60,5 @@
         </table>
     </div>
 </div>
-<!--<table class="easyui-datagrid-noauto"
-               data-options="
-               method:'post',
-               fit:true,
-               border:false,
-               rownumbers:true,
-               fitColumns:true,
-               pageSize:cj.getDataGridAttr('pageSize'),
-               pageList:cj.getDataGridAttr('pageList'),
-               singleSelect:true,
-               loadMsg:'',
-               striped:true,
-               pagination:true">
-    <thead>
-    <tr>
-        <th data-options="field:'lr_id',hidden:true">老人表主键</th>
-        <th data-options="field:'ro',width:100,align:'center',formatter:function(value,rowData,rowIndex)
-            {
-                var str='<div></div>';
-                str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><span><span class=&quot;icon-add-pl16&quot;>处理</span></span></a>');
-                return str.html();
-            }">操作</th>
-        <th data-options="field:'aulevel',width:127,
-        formatter: function(value,row,index){
-                if(value == 0){
-                    return approvalProcess[4]
-                }else{
-                    return approvalProcess[value]
-                }
-			}">状态</th>
-        <th data-options="field:'auflag',width:180">流程信息</th>
-        <th data-options="field:'audesc',width:180">处理意见</th>
-        <th data-options="field:'name',width:127,
-        formatter:function(v,r,i)
-                {
-                    var str='<div></div>';
-                    str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
-                    return str.html();
-                }">姓名</th>
-        <th data-options="field:'identityid',width:210">身份证</th>
-        <th data-options="field:'gender',width:74,
-        formatter: function(value,row,index){
-                return getGender[value]
-			}">性别</th>
-        <th data-options="field:'auuser',width:127">办理人</th>
-        &lt;!&ndash;<th data-options="field:'bsnyue',width:127">业务期</th>&ndash;&gt;
-        <th data-options="field:'bstime',width:230">时间</th>
-    </tr>
-    </thead>
-</table>-->
-<!--<div tb style="padding-bottom: 0px">
-    <div class="highcharstoolbar">&nbsp;&nbsp;查询条件</div>
-    <div style="border: 1px solid rgba(128, 176, 79, 0.12);padding: 8px;padding-top: 2px;padding-bottom: 25px;">
-        <table cellspacing="0" cellpadding="0" style="float: right;padding-bottom: 3px">
-            <tr>
-
-                <td>
-                    姓名 :
-                    <input opt="name" type="text" size="10" style="height: 18px;border-color: #95B8E7">
-                    &nbsp;&nbsp;
-                </td>
-
-                <td>
-                    身份证 :
-                    <input opt="identityid" type="text" style="height: 18px;border-color: #95B8E7">
-                </td>
-
-                <td>
-                    <span class="searchbtn" >&nbsp;</span>
-                </td>
-
-            </tr>
-        </table>
-    </div>
-</div>-->
 
 
