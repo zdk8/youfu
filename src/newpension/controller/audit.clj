@@ -1050,7 +1050,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
        get-moneysql (str "select jja_id," col "from (" get-mreportsql ") group by jja_id")
        get-resultsql (str "select jm.name,jm.identityid,jm.address,jm.servicername,jm.servicephone,jm.serviceaddress, s.*,jm.servicetime,jm.assesstype,jm.districtid,h.subsidy_money,dv.dvname  from ( " get-moneysql ") s
                            left join  (select j.jja_id,j.name,j.identityid,j.address,j.districtid,a.servicername,a.servicephone,a.serviceaddress,a.servicetime,a.assesstype from t_jjylapply j
-                                         left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime,t.assesstype from t_jjylassessment t
+                                         left join   (select ds.servicername,ds.servicephone,ds.serviceaddress,t.jja_id,t.servicetime,t.assesstype from (select j.jja_id,j.servicetime,j.s_id,a.assesstype from t_jjylapply j,t_jjylassessment a where j.jja_id = a.jja_id) t
                                                  left join t_depservice ds on t.s_id = ds.s_id) a
                                          on j.jja_id = a.jja_id) jm
                            on s.jja_id = jm.jja_id
