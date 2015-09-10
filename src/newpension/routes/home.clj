@@ -228,13 +228,19 @@
   (POST "/depart/getdepartentrylist" request (depart/get-departentry-list request))      ;;获取机构出入记录列表
 
   (POST "/old/oldestpeople" request (old/add-oldestpeople request))                                          ;;高龄老人
+  (POST "/old/getoldestpeople" request (old/get-oldestpeople request))                                        ;;高龄老人查询
+  (POST "/old/updateoldestpeople" request (old/update-oldestpeople request))                                  ;;高龄老人的更新
+  (POST "/old/deloldestpeople" request (old/delete-oldestpeople request))                                      ;;高龄老人数据删除
   (POST "/old/addenpeople" request (old/add-emptynestpeople request))                                ;;空巢老人数据添加
   (POST "/old/getenpeople" request (old/get-emptynestpeople request))                                ;;查找空巢老人数据
   (POST "/old/updateenpeople" request (old/update-emptynestpeople request))                          ;;更新空巢老人数据
   (POST "/old/delenpeople" request (old/del-emptynestpeople request))                                ;;注销空巢老人数据
   (POST "/old/enpeoplestatistic" request (old/emptynest-statistic request))                          ;;空巢老人数据统计分析
   (POST "/old/getemptydetail" request (old/get-emptynest-detail request))                            ;;获取空巢老人每项具体数据
-  (POST "/old/addoldcarepeople" request (old/add-oldcarepeople request))                              ;;新增优抚老人数据
+  (POST "/old/addoldcarepeople" request (old/add-oldcarepeople request))                                    ;;新增优抚老人数据
+  (POST "/old/getocpeople" request (old/get-oldcarepeople request))                                          ;;优抚老人查询
+  (POST "/old/updateocpeople" request (old/update-oldcarepeople request))                                    ;;优抚老人数据更新
+  (POST "/old/delocpeople" request (old/delete-oldcarepeople request))                                       ;;优抚老人数据删除
 
 
   ;(POST "/old/opstatistic" request (old/opstatistic request))                                                                  ;;老人信息统计
