@@ -159,7 +159,7 @@
        maxagecond (if (> (count maxage) 0)  (str " and age <= " maxage ))
        typecond (if (> (count datatype) 0)  (str " and type = '" datatype "'"))
        depidcond (if (> (count dep_id) 0) (str "and dep_id = " dep_id))
-       cond (str " and deptype = '" deptype "' " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname)  minagecond maxagecond typecond depidcond)           ;" and checkouttime is null"
+       cond (str " and deptype = '" deptype "' and checkouttime is null " (common/likecond "name" name)  (common/likecond "identityid" identityid)  (common/likecond "departname" departname)  minagecond maxagecond typecond depidcond)           ;" and checkouttime is null"
        getresult (common/fenye rows page "t_oldpeopledep" "*" cond " order by opd_id desc")]
     (resp/json {:total (:total getresult) :rows (common/time-before-list (:rows getresult) "checkintime")})))
 
@@ -486,7 +486,7 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         zl_id (:zl_id params)
         page (:page params)
         rows (:rows params)
-        conds (str (common/likecond "name" name) (if (> (count zl_id) 0) (str " and zl_id = " zl_id)) )
+        conds (str (common/likecond "name" name) (if (> (count zl_id) 0) (str " and zl_id = " zl_id)) " and isleave is null ")
         getresult (common/fenye rows page "t_carepeople" "*" conds "")]
     (resp/json {:total (:total getresult) :rows (:rows getresult)})))
 
