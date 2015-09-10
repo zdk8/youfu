@@ -61,11 +61,35 @@ if(!window.console){
 /**
  * Created by weipan on 3/31/14.
  */
+var ajaxv = {};
+ajaxv.ajax = function (url,data,_success,_error) {
+    $.ajax({
+        type:'post',
+        url:url,
+        data:data,
+        success: function (data) {
+            if(data.length > 0){
+                _success(data[0].aaa103);
+            }
+        },
+        error: function () {
+            _error();
+        }
+    })
+}
+ajaxv.successf = function (info) {
+    //return info;
+    alert(info)
+}
+ajaxv.errorf = function () {
+
+}
 var cjEnum={};//和cj中的Enums一样，只是便于调试，在代码中不用
 var cj=(function(){
     var pz=15;
     var dataGridAttr={ pageSize:pz, pageList: [pz, 30,50]}
     var Enums={};
+    var Enums2={};
 
     function  indexOf(a,p,v){
         for(var i in a){
@@ -92,9 +116,9 @@ var cj=(function(){
                         };
                     });
                     //console.log(items)
-                    if(Enums[type]){
+                    //if(Enums[type]){
                         cjEnum[type]=Enums[type]=items;
-                    }
+                    //}
                     success(items);
                 },
                 error: function(){
@@ -275,8 +299,64 @@ var cj=(function(){
         getDataGridAttr:function(name){
             return dataGridAttr[name]
         },
-        enumFormatter:function(ename,f){
+        enumFormatter:function(ename){
             return enfmt(getEnumlower(ename.toLowerCase()))
+        },
+        enumFormatter2: function (ename,value) {
+            return function(value,recode,index){
+                if(ename && value){
+                    /*ajaxv.ajax({
+                        url:'getenumbytypeandv',
+                        type:'post',
+                        data:{
+                            aaa100:ename,
+                            aaa102:value
+                        },
+                        success: function (data) {
+                            if(data.length > 0){
+                                console.log(data[0].aaa103)
+                                return data[0].aaa103;
+                            }
+                        }
+
+                    })*/
+
+                    var rs = ajaxv.ajax(
+                        'getenumbytypeandv',
+                        {aaa100:ename,aaa102:value},
+                        ajaxv.successf,
+                        ajaxv.errorf
+                    );
+
+                    /*for (var i = 0; i < ef.length; i++) {
+                        if (ef[i].id == value) {
+                            return ef[i].text;
+                        }
+                    }*/
+                    //return value;
+                    console.log(rs)
+                }
+            }
+            /*var v;
+            if(ename && value){
+                $.ajax({
+                    url:'getenumbytypeandv',
+                    type:'post',
+                    data:{
+                        aaa100:ename,
+                        aaa102:value
+                    },
+                    success: function (data) {
+                        if(data.length > 0){
+                            console.log(data[0].aaa103)
+                            //return data[0].aaa103;
+                            v = data[0].aaa103;
+                        }
+                    }
+
+                })
+                return "nan";
+            }*/
         },
         getEnum:function(ename){
             return getEnumlower(ename.toLowerCase())
@@ -376,6 +456,34 @@ var cj=(function(){
             return function(param,success,error){
                 success(getEnum(type));
             }
+        },showSuccess: function (msg) {
+            var index = layer.open({
+                type: 1, //page层
+                area: ['200px', '100px'],
+                title: '温馨提示',
+                offset: 'rb', //右下角弹出
+                shade: false, //遮罩透明度
+                moveType: 1, //拖拽风格，0是默认，1是传统拖动
+                shift: 4, //0-6的动画形式，-1不开启
+                content: '<div style="padding:5px;text-align: center;">'+msg+'</div>'
+            });
+            window.setTimeout(function () {
+                layer.close(index);
+            },3000);
+        },showFail: function (msg) {
+            var index = layer.open({
+                type: 1, //page层
+                area: ['200px', '100px'],
+                title: '温馨提示',
+                offset: 'rb', //右下角弹出
+                shade: false, //遮罩透明度
+                moveType: 1, //拖拽风格，0是默认，1是传统拖动
+                shift: 4, //0-6的动画形式，-1不开启
+                content: '<div style="padding:5px;text-align: center;color: red;">'+msg+'</div>'
+            });
+            window.setTimeout(function () {
+                layer.close(index);
+            },3000);
         }
     }
 

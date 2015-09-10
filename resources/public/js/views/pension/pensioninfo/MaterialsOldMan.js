@@ -86,6 +86,8 @@ define(function () {
 
     /*保存*/
     function saveFunc(local,option){
+        local.find('[name=operators]').val(cj.getUserMsg().username);
+        local.find('[opt=formdata]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
         local.find('[opt=save]').show().click(function () {
             local.find('[opt=highyearoldform]').form('submit',{
                 url:'old/addoldcarepeople',
@@ -127,6 +129,36 @@ define(function () {
             local.find('input[name='+key+'][type=radio][value='+datas[key]+']').attr("checked","checked");
             local.find('input[name='+key+'][type=radio][value='+datas[key]+']+label').addClass("checked");
         }
+
+        local.find('[opt=update]').show().click(function () {
+            local.find('[opt=highyearoldform]').form('submit',{
+                url:'old/updateocpeople',
+                onSubmit: function (param) {
+                    layer.load();
+                    if(!isNaN(local.find("[opt=districtid]").combobox("getValue"))){          //是否是数字
+                        param.districtid = local.find("[opt=districtid]").combobox("getValue");
+                    }else{
+                        param.districtid = datas.districtid
+                    }
+                    param.yf_id = datas.yf_id;
+                    var isValid = $(this).form('validate');
+                    if (!isValid){
+                        layer.closeAll('loading');
+                    }
+                    return isValid;
+                },
+                success: function (data) {
+                    if(data == "success"){
+                        layer.closeAll('loading');
+                        cj.showSuccess('保存成功');
+                        option.queryParams.datagrid.datagrid('reload');
+                    }else{
+                        layer.closeAll('loading');
+                        cj.showFail('保存失败');
+                    }
+                }
+            })
+        });
     }
 
     function render(l,o){
@@ -135,6 +167,9 @@ define(function () {
             switch (o.queryParams.actiontype){
                 case 'update':
                     updateFunc(l, o);
+                    break;
+                case 'add':
+                    saveFunc(l, o);
                     break;
                 default :
                     break;
