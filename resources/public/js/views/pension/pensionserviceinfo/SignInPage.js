@@ -208,20 +208,20 @@ define(function(){
                         url:'depart/opddesignall',
                         type:'post',
                         data:{
-                            dep_id:90
+                            //dep_id:90
                         },
                         success:function(data){
                             if(data == "success"){
                                 showProcess(false);
                                 if(showProcess(false)){
                                     cj.slideShow('签到完成');
-                                    refreshGrid();
+                                    //refreshGrid();
                                 }
                             }else{
                                 showProcess(false);
                                 if(showProcess(false)){
                                     cj.slideShow('<label style="color:red">签到失败</label>');
-                                    refreshGrid();
+                                    //refreshGrid();
                                 }
                             }
                         },
