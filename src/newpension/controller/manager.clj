@@ -186,6 +186,9 @@
     )
 
   )
+(defn getenumbytypeandv [type value]
+  (resp/json (basemd/getenumeratebytypeandv type value))
+  )
 (defn create-user [req]
   (let [{params :params} req
         {flag :flag} params

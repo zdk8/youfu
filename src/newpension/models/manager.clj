@@ -11,7 +11,10 @@
 
 (defn getenumeratebytype [keyword ]
   (with-db dboracle
-    (exec-raw [(str "select lower(aaa100) enumeratetype,aaa102 enumeratevalue,aaa103 enumeratelabel from xt_combodt where lower(aaa100) like '" keyword "%' order by aaa102 asc ") []] :results)))
+    (exec-raw [(str "select lower(aaa100) enumeratetype,aaa102 enumeratevalue,aaa103 enumeratelabel from xt_combodt where lower(aaa100) = '" keyword "' order by aaa102 asc ") []] :results)))
+(defn getenumeratebytypeandv [type value]
+  (with-db dboracle
+    (exec-raw [(str "select aaa103 from xt_combodt where aaa100='" type "' and aaa102=" value) []] :results)))
 
 (defn allmenutree [node]
   (with-db dboracle

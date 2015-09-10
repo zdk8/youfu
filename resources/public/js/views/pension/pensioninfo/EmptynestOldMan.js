@@ -89,25 +89,28 @@ define(function () {
 
     /*保存*/
     function saveFunc(local,option){
+        local.find('[name=operators]').val(cj.getUserMsg().username);
+        local.find('[opt=formdata]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
         local.find('[opt=save]').show().click(function () {
             local.find('[opt=emptynestoldform]').form('submit',{
                 url:'old/addenpeople',
                 onSubmit: function (param) {
-                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    layer.load();
                     param.districtid = local.find('[opt=districtid]').combobox("getValue")
                     var isValid = $(this).form('validate');
                     if (!isValid){
-                        showProcess(false);
+                        layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
                     if(data == "success"){
-                        showProcess(false);
-                        cj.slideShow('保存成功');
+                        layer.closeAll('loading');
+                        cj.showSuccess('保存成功');
+                        option.queryParams.datagrid.datagrid('reload');
                     }else{
-                        cj.slideShow('<label style="color: red">保存失败</label>');
-                        showProcess(false);
+                        layer.closeAll('loading');
+                        cj.showFail('保存失败');
                     }
                 }
             })
@@ -117,11 +120,10 @@ define(function () {
     function updateFunc(local,option){
         var datas = option.queryParams.data;
         local.find('[opt=emptynestoldform]').form('load',datas);
-        var districtnameval = getDivistionTotalname(datas.districtid)
+        var districtnameval = getDivistionTotalname(datas.districtid);
         var districtid = local.find('[opt=districtid]');      //行政区划
         districtid.combobox("setValue",districtnameval)  //填充行政区划
         for(var key in datas){
-            console.log(datas[key])
             local.find('input[name='+key+'][type=radio][value="'+datas[key]+'"]').attr("checked","checked");
             local.find('input[name='+key+'][type=radio][value="'+datas[key]+'"]+label').addClass("checked");
             local.find('input[name='+key+'][type=checkbox][value="'+datas[key]+'"]').attr("checked","checked");
@@ -131,26 +133,26 @@ define(function () {
             local.find('[opt=emptynestoldform]').form('submit',{
                 url:'old/updateenpeople',
                 onSubmit: function (param) {
-                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                    layer.load();
                     if(!isNaN(local.find("[opt=districtid]").combobox("getValue"))){          //是否是数字
-                        param.districtid = local.find("[opt=districtid]").combobox("getValue")
+                        param.districtid = local.find("[opt=districtid]").combobox("getValue");
                     }else{
                         param.districtid = datas.districtid
                     }
                     param.kc_id = datas.kc_id;
                     var isValid = $(this).form('validate');
                     if (!isValid){
-                        showProcess(false);
+                        layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
                     if(data == "success"){
-                        showProcess(false);
-                        cj.slideShow('保存成功');
+                        layer.closeAll('loading');
+                        cj.showSuccess('保存成功');
                     }else{
-                        cj.slideShow('<label style="color: red">保存失败</label>');
-                        showProcess(false);
+                        layer.closeAll('loading');
+                        cj.showFail('保存失败');
                     }
                 }
             })
@@ -158,11 +160,15 @@ define(function () {
     }
 
     function render(l,o){
+        layer.closeAll('loading');
         create(l,o);
         if(o && o.queryParams){
             switch (o.queryParams.actiontype){
                 case 'update':
                     updateFunc(l, o);
+                    break;
+                case 'add':
+                    saveFunc(l,o);
                     break;
                 default :
                     break;

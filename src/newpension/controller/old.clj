@@ -997,7 +997,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
   (let [params (:params request)
         gn_id (:gn_id params)
         gndata (select-keys params oldestpeople)]
-    (db/updatedata-by-tablename "t_oldestpeople" (common/dateymd-bf-list gndata "birthd" "formdata") {:gn_id gn_id})
+    (db/updatedata-by-tablename "t_oldestpeople" (common/dateformat-bf-insert gndata "birthd" "formdata") {:gn_id gn_id})
     (str "success")))
 
 (defn delete-oldestpeople [request]
@@ -1041,7 +1041,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
   (let [params (:params request)
         yf_id (:yf_id params)
         yfdata (select-keys params oldcarepeople)]
-    (db/updatedata-by-tablename "t_oldcarepeople" yfdata {:yf_id yf_id})
+    (db/updatedata-by-tablename "t_oldcarepeople" (common/dateformat-bf-insert yfdata "birthd" "formdata") {:yf_id yf_id})
     (str "success")))
 
 (defn delete-oldcarepeople [request]

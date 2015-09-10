@@ -19,7 +19,8 @@
   (POST "/saveFunction" req (myctrl/create-function req))
   (GET "/getenumbytype" [type  callback]
     (myctrl/getenumbytype type  callback))
-
+  (POST "/getenumbytypeandv" [aaa100 aaa102]
+    (myctrl/getenumbytypeandv aaa100 aaa102))
 
   ;;代码维护
   (POST "/getcombo" req (myctrl/get-combo req))
