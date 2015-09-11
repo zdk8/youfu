@@ -167,10 +167,12 @@
   (POST "/audit/getalljjyldepart" request (audit/getall-jjyldepart request))                                        ;;获取居家养老服务机构
   (POST "/audit/getjjyldepartbyid" request (audit/get-jjyldepartbyid request))                                       ;;根据id获取居家养老服务机构信息
   (POST "/audit/updatejjyldepart" request (audit/update-jjyldepart request))                                      ;;更新居家养老服务机构
+  (POST "/audit/deljjyldepart" request (audit/delete-jjyldepart request))                                          ;;删除居家养老服务机构
   (POST "/audit/adddepservice" request (audit/add-depservice request))                                              ;;添加机构服务人员
   (POST "/audit/getalldepservice" request (audit/getall-depservice request))                                            ;;获取服务人员信息
   (POST "/audit/updatedsbyid" request (audit/update-dsbyid request))                                                     ;;修改服务人员信息
   (POST "/audit/getdepservicebyid"  request (audit/get-depservicebyid request))                                    ;;根据id获取服务人员信息
+  (POST "/audit/deldepservicebyid" request (audit/delete-depservice-byid request))                                  ;;根据id删除服务人员
 
   (POST "/audit/gethositaldata" request (audit/get-hospitaldata request))                                              ;;获取未申请住院补助信息
   (POST "/audit/applyhospitalsubsidy" request (audit/apply-hospitalsubsidy request))                                 ;;住院补助申请

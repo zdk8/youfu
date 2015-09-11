@@ -516,6 +516,15 @@
     (str "true")
     ))
 
+(defn delete-jjyldepart [request]
+  (let [params (:params request)
+        jdep_id (:jdep_id params)
+        hasservice (count (db/selectdatas-by-tablename "t_depservice" {:dep_id jdep_id})) ]
+    (if (> hasservice 0)
+      (resp/json {:success false :message "this department has service"})
+      (do (db/deletedata-by-tablename "t_depservice" {:jdep_id jdep_id})
+          (resp/json {:success true :message "delete success"})))))
+
 (defn add-depservice [request]
   (let[params (:params request)
        depservicedata (select-keys params depservice)
@@ -545,6 +554,12 @@
   (let[params (:params request)
        s_id (:s_id params)]
     (resp/json (db/get-depservicebyid s_id))))
+
+(defn delete-depservice-byid [request]
+  (let [params (:params request)
+        s_id (:s_id params)]
+    (db/deletedata-by-tablename "t_depservice" {:s_id s_id})
+    (str "true")))
 
 
 (defn get-hospitaldata [request]                                                            "获取审核通过的数据"
