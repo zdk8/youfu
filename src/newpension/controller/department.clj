@@ -530,6 +530,12 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
     (db/updatedata-by-tablename "t_careworker" cwdata {:cw_id cw_id})
     (str "success")))
 
+(defn delete-careworder [request]
+  (let [params (:params request)
+        cw_id (:cw_id params)]
+    (db/deletedata-by-tablename "t_careworker" {:cw_id cw_id})
+    (str "success")))
+
 (defn add-bigevent
   "新增大型活动"
   [request]
@@ -554,6 +560,12 @@ SELECT opd_id,SYSDATE AS signdate FROM  T_OLDPEOPLEDEP WHERE  opd_id NOT IN
         be_id (:be_id params)
         bedata (select-keys params (:bigevent common/selectcols))]
     (db/updatedata-by-tablename "t_bigevent" (common/dateformat-bf-insert bedata "starttime")  {:be_id be_id})
+    (str "success")))
+
+(defn delete-bigevent [request]
+  (let [params (:params request)
+        be_id (:be_id params)]
+    (db/deletedata-by-tablename "t_bigevent" {:be_id be_id})
     (str "success")))
 
 (defn add-homevisit

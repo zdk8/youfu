@@ -211,10 +211,12 @@
   (POST "/depart/addcareworker" request (depart/add-careworker request))                      ;;添加照料工作人员
   (POST "/depart/getcareworkerlist" request (depart/get-careworker-list request))            ;;获取照料信息工作人员列表
   (POST "/depart/updatecareworker" request (depart/update-careworker request))                ;;更新照料工作人员信息
+  (POST "/depart/delcareworker" request (depart/delete-careworder request))                    ;;删除工作人员信息
 
   (POST "/depart/addbigevent" request (depart/add-bigevent request))                          ;;添加大型活动
   (POST "/depart/getbigeventlist" request (depart/get-bigevent-list request))                 ;;获取大型活动列表
   (POST "/depart/updatebigevent" request (depart/update-bigevent request))                     ;;更新大型活动信息
+  (POST "/depart/delbigevent" request (depart/delete-bigevent request))                         ;;删除大型活动信息
 
   (POST "/depart/addhomevisit" request (depart/add-homevisit request))                     ;;添加上门访问记录
   (POST "/depart/gethomevistlist" request (depart/get-homevist-list request))                      ;;获取上门访问列表
