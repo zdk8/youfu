@@ -996,7 +996,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 (defn update-oldestpeople [request]
   (let [params (:params request)
         gn_id (:gn_id params)
-        gndata (select-keys params oldestpeople)]
+        gndata (conj (zipmap oldestpeople (repeat nil)) (select-keys params oldestpeople)) ]
     (db/updatedata-by-tablename "t_oldestpeople" (common/dateformat-bf-insert gndata "birthd" "formdata") {:gn_id gn_id})
     (str "success")))
 
@@ -1040,7 +1040,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
 (defn update-oldcarepeople [request]
   (let [params (:params request)
         yf_id (:yf_id params)
-        yfdata (select-keys params oldcarepeople)]
+        yfdata (conj (zipmap oldcarepeople (repeat nil)) (select-keys params oldcarepeople)) ]
     (db/updatedata-by-tablename "t_oldcarepeople" (common/dateformat-bf-insert yfdata "birthd" "formdata") {:yf_id yf_id})
     (str "success")))
 
@@ -1094,7 +1094,7 @@ WHERE s.districtid = dv.dvcode ORDER BY s.districtid"))))
   [request]
   (let[params (:params request)
        kc_id (:kc_id params)
-       endata (select-keys params emptynestpeople)]
+       endata (conj (zipmap emptynestpeople (repeat nil)) (select-keys params emptynestpeople)) ]
     (db/update-emptynestpeople (common/timefmt-bef-insert endata "birthd") kc_id)
     (str "success")))
 
