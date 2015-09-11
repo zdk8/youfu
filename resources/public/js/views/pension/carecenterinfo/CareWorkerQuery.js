@@ -12,7 +12,7 @@ define(function(){
                 onLoadSuccess:function(data){
                     var viewbtns=local.find('[action=view]');
                     var updatebtns=local.find('[action=update]');
-                    var deletebtns=local.find('[action=delete]');
+                    var deletebtns=local.find('[action=logout_w]');
                     var mapbtn = local.find('[action=map]');                //地图
                     var btns_arr=[viewbtns,updatebtns,deletebtns,mapbtn];
                     var rows=data.rows;
@@ -21,6 +21,7 @@ define(function(){
                             (function(index){
                                 var record=rows[index];
                                 $(btns_arr[j][i]).click(function(){
+                                    layer.load();
                                     if($(this).attr("action")=='view'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.zl_name+'】工作人员详细信息',
@@ -42,6 +43,29 @@ define(function(){
                                                 refresh:refreshGrid                //刷新
                                             }
                                         })
+                                    }else if($(this).attr("action")=='logout_w'){
+                                        layer.closeAll('loading');
+                                        layer.confirm('确定要注销么？', {icon: 3, title: '温馨提示'}, function (index) {
+                                            layer.close(index);
+                                            layer.load();
+                                            $.ajax({
+                                                url: 'depart/delcareworker',
+                                                type: 'post',
+                                                data: {
+                                                    cw_id: record.cw_id
+                                                },
+                                                success: function (data) {
+                                                    if (data == "success") {
+                                                        layer.closeAll('loading');
+                                                        layer.alert('注销成功!', {icon: 6, title: '温馨提示'});
+                                                        refreshGrid();
+                                                    } else {
+                                                        layer.closeAll('loading');
+                                                        layer.alert('注销失败!', {icon: 5, title: '温馨提示'});
+                                                    }
+                                                }
+                                            })
+                                        });
                                     }
                                 });
                             })(i);

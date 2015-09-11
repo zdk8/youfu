@@ -8,7 +8,17 @@
     background: url('../img/add.png') no-repeat left center;
     padding-left: 16px;
 }
-
+.add_event_btn{
+    background: url('../images/btns/add_event.png') no-repeat;
+    height: 22px;
+    width: 80px;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+}
+.add_event_btn:active{
+    border: 1px solid #6fb3e0;
+}
 .add_fwry_btn{
     background: url('../images/btns/add_fwry.png') no-repeat;
     height: 22px;

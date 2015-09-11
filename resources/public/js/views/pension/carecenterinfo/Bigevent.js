@@ -21,6 +21,7 @@ define(function () {
         });
     }
     var addBigEvent = function (local,option) {
+        local.find('[name=zl_name]').val(option.queryParams.data.name);
         local.find('[opt=save]').show().click(function () {
             local.find('[opt=bigeventinfo]').form('submit', {
                 url:'depart/addbigevent',
@@ -30,15 +31,44 @@ define(function () {
                     if (!isValid){
                         layer.closeAll('loading');
                     }
+                    params.zl_id = option.queryParams.data.zl_id;
                     return isValid;
                 },
                 success: function (data) {
                     if(data == "success"){
                         layer.closeAll('loading');
-                        layer.alert('保存成功!', {icon: 6,title:'温馨提示'});
+                        cj.showSuccess('新增成功');
                     }else{
                         layer.closeAll('loading');
-                        layer.alert('保存失败!', {icon: 5,title:'温馨提示'});
+                        cj.showFail('新增失败');
+                    }
+                }
+            });
+        });
+    }
+    /*修改*/
+    var updateBigEvent = function (local,option) {
+        local.find('[opt=bigeventinfo]').form('load',option.queryParams.data);
+        local.find('[opt=update]').show().click(function () {
+            local.find('[opt=bigeventinfo]').form('submit', {
+                url:'depart/updatebigevent',
+                onSubmit: function (params) {
+                    layer.load();
+                    var isValid = $(this).form('validate');
+                    if (!isValid){
+                        layer.closeAll('loading');
+                    }
+                    params.be_id = option.queryParams.data.be_id;
+                    return isValid;
+                },
+                success: function (data) {
+                    if(data == "success"){
+                        layer.closeAll('loading');
+                        cj.showSuccess('修改成功');
+                        option.queryParams.datagrid.datagrid("reload");
+                    }else{
+                        layer.closeAll('loading');
+                        cj.showFail('修改失败');
                     }
                 }
             });
@@ -58,6 +88,9 @@ define(function () {
                         break;
                     case 'add':
                         addBigEvent(local,option);
+                        break;
+                    case 'update':
+                        updateBigEvent(local,option);
                         break;
                     default :
                         break;

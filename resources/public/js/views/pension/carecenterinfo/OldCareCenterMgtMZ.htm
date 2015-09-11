@@ -9,7 +9,7 @@
                 <span style="float: right;margin-top: 3px">
                     <input type="button" value="查询" class="btns" opt="query_carecenter">
                     <input type="button" value="新增照料中心" class="btns" opt="addcarecenter" style="width: 100px;">
-                    <input type="button" value="新增活动" class="btns" opt="addbigevent" style="width: 70px;">
+                    <!--<input type="button" value="新增活动" class="btns" opt="addbigevent" style="width: 70px;">-->
                 </span>
             </div>
         </div>
@@ -40,15 +40,15 @@
                         <th data-options="field:'address',width:170,align:'center'">联系地址</th>
                         <th data-options="field:'phone',width:100,align:'center'">联系电话</th>
                         <th data-options="field:'runtime',width:100,align:'center'">开办时间</th>
-                        <th data-options="field:'ro',width:420,align:'center',formatter:function(value,rowData,rowIndex)
+                        <th data-options="field:'ro',width:440,align:'center',formatter:function(value,rowData,rowIndex)
                         {
                             var str='<div></div>';
                             str=$(str).append('<a action=&quot;update_cc&quot;title=&quot;修改&quot;><div class=&quot;update_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');
                             str=$(str).append('<a action=&quot;addcarep_cc&quot;title=&quot;添加照料人员&quot;><div class=&quot;add_zlry_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');
                             str=$(str).append('<a action=&quot;addworkp_cc&quot;title=&quot;添加工作人员&quot;><div class=&quot;add_gzry_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');
-                            str=$(str).append('<a action=&quot;map_cc&quot;title=&quot;地图&quot;><div class=&quot;map_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');
+                            str=$(str).append('<a action=&quot;addevent_cc&quot;title=&quot;新增活动&quot;><div class=&quot;add_event_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');
                             return str.html();
-                        }">操作</th>
+                        }">操作</th><!--str=$(str).append('<a action=&quot;map_cc&quot;title=&quot;地图&quot;><div class=&quot;map_btn&quot;style=&quot;float:left;margin-left:10px;&quot;></div></a>');-->
                     </tr>
                     </thead>
                 </table>
@@ -115,10 +115,10 @@
                                 <div style="border: 1px solid #e5e5e5;
                                             width: auto;height: 80%;background-color: #eff3f8;padding-top: 6px">
                                     <div style="height: 30px;padding-top: 6px;padding-right:3px;">
-                                        &nbsp;<span>姓名 </span><span><input type="text" size="5" class="inputtext"></span>
-                                        &nbsp;<span>身份证号 </span><span><input type="text" size="15" class="inputtext"></span>
+                                        &nbsp;<span>姓名 </span><span><input type="text" size="5" class="inputtext" opt="name_wp"></span>
+                                        <!--&nbsp;<span>身份证号 </span><span><input type="text" size="15" class="inputtext"></span>-->
                                                 <span style="float: right;margin-top: 3px">
-                                                    <input type="button" value="查询" class="btns">
+                                                    <input type="button" value="查询" class="btns" opt="query_worker">
                                                 </span>
                                     </div>
                                 </div>
@@ -166,10 +166,10 @@
                                 <div style="border: 1px solid #e5e5e5;
                                             width: auto;height: 80%;background-color: #eff3f8;padding-top: 6px">
                                     <div style="height: 30px;padding-top: 6px;padding-right:3px;">
-                                        &nbsp;<span>姓名 </span><span><input type="text" size="5" class="inputtext"></span>
-                                        &nbsp;<span>身份证号 </span><span><input type="text" size="15" class="inputtext"></span>
+                                        &nbsp;<span>活动名称 </span><span><input type="text" size="5" class="inputtext" opt="name_be"></span>
+                                        <!--&nbsp;<span>身份证号 </span><span><input type="text" size="15" class="inputtext"></span>-->
                                                 <span style="float: right;margin-top: 3px">
-                                                    <input type="button" value="查询" class="btns">
+                                                    <input type="button" value="查询" class="btns"  opt="query_event">
                                                 </span>
                                     </div>
                                 </div>

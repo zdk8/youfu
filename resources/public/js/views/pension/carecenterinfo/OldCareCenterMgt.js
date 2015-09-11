@@ -14,15 +14,17 @@ define(function(){
                     var updatebtns=local.find('[action=update]');
                     var addcarepbtns=local.find('[action=addcarep]');
                     var addworkpbtns=local.find('[action=addworkp]');
+                    var addeventbtns=local.find('[action=addevent_cc]');
                     var deletebtns=local.find('[action=delete]');
                     var mapbtn = local.find('[action=map]');                //地图
-                    var btns_arr=[viewbtns,updatebtns,addcarepbtns,addworkpbtns,deletebtns,mapbtn];
+                    var btns_arr=[viewbtns,updatebtns,addcarepbtns,addworkpbtns,addeventbtns,deletebtns,mapbtn];
                     var rows=data.rows;
                     for(var i=0;i<rows.length;i++){
                         for(var j=0;j<btns_arr.length;j++){
                             (function(index){
                                 var record=rows[index];
                                 $(btns_arr[j][i]).click(function(){
+                                    layer.load();
                                     if($(this).attr("action")=='view'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.name+'】详细信息',
@@ -65,7 +67,19 @@ define(function(){
                                                 data:record                   //填充数据
                                             }
                                         })
+                                    }else if($(this).attr("action")=='addevent_cc'){
+                                        cj.showContent({                                          //详细信息(tab标签)
+                                            title:'【'+record.name+'】新增活动',
+                                            htmfile:'text!views/pension/carecenterinfo/Bigevent.htm',
+                                            jsfile:'views/pension/carecenterinfo/Bigevent',
+                                            queryParams:{
+                                                actiontype:'add',         //（处理）操作方式
+                                                data:record,                  //填充数据
+                                                refresh:refreshGrid
+                                            }
+                                        })
                                     }else if($(this).attr("action")=='map'){
+                                        layer.closeAll('loading');
                                         var ywtype = "PT_LNR"
                                         //var mapguid = record.mapguid;
                                         window.open (mapURL+'map#task?ywtype='+ywtype+'&'+

@@ -111,10 +111,10 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url: 'depart/leavecarepeople111',
+                                            url: 'depart/delcareworker',
                                             type: 'post',
                                             data: {
-                                                cp_id: record.cp_id
+                                                cw_id: record.cw_id
                                             },
                                             success: function (data) {
                                                 if (data == "success") {
@@ -172,8 +172,8 @@ define(function(){
                                         jsfile: 'views/pension/carecenterinfo/Bigevent',
                                         queryParams: {
                                             actiontype: 'update',         //（处理）操作方式
-                                            data: record                   //填充数据
-                                            //refresh: refreshGrid                //刷新
+                                            data: record,                   //填充数据
+                                            datagrid: datagrid                //刷新
                                         }
                                     })
                                 }else if ($(this).attr("action") == 'logout_be') {
@@ -181,10 +181,10 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url: 'depart/leavecarepeople111',
+                                            url: 'depart/delbigevent',
                                             type: 'post',
                                             data: {
-                                                cp_id: record.cp_id
+                                                be_id: record.be_id
                                             },
                                             success: function (data) {
                                                 if (data == "success") {
@@ -228,9 +228,10 @@ define(function(){
                     var updatebtns=local.find('[action=update_cc]');
                     var addcarepbtns=local.find('[action=addcarep_cc]');
                     var addworkpbtns=local.find('[action=addworkp_cc]');
+                    var addeventbtns=local.find('[action=addevent_cc]');
                     var deletebtns=local.find('[action=delete_cc]');
                     var mapbtn = local.find('[action=map_cc]');                //地图
-                    var btns_arr=[viewbtns,updatebtns,addcarepbtns,addworkpbtns,deletebtns,mapbtn];
+                    var btns_arr=[viewbtns,updatebtns,addcarepbtns,addworkpbtns,addeventbtns,deletebtns,mapbtn];
                     var rows=data.rows;
                     for(var i=0;i<rows.length;i++){
                         for(var j=0;j<btns_arr.length;j++){
@@ -278,6 +279,17 @@ define(function(){
                                             queryParams:{
                                                 actiontype:'add',         //（处理）操作方式
                                                 data:record                   //填充数据
+                                            }
+                                        })
+                                    }else if($(this).attr("action")=='addevent_cc'){
+                                        cj.showContent({                                          //详细信息(tab标签)
+                                            title:'【'+record.name+'】新增活动',
+                                            htmfile:'text!views/pension/carecenterinfo/Bigevent.htm',
+                                            jsfile:'views/pension/carecenterinfo/Bigevent',
+                                            queryParams:{
+                                                actiontype:'add',         //（处理）操作方式
+                                                data:record,                  //填充数据
+                                                refresh:refreshGrid
                                             }
                                         })
                                     }else if($(this).attr("action")=='map_cc'){
@@ -341,26 +353,8 @@ define(function(){
                     })
                 }
             })
-            /*新增活动*/
-            local.find('[opt=addbigevent]').click(function(){
-                var title = "新增活动"
-                if($("#tabs").tabs('getTab',title)){
-                    $("#tabs").tabs('select',title)
-                }else{
-                    cj.showContent({                                          //详细信息(tab标签)
-                        title:title,
-                        htmfile:'text!views/pension/carecenterinfo/Bigevent.htm',
-                        jsfile:'views/pension/carecenterinfo/Bigevent',
-                        queryParams:{
-                            actiontype:'add',         //（处理）操作方式
-                            title:title,
-                            refresh:refreshGrid
-                        }
-                    })
-                }
-            })
 
-
+            /*照料人员查询*/
             local.find('[opt=query_carepeople]').click(function(){
                 console.log(local.find('[opt=zl_id]').val())
                 carepeopledatagrid.datagrid('load',{
@@ -369,7 +363,20 @@ define(function(){
                     identityid:local.find('[opt=identityid_cp]').val()
                 })
             })
-
+            /*工作人员查询*/
+            local.find('[opt=query_worker]').click(function(){
+                workerdatagrid.datagrid('load',{
+                    zl_id:local.find('[opt=zl_id]').val(),
+                    zl_name:local.find('[opt=name_wp]').val()
+                })
+            })
+            /*大型活动查询*/
+            local.find('[opt=query_event]').click(function(){
+                bigeventdatagrid.datagrid('load',{
+                    zl_id:local.find('[opt=zl_id]').val(),
+                    activityname:local.find('[opt=name_be]').val()
+                })
+            })
         }
     }
 })
