@@ -662,7 +662,7 @@
         condname (if (> (count name) 0) (str " and j.name like '%" name "%' "))
         condid (if (> (count identityid) 0) (str " and j.identityid like '%" identityid "%' "))
         qopsql (str "SELECT t.JJA_ID,t.NAME,t.IDENTITYID,t.GENDER,t.BIRTHD,t.ADDRESS,t.AGE,t.MONTHSUBSIDY,t.SERVICETIME,t.HOSPITALSUBSIDY,h.SUBSIDY_MONEY FROM
-(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,j.SERVICETIME,j.HOSPITALSUBSIDY,a.MONTHSUBSIDY
+(SELECT j.JJA_ID,j.NAME,j.IDENTITYID,j.GENDER,j.BIRTHD,j.ADDRESS,j.AGE,j.SERVICETIME,j.HOSPITALSUBSIDY,j.MONTHSUBSIDY
 FROM T_JJYLAPPLY j,T_JJYLASSESSMENT a WHERE j.ishandle = 'y' " condname  condid "  AND j.JJA_ID = a.JJA_ID AND j.jja_id NOT IN
 (SELECT jja_id FROM t_dolemoney WHERE bsnyue ='" ywq "')) t
 LEFT JOIN t_hospitalsubsidy h
