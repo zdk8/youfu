@@ -66,20 +66,22 @@ define(function(){
                                     if ($("#tabs").tabs('getTab', title)) {
                                         $("#tabs").tabs('select', title)
                                     } else {
+                                        layer.load();
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title: title,
                                             htmfile: 'text!views/pension/carecenterinfo/carepeople.htm',
                                             jsfile: 'views/pension/carecenterinfo/carepeople',
                                             queryParams: {
                                                 actiontype: 'view',         //（处理）操作方式
-                                                record: record,
+                                                data: record,
                                                 title: title,
                                                 refresh: refreshGrid                //刷新
                                             }
                                         })
                                     }
                                 }else if (action == "sign") {
-                                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                    //showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                    layer.load();
                                     $.ajax({
                                         url:'depart/signcarepeople',
                                         type:'post',
@@ -87,27 +89,22 @@ define(function(){
                                             cp_id:record.cp_id
                                         },
                                         success:function(data){
+                                            layer.closeAll('loading');
                                             if(data == "success"){
-                                                showProcess(false);
-                                                if(showProcess(false)){
-                                                    cj.slideShow('点名成功');
-                                                    refreshGrid();
-                                                }
+                                                cj.showSuccess('点名成功');
+                                                refreshGrid();
                                             }else{
-                                                showProcess(false);
-                                                if(showProcess(false)){
-                                                    cj.slideShow('<label style="color:red">点名失败</label>');
-                                                    refreshGrid();
-                                                }
+                                                cj.showFail('点名失败');
                                             }
                                         },
                                         error:function(a,b,c){
-                                            showProcess(false);
-                                            cj.slideShow('<label style="color:red">服务器错误</label>');
+                                            layer.closeAll('loading');
+                                            layer.alert('<label style="color:red">服务器错误</label>!', {icon: 5, title: '温馨提示'});
                                         }
                                     })
                                 }else if (action == "signcancle") {
-                                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                    //showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                    layer.load();
                                     $.ajax({
                                         url:'depart/cancelcarepeoplesign',
                                         type:'post',
@@ -115,23 +112,17 @@ define(function(){
                                             cp_id:record.cp_id
                                         },
                                         success:function(data){
+                                            layer.closeAll('loading');
                                             if(data == "success"){
-                                                showProcess(false);
-                                                if(showProcess(false)){
-                                                    cj.slideShow('取消点名');
-                                                    refreshGrid();
-                                                }
+                                                cj.showSuccess('取消点名');
+                                                refreshGrid();
                                             }else{
-                                                showProcess(false);
-                                                if(showProcess(false)){
-                                                    cj.slideShow('<label style="color:red">取消失败</label>');
-                                                    refreshGrid();
-                                                }
+                                                cj.showFail('取消失败');
                                             }
                                         },
                                         error:function(a,b,c){
-                                            showProcess(false);
-                                            cj.slideShow('<label style="color:red">服务器错误</label>');
+                                            layer.closeAll('loading');
+                                            layer.alert('<label style="color:red">服务器错误</label>!', {icon: 5, title: '温馨提示'});
                                         }
                                     })
                                 }
@@ -193,7 +184,7 @@ define(function(){
                         },
                         error:function(a,b,c){
                             showProcess(false);
-                            cj.slideShow('<label style="color:red">服务器错误</label>');
+                            layer.alert('<label style="color:red">服务器错误</label>!', {icon: 5, title: '温馨提示'});
                         }
                     })
                 }
@@ -201,33 +192,26 @@ define(function(){
         })
         /*一键签到*/
         local.find('[opt=signallbtn]').click(function () {
-            $.messager.confirm('温馨提示', '确定要全部签到么?', function(r){
-                if (r){
-                    showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                    $.ajax({
-                        url:'depart/carepeopleallsign',
-                        type:'post',
-                        success:function(data){
-                            if(data == "success"){
-                                showProcess(false);
-                                if(showProcess(false)){
-                                    cj.slideShow('签到完成');
-                                    refreshGrid();
-                                }
-                            }else{
-                                showProcess(false);
-                                if(showProcess(false)){
-                                    cj.slideShow('<label style="color:red">签到失败</label>');
-                                    refreshGrid();
-                                }
-                            }
-                        },
-                        error:function(a,b,c){
-                            showProcess(false);
-                            cj.slideShow('<label style="color:red">服务器错误</label>');
+            layer.confirm('确定要全部签到么?', {icon: 3, title: '温馨提示'}, function (index) {
+                layer.close(index);
+                layer.load();
+                $.ajax({
+                    url:'depart/carepeopleallsign',
+                    type:'post',
+                    success:function(data){
+                        layer.closeAll('loading');
+                        if(data == "success"){
+                            cj.showSuccess('签到完成');
+                            refreshGrid();
+                        }else{
+                            cj.showFail('签到失败');
                         }
-                    })
-                }
+                    },
+                    error:function(a,b,c){
+                        layer.closeAll('loading');
+                        layer.alert('<label style="color:red">服务器错误</label>!', {icon: 5, title: '温馨提示'});
+                    }
+                })
             });
         })
         /*导出xls*/

@@ -28,29 +28,33 @@ define(function(){
                                 if(action == "cancellation"){             //注销
                                     var departname = record.departname;         //机构名称
                                     var testmsg = "是否注销人员【<label style='color: darkslategrey;font-weight: bold'>"+record.servicername+"</label>】?"
-                                    $.messager.confirm('温馨提示', testmsg, function(r){
-                                        if (r){
-                                            $.ajax({
-                                                url:'pension/oldpeoplecheckout',
-                                                type:'post',
-                                                data:{
-                                                    opd_id:record.s_id
-                                                },
-                                                success:function(data){
-                                                    if(data.success){
-                                                        cj.slideShow('人员注销成功');
-                                                        fwrygl.datagrid("reload")
-                                                    }
-                                                },
-                                                dataType:'json'
-                                            })
-                                        }
+                                    layer.confirm(testmsg, {icon: 3, title:'温馨提示'}, function(index){
+                                        layer.close(index);
+                                        layer.load();
+                                        $.ajax({
+                                            url:'audit/deldepservicebyid',
+                                            type:'post',
+                                            data:{
+                                                s_id:record.s_id
+                                            },
+                                            success: function (data) {
+                                                if(data == "true"){
+                                                    layer.closeAll('loading');
+                                                    layer.alert('注销成功', {icon: 6});
+                                                    refreshGrid();
+                                                }else{
+                                                    layer.closeAll('loading');
+                                                    layer.alert('注销失败', {icon: 5});
+                                                }
+                                            }
+                                        });
                                     });
                                 }else if(action = "view"){
                                     var title = "【"+record.servicername+'】详细信息';
                                     if($("#tabs").tabs('getTab',title)){
                                         $("#tabs").tabs('select',title)
                                     }else{
+                                        layer.load();
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:title,
                                             htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesPeople.htm',
@@ -69,6 +73,7 @@ define(function(){
                                     if($("#tabs").tabs('getTab',title)){
                                         $("#tabs").tabs('select',title)
                                     }else{
+                                        layer.load();
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:title,
                                             htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesPeople.htm',

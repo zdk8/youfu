@@ -1,5 +1,7 @@
 define(function () {
-    var keyarray = ['son','daughter','grandson','other']
+    var keyarray = ['kn_eat','kn_bathe','kn_floor','kn_housework','kn_walk','kn_transit','kn_toilet','kn_bed','kn_nothing',
+        'fw_housekeeping','fw_treatment','fw_meal','fw_tend','fw_doctor','fw_dailyshop','fw_aid','fw_hotline','fw_entertainment',
+        'fw_law','fw_chat','fw_nothing'];
     /*为radio添加样式*/
     var addRadioCss = function(local) {
         var selectRadio = ":input[type=radio] + label";
@@ -120,7 +122,6 @@ define(function () {
         var districtnameval = getDivistionTotalname(datas.districtid)
         var districtid = local.find('[opt=districtid]');      //行政区划
         districtid.combobox("setValue",districtnameval)  //填充行政区划
-        local.find('[opt=update]').show();
         for(var i=0;i<keyarray.length;i++){
             local.find('input[name='+keyarray[i]+'][type=checkbox][value='+datas[keyarray[i]]+']').attr("checked","checked");
             local.find('input[name='+keyarray[i]+'][type=checkbox][value='+datas[keyarray[i]]+']+label').addClass("checked");
@@ -129,6 +130,9 @@ define(function () {
             local.find('input[name='+key+'][type=radio][value='+datas[key]+']').attr("checked","checked");
             local.find('input[name='+key+'][type=radio][value='+datas[key]+']+label').addClass("checked");
         }
+
+        /*根据身份证填充基本信息*/
+        fillInfoByIndentityid({identityid:local.find("[opt=identityid]"),age:local.find('[opt=tip_age]'),agetype:""})
 
         local.find('[opt=update]').show().click(function () {
             local.find('[opt=highyearoldform]').form('submit',{

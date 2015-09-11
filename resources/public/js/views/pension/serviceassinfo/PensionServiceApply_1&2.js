@@ -265,7 +265,7 @@ define(function(){
                 success: function (data) {
                     if(data == "true"){
                         layer.closeAll('loading');
-                        cj.slideShow('保存完成');
+                        cj.showSuccess('保存完成');
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
                         var ref = option.queryParams.refresh;             //刷新
@@ -273,7 +273,8 @@ define(function(){
                         $("#tabs").tabs('close',option.queryParams.title);
                     }else{
                         layer.closeAll('loading');
-                        cj.slideShow('<label style="color: red">提交失败</label>');
+                        //cj.slideShow('<label style="color: red">提交失败</label>');
+                        cj.showFail('保存失败')
                         local.find('[opt=save]').show();
                         local.find('[opt=save2]').hide();
                     }
@@ -323,7 +324,8 @@ define(function(){
                 onSubmit: function (params) {
                     var isValid = $(this).form('validate');
                     if(isValid){
-                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        //showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        layer.load();
                         if(!isNaN(local.find("[opt=districtid]").combobox("getValue"))){          //是否是数字
                             params.districtid = districtid.combobox("getValue")
                         }else{
@@ -334,13 +336,17 @@ define(function(){
                 },
                 success: function (data) {
                     if(data == "true"){
-                        showProcess(false);
-                        cj.slideShow('修改成功');
-                        if(showProcess(false)){
+                        //showProcess(false);
+                        layer.closeAll('loading');
+                        cj.showSuccess('修改成功');
+                        $("#tabs").tabs('close',option.queryParams.title)
+                        var ref = option.queryParams.refresh;             //刷新
+                        ref();
+                        /*if(showProcess(false)){
                             $("#tabs").tabs('close',option.queryParams.title)
                              var ref = option.queryParams.refresh;             //刷新
                              ref();
-                        }
+                        }*/
                     }
                 }
             });
@@ -367,7 +373,7 @@ define(function(){
                 success: function (data) {
                     if(data == "true"){
                         layer.closeAll('loading');
-                        cj.slideShow('提交完成');
+                        cj.showSuccess('提交完成');
                         local.find('[opt=commit]').show();
                         local.find('[opt=commit2]').hide();
                         $("#tabs").tabs('close',option.queryParams.title);
@@ -375,7 +381,8 @@ define(function(){
                         ref();
                     }else{
                         layer.closeAll('loading');
-                        cj.slideShow('<label style="color: red">提交失败</label>');
+                        cj.showFail('提交失败');
+                        //cj.slideShow('<label style="color: red">提交失败</label>');
                         local.find('[opt=commit]').show();
                         local.find('[opt=commit2]').hide();
                     }

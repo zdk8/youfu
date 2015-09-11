@@ -326,6 +326,7 @@ define(function(){
     }
 
     var render=function(l,o){
+        layer.closeAll('loading');
         create(l, o);
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){

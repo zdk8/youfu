@@ -28,6 +28,7 @@ define(function(){
                                         $("#tabs").tabs('select',title)
                                     }else{
 //                                        showProcess(true, '温馨提示', '数据处理中，请稍后...');   //进度框加载
+                                        layer.load();
                                         $.ajax({
                                             url:"searchid",                                //查询老人表
                                             data:{

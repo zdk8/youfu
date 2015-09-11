@@ -58,19 +58,21 @@ define(function(){
                     params.jdep_id = option.queryParams.data.jdep_id;
                     var isValid = $(this).form('validate');
                     if(isValid){
-                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                        layer.load();
+                    }else{
+                        layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success:function(data){
                     if(data == "true"){
-                        showProcess(false);
-                        cj.slideShow('修改成功');
-                        if(showProcess(false)){
-                            $("#tabs").tabs("close",option.title)
-                            var ref = option.queryParams.refresh;
-                            ref();
-                        }
+                        layer.closeAll('loading');
+                        cj.showSuccess('修改完成');
+                        /*$("#tabs").tabs("close",option.title)*/
+                        var ref = option.queryParams.refresh;
+                        ref();
+                    }else{
+                        layer.closeAll('loading');
                     }
                 }
             })
@@ -78,6 +80,7 @@ define(function(){
     }
 
     var render=function(l,o){
+        layer.closeAll('loading');
         initPage(l,o);                //初始化页面
         if(o.queryParams) {
             switch (o.queryParams.actiontype){

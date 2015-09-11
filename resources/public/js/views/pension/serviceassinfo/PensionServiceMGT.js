@@ -27,6 +27,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                                             layer.load();
                                             var title = "【"+record.name+'】服务申请详细信息';
                                             if(record.apply_type == '1'){
+                                                layer.load();
                                                 cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
                                                     htmfile:'text!views/pension/serviceassinfo/PensionServiceApply_1&2.htm',
@@ -39,6 +40,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                                                     }
                                                 });
                                             }else if(record.apply_type == '3'){
+                                                layer.load();
                                                 cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
                                                     htmfile:'text!views/pension/serviceassinfo/PensionServiceApply_3.htm',
@@ -54,6 +56,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                                         }else if($(this).attr("action")=='commit'){         //提交
                                             layer.confirm('是否提交?', {icon: 3, title:'温馨提示'}, function(index){
                                                 layer.close(index);
+                                                layer.load();
                                                 $.ajax({
                                                     url:'audit/addauditapply',
                                                     type:'post',

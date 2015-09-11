@@ -47,6 +47,7 @@ define(function () {
 
     return {
         render: function (local, option) {
+            layer.closeAll('loading');
             addToolBar(local);
             local.find('[opt=save]').hide();
             local.find('[opt=update]').hide();

@@ -116,9 +116,9 @@ var cj=(function(){
                         };
                     });
                     //console.log(items)
-                    //if(Enums[type]){
+                    /*if(!Enums[type]){
                         cjEnum[type]=Enums[type]=items;
-                    //}
+                    }*/
                     success(items);
                 },
                 error: function(){
@@ -144,7 +144,7 @@ var cj=(function(){
     }
 //***************************
 
-    var singleFun=function(){
+    var singleFun=function(type){
         /*if(cbdata){
             var d=cbdata;
             Enums= d.rows
@@ -167,28 +167,26 @@ var cj=(function(){
         $.ajax({
             url:'getenumbytype',
             dataType: 'jsonp',
-            data:{skeyword:'',type:''},
+            data:{skeyword:'',type:type},
             success: function(data){
-                var obj={};
                 var items = $.map(data, function(item){
-                    if(obj[item.enumeratetype]){
-                        obj[item.enumeratetype].push({
-                            id: item.enumeratevalue,
-                            text: item.enumeratelabel
-                        })
-                    }else{
-                        obj[item.enumeratetype]=[{
-                            id: item.enumeratevalue,
-                            text: item.enumeratelabel
-                        }]
-                    }
+                    return {
+                        id: item.enumeratevalue,
+                        text: item.enumeratelabel
+                    };
                 });
-                Enums= obj;
-                cjEnum= obj;
+                if(!Enums[type]){
+                    cjEnum[type]=Enums[type]=items;
+                }
             }
         })
     }
-    window.setTimeout(singleFun,1000);
+    window.setTimeout(function () {
+        var enumarr = ['gender','oldnation'];
+        for(var i=0;i<enumarr.length;i++){
+            singleFun(enumarr[i]);
+        }
+    },1000);
 
     var getEnumlower=function(searchtype){
         return Enums[searchtype];

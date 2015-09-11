@@ -34,7 +34,7 @@
                     formatter:function(v,r,i)
                     {
                         var str='<div></div>';
-                        str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                        str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
                         return str.html();
                     }">姓名</th>
                 <th data-options="field:'gender',width:60,align:'center',formatter: cj.enumFormatter('gender')">性别</th>

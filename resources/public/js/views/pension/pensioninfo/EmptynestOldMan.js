@@ -150,6 +150,7 @@ define(function () {
                     if(data == "success"){
                         layer.closeAll('loading');
                         cj.showSuccess('保存成功');
+                        option.queryParams.datagrid.datagrid('reload');
                     }else{
                         layer.closeAll('loading');
                         cj.showFail('保存失败');

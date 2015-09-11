@@ -25,7 +25,7 @@ define(function(){
                                             queryParams:{
                                                 actiontype:'update',         //（处理）操作方式
                                                 data:record,                   //填充数据
-                                                refresh:peopleinfodatarid                //刷新
+                                                datagrid:peopleinfodatarid                //刷新
                                             }
                                         });
                                     }else if($(this).attr("action")=='delete'){
@@ -59,7 +59,7 @@ define(function(){
                                             queryParams:{
                                                 actiontype:'update',         //（处理）操作方式
                                                 data:record,                   //填充数据
-                                                refresh:peopleinfodatarid                //刷新
+                                                datagrid:peopleinfodatarid                //刷新
                                             }
                                         });
                                     }
@@ -68,8 +68,7 @@ define(function(){
                         }
                     }
                 },
-                striped:true,
-                toolbar:local.find('div[tb]')
+                striped:true
             })
 
 

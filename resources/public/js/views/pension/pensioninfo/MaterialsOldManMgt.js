@@ -17,6 +17,7 @@ define(function(){
                                 var record=rows[index];
                                 $(btns_arr[j][i]).click(function(){
                                     if($(this).attr("action")=='view'){
+                                        layer.load();
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:record.name+'详细信息',
                                             htmfile:'text!views/pension/pensioninfo/MaterialsOldMan.htm',

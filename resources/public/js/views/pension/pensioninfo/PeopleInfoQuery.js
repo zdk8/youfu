@@ -21,7 +21,17 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 if($(this).attr("action")=='view'){
                                     layer.load();
-                                    if(record.datatype == "g"){
+                                    cj.showContent({                                          //详细信息(tab标签)
+                                        title:record.name+'详细信息',
+                                        htmfile:'text!views/pension/pensioninfo/PensionPeopleInfo.htm',
+                                        jsfile:'views/pension/pensioninfo/PensionPeopleInfo',
+                                        queryParams:{
+                                            actiontype:'update',         //（处理）操作方式
+                                            data:record,                   //填充数据
+                                            refresh:peopleinfodatarid                //刷新
+                                        }
+                                    })
+                                    /*if(record.datatype == "g"){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:record.name+'详细信息',
                                             htmfile:'text!views/pension/pensioninfo/HighYearOldMan.htm',
@@ -43,7 +53,7 @@ define(function(){
                                                 refresh:peopleinfodatarid                //刷新
                                             }
                                         })
-                                    }
+                                    }*/
                                     //viewRoleInfo(record);
                                 }else if($(this).attr("action")=='map'){
                                     var ywtype = "PT_LNR"

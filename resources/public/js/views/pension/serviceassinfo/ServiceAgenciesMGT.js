@@ -27,7 +27,8 @@ define(function(){
                                     $(btns_arr[j][i]).click(function(){
                                         var action = $(this).attr("action");
                                         if(action == 'view'){
-                                            var title = "【"+record.name+'】服务申请详细信息'
+                                            var title = "【"+record.name+'】服务申请详细信息';
+                                            layer.load();
                                             cj.showContent({                                          //详细信息(tab标签)
                                                 title:title,
                                                 htmfile:'text!views/pension/serviceassinfo/PensionServiceApply.htm',
@@ -46,6 +47,7 @@ define(function(){
                                                 $("#tabs").tabs('select',title)
                                             }else{
 //                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                                layer.load();
                                                 cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
                                                     htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesForm.htm',
@@ -59,29 +61,35 @@ define(function(){
                                                 })
                                             }
                                         }else if(action=='delete'){               //删除
-                                            /*var title = "【"+record.name+'】信息变更'
-                                            if($("#tabs").tabs('getTab',title)){
-                                                $("#tabs").tabs('select',title)
-                                            }else{
-//                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                                                cj.showContent({                                          //变更详细信息(tab标签)
-                                                    title:title,
-                                                    htmfile:'text!views/pension/PensionServiceApply.htm',
-                                                    jsfile:'views/pension/PensionServiceApply',
-                                                    queryParams:{
-                                                        actiontype:'change',         //（处理）操作方式
-                                                        data:record,
-                                                        title:title,
-                                                        refresh:refreshGrid
+                                            layer.confirm('是否删除', {icon: 3, title:'温馨提示'}, function(index){
+                                                layer.close(index);
+                                                //layer.load();
+                                                $.ajax({
+                                                    url:'audit/deljjyldepart',
+                                                    type:'post',
+                                                    data:{
+                                                        jdep_id:record.jdep_id
+                                                    },
+                                                    dataType:'json',
+                                                    success: function (data) {
+                                                        if(data.success){
+                                                            layer.closeAll('loading');
+                                                            layer.alert('删除成功', {icon: 6});
+                                                            refreshGrid();
+                                                        }else{
+                                                            layer.closeAll('loading');
+                                                            layer.alert('删除失败,该机构下已有服务人员', {icon: 5});
+                                                        }
                                                     }
-                                                })
-                                            }*/
+                                                });
+                                            });
                                         }else if(action=='addfwry'){
                                             var title = '<label style="font-weight: bold;color: rgba(39,42,40,0.83)">添加服务人员-'+record.departname+'</label>';
                                             if($("#tabs").tabs('getTab',title)){
                                                 $("#tabs").tabs('select',title)
                                             }else{
 //                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                                layer.load();
                                                 cj.showContent({                                          //详细信息(tab标签)
                                                     title:title,
                                                     htmfile:'text!views/pension/serviceassinfo/ServiceAgenciesPeople.htm',

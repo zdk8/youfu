@@ -48,6 +48,7 @@ define(function(){
         }
         var pplogoutform = local.find("[opt=pplogoutform]");     //注销表单
         addToolBar(local);
+        layer.closeAll('loading');
         if(option.queryParams.actiontype == "logout"){         //注销
             local.find('[opt=pplogout_table] input').attr("readonly","true");//表单禁用
             local.find('textarea[name=rm_streetreview]').attr("readonly","true")

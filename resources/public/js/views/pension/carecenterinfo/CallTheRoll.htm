@@ -42,7 +42,7 @@
 
                         <td>
                             <input type="button" value="查询" class="btns" opt="query">
-                            <input class="btns" type="button" opt="exportexcel" value="导出Excel" style="width: 80px;">
+                            <!--<input class="btns" type="button" opt="exportexcel" value="导出Excel" style="width: 80px;">-->
                         </td>
 
                     </tr>
@@ -92,7 +92,7 @@
                 formatter:function(v,r,i)
                     {
                         var str='<div></div>';
-                        str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                        str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
                         return str.html();
                     }">姓名</th>
                 <th data-options="field:'age',width:80,align:'center'">年龄</th>

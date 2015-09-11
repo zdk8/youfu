@@ -75,6 +75,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
 
             function getapplybyidFunc(params){
 //                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                layer.load();
                 $.ajax({
                     url:"audit/getapplybyid",
                     type:"post",

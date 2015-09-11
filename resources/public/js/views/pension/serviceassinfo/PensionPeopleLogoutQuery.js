@@ -28,6 +28,7 @@ define(['views/pension/serviceassinfo/PensionServiceAss'],function(psafile){
                                                 $("#tabs").tabs('select',title)
                                             }else{
 //                                                showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
+                                                layer.load();
                                                 cj.showContent({                                          //变更详细信息(tab标签)
                                                     title:title,
                                                     htmfile:'text!views/pension/serviceassinfo/PensionServiceApply.htm',

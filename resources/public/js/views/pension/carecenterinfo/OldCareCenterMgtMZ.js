@@ -50,7 +50,7 @@ define(function(){
                                                 if (data == "success") {
                                                     layer.closeAll('loading');
                                                     layer.alert('注销成功!', {icon: 6, title: '温馨提示'});
-                                                    //refreshGrid();
+                                                    datagrid.datagrid('reload');
                                                 } else {
                                                     layer.closeAll('loading');
                                                     layer.alert('注销失败!', {icon: 5, title: '温馨提示'});
@@ -74,15 +74,16 @@ define(function(){
             onLoadSuccess: function (data) {
                 var viewbtns = local.find('[action=view_w]');
                 var updatebtns = local.find('[action=update_w]');
-                var deletebtns = local.find('[action=delete_w]');
+                var logout_wbtns = local.find('[action=logout_w]');
                 var mapbtn = local.find('[action=map]');                //地图
-                var btns_arr = [viewbtns, updatebtns, deletebtns, mapbtn];
+                var btns_arr = [viewbtns, updatebtns, logout_wbtns, mapbtn];
                 var rows = data.rows;
                 for (var i = 0; i < rows.length; i++) {
                     for (var j = 0; j < btns_arr.length; j++) {
                         (function (index) {
                             var record = rows[index];
                             $(btns_arr[j][i]).click(function () {
+                                layer.load();
                                 if ($(this).attr("action") == 'view_w') {
                                     cj.showContent({                                          //详细信息(tab标签)
                                         title: '【' + record.zl_name + '】工作人员详细信息',
@@ -101,9 +102,32 @@ define(function(){
                                         queryParams: {
                                             actiontype: 'update',         //（处理）操作方式
                                             data: record,                   //填充数据
-                                            refresh: refreshGrid                //刷新
+                                            datagrid: datagrid                //刷新
                                         }
                                     })
+                                }else if ($(this).attr("action") == 'logout_w') {
+                                    layer.closeAll('loading');
+                                    layer.confirm('确定要注销么？', {icon: 3, title: '温馨提示'}, function (index) {
+                                        layer.close(index);
+                                        layer.load();
+                                        $.ajax({
+                                            url: 'depart/leavecarepeople111',
+                                            type: 'post',
+                                            data: {
+                                                cp_id: record.cp_id
+                                            },
+                                            success: function (data) {
+                                                if (data == "success") {
+                                                    layer.closeAll('loading');
+                                                    layer.alert('注销成功!', {icon: 6, title: '温馨提示'});
+                                                    datagrid.datagrid('reload');
+                                                } else {
+                                                    layer.closeAll('loading');
+                                                    layer.alert('注销失败!', {icon: 5, title: '温馨提示'});
+                                                }
+                                            }
+                                        })
+                                    });
                                 }
                             });
                         })(i);
@@ -120,7 +144,7 @@ define(function(){
             onLoadSuccess: function (data) {
                 var viewbtns = local.find('[action=view_be]');
                 var updatebtns = local.find('[action=update_be]');
-                var deletebtns = local.find('[action=delete_be]');
+                var deletebtns = local.find('[action=logout_be]');
                 var mapbtn = local.find('[action=map]');                //地图
                 var btns_arr = [viewbtns, updatebtns, deletebtns, mapbtn];
                 var rows = data.rows;
@@ -130,7 +154,7 @@ define(function(){
                             var record = rows[index];
                             $(btns_arr[j][i]).click(function () {
                                 if ($(this).attr("action") == 'view_be') {
-                                    console.log(22)
+                                    layer.load();
                                     cj.showContent({                                          //详细信息(tab标签)
                                         title: '【' + record.zl_name + '】活动详细信息',
                                         htmfile: 'text!views/pension/carecenterinfo/Bigevent.htm',
@@ -141,7 +165,7 @@ define(function(){
                                         }
                                     })
                                 } else if ($(this).attr("action") == 'update_be') {
-                                    console.log(3232)
+                                    layer.load();
                                     cj.showContent({                                          //详细信息(tab标签)
                                         title: '【' + record.zl_name + '】活动信息修改',
                                         htmfile: 'text!views/pension/carecenterinfo/Bigevent.htm',
@@ -152,6 +176,28 @@ define(function(){
                                             //refresh: refreshGrid                //刷新
                                         }
                                     })
+                                }else if ($(this).attr("action") == 'logout_be') {
+                                    layer.confirm('确定要注销么？', {icon: 3, title: '温馨提示'}, function (index) {
+                                        layer.close(index);
+                                        layer.load();
+                                        $.ajax({
+                                            url: 'depart/leavecarepeople111',
+                                            type: 'post',
+                                            data: {
+                                                cp_id: record.cp_id
+                                            },
+                                            success: function (data) {
+                                                if (data == "success") {
+                                                    layer.closeAll('loading');
+                                                    layer.alert('注销成功!', {icon: 6, title: '温馨提示'});
+                                                    datagrid.datagrid('reload');
+                                                } else {
+                                                    layer.closeAll('loading');
+                                                    layer.alert('注销失败!', {icon: 5, title: '温馨提示'});
+                                                }
+                                            }
+                                        })
+                                    });
                                 }
                             });
                         })(i);
@@ -191,6 +237,7 @@ define(function(){
                             (function(index){
                                 var record=rows[index];
                                 $(btns_arr[j][i]).click(function(){
+                                    layer.load();
                                     if($(this).attr("action")=='view_cc'){
                                         cj.showContent({                                          //详细信息(tab标签)
                                             title:'【'+record.name+'】详细信息',
@@ -234,6 +281,7 @@ define(function(){
                                             }
                                         })
                                     }else if($(this).attr("action")=='map_cc'){
+                                        layer.closeAll('loading');
                                         var ywtype = "PT_LNR"
                                         //var mapguid = record.mapguid;
                                         window.open (mapURL+'map#task?ywtype='+ywtype+'&'+

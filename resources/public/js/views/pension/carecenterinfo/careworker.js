@@ -31,11 +31,11 @@ define(function () {
                 success: function (data) {
                     if(data == "success"){
                         layer.closeAll('loading');
-                        layer.alert('保存成功!', {icon: 6,title:'温馨提示'});
+                        cj.showSuccess('保存成功');
                         //option.queryParams.refresh();
                     }else{
                         layer.closeAll('loading');
-                        layer.alert('保存失败!', {icon: 5,title:'温馨提示'});
+                        cj.showFail('保存失败');
                     }
                 }
             });
@@ -67,11 +67,11 @@ define(function () {
                 success: function (data) {
                     if(data == "success"){
                         layer.closeAll('loading');
-                        layer.alert('修改成功!', {icon: 6,title:'温馨提示'});
-                        option.queryParams.refresh();
+                        cj.showSuccess('修改成功');
+                        option.queryParams.datagrid.datagrid('reload');
                     }else{
                         layer.closeAll('loading');
-                        layer.alert('修改失败!', {icon: 5,title:'温馨提示'});
+                        cj.showFail('修改失败');
                     }
                 }
             });
@@ -80,6 +80,7 @@ define(function () {
 
     return {
         render: function (local,option) {
+            layer.closeAll('loading');
             addToolBar(local);
             local.find('[opt=save]').hide();
             local.find('[opt=update]').hide();

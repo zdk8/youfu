@@ -194,6 +194,57 @@ var getBaseInfoByIdentityid = function(params){
         }
     });
 }
+/*根据身份证填充信息*/
+var fillInfoByIndentityid = function (params) {
+    var val = params.identityid.val();
+    var sex;
+    var birthdayValue;
+    var age;
+    var sexcode;
+    if (15 == val.length) { //15位身份证号码
+        birthdayValue = val.charAt(6) + val.charAt(7);
+        if (parseInt(birthdayValue) < 10) {
+            birthdayValue = '20' + birthdayValue;
+        }
+        else {
+            birthdayValue = '19' + birthdayValue;
+        }
+        age = Date.getFullYear()-parseInt(birthdayValue); //年龄
+        birthdayValue = birthdayValue + '-' + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11);
+        if (parseInt(val.charAt(14) / 2) * 2 != val.charAt(14)) {
+            sex = '男';
+            sexcode = '1';
+        }
+        else{
+            sex = '女';
+            sexcode = '0';
+        }
+    }
+    if (18 == val.length) { //18位身份证号码
+        birthdayValue = val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11)
+        + '-' + val.charAt(12) + val.charAt(13);
+        if (parseInt(val.charAt(16) / 2) * 2 != val.charAt(16)){
+            sex = '男';
+            sexcode = '1';
+        }
+        else{
+            sex = '女';
+            sexcode = '0';
+        }
+        age =(new Date()).getFullYear()-parseInt((val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9)));
+    }
+    if(params.birthdate){
+        params.birthdate.datebox('setValue',birthdayValue) ;
+    }
+    if(params.gender){
+        params.gender.combobox('setValue',sexcode) ;
+    }
+    if(params.agetype == "span"){
+        params.tip_age[0].innerText = age+"岁";
+    }else{
+        params.age.val(age);
+    }
+}
 /*计算评估总分*/
 var calculate=function(local){
     var value=0;
