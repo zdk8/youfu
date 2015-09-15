@@ -2,16 +2,24 @@
   (:require [compojure.core :refer :all]
             [partymgt.layout :as layout]
             [partymgt.util :as util]
-
             [noir.session :as session]
-
             [clojure.data.json :as json]
-            [partymgt.controller.manager :as mymngctrl]
             [ring.util.response :refer [redirect file-response]]
             [noir.response :as resp]
+
+            [partymgt.controller.manager :as mymngctrl]
+            [partymgt.controller.login :as login]
             ))
 
 (defroutes home-routes
-  (GET "/" [] (layout/render "index.html"))
+  (GET "/" req (login/home req))
+  (POST "/login" req (login/login req)) ;;登录
+  (GET "/logout" request (login/logout request)) ;;注销
+
+
+  (GET "/index" [] (layout/render "index.html"))
+  (GET "/manager" [] (layout/render "manager.html"))
+
+
 
   )

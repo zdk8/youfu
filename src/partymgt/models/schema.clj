@@ -7,7 +7,7 @@
                  :subprotocol "oracle"
 ;                 :subname "thin:@localhost:1521:orcl"
                  :subname "thin:@192.168.2.142:1521:orcl"
-                 :user "pension_pinghu"
+                 :user "partybuild_hy"
 ;                 :user "NEWPENSION"
                  :password "hvit"
                  :naming {:keys clojure.string/lower-case :fields clojure.string/upper-case}})

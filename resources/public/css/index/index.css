@@ -1,36 +1,41 @@
 /*####north#####*/
-.bghead{
-    height:85px;
-    background: url("../../images/index/headbg1.png") repeat;
+body{
+    /*min-width: 1200px;*/
 }
-.bghead1{
-    width: 200px;
-    margin-top: 8px;
-    font-size: 20px;
-    font-weight: bold;
+.head_bg{
+    height:100%;
+    width: 100%;
+    position: absolute;
+    background-color: #0d7fd7;
+}
+.bghead_l{
+    width: 240px;
+    margin-top: 25px;
+    font-size: 28px;
+    font-weight: bolder;
     color: #ffffff;
-    padding-top: 4px;
-    margin-left: 5px;
+    margin-left: 25px;
 }
-.logo{
+/*.logo{
     background: url("../../images/index/logo.png") no-repeat;
-    /*height: 50px;*/
-    /*width: 50px;*/
-}
-.bghead2{
-    background: url("../../images/index/headbg2.png") no-repeat;
-    /*border: 1px solid red;*/
-    width: 450px;
+}*/
+.bghead_r{
+    width: 250px;
     height: 40px;
-    margin-top: -83px;
+    margin-top: -25px;
+    margin-right: 35px;
     float: right;
-
     text-align: right;
     color: #ffffff;
     font-size: 14px;
-    font-weight: bold;
-    padding-top: 40px;
-    /*padding-right: 5px;*/
+}
+.bghead_r li{
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.bghead_r li a{
+    color: white;
 }
 
 
@@ -42,35 +47,97 @@ a,img{
 }
 a:hover{
     color:#104b67;
-    border-bottom: 1px solid #6fb3e0;
+    /*border-bottom: 1px solid #6fb3e0;*/
 }
 
-.left{
+/*#####center#######*/
+.centertip{
+    height: 55px;
+    /*border-bottom: 1px solid #F2F2F2;*/
+    /*font-size: 14px;*/
+    background: #3273a9;
+    color: white;
+    font-family: Microsoft JhengHei;
+    font-size: 19px;
+    letter-spacing:2px;
+    padding-top: 4px;
+}
+.centertip ul{
+    display: inline;
+
+}
+.centertip li{
+    float: left;
+    border-right: 1px solid #045886;
+    /*border-bottom: 1px solid #045886;*/
+    cursor: pointer;
+    height: 36px;
+    /*height: 51px;*/
+    width: 230px;
+    text-align: center;
+    padding-top: 15px;
+}
+.centertip li:hover{
+    border-top: 4px solid #d6e3ee;
+}
+.centertipV{
+    /*height: 36px;*/
+    /*padding-top: 15px;*/
+    border-top: 4px solid #d6e3ee;
+    /*border: 1px solid red;*/
+}
+
+/*菜单栏*/
+.menubar{
     width: 100%;
     height:100%;
-    color:#000000;
+    color:white;
     font-size:14px;
     text-align:left;
     position:absolute;
     left:0;top:0;
     font:12px/180% "微软雅黑";
-    background-color: #f6f6f6;
+    background-color: #0d7fd7;
 }
 
-.left_top{
-    background-color: #F6F6F6;
-    height: 30px;
+.menubar_top{
+    height: 40px;
     border-bottom: 1px solid #e5e5e5;
-    padding-top: 10px;
-    padding-left: 60px;
+    padding-top: 20px;
+    padding-left: 30px;
     font-weight: bolder;
     font-size: 20px;
-    color: #555555;
+    letter-spacing:6px;
+    color: white;
 }
-.div1{
+.menubar ul{
+    margin: 0px;
+    padding: 0px;
+}
+.menubar ul li{
+    font-size: 20px;
+    margin-bottom: 5px;
+    /*margin-top: 5px;*/
+    height: 35px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+.menubar ul li:hover{
+    border-right: 4px solid #d6e3ee;
+    background-color: #045886;
+}
+.menubar ul li a{
+    color: white;
+    margin-left: 48px;
+}
+.menubarV{
+    border-right: 4px solid #d6e3ee;
+    background-color: #045886;
+}
+/*.div1{
     text-align:left;
     width:99%;
-}
+}*/
 .div2{
     height:40px;
     line-height:40px;
@@ -113,17 +180,7 @@ a:hover{
     background-color: #e8f7df;
 }
 
-/*#####center#######*/
-.centertip{
-    height: 25px;
-    border-bottom: 1px solid #F2F2F2;
-    padding-top: 16px;
-    font-size: 14px;
-    background: #F6F6F6;
-}
-.centertip span{
-    color: #0080d8;
-}
+
 
 /*查询栏*/
 /*###########按钮############*/
