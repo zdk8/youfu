@@ -1,5 +1,0 @@
-(ns newpension.controller.zhfont)
-(def stfangso "C:\\Windows\\Fonts\\STFANGSO.TTF")
-(def msyh "C:\\Windows\\Fonts\\微软雅黑\\msyh.ttf")
-;(def default (String. (.getBytes default "ISO8859-1") "GBK"))
-(def default stfangso)
