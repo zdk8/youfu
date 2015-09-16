@@ -37,6 +37,14 @@ body{
 .bghead_r li a{
     color: white;
 }
+.bghead_r_date{
+    width: 280px;
+    height: 20px;
+    margin-top: -55px;
+    margin-right: -280px;
+    float: right;
+    text-align: right;
+}
 
 
 /*#####west######*/
@@ -47,12 +55,13 @@ a,img{
 }
 a:hover{
     color:#104b67;
-    /*border-bottom: 1px solid #6fb3e0;*/
+    border-bottom: 1px solid #6fb3e0;
 }
 
 /*#####center#######*/
 .centertip{
     height: 55px;
+    /*min-width: 1500px;*/
     /*border-bottom: 1px solid #F2F2F2;*/
     /*font-size: 14px;*/
     background: #3273a9;
@@ -73,7 +82,7 @@ a:hover{
     cursor: pointer;
     height: 36px;
     /*height: 51px;*/
-    width: 230px;
+    width: 200px;
     text-align: center;
     padding-top: 15px;
 }
@@ -115,7 +124,7 @@ a:hover{
     padding: 0px;
 }
 .menubar ul li{
-    font-size: 20px;
+    font-size: 19px;
     margin-bottom: 5px;
     /*margin-top: 5px;*/
     height: 35px;
@@ -126,7 +135,7 @@ a:hover{
     border-right: 4px solid #d6e3ee;
     background-color: #045886;
 }
-.menubar ul li a{
+.menubar ul li span{
     color: white;
     margin-left: 48px;
 }

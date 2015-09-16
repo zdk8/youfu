@@ -30,36 +30,10 @@
                 </tr>
 
                 <tr>
-                    <th>区域代码 :</th>
-                    <td>
-                        <!--<input type="text" name="regionid" class="input-text" >
-                        <div opt="tip" name="totalname" style="display: inline"> 请先选择地区再添加用户</div>-->
-                        <input class="easyui-combotree" opt="districtidmanager" style="width: 200px;">
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>用户类型 :</th>
-                    <td>
-                        <select name="usertype">
-                            <option value="0" selected="selected">政府</option>
-                            <option value="1">养老机构</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>养老机构 :</th>
-                    <td>
-                        <input class="easyui-combobox" name="depid" style="width:200px;"
-                               data-options="loader:getYLJG(), editable:false, valueField:'id', textField:'text' ">
-                    </td>
-                </tr>
-
-
-                <tr>
                     <th>描述 :</th>
-                    <td><input type="text" name="description" class="input-text" size="50"></td>
+                    <td>
+                        <textarea class="input-text" name="description" style="width: 95%;height: 36px"placeholder="填写备注信息"></textarea>
+                    </td>
                 </tr>
                 </tbody>
             </table>

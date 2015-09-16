@@ -30,17 +30,25 @@
                         <th data-options="field:'username',width:100,align:'center',formatter:function(v,r,i)
                         {
                             var str='<div></div>';
-                            str=$(str).append('<a action=&quot;view&quot;>'+v+'('+r.loginname+')</a>');
+                            str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
                             return str.html();
-                        }">用户名称(登录名)</th>
-                        <th data-options="field:'totalname',width:100,align:'center'">区域名称</th>
-                        <th data-options="field:'regionid',width:50,align:'center'">区域代码</th>
+                        }">用户名称</th>
+                        <th data-options="field:'loginname',width:100,align:'center'">登录名</th>
+                        <th data-options="field:'passwd',width:50,align:'center'">密码</th>
+                        <th data-options="field:'useful',width:50,align:'center',
+                        formatter:function(v,i,r){
+                            if(v == 0){
+                                return '无效'
+                            }else{
+                                return '有效'
+                            }
+                        }">是否有效</th>
                         <th data-options="field:'createdate',width:100,align:'center',formatter:cj.dateFormatter(),hidden:true">创建时间</th>
                         <th data-options="field:'delete',width:50,align:'center',formatter:function(v,r,i)
                         {
                             var str='<div></div>';
-                            str=$(str).append('<a action=&quot;delete&quot;>删除</a>&nbsp;|&nbsp;');
-                            str=$(str).append('<a action=&quot;addrole&quot;>添加角色</a>');
+                            str=$(str).append('<a action=&quot;delete&quot;href=&quot;javaScript:;&quot;>删除</a>&nbsp;|&nbsp;');
+                            str=$(str).append('<a action=&quot;addrole&quot;href=&quot;javaScript:;&quot;>添加角色</a>');
                             return str.html();
                         }">操作</th>
                     </tr>
@@ -49,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div data-options="region:'west',lines:true" style="width:250px;">
+    <!--<div data-options="region:'west',lines:true" style="width:250px;">
         <ul id="Divisiontree"></ul>
-    </div>
+    </div>-->
 </div>

@@ -29,7 +29,7 @@
                 <th data-options="field:'rolename',width:100,align:'center',formatter:function(v,r,i)
             {
                 var str='<div></div>';
-                str=$(str).append('<a action=&quot;view&quot;>'+v+'</a>');
+                str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
                 return str.html();
             }">角色名称</th>
                 <th data-options="field:'roledesc',width:120,align:'center'">描述</th>
@@ -37,8 +37,8 @@
                 <th data-options="field:'delete',width:50,align:'center',formatter:function(v,r,i)
             {
                 var str='<div></div>';
-                str=$(str).append('<a action=&quot;delete&quot;>删除</a>&nbsp;|&nbsp;');
-                str=$(str).append('<a action=&quot;grant&quot;>授权</a>');
+                str=$(str).append('<a action=&quot;delete&quot;href=&quot;javaScript:;&quot;>删除</a>&nbsp;|&nbsp;');
+                str=$(str).append('<a action=&quot;grant&quot;href=&quot;javaScript:;&quot;>授权</a>');
                 return str.html();
             }">操作</th>
             </tr>

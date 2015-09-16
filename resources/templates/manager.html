@@ -58,12 +58,18 @@
                 <!--<span>欢迎！{{username}}</span>&nbsp;|
                 <span style="cursor: pointer" opt="closeAllTabs">关&nbsp;闭</span>&nbsp;|
                 <span style="cursor: pointer"><a href="logout" style="color: white;">退&nbsp;出</a></span>&nbsp;-->
-                <ul>
-                    <li>首页</li>
-                    <li>信息</li>
-                    <li>刷新</li>
-                    <li><a href="logout">退出</a></li>
-                </ul>
+                <!--<div>11111</div>-->
+                <div>
+                    <ul>
+                        <li>首页</li>
+                        <li>信息</li>
+                        <li>刷新</li>
+                        <li><a href="logout">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bghead_r_date">
+                <label opt="currentDate" style="float: right;font-size: 10px;color:white;font-style: oblique;"></label>
             </div>
         </div>
     </div>
@@ -111,7 +117,7 @@
                             <div data-options="region:'center',border:false" style="padding:5px;">
                                 <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
                                     <div title="主页" data-options="border:false" style="padding:5px;">
-                                        <div class="easyui-layout" data-options="fit:true">
+                                        <!--<div class="easyui-layout" data-options="fit:true">
                                             <div data-options="region:'north',border:false"
                                                  style="height:50px;padding:0 5px 0 5px;">
                                                 <div style="border: 1px solid #e5e5e5;
@@ -153,7 +159,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -193,10 +199,12 @@
 //            $('[opt=contentshow]').html($(this).text().trim());
             $('.menubar_top').html($this.text().trim());
         });
-
+        /*功能菜单事件*/
         $('[opt=menu] ul li').on('click', function () {
+            var $this = $(this);
+            $this.addClass("menubarV").siblings().removeClass("menubarV");
             mm = $(this)
-            $(this).addClass("menubarV").siblings().removeClass("menubarV");
+
         });
 
 //        usermsg=eval('('+$('#usermsg').text()+')');

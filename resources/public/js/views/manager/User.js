@@ -31,7 +31,7 @@ define(function(){
                     function(win,htmfile,jsfile){
                         win.render({
                             title:'用户信息',
-                            width:524,
+                            width:500,
                             html:/*$(htmfile).eq(0)*/htmfile,
                             buttons:[
                                 {text:'取消',handler:function(html,parent){
@@ -42,54 +42,35 @@ define(function(){
                             renderHtml:function(poplocal,submitbtn,parent){
                                 var regionid;
                                 if(record) {
-                                    $.post('getuserbyid',{
-                                        id:record.userid
-                                    },function(data){
-                                        poplocal.find('form').form('load', data);//加载数据到表单
-                                        var districtnameval = getDivistionTotalname(data.regionid)
-                                        regionid = data.regionid;
-                                        poplocal.find('[opt=districtidmanager]').combotree("setValue",districtnameval)
-                                        //poplocal.find('[opt=tip]').text(data.totalname);
-                                    },'json')
+                                    poplocal.find('form').form('load', record);//加载数据到表单
+                                }else{
+                                    poplocal.find('[name=loginname]').val('');
+                                    poplocal.find('[name=passwd]').val("");
                                 }
-                                if(mynode){
-                                    poplocal.find('[opt=tip]').text(mynode.totalname);
-                                    poplocal.find('[name=regionid]').val(mynode.dvcode);
-
-
-                                    $(submitbtn).bind('click', function () {
-                                        layer.load();
-                                        poplocal.find('form').form('submit', {
-                                            url: 'saveuser',
-                                            onSubmit: function (param) {
-                                                var isValid = $(this).form('validate');
-                                                if (!isValid) {
-                                                    //$.messager.progress('close');
-                                                    layer.closeAll('loading');
-                                                }
-                                                if(!poplocal.find('[name=userid]').val()){
-                                                    param.flag=-1;
-                                                }
-                                                if(!isNaN(poplocal.find("[opt=districtidmanager]").combotree("getValue"))){          //是否是数字
-                                                    param.regionid = poplocal.find("[opt=districtidmanager]").combotree("getValue")
-                                                }else{
-                                                    param.regionid = regionid
-                                                }
-                                                return isValid;
-                                            },
-                                            success: function (data) {
-                                                var obj = eval('('+data+')');
-                                                if(obj.success) {
-                                                    parent.trigger('close');
-                                                    layer.closeAll('loading');
-                                                    refreshGrid();
-                                                }
+                                $(submitbtn).bind('click', function () {
+                                    layer.load();
+                                    poplocal.find('form').form('submit', {
+                                        url: 'saveuser',
+                                        onSubmit: function (param) {
+                                            var isValid = $(this).form('validate');
+                                            if (!isValid) {
+                                                layer.closeAll('loading');
                                             }
-                                        })
-                                    });
-                                }
-
-
+                                            if(!poplocal.find('[name=userid]').val()){
+                                                param.flag=-1;
+                                            }
+                                            return isValid;
+                                        },
+                                        success: function (data) {
+                                            var obj = eval('('+data+')');
+                                            if(obj.success) {
+                                                parent.trigger('close');
+                                                layer.closeAll('loading');
+                                                refreshGrid();
+                                            }
+                                        }
+                                    })
+                                });
                                 jsfile.render(local,{
                                     parent:parent
                                 })
@@ -123,7 +104,7 @@ define(function(){
             }
 
 
-            var $mytree=$('#Divisiontree').tree({
+            /*var $mytree=$('#Divisiontree').tree({
                 checkbox:false,
                 url:'getdivisiontree',
                 animate:true,
@@ -140,7 +121,7 @@ define(function(){
                         mynode = data[0];
                     }
                 }
-            });
+            });*/
 
             localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
@@ -182,8 +163,8 @@ define(function(){
             
             local.find('[opt=query]').click(function () {
                 localDataGrid.datagrid('load',{
-                    username:local.find('[opt=username]').val(),
-                    node:mynode.dvcode.substr(mynode.dvcode.length-2,mynode.dvcode.length-1)=="00"?mynode.dvcode.substr(0,mynode.dvcode.length-2):mynode.dvcode
+                    username:local.find('[opt=username]').val()
+                    //node:mynode.dvcode.substr(mynode.dvcode.length-2,mynode.dvcode.length-1)=="00"?mynode.dvcode.substr(0,mynode.dvcode.length-2):mynode.dvcode
                 });
             });
         }

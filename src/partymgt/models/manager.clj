@@ -177,6 +177,18 @@
 ;                               where rownum <= " end ") where rn >=" start)] :results)
 ;  ))
 
+
+(defn get-results-bysql[totalsql]
+  (exec-raw [totalsql []] :results))
+
+(defn getall-results [start end sql]
+  (let [sql (str "SELECT * FROM
+(SELECT A.*, ROWNUM RN FROM
+("sql") A
+  WHERE ROWNUM <= " end ")
+ WHERE RN >= " start)]
+    (exec-raw [sql []] :results)))
+
 (defn get-user-by-id [id]
   (with-db dboracle
     (exec-raw [(str "select u.*,d.totalname from xt_user u,division d where u.userid = '"

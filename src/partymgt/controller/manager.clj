@@ -103,22 +103,20 @@
   (let [results (first (basemd/get-function-by-id id))]
     (resp/json results)))
 
-;(defn get-user-by-regionid [req]
-;  (let [{params :params} req
-;        {page :page} params
-;        {rows :rows} params
-;        r   (read-string rows)
-;        p  (read-string page)
-;        start  (inc(* r (dec p)))
-;        end (* r p)
-;        {node :node} params
-;        {username :username} params
-;        totalsql  (str "select u.*,d.totalname from xt_user u,division d where u.regionid like '"
-;                    node "%' and u.username like '" username "%' and u.regionid=d.dvcode")
-;        total (count (db/get-results-bysql totalsql))
-;        results (db/getall-results start end totalsql)]
-;    (resp/json {:total total :rows results})
-;    ))
+(defn get-user-by-regionid [req]
+  (let [{params :params} req
+        {page :page} params
+        {rows :rows} params
+        r   (read-string rows)
+        p  (read-string page)
+        start  (inc(* r (dec p)))
+        end (* r p)
+        {username :username} params
+        totalsql  (str "select u.* from xt_user u where u.username like '" username "%' order by createdate desc")
+        total (count (basemd/get-results-bysql totalsql))
+        results (basemd/getall-results start end totalsql)]
+    (resp/json {:total total :rows results})
+    ))
 (defn get-user-by-id [id]
   (let [results (first (basemd/get-user-by-id id))]
     (resp/json results)))

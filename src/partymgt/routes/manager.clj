@@ -37,7 +37,7 @@
   ;;用户维护
   (GET "/getdivisiontree" req (myctrl/get-divisiontree req))
   (POST "/getdivisiontree" req (myctrl/get-divisiontree req))
-;  (POST "/getuserbyregionid" req (myctrl/get-user-by-regionid req))
+  (POST "/getuserbyregionid" req (myctrl/get-user-by-regionid req))
   (GET "/getuserbyid" [id] (myctrl/get-user-by-id id))
   (POST "/getuserbyid" [id] (myctrl/get-user-by-id id))
   (POST "/deluserbyid" [id] (myctrl/del-user-by-id id))

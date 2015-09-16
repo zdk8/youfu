@@ -51,6 +51,7 @@ define(function(){
                         data: { functionids : s.toString() ,roleid:currentroleid},
                         url:'savegrant',
                         success:function(res){
+                            layer.closeAll('loading');
                             option.parent.trigger('close');
                         }
                     }
@@ -67,6 +68,7 @@ define(function(){
                 $functiontree.tree('collapseAll');
             })
             option.submitbtn.bind('click',function(){
+                layer.load();
                 getChecked();
             })
 

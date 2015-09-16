@@ -36,7 +36,11 @@
     <script type="text/javascript" defer="defer" src="js/mycalendar.js"></script>
 
 
-
+<style>
+    #img{width:600px;height:60px;background:#ccc;overflow:hidden;float:left}
+    #img ul{margin:0;padding:0;list-style:none;width:100000px}
+    #img li{margin:0;padding:0;width:100px;height:60px;display:block;float:left;margin-right:5px;background:#009900}
+</style>
 </head>
 <body>
 <!--<div id="usermsg" style="display: block">{{usermsg}}</div>-->
@@ -65,18 +69,21 @@
                     <li><a href="logout">退出</a></li>
                 </ul>
             </div>
+            <div class="bghead_r_date">
+                <label opt="currentDate" style="float: right;font-size: 10px;color:white;font-style: oblique;"></label>
+            </div>
         </div>
     </div>
     <div data-options="region:'center',border:false">
         <div class="easyui-layout" data-options="fit:true">
             <div data-options="region:'north',height:63,border:false"><!--style="background: #3273a9;"-->
-                <div class="centertip" style="display: block;">
+                <div class="centertip" opt="menutotal">
                     <ul>
-                        <li><span opt="jdxt">党建系统</span></li>
-                        <li><span opt="lzdagl">廉政档案管理</span></li>
-                        <li><span opt="rsgl">人事档案</span></li>
-                        <li><span opt="jcsj">基础数据</span></li>
-                        <li><span opt="tjfx">统计分析</span></li>
+                        <!--<li><span opt="jdxt">党建系统</span></li>-->
+                        <!--<li><span opt="lzdagl">廉政档案管理</span></li>-->
+                        <!--<li><span opt="rsgl">人事档案</span></li>-->
+                        <!--<li><span opt="jcsj">基础数据</span></li>-->
+                        <!--<li><span opt="tjfx">统计分析</span></li>-->
                         <!--<li><span opt="qxgl">权限管理</span></li>-->
                     </ul>
                 </div>
@@ -87,33 +94,31 @@
                         <div style="height: 99.6%;border: 1px solid red;">
                             <div class="menubar">
                                 <div class="menubar_top">
-                                    <label>党建系统</label>
+                                    <!--<label>党建系统</label>-->
                                 </div>
                                 <div opt="menu">
                                     <ul>
-                                        <li><a href="javaScript:;">党支部</a></li>
-                                        <li><a href="javaScript:;">共青团</a></li>
-                                        <li><a href="javaScript:;">妇女小组</a></li>
-                                        <li><a href="javaScript:;">公会</a></li>
-                                        <li><a href="javaScript:;">老干部</a></li>
+                                        <!--<li><a href="javaScript:;">党支部</a></li>-->
+                                        <!--<li><a href="javaScript:;">共青团</a></li>-->
+                                        <!--<li><a href="javaScript:;">妇女小组</a></li>-->
+                                        <!--<li><a href="javaScript:;">公会</a></li>-->
+                                        <!--<li><a href="javaScript:;">老干部</a></li>-->
                                     </ul>
-                                    <!--<div class="div211"><div class="jbsz"></div>党支部</div>-->
-                                    <!--<input type="hidden" value='+data[i].functionid+'>-->
-                                    <!--<div class="div3" opt="'+data[i].title+'">111</div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div data-options="region:'center',border:false" style="border:1px solid red;">
+                    <div opt="showright" data-options="region:'center',border:false">
                         <div class="easyui-layout" data-options="fit:true">
-                            <div data-options="region:'north',height:50,border:false">
+                            <!--<div data-options="region:'north',height:50,border:false">
                                 <div class="centertip">
                                     <span>&nbsp;<span>主页</span></span>
                                     <label opt="currentDate" style="float: right;margin-right: 8px;font-size: 10px;color:#104b67;font-style: oblique;"></label>
                                 </div>
-                            </div>
-                            <div data-options="region:'center',border:false" style="padding:5px;">
-                                <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
+                            </div>-->
+                            <div data-options="region:'center',border:false">
+                                <div id="panel" class="easyui-panel" data-options="iconCls:'icon-save',fit:true"></div>
+                                <!--<div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
                                     <div title="主页" data-options="border:false" style="padding:5px;">
                                         <div class="easyui-layout" data-options="fit:true">
                                             <div data-options="region:'north',border:false"
@@ -159,7 +164,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -169,66 +174,103 @@
     </div>
 </div>
 
+
 <script type="text/javascript">
 //    var usermsg;
     $(document).ready(function(){
+        /*功能节点加载*/
+        var loadFunction = function (funcid) {
+            $.ajax({
+                url:'getfunctionmenu',
+                type:'post',
+                data:{
+                    funcid:funcid
+                },
+                success:function(data){
+                    layer.closeAll('loading');
+                    var menuarr = new Array();
+                    if(data.length > 0){
+                        for(var i=0;i<data.length;i++){
+                            var menu = '<li><span opt="'+data[i].location+'">'+data[i].title+'</span></li>'
+                            menuarr.push(menu);
+                        }
+                        $('[opt=menu] ul').html(menuarr);
+                        $('[opt=menu] ul li').first().addClass('menubarV');
 
-        window.setTimeout(function () {
-//            $('.centertip').slideDown('fast');
-//            $('[opt=contentshow]').show('fast');
-        },500);
-
-        $('.centertip ul li').first().addClass('centertipV');
-        $('[opt=menu] ul li').first().addClass('menubarV');
-
-        /*上方功能菜单事件*/
-        $('.centertip ul li').on('click', function () {
-            var $this = $(this);
-            $this.addClass("centertipV").siblings().removeClass("centertipV");
-
-            tt = $(this)
-
-            var funcurl = $this.find('span').attr('opt');
-            console.log(funcurl)
-
-
-
-
-//            $('[opt=contentshow]').html($(this).text().trim());
-            $('.menubar_top').html($this.text().trim());
-        });
-
-        $('[opt=menu] ul li').on('click', function () {
-            mm = $(this)
-            $(this).addClass("menubarV").siblings().removeClass("menubarV");
-        });
-
-//        usermsg=eval('('+$('#usermsg').text()+')');
-        $('[opt=currentDate]').text(mycalendar.RunGLNL());
-        /*$.ajax({
+                        var intface = $('[opt=menu] ul li').first().find('span').attr('opt');
+                        var funcarr = intface.replace('.','/');
+                        require(['text!views/'+funcarr+'.htm','views/'+funcarr], function (htm,js) {
+                            var panel = $('#panel').panel({content:htm,cache:false});
+                            if(js && js.render){
+                                js.render(panel);
+                            }
+                        })
+                    }
+                }
+            });
+        }
+        /*菜单项加载*/
+        $.ajax({
             url:'getfunction',
             type:'post',
             success: function (data) {
                 var htmarr = new Array();
                 if(data.length>0){
                     for(var i=0;i<data.length;i++){
-                       *//* var menubg;
+                        var menubg;
                         if(data[i].img){
                             menubg = data[i].img;
                         }else{
                             menubg = "menu2.png"
-                        }*//*
-                        var htm ='<div class="div2"><div class="jbsz"></div>'+data[i].title+'</div>' +
-                                '<input type="hidden" value='+data[i].functionid+'>'+
-                                '<div class="div3" opt="'+data[i].title+'"></div>';
-                        htmarr.push(htm);
+                        }
+                        var menuli = '<li><span opt="'+data[i].functionid+'">'+data[i].title+'</span></li>';
+                        htmarr.push(menuli);
                     }
-                    $('.left .div1 [opt=menu]').html(htmarr);
+                    $('[opt=menutotal] ul').html(htmarr);
+                    $('.centertip ul li').first().addClass('centertipV');
+                    $('.menubar_top').html($('.centertip ul li').first().text());
+                    loadFunction($('.centertip ul li').first().find('span').attr('opt'));
                 }else{
-                    $('.left .div1 [opt=menu]').html('<div style="text-align: center;"><label style="color: red;">无相应功能模块!</label></div>')
+                    $('[opt=menutotal] ul').html('<li><span style="color: red;">无相应功能模块!</span></li>');
                 }
             }
-        })*/
+        })
+
+
+
+        /*上方功能菜单事件*/
+        $(document).on('click','.centertip ul li', function () {
+            layer.load();
+            var $this = $(this);
+            $this.addClass("centertipV").siblings().removeClass("centertipV");
+            $('.menubar_top').html($this.text());
+            var funcurl = $this.find('span').attr('opt');
+            loadFunction(funcurl);
+        });
+
+        /*功能菜单事件*/
+        $(document).on('click','[opt=menu] ul li', function () {
+            var $this = $(this);
+            $this.addClass("menubarV").siblings().removeClass("menubarV");
+            var intface = $this.find('span').attr('opt');
+            var funcarr = intface.replace('.','/');
+            require(['text!views/'+funcarr+'.htm','views/'+funcarr], function (htm,js) {
+                var panel = $('#panel').panel({content:htm,cache:false});
+                if(js && js.render){
+                    js.render(panel);
+                }
+            })
+
+        });
+        /*$('[opt=menu] ul li').on('click', function () {
+            mm = $(this)
+            $(this).addClass("menubarV").siblings().removeClass("menubarV");
+        });*/
+
+//        usermsg=eval('('+$('#usermsg').text()+')');
+        $('[opt=currentDate]').text(mycalendar.RunGLNL());
+
+
         /*$(document).on('click','.div2', function () {
             var $this = $(this);
             var node = $this.next().val();
@@ -317,6 +359,7 @@
         });
     });
 </script>
+
 
 </body>
 <script src="js/cj.js"></script>
