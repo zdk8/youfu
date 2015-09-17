@@ -1,0 +1,139 @@
+<!--<div class="easyui-panel newRadio" opt="formcontentpanel"
+     style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
+     data-options="fit:true,border:false">-->
+<form opt="pensionform" class="common-form" method="post">
+    <table opt="baseinfo_table" width="90%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+        <!--<tr>
+            <td rowspan="4" colspan="2" style="text-align: center">
+                <div id="personimg" style="width: 150px;height: 120px;cursor: pointer;margin-left: 50px;" opt="personimg">
+                    <img name="pensionimgpath" src="img/noperson.gif" value="" alt="用户照片" width="150px" height="120px">
+                </div>
+                <input name ="pensionimgpath" type="hidden">
+            </td>
+        </tr>-->
+        <tr>
+            <td class="formtdtext" style="width: 100px">姓名<label></label></td>
+            <td>
+                <input class="easyui-validatebox input-text" name="name" data-options="required:true"><span style="color: red">*</span>
+            </td>
+            <td rowspan="4" colspan="2" style="text-align: center">
+                <div id="personimg" style="width: 150px;height: 120px;cursor: pointer;margin-left: 80px;" opt="personimg">
+                    <img name="pensionimgpath" src="images/noperson.gif" value="" alt="用户照片" width="150px" height="120px">
+                </div>
+                <input name ="pensionimgpath" type="hidden">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">身份证<label></label></td>
+            <td>
+                <input opt="identityid" name="identityid" class="easyui-validatebox input-text"
+                       data-options="required:true,invalidMessage:'请输入正确的身份证号',validType:'identityid'"><span style="color: red">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">性别<label></label></td>
+            <td>
+                <input opt="gender" class="easyui-combobox" style="height: 24px"
+                       name="gender"
+                       data-options="
+                                loader:cj.getLoader('gender'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">年龄<label></label></td>
+            <td>
+                <input opt="age" class="easyui-validatebox input-text" name="age">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">籍贯<label></label></td>
+            <td>
+                <input opt="age" class="easyui-validatebox input-text" name="age">
+            </td>
+            <td class="formtdtext">出生地<label></label></td>
+            <td>
+                <input opt="age" class="easyui-validatebox input-text" name="age">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">民族<label></label></td>
+            <td>
+                <input class="easyui-combobox" style="height: 24px"
+                       opt="nation"
+                       name="nation"
+                       data-options="
+                                loader: cj.getLoader('oldnation'),
+                                mode: 'remote',
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'">
+            </td>
+            <td class="formtdtext">婚姻情况<label></label></td>
+            <td>
+                <input class="easyui-combobox "
+                       name="marriage"
+                       style="width: 100px"
+                       data-options="
+                                loader:cj.getLoader('marriage'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'
+                     ">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">退休时间<label></label></td>
+            <td>
+                <input opt="age" class="easyui-validatebox input-text" name="age">
+            </td>
+            <td class="formtdtext">联系方式<label></label></td>
+            <td>
+                <input opt="age" class="easyui-validatebox input-text" name="age">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">住址<label></label></td>
+            <td>
+                <input opt="age" class="easyui-validatebox input-text" name="age">
+            </td>
+            <td class="formtdtext">政治面貌<label></label></td>
+            <td>
+                <input opt="age" class="easyui-validatebox input-text" name="age">
+            </td>
+        </tr>
+    </table>
+<!--<div style="width: 900px;margin: 0px auto 5px auto">
+    <table style="width: 900px">
+        <tr>
+            <td style="text-align: left">
+                <table style="width: 450px">
+                    <tr>
+                        <td class="formtdtext" style="text-align: right;width: 70px">制单日期<label></label></td>
+                        <td style="width: 100;text-align: left" >
+                            <input class="easyui-datebox" opt="setdaytime" name="operator_date" readonly
+                                   data-options="formatter:myformatter,parser:myparser">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="text-align: right">
+                <table style="width: 450px">
+                    <tr>
+                        <td style="width: 100px" >
+                            制单人<label></label><input size="15" class="easyui-validatebox input-text" name="operators" readonly="true"
+                                style="background-color: rgb(231, 241, 211);background: rgb(231, 241, 211);">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+
+        </tr>
+    </table>
+</div>-->
+</form>
+<!--</div>-->
+

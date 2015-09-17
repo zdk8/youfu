@@ -49,14 +49,6 @@
         <div class="head_bg">
             <div class="bghead_l">
                 <div>党建人事管理系统</div>
-                <!--<table>
-                    <tr>
-                        <td>
-                            &lt;!&ndash;<img src="images/index/logo.png">&ndash;&gt;
-                            <div>党建人事管理系统</div>
-                        </td>
-                    </tr>
-                </table>-->
             </div>
             <div class="bghead_r">
                 <!--<span>欢迎！{{username}}</span>&nbsp;|
@@ -176,8 +168,9 @@
 
 
 <script type="text/javascript">
-//    var usermsg;
+    var usermsg;
     $(document).ready(function(){
+        $('[opt=currentDate]').text(mycalendar.RunGLNL());//时间加载
         /*功能节点加载*/
         var loadFunction = function (funcid) {
             $.ajax({
@@ -236,8 +229,6 @@
             }
         })
 
-
-
         /*上方功能菜单事件*/
         $(document).on('click','.centertip ul li', function () {
             layer.load();
@@ -262,101 +253,6 @@
             })
 
         });
-        /*$('[opt=menu] ul li').on('click', function () {
-            mm = $(this)
-            $(this).addClass("menubarV").siblings().removeClass("menubarV");
-        });*/
-
-//        usermsg=eval('('+$('#usermsg').text()+')');
-        $('[opt=currentDate]').text(mycalendar.RunGLNL());
-
-
-        /*$(document).on('click','.div2', function () {
-            var $this = $(this);
-            var node = $this.next().val();
-            if($(this).next().next().find('li').length == 0){
-                $.ajax({
-                    url:'getfunctionmenu',
-                    type:'post',
-                    data:{
-                        funcid:node
-                    },
-                    success:function(data){
-                        var menuarr = new Array();
-                        if(data.length > 0){
-                            for(var i=0;i<data.length;i++){
-                                var menu = '<li><label style="cursor: pointer" opt="'+data[i].location+'">'+data[i].title+'</label></li>';
-                                menuarr.push(menu);
-                            }
-                            $this.next().next().html(menuarr);
-                            menuclick($this);
-                        }
-                    }
-                });
-            }else{
-                menuclick($this);
-            }
-        })*/
-        var menuclick = function ($this) {
-            $this.next().next('div').slideToggle("slow").siblings(".div3:visible").slideUp("slow");
-            $this.addClass("div2bag").siblings().removeClass("div2bag");
-            $this.next().next().find('li').addClass("div3bag").siblings().removeClass("div3bag");
-        }
-        var gettabs = function (title,htm) {
-            return $('#tabs').tabs('add',{
-                title:title,
-//                content:'<div style="height: 95.6%;margin: 10px;border: 1px solid red">'+htm+'</div>',
-                content:htm,
-                closable:true
-            }).tabs('getTab',title);
-        }
-        $(document).on('click','.div3 li', function () {
-//            var tip1 = $(this).parent().attr('opt');
-//            var tip2 = $(this).text();
-//            var span = '&nbsp;<span>'+tip1+'</span>&nbsp;>&nbsp;<span>'+tip2+'</span>';
-//            $('.centertip').find('span').html(span);
-            $(this).addClass("div3bag").siblings().removeClass("div3bag");
-            var intface = $(this).find('label').attr('opt');
-            var tabs = $('#tabs');
-            var title = $(this).text();
-            var funcarr = intface.replace('.','/');
-            if(!tabs.tabs('exists',title)){
-                require(['text!views/'+funcarr+'.htm','views/'+funcarr], function (htm,js) {
-                    var tab = gettabs(title,htm);
-                    if(js && js.render){
-                        js.render(tab);
-                    }
-                })
-            }else{
-                tabs.tabs('select',title);
-            }
-        })
-        /*叶签变化时导航栏的变化*/
-        $('#tabs').tabs({
-            onSelect: function (title) {
-                var span;
-                if(title == "主页"){
-                    span = '&nbsp;<span>'+title+'</span>';
-                }else{
-                    var lng = $('.div3').find('label');
-                    for(var i=0;i<lng.length;i++){
-                        if($(lng[i]).text() == title){
-                            var tip1 = $(lng[i]).parent().parent().attr('opt');
-                            span = '&nbsp;<span>'+tip1+'</span>&nbsp;>&nbsp;<span>'+title+'</span>';
-                        }
-                    }
-                }
-                $('.centertip').find('span').html(span);
-            }
-        })
-        /*关闭所有页签*/
-        $('[opt=closeAllTabs]').click(function () {
-            $(".tabs li").each(function(index, obj) {
-                //获取所有可关闭的选项卡
-                var tab = $(".tabs-closable", this).text();
-                $(".easyui-tabs").tabs('close', tab);
-            });
-        });
     });
 </script>
 
@@ -372,5 +268,8 @@
 <script type="text/javascript" src="js/highcharts/highcharts.js"></script>
 
 <script src="js/scripts/jquery-form.js"></script>
+
+<link type="text/css" rel="stylesheet" href="js/commonfuncs/datagrid/dataGrid.css" >
+<script src="js/commonfuncs/datagrid/dataGrid.js" type="text/javascript"></script>
 
 </html>

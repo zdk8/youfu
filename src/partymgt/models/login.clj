@@ -29,6 +29,6 @@
         ))
 ;  (first
 ;    (with-db dboracle
-;      (exec-raw ["select * from xt_user u,division d where u.regionid=d.dvcode and u.loginname=? and u.passwd=?" [name pwd]] :results))
+;      (exec-raw ["select * from xt_user u where u.loginname=? and u.passwd=?" [name pwd]] :results))
 ;    )
   )

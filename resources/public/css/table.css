@@ -33,12 +33,12 @@ textarea,textarea.input-text,textarea.input-focus{font-size:12px;height:auto; pa
     content: ":"
 }
 .common-form table{
-    width: 1100px;
+    /*min-width: 500px;*/
     margin: 0px auto;
     border: 1px solid #e5e5e5;
 }
 .common-form fieldset,.common-form fieldset table{
-    width: 1100px;
+    /*width: 1100px;*/
     margin: 0px auto;
     border: 1px solid #e5e5e5;
 }

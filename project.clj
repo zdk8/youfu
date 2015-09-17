@@ -62,5 +62,5 @@
                                :releases {:checksum :fail :update :always}}]
 
                   ]
-  :java-source-paths ["src/partymgt/javaxls"]
+;  :java-source-paths ["src/partymgt/javaxls"]
   :min-lein-version "2.0.0")

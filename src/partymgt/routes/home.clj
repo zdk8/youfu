@@ -17,8 +17,8 @@
   (GET "/logout" request (login/logout request)) ;;注销
 
 
-  (GET "/menubar" [] (layout/render "menubar.html"))
   (GET "/manager" [] (layout/render "manager.html"))
+  (GET "/datagrid" [] (layout/render "datagrid.html"))
 
 
 
