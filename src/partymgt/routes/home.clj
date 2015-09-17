@@ -8,6 +8,7 @@
             [noir.response :as resp]
 
             [partymgt.controller.manager :as mymngctrl]
+            [partymgt.controller.controller :as ctl]
             [partymgt.controller.login :as login]
             ))
 
@@ -22,4 +23,7 @@
 
 
 
+
+  ;;test
+  (GET "/gettablecols" [tablename] (ctl/test-get-tablecols tablename))   ;;获取表的字段
   )
