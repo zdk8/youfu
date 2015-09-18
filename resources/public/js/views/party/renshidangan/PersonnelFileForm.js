@@ -48,22 +48,6 @@ define(function(){
             .prev().hide();     //原来的圆点样式设置为不可见
     }
 
-    function create(local,option){
-        addToolBar(local);
-        /*为每个label注册收缩事件*/
-        local.find('fieldset').find('legend').find('label').each(function(obj,fn,arg){
-            var labelopt = fn.attributes[0].value.toString()
-            var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
-            if(label_talbe != "baseinfo"){
-                FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
-            }
-        }).click(function(e){
-                var labelopt = $(this)[0].attributes[0].value.toString();
-                var label_talbe = labelopt.substr(0,labelopt.lastIndexOf('_'));
-                FieldSetVisual(local,label_talbe+'_table',label_talbe,label_talbe+'_img')
-            })
-
-    }
 
     /*查看并修改*/
     var actionInfo=function(local,option) {
@@ -120,59 +104,223 @@ define(function(){
         });
     };
 
+    
+    /*学历学位添加*/
+    var degreeForm = function (local) {
+        var tdarr1 = '<td align="center"><input opt="edutype" class="easyui-combobox" opt2="educationtype" style="width: 100px"></td>'+
+            '<td align="center"><input class="input-text" opt="college"></td>' +
+            '<td align="center"><input class="input-text" opt="profession"></td>'+
+            '<td><input size="8" opt="pp_id" type="hidden"><input size="8" opt="districtidval" type="hidden"><a opt="dellist_degree" style="cursor: pointer;">删除</a></td>';
+
+        var _html1 = '<tr>' + tdarr1+ '</tr>';
+        local.find('[opt=addlist_degree]').click(function () {
+            var $this =$(this);
+            var $tr = $this.parents('.list').find('tbody');
+            $tr.append(_html1);
+            var edutype = local.find('[opt=edutype]').last();
+            edutype.combobox({
+                loader:cj.getLoader('edutype'),
+                valueField:'id',
+                editable:false,
+                textField:'text'
+            });
+            var lasttr = $tr.find('tr')[$tr.find('tr').length-1];
+            $($($(lasttr).find('td')[0]).find('span.combo')[1]).remove();
+            local.find('[opt=dellist_degree]').each(function () {
+            }).click(function () {
+                var _tr = $(this).parents('tr');
+                if (_tr.attr('class') != "demo") {
+                    var pp_id = _tr.find('[opt=pp_id]').val()
+                    if(!pp_id){
+                        _tr.remove();
+                    }
+                }
+            })
+        });
+    }
+    /*主要家庭成员添加*/
+    var familyForm = function (local) {
+        var tdarr2 = '<td align="center"><input class="input-text" opt="appellation" style="width: 100px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_name" style="width: 100px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_identityid" style="width: 100px;"></td>' +
+            '<td align="center"><input opt="fm_politicalstatus" class="easyui-combobox " style="width: 100px"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_workunit" style="width: 100px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_position" style="width: 100px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_contactway" style="width: 100px;"></td>'+
+            '<td><input size="8" opt="pp_id" type="hidden"><input size="8" opt="districtidval" type="hidden"><a opt="dellist_family" style="cursor: pointer;">删除</a></td>';;
+        var _html2 = '<tr>' + tdarr2+ '</tr>';
+        local.find('[opt=addlist_family]').click(function () {
+            var $this =$(this);
+            var $tr = $this.parents('.list').find('tbody');
+            $tr.append(_html2);
+            var fm_politicalstatus = local.find('[opt=fm_politicalstatus]');
+            fm_politicalstatus.combobox({
+                loader:cj.getLoader('politicsstatus'),
+                valueField:'id',
+                editable:false,
+                textField:'text'
+            });
+            var lasttr = $tr.find('tr')[$tr.find('tr').length-1];
+            $($($(lasttr).find('td')[0]).find('span.combo')[1]).remove();
+            local.find('[opt=dellist_family]').each(function () {
+            }).click(function () {
+                var _tr = $(this).parents('tr');
+                if (_tr.attr('class') != "demo") {
+                    var pp_id = _tr.find('[opt=pp_id]').val()
+                    if(!pp_id){
+                        _tr.remove();
+                    }
+                }
+            })
+        });
+    }
+    /*学位学历表单提交时值动态获取*/
+    var getDegreeValue = function (local) {
+        var edutype = local.find('[opt=edutype]');//教育类别
+        var college = local.find('[opt=college]');      //毕业院校
+        var profession = local.find('[opt=profession]');      //毕业院校
+        var arr1 = new Array();
+        var arr2 = new Array();
+        var arr3 = new Array();
+        edutype.each(function () {
+            arr1.push($(this).combobox('getValue'))
+        });
+        college.each(function () {
+            arr2.push($(this).val())
+        });
+        profession.each(function () {
+            arr3.push($(this).val())
+        });
+
+        var arrall = new Array();
+        for(var i=0;i<arr1.length;i++){
+            var maparr = {};
+            maparr['educationtype']=arr1[i];
+            maparr['college']=arr2[i];
+            maparr['profession']=arr3[i];
+            arrall.push(maparr);
+        }
+        return arrall;
+    }
+    var getFamilyValue = function (local) {
+        var appellation = local.find('[opt=appellation]');//称谓
+        var fm_name = local.find('[opt=fm_name]');      //姓名
+        var fm_identityid = local.find('[opt=fm_identityid]');      //身份证
+        var fm_politicalstatus = local.find('[opt=fm_politicalstatus]');      //政治面貌
+        var fm_workunit = local.find('[opt=fm_workunit]');      //工作单位
+        var fm_position = local.find('[opt=fm_position]');      //职务
+        var fm_contactway = local.find('[opt=fm_contactway]');      //联系方式
+        var arr1 = new Array();
+        var arr2 = new Array();
+        var arr3 = new Array();
+        var arr4 = new Array();
+        var arr5 = new Array();
+        var arr6 = new Array();
+        var arr7 = new Array();
+        appellation.each(function () {
+            arr1.push($(this).val())
+        });
+        fm_name.each(function () {
+            arr2.push($(this).val())
+        });
+        fm_identityid.each(function () {
+            arr3.push($(this).val())
+        });
+        fm_politicalstatus.each(function () {
+            arr4.push($(this).combobox('getValue'))
+        });
+        fm_workunit.each(function () {
+            arr5.push($(this).val())
+        });
+        fm_position.each(function () {
+            arr6.push($(this).val())
+        });
+        fm_contactway.each(function () {
+            arr7.push($(this).val())
+        });
+
+        var arrall = new Array();
+        for(var i=0;i<arr1.length;i++){
+            var maparr = {};
+            maparr['appellation']=arr1[i];
+            maparr['fm_name']=arr2[i];
+            maparr['fm_identityid']=arr3[i];
+            maparr['fm_politicalstatus']=arr4[i];
+            maparr['fm_workunit']=arr5[i];
+            maparr['fm_position']=arr6[i];
+            maparr['fm_contactway']=arr7[i];
+            arrall.push(maparr);
+        }
+        return arrall;
+    }
     /*新增数据时进入*/
     var saveFunc = function(local,option){
-        addCheckboxCss(local);
-        var districtid = local.find('[opt=districtid]');      //行政区划
-        getdivision(districtid);                    //加载行政区划
-        local.find('[name=operators]').val(cj.getUserMsg().username);
-        local.find('[opt=setdaytime]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
-        /*根据身份证获取基本信息*/
-        getBaseInfoByIdentityid({identityid:local.find("[opt=identityid]"),birthdate:local.find('[opt=birthdate]'),
-            gender:local.find('[opt=gender]'),age:local.find('[opt=age]'),agetype:null});
-        local.find('[opt=dealwith]').hide();
-        local.find('[opt=update]').hide();
-        local.find('[opt=delete]').hide();
-        local.find('[opt=save2]').hide();
-        var savebtn = local.find('[opt=save]');               //保存按钮
-        savebtn.show().click(function(){
-            //local.find('[opt=save]').hide()
-            //local.find('[opt=save2]').show()
-            local.find('[opt=pensionform]').form('submit', {
-                url:'saveold',
+        degreeForm(local);//学位学历添加
+
+        familyForm(local);/*主要家庭成员添加*/
+
+        /*工作状况状态选择*/
+        local.find('[opt=workstatus]').combobox({
+            onSelect: function (record) {
+                var timename;
+                if(record.id == "0"){
+                    timename = '工作时间';
+                }else if(record.id == "1"){
+                    timename = '离休时间';
+                }else{
+                    timename = '退休时间';
+                }
+                var ht = timename+'<label></label>&nbsp;';
+                local.find('[opt=worktime]').html(ht)
+            }
+        });
+        /*人员身份选择*/
+        local.find('[opt=personnel]').combobox({
+            onSelect: function (record) {
+                if(record.id == "2"){       //事业处理
+                    local.find('[opt=shiye]').slideDown('slow');
+                    local.find('[opt=hetonggong]').slideUp('slow');
+                }else if(record.id == "3"){ //岗位合同工处理
+                    local.find('[opt=hetonggong]').slideDown('slow');
+                    local.find('[opt=shiye]').slideUp('slow');
+                }else{
+                    local.find('[opt=shiye]').slideUp('slow');
+                    local.find('[opt=hetonggong]').slideUp('slow');
+                }
+            }
+        });
+
+        option.submitbtn.click(function () {
+            var nameedu = getDegreeValue(local);//学位学历获取
+            var namefamily = getFamilyValue(local);//家庭成员获取
+            var $local = option.parent;
+            $local.find('form').form('submit', {
+                url: 'saveold1',
                 onSubmit: function (params) {
-                    //showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
                     layer.load();
-                    params.districtid = districtid.combobox("getValue")
                     var isValid = $(this).form('validate');
-                    if (!isValid){
-                        showProcess(false);
+                    params.educationway = nameedu;
+                    params.familymembers = namefamily;
+                    if (!isValid) {
                         layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
-                    if(data == "true"){
-                        //showProcess(false);
+                    if (data == "true") {
                         layer.closeAll('loading');
-                        //cj.slideShow('保存成功');
-                        layer.alert('保存成功!', {icon: 6,title:'温馨提示'});
-                        //local.find('[opt=save]').show()
-                        //local.find('[opt=save2]').hide()
-                        if(showProcess(false)){
-                            $("#tabs").tabs("close","老年基本信息录入");
-                        }
-                    }else{
+                        layer.alert('保存成功!', {icon: 6, title: '温馨提示'});
+                    } else {
                         layer.closeAll('loading');
-                        cj.slideShow('<label style="color: red">保存失败</label>');
+                        layer.alert('保存失败!', {icon: 5, title: '温馨提示'});
                     }
                 }
-            });
-        })
+            })
+        });
 
         /*图片上传*/
         local.find('[opt=personimg]').click(function(){
-            require(['commonfuncs/popwin/win','text!views/pension/fileupload/FileForm.htm','views/pension/fileupload/FileForm'],
+            require(['commonfuncs/popwin/win','text!views/party/fileupload/FileForm.htm','views/party/fileupload/FileForm'],
                 function(win,htmfile,jsfile){
                     win.render({
                         title:"上传图片",
@@ -264,7 +412,6 @@ define(function(){
 
     var render=function(l,o){
         layer.closeAll('loading');
-        create(l,o);
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'update1':

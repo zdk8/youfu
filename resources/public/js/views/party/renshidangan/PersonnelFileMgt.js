@@ -128,7 +128,7 @@ define(function(){
                     /*layer.open({
                         type: 1,
                         skin: 'layui-layer-rim', //加上边框
-                        area: ['420px', '240px'], //宽高
+                        area: ['890px', '550px'], //宽高
                         content: htmfile
                     });
                     if(jsfile){
@@ -146,8 +146,8 @@ define(function(){
 
                     win.render({
                         title:'人事档案添加',
-                        width:695,
-                        height:450,
+                        width:890,
+                        height:550,
                         html:htmfile,
                         buttons:[
                             {text:'取消',handler:function(html,parent){

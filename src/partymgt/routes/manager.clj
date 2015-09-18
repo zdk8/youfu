@@ -30,9 +30,11 @@
   (POST "/getcombobypr" req (myctrl/get-combo-by-pr req))
   (POST "/getcombodtbypr" req (myctrl/get-combodt-by-pr req))
 
+  ;;功能维护
   (GET "/getFunctionById" [node] (myctrl/get-function-by-id node))
   (POST "/delFunctionById" [functionid] (myctrl/del-function-by-id functionid))
   (POST "/saveFunction" req (myctrl/create-function req))
+  (POST "/getFunctionImg" req (myctrl/getFunctionImg req))
 
   ;;用户维护
   (GET "/getdivisiontree" req (myctrl/get-divisiontree req))
@@ -54,6 +56,10 @@
   (POST "/savegrant" req (myctrl/save-grant req))
   (GET "/saveroleuser" req (myctrl/save-role-user req))
   (POST "/saveroleuser" req (myctrl/save-role-user req))
+
+  ;;图标上传
+  (POST "/uploadimg" [file pc_id filetype filenamemsg fileext] (myctrl/uploadimg file pc_id filetype filenamemsg fileext));;上传
+
   ;;测试session
   (GET "/getiframes" [pagename pagetitle]
     (layout/render "addold.html" {:pagename pagename

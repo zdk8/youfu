@@ -137,6 +137,42 @@ define(function(){
                 alert('noaction');
             })
 
+            /*添加图片*/
+            local.find('[opt=addimg]').click(function () {
+                /*图片上传*/
+                require(['commonfuncs/popwin/win','text!views/party/fileupload/FileForm.htm','views/party/fileupload/FileForm'],
+                    function(win,htmfile,jsfile){
+                        win.render({
+                            title:"上传图片",
+                            width:400,
+                            height:200,
+                            html:htmfile,
+                            buttons:[
+                                {text:'取消',handler:function(html,parent){
+                                    parent.trigger('close');
+                                }},
+                                {
+                                    text:'保存',
+                                    handler:function(html,parent){
+                                    }
+                                }
+                            ],
+                            renderHtml:function(localc,submitbtn,parent){
+                                jsfile.render(localc,{
+                                    submitbtn:submitbtn,
+                                    parent:parent,
+                                    plocal:local,
+                                    functype:"funcimg",
+                                    onCreateSuccess:function(data){
+                                        parent.trigger('close');
+                                    }
+                                })
+                            }
+                        })
+                    }
+                )
+            });
+
         }
     }
 })

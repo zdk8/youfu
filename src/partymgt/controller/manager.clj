@@ -5,6 +5,8 @@
             [noir.response :as resp]
             [noir.session :as session]
             [taoensso.timbre :as timbre]
+            [noir.io :as io]
+            [partymgt.models.schema :as schema]
             ))
 
 
@@ -130,6 +132,13 @@
         results (if (= functionid "-1") (basemd/create-function params) (basemd/update-function params functionid))
         ]
     (resp/json {:test "test"})))
+(defn getFunctionImg [req]
+  (let [{params :params} req
+        {functionid :funcid} params]
+    (resp/json (basemd/getFunctionImg functionid))
+    )
+  )
+
 
 (defn create-combo [req]
   (let [{params :params} req
@@ -223,6 +232,43 @@
 (defn get-role-by-id [id]
   (let [results (first (basemd/get-role-by-id id))]
     (resp/json results)))
+
+(defn uploadfile
+  "文件上传"
+  [file  dirpath filename]
+;  (let [havedir (fs/exists? dirpath)
+        ;        uploadpath (str schema/datapath "upload/")
+        ;        timenow (c/to-long  (l/local-now))
+        ;;       filename (str timenow (:filename file))
+        ;        filename (str filenamemsg fileext)
+        ;        filesie (:size file)
+        ;        filedata {:file_anme filenamemsg :attach_type filetype :fie_path (str "/upload/" filetype "/" filename) :file_size filesie :file_type fileext :pc_id pc_id}
+;        ]
+    ;    ;(println  "FFFFFFFFFFFF" file)
+    ;
+    ;    filedata
+;    (if havedir "" (fs/mkdirs dirpath))     ;如果文件不存在，建立此文件
+    (io/upload-file dirpath  (conj file {:filename filename}))
+;    )
+  )  ;文件上传
+
+;;图标上传
+(defn uploadimg [file pc_id filetype filenamemsg fileext]
+  (try
+    (let[;filedata (common/uploadfile file pc_id filetype filenamemsg fileext)
+         uploadpath (str schema/datapath "images/menu/")      ;获取当前目录
+;         timenow (c/to-long  (l/local-now))              ;当前时间数字
+         ;        filename (str timenow (:filename file))
+         filename (str filenamemsg fileext)              ;文件名称
+         filesie (:size file)                            ;文件大小
+         filedata {:file_name filenamemsg :attach_type filetype :fie_path (str "/upload/" filetype "/" filename) :file_size filesie :file_type fileext :pc_id pc_id}
+         dirpath (str uploadpath filetype)
+         ]
+;      (uploadfile file  dirpath filename)
+;      (db/adddata-by-tablename "t_attach_files" filedata)
+      (str "success"))
+    (catch Exception e (str (.getMessage e )))
+    ))
 
 
 ;;session test

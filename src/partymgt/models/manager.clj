@@ -84,6 +84,11 @@
   (let [f (conj function {:functionid (strs/replace (str (java.util.UUID/randomUUID)) "-" "")}) ]
     (insert xt_function
       (values f))))
+(defn getFunctionImg [functionid]
+  (first
+    (select xt_function
+    (where {:functionid functionid})
+    )))
 
 
 (defn create-combo [combo]

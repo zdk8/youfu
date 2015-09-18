@@ -16,7 +16,6 @@
     </script>
 
     <link rel="stylesheet" type="text/css" href="css/index/index.css"/>
-    <link rel="stylesheet" type="text/css" href="css/btns.css"/>
     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="js/scripts/easyui/themes/default/easyui.css" />
@@ -86,11 +85,11 @@
                         <div style="height: 99.6%;border: 1px solid red;">
                             <div class="menubar">
                                 <div class="menubar_top">
-                                    <!--<label>党建系统</label>-->
+                                    <!--<img src="images/menu/1.png" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">党建系统-->
                                 </div>
                                 <div opt="menu">
                                     <ul>
-                                        <!--<li><a href="javaScript:;">党支部</a></li>-->
+                                        <!--<li><span opt="dddddd"><img src="images/menu/1.png" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">党支部</span></li>-->
                                         <!--<li><a href="javaScript:;">共青团</a></li>-->
                                         <!--<li><a href="javaScript:;">妇女小组</a></li>-->
                                         <!--<li><a href="javaScript:;">公会</a></li>-->
@@ -102,61 +101,8 @@
                     </div>
                     <div opt="showright" data-options="region:'center',border:false">
                         <div class="easyui-layout" data-options="fit:true">
-                            <!--<div data-options="region:'north',height:50,border:false">
-                                <div class="centertip">
-                                    <span>&nbsp;<span>主页</span></span>
-                                    <label opt="currentDate" style="float: right;margin-right: 8px;font-size: 10px;color:#104b67;font-style: oblique;"></label>
-                                </div>
-                            </div>-->
                             <div data-options="region:'center',border:false">
                                 <div id="panel" class="easyui-panel" data-options="iconCls:'icon-save',fit:true"></div>
-                                <!--<div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
-                                    <div title="主页" data-options="border:false" style="padding:5px;">
-                                        <div class="easyui-layout" data-options="fit:true">
-                                            <div data-options="region:'north',border:false"
-                                                 style="height:50px;padding:0 5px 0 5px;">
-                                                <div style="border: 1px solid #e5e5e5;
-                                                width: auto;height: 84%;background-color: #eff3f8;padding-top: 6px">
-                                                    <div style="height: 30px;padding-top: 6px;padding-right:3px;">
-                                                        &nbsp;<span>姓名 </span><span><input type="text" size="5" class="inputtext"></span>
-                                                        &nbsp;<span>身份证号 </span><span><input type="text" size="15" class="inputtext"></span>
-                                                        &nbsp;<span>年龄 </span><span><input type="text" size="5" class="inputtext"> -- <input type="text" size="5" class="inputtext"></span>
-                                                    <span style="float: right;margin-top: 3px">
-                                                        <input type="button" value="查询" class="btns">
-                                                        <input type="button" value="导出" class="btns">
-                                                    </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div data-options="region:'center',border:false" style="padding:5px;">
-                                                <table class="easyui-datagrid" data-options="fit:true,
-                                                                    fitColumns:true,pagination:true">
-                                                    <thead>
-                                                    <tr>
-                                                        <th data-options="field:'code',width:100,align:'center'">姓名</th>
-                                                        <th data-options="field:'name',width:100,align:'center'">出生年月</th>
-                                                        <th data-options="field:'price',width:100,align:'center'">身份证号</th>
-                                                        <th data-options="field:'price',width:100,align:'center',
-                                                            formatter:function(value,rowData,rowIndex){
-                                                            var str='<div></div>';
-                                                            str=$(str).append('<a action=&quot;delete&quot;title=&quot;删除&quot;>删除</a>');
-                                                            return str.html();
-                                                        }">操作</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>夏留金</td><td>1950-04-11</td><td>330424194406182017</td><td>2323</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>鲍天松</td><td>1959-04-02</td><td>330424195904022010</td><td>2323</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -184,7 +130,13 @@
                     var menuarr = new Array();
                     if(data.length > 0){
                         for(var i=0;i<data.length;i++){
-                            var menu = '<li><span opt="'+data[i].location+'">'+data[i].title+'</span></li>'
+                            var menubg;
+                            if(data[i].img){
+                                menubg = data[i].img;
+                            }else{
+                                menubg = "1.png"
+                            }
+                            var menu = '<li><span opt="'+data[i].location+'">'+'<img src="images/menu/'+menubg+'" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">'+data[i].title+'</span></li>'
                             menuarr.push(menu);
                         }
                         $('[opt=menu] ul').html(menuarr);
@@ -214,14 +166,15 @@
                         if(data[i].img){
                             menubg = data[i].img;
                         }else{
-                            menubg = "menu2.png"
+                            menubg = "1.png"
                         }
                         var menuli = '<li><span opt="'+data[i].functionid+'">'+data[i].title+'</span></li>';
                         htmarr.push(menuli);
                     }
                     $('[opt=menutotal] ul').html(htmarr);
                     $('.centertip ul li').first().addClass('centertipV');
-                    $('.menubar_top').html($('.centertip ul li').first().text());
+                    var imghtm = '<img src="images/menu/'+menubg+'" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">';
+                    $('.menubar_top').html(imghtm+$('.centertip ul li').first().text());
                     loadFunction($('.centertip ul li').first().find('span').attr('opt'));
                 }else{
                     $('[opt=menutotal] ul').html('<li><span style="color: red;">无相应功能模块!</span></li>');
@@ -234,8 +187,24 @@
             layer.load();
             var $this = $(this);
             $this.addClass("centertipV").siblings().removeClass("centertipV");
-            $('.menubar_top').html($this.text());
             var funcurl = $this.find('span').attr('opt');
+            $.ajax({
+                url:'getFunctionImg',
+                type:'post',
+                data:{
+                    funcid:funcurl
+                },
+                success: function (data) {
+                    var menubg;
+                    if(data.img){
+                        menubg = data.img;
+                    }else{
+                        menubg = "1.png"
+                    }
+                    var imghtm = '<img src="images/menu/'+menubg+'" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">';
+                    $('.menubar_top').html(imghtm+$this.text());
+                }
+            })
             loadFunction(funcurl);
         });
 
