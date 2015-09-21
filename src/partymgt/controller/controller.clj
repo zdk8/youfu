@@ -35,7 +35,7 @@
         identityid (:identityid params)
         rows (:rows params)
         page (:page params)
-        conds (str " isdel is null" (common/likecond "name" name) (common/likecond "identityid" identityid))
+        conds (str " and isdel is null" (common/likecond "name" name) (common/likecond "identityid" identityid))
         getresult (common/fenye rows page "t_personalrecords" "*" conds " order by pr_id desc")
         ]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime")})))
