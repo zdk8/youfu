@@ -292,7 +292,7 @@ define(function(){
         });
 
         option.submitbtn.click(function () {
-            var nameedu = getDegreeValue(local);//学位学历获取
+            nameedu = getDegreeValue(local);//学位学历获取
             var namefamily = getFamilyValue(local);//家庭成员获取
             var $local = option.parent;
             $local.find('form').form('submit', {
@@ -300,8 +300,8 @@ define(function(){
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
-                    params.educationway = nameedu;
-                    params.familymembers = namefamily;
+                    params.educationway = JSON.stringify(nameedu);
+                    params.familymembers = JSON.stringify(namefamily);
                     if (!isValid) {
                         layer.closeAll('loading');
                     }
