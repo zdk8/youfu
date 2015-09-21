@@ -309,3 +309,36 @@ ol, ul, li, dl, dd, dt {
     list-style: none;
 }
 
+
+/*弹出框功能条*/
+.funcmenu{
+    border-bottom:1px solid #D5D5D5;
+    height: 36px;
+    overflow:hidden;
+    background-color: #EAEAEA;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    margin: 0 auto;
+    display: none;
+}
+.funcmenu ul{
+    margin: 0 auto;
+    height: 31px;
+    padding-top: 3px;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+.funcmenu ul li{
+    height: 34px;
+    margin: 0 auto;
+    display:inline;
+    padding:0;
+}
+.funcmenu ul li input{
+    height: 30px;
+    width: 45px;
+    font-weight: bolder;
+}
+
+

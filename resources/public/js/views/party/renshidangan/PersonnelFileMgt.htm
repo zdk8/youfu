@@ -19,47 +19,38 @@
         </div>
     </div>
     <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
-        <table class="easyui-datagrid"
+        <table class="easyui-datagrid-noauto"
                data-options="fit:true,
-                    fitColumns:false,
+                    fitColumns:true,
                     method:'post',
                     singleSelect:true,
                     loadMsg:'',
                     pagination:true">
             <thead frozen="true">
-            <tr>
-                <th data-options="field:'lr_id',hidden:true">老人表主键</th>
-                <th data-options="field:'name',width:80,align:'center',
-                formatter:function(v,r,i){
-                            var str='<div></div>';
-                            str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
-                            return str.html();
-                        }">姓名</th>
-            </tr>
+                <tr>
+                    <th data-options="field:'name',width:80,align:'center',
+                    formatter:function(v,r,i){
+                                var str='<div></div>';
+                                str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
+                                return str.html();
+                            }">姓名</th>
+                </tr>
             </thead>
             <thead>
             <tr>
                 <th data-options="field:'identityid',width:170,align:'center'">身份证</th>
-                <th data-options="field:'aulevel',width:100,align:'center',
-                formatter: function(value,row,index){
-                        if(value == 0){
-                            return approvalProcess[4]
-                        }else{
-                            return approvalProcess[value]
-                        }
-                    }">状态</th>
-                <th data-options="field:'auflag',width:100,align:'center'">流程信息</th>
-                <th data-options="field:'audesc',width:180,align:'center'">处理意见</th>
                 <th data-options="field:'gender',width:74,align:'center',
                 formatter: function(value,row,index){
                         return getGender[value]
                     }">性别</th>
-                <th data-options="field:'auuser',width:127,align:'center'">办理人</th>
-                <th data-options="field:'bstime',width:140,align:'center'">时间</th>
+                <th data-options="field:'age',width:100,align:'center'">年龄</th>
+                <th data-options="field:'native',width:127,align:'center'">籍贯</th>
+                <th data-options="field:'contactway',width:140,align:'center'">联系方式</th>
                 <th data-options="field:'ro',width:100,align:'center',
                 formatter:function(value,rowData,rowIndex){
                     var str='<div></div>';
-                    str=$(str).append('<a action=&quot;dealwith&quot;title=&quot;处理&quot;><div class=&quot;dealwith_btn&quot;></div></a>');
+                    str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                    str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                     return str.html();
                 }">操作</th>
             </tr>
