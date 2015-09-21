@@ -54,7 +54,7 @@
         familydata (map #(conj % {:pr_id pr_id}) getfamilydata)
         ]
     (db/update-pensonrecords prdata edudata familydata pr_id)
-    (str "ture")))
+    (str "true")))
 
 (defn delete-record-byid [request]
   (let [params (:params request)
