@@ -26,6 +26,7 @@
   (POST "/record/getrecordlist" request (ctl/get-record-list request))
   (POST "/record/updaterecord" request (ctl/update-record-byid request))
   (POST "/record/delpensonrecords" request (ctl/delete-record-byid request))
+  (POST "/record/getrecordbyid" request (ctl/get-record-byid request))
 
 
   ;;test

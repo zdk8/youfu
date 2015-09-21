@@ -62,6 +62,16 @@
     (db/updatedata-by-tablename "t_personalrecords" {:isdel "1"} {:pr_id pr_id})
     (str "true")))
 
+(defn get-record-byid [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)
+        getprdata    (db/selectdatas-by-tablename "t_personalrecords" {:pr_id pr_id})
+        getedudata   (db/selectdatas-by-tablename "t_educationway" {:pr_id pr_id})
+        getfamilydata (db/selectdatas-by-tablename "t_familymember" {:pr_id pr_id})
+        prdata (conj (common/dateymd-bf-list getprdata "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime") {:educationway getedudata :familymembers getfamilydata} )
+        ]
+    (resp/json prdata)))
+
 
 
 
