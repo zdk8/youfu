@@ -14,7 +14,7 @@
 
 
 (def selectcols {;;人事档案表
-                 :t_personalrecords [:name :identityid :gender :age :native :birthplace :photo :nation :marriage :workstatus :worktime :contactway :address :education :educationway :familymembers :politicalstatus :organizeunit :partytime :department :position :positiontype :personnel :employtime :employterm :technicalpost :contractsigntime :contractdeadline :probation :post :workunit :incumbent :positionlevel :incumbenttime :chargework :pb :cy :vc :wg :tu]
+                 :t_personalrecords [:name :identityid :gender :age :native :birthplace :photo :nation :marriage :workstatus :worktime :contactway :address :education :politicalstatus :organizeunit :partytime :department :position :positiontype :personnel :employtime :employterm :technicalpost :contractsigntime :contractdeadline :probation :post :workunit :incumbent :positionlevel :incumbenttime :chargework :pb :cy :vc :wg :tu]
                  ;;学位学历表
                  :t_educationway [:educationtype :college :profession]
                  ;;家庭成员表

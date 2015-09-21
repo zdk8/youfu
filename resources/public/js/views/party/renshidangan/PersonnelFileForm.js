@@ -295,7 +295,7 @@ define(function(){
             var namefamily = getFamilyValue(local);//家庭成员获取
             var $local = option.parent;
             $local.find('form').form('submit', {
-                url: 'saveold1',
+                url: 'record/addpensonrecords',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');

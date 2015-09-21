@@ -2,11 +2,18 @@
   (:use compojure.core)
   (:require
     [partymgt.models.db :as db]
-    [noir.response :as resp]))
+    [partymgt.common.common :as common]
+    [noir.response :as resp]
+    ))
 
 
 
-
+(defn add-pensonrecords [request]
+  (let [params (:params request)
+        prdata (select-keys params (:t_personalrecords common/selectcols))
+        edudata (:educationway params)
+        familydata (:familymembers params)]
+    (println "PPPPPPPPPP" params)))
 
 
 

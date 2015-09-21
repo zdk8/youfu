@@ -22,6 +22,7 @@
   (GET "/datagrid" [] (layout/render "datagrid.html"))
 
 
+  (POST "/record/addpensonrecords" request (ctl/add-pensonrecords request))
 
 
   ;;test
