@@ -34,12 +34,12 @@ define(function(){
         result.find('.pop-win-north-title').html(option['title']).width(option['width']-50);//设置标题名并设置宽度
         var $html=$(option['htmlcontent']);
         result.find('.htmlcontent').html($html);
-        result.show();
-        /*result.hide();
-        layer.load(1)
+        //result.show();
+        result.hide();
         window.setTimeout(function(){
+            layer.closeAll('loading');
             result.show();
-        },500)*/
+        },300)
 
 
 
@@ -77,6 +77,7 @@ define(function(){
     }
 
     var render=function(option){
+        layer.load(2);
         require(['text!commonfuncs/popwin/win.htm'],function(win){
             webox({
                 height:option.height||350,

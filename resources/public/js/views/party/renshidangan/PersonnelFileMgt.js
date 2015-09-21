@@ -1,8 +1,11 @@
 /*审核处理*/
 define(function(){
     function render(local,option){
-        local.find('[opt=other]').click(function () {
+        local.find('[opt=other]').on('click', function () {
             local.find('[opt=func_btn]').animate({"right":'', width : "show"},500);
+        });
+        local.find('[opt=other_2]').on('click', function () {
+            local.find('[opt=func_btn]').animate({"right":'', width : "hide"},500);
         });
 
         var ppaudit = local.find('.easyui-datagrid-noauto');               //审核datagrid

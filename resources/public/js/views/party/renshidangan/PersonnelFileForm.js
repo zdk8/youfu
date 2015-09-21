@@ -153,7 +153,8 @@ define(function(){
             var $this =$(this);
             var $tr = $this.parents('.list').find('tbody');
             $tr.append(_html2);
-            var fm_politicalstatus = local.find('[opt=fm_politicalstatus]');
+            var fm_politicalstatus = local.find('[opt=fm_politicalstatus]').last();
+            //var fm_politicalstatus = local.find('[opt=fm_politicalstatus]');
             fm_politicalstatus.combobox({
                 loader:cj.getLoader('politicsstatus'),
                 valueField:'id',
