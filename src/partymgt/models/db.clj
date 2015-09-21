@@ -57,3 +57,19 @@
   (select tablename
           (where conds)))
 
+
+
+
+(defn add-pensonrecords [prdata edudata familydata]
+  (transaction
+    (adddata-by-tablename "t_personalrecords" prdata)                              ;增加人事档案基础数据
+    (dorun (map #(adddata-by-tablename "t_educationway" %) edudata))              ;增加人事档案相关的学历历程关联数据
+    (dorun (map #(adddata-by-tablename "t_familymember" %) familydata))))         ;增加人事档案相关的人员关系关联数据
+
+(defn update-pensonrecords [prdata edudata familydata pr_id]
+  (transaction
+    (deletedata-by-tablename "t_educationway" {:pr_id pr_id})                       ;删除原学历历程数据
+    (deletedata-by-tablename "t_familymember" {:pr_id pr_id})                       ;删除原人员关系数据
+    (updatedata-by-tablename "t_personalrecords" prdata {:pr_id pr_id})             ;更新人事档案基础数据
+    (dorun (map #(adddata-by-tablename "t_educationway" %) edudata))               ;增加新的学历历程关联数据
+    (dorun (map #(adddata-by-tablename "t_familymember" %) familydata))))          ;增加新的人员关系关联数据

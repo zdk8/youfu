@@ -4,21 +4,63 @@
     [partymgt.models.db :as db]
     [partymgt.common.common :as common]
     [noir.response :as resp]
+    [clojure.data.json :as json]
     ))
 
 
 
-(defn add-pensonrecords [request]
+(defn add-pensonrecords
+  "人事档案数据增加"
+  [request]
   (let [params (:params request)
-        prdata (select-keys params (:t_personalrecords common/selectcols))
-        edudata (:educationway params)
-        familydata (:familymembers params)]
-    (println "PPPPPPPPPP" params)))
+        getprdata (select-keys params (:t_personalrecords common/selectcols))
+        getedudata  (json/read-str  (:educationway params) :key-fn keyword)
+        getfamilydata (json/read-str  (:familymembers params) :key-fn keyword)
+        prnextid (:nextval (first(db/get-results-bysql "select seq_t_personalrecords.nextval  from dual")))
+        prdata (conj (common/dateformat-bf-insert getprdata  "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime") {:pr_id prnextid})
+        edudata (map #(conj % {:pr_id prnextid}) getedudata)
+        familydata (map #(conj % {:pr_id prnextid}) getfamilydata)
+        ]
+    ;(println "PPPPPPPPPP" prdata)
+    ;(println "EEEEEEEEEE" edudata)
+    ;(println "FFFFFFFFFF" familydata)
+    (db/add-pensonrecords prdata edudata familydata)
+    (str "true")))
+
+(defn get-record-list
+  "人事档案数据列表查询"
+  [request]
+  (let [params (:params request)
+        name (:name params)
+        identityid (:identityid params)
+        rows (:rows params)
+        page (:page params)
+        conds (str " isdel is null" (common/likecond "name" name) (common/likecond "identityid" identityid))
+        getresult (common/fenye rows page "t_personalrecords" "*" conds " order by pr_id desc")
+        ]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime")})))
 
 
+(defn update-record-byid
+  "根据id更新人事档案的数据"
+  [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)
+        getprdata (select-keys params (:t_personalrecords common/selectcols))
+        getedudata  (json/read-str  (:educationway params) :key-fn keyword)
+        getfamilydata (json/read-str  (:familymembers params) :key-fn keyword)
+        prdata (common/dateformat-bf-insert getprdata  "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime")
+        edudata (map #(conj % {:pr_id pr_id}) getedudata)
+        familydata (map #(conj % {:pr_id pr_id}) getfamilydata)
+        ]
+    (db/update-pensonrecords prdata edudata familydata pr_id)
+    (str "ture")))
 
-
-
+(defn delete-record-byid [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)]
+    (db/updatedata-by-tablename "t_personalrecords" {:isdel "1"} {:pr_id pr_id})
+    (str "true")))
 
 
 

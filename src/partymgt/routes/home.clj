@@ -21,8 +21,11 @@
   (GET "/test" [] (layout/render "test.html"))
   (GET "/datagrid" [] (layout/render "datagrid.html"))
 
-
+  ;;人事档案相关接口
   (POST "/record/addpensonrecords" request (ctl/add-pensonrecords request))
+  (POST "/record/getrecordlist" request (ctl/get-record-list request))
+  (POST "/record/updaterecord" request (ctl/update-record-byid request))
+  (POST "/record/delpensonrecords" request (ctl/delete-record-byid request))
 
 
   ;;test
