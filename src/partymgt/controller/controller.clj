@@ -73,7 +73,37 @@
     (resp/json prdata)))
 
 
+(defn add-partybranch
+  "新增党支部"
+  [request]
+  (let [params (:params request)
+        partydata (select-keys params (:t_partybranch common/selectcols))]
+    (db/adddata-by-tablename "t_partybranch" (common/dateformat-bf-insert partydata "pb_createtime"))
+    (str "true")))
 
+(defn update-party-byid [request]
+  (let [params (:params request)
+        pb_id (:pb_id params)
+        partydata (select-keys params (:t_partybranch common/selectcols))]
+    (db/updatedata-by-tablename "t_partybranch" (common/dateformat-bf-insert partydata "pb_createtime") {:pb_id pb_id})
+    (str "true")))
+
+(defn get-depart-list [request]
+  (let [params (:params request)
+        pb_name (:pb_name params)
+        rows (:rows params)
+        page (:page params)
+        conds (str (common/likecond "pb_name" pb_name))
+        getresult (common/fenye rows page "t_partybranch" "*" conds " order by pb_id desc")]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "pb_createtime") })))
+
+(defn add-people-to-party [request]
+  (let [params (:params request)
+        pb_id (:pb_id params)
+        pr_id (:pr_id params)
+        ]
+    (db/updatedata-by-tablename "t_personalrecords" {:pb pb_id} {:pr_id pr_id})
+    (str "true")))
 
 
 
