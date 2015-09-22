@@ -59,6 +59,39 @@ define(function(){
                         })(i)
                     }
                 }
+            },
+            onDblClickRow: function (index,row) {
+                layer.load(2);
+                var title = row.name+'-信息';
+                $.ajax({
+                    url:'record/getrecordbyid',
+                    type:'post',
+                    data:{
+                        pr_id:row.pr_id
+                    },
+                    success: function (data) {
+                        require(['text!views/party/renshidangan/PersonnelFile_Child.htm','views/party/renshidangan/PersonnelFile_Child'],
+                            function(htmfile,jsfile){
+                                layer.open({
+                                    title:title,
+                                    type: 1,
+                                    area: ['600px', '400px'], //宽高
+                                    content: htmfile,
+                                    shift: 2,
+                                    success: function(layero, index){
+                                        jsfile.render(layero,{
+                                            index:index,
+                                            queryParams:{
+                                                childrecord:data
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        )
+                    }
+                })
+
             }
         })
 
