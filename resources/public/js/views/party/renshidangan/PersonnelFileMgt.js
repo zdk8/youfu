@@ -8,21 +8,20 @@ define(function(){
             local.find('[opt=func_btn]').animate({"right":'', width : "hide"},500);
         });
 
-        var ppaudit = local.find('.easyui-datagrid-noauto');               //审核datagrid
-        var dealwith = local.find('[opt=dealwith]');                        //处理
-        var operationlog = local.find('[opt=operationlog]');                //操作日志
+        var datagrid = local.find('.easyui-datagrid-noauto');
         var refreshGrid=function() {
-            ppaudit.datagrid('reload');
+            datagrid.datagrid('reload');
         };
-        /*加载审核人员*/
-        local.find('.easyui-datagrid-noauto').datagrid({
-            url:"pension/get-auditpeople",
+        /*加载人事档案人员*/
+        datagrid.datagrid({
+            url:"record/getrecordlist",
             type:'post',
             onLoadSuccess:function(data){
-                var info = local.find('[action=view]');           //详细信息
-                var dealwith = local.find('[action=dealwith]');           //处理
+                var view = local.find('[action=view]');           //详细信息
+                var updatebtns = local.find('[action=update]');           //修改
+                var delbtns = local.find('[action=del]');           //删除
                 var rows=data.rows;
-                var btns_arr=[info,dealwith];
+                var btns_arr=[view,delbtns,updatebtns];
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -30,192 +29,145 @@ define(function(){
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "view"){                                       //详细信息
-                                    var title = "【"+record.name+'】详细信息';
-                                    if($("#tabs").tabs('getTab',title)){
-                                        $("#tabs").tabs('select',title)
-                                    }else{
-//                                        showProcess(true, '温馨提示', '数据处理中，请稍后...');   //进度框加载
+                                    updateFunc(record,refreshGrid);
+                                }else if(action == "del"){                   //处理
+                                    layer.confirm('确定删除么?', {icon: 3, title:'温馨提示'}, function(index){
+                                        layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:"searchid",                                //查询老人表
+                                            url:'record/delpensonrecords',
+                                            type:'post',
                                             data:{
-                                                id:record.lr_id
+                                                pr_id:record.pr_id
                                             },
-                                            type:"post",
-                                            dataType:"json",
-                                            success:function(data){
-                                                cj.showContent({                                          //详细信息(tab标签)
-                                                    title:title,
-                                                    htmfile:'text!views/pension/pensioninfo/PensionPeopleInfo.htm',
-                                                    jsfile:'views/pension/pensioninfo/PensionPeopleInfo',
-                                                    queryParams:{
-                                                        actiontype:'info',         //（处理）操作方式
-                                                        data:data,                   //填充数据
-                                                        record:record,
-                                                        title:title,
-                                                        refresh:refreshGrid                //刷新
-                                                    }
-                                                })
-                                            }
-                                        })
-                                    }
-                                }else if(action == "dealwith"){                   //处理
-                                    var userlength = cj.getUserMsg().regionid.length;
-                                    var aul = record.aulevel;
-                                    require(['commonfuncs/popwin/win','text!views/pension/pensioninfo/PensionPeopleAuditDlg.htm','views/pension/pensioninfo/PensionPeopleAuditDlg'],
-                                        function(win,htmfile,jsfile){
-                                            win.render({
-                                                title:'处理',
-                                                width:395,
-                                                height:250,
-                                                html:htmfile,
-                                                buttons:[
-                                                    {text:'取消',handler:function(html,parent){
-                                                        parent.trigger('close');
-                                                    }},
-                                                    {
-                                                        text:'保存',
-                                                        handler:function(html,parent){ }}
-                                                ],
-                                                renderHtml:function(local,submitbtn,parent){
-                                                    jsfile.render(local,{
-                                                        submitbtn:submitbtn,
-                                                        act:'c',
-                                                        refresh:refreshGrid,
-                                                        title:null,
-                                                        data:record,
-                                                        parent:parent,
-                                                        onCreateSuccess:function(data){
-                                                            parent.trigger('close');
-                                                        }
-                                                    })
+                                            success: function (data) {
+                                                if(data == "true"){
+                                                    layer.closeAll('loading');
+                                                    layer.alert('删除成功', {icon: 6});
+                                                    refreshGrid();
+                                                }else{
+                                                    layer.closeAll('loading');
+                                                    layer.alert('删除失败', {icon: 5});
                                                 }
-                                            })
-                                        }
-                                    )
-                                    //showDlg(refreshGrid,record)
-                                    /*if(userlength == 12){
-                                        $.messager.alert('温馨提示','对不起,你没有该权限!','info');
-                                    }else if(userlength == 9){
-                                        if(aul == 1 || aul == 4 || aul == 5){
-                                            showDlg(refreshGrid,record)
-                                        }else{
-                                            $.messager.alert('温馨提示','对不起,你没有审批权限!','info');
-                                        }
-                                    }else if(userlength == 6){
-                                        showDlg(refreshGrid,record)
-                                    }*/
+                                            }
+                                        });
+                                    });
+                                }else if(action == "update"){                   //修改
+                                    updateFunc(record,refreshGrid);
                                 }
                             });
                         })(i)
                     }
                 }
             },
-            toolbar:local.find('div[tb]')
+            onDblClickRow: function (index,row) {
+                layer.load(2);
+                var title = row.name+'-信息';
+                $.ajax({
+                    url:'record/getrecordbyid',
+                    type:'post',
+                    data:{
+                        pr_id:row.pr_id
+                    },
+                    success: function (data) {
+                        require(['text!views/party/renshidangan/PersonnelFile_Child.htm','views/party/renshidangan/PersonnelFile_Child'],
+                            function(htmfile,jsfile){
+                                layer.open({
+                                    title:title,
+                                    type: 1,
+                                    area: ['600px', '400px'], //宽高
+                                    content: htmfile,
+                                    shift: 2,
+                                    success: function(layero, index){
+                                        jsfile.render(layero,{
+                                            index:index,
+                                            queryParams:{
+                                                childrecord:data
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        )
+                    }
+                })
+
+            }
         })
-//        operationlogFunc(operationlog);             //操作日志
 
         var name = local.find('[opt=name]');                        //姓名
         var identityid = local.find('[opt=identityid]');        //身份证
         /*搜索*/
         local.find('[opt=query]').click(function(){
-            ppaudit.datagrid('load',{
+            datagrid.datagrid('load',{
                 name:name.val(),
                 identityid:identityid.val()
             })
         })
 
+        /*添加人事档案*/
         local.find('[opt=addbtn]').click(function(){
-            require(['commonfuncs/popwin/win','text!views/party/renshidangan/PersonnelFileForm.htm','views/party/renshidangan/PersonnelFileForm'],
-                function(win,htmfile,jsfile){
-                    /*layer.open({
-                        type: 1,
-                        skin: 'layui-layer-rim', //加上边框
-                        area: ['890px', '550px'], //宽高
-                        content: htmfile
-                    });
-                    if(jsfile){
-                        jsfile.render(local,{
-                            act:'c',
-                            refresh:refreshGrid,
-                            title:null,
-                            //data:record,
-                            parent:parent,
-                            onCreateSuccess:function(data){
-                                parent.trigger('close');
-                            }
-                        })
-                    }*/
-
-                    win.render({
+            layer.load(2);
+            require(['text!views/party/renshidangan/PersonnelFileForm.htm','views/party/renshidangan/PersonnelFileForm'],
+                function(htmfile,jsfile){
+                    layer.open({
                         title:'人事档案添加',
-                        width:890,
-                        height:550,
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},
-                            {
-                                text:'保存',
-                                handler:function(html,parent){ }}
-                        ],
-                        renderHtml:function(local,submitbtn,parent){
-                            jsfile.render(local,{
-                                submitbtn:submitbtn,
-                                act:'c',
-                                refresh:refreshGrid,
-                                title:null,
-                                //data:record,
-                                parent:parent,
-                                onCreateSuccess:function(data){
-                                    parent.trigger('close');
+                        type: 1,
+                        area: ['890px', '550px'], //宽高
+                        content: htmfile,
+                        success: function(layero, index){
+                            jsfile.render(layero,{
+                                index:index,
+                                queryParams:{
+                                    actiontype:'add',
+                                    refresh:refreshGrid
                                 }
-                            })
+                            });
                         }
-                    })
+                    });
                 }
             )
         });
 
+
     }
 
-    var showDlg = function(refreshGrid,record){
-        require(['commonfuncs/popwin/win','text!views/pension/pensioninfo/PensionPeopleAuditDlg.htm','views/pension/pensioninfo/PensionPeopleAuditDlg'],
-            function(win,htmfile,jsfile){
-                win.render({
-                    title:'处理',
-                    width:395,
-                    height:250,
-                    html:htmfile,
-                    buttons:[
-                        {text:'取消',handler:function(html,parent){
-                            parent.trigger('close');
-                        }},
-                        {
-                            text:'保存',
-                            handler:function(html,parent){ }}
-                    ],
-                    renderHtml:function(local,submitbtn,parent){
-                        jsfile.render(local,{
-                            submitbtn:submitbtn,
-                            act:'c',
-                            refresh:refreshGrid,
-                            title:null,
-                            data:record,
-                            parent:parent,
-                            onCreateSuccess:function(data){
-                                parent.trigger('close');
+    /*人事档案修改*/
+    var updateFunc = function (record,refreshGrid) {
+        layer.load(2);
+        $.ajax({
+            url:'record/getrecordbyid',
+            type:'post',
+            data:{
+                pr_id:record.pr_id
+            },
+            success: function (data) {
+                var title ='【'+record.name+ '】人事档案信息修改';
+                require(['text!views/party/renshidangan/PersonnelFileForm.htm','views/party/renshidangan/PersonnelFileForm'],
+                    function(htmfile,jsfile){
+                        layer.open({
+                            title:title,
+                            type: 1,
+                            area: ['890px', '550px'], //宽高
+                            content: htmfile,
+                            success: function(layero, index){
+                                jsfile.render(layero,{
+                                    index:index,
+                                    queryParams:{
+                                        actiontype:'update',
+                                        refresh:refreshGrid,
+                                        record:record,
+                                        childrecord:data
+                                    }
+                                });
                             }
-                        })
+                        });
                     }
-                })
+                )
             }
-        )
+        })
+
     }
-
-
-
 
     return {
         render:render

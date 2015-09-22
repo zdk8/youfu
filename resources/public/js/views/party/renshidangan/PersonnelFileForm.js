@@ -1,116 +1,43 @@
 define(function(){
-    var keyarray = ['fwlx_jjyl','fwlx_fwj','fwlx_mftj','fwlx_dylnb','fwlx_jgyl','fwlx_tyfw','fwlx_hjj','fwlx_qt',//享受服务类型
-        'jk_rcws_st','jk_rcws_xl','jk_rcws_xt','jk_rcws_sy','jk_rcws_xj','jk_rcws_tx','jk_rcws_xzj','jk_rcws_xy',//日常卫生
-        'jk_bs_gaoxy','jk_bs_tangnb','jk_bs_fengs','jk_bs_xinzb','jk_bs_chid','jk_bs_guz','jk_bs_qit'];          //病史情况
+    var arr_combobox = ['gender','nation','marriage','politicalstatus','positiontype','edutype','fm_politicalstatus'];
+    var arr_datebox = ['worktime','partytime'];
+    var arr_validatebox = ['name','identityid'];
 
-    var addToolBar=function(local) {
-        var toolBarHeight=35;
-        var toolBar=cj.getFormToolBar([
-            {text: '处理',hidden:'hidden',opt:'dealwith'},
-            {text: '修改',hidden:'hidden',opt:'update'},
-            {text: '删除',hidden:'hidden',opt:'delete'},
-            {text: '保存',hidden:'hidden',opt:'save'},
-            {text: '保存',hidden:'hidden',opt:'save2'}
-//            {text: '操作日志',hidden:'hidden',opt:'log'}
-        ]);
-        local.append(toolBar);
-        local.find('div[opt=formcontentpanel]').panel({
-            onResize: function (width, height) {
-                $(this).height($(this).height() - toolBarHeight);
-                toolBar.height(toolBarHeight);
-            }
+    var addToolBar=function(local,option,li) {
+        var li_func = ' <li>' +
+            '<input type="button" value="取消" class="btns" opt="cancel">' +
+            '</li>' +'&nbsp;'+li;
+
+        var functool = local.find('.layui-layer-setwin');
+        functool.after('<div class="funcmenu"><ul></ul></div>');
+        var _toolbar = local.find('.funcmenu');
+        _toolbar.css('display','block');
+        _toolbar.find('ul').html(li_func);
+        /*取消*/
+        local.find('[opt=cancel]').click(function () {
+            layer.close(option.index);
         });
     };
-    /*为Checkbox添加样式*/
-    var addCheckboxCss = function(local) {
-        var selectRadio = ":input[type=checkbox] + label";
-        local.find(selectRadio).each(function () {
-            if ($(this).prev()[0].checked){
-                $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
-            }
-        }).click(function () {               //为第个元素注册点击事件
-                var s = $($(this).prev()[0]).attr('name')
-                s = ":input[name=" + s + "]+label"
-                var isChecked=$(this).prev()[0].checked;
-                local.find(s).each(function (i) {
-                    $(this).prev()[0].checked = false;
-                    $(this).removeClass("checked");
-                    $($(this).prev()[0]).removeAttr("checked");
-                });
-                if(isChecked){
-                    //如果单选已经为选中状态,则什么都不做
-                }else{
-                    $(this).prev()[0].checked = true;
-                    $(this).addClass("checked");
-                    $($(this).prev()[0]).attr("checked","checked");
-                }
-            })
-            .prev().hide();     //原来的圆点样式设置为不可见
+    /*easyui控件初始化*/
+    var initControls = function (local) {
+        for(var i=0;i<arr_combobox.length;i++){
+            local.find('[opt='+arr_combobox[i]+']').combobox();
+        }
+        for(var i=0;i<arr_datebox.length;i++){
+            local.find('[opt='+arr_datebox[i]+']').datebox();
+        }
+        for(var i=0;i<arr_validatebox.length;i++){
+            local.find('[name='+arr_validatebox[i]+']').validatebox();
+        }
+
     }
 
-
-    /*查看并修改*/
-    var actionInfo=function(local,option) {
-        layer.closeAll('loading');
-        addCheckboxCss(local);
-        var districtid = local.find('[opt=districtid]');      //行政区划
-        getdivision(districtid);
-        local.find('[opt=dealwith]').hide();
-        local.find('[opt=delete]').hide();
-        local.find('[opt=save]').hide();
-        local.find('[opt=save2]').hide();
-        var datas = option.queryParams.data;
-        var pensionform = local.find('[opt=pensionform]');      //老人信息主表
-        pensionform.form('load',datas)        //填充表单
-        var districtnameval = getDivistionTotalname(option.queryParams.data.districtid)
-        districtid.combobox("setValue",districtnameval)  //填充行政区划
-        /*填充checkbox*/
-        for(var i=0;i<keyarray.length;i++){
-            local.find('input[name='+keyarray[i]+'][type=checkbox][value='+datas[keyarray[i]]+']').attr("checked","checked");
-            local.find('input[name='+keyarray[i]+'][type=checkbox][value='+datas[keyarray[i]]+']+label').addClass("checked");
-        }
-        local.find('[opt=update]').show().click(function(){
-            pensionform.form('submit', {
-                url:'updateold',
-                dataType:"json",
-                onSubmit: function (params) {
-                    var isValid = $(this).form('validate');
-                    if(isValid){
-//                        showProcess(true, '温馨提示', '正在提交数据...');   //进度框加载
-                        if(!isNaN(local.find("[opt=districtid]").combobox("getValue"))){          //是否是数字
-                            params.districtid = local.find("[opt=districtid]").combobox("getValue")
-                        }else{
-                            params.districtid = option.queryParams.data.districtid
-                        }
-                        params.lr_id = option.queryParams.data.lr_id
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    if(data == "true"){
-                        showProcess(false);
-                        cj.slideShow('修改成功');
-                        if(showProcess(false)){
-                            $("#tabs").tabs('close',option.queryParams.title)
-                            var ref = option.queryParams.refresh;             //刷新
-                            ref();
-                        }
-                    }else{
-                        showProcess(false);
-                        cj.slideShow('<label style="color: red">修改失败</label>');
-                    }
-                }
-            });
-        });
-    };
-
-    
     /*学历学位添加*/
     var degreeForm = function (local) {
         var tdarr1 = '<td align="center"><input opt="edutype" class="easyui-combobox" opt2="educationtype" style="width: 100px"></td>'+
             '<td align="center"><input class="input-text" opt="college"></td>' +
             '<td align="center"><input class="input-text" opt="profession"></td>'+
-            '<td><input size="8" opt="pp_id" type="hidden"><input size="8" opt="districtidval" type="hidden"><a opt="dellist_degree" style="cursor: pointer;">删除</a></td>';
+            '<td><a opt="dellist_degree" style="cursor: pointer;">删除</a></td>';
 
         var _html1 = '<tr>' + tdarr1+ '</tr>';
         local.find('[opt=addlist_degree]').click(function () {
@@ -147,14 +74,13 @@ define(function(){
             '<td align="center"><input class="input-text" opt="fm_workunit" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_position" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_contactway" style="width: 100px;"></td>'+
-            '<td><input size="8" opt="pp_id" type="hidden"><input size="8" opt="districtidval" type="hidden"><a opt="dellist_family" style="cursor: pointer;">删除</a></td>';;
+            '<td><a opt="dellist_family" style="cursor: pointer;">删除</a></td>';
         var _html2 = '<tr>' + tdarr2+ '</tr>';
         local.find('[opt=addlist_family]').click(function () {
             var $this =$(this);
             var $tr = $this.parents('.list').find('tbody');
             $tr.append(_html2);
             var fm_politicalstatus = local.find('[opt=fm_politicalstatus]').last();
-            //var fm_politicalstatus = local.find('[opt=fm_politicalstatus]');
             fm_politicalstatus.combobox({
                 loader:cj.getLoader('politicsstatus'),
                 valueField:'id',
@@ -254,11 +180,104 @@ define(function(){
         }
         return arrall;
     }
-    /*新增数据时进入*/
-    var saveFunc = function(local,option){
+    
+    /*学位学历数据加载*/
+    var loadEducationData = function (local,educationway) {
+        local.find('[opt=edutype]').combobox('setValue',educationway[0].educationtype);
+        local.find('[opt=college]').val(educationway[0].college);
+        local.find('[opt=profession]').val(educationway[0].profession);
+
+        var tdarr1 = '<td align="center"><input opt="edutype" class="easyui-combobox" opt2="educationtype" style="width: 100px"></td>'+
+            '<td align="center"><input class="input-text" opt="college"></td>' +
+            '<td align="center"><input class="input-text" opt="profession"></td>'+
+            '<td><a opt="dellist_degree" style="cursor: pointer;">删除</a></td>';
+
+        for(var i=1;i<educationway.length;i++){
+            var _html1 = '<tr>' + tdarr1+ '</tr>';
+            var $edu = local.find('[opt=edu] tbody');
+            $edu.append(_html1);
+            var edutype = local.find('[opt=edutype]').last();
+            edutype.combobox({
+                loader:cj.getLoader('edutype'),
+                valueField:'id',
+                editable:false,
+                textField:'text'
+            });
+            var lasttr = $edu.find('tr')[$edu.find('tr').length-1];
+            $($($(lasttr).find('td')[0]).find('span.combo')[1]).remove();
+            local.find('[opt=dellist_degree]').each(function () {
+            }).click(function () {
+                var _tr = $(this).parents('tr');
+                if (_tr.attr('class') != "demo") {
+                    var pp_id = _tr.find('[opt=pp_id]').val()
+                    if(!pp_id){
+                        _tr.remove();
+                    }
+                }
+            })
+            local.find('[opt=edutype]').combobox('setValue',educationway[i].educationtype);
+            local.find('[opt=college]').val(educationway[i].college);
+            local.find('[opt=profession]').val(educationway[i].profession);
+        }
+    }
+    /*主要家庭成员数据加载*/
+    var loadFamilyData = function (local,familymembers) {
+        for(var key in familymembers[0]){
+            if(key == 'fm_politicalstatus'){
+                local.find('[opt=fm_politicalstatus]').combobox('setValue',familymembers[0][key]);
+            }else{
+                local.find('[opt='+key+']').val(familymembers[0][key]);
+            }
+        }
+
+        var tdarr2 = '<td align="center"><input class="input-text" opt="appellation" style="width: 100px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_name" style="width: 100px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_identityid" style="width: 100px;"></td>' +
+            '<td align="center"><input opt="fm_politicalstatus" class="easyui-combobox " style="width: 100px"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_workunit" style="width: 100px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_position" style="width: 100px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_contactway" style="width: 100px;"></td>'+
+            '<td><a opt="dellist_family" style="cursor: pointer;">删除</a></td>';
+
+        for(var i=1;i<familymembers.length;i++){
+            var _html2 = '<tr>' + tdarr2+ '</tr>';
+            var $fam = local.find('[opt=fam] tbody');
+            $fam.append(_html2);
+            var fm_politicalstatus = local.find('[opt=fm_politicalstatus]').last();
+            fm_politicalstatus.combobox({
+                loader:cj.getLoader('politicsstatus'),
+                valueField:'id',
+                editable:false,
+                textField:'text'
+            });
+            var lasttr = $fam.find('tr')[$fam.find('tr').length-1];
+            $($($(lasttr).find('td')[0]).find('span.combo')[1]).remove();
+            local.find('[opt=dellist_family]').each(function () {
+            }).click(function () {
+                var _tr = $(this).parents('tr');
+                if (_tr.attr('class') != "demo") {
+                    var pp_id = _tr.find('[opt=pp_id]').val()
+                    if(!pp_id){
+                        _tr.remove();
+                    }
+                }
+            })
+            for(var key in familymembers[0]){
+                if(key == 'fm_politicalstatus'){
+                    local.find('[opt=fm_politicalstatus]').combobox('setValue',familymembers[i][key]);
+                }else{
+                    local.find('[opt='+key+']').val(familymembers[i][key]);
+                }
+            }
+        }
+    }
+    
+    var initFunc = function (local,option) {
         degreeForm(local);//学位学历添加
 
         familyForm(local);/*主要家庭成员添加*/
+
+        initControls(local);//控件初始化
 
         /*工作状况状态选择*/
         local.find('[opt=workstatus]').combobox({
@@ -272,7 +291,7 @@ define(function(){
                     timename = '退休时间';
                 }
                 var ht = timename+'<label></label>&nbsp;';
-                local.find('[opt=worktime]').html(ht)
+                local.find('[opt=worktime_label]').html(ht)
             }
         });
         /*人员身份选择*/
@@ -290,12 +309,17 @@ define(function(){
                 }
             }
         });
-
-        option.submitbtn.click(function () {
-            nameedu = getDegreeValue(local);//学位学历获取
+    }
+    
+    /*新增数据时进入*/
+    var saveFunc = function(local,option){
+        var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
+        addToolBar(local,option,li);
+        /*保存*/
+        local.find('[opt=save]').click(function () {
+            var nameedu = getDegreeValue(local);//学位学历获取
             var namefamily = getFamilyValue(local);//家庭成员获取
-            var $local = option.parent;
-            $local.find('form').form('submit', {
+            local.find('form').form('submit', {
                 url: 'record/addpensonrecords',
                 onSubmit: function (params) {
                     layer.load();
@@ -310,10 +334,12 @@ define(function(){
                 success: function (data) {
                     if (data == "true") {
                         layer.closeAll('loading');
-                        layer.alert('保存成功!', {icon: 6, title: '温馨提示'});
+                        cj.showSuccess('保存成功');
+                        option.queryParams.refresh();
+                        layer.close(option.index);
                     } else {
                         layer.closeAll('loading');
-                        layer.alert('保存失败!', {icon: 5, title: '温馨提示'});
+                        cj.showFail('保存失败');
                     }
                 }
             })
@@ -355,80 +381,64 @@ define(function(){
             )
         })
     }
+    
+    /*修改数据*/
+    var updateFunc = function (local,option) {
+        var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>';
+        addToolBar(local,option,li);
+        var record = option.queryParams.record; //主表信息
+        local.find('form').form('load',record);//主表数据填充
+        var childrecord = option.queryParams.childrecord;//子表信息
+        var educationway =childrecord.educationway; //学位学历信息
+        loadEducationData(local,educationway);//学位学历数据填充
+        var familymembers =childrecord.familymembers; //主要家庭成员信息
+        loadFamilyData(local,familymembers);//主要家庭成员数据填充
 
-    /*处理时进入页面(actionType=info)*/
-    var dealwithInfoFunc = function(local,option){
-        addCheckboxCss(local);
-        var datas = option.queryParams.data;
-        var pensionform = local.find('[opt=pensionform]');      //老人信息主表
-        pensionform.form('load',datas)        //填充表单
-        var districtid = local.find('[opt=districtid]');      //行政区划
-        var districtnameval = getDivistionTotalname(option.queryParams.data.districtid)
-        districtid.combobox("setValue",districtnameval)  //填充行政区划
-        /*填充checkbox*/
-        for(var i=0;i<keyarray.length;i++){
-            local.find('input[name='+keyarray[i]+'][type=checkbox][value='+datas[keyarray[i]]+']').attr("checked","checked");
-            local.find('input[name='+keyarray[i]+'][type=checkbox][value='+datas[keyarray[i]]+']+label').addClass("checked");
-        }
-        var dealwithbtn = local.find('[opt=dealwith]');            //处理按钮
-        local.find('[opt=save]').hide();
-        local.find('[opt=save2]').hide();
-        local.find('[opt=update]').hide();
-        local.find('[opt=delete]').hide();
-        dealwithbtn.show().click(function(){
-            require(['commonfuncs/popwin/win','text!views/pension/pensioninfo/PensionPeopleAuditDlg.htm','views/pension/pensioninfo/PensionPeopleAuditDlg'],
-                function(win,htmfile,jsfile){
-                    win.render({
-                        title:'处理',
-                        width:395,
-                        height:250,
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},
-                            {
-                                text:'保存',
-                                handler:function(html,parent){ }}
-                        ],
-                        renderHtml:function(local,submitbtn,parent){
-                            jsfile.render(local,{
-                                submitbtn:submitbtn,
-                                act:'c',
-                                refresh:option.queryParams.refresh,
-                                data:option.queryParams.record,
-                                title:option.queryParams.title,
-                                parent:parent,
-                                onCreateSuccess:function(data){
-                                    parent.trigger('close');
-                                }
-                            })
-                        }
-                    })
+        local.find('[opt=update]').click(function () {
+            var nameedu = getDegreeValue(local);//学位学历获取
+            var namefamily = getFamilyValue(local);//家庭成员获取
+            local.find('form').form('submit', {
+                url: 'record/updaterecord',
+                onSubmit: function (params) {
+                    layer.load();
+                    var isValid = $(this).form('validate');
+                    params.pr_id = record.pr_id;
+                    params.educationway = JSON.stringify(nameedu);
+                    params.familymembers = JSON.stringify(namefamily);
+                    if (!isValid) {
+                        layer.closeAll('loading');
+                    }
+                    return isValid;
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        layer.closeAll('loading');
+                        cj.showSuccess('修改成功');
+                        option.queryParams.refresh();
+                        layer.close(option.index);
+                    } else {
+                        layer.closeAll('loading');
+                        cj.showFail('修改失败');
+                    }
                 }
-            )
-        })
+            })
+        });
     }
-
 
     var render=function(l,o){
         layer.closeAll('loading');
+        initFunc(l,o);//初始化
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
-                case 'update1':
-                    (function(){alert('hahaha')})();
-                    break;
-                case 'info':
-                    dealwithInfoFunc(l,o);
-                    break;
                 case 'update':
-                    actionInfo(l, o);
+                    updateFunc(l, o);
+                    break;
+                case 'add':
+                    saveFunc(l, o);
                     break;
                 default :
                     break;
             }
-        }else{
-            saveFunc(l, o);
         }
     }
     return {

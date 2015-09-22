@@ -54,7 +54,7 @@
         familydata (map #(conj % {:pr_id pr_id}) getfamilydata)
         ]
     (db/update-pensonrecords prdata edudata familydata pr_id)
-    (str "ture")))
+    (str "true")))
 
 (defn delete-record-byid [request]
   (let [params (:params request)
@@ -65,12 +65,12 @@
 (defn get-record-byid [request]
   (let [params (:params request)
         pr_id (:pr_id params)
-        getprdata    (db/selectdatas-by-tablename "t_personalrecords" {:pr_id pr_id})
+        ;getprdata    (db/selectdatas-by-tablename "t_personalrecords" {:pr_id pr_id})
         getedudata   (db/selectdatas-by-tablename "t_educationway" {:pr_id pr_id})
         getfamilydata (db/selectdatas-by-tablename "t_familymember" {:pr_id pr_id})
-        prdata (conj (common/dateymd-bf-list getprdata "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime") {:educationway getedudata :familymembers getfamilydata} )
+        ;prdata (conj (common/dateymd-bf-list getprdata "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime") {:educationway getedudata :familymembers getfamilydata} )
         ]
-    (resp/json prdata)))
+    (resp/json {:educationway getedudata :familymembers getfamilydata})))
 
 
 (defn add-partybranch
