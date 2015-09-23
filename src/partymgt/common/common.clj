@@ -8,8 +8,10 @@
                 [partymgt.models.schema :as schema]
                 [clj-time.local :as l]
                 [clj-time.coerce :as c]
+                [me.raynes.fs :as fs]
                 [noir.io :as io]
                 [partymgt.models.db :as db]
+                [noir.session :as session]
                ))
 
 
@@ -37,14 +39,33 @@
 
 
 
-(defn uploadfile [file]
-  (let [uploadpath (str schema/datapath "upload/")
-        timenow (c/to-long  (l/local-now))
-        filename (str timenow (:filename file))
+(defn uploadfile
+  "文件上传"
+  [file  dirpath filename]
+  (let [havedir (fs/exists? dirpath)
+        ;        uploadpath (str schema/datapath "upload/")
+        ;        timenow (c/to-long  (l/local-now))
+        ;;       filename (str timenow (:filename file))
+        ;        filename (str filenamemsg fileext)
+        ;        filesie (:size file)
+        ;        filedata {:file_anme filenamemsg :attach_type filetype :fie_path (str "/upload/" filetype "/" filename) :file_size filesie :file_type fileext :pc_id pc_id}
         ]
-    (io/upload-file uploadpath  (conj file {:filename filename}))
-   {:filename  filename :filepath  (str "/get-file/" filename)}
-    ))
+    (if havedir "" (fs/mkdirs dirpath))     ;如果文件不存在，建立此文件
+    (io/upload-file dirpath  (conj file {:filename filename}))))  ;文件上传
+
+
+
+
+(defn delfile
+  "删除文件"
+  [delpath]
+  (let [isfile (fs/file? delpath)]
+    (if isfile (fs/delete delpath))   ;文件存在删除文件
+    (println "FFFFFFFFFF"  isfile)))
+
+;;session
+(defn get-session []
+  (first(session/get :usermsg)))
 
 
 ;时间格式化

@@ -3,8 +3,11 @@
   (:require
     [partymgt.models.db :as db]
     [partymgt.common.common :as common]
+    [partymgt.models.schema :as schema]
     [noir.response :as resp]
     [clojure.data.json :as json]
+    [clj-time.local :as l]
+    [clj-time.coerce :as c]
     ))
 
 
@@ -106,6 +109,30 @@
     (str "true")))
 
 
+;;附件管理
+(defn uploadfile [file pc_id filetype filenamemsg fileext]
+  (try
+    (let[;filedata (common/uploadfile file pc_id filetype filenamemsg fileext)
+         uploadpath (str schema/datapath "upload/")      ;获取当前目录
+         timenow (c/to-long  (l/local-now))              ;当前时间数字
+         ;        filename (str timenow (:filename file))
+         filename (str timenow filenamemsg fileext)              ;文件名称
+         filesie (:size file)                            ;文件大小
+         filedata {:file_name filenamemsg :attach_type filetype :fie_path (str "/upload/" filetype "/" filename) :file_size filesie :file_type fileext :pc_id pc_id}
+         dirpath (str uploadpath filetype)
+         ]
+      (common/uploadfile file  dirpath filename)
+      (db/adddata-by-tablename "t_attach_files" filedata)
+      (str "success"))
+    (catch Exception e (str (.getMessage e )))
+    ))
+
+(defn deletefile [id filepath]
+  (let [delpath (str schema/datapath filepath)]
+    (common/delfile delpath)
+    (db/deletedata-by-tablename "t_attach_files" {:attach_id id})
+    ;(println "DDDDDDDD" delpath)
+    (str "success")))
 
 
 
