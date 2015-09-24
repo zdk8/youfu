@@ -18,7 +18,7 @@
                  [org.jfree/jfreechart "1.0.15"]
                  [com.lowagie/itext "4.2.1"]
                  [org.apache.xmlgraphics/batik-gvt "1.7"]
-
+                 [me.raynes/fs "1.4.6"]               ;文件处理库
                  [org.apache.poi/poi "3.9"]
                  ;;[org.apache.poi/poi-ooxml "3.9"]  由于下载poi-ooxml及依赖jar不到的原�?暂停使用(在clj-excel.core)
                  [hvitmiddleware "0.1.6"]]
