@@ -1,7 +1,7 @@
 <!--<div class="easyui-panel newRadio" opt="formcontentpanel"
      style="overflow-y: scroll;border-bottom: 1px solid greenyellow;"
      data-options="fit:true,border:false">-->
-<form class="common-form" method="post">
+<form class="common-form" method="post" enctype="multipart/form-data">
     <table opt="baseinfo_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
         <tr>
             <td class="formtdtext" style="width: 100px">姓名<label></label></td>
@@ -10,14 +10,18 @@
             </td>
             <td class="formtdtext">身份证号<label></label></td>
             <td>
-                <input opt="identityid" name="identityid" class="easyui-validatebox input-text"
+                <input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 170px;"
                        data-options="required:true,invalidMessage:'请输入正确的身份证号',validType:'identityid'"><span style="color: red">*</span>
             </td>
             <td rowspan="4" colspan="2" style="text-align: center">
                 <div id="personimg" style="width: 150px;height: 120px;cursor: pointer;margin-left: 80px;" opt="personimg">
                     <img name="photo" src="images/noperson.gif" value="" alt="用户照片" width="150px" height="120px">
                 </div>
-                <input name ="pensionimgpath" type="hidden">
+                <input name="fileext" style="display: none;">
+                <input opt="inputVal"
+                       type="file"
+                       name="file"
+                       style="width:251px;border:0;height: 24px;display: none;" value="" maxlength="64">
             </td>
         </tr>
         <tr>
@@ -224,18 +228,18 @@
         </tr>
         <tr class="demo">
             <td align="center">
-                <input class="input-text" opt="appellation" style="width: 100px;">
+                <input class="input-text" opt="appellation" style="width: 70px;">
             </td>
             <td align="center">
-                <input class="input-text" opt="fm_name" style="width: 100px;">
+                <input class="input-text" opt="fm_name" style="width: 70px;">
             </td>
             <td align="center">
-                <input class="input-text" opt="fm_identityid" style="width: 100px;">
+                <input class="input-text" opt="fm_identityid" style="width: 130px;">
             </td>
             <td align="center">
                 <input class="easyui-combobox "
                        opt="fm_politicalstatus"
-                       style="width: 100px"
+                       style="width: 80px"
                        data-options="
                                 loader:cj.getLoader('politicsstatus'),
                                 editable:false,
