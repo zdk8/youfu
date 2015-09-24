@@ -59,19 +59,17 @@ define(function () {
             function preview(file)
             {
                 ff = file;
-                alert(file)
                 //var prevDiv = document.getElementById('personimg');
                 var prevDiv = option.params.plocal.find('[opt=personimg]');
                 //var prevDiv = $('[opt=preview]');
                 if (file.files && file.files[0]){
-                    alert(1)
                     var reader = new FileReader();
                     reader.onload = function(evt){
                         var imghtm = '<img style="width:150px;height:120px;" src="' + evt.target.result + '" />';
                         prevDiv.html(imghtm);
                         //prevDiv.innerHTML = '<img style="width:150px;height:120px;" src="' + evt.target.result + '" />';
-                        tt = evt
-                        console.log(evt.target.result)
+                        //tt = evt
+                        //console.log(evt.target.result)
                     }
                     reader.readAsDataURL(file.files[0]);
                 }else{
