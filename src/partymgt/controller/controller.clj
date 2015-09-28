@@ -84,14 +84,16 @@
     (db/adddata-by-tablename "t_partybranch" (common/dateformat-bf-insert partydata "pb_createtime"))
     (str "true")))
 
-(defn update-party-byid [request]
+(defn update-party-byid
+  [request]
   (let [params (:params request)
         pb_id (:pb_id params)
         partydata (select-keys params (:t_partybranch common/selectcols))]
     (db/updatedata-by-tablename "t_partybranch" (common/dateformat-bf-insert partydata "pb_createtime") {:pb_id pb_id})
     (str "true")))
 
-(defn get-depart-list [request]
+(defn get-depart-list
+  [request]
   (let [params (:params request)
         pb_name (:pb_name params)
         rows (:rows params)
