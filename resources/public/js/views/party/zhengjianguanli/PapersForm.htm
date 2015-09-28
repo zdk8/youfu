@@ -1,0 +1,57 @@
+<form class="common-form" method="post" enctype="multipart/form-data">
+    <table opt="baseinfo_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+        <tr>
+            <td class="formtdtext" style="width: 100px">姓名<label></label></td>
+            <td>
+                <input class="input-text" name="name" data-options="required:true" style="width: 100px;"><span style="color: red">*</span>
+            </td>
+            <td class="formtdtext">证件号码<label></label></td>
+            <td>
+                <input class="input-text" name="credentialsnumb" data-options="required:true" style="width: 170px;"><span style="color: red">*</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">出生日期<label></label></td>
+            <td>
+                <input opt="birthday" name="birthday" class="easyui-datebox" style="width: 100px">
+            </td>
+            <td class="formtdtext">性别<label></label></td>
+            <td>
+                <input opt="gender" class="easyui-combobox" style="height: 24px;width: 100px;"
+                       name="gender"
+                       data-options="
+                                loader:cj.getLoader('gender'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">有效期<label></label></td>
+            <td>
+                <input opt="validity" name="validity" class="easyui-datebox" style="width: 100px">
+            </td>
+            <td class="formtdtext">上交日期<label></label></td>
+            <td>
+                <input opt="handdate" name="handdate" class="easyui-datebox" style="width: 100px">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">持证种类<label></label></td>
+            <td>
+                <input name="credentialstype" class="input-text">
+            </td>
+            <td class="formtdtext">管理员<label></label></td>
+            <td>
+                <input class="input-text" name="manager" style="width: 100px;">
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">备注<label></label></td>
+            <td colspan="3">
+                <textarea name="comments" style="width: 95%;"></textarea>
+            </td>
+        </tr>
+    </table>
+</form>
+
