@@ -143,52 +143,6 @@ a:hover{
     border-right: 4px solid #d6e3ee;
     background-color: #045886;
 }
-/*.div1{
-    text-align:left;
-    width:99%;
-}*/
-.div2{
-    height:40px;
-    line-height:40px;
-    cursor:pointer;
-    font-size:14px;
-    position:relative;
-    border-bottom:#ccc 1px dotted;
-    padding-left: 50px;
-    background-color: #F6F6F6;
-    border-bottom: 1px solid #ffffff;
-    color: #555555;
-}
-.div2bag{
-    background-color: #e5e5e5;
-    border-left: 5px solid #0ab5d9;
-    color:#0080d8;
-}
-
-.div3{
-    display:none;
-    font-size:13px;
-    background-color: #ffffff;
-}
-.div3 ul{margin:0;padding:0;}
-.div3 li{
-    height:30px;
-    line-height:30px;
-    list-style:none;
-    border-bottom: #e4deff 1px dotted;
-    text-align:left;
-    padding-left: 60px;
-    cursor: pointer;
-}
-.div3 li:hover{
-    background-color: #e8f7df;
-}
-
-.div3bag{
-    border-right: 2px solid darkmagenta;
-    background-color: #e8f7df;
-}
-
 
 
 /*查询栏*/
@@ -212,7 +166,7 @@ a:hover{
 
 
 /************表单上方或者下方的悬浮工具条***************/
-div.form-foot-btns{
+/*div.form-foot-btns{
     border-top: 1px solid gainsboro;
 }
 div.form-foot-btns ul
@@ -241,7 +195,7 @@ div.form-foot-btns ul li a:hover{
 div.form-foot-btns ul li a:active{
     position: relative;
     top: 1px;
-}
+}*/
 
 /*工具栏背景*/
 .highcharstoolbar{
@@ -253,58 +207,6 @@ div.form-foot-btns ul li a:active{
     padding-top: 5px;
 }
 
-/*流程*/
-ol.flowstep-6 {
-    overflow: hidden;
-    zoom: 1;
-}
-.flowstep-6 {
-    margin-left: 0;
-    margin-right: -45px;
-    width: 875px;
-}
-.flowstep-6 li {
-    float: left;
-    text-align: center;
-    width:135px;
-}
-.flowstep-6 .step-name {
-    padding: 3px 0;
-    font-weight: 700;
-    color: #444;
-}
-.flowstep-6 .step-pass .step-name{
-    color: #999;
-}
-.flowstep-6 .step-name-b{
-    font-weight: bold;
-    color:red;
-}
-.flowstep-6 .step-no {
-    height: 34px;
-    line-height: 34px;
-    font-family: 'arial black';
-    color: #fff;
-    font-size: 18px;
-}
-.flowstep-6 .step-no {
-    background: url(../../images/process/gostatus.png) 50% -102px;
-}
-.flowstep-6 .step-last .step-no {
-    /*background-position: 50% -136px;*/
-}
-.flowstep-6 .step-pass .step-no {
-    color: transparent;
-    _color:tomato; /*For IE6-*/
-    _filter:chroma(color=tomato);/*For IE6-*/
-    background: url(../../images/process/gostatus.png) 50% -170px;
-}
-.flowstep-6 .step-first .step-no {
-    /*background-position: 50% -204px;*/
-}
-.flowstep-6 .step-last-pass .step-no {
-    background: url(../../images/process/gostatus.png) no-repeat 50% -68px;
-}
 ol, ul, li, dl, dd, dt {
     list-style: none;
 }
@@ -339,6 +241,84 @@ ol, ul, li, dl, dd, dt {
     height: 30px;
     width: 45px;
     font-weight: bolder;
+}
+/*附件类型*/
+.filefolder{
+    background-color: #f2f2f2;
+}
+.filefolder div{
+    text-align: center;
+    font-size: 14px;
+    background-color: #0d7fd7;
+    height: 24px;
+    color: white;
+    font-family: 华文细黑;
+    padding-top: 5px;
+    border-bottom: 1px solid #045886;
+}
+.filefolder ul{
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+    font-size: 14px;
+    font-family: 华文细黑;
+    color: white;
+}
+.filefolder ul li{
+    border-bottom: 1px solid white;
+    height: 18px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: #0d7fd7;
+    cursor: pointer;
+}
+.filefolder ul li:hover{
+    border-right: 2px solid white;
+    background-color: #045886;
+}
+.menu_funcV{
+    border-right: 2px solid white;
+    background-color: #045886 !important;
+}
+.filefolder ul li span{
+    margin-left: 10px;
+}
+/*附件功能*/
+.file_func{
+    height: 36px;
+    background: #3273a9;
+    color: white;
+    font-family: Microsoft JhengHei;
+    font-size: 16px;
+    letter-spacing:2px;
+    padding-top: 4px;
+}
+.file_func ul{
+    display: inline;
+
+}
+.file_func li{
+    float: left;
+    border-right: 1px solid #045886;
+    cursor: pointer;
+    height: 26px;
+    /*height: 51px;*/
+    width: 150px;
+    text-align: center;
+    padding-top: 5px;
+}
+.file_func li:hover{
+    border-top: 4px solid #d6e3ee;
+}
+.file_func li:active{
+    position: relative;
+    top: 1px;
+}
+.file_funcV{
+    /*height: 36px;*/
+    /*padding-top: 15px;*/
+    border-top: 4px solid #d6e3ee;
+    /*border: 1px solid red;*/
 }
 
 

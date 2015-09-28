@@ -1,4 +1,3 @@
-/*审核处理*/
 define(function(){
     function render(local,option){
         local.find('[opt=other]').on('click', function () {
@@ -75,7 +74,7 @@ define(function(){
                                 layer.open({
                                     title:title,
                                     type: 1,
-                                    area: ['600px', '400px'], //宽高
+                                    area: ['700px', '440px'], //宽高
                                     content: htmfile,
                                     shift: 2,
                                     success: function(layero, index){
@@ -91,7 +90,6 @@ define(function(){
                         )
                     }
                 })
-
             }
         })
 

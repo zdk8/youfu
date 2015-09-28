@@ -3,6 +3,7 @@ define(function(){
     var arr_datebox = ['worktime','partytime'];
     var arr_validatebox = ['name','identityid'];
 
+    /*添加功能按钮*/
     var addToolBar=function(local,option,li) {
         var li_func = ' <li>' +
             '<input type="button" value="取消" class="btns" opt="cancel">' +
@@ -67,10 +68,10 @@ define(function(){
     }
     /*主要家庭成员添加*/
     var familyForm = function (local) {
-        var tdarr2 = '<td align="center"><input class="input-text" opt="appellation" style="width: 100px;"></td>' +
-            '<td align="center"><input class="input-text" opt="fm_name" style="width: 100px;"></td>' +
-            '<td align="center"><input class="input-text" opt="fm_identityid" style="width: 100px;"></td>' +
-            '<td align="center"><input opt="fm_politicalstatus" class="easyui-combobox " style="width: 100px"></td>' +
+        var tdarr2 = '<td align="center"><input class="input-text" opt="appellation" style="width: 70px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_name" style="width: 70px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_identityid" style="width: 130px;"></td>' +
+            '<td align="center"><input opt="fm_politicalstatus" class="easyui-combobox " style="width: 80px"></td>' +
             '<td align="center"><input class="input-text" opt="fm_workunit" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_position" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_contactway" style="width: 100px;"></td>'+
@@ -215,9 +216,9 @@ define(function(){
                     }
                 }
             })
-            local.find('[opt=edutype]').combobox('setValue',educationway[i].educationtype);
-            local.find('[opt=college]').val(educationway[i].college);
-            local.find('[opt=profession]').val(educationway[i].profession);
+            local.find('[opt=edutype]').last().combobox('setValue',educationway[i].educationtype);
+            local.find('[opt=college]').last().val(educationway[i].college);
+            local.find('[opt=profession]').last().val(educationway[i].profession);
         }
     }
     /*主要家庭成员数据加载*/
@@ -230,10 +231,10 @@ define(function(){
             }
         }
 
-        var tdarr2 = '<td align="center"><input class="input-text" opt="appellation" style="width: 100px;"></td>' +
-            '<td align="center"><input class="input-text" opt="fm_name" style="width: 100px;"></td>' +
-            '<td align="center"><input class="input-text" opt="fm_identityid" style="width: 100px;"></td>' +
-            '<td align="center"><input opt="fm_politicalstatus" class="easyui-combobox " style="width: 100px"></td>' +
+        var tdarr2 = '<td align="center"><input class="input-text" opt="appellation" style="width: 70px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_name" style="width: 70px;"></td>' +
+            '<td align="center"><input class="input-text" opt="fm_identityid" style="width: 130px;"></td>' +
+            '<td align="center"><input opt="fm_politicalstatus" class="easyui-combobox " style="width: 80px"></td>' +
             '<td align="center"><input class="input-text" opt="fm_workunit" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_position" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_contactway" style="width: 100px;"></td>'+
@@ -264,14 +265,15 @@ define(function(){
             })
             for(var key in familymembers[0]){
                 if(key == 'fm_politicalstatus'){
-                    local.find('[opt=fm_politicalstatus]').combobox('setValue',familymembers[i][key]);
+                    local.find('[opt=fm_politicalstatus]').last().combobox('setValue',familymembers[i][key]);
                 }else{
-                    local.find('[opt='+key+']').val(familymembers[i][key]);
+                    local.find('[opt='+key+']').last().val(familymembers[i][key]);
                 }
             }
         }
     }
-    
+
+    /*界面初始化，公共方法*/
     var initFunc = function (local,option) {
         degreeForm(local);//学位学历添加
 
@@ -309,12 +311,27 @@ define(function(){
                 }
             }
         });
+
+        /*图片上传*/
+        local.find('[opt=personimg]').click(function(){
+            local.find('[opt=inputVal]').click();
+        })
+        /*附件选择动态事件*/
+        local.find('[opt=inputVal]').bind('change',function(){
+            var file=$(this).val();
+            var strFileName=file.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");  //正则表达式获取文件名，不带后缀
+            var FileExt='.'+file.replace(/.+\./,"");   //正则表达式获取后缀
+            //local.find('[name=filenamemsg]').val(strFileName);
+            local.find('[name=fileext]').val(FileExt);
+            cj.imgView(this,local);
+        });
     }
     
     /*新增数据时进入*/
     var saveFunc = function(local,option){
         var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
         addToolBar(local,option,li);
+
         /*保存*/
         local.find('[opt=save]').click(function () {
             var nameedu = getDegreeValue(local);//学位学历获取
@@ -344,42 +361,6 @@ define(function(){
                 }
             })
         });
-
-        /*图片上传*/
-        local.find('[opt=personimg]').click(function(){
-            require(['commonfuncs/popwin/win','text!views/party/fileupload/FileForm.htm','views/party/fileupload/FileForm'],
-                function(win,htmfile,jsfile){
-                    win.render({
-                        title:"上传图片",
-                        width:400,
-                        height:200,
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},
-                            {
-                                text:'保存',
-                                handler:function(html,parent){
-                                }
-                            }
-                        ],
-                        renderHtml:function(localc,submitbtn,parent){
-                            jsfile.render(localc,{
-                                submitbtn:submitbtn,
-                                parent:parent,
-                                plocal:local,
-                                //filetype:filetype,
-                                //refresh:refreshDatagrid,
-                                onCreateSuccess:function(data){
-                                    parent.trigger('close');
-                                }
-                            })
-                        }
-                    })
-                }
-            )
-        })
     }
     
     /*修改数据*/

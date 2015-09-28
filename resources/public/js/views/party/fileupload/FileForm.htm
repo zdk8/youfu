@@ -1,9 +1,8 @@
 <div align="center">
     <div style="margin-top: 15px;">
-    <form opt="fileuploadform" method="post" action="fileupload"><!--enctype="multipart/form-data"-->
-        <input name="pc_id" style="display: none;">
-        <input name="filetype" style="display: none;">
-        <input name="fileext" style="display: none;">
+    <form opt="fileuploadform" method="post"  enctype="multipart/form-data"><!--enctype="multipart/form-data"-->
+        <input name="pc_id" style="display: block;"><!--action="fileupload"-->
+        <input name="fileext" style="display: block;">
         <table class="table_form">
             <tr>
                 <td style="text-align: right">文件 :</td>
@@ -12,8 +11,7 @@
                         <input opt="inputVal"
                                type="file"
                                name="file"
-                               style="width:251px;border:0;height: 24px;" value="" maxlength="64"
-                               onchange="preview(this)">
+                               style="width:251px;border:0;height: 24px;" value="" maxlength="64">
                     </div>
                 </td>
             </tr>
