@@ -1,7 +1,7 @@
 define(function(){
-    var arr_combobox = ['gender'];
-    var arr_datebox = ['birthday','validity','handdate'];
-    var arr_validatebox = ['name','credentialsnumb','credentialstype'];
+    var arr_combobox = [];
+    var arr_datebox = ['receivedate','returndate'];
+    var arr_validatebox = ['returndate'];
 
     /*添加功能按钮*/
     var addToolBar=function(local,option,li) {
@@ -38,51 +38,21 @@ define(function(){
         initControls(local);//控件初始化
     }
     
-    /*新增数据时进入*/
-    var saveFunc = function(local,option){
-        var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
-        addToolBar(local,option,li);
-
-        /*保存*/
-        local.find('[opt=save]').click(function () {
-            local.find('form').form('submit', {
-                url: 'party/addcertificate',
-                onSubmit: function (params) {
-                    layer.load();
-                    var isValid = $(this).form('validate');
-                    if (!isValid) {
-                        layer.closeAll('loading');
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    layer.closeAll('loading');
-                    if (data == "true") {
-                        cj.showSuccess('保存成功');
-                        option.queryParams.refresh();
-                        layer.close(option.index);
-                    } else {
-                        cj.showFail('保存失败');
-                    }
-                }
-            })
-        });
-    }
-    
-    /*修改数据*/
-    var updateFunc = function (local,option) {
-        var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>';
+    /*证件归还*/
+    var backFunc = function(local,option){
+        var li = '<li><input type="button" value="归还" class="btns" opt="save"></li>';
         addToolBar(local,option,li);
         var record = option.queryParams.record; //主表信息
         local.find('form').form('load',record);//主表数据填充
-
-        local.find('[opt=update]').click(function () {
+        local.find('[opt=returndate]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
+        /*保存*/
+        local.find('[opt=save]').click(function () {
             local.find('form').form('submit', {
-                url: 'party/updatecertificate',
+                url: 'party/returncerreceive1',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
-                    params.c_id = record.c_id;
+                    params.cr_id = record.cr_id;
                     if (!isValid) {
                         layer.closeAll('loading');
                     }
@@ -91,11 +61,11 @@ define(function(){
                 success: function (data) {
                     layer.closeAll('loading');
                     if (data == "true") {
-                        cj.showSuccess('修改成功');
+                        cj.showSuccess('证件成功归还');
                         option.queryParams.refresh();
                         layer.close(option.index);
                     } else {
-                        cj.showFail('修改失败');
+                        cj.showFail('证件归还失败');
                     }
                 }
             })
@@ -107,11 +77,8 @@ define(function(){
         initFunc(l,o);//初始化
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
-                case 'update':
-                    updateFunc(l, o);
-                    break;
-                case 'add':
-                    saveFunc(l, o);
+                case 'back':        //证件归还
+                    backFunc(l, o);
                     break;
                 default :
                     break;

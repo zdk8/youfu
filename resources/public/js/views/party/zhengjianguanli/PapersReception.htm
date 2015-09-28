@@ -5,6 +5,16 @@
             <div style="height: 35px;padding-top: 12px;padding-right:3px;">
                 &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
                 &nbsp;<span>证件号码 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                &nbsp;<span>是否归还 </span>
+                    <span>
+                        <input opt="gender" class="easyui-combobox" style="height: 24px;width: 100px;"
+                               name="isback"
+                               data-options="
+                                loader:cj.getLoader('isback'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'">
+                    </span>
             </div>
 
             <div style="float: right;margin-top: -48px;right: 2px;display: inline">
@@ -14,7 +24,7 @@
             <div opt="func_btn" style="float: right;background-color:snow;
                         margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
                 <input type="button" value=">" class="btns" opt="other_2" style="height: 50px;width: 15px;font-weight: bolder;">
-                <input type="button" value="添加" class="btns" opt="addbtn" style="height: 50px;width: 45px;font-weight: bolder;">
+                <input type="button" value="证件领用" class="btns" opt="addbtn" style="height: 50px;width: 65px;font-weight: bolder;">
             </div>
         </div>
     </div>
@@ -45,8 +55,7 @@
                 <th data-options="field:'ro',width:100,align:'center',
                                     formatter:function(value,rowData,rowIndex){
                                         var str='<div></div>';
-                                        str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
-                                        str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        str=$(str).append('<a action=&quot;back&quot;title=&quot;证件归还&quot;href=&quot;javaScript:;&quot;><span>证件归还</span></a>&nbsp;');
                                         return str.html();
                                     }">操作</th>
             </tr>

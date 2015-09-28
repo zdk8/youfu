@@ -13,7 +13,7 @@ define(function(){
         };
         /*证件加载*/
         datagrid.datagrid({
-            url:"record/getrecordlist",
+            url:"party/getcertificatelist",
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
@@ -34,18 +34,17 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:'record/delpensonrecords',
+                                            url:'party/delcertificate',
                                             type:'post',
                                             data:{
-                                                pr_id:record.pr_id
+                                                c_id:record.c_id
                                             },
                                             success: function (data) {
+                                                layer.closeAll('loading');
                                                 if(data == "true"){
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除成功', {icon: 6});
                                                     refreshGrid();
                                                 }else{
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除失败', {icon: 5});
                                                 }
                                             }
@@ -94,7 +93,7 @@ define(function(){
         })
 
         var name = local.find('[opt=name]');                        //姓名
-        var identityid = local.find('[opt=identityid]');        //身份证
+        var identityid = local.find('[opt=identityid]');        //证件号码
         /*搜索*/
         local.find('[opt=query]').click(function(){
             datagrid.datagrid('load',{
@@ -111,7 +110,7 @@ define(function(){
                     layer.open({
                         title:'添加证件',
                         type: 1,
-                        area: ['600px', '350px'], //宽高
+                        area: ['600px', '300px'], //宽高
                         content: htmfile,
                         success: function(layero, index){
                             jsfile.render(layero,{
@@ -140,13 +139,13 @@ define(function(){
                 pr_id:record.pr_id
             },
             success: function (data) {
-                var title ='【'+record.name+ '】证件信息修改';
+                var title =record.name+ ' - 证件信息修改';
                 require(['text!views/party/zhengjianguanli/PapersForm.htm','views/party/zhengjianguanli/PapersForm'],
                     function(htmfile,jsfile){
                         layer.open({
                             title:title,
                             type: 1,
-                            area: ['600px', '350px'], //宽高
+                            area: ['600px', '300px'], //宽高
                             content: htmfile,
                             success: function(layero, index){
                                 jsfile.render(layero,{

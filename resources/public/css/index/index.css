@@ -321,4 +321,26 @@ ol, ul, li, dl, dd, dt {
     /*border: 1px solid red;*/
 }
 
+/*人员添加*/
+.addpeople{
+
+}
+.addpeople div{
+    text-align: center;
+    border-bottom: 1px solid white;
+    background-color: darkgoldenrod;
+    cursor: pointer;
+    color: white;
+    font-weight: bolder;
+    height: 19px;
+    padding-top: 5px;
+}
+.addpeople div:hover{
+    background-color: darkgray;
+}
+.addpeople div:active{
+    position: relative;
+    top: 1px;
+}
+
 

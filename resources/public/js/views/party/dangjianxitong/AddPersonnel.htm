@@ -1,0 +1,60 @@
+<div class="easyui-layout" data-options="fit:true" opt="addpersonnel">
+    <div data-options="region:'west'" style="width:350px;">
+        <table class="easyui-datagrid-noauto" opt="not_p" title="人员列表"
+               data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:false,
+                        loadMsg:'',
+                        pagination:true">
+            <thead>
+            <tr>
+                <th field="ck" checkbox="true"></th>
+                <th data-options="field:'name',width:100,align:'center'">姓名</th>
+                <th data-options="field:'age',width:100,align:'center'">年龄</th>
+                <th data-options="field:'gender',width:74,align:'center',
+                            formatter: function(value,row,index){
+                                    return getGender[value]
+                                }">性别</th>
+                <th data-options="field:'native',width:127,align:'center'">籍贯</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div data-options="region:'center'" style="width:100px;">
+        <div style="margin-top: 130px;" class="addpeople">
+            <div opt="add_p"> > </div>
+            <div opt="add_p2" style="display: none;"> > </div>
+            <div opt="add_p_all"> >> </div>
+
+            <div opt="reduce_p"> < </div>
+            <div opt="reduce_p_all"> << </div>
+        </div>
+    </div>
+
+    <div data-options="region:'east'" style="width:350px;">
+        <table class="easyui-datagrid-noauto" opt="has_p" title="已添加人员"
+               data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:false,
+                        loadMsg:'',
+                        pagination:true">
+            <thead>
+            <tr>
+                <th field="ck" checkbox="true"></th>
+                <th data-options="field:'name',width:100,align:'center'">姓名</th>
+                <th data-options="field:'age',width:100,align:'center'">年龄</th>
+                <th data-options="field:'gender',width:74,align:'center',
+                            formatter: function(value,row,index){
+                                    return getGender[value]
+                                }">性别</th>
+                <th data-options="field:'native',width:127,align:'center'">籍贯</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+

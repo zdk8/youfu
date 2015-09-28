@@ -1,7 +1,7 @@
 define(function(){
-    var arr_combobox = ['gender'];
-    var arr_datebox = ['birthday','validity','handdate'];
-    var arr_validatebox = ['name','credentialsnumb','credentialstype'];
+    var arr_combobox = ['c_id'];
+    var arr_datebox = ['receivedate'];
+    var arr_validatebox = ['c_id'];
 
     /*添加功能按钮*/
     var addToolBar=function(local,option,li) {
@@ -40,13 +40,41 @@ define(function(){
     
     /*新增数据时进入*/
     var saveFunc = function(local,option){
-        var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
+        var li = '<li><input type="button" value="领用" class="btns" opt="save"></li>';
         addToolBar(local,option,li);
+        local.find('[opt=receivedate]').datebox('setValue',new Date().pattern('yyyy-MM-dd'));
 
+        /*证件加载*/
+        local.find("input[opt=c_id]").combogrid({
+            panelWidth:330,
+            panelHeight:350,
+            url:'party/getcertificatelist',
+            queryParams:{
+                isreceive:'1'
+            },
+            method:'post',
+            idField:'c_id',
+            textField:'name',
+            fitColumns:true,
+            pagination:true,
+            mode:'remote',
+            columns:[[
+                {field:'name',title:'姓名',width:35,align:'center'},
+                {field:'credentialstype',title:'证件类型',width:60,align:'center'},
+                {field:'credentialsnumb',title:'证件号码',width:90,align:'center'}
+            ]],
+            onBeforeLoad:function(params){
+                params.name = local.find('[opt=c_id]').combobox('getValue');
+            },
+            onClickRow:function(index,row){
+                local.find('[name=credentialstype]').val(row.credentialstype);
+                local.find('[name=credentialsnumb]').val(row.credentialsnumb);
+            }
+        });
         /*保存*/
         local.find('[opt=save]').click(function () {
             local.find('form').form('submit', {
-                url: 'party/addcertificate',
+                url: 'party/addcerreceive',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
@@ -58,44 +86,11 @@ define(function(){
                 success: function (data) {
                     layer.closeAll('loading');
                     if (data == "true") {
-                        cj.showSuccess('保存成功');
+                        cj.showSuccess('证件领用成功');
                         option.queryParams.refresh();
                         layer.close(option.index);
                     } else {
-                        cj.showFail('保存失败');
-                    }
-                }
-            })
-        });
-    }
-    
-    /*修改数据*/
-    var updateFunc = function (local,option) {
-        var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>';
-        addToolBar(local,option,li);
-        var record = option.queryParams.record; //主表信息
-        local.find('form').form('load',record);//主表数据填充
-
-        local.find('[opt=update]').click(function () {
-            local.find('form').form('submit', {
-                url: 'party/updatecertificate',
-                onSubmit: function (params) {
-                    layer.load();
-                    var isValid = $(this).form('validate');
-                    params.c_id = record.c_id;
-                    if (!isValid) {
-                        layer.closeAll('loading');
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    layer.closeAll('loading');
-                    if (data == "true") {
-                        cj.showSuccess('修改成功');
-                        option.queryParams.refresh();
-                        layer.close(option.index);
-                    } else {
-                        cj.showFail('修改失败');
+                        cj.showFail('证件领用失败');
                     }
                 }
             })
@@ -107,9 +102,6 @@ define(function(){
         initFunc(l,o);//初始化
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
-                case 'update':
-                    updateFunc(l, o);
-                    break;
                 case 'add':
                     saveFunc(l, o);
                     break;

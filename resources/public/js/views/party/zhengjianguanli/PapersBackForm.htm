@@ -1,0 +1,32 @@
+<!--证件归还-->
+<form class="common-form" method="post">
+    <table opt="baseinfo_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+        <tr>
+            <td class="formtdtext" style="width: 100px">姓名<label></label></td>
+            <td>
+                <input class="input-text" name="name" readonly>
+            </td>
+            <td class="formtdtext">证件类型<label></label></td>
+            <td>
+                <input class="input-text" name="credentialstype" readonly>
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">证件号码<label></label></td>
+            <td>
+                <input class="input-text" name="credentialsnumb" style="width: 170px;" readonly>
+            </td>
+            <td class="formtdtext">领用日期<label></label></td>
+            <td>
+                <input opt="receivedate" name="receivedate" class="easyui-datebox" style="width: 100px" readonly>
+            </td>
+        </tr>
+        <tr>
+            <td class="formtdtext">归还日期<label></label></td>
+            <td colspan="3">
+                <input opt="returndate" name="returndate" class="easyui-datebox" data-options="required:true" style="width: 100px">
+            </td>
+        </tr>
+    </table>
+</form>
+
