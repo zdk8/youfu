@@ -1,0 +1,47 @@
+<!--妇女小组-->
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',border:false"
+         style="height:60px;padding:0 0 0 0px;">
+        <div style="width: auto;height: 50px;;background-color: #eff3f8;"><!-- #e5e5e5-->
+            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                &nbsp;<span>名称 </span><span><input opt="name" type="text" size="15" class="inputtext"></span>
+                &nbsp;<span>建立时间 </span><span><input opt="identityid" class="easyui-datebox" style="width: 100px;"></span>
+            </div>
+
+            <div style="float: right;margin-top: -48px;right: 2px;display: inline">
+                <input type="button" value="操作" class="btns" opt="other" style="height: 50px;width: 45px;font-weight: bolder;">
+                <input type="button" value="查询" class="btns" opt="query" style="height: 50px;width: 45px;font-weight: bolder;">
+            </div>
+            <div opt="func_btn" style="float: right;background-color:snow;
+                        margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
+                <input type="button" value=">" class="btns" opt="other_2" style="height: 50px;width: 15px;font-weight: bolder;">
+                <input type="button" value="添加" class="btns" opt="addbtn" style="height: 50px;width: 45px;font-weight: bolder;">
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
+        <table class="easyui-datagrid-noauto"
+               data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+            <thead>
+            <tr>
+                <th data-options="field:'birthday',width:100,align:'center'">名称</th>
+                <th data-options="field:'credentialstype',width:170,align:'center'">建立时间</th>
+                <th data-options="field:'ro',width:100,align:'center',
+                                    formatter:function(value,rowData,rowIndex){
+                                        var str='<div></div>';
+                                        str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        return str.html();
+                                    }">操作</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+

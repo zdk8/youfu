@@ -60,6 +60,9 @@ div.form-foot-btns ul li a, div.form-foot-btns ul li a:visited
     padding-bottom: 6px;
     padding-top: 2px;
 }
+textarea{
+    border: 1px solid #e5e5e5;
+}
 
 
 

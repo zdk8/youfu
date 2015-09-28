@@ -482,6 +482,25 @@ var cj=(function(){
             window.setTimeout(function () {
                 layer.close(index);
             },3000);
+        },imgView: function (file,local) {      //照片预览
+            var prevDiv = local.find('[opt=personimg]');
+            if (file.files){
+                if(file.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function(evt){
+                        var imghtm = '<img style="width:150px;height:120px;" src="' + evt.target.result + '" />';
+                        prevDiv.html(imghtm);
+                    }
+                    reader.readAsDataURL(file.files[0]);
+                }else{
+                    var noperson = '<img name="photo" src="images/noperson.gif" value="" alt="用户照片" width="150px" height="120px">';
+                    prevDiv.html(noperson);
+                }
+            }else{//ie下实现
+                var imghtmie = '<div class="img" style="width:150px;height:120px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+                prevDiv.html(imghtmie);
+            }
+
         }
     }
 
