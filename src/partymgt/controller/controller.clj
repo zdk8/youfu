@@ -143,15 +143,19 @@
 ;;证件领用登记
 (defn add-cerreceive [request]
   (let [params (:params request)
-        recdata (select-keys params (:t_certificatereceive common/selectcols))]
-    (db/adddata-by-tablename "t_certificatereceive" (common/dateformat-bf-insert recdata "receivedate" "returndate"))
+        c_id (:c_id params)
+        recdata (common/dateformat-bf-insert (select-keys params (:t_certificatereceive common/selectcols))"receivedate" "returndate" )]
+    (db/add-cerreceive recdata c_id)
     (str "true")))
 
 (defn return-cerreceive [request]
   (let [params (:params request)
         cr_id (:cr_id params)
-        returndate (:returndate params)]
-    (db/updatedata-by-tablename "t_certificatereceive" (common/dateformat-bf-insert {:returndate returndate} "returndate") {:cr_id cr_id})
+        c_id (:c_id params)
+        returndate (common/dateformat-bf-insert {:returndate (:returndate params)} "returndate")
+        ]
+    ;(db/updatedata-by-tablename "t_certificatereceive" (common/dateformat-bf-insert {:returndate returndate} "returndate") {:cr_id cr_id})
+    (db/return-cerreceive returndate cr_id c_id)
     (str "true")))
 
 (defn delete-cerreceive [request]
@@ -159,6 +163,19 @@
         cr_id (:cr_id params)]
     (db/deletedata-by-tablename "t_certificatereceive" {:cr_id cr_id})
     (str "true")))
+
+(defn get-cerreceive-list [request]
+  (let [params (:params request)
+        rows (:rows params)
+        page (:page params)
+        name (:name params)
+        credentialsnumb (:credentialsnumb params)
+        isreceive (:isreceive params)
+        receivecond (if (= isreceive "1") (str " and isreceive = 1 ") (str " and isreceive not= 1 "))
+        conds (str receivecond (common/likecond "name" name) (common/likecond "credentialsnumb" credentialsnumb))
+        getsql (str "select c_id,name,gender,birthday,credentialstype,credentialsnumb,validity,handdate,manager,c_comments,isreceive,cr_id,receivedate,returndate,cr_comments from(select c.*,cr.cr_id,cr.receivedate,cr.returndate,cr.cr_comments from t_certificatereceive cr left join t_certificate c on cr.c_id = c.c_id)")
+        getresults (common/fenye rows page (str "(" getsql ")") "*" conds " order by cr_id desc ")]
+    (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "validity" "handdate" "receivedate" "returndate" )})))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]

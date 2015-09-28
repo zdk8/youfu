@@ -73,3 +73,13 @@
     (updatedata-by-tablename "t_personalrecords" prdata {:pr_id pr_id})             ;更新人事档案基础数据
     (dorun (map #(adddata-by-tablename "t_educationway" %) edudata))               ;增加新的学历历程关联数据
     (dorun (map #(adddata-by-tablename "t_familymember" %) familydata))))          ;增加新的人员关系关联数据
+
+(defn add-cerreceive [redata c_id]
+  (transaction
+    (adddata-by-tablename "t_certificatereceive" redata)
+    (updatedata-by-tablename "t_certificate" {:isreceive "1"} {:c_id c_id})))
+
+(defn return-cerreceive [returndate cr_id c_id]
+  (transaction
+    (updatedata-by-tablename "t_certificatereceive" returndate {:cr_id cr_id})
+    (updatedata-by-tablename "t_certificate" {:isreceive nil} {:c_id c_id})))

@@ -32,9 +32,9 @@
                  ;;妇女小组表
                  :t_womengroup [:wg_name :wg_createtime]
                  ;;证件管理备案表
-                 :t_certificate [:name :gender :birthday :credentialstype :credentialsnumb :validity :handdate :manager :comments]
+                 :t_certificate [:name :gender :birthday :credentialstype :credentialsnumb :validity :handdate :manager :c_comments]
                  ;;证件管理领用登记表
-                 :t_certificatereceive [:receivedate :returndate :comments :c_id]
+                 :t_certificatereceive [:receivedate :returndate :cr_comments :c_id]
                  })
 
 

@@ -44,6 +44,7 @@
   (POST "/party/addcerreceive" request (ctl/add-cerreceive request))                     ;证件领用
   (POST "/party/returncerreceive" request (ctl/return-cerreceive request))                ;证件归还
   (POST "/party/delcerreceive" request (ctl/delete-cerreceive request))
+  (POST "/party/getcerreceivelist" request (ctl/get-cerreceive-list request))
 
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
