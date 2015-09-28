@@ -57,6 +57,33 @@ if(!window.console){
     }
 }
 //****************************************************************************************
+
+/**
+ * Created by weipan on 3/31/14.
+ */
+var ajaxv = {};
+ajaxv.ajax = function (url,data,_success,_error) {
+    $.ajax({
+        type:'post',
+        url:url,
+        data:data,
+        success: function (data) {
+            if(data.length > 0){
+                _success(data[0].aaa103);
+            }
+        },
+        error: function () {
+            _error();
+        }
+    })
+}
+ajaxv.successf = function (info) {
+    //return info;
+    alert(info)
+}
+ajaxv.errorf = function () {
+
+}
 var cjEnum={};//和cj中的Enums一样，只是便于调试，在代码中不用
 var cj=(function(){
     var pz=15;
@@ -160,10 +187,102 @@ var cj=(function(){
             singleFun(enumarr[i]);
         }
     },1000);
+
+    var getEnumlower=function(searchtype){
+        return Enums[searchtype];
+    }
+    var enfmt=function(ef){
+        return function(value,recode,index){
+            if(ef){
+                for (var i = 0; i < ef.length; i++) {
+                    if (ef[i].id == value) {
+                        return ef[i].text;
+                    }
+                }
+                return value;
+            }
+        }
+    }
+    /*枚举*/
+    /*统计类型*/
+    var type_tj = [{"id":"xzqh","text":"行政区划","selected":true},{"id":"xb","text":"性别"},{"id":"nl","text":"年龄"},
+        /*{"id":"mz","text":"民族"},*/{"id":"lb","text":"类别"},{"id":"hy","text":"婚姻状况"},{"id":"zn","text":"有无子女"},
+        {"id":"wh","text":"文化程度"},{"id":"kcyy","text":"空巢原因"},{"id":"xqah","text":"兴趣爱好"},
+        {"id":"twpl","text":"子女探望频率"},{"id":"jjly","text":"经济来源"},{"id":"grysr","text":"个人月收入"},
+        {"id":"knhd","text":"近期活动"},{"id":"xyfw","text":"需要服务"},{"id":"shzq","text":"晚年最缺"}];
+    /*子类型*/
+    var lb = [{"id":1,"text":"低保"},{"id":2,"text":"低保边缘户"},{"id":3,"text":"低收入户"},{"id":4,"text":"失独"},
+        {"id":5,"text":"重残"},{"id":6,"text":"其他"}];
+    var hyzk = [{"id":1,"text":"未婚"},{"id":2,"text":"已婚"},{"id":3,"text":"离婚"},{"id":4,"text":"分居"},
+        {"id":5,"text":"丧偶"},{"id":6,"text":"其他"}];
+    var whchd = [{"id":1,"text":"文盲"},{"id":2,"text":"小学"},{"id":3,"text":"初中"},{"id":4,"text":"高中"},
+        {"id":5,"text":"大专以上"}];
+    var kchyy = [{"id":1,"text":"经济原因"},{"id":2,"text":"家庭成员关系原因"},{"id":3,"text":"生活习惯"},{"id":4,"text":"其他"}];
+    var zntw = [{"id":1,"text":"一两天"},{"id":2,"text":"一周"},{"id":3,"text":"两周"},{"id":4,"text":"一个月"},
+        {"id":5,"text":"二个月"},{"id":6,"text":"一个季度"},{"id":7,"text":"半年"},{"id":8,"text":"一年及以上"}];
+    var yshr = [{"id":1,"text":"没有"},{"id":2,"text":"不足200"},{"id":3,"text":"200~499"},{"id":4,"text":"500~999"},
+        {"id":5,"text":"1000~1499"},{"id":6,"text":"1500~2000"},{"id":7,"text":"2000及以上"}];
+    var emnumap = {};
+    emnumap['type_tj'] = type_tj;
+    emnumap['lb'] = lb;
+    emnumap['hyzk'] = hyzk;
+    emnumap['whchd'] = whchd;
+    emnumap['kchyy'] = kchyy;
+    emnumap['zntw'] = zntw;
+    emnumap['yshr'] = yshr;
+    function getEnum(type){
+        return emnumap[type];
+    }
     var commonj = {
         version: '1.0',
         defaultTitle: '提示',
         ajaxaSynchronous: false,
+        calert: function (res) {
+            var d = eval('(' + res + ')');
+            if (!!d && (d.success == true || d.success == 'true')) {
+                $.messager.alert(cj.defaultTitle, '操作成功!', 'info');
+            } else {
+                $.messager.alert(cj.defaultTitle, '操作失败!', 'info');
+            }
+        },
+        question: function (info, fun, title) {
+            var boxtitle = cj.defaultTitle;
+            if (title) {
+                boxtitle = title;
+            }
+            $.messager.confirm(boxtitle, info, function (r) {
+                if (r) {
+                    fun()
+                }
+            });
+        },
+
+        ifSuccQest: function (res, info, fun, title) {
+            var d = eval('(' + res + ')');
+            if (!d||d.success == true || d.success == 'true') {
+                cj.question(info, fun, title)
+            }
+        },
+        csumbitQest:function(res,info,fun,title){
+            var d= $.evalJSON(res);
+            if(d){
+                if(d.success == true || d.success == 'true'){
+                    cj.question((d.message||info||'操作成功')+',是否关闭', fun,title)
+                }else{
+                    cj.question(( d.message||'操作失败')+',是否关闭', fun,title)
+                }
+            }else{
+                $.messager.alert(cj.defaultTitle, '操作失败!', 'info');
+            }
+        },
+        slideShow:function(message,title){
+            $.messager.show({
+                title:title||'温馨提示',
+                msg:message||'',
+                timeout:3000,
+                showType:'slide'
+            });
+        },
         getByteLen: function (val) {
             var len = 0;
             for (var i = 0; i < val.length; i++) {
@@ -254,6 +373,51 @@ var cj=(function(){
                 show.ShowContent(option)
             }
             require(['commonfuncs/TreeClickEvent'],f)
+        },
+        showHtmlIframe:function(value){
+            var f=function(show){
+                show.ShowHtmlIframe(value)
+            }
+            require(['commonfuncs/TreeClickEvent'],f)
+        },
+        showIframe:function(value,jsfile,title,customparam){
+            var f=function(show){
+                show.ShowIframe(value,jsfile,title,customparam)
+            }
+            require(['commonfuncs/TreeClickEvent'],f)
+        },
+        showHtml:function(title,texthtml){
+            require(['commonfuncs/TreeClickEvent'],function(js){
+                js.closeTabByTitle(title);
+                js.showHtml(title,texthtml);
+            })
+        },
+        searchLog:function(functionid,isAuditLog){
+            require(['commonfuncs/TreeClickEvent'],function(js){
+                var location='log.do?method='+functionid;
+                if(isAuditLog){
+                    location+='&isAuditLog='+isAuditLog
+                }
+                var title='操作日志';
+                js.closeTabByTitle(title)
+                js.ShowIframe(location,'',title)
+            })
+        },
+        getCurrTab:function(){
+            return $('#tabs').tabs('getSelected');
+        } ,
+        rowStyler:function(index,row){
+            if(index%2==1){
+                return 'background:#e7ffe7';
+            }
+        },dateFormatter:function(fmt){
+            return function(v,r,i){
+                var d=v;
+                if(!d){return}
+                d= new Date(d.replace(/-/g,'/'));
+                return d.pattern(fmt||'yyyy-MM-dd hh:mm')
+            }
+
         },getUrl:getUrl,
         ajaxdata:function(url,data,success,type){
             var atype=type;
@@ -285,7 +449,8 @@ var cj=(function(){
             return $btnarea;
         },getUserMsg:function(){
             return usermsg;
-        },getLocalEnum: function (type) {
+        },
+        getLocalEnum: function (type) {
             return function(param,success,error){
                 success(getEnum(type));
             }
@@ -317,25 +482,6 @@ var cj=(function(){
             window.setTimeout(function () {
                 layer.close(index);
             },3000);
-        },imgView: function (file,local) {      //照片预览
-            var prevDiv = local.find('[opt=personimg]');
-            if (file.files){
-                if(file.files[0]){
-                    var reader = new FileReader();
-                    reader.onload = function(evt){
-                        var imghtm = '<img style="width:150px;height:120px;" src="' + evt.target.result + '" />';
-                        prevDiv.html(imghtm);
-                    }
-                    reader.readAsDataURL(file.files[0]);
-                }else{
-                    var noperson = '<img name="photo" src="images/noperson.gif" value="" alt="用户照片" width="150px" height="120px">';
-                    prevDiv.html(noperson);
-                }
-            }else{//ie下实现
-                var imghtmie = '<div class="img" style="width:150px;height:120px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
-                prevDiv.html(imghtmie);
-            }
-
         }
     }
 
@@ -344,6 +490,81 @@ var cj=(function(){
 })()
 
 
+jQuery.fn.cssRadioOnly = function (){
+    var me = ($(this))
+    var selectRadio = ":input[type=radio] + label";
+    me.find(selectRadio).each(function () {
+        if ($(this).prev()[0].checked)
+            $(this).addClass("checked");
+    }).prev().hide();
+}
+jQuery.fn.cssCheckBoxOnly = function () {
+    var me = ($(this))
+    var selectCheck = ":input[type=checkbox] + label";
+    me.find(selectCheck).each(function () {
+        if ($(this).prev()[0].checked) {
+            $(this).addClass("checked");
+        }
+    }).prev().hide();
+}
+jQuery.fn.cssRadio = function (toggle) {
+    var me = ($(this))
+    var selectRadio = ":input[type=radio] + label";
+    me.find(selectRadio).each(function () {
+        if ($(this).prev()[0].checked)
+            $(this).addClass("checked"); //初始化,如果已经checked了则添加新打勾样式
+    }).click(function () {               //为第个元素注册点击事件
+            var s = $($(this).prev()[0]).attr('name')
+            s = ":input[name=" + s + "]+label"
+            var isChecked=$(this).prev()[0].checked;
+            me.find(s).each(function (i) {
+                $(this).prev()[0].checked = false;
+                $(this).prev().removeAttr("checked");
+                $(this).removeClass("checked");
+            });
+            if(isChecked&&toggle){
+                //如果单选已经为选中状态并且参数为true,则什么都不做
+            }else{
+                $(this).prev()[0].checked = true;
+                $(this).prev().attr("checked","checked");
+                $(this).addClass("checked");
+            }
+
+        })
+        .prev().hide();     //原来的圆点样式设置为不可见
+
+
+};
+jQuery.fn.cssCheckBox = function () {
+    var me = ($(this))
+    me.find(":input[type=checkbox] + label").each(function () {
+        if ($(this).prev()[0].checked) {
+            $(this).addClass("checked");
+        }
+    }).toggle(function () {
+            $(this).prev()[0].checked = true;
+            $(this).addClass("checked");
+            $($(this).prev()[0]).attr("checked","checked");
+
+        },
+        function () {
+            $(this).prev()[0].checked = false;
+            $(this).removeClass("checked");
+            $($(this).prev()[0]).removeAttr("checked");
+        }).prev().hide();
+}
+
+var lr=(function(){
+    return {
+        url:function(option,eventName){
+           var en='';
+            if(eventName){
+                en='&eventName='+eventName
+            }
+           return 'lr.do?model='+option.location+en+'&functionid='+option.functionid;
+        }
+    }
+})() ;
 
 
 
