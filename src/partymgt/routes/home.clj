@@ -33,6 +33,35 @@
   (POST "/party/updatepartybyid" request (ctl/update-party-byid request))
   (POST "/party/getpartylist" request (ctl/get-depart-list request))
   (POST "/party/addpeopletoparty" request (ctl/add-people-to-party request))
+  (POST "/party/delpartybranch" request (ctl/delete-partybranch request))
+
+  ;;共青团
+  (POST "/party/addyouthleague" request (ctl/add-youthleague request))
+  (POST "/party/updateyouthleaguebyid" request (ctl/update-youthleague-byid request))
+  (POST "/party/getyouthleaguelist" request (ctl/get-youthleague-list request))
+  (POST "/party/addpeopletoyouthleague" request (ctl/add-people-to-youthleague request))
+  (POST "/party/delyouthleague" request (ctl/delete-youthleague request))
+
+  ;;老干部
+  (POST "/party/addveterancadre" request (ctl/add-veterancadre request))
+  (POST "/party/updateveteranbyid" request (ctl/update-veteran-byid request))
+  (POST "/party/getveteranlist" request (ctl/get-veteran-list request))
+  (POST "/party/addpeopletoveteran" request (ctl/add-people-to-veteran request))
+  (POST "/party/delveterancadre" request (ctl/delete-veterancadre request))
+
+  ;;妇女小组
+  (POST "/party/addwomengroup" request (ctl/add-womengroup request))
+  (POST "/party/updatewomengroupbyid" request (ctl/update-womengroup-byid request))
+  (POST "/party/getwomengrouplist" request (ctl/get-womengroup-list request))
+  (POST "/party/addpeopletowomengroup" request (ctl/add-people-to-womengroup request))
+  (POST "/party/delwomengroup" request (ctl/delete-womengroup request))
+
+  ;;工会
+  (POST "/party/addtradeunion" request (ctl/add-tradeunion request))
+  (POST "/party/updatetradeunionbyid" request (ctl/update-tradeunion-byid request))
+  (POST "/party/gettradeunionlist" request (ctl/get-tradeunion-list request))
+  (POST "/party/addpeopletotradeunion" request (ctl/add-people-to-tradeunion request))
+  (POST "/party/deltradeunion" request (ctl/delete-tradeunion request))
 
   ;;证件备案管理
   (POST "/party/addcertificate" request (ctl/add-certificate request))

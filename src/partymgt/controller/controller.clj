@@ -110,6 +110,168 @@
     (db/updatedata-by-tablename "t_personalrecords" {:pb pb_id} {:pr_id pr_id})
     (str "true")))
 
+(defn delete-partybranch [request]
+  (let [params (:params request)
+        pb_id (:pb_id params)]
+    (db/updatedata-by-tablename "t_partybranch" {:isdel "1"} {:pb_id pb_id})
+    (str "true")))
+
+;;共青团
+(defn add-youthleague [request]
+  (let [params (:params request)
+        youthdata (select-keys params (:t_communistyouthleague common/selectcols))]
+    (db/adddata-by-tablename "t_communistyouthleague" (common/dateformat-bf-insert youthdata "cy_createtime"))
+    (str "true")))
+
+(defn update-youthleague-byid
+  [request]
+  (let [params (:params request)
+        cy_id (:cy_id params)
+        youthdata (select-keys params (:t_communistyouthleague common/selectcols))]
+    (db/updatedata-by-tablename "t_communistyouthleague" (common/dateformat-bf-insert youthdata "cy_createtime") {:cy_id cy_id})
+    (str "true")))
+
+(defn get-youthleague-list
+  [request]
+  (let [params (:params request)
+        cy_name (:cy_name params)
+        rows (:rows params)
+        page (:page params)
+        conds (str (common/likecond "cy_name" cy_name))
+        getresult (common/fenye rows page "t_communistyouthleague" "*" conds " order by cy_id desc")]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "cy_createtime") })))
+
+(defn add-people-to-youthleague [request]
+  (let [params (:params request)
+        cy_id (:cy_id params)
+        pr_id (:pr_id params)
+        ]
+    (db/updatedata-by-tablename "t_personalrecords" {:cy cy_id} {:pr_id pr_id})
+    (str "true")))
+
+(defn delete-youthleague [request]
+  (let [params (:params request)
+        cy_id (:cy_id params)]
+    (db/updatedata-by-tablename "t_communistyouthleague" {:isdel "1"} {:cy_id cy_id})
+    (str "true")))
+
+;;老干部
+(defn add-veterancadre [request]
+  (let [params (:params request)
+        veterandata (select-keys params (:t_veterancadre common/selectcols))]
+    (db/adddata-by-tablename "t_veterancadre" (common/dateformat-bf-insert veterandata "vc_createtime"))
+    (str "true")))
+
+(defn update-veteran-byid
+  [request]
+  (let [params (:params request)
+        vc_id (:vc_id params)
+        veterandata (select-keys params (:t_veterancadre common/selectcols))]
+    (db/updatedata-by-tablename "t_veterancadre" (common/dateformat-bf-insert veterandata "vc_createtime") {:vc_id vc_id})
+    (str "true")))
+
+(defn get-veteran-list
+  [request]
+  (let [params (:params request)
+        vc_name (:vc_name params)
+        rows (:rows params)
+        page (:page params)
+        conds (str (common/likecond "vc_name" vc_name))
+        getresult (common/fenye rows page "t_veterancadre" "*" conds " order by vc_id desc")]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "vc_createtime") })))
+
+(defn add-people-to-veteran [request]
+  (let [params (:params request)
+        vc_id (:vc_id params)
+        pr_id (:pr_id params)
+        ]
+    (db/updatedata-by-tablename "t_personalrecords" {:vc vc_id} {:pr_id pr_id})
+    (str "true")))
+
+(defn delete-veterancadre [request]
+  (let [params (:params request)
+        vc_id (:vc_id params)]
+    (db/updatedata-by-tablename "t_veterancadre" {:isdel "1"} {:vc_id vc_id})
+    (str "true")))
+
+;;妇女小组
+(defn add-womengroup [request]
+  (let [params (:params request)
+        womendata (select-keys params (:t_womengroup common/selectcols))]
+    (db/adddata-by-tablename "t_womengroup" (common/dateformat-bf-insert womendata "wg_createtime"))
+    (str "true")))
+
+(defn update-womengroup-byid
+  [request]
+  (let [params (:params request)
+        wg_id (:wg_id params)
+        womendata (select-keys params (:t_womengroup common/selectcols))]
+    (db/updatedata-by-tablename "t_womengroup" (common/dateformat-bf-insert womendata "wg_createtime") {:wg_id wg_id})
+    (str "true")))
+
+(defn get-womengroup-list
+  [request]
+  (let [params (:params request)
+        wg_name (:wg_name params)
+        rows (:rows params)
+        page (:page params)
+        conds (str (common/likecond "wg_name" wg_name))
+        getresult (common/fenye rows page "t_womengroup" "*" conds " order by wg_id desc")]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "wg_createtime") })))
+
+(defn add-people-to-womengroup [request]
+  (let [params (:params request)
+        wg_id (:wg_id params)
+        pr_id (:pr_id params)
+        ]
+    (db/updatedata-by-tablename "t_personalrecords" {:wg wg_id} {:pr_id pr_id})
+    (str "true")))
+
+(defn delete-womengroup [request]
+  (let [params (:params request)
+        wg_id (:wg_id params)]
+    (db/updatedata-by-tablename "t_womengroup" {:isdel "1"} {:wg_id wg_id})
+    (str "true")))
+
+;;工会
+(defn add-tradeunion [request]
+  (let [params (:params request)
+        tradedata (select-keys params (:t_tradeunion common/selectcols))]
+    (db/adddata-by-tablename "t_tradeunion" (common/dateformat-bf-insert tradedata "tu_createtime"))
+    (str "true")))
+
+(defn update-tradeunion-byid
+  [request]
+  (let [params (:params request)
+        tu_id (:tu_id params)
+        tradedata (select-keys params (:t_tradeunion common/selectcols))]
+    (db/updatedata-by-tablename "t_tradeunion" (common/dateformat-bf-insert tradedata "tu_createtime") {:tu_id tu_id})
+    (str "true")))
+
+(defn get-tradeunion-list
+  [request]
+  (let [params (:params request)
+        tu_name (:tu_name params)
+        rows (:rows params)
+        page (:page params)
+        conds (str (common/likecond "tu_name" tu_name))
+        getresult (common/fenye rows page "t_tradeunion" "*" conds " order by tu_id desc")]
+    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "tu_createtime") })))
+
+(defn add-people-to-tradeunion [request]
+  (let [params (:params request)
+        tu_id (:tu_id params)
+        pr_id (:pr_id params)
+        ]
+    (db/updatedata-by-tablename "t_personalrecords" {:tu tu_id} {:pr_id pr_id})
+    (str "true")))
+
+(defn delete-tradeunion [request]
+  (let [params (:params request)
+        tu_id (:tu_id params)]
+    (db/updatedata-by-tablename "t_tradeunion" {:isdel "1"} {:tu_id tu_id})
+    (str "true")))
+
 ;;证件管理
 (defn add-certificate [request]
   (let [params (:params request)
