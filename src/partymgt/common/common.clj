@@ -34,7 +34,7 @@
                  ;;证件管理备案表
                  :t_certificate [:name :gender :birthday :credentialstype :credentialsnumb :validity :handdate :manager :comments]
                  ;;证件管理领用登记表
-                 :t_certificatereceive [:receivedate :returndate :comments]
+                 :t_certificatereceive [:receivedate :returndate :comments :c_id]
                  })
 
 

@@ -110,6 +110,55 @@
     (db/updatedata-by-tablename "t_personalrecords" {:pb pb_id} {:pr_id pr_id})
     (str "true")))
 
+;;证件管理
+(defn add-certificate [request]
+  (let [params (:params request)
+        cerdata (select-keys params (:t_certificate common/selectcols))]
+    (db/adddata-by-tablename "t_certificate" (common/dateformat-bf-insert cerdata "birthday" "validity" "handdate"))
+    (str "true")))
+
+(defn update-certificate [request]
+  (let [params (:params request)
+        c_id (:c_id params)
+        cerdata (select-keys params (:t_certificate common/selectcols))]
+    (db/updatedata-by-tablename "t_certificate" (common/dateformat-bf-insert cerdata "birthday" "validity" "handdate") {:c_id c_id})
+    (str "true")))
+
+(defn get-certificate-list [request]
+  (let [params (:params request)
+        rows (:rows params)
+        page (:page params)
+        name (:name params)
+        credentialsnumb (:credentialsnumb params)
+        conds (str " and isdel is null " (common/likecond "name" name) (common/likecond "credentialsnumb" credentialsnumb))
+        getresults (common/fenye rows page "t_certificate" "*" conds "")]
+    (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "validity" "handdate")})))
+
+(defn delete-certificate [request]
+  (let [params (:params request)
+        c_id (:c_id params)]
+    (db/updatedata-by-tablename "t_certificate" {:isdel "1"} {:c_id c_id})
+    (str "true")))
+
+;;证件领用登记
+(defn add-cerreceive [request]
+  (let [params (:params request)
+        recdata (select-keys params (:t_certificatereceive common/selectcols))]
+    (db/adddata-by-tablename "t_certificatereceive" (common/dateformat-bf-insert recdata "receivedate" "returndate"))
+    (str "true")))
+
+(defn return-cerreceive [request]
+  (let [params (:params request)
+        cr_id (:cr_id params)
+        returndate (:returndate params)]
+    (db/updatedata-by-tablename "t_certificatereceive" (common/dateformat-bf-insert {:returndate returndate} "returndate") {:cr_id cr_id})
+    (str "true")))
+
+(defn delete-cerreceive [request]
+  (let [params (:params request)
+        cr_id (:cr_id params)]
+    (db/deletedata-by-tablename "t_certificatereceive" {:cr_id cr_id})
+    (str "true")))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]

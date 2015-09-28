@@ -34,6 +34,17 @@
   (POST "/party/getpartylist" request (ctl/get-depart-list request))
   (POST "/party/addpeopletoparty" request (ctl/add-people-to-party request))
 
+  ;;证件备案管理
+  (POST "/party/addcertificate" request (ctl/add-certificate request))
+  (POST "/party/updatecertificate" request (ctl/update-certificate request))
+  (POST "/party/getcertificatelist" request (ctl/get-certificate-list request))
+  (POST "/party/delcertificate" request (ctl/delete-certificate request))
+
+  ;;证件领用登记
+  (POST "/party/addcerreceive" request (ctl/add-cerreceive request))                     ;证件领用
+  (POST "/party/returncerreceive" request (ctl/return-cerreceive request))                ;证件归还
+  (POST "/party/delcerreceive" request (ctl/delete-cerreceive request))
+
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除
