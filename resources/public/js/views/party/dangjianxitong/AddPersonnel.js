@@ -64,8 +64,6 @@ define(function(){
                     url:option.params.add_p_url,
                     type:'post',
                     data:{
-                        //pb_id:option.queryParams.record.pb_id,
-                        idtype:option.params.idtype,
                         id:option.params.id,
                         pr_ids:names.join(",")
                     },
@@ -83,23 +81,25 @@ define(function(){
             }
         });
         /*>>*/
+        var add_p_all2 = local.find('[opt=add_p_all2]');
         local.find('[opt=add_p_all]').click(function () {
+            var $this = $(this);
             layer.confirm('是否需要添加所有人员？', {icon: 3,shift: 6,title:'温馨提示'}, function(index){
                 layer.close(index);
-                //layer.load();
+                layer.load();
+                $this.hide();
+                add_p_all2.show();
                 $.ajax({
                     url:option.params.add_p_url,
                     type:'post',
                     data:{
-                        //pb_id:option.queryParams.record.pb_id,
-                        idtype:option.params.idtype,
                         id:option.params.id,
                         pr_ids:'all'
                     },
                     success: function (data) {
                         layer.closeAll('loading');
-                        //$this.show();
-                        //add_p2.hide();
+                        $this.show();
+                        add_p_all2.hide();
                         if(data == "true"){
                             layer.alert('人员添加成功', {icon: 6,title:'温馨提示',shift:2});
                             not_p_datagrid.datagrid('reload');
@@ -118,9 +118,9 @@ define(function(){
             if(checkedItems.length == 0){
                 layer.alert('请选择要移除的人员', {icon: 6});
             }else{
-                //layer.load();
-                //$this.hide();
-                //reduce_p2.show();
+                layer.load();
+                $this.hide();
+                reduce_p2.show();
                 $.each(checkedItems, function(index, item){
                     names.push(item.pr_id);
                 });
@@ -129,7 +129,6 @@ define(function(){
                     url:option.params.reduce_p_url,
                     type:'post',
                     data:{
-                        idtype:option.params.idtype,
                         id:option.params.id,
                         pr_ids:names.join(",")
                     },
@@ -147,9 +146,32 @@ define(function(){
             }
         });
         /*<<*/
+        var reduce_p_all2 = local.find('[opt=reduce_p_all2]');
         local.find('[opt=reduce_p_all]').click(function () {
+            var $this = $(this);
             layer.confirm('是否移除所有人员？', {icon: 3,shift: 6,title:'温馨提示'}, function(index){
                 layer.close(index);
+                layer.load();
+                $this.hide();
+                reduce_p_all2.show();
+                $.ajax({
+                    url:option.params.add_p_url,
+                    type:'post',
+                    data:{
+                        id:option.params.id,
+                        pr_ids:'all'
+                    },
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        $this.show();
+                        reduce_p_all2.hide();
+                        if(data == "true"){
+                            layer.alert('人员移除成功', {icon: 6,title:'温馨提示',shift:2});
+                            not_p_datagrid.datagrid('reload');
+                            has_p_datagrid.datagrid('reload');
+                        }
+                    }
+                });
             });
         });
     }
