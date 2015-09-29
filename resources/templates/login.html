@@ -1,99 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/ico" href="css/login/images/favicon.ico" />
+<head lang="en">
+    <meta charset="UTF-8">
     <title>用户登入</title>
-    <link href="css/login/styles.css" type="text/css" media="screen" rel="stylesheet" />
-    <!--<link href="js/jqueryplugin/jquery-ui-1.11.1.custom/jquery-ui.css" rel="stylesheet">-->
+    <link href="css/login/login.css" type="text/css" media="screen" rel="stylesheet"/>
     <script src="js/jquery-1.8.0.min.js"></script>
-    <!--<script src="js/jqueryplugin/jquery-ui-1.11.1.custom/jquery-ui.js"></script>
-    <script type="text/javascript" src="css/login/jquery.keyboard.extension-typing.js"></script>
-    <link type="text/css" href="css/login/keyboard.css" rel="stylesheet" />
-    <script type="text/javascript" src="css/login/jquery.keyboard.js"></script>-->
-
-    <script src="js/md5.js" type="text/javascript"></script>
-    <!--<script src="js/enc-base64-min.js" type="text/javascript"></script>-->
-
-
-    <style type="text/css">
-
-    </style>
 </head>
-<body id="login">
-<div id="wrappertop">
-</div>
-<div id="wrapper">
-    <div id="content">
-        <div id="header">
-            <h1>
-                <a href=""></a>
-            </h1>
-        </div>
-        <div id="darkbanner" class="banner320">
-            <h2> 平湖养老管理系统</h2>
-        </div>
-        <div id="darkbannerwrap"></div>
-        <form name="form1" method="post" action="login">
-            <fieldset class="form">
-                <p>
-                    <label class="loginlabel" for="username">
-                        用户名:</label>
-                    <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all" name="username"
-                           id="username" type="text" value="" />
-                </p>
-                <p>
-                    <label class="loginlabel" for="password">
-                        密&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
-                    <span>
-                        <input class="logininput ui-keyboard-input ui-widget-content ui-corner-all"
-                               name="password" id="password" type="password" />
-                        <!--<img id="passwd" class="tooltip" alt="Click to open the virtual keyboard" title="Click to open the virtual keyboard"
-                            src="css/login/keyboard.png" />-->
-                    </span>
-                </p>
-                <button id="loginbtn" type="button" class="positive" name="Submit">
-                    <img src="css/login/key.png" alt="Announcement" />登入</button>
-                <ul id="forgottenpassword">
-                    <li class="boldtext">|</li>
-                    <li>
-                        <!--<input type="checkbox" name="remember" id="rememberMe">-->
-                        <label for="rememberMe" >用户类型 :</label>
-                    </li>
-
-                    <li style="margin-left: 0;padding-left:0;line-height: 18px;height: 18px;">
-
-                        <select name="remember" id="rememberMe" style="width: 90px;height: 20px;font-size: 8px;">
-                            <option>普通用户</option>
-                            <option>管理员</option>
-                        </select>
-                        <label style="color: red;margin-left: 10px;">{{loginmsg}}</label>
-                    </li>
-                </ul>
-            </fieldset>
-        </form>
-        <div class="foot">
-            <h1>
-                <a href=""></a>
-            </h1>
+<body>
+<div class="shad">
+    <div class="lg">
+        <div class="div1">
+            <form name="form1" method="post" action="login">
+                <table>
+                    <tr>
+                        <td>用户名:</td>
+                        <td>
+                            <input type="text" name="username" id="username">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密&nbsp;&nbsp;码:</td>
+                        <td>
+                            <input type="password" name="password" id="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <div class="reset"></div>
+                            <div class="login"></div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <div style="text-align: center;color: red;font-size: 12px;">{{loginmsg}}</div>
         </div>
     </div>
 </div>
 
-<!--<div id="wrapperbottom_branding">
-    <div id="wrapperbottom_branding_text">
-        Language:<a href="#" style='text-decoration: none'>中文 </a>| <a href="#" style='text-decoration: none'>
-        English</a></div>
-</div>-->
-<script type="text/javascript">
+<script>
     $(document).ready(function() {
-
-
-        /*$('#password').keyboard({
-            openOn: null,
-            stayOpen: true,
-            layout: 'qwerty'
-        }).addTyping();*/
         $("#username").focus();
         $('#passwd').click(function() {
             $('#password').getkeyboard().reveal();
@@ -117,15 +62,13 @@
                     return;
                 }
             })
-            $("#loginbtn").html("Loading....  <img src='css/login/loading.gif' alt='Announcement' /> ");
-            $("#loginbtn").attr("disabled", "disabled");
-
+            $(".login").attr("disabled", "disabled");
             //密码加密
             //$('#password').val(CryptoJS.enc.Base64.stringify(CryptoJS.MD5($('#password').val())));
             $('form[name=form1]').submit();
 //            CryptoJS.enc.Base64.stringify(CryptoJS.MD5($('#password').val()))
         };
-        $("#loginbtn").click(dologin)
+        $(".login").click(dologin)
         $('#password').keyup(function(event){
             switch(event.keyCode) {
                 case 13:
@@ -135,7 +78,12 @@
                     break;
             }
         })
+        
+        $('.reset').click(function () {
+            $("#username").val('');
+            $("#password").val('');
+        })
     });
-
 </script>
 </body>
+</html>

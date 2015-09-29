@@ -17,10 +17,6 @@
   (POST "/login" req (login/login req)) ;;登录
   (GET "/logout" request (login/logout request)) ;;注销
 
-
-  (GET "/test" [] (layout/render "test.html"))
-  (GET "/datagrid" [] (layout/render "datagrid.html"))
-
   ;;人事档案相关接口
   (POST "/record/addpensonrecords" request (ctl/add-pensonrecords request))
   (POST "/record/getrecordlist" request (ctl/get-record-list request))
