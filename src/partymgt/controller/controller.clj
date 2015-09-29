@@ -38,7 +38,18 @@
         identityid (:identityid params)
         rows (:rows params)
         page (:page params)
-        conds (str " and isdel is null" (common/likecond "name" name) (common/likecond "identityid" identityid))
+        group (:group params)
+        pb_id (:pb_id params)
+        cy_id (:cy_id params)
+        vc_id (:vc_id params)
+        wg_id (:wg_id params)
+        tu_id (:tu_id params)
+
+        groupcond (if (> (count group) 0)
+                    (if (= group "0")
+                      (str (if (> (count pb_id) 0) (str " and pb = " pb_id)) (if (> (count cy_id) 0) (str " and cy = " cy_id)) (if (> (count vc_id) 0) (str " and vc = " vc_id)) (if (> (count wg_id) 0) (str " and wg = " wg_id)) (if (> (count tu_id) 0) (str " and tu = " tu_id)))
+                      (str (if (> (count pb_id) 0) (str " and pb is null " )) (if (> (count cy_id) 0) (str " and cy is null  " )) (if (> (count vc_id) 0) (str " and vc is null  " )) (if (> (count wg_id) 0) (str " and wg is null  " )) (if (> (count tu_id) 0) (str " and tu is null  " )))))
+        conds (str " and isdel is null" (common/likecond "name" name) (common/likecond "identityid" identityid) groupcond)
         getresult (common/fenye rows page "t_personalrecords" "*" conds " order by pr_id desc")
         ]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime")})))
@@ -375,3 +386,4 @@
        colskey (map #(keyword (first (vals % )) )cols) ]
     (println colskey)
     (resp/json {:success colskey})))
+
