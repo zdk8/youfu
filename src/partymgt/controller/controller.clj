@@ -125,7 +125,7 @@
         pb_id (:id params)
         pr_ids  (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:pb pb_id} {:pb nil})
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:pb pb_id} {:pb nil :isdel nil})
                          (db/add-people-to-group "t_personalrecords" {:pb pb_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
@@ -165,7 +165,8 @@
         cy_id (:id params)
         pr_ids (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:cy cy_id} {:pb nil})
+    (println "SSSSSSSSSSS"  pr_ids "    " (= pr_ids "all"))
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:cy cy_id} {:cy nil :isdel nil})
                          (db/add-people-to-group "t_personalrecords" {:cy cy_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
@@ -205,7 +206,7 @@
         vc_id (:id params)
         pr_ids (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:vc vc_id} {:pb nil})
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:vc vc_id} {:vc nil :isdel nil})
                          (db/add-people-to-group "t_personalrecords" {:vc vc_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
@@ -245,7 +246,7 @@
         wg_id (:id params)
         pr_ids (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:wg wg_id} {:pb nil})
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:wg wg_id} {:wg nil :isdel nil})
                          (db/add-people-to-group "t_personalrecords" {:wg wg_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
@@ -285,7 +286,7 @@
         tu_id (:id params)
         pr_ids (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:tu tu_id} {:pb nil})
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:tu tu_id} {:tu nil :isdel nil})
                          (db/add-people-to-group "t_personalrecords" {:tu tu_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
