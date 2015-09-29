@@ -31,11 +31,18 @@ define(function(){
         not_p_datagrid.datagrid({
             url:"record/getrecordlist",
             type:'post',
+            queryParams:{
+                group:'0'
+            },
             onLoadSuccess:function(data){}
         });
         has_p_datagrid.datagrid({
             url:"record/getrecordlist",
             type:'post',
+            queryParams:{
+                group:'1',
+                pb_id:option.queryParams.record.pb_id
+            },
             onLoadSuccess:function(data){}
         });
 
@@ -48,18 +55,30 @@ define(function(){
             if(checkedItems.length == 0){
                 layer.alert('请选择要添加的人员', {icon: 6});
             }else{
-                layer.load();
-                $this.hide();
-                add_p2.show();
+                //layer.load();
+                //$this.hide();
+                //add_p2.show();
                 $.each(checkedItems, function(index, item){
                     names.push(item.pr_id);
                 });
                 console.log(names.join(","));
+                $.ajax({
+                    url:'dfsfs',
+                    type:'post',
+                    data:{
+                        aa:names.join(",")
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    }
+                });
             }
         });
         /*>>*/
         local.find('[opt=add_p_all]').click(function () {
-            console.log('>>')
+            layer.confirm('是否需要添加所有人员？', {icon: 3,shift: 6,title:'温馨提示'}, function(index){
+                layer.close(index);
+            });
         });
         /*<*/
         local.find('[opt=reduce_p]').click(function () {

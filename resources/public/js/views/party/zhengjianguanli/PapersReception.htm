@@ -4,14 +4,14 @@
         <div style="width: auto;height: 50px;;background-color: #eff3f8;"><!-- #e5e5e5-->
             <div style="height: 35px;padding-top: 12px;padding-right:3px;">
                 &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
-                &nbsp;<span>证件号码 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                &nbsp;<span>证件号码 </span><span><input opt="credentialsnumb" type="text" size="15" class="inputtext"></span>
                 &nbsp;<span>是否归还 </span>
                     <span>
-                        <input opt="gender" class="easyui-combobox" style="height: 24px;width: 100px;"
+                        <input opt="isback" class="easyui-combobox" style="height: 24px;width: 100px;"
                                name="isback"
                                data-options="
                                 loader:cj.getLoader('isback'),
-                                editable:false,
+                                editable:true,
                                 valueField:'id',
                                 textField:'text'">
                     </span>
@@ -36,18 +36,9 @@
                         singleSelect:true,
                         loadMsg:'',
                         pagination:true">
-            <thead frozen="true">
-            <tr>
-                <th data-options="field:'name',width:80,align:'center',
-                            formatter:function(v,r,i){
-                                        var str='<div></div>';
-                                        str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
-                                        return str.html();
-                                    }">姓名</th>
-            </tr>
-            </thead>
             <thead>
             <tr>
+                <th data-options="field:'name',width:80,align:'center'">姓名</th>
                 <th data-options="field:'credentialstype',width:170,align:'center'">领用证件类型</th>
                 <th data-options="field:'credentialsnumb',width:170,align:'center'">证件号码</th>
                 <th data-options="field:'receivedate',width:170,align:'center'">领用日期</th>

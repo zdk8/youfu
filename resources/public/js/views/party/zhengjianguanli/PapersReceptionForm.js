@@ -71,29 +71,34 @@ define(function(){
                 local.find('[name=credentialsnumb]').val(row.credentialsnumb);
             }
         });
-        /*保存*/
+        /*领用*/
         local.find('[opt=save]').click(function () {
-            local.find('form').form('submit', {
-                url: 'party/addcerreceive',
-                onSubmit: function (params) {
-                    layer.load();
-                    var isValid = $(this).form('validate');
-                    if (!isValid) {
+            var credentialsnumb = local.find('[name=credentialsnumb]').val();
+            if(credentialsnumb){
+                local.find('form').form('submit', {
+                    url: 'party/addcerreceive',
+                    onSubmit: function (params) {
+                        layer.load();
+                        var isValid = $(this).form('validate');
+                        if (!isValid) {
+                            layer.closeAll('loading');
+                        }
+                        return isValid;
+                    },
+                    success: function (data) {
                         layer.closeAll('loading');
+                        if (data == "true") {
+                            cj.showSuccess('证件领用成功');
+                            option.queryParams.refresh();
+                            layer.close(option.index);
+                        } else {
+                            cj.showFail('证件领用失败');
+                        }
                     }
-                    return isValid;
-                },
-                success: function (data) {
-                    layer.closeAll('loading');
-                    if (data == "true") {
-                        cj.showSuccess('证件领用成功');
-                        option.queryParams.refresh();
-                        layer.close(option.index);
-                    } else {
-                        cj.showFail('证件领用失败');
-                    }
-                }
-            })
+                })
+            }else{
+                layer.alert('请正确操作,选择姓名带入证件号', {icon: 6,title:'温馨提示'});
+            }
         });
     }
 

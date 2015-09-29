@@ -115,12 +115,12 @@ define(function(){
             }
         })
 
-        var name = local.find('[opt=name]');                        //名称
+        var pb_name = local.find('[opt=pb_name]');                        //名称
         var pb_createtime = local.find('[opt=pb_createtime]');   //建立时间
         /*搜索*/
         local.find('[opt=query]').click(function(){
             datagrid.datagrid('load',{
-                name:name.val(),
+                pb_name:pb_name.val(),
                 pb_createtime:pb_createtime.datebox('getValue')
             })
         })
