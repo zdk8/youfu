@@ -83,3 +83,6 @@
   (transaction
     (updatedata-by-tablename "t_certificatereceive" returndate {:cr_id cr_id})
     (updatedata-by-tablename "t_certificate" {:isreceive nil} {:c_id c_id})))
+
+
+
