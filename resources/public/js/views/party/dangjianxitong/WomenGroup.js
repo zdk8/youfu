@@ -13,7 +13,7 @@ define(function(){
         };
         /*妇女小组加载*/
         datagrid.datagrid({
-            url:"record/getrecordlist",
+            url:"party/getwomengrouplist",
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
@@ -34,18 +34,17 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:'record/delpensonrecords',
+                                            url:'party/delwomengroup',
                                             type:'post',
                                             data:{
                                                 pr_id:record.pr_id
                                             },
                                             success: function (data) {
+                                                layer.closeAll('loading');
                                                 if(data == "true"){
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除成功', {icon: 6});
                                                     refreshGrid();
                                                 }else{
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除失败', {icon: 5});
                                                 }
                                             }
@@ -93,20 +92,20 @@ define(function(){
             }
         })
 
-        var name = local.find('[opt=name]');                        //姓名
-        var identityid = local.find('[opt=identityid]');        //身份证
+        var wg_name = local.find('[opt=wg_name]');                        //名称
+        var wg_createtime = local.find('[opt=wg_createtime]');        //建立时间
         /*搜索*/
         local.find('[opt=query]').click(function(){
             datagrid.datagrid('load',{
-                name:name.val(),
-                identityid:identityid.val()
+                wg_name:wg_name.val(),
+                wg_createtime:wg_createtime.datebox('getValue')
             })
         })
 
-        /*添加证件*/
+        /*添加妇女小组*/
         local.find('[opt=addbtn]').click(function(){
             layer.load(2);
-            require(['text!views/party/zhengjianguanli/PapersForm.htm','views/party/zhengjianguanli/PapersForm'],
+            require(['text!views/party/dangjianxitong/WomenGroupForm.htm','views/party/dangjianxitong/WomenGroupForm'],
                 function(htmfile,jsfile){
                     layer.open({
                         title:'添加证件',
@@ -130,40 +129,30 @@ define(function(){
 
     }
 
-    /*证件修改*/
+    /*修改妇女小组*/
     var updateFunc = function (record,refreshGrid) {
         layer.load(2);
-        $.ajax({
-            url:'record/getrecordbyid',
-            type:'post',
-            data:{
-                pr_id:record.pr_id
-            },
-            success: function (data) {
-                var title ='【'+record.name+ '】证件信息修改';
-                require(['text!views/party/zhengjianguanli/PapersForm.htm','views/party/zhengjianguanli/PapersForm'],
-                    function(htmfile,jsfile){
-                        layer.open({
-                            title:title,
-                            type: 1,
-                            area: ['600px', '350px'], //宽高
-                            content: htmfile,
-                            success: function(layero, index){
-                                jsfile.render(layero,{
-                                    index:index,
-                                    queryParams:{
-                                        actiontype:'update',
-                                        refresh:refreshGrid,
-                                        record:record,
-                                        childrecord:data
-                                    }
-                                });
+        var title =record.wg_name+ ' - 证件信息修改';
+        require(['text!views/party/dangjianxitong/WomenGroupForm.htm','views/party/dangjianxitong/WomenGroupForm'],
+            function(htmfile,jsfile){
+                layer.open({
+                    title:title,
+                    type: 1,
+                    area: ['500px', '100px'], //宽高
+                    content: htmfile,
+                    success: function(layero, index){
+                        jsfile.render(layero,{
+                            index:index,
+                            queryParams:{
+                                actiontype:'update',
+                                refresh:refreshGrid,
+                                record:record
                             }
                         });
                     }
-                )
+                });
             }
-        })
+        )
 
     }
 

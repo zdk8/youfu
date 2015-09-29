@@ -4,8 +4,8 @@
          style="height:60px;padding:0 0 0 0px;">
         <div style="width: auto;height: 50px;;background-color: #eff3f8;"><!-- #e5e5e5-->
             <div style="height: 35px;padding-top: 12px;padding-right:3px;">
-                &nbsp;<span>名称 </span><span><input opt="name" type="text" size="15" class="inputtext"></span>
-                &nbsp;<span>建立时间 </span><span><input opt="identityid" class="easyui-datebox" style="width: 100px;"></span>
+                &nbsp;<span>名称 </span><span><input opt="cy_name" type="text" size="15" class="inputtext"></span>
+                &nbsp;<span>建立时间 </span><span><input opt="cy_createtime" class="easyui-datebox" style="width: 100px;"></span>
             </div>
 
             <div style="float: right;margin-top: -48px;right: 2px;display: inline">
@@ -29,8 +29,13 @@
                         pagination:true">
             <thead>
             <tr>
-                <th data-options="field:'birthday',width:100,align:'center'">名称</th>
-                <th data-options="field:'credentialstype',width:170,align:'center'">建立时间</th>
+                <th data-options="field:'cy_name',width:100,align:'center',
+                formatter:function(v,r,i){
+                     var str='<div></div>';
+                     str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
+                     return str.html();
+                 }">名称</th>
+                <th data-options="field:'cy_createtime',width:170,align:'center'">建立时间</th>
                 <th data-options="field:'ro',width:100,align:'center',
                                     formatter:function(value,rowData,rowIndex){
                                         var str='<div></div>';

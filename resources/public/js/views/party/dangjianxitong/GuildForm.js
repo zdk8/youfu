@@ -46,7 +46,7 @@ define(function(){
         /*保存*/
         local.find('[opt=save]').click(function () {
             local.find('form').form('submit', {
-                url: 'record/addpensonrecords11',
+                url: 'party/addtradeunion',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
@@ -56,13 +56,12 @@ define(function(){
                     return isValid;
                 },
                 success: function (data) {
+                    layer.closeAll('loading');
                     if (data == "true") {
-                        layer.closeAll('loading');
                         cj.showSuccess('保存成功');
                         option.queryParams.refresh();
                         layer.close(option.index);
                     } else {
-                        layer.closeAll('loading');
                         cj.showFail('保存失败');
                     }
                 }
@@ -79,24 +78,23 @@ define(function(){
 
         local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {
-                url: 'record/updaterecord11',
+                url: 'party/updatetradeunionbyid',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
-                    params.pr_id = record.pr_id;
+                    params.tu_id = record.tu_id;
                     if (!isValid) {
                         layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
+                    layer.closeAll('loading');
                     if (data == "true") {
-                        layer.closeAll('loading');
                         cj.showSuccess('修改成功');
                         option.queryParams.refresh();
                         layer.close(option.index);
                     } else {
-                        layer.closeAll('loading');
                         cj.showFail('修改失败');
                     }
                 }

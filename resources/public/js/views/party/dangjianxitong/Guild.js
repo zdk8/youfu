@@ -13,7 +13,7 @@ define(function(){
         };
         /*公会加载*/
         datagrid.datagrid({
-            url:"record/getrecordlist",
+            url:"party/gettradeunionlist",
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
@@ -34,18 +34,17 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:'record/delpensonrecords',
+                                            url:'party/deltradeunion',
                                             type:'post',
                                             data:{
-                                                pr_id:record.pr_id
+                                                tu_id:record.tu_id
                                             },
                                             success: function (data) {
+                                                layer.closeAll('loading');
                                                 if(data == "true"){
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除成功', {icon: 6});
                                                     refreshGrid();
                                                 }else{
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除失败', {icon: 5});
                                                 }
                                             }
@@ -93,13 +92,13 @@ define(function(){
             }
         })
 
-        var name = local.find('[opt=name]');                        //姓名
-        var identityid = local.find('[opt=identityid]');        //身份证
+        var tu_name = local.find('[opt=tu_name]');                        //名称
+        var tu_createtime = local.find('[opt=tu_createtime]');        //创建时间
         /*搜索*/
         local.find('[opt=query]').click(function(){
             datagrid.datagrid('load',{
-                name:name.val(),
-                identityid:identityid.val()
+                tu_name:tu_name.val(),
+                tu_createtime:tu_createtime.datebox('getValue')
             })
         })
 
@@ -133,37 +132,27 @@ define(function(){
     /*证件修改*/
     var updateFunc = function (record,refreshGrid) {
         layer.load(2);
-        $.ajax({
-            url:'record/getrecordbyid',
-            type:'post',
-            data:{
-                pr_id:record.pr_id
-            },
-            success: function (data) {
-                var title ='【'+record.name+ '】公会修改';
-                require(['text!views/party/dangjianxitong/GuildForm.htm','views/party/dangjianxitong/GuildForm'],
-                    function(htmfile,jsfile){
-                        layer.open({
-                            title:title,
-                            type: 1,
-                            area: ['500px', '100px'], //宽高
-                            content: htmfile,
-                            success: function(layero, index){
-                                jsfile.render(layero,{
-                                    index:index,
-                                    queryParams:{
-                                        actiontype:'update',
-                                        refresh:refreshGrid,
-                                        record:record,
-                                        childrecord:data
-                                    }
-                                });
+        var title =record.tu_name+ ' - 公会修改';
+        require(['text!views/party/dangjianxitong/GuildForm.htm','views/party/dangjianxitong/GuildForm'],
+            function(htmfile,jsfile){
+                layer.open({
+                    title:title,
+                    type: 1,
+                    area: ['500px', '100px'], //宽高
+                    content: htmfile,
+                    success: function(layero, index){
+                        jsfile.render(layero,{
+                            index:index,
+                            queryParams:{
+                                actiontype:'update',
+                                refresh:refreshGrid,
+                                record:record
                             }
                         });
                     }
-                )
+                });
             }
-        })
+        )
 
     }
 

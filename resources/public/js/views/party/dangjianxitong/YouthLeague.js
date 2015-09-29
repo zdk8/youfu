@@ -11,9 +11,9 @@ define(function(){
         var refreshGrid=function() {
             datagrid.datagrid('reload');
         };
-        /*证件加载*/
+        /*共青团加载*/
         datagrid.datagrid({
-            url:"record/getrecordlist",
+            url:"party/getyouthleaguelist",
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
@@ -34,18 +34,17 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:'record/delpensonrecords',
+                                            url:'party/delyouthleague',
                                             type:'post',
                                             data:{
-                                                pr_id:record.pr_id
+                                                cy_id:record.cy_id
                                             },
                                             success: function (data) {
+                                                layer.closeAll('loading');
                                                 if(data == "true"){
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除成功', {icon: 6});
                                                     refreshGrid();
                                                 }else{
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除失败', {icon: 5});
                                                 }
                                             }
@@ -93,23 +92,23 @@ define(function(){
             }
         })
 
-        var name = local.find('[opt=name]');                        //姓名
-        var identityid = local.find('[opt=identityid]');        //身份证
+        var cy_name = local.find('[opt=cy_name]');                        //姓名
+        var cy_createtime = local.find('[opt=cy_createtime]');        //身份证
         /*搜索*/
         local.find('[opt=query]').click(function(){
             datagrid.datagrid('load',{
-                name:name.val(),
-                identityid:identityid.val()
+                cy_name:cy_name.val(),
+                cy_createtime:cy_createtime.datebox('getValue')
             })
         })
 
-        /*添加证件*/
+        /*添加共青团*/
         local.find('[opt=addbtn]').click(function(){
             layer.load(2);
-            require(['text!views/party/zhengjianguanli/PapersForm.htm','views/party/zhengjianguanli/PapersForm'],
+            require(['text!views/party/dangjianxitong/YouthLeagueForm.htm','views/party/dangjianxitong/YouthLeagueForm'],
                 function(htmfile,jsfile){
                     layer.open({
-                        title:'添加证件',
+                        title:'添加共青团',
                         type: 1,
                         area: ['500px', '100px'], //宽高
                         content: htmfile,
@@ -130,41 +129,30 @@ define(function(){
 
     }
 
-    /*证件修改*/
+    /*共青团修改*/
     var updateFunc = function (record,refreshGrid) {
         layer.load(2);
-        $.ajax({
-            url:'record/getrecordbyid',
-            type:'post',
-            data:{
-                pr_id:record.pr_id
-            },
-            success: function (data) {
-                var title ='【'+record.name+ '】证件信息修改';
-                require(['text!views/party/zhengjianguanli/PapersForm.htm','views/party/zhengjianguanli/PapersForm'],
-                    function(htmfile,jsfile){
-                        layer.open({
-                            title:title,
-                            type: 1,
-                            area: ['500px', '100px'], //宽高
-                            content: htmfile,
-                            success: function(layero, index){
-                                jsfile.render(layero,{
-                                    index:index,
-                                    queryParams:{
-                                        actiontype:'update',
-                                        refresh:refreshGrid,
-                                        record:record,
-                                        childrecord:data
-                                    }
-                                });
+        var title =record.cy_name+ ' - 共青团修改';
+        require(['text!views/party/dangjianxitong/YouthLeagueForm.htm','views/party/dangjianxitong/YouthLeagueForm'],
+            function(htmfile,jsfile){
+                layer.open({
+                    title:title,
+                    type: 1,
+                    area: ['500px', '100px'], //宽高
+                    content: htmfile,
+                    success: function(layero, index){
+                        jsfile.render(layero,{
+                            index:index,
+                            queryParams:{
+                                actiontype:'update',
+                                refresh:refreshGrid,
+                                record:record
                             }
                         });
                     }
-                )
+                });
             }
-        })
-
+        )
     }
 
     return {

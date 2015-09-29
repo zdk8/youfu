@@ -50,7 +50,7 @@ define(function(){
             panelHeight:350,
             url:'party/getcertificatelist',
             queryParams:{
-                isreceive:'1'
+                isreceive:'0'
             },
             method:'post',
             idField:'c_id',

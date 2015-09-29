@@ -13,7 +13,7 @@ define(function(){
         };
         /*老干部加载*/
         datagrid.datagrid({
-            url:"record/getrecordlist",
+            url:"party/getveteranlist",
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
@@ -34,18 +34,17 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:'record/delpensonrecords',
+                                            url:'party/delveterancadre',
                                             type:'post',
                                             data:{
-                                                pr_id:record.pr_id
+                                               vc_id:record.vc_id
                                             },
                                             success: function (data) {
+                                                layer.closeAll('loading');
                                                 if(data == "true"){
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除成功', {icon: 6});
                                                     refreshGrid();
                                                 }else{
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除失败', {icon: 5});
                                                 }
                                             }
@@ -93,20 +92,20 @@ define(function(){
             }
         })
 
-        var name = local.find('[opt=name]');                        //姓名
-        var identityid = local.find('[opt=identityid]');        //身份证
+        var vc_name = local.find('[opt=vc_name]');                        //名称
+        var vc_createtime = local.find('[opt=vc_createtime]');        //建立时间
         /*搜索*/
         local.find('[opt=query]').click(function(){
             datagrid.datagrid('load',{
-                name:name.val(),
-                identityid:identityid.val()
+                vc_name:vc_name.val(),
+                vc_createtime:vc_createtime.datebox('getValue')
             })
         })
 
         /*添加老干部*/
         local.find('[opt=addbtn]').click(function(){
             layer.load(2);
-            require(['text!views/party/dangjianxitong/VeteranCadre.htm','views/party/dangjianxitong/VeteranCadre'],
+            require(['text!views/party/dangjianxitong/VeteranCadreForm.htm','views/party/dangjianxitong/VeteranCadreForm'],
                 function(htmfile,jsfile){
                     layer.open({
                         title:'添加老干部',
@@ -130,40 +129,30 @@ define(function(){
 
     }
 
-    /*证件修改*/
+    /*修改老干部*/
     var updateFunc = function (record,refreshGrid) {
         layer.load(2);
-        $.ajax({
-            url:'record/getrecordbyid',
-            type:'post',
-            data:{
-                pr_id:record.pr_id
-            },
-            success: function (data) {
-                var title ='【'+record.name+ '】修改';
-                require(['text!views/party/dangjianxitong/VeteranCadre.htm','views/party/dangjianxitong/VeteranCadre'],
-                    function(htmfile,jsfile){
-                        layer.open({
-                            title:title,
-                            type: 1,
-                            area: ['500px', '100px'], //宽高
-                            content: htmfile,
-                            success: function(layero, index){
-                                jsfile.render(layero,{
-                                    index:index,
-                                    queryParams:{
-                                        actiontype:'update',
-                                        refresh:refreshGrid,
-                                        record:record,
-                                        childrecord:data
-                                    }
-                                });
+        var title = record.vc_name+ ' - 修改';
+        require(['text!views/party/dangjianxitong/VeteranCadreForm.htm','views/party/dangjianxitong/VeteranCadreForm'],
+            function(htmfile,jsfile){
+                layer.open({
+                    title:title,
+                    type: 1,
+                    area: ['500px', '100px'], //宽高
+                    content: htmfile,
+                    success: function(layero, index){
+                        jsfile.render(layero,{
+                            index:index,
+                            queryParams:{
+                                actiontype:'update',
+                                refresh:refreshGrid,
+                                record:record
                             }
                         });
                     }
-                )
+                });
             }
-        })
+        )
 
     }
 
