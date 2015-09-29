@@ -98,7 +98,7 @@
         pb_name (:pb_name params)
         rows (:rows params)
         page (:page params)
-        conds (str (common/likecond "pb_name" pb_name))
+        conds (str " and isdel is null"  (common/likecond "pb_name" pb_name))
         getresult (common/fenye rows page "t_partybranch" "*" conds " order by pb_id desc")]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "pb_createtime") })))
 
@@ -137,7 +137,7 @@
         cy_name (:cy_name params)
         rows (:rows params)
         page (:page params)
-        conds (str (common/likecond "cy_name" cy_name))
+        conds (str " and isdel is null"  (common/likecond "cy_name" cy_name))
         getresult (common/fenye rows page "t_communistyouthleague" "*" conds " order by cy_id desc")]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "cy_createtime") })))
 
@@ -176,7 +176,7 @@
         vc_name (:vc_name params)
         rows (:rows params)
         page (:page params)
-        conds (str (common/likecond "vc_name" vc_name))
+        conds (str " and isdel is null"  (common/likecond "vc_name" vc_name))
         getresult (common/fenye rows page "t_veterancadre" "*" conds " order by vc_id desc")]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "vc_createtime") })))
 
@@ -215,7 +215,7 @@
         wg_name (:wg_name params)
         rows (:rows params)
         page (:page params)
-        conds (str (common/likecond "wg_name" wg_name))
+        conds (str " and isdel is null"  (common/likecond "wg_name" wg_name))
         getresult (common/fenye rows page "t_womengroup" "*" conds " order by wg_id desc")]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "wg_createtime") })))
 
@@ -254,7 +254,7 @@
         tu_name (:tu_name params)
         rows (:rows params)
         page (:page params)
-        conds (str (common/likecond "tu_name" tu_name))
+        conds (str " and isdel is null"  (common/likecond "tu_name" tu_name))
         getresult (common/fenye rows page "t_tradeunion" "*" conds " order by tu_id desc")]
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "tu_createtime") })))
 
