@@ -1,0 +1,59 @@
+body{
+    background: url("images/bg.png") repeat;
+    height:97%;
+    margin:0px;
+}
+.shad{
+    background: url("images/shad.png") repeat center;
+    margin-top: 10%;
+    padding-bottom: 120px;
+
+}
+.lg{
+    background-image: url("images/loginform.png");
+    width:575px;
+    height: 357px;
+    margin: 0 auto;
+}
+.lg .div1{
+    height: 100px;
+    width: 250px;
+    margin-top: 180px;
+    margin-right: 20px;
+    float: right;
+}
+.lg .div1 table{
+    margin-top: 10px;
+    color: #0952a1;
+    font-size: 14px;
+}
+.lg .div1 table input{
+    background-color: #f5fafe;
+    border: 1px solid #7491b5;
+}
+.login{
+    cursor: pointer;
+    background: url("images/login.png");
+    width: 53px;
+    height: 27px;
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+.login:active{
+    position: relative;
+    top: 1px;
+}
+.reset{
+    cursor: pointer;
+    background: url("images/reset.png");
+    width: 53px;
+    height: 27px;
+    float: right;
+    margin-top: 10px;
+}
+.reset:active{
+    position: relative;
+    top: 1px;
+}
+
