@@ -85,4 +85,11 @@
     (updatedata-by-tablename "t_certificate" {:isreceive nil} {:c_id c_id})))
 
 
+(defn test-in [ids]
+  (select "t_personalrecords"
+          (where {:pr_id [in ids]})))
 
+(defn add-people-to-group [tablename groupid peopleids]
+  (update tablename
+          (set-fields groupid)
+          (where {:pr_id [in peopleids]})))

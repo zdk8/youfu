@@ -77,4 +77,5 @@
 
   ;;test
   (GET "/gettablecols" [tablename] (ctl/test-get-tablecols tablename))   ;;获取表的字段
+  (POST "/dfsfs" request (ctl/test-dfs request))
   )

@@ -6,6 +6,7 @@
     [partymgt.models.schema :as schema]
     [noir.response :as resp]
     [clojure.data.json :as json]
+    [clojure.string :as cstr]
     [clj-time.local :as l]
     [clj-time.coerce :as c]
     ))
@@ -47,11 +48,12 @@
 
         groupcond (if (> (count group) 0)
                     (if (= group "0")
-                      (str (if (> (count pb_id) 0) (str " and pb = " pb_id)) (if (> (count cy_id) 0) (str " and cy = " cy_id)) (if (> (count vc_id) 0) (str " and vc = " vc_id)) (if (> (count wg_id) 0) (str " and wg = " wg_id)) (if (> (count tu_id) 0) (str " and tu = " tu_id)))
-                      (str (if (> (count pb_id) 0) (str " and pb is null " )) (if (> (count cy_id) 0) (str " and cy is null  " )) (if (> (count vc_id) 0) (str " and vc is null  " )) (if (> (count wg_id) 0) (str " and wg is null  " )) (if (> (count tu_id) 0) (str " and tu is null  " )))))
+                      (str (if (> (count pb_id) 0) (str " and pb is null " )) (if (> (count cy_id) 0) (str " and cy is null  " )) (if (> (count vc_id) 0) (str " and vc is null  " )) (if (> (count wg_id) 0) (str " and wg is null  " )) (if (> (count tu_id) 0) (str " and tu is null  " )))
+                      (str (if (> (count pb_id) 0) (str " and pb = " pb_id)) (if (> (count cy_id) 0) (str " and cy = " cy_id)) (if (> (count vc_id) 0) (str " and vc = " vc_id)) (if (> (count wg_id) 0) (str " and wg = " wg_id)) (if (> (count tu_id) 0) (str " and tu = " tu_id)))))
         conds (str " and isdel is null" (common/likecond "name" name) (common/likecond "identityid" identityid) groupcond)
         getresult (common/fenye rows page "t_personalrecords" "*" conds " order by pr_id desc")
         ]
+    (println "GGGGGGGGGG" groupcond)
     (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime")})))
 
 
@@ -116,9 +118,9 @@
 (defn add-people-to-party [request]
   (let [params (:params request)
         pb_id (:pb_id params)
-        pr_id (:pr_id params)
+        pr_ids (cstr/split (:pr_ids params) #"," )
         ]
-    (db/updatedata-by-tablename "t_personalrecords" {:pb pb_id} {:pr_id pr_id})
+    (db/add-people-to-group "t_personalrecords" {:pb pb_id} pr_ids)
     (str "true")))
 
 (defn delete-partybranch [request]
@@ -155,9 +157,9 @@
 (defn add-people-to-youthleague [request]
   (let [params (:params request)
         cy_id (:cy_id params)
-        pr_id (:pr_id params)
+        pr_ids (:pr_ids params)
         ]
-    (db/updatedata-by-tablename "t_personalrecords" {:cy cy_id} {:pr_id pr_id})
+    (db/add-people-to-group "t_personalrecords" {:cy cy_id} pr_ids)
     (str "true")))
 
 (defn delete-youthleague [request]
@@ -194,9 +196,9 @@
 (defn add-people-to-veteran [request]
   (let [params (:params request)
         vc_id (:vc_id params)
-        pr_id (:pr_id params)
+        pr_ids (:pr_ids params)
         ]
-    (db/updatedata-by-tablename "t_personalrecords" {:vc vc_id} {:pr_id pr_id})
+    (db/add-people-to-group "t_personalrecords" {:vc vc_id} pr_ids)
     (str "true")))
 
 (defn delete-veterancadre [request]
@@ -233,9 +235,9 @@
 (defn add-people-to-womengroup [request]
   (let [params (:params request)
         wg_id (:wg_id params)
-        pr_id (:pr_id params)
+        pr_ids (:pr_ids params)
         ]
-    (db/updatedata-by-tablename "t_personalrecords" {:wg wg_id} {:pr_id pr_id})
+    (db/add-people-to-group "t_personalrecords" {:wg wg_id} pr_ids)
     (str "true")))
 
 (defn delete-womengroup [request]
@@ -272,9 +274,9 @@
 (defn add-people-to-tradeunion [request]
   (let [params (:params request)
         tu_id (:tu_id params)
-        pr_id (:pr_id params)
+        pr_ids (:pr_ids params)
         ]
-    (db/updatedata-by-tablename "t_personalrecords" {:tu tu_id} {:pr_id pr_id})
+    (db/add-people-to-group "t_personalrecords" {:tu tu_id} pr_ids)
     (str "true")))
 
 (defn delete-tradeunion [request]
@@ -386,4 +388,11 @@
        colskey (map #(keyword (first (vals % )) )cols) ]
     (println colskey)
     (resp/json {:success colskey})))
+
+(defn test-dfs [request]
+  (let [params (:params request)
+        aa (:aa params)]
+    (println (cstr/split  aa #"," ))
+    (println (db/test-in (clojure.string/split  aa #"," )))
+    ))
 
