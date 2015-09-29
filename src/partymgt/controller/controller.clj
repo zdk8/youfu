@@ -122,7 +122,7 @@
 
 (defn add-people-to-party [request]
   (let [params (:params request)
-        pb_id (:pb_id params)
+        pb_id (:id params)
         pr_ids  (:pr_ids params)
         ]
     (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:pb pb_id} {:pb nil})
@@ -162,7 +162,7 @@
 
 (defn add-people-to-youthleague [request]
   (let [params (:params request)
-        cy_id (:cy_id params)
+        cy_id (:id params)
         pr_ids (:pr_ids params)
         ]
     (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:cy cy_id} {:pb nil})
@@ -202,7 +202,7 @@
 
 (defn add-people-to-veteran [request]
   (let [params (:params request)
-        vc_id (:vc_id params)
+        vc_id (:id params)
         pr_ids (:pr_ids params)
         ]
     (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:vc vc_id} {:pb nil})
@@ -242,7 +242,7 @@
 
 (defn add-people-to-womengroup [request]
   (let [params (:params request)
-        wg_id (:wg_id params)
+        wg_id (:id params)
         pr_ids (:pr_ids params)
         ]
     (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:wg wg_id} {:pb nil})
@@ -282,7 +282,7 @@
 
 (defn add-people-to-tradeunion [request]
   (let [params (:params request)
-        tu_id (:tu_id params)
+        tu_id (:id params)
         pr_ids (:pr_ids params)
         ]
     (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:tu tu_id} {:pb nil})
