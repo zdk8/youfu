@@ -93,12 +93,12 @@ define(function(){
         })
 
         var name = local.find('[opt=name]');                        //姓名
-        var identityid = local.find('[opt=identityid]');        //证件号码
+        var credentialsnumb = local.find('[opt=credentialsnumb]');        //证件号码
         /*搜索*/
         local.find('[opt=query]').click(function(){
             datagrid.datagrid('load',{
                 name:name.val(),
-                identityid:identityid.val()
+                credentialsnumb:credentialsnumb.val()
             })
         })
 

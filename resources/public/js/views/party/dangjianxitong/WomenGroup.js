@@ -37,7 +37,7 @@ define(function(){
                                             url:'party/delwomengroup',
                                             type:'post',
                                             data:{
-                                                pr_id:record.pr_id
+                                                wg_id:record.wg_id
                                             },
                                             success: function (data) {
                                                 layer.closeAll('loading');

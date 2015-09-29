@@ -48,11 +48,12 @@ define(function(){
         /*保存*/
         local.find('[opt=save]').click(function () {
             local.find('form').form('submit', {
-                url: 'party/returncerreceive1',
+                url: 'party/returncerreceive',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
                     params.cr_id = record.cr_id;
+                    params.c_id = record.c_id;
                     if (!isValid) {
                         layer.closeAll('loading');
                     }

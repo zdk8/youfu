@@ -129,7 +129,7 @@ define(function(){
 
     }
 
-    /*证件修改*/
+    /*修改公会*/
     var updateFunc = function (record,refreshGrid) {
         layer.load(2);
         var title =record.tu_name+ ' - 公会修改';

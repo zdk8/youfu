@@ -26,9 +26,7 @@ define(function(){
                             var record=rows[index];
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
-                                if(action == "view"){                                       //详细信息
-                                    updateFunc(record,refreshGrid);
-                                }else if(action == "back"){
+                                if(action == "back"){
                                     layer.load(2);
                                     require(['text!views/party/zhengjianguanli/PapersBackForm.htm','views/party/zhengjianguanli/PapersBackForm'],
                                         function(htmfile,jsfile){
@@ -51,55 +49,28 @@ define(function(){
                                             });
                                         }
                                     )
-                                }else if(action == "update"){                   //修改
-                                    updateFunc(record,refreshGrid);
                                 }
                             });
                         })(i)
                     }
                 }
             },
-            onDblClickRow: function (index,row) {
-                layer.load(2);
-                var title = row.name+'-信息';
-                $.ajax({
-                    url:'record/getrecordbyid',
-                    type:'post',
-                    data:{
-                        pr_id:row.pr_id
-                    },
-                    success: function (data) {
-                        require(['text!views/party/renshidangan/PersonnelFile_Child.htm','views/party/renshidangan/PersonnelFile_Child'],
-                            function(htmfile,jsfile){
-                                layer.open({
-                                    title:title,
-                                    type: 1,
-                                    area: ['700px', '440px'], //宽高
-                                    content: htmfile,
-                                    shift: 2,
-                                    success: function(layero, index){
-                                        jsfile.render(layero,{
-                                            index:index,
-                                            queryParams:{
-                                                childrecord:data
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        )
-                    }
-                })
+            rowStyler: function(index,row){
+                if (row.returndate == null){
+                    return 'color:#FFA07A;';
+                }
             }
         })
 
         var name = local.find('[opt=name]');                        //姓名
-        var identityid = local.find('[opt=identityid]');        //身份证
+        var credentialsnumb = local.find('[opt=credentialsnumb]');        //证件号
+        var isback = local.find('[opt=isback]');        //是否归还
         /*搜索*/
         local.find('[opt=query]').click(function(){
             datagrid.datagrid('load',{
                 name:name.val(),
-                identityid:identityid.val()
+                credentialsnumb:credentialsnumb.val(),
+                isback:isback.combobox('getValue')
             })
         })
 
@@ -127,43 +98,6 @@ define(function(){
             )
         });
 
-
-    }
-
-    /*人事档案修改*/
-    var updateFunc = function (record,refreshGrid) {
-        layer.load(2);
-        $.ajax({
-            url:'record/getrecordbyid',
-            type:'post',
-            data:{
-                pr_id:record.pr_id
-            },
-            success: function (data) {
-                var title ='【'+record.name+ '】人事档案信息修改';
-                require(['text!views/party/renshidangan/PersonnelFileForm.htm','views/party/renshidangan/PersonnelFileForm'],
-                    function(htmfile,jsfile){
-                        layer.open({
-                            title:title,
-                            type: 1,
-                            area: ['890px', '550px'], //宽高
-                            content: htmfile,
-                            success: function(layero, index){
-                                jsfile.render(layero,{
-                                    index:index,
-                                    queryParams:{
-                                        actiontype:'update',
-                                        refresh:refreshGrid,
-                                        record:record,
-                                        childrecord:data
-                                    }
-                                });
-                            }
-                        });
-                    }
-                )
-            }
-        })
 
     }
 
