@@ -16,33 +16,33 @@ define(function(){
         });
     };
 
-
-    /*界面初始化，公共方法*/
-    var initFunc = function (local,option) {
-        local.find('[opt=addpersonnel]').layout();
-    }
-
-    /*新增数据时进入*/
-    var saveFunc = function(local,option){
+    var render=function(local,option){
+        layer.closeAll('loading');
+        local.find('[opt=addpersonnel]').layout();//初始化
         addToolBar(local,option,'');
 
         var not_p_datagrid = local.find('[opt=not_p]');//未添加的人员
         var has_p_datagrid = local.find('[opt=has_p]');//已添加的人员
+
         not_p_datagrid.datagrid({
             url:"record/getrecordlist",
+            //url:option.params.url,
             type:'post',
             queryParams:{
                 group:'0',
-                pb_id:option.queryParams.record.pb_id
+                idtype:option.params.idtype,
+                id:option.params.id
             },
             onLoadSuccess:function(data){}
         });
         has_p_datagrid.datagrid({
             url:"record/getrecordlist",
+            //url:option.params.url,
             type:'post',
             queryParams:{
                 group:'1',
-                pb_id:option.queryParams.record.pb_id
+                idtype:option.params.idtype,
+                id:option.params.id
             },
             onLoadSuccess:function(data){}
         });
@@ -54,23 +54,32 @@ define(function(){
             var checkedItems = not_p_datagrid.datagrid('getChecked');
             var names = [];
             if(checkedItems.length == 0){
-                layer.alert('请选择要添加的人员', {icon: 6});
+                layer.alert('请选择要添加的人员', {icon: 6,title:'温馨提示'});
             }else{
-                //layer.load();
-                //$this.hide();
-                //add_p2.show();
+                layer.load();
+                $this.hide();
+                add_p2.show();
                 $.each(checkedItems, function(index, item){
                     names.push(item.pr_id);
                 });
-                console.log(names.join(","));
                 $.ajax({
-                    url:'dfsfs',
+                    url:option.params.add_p_url,
                     type:'post',
                     data:{
-                        aa:names.join(",")
+                        //pb_id:option.queryParams.record.pb_id,
+                        idtype:option.params.idtype,
+                        id:option.params.id,
+                        pr_ids:names.join(",")
                     },
                     success: function (data) {
-                        console.log(data)
+                        layer.closeAll('loading');
+                        $this.show();
+                        add_p2.hide();
+                        if(data == "true"){
+                            layer.alert('人员添加成功', {icon: 6,title:'温馨提示',shift:2});
+                            not_p_datagrid.datagrid('reload');
+                            has_p_datagrid.datagrid('reload');
+                        }
                     }
                 });
             }
@@ -79,9 +88,31 @@ define(function(){
         local.find('[opt=add_p_all]').click(function () {
             layer.confirm('是否需要添加所有人员？', {icon: 3,shift: 6,title:'温馨提示'}, function(index){
                 layer.close(index);
+                //layer.load();
+                $.ajax({
+                    url:option.params.add_p_url,
+                    type:'post',
+                    data:{
+                        //pb_id:option.queryParams.record.pb_id,
+                        idtype:option.params.idtype,
+                        id:option.params.id,
+                        pr_ids:'all'
+                    },
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        //$this.show();
+                        //add_p2.hide();
+                        if(data == "true"){
+                            layer.alert('人员添加成功', {icon: 6,title:'温馨提示',shift:2});
+                            not_p_datagrid.datagrid('reload');
+                            has_p_datagrid.datagrid('reload');
+                        }
+                    }
+                });
             });
         });
         /*<*/
+        var reduce_p2 = local.find('[opt=reduce_p2]');
         local.find('[opt=reduce_p]').click(function () {
             var $this = $(this);
             var checkedItems = has_p_datagrid.datagrid('getChecked');
@@ -91,19 +122,28 @@ define(function(){
             }else{
                 //layer.load();
                 //$this.hide();
-                //add_p2.show();
+                //reduce_p2.show();
                 $.each(checkedItems, function(index, item){
                     names.push(item.pr_id);
                 });
                 console.log(names.join(","));
                 $.ajax({
-                    url:'dfsfs',
+                    url:option.params.reduce_p_url,
                     type:'post',
                     data:{
-                        aa:names.join(",")
+                        idtype:option.params.idtype,
+                        id:option.params.id,
+                        pr_ids:names.join(",")
                     },
                     success: function (data) {
-                        console.log(data)
+                        layer.closeAll('loading');
+                        $this.show();
+                        reduce_p2.hide();
+                        if(data == "true"){
+                            layer.alert('人员移除成功', {icon: 6,title:'温馨提示',shift:2});
+                            not_p_datagrid.datagrid('reload');
+                            has_p_datagrid.datagrid('reload');
+                        }
                     }
                 });
             }
@@ -114,20 +154,6 @@ define(function(){
                 layer.close(index);
             });
         });
-    }
-
-    var render=function(l,o){
-        layer.closeAll('loading');
-        initFunc(l,o);//初始化
-        if(o && o.queryParams) {
-            switch (o.queryParams.actiontype){
-                case 'add':
-                    saveFunc(l, o);
-                    break;
-                default :
-                    break;
-            }
-        }
     }
     return {
         render:render

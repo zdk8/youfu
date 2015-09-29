@@ -39,6 +39,7 @@
                 <th data-options="field:'ro',width:100,align:'center',
                                     formatter:function(value,rowData,rowIndex){
                                         var str='<div></div>';
+                                        str=$(str).append('<a action=&quot;add_p&quot;title=&quot;添加人员&quot;href=&quot;javaScript:;&quot;><span>添加人员</span></a>&nbsp;');
                                         str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
                                         str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                                         return str.html();

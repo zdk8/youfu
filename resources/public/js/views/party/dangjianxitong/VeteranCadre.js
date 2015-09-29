@@ -17,10 +17,11 @@ define(function(){
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
+                var add_pbtns = local.find('[action=add_p]');           //添加人员
                 var updatebtns = local.find('[action=update]');           //修改
                 var delbtns = local.find('[action=del]');           //删除
                 var rows=data.rows;
-                var btns_arr=[view,delbtns,updatebtns];
+                var btns_arr=[view,delbtns,updatebtns,add_pbtns];
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -52,6 +53,28 @@ define(function(){
                                     });
                                 }else if(action == "update"){                   //修改
                                     updateFunc(record,refreshGrid);
+                                }else if(action == "add_p"){                   //添加人员
+                                    var title =record.vc_name+ ' - 老干部人员添加';
+                                    require(['text!views/party/dangjianxitong/AddPersonnel.htm','views/party/dangjianxitong/AddPersonnel'],
+                                        function(htmfile,jsfile){
+                                            layer.open({
+                                                title:title,
+                                                type: 1,
+                                                area: ['800px', '400px'], //宽高
+                                                content: htmfile,
+                                                success: function(layero, index){
+                                                    jsfile.render(layero,{
+                                                        index:index,
+                                                        queryParams:{
+                                                            actiontype:'add',
+                                                            refresh:refreshGrid,
+                                                            record:record
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    )
                                 }
                             });
                         })(i)
