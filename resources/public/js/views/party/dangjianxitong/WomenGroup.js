@@ -69,6 +69,11 @@ define(function(){
                                                             actiontype:'add',
                                                             refresh:refreshGrid,
                                                             record:record
+                                                        },params:{
+                                                            add_p_url:'party/addpeopletowomengroup',   //添加人员
+                                                            reduce_p_url:'party/addpeopletoparty',   //移除人员
+                                                            idtype:'wg',              //id类型(党支部、共青团...区分)
+                                                            id:record.wg_id               //id值
                                                         }
                                                     });
                                                 }

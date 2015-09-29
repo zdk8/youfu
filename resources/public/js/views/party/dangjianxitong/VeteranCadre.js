@@ -69,6 +69,11 @@ define(function(){
                                                             actiontype:'add',
                                                             refresh:refreshGrid,
                                                             record:record
+                                                        },params:{
+                                                            add_p_url:'party/addpeopletoveteran',   //添加人员
+                                                            reduce_p_url:'party/addpeopletoparty',   //移除人员
+                                                            idtype:'vc',              //id类型(党支部、共青团...区分)
+                                                            id:record.vc_id               //id值
                                                         }
                                                     });
                                                 }

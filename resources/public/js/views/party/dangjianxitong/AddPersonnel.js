@@ -26,7 +26,6 @@ define(function(){
 
         not_p_datagrid.datagrid({
             url:"record/getrecordlist",
-            //url:option.params.url,
             type:'post',
             queryParams:{
                 group:'0',
@@ -37,7 +36,6 @@ define(function(){
         });
         has_p_datagrid.datagrid({
             url:"record/getrecordlist",
-            //url:option.params.url,
             type:'post',
             queryParams:{
                 group:'1',

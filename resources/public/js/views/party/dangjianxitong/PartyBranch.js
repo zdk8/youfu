@@ -72,7 +72,7 @@ define(function(){
                                                         },params:{
                                                             add_p_url:'party/addpeopletoparty',   //添加人员
                                                             reduce_p_url:'party/addpeopletoparty',   //移除人员
-                                                            idtype:'pb_id',              //id类型(党支部、共青团...区分)
+                                                            idtype:'pb',              //id类型(党支部、共青团...区分)
                                                             id:record.pb_id               //id值
                                                         }
                                                     });

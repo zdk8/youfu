@@ -69,6 +69,11 @@ define(function(){
                                                             actiontype:'add',
                                                             refresh:refreshGrid,
                                                             record:record
+                                                        },params:{
+                                                            add_p_url:'party/addpeopletotradeunion',   //添加人员
+                                                            reduce_p_url:'party/addpeopletoparty',   //移除人员
+                                                            idtype:'tu',              //id类型(党支部、共青团...区分)
+                                                            id:record.tu_id               //id值
                                                         }
                                                     });
                                                 }
