@@ -85,11 +85,21 @@
     (updatedata-by-tablename "t_certificate" {:isreceive nil} {:c_id c_id})))
 
 
-(defn test-in [ids]
-  (select "t_personalrecords"
-          (where {:pr_id [in ids]})))
-
 (defn add-people-to-group [tablename groupid peopleids]
   (update tablename
           (set-fields groupid)
           (where {:pr_id [in peopleids]})))
+
+(defn add-allpeople-to-group [tablename groupid allcond]
+  (update tablename
+          (set-fields groupid)
+          (where allcond)))
+
+
+
+
+
+
+(defn test-in []
+  (select "t_personalrecords"
+          (where {:pb 1})))

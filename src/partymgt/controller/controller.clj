@@ -118,9 +118,10 @@
 (defn add-people-to-party [request]
   (let [params (:params request)
         pb_id (:pb_id params)
-        pr_ids (cstr/split (:pr_ids params) #"," )
+        pr_ids  (:pr_ids params)
         ]
-    (db/add-people-to-group "t_personalrecords" {:pb pb_id} pr_ids)
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:pb pb_id} {:pb nil})
+                         (db/add-people-to-group "t_personalrecords" {:pb pb_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-partybranch [request]
@@ -159,7 +160,8 @@
         cy_id (:cy_id params)
         pr_ids (:pr_ids params)
         ]
-    (db/add-people-to-group "t_personalrecords" {:cy cy_id} pr_ids)
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:cy cy_id} {:pb nil})
+                         (db/add-people-to-group "t_personalrecords" {:cy cy_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-youthleague [request]
@@ -198,7 +200,8 @@
         vc_id (:vc_id params)
         pr_ids (:pr_ids params)
         ]
-    (db/add-people-to-group "t_personalrecords" {:vc vc_id} pr_ids)
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:vc vc_id} {:pb nil})
+                         (db/add-people-to-group "t_personalrecords" {:vc vc_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-veterancadre [request]
@@ -237,7 +240,8 @@
         wg_id (:wg_id params)
         pr_ids (:pr_ids params)
         ]
-    (db/add-people-to-group "t_personalrecords" {:wg wg_id} pr_ids)
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:wg wg_id} {:pb nil})
+                         (db/add-people-to-group "t_personalrecords" {:wg wg_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-womengroup [request]
@@ -276,7 +280,8 @@
         tu_id (:tu_id params)
         pr_ids (:pr_ids params)
         ]
-    (db/add-people-to-group "t_personalrecords" {:tu tu_id} pr_ids)
+    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:tu tu_id} {:pb nil})
+                         (db/add-people-to-group "t_personalrecords" {:tu tu_id} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-tradeunion [request]
@@ -389,10 +394,6 @@
     (println colskey)
     (resp/json {:success colskey})))
 
-(defn test-dfs [request]
-  (let [params (:params request)
-        aa (:aa params)]
-    (println (cstr/split  aa #"," ))
-    (println (db/test-in (clojure.string/split  aa #"," )))
-    ))
+(defn test-dfs []
+  (resp/json (db/test-in )) )
 
