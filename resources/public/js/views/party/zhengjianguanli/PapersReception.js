@@ -57,7 +57,9 @@ define(function(){
             },
             rowStyler: function(index,row){
                 if (row.returndate == null){
-                    return 'color:#FFA07A;';
+                    return 'color:#A52A2A;';
+                }else{
+                    return 'color:#20B2AA';
                 }
             }
         })
