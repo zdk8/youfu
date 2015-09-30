@@ -1,0 +1,19 @@
+<table class="easyui-datagrid-noauto"
+       data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+    <thead>
+    <tr>
+        <th data-options="field:'name',width:100,align:'center'">姓名</th>
+        <th data-options="field:'age',width:100,align:'center'">年龄</th>
+        <th data-options="field:'gender',width:74,align:'center',
+                            formatter: function(value,row,index){
+                                    return getGender[value]
+                                }">性别</th>
+        <th data-options="field:'native',width:127,align:'center'">籍贯</th>
+    </tr>
+    </thead>
+</table>

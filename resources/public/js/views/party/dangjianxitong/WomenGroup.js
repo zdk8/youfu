@@ -71,7 +71,7 @@ define(function(){
                                                             record:record
                                                         },params:{
                                                             add_p_url:'party/addpeopletowomengroup',   //添加人员
-                                                            reduce_p_url:'party/addpeopletoparty',   //移除人员
+                                                            reduce_p_url:'party/removepeopletowomengroup',   //移除人员
                                                             idtype:'wg',              //id类型(党支部、共青团...区分)
                                                             id:record.wg_id               //id值
                                                         }
@@ -88,35 +88,28 @@ define(function(){
             },
             onDblClickRow: function (index,row) {
                 layer.load(2);
-                var title = row.name+'-信息';
-                $.ajax({
-                    url:'record/getrecordbyid',
-                    type:'post',
-                    data:{
-                        pr_id:row.pr_id
-                    },
-                    success: function (data) {
-                        require(['text!views/party/renshidangan/PersonnelFile_Child.htm','views/party/renshidangan/PersonnelFile_Child'],
-                            function(htmfile,jsfile){
-                                layer.open({
-                                    title:title,
-                                    type: 1,
-                                    area: ['500px', '100px'], //宽高
-                                    content: htmfile,
-                                    shift: 2,
-                                    success: function(layero, index){
-                                        jsfile.render(layero,{
-                                            index:index,
-                                            queryParams:{
-                                                childrecord:data
-                                            }
-                                        });
+                var title = row.wg_name+'-所含人员列表';
+                require(['text!views/party/dangjianxitong/PersonDatagrid.htm','views/party/dangjianxitong/PersonDatagrid'],
+                    function(htmfile,jsfile){
+                        layer.open({
+                            title:title,
+                            type: 1,
+                            area: ['600px', '350px'], //宽高
+                            content: htmfile,
+                            shift: 2,
+                            success: function(layero, index){
+                                jsfile.render(layero,{
+                                    index:index,
+                                    queryParams:{
+                                    },params:{
+                                        idtype:'wg',              //id类型(党支部、共青团...区分)
+                                        id:row.wg_id               //id值
                                     }
                                 });
                             }
-                        )
+                        });
                     }
-                })
+                )
             }
         })
 

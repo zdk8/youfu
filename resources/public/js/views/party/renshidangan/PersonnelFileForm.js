@@ -38,7 +38,7 @@ define(function(){
         var tdarr1 = '<td align="center"><input opt="edutype" class="easyui-combobox" opt2="educationtype" style="width: 100px"></td>'+
             '<td align="center"><input class="input-text" opt="college"></td>' +
             '<td align="center"><input class="input-text" opt="profession"></td>'+
-            '<td><a opt="dellist_degree" style="cursor: pointer;">删除</a></td>';
+            '<td><a opt="dellist_degree" style="cursor: pointer;"><!--删除--><img src="images/reduce.png"></a></td>';
 
         var _html1 = '<tr>' + tdarr1+ '</tr>';
         local.find('[opt=addlist_degree]').click(function () {
@@ -75,7 +75,7 @@ define(function(){
             '<td align="center"><input class="input-text" opt="fm_workunit" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_position" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_contactway" style="width: 100px;"></td>'+
-            '<td><a opt="dellist_family" style="cursor: pointer;">删除</a></td>';
+            '<td><a opt="dellist_family" style="cursor: pointer;"><!--删除--><img src="images/reduce.png"></a></td>';
         var _html2 = '<tr>' + tdarr2+ '</tr>';
         local.find('[opt=addlist_family]').click(function () {
             var $this =$(this);
@@ -191,7 +191,7 @@ define(function(){
         var tdarr1 = '<td align="center"><input opt="edutype" class="easyui-combobox" opt2="educationtype" style="width: 100px"></td>'+
             '<td align="center"><input class="input-text" opt="college"></td>' +
             '<td align="center"><input class="input-text" opt="profession"></td>'+
-            '<td><a opt="dellist_degree" style="cursor: pointer;">删除</a></td>';
+            '<td><a opt="dellist_degree" style="cursor: pointer;"><!--删除--><img src="images/reduce.png"></a></td>';
 
         for(var i=1;i<educationway.length;i++){
             var _html1 = '<tr>' + tdarr1+ '</tr>';
@@ -238,7 +238,7 @@ define(function(){
             '<td align="center"><input class="input-text" opt="fm_workunit" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_position" style="width: 100px;"></td>' +
             '<td align="center"><input class="input-text" opt="fm_contactway" style="width: 100px;"></td>'+
-            '<td><a opt="dellist_family" style="cursor: pointer;">删除</a></td>';
+            '<td><a opt="dellist_family" style="cursor: pointer;"><!--删除--><img src="images/reduce.png"></a></td>';
 
         for(var i=1;i<familymembers.length;i++){
             var _html2 = '<tr>' + tdarr2+ '</tr>';
@@ -369,6 +369,10 @@ define(function(){
         addToolBar(local,option,li);
         var record = option.queryParams.record; //主表信息
         local.find('form').form('load',record);//主表数据填充
+        var imgurl;
+        record.photo == null ? imgurl = 'noperson.gif' : imgurl = record.photo;
+        var imghtm = '<img style="width:150px;height:120px;" src="personimgs/'+imgurl+'" />';//图片填充
+        local.find('[opt=personimg]').html(imghtm);
         var childrecord = option.queryParams.childrecord;//子表信息
         var educationway =childrecord.educationway; //学位学历信息
         loadEducationData(local,educationway);//学位学历数据填充

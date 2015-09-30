@@ -10,15 +10,20 @@ table {
     font-family: Verdana, Geneva, sans-serif, "宋体";
     font-size: 14px;
     width: 130px;
+    color: #000000;
 }
-.table_form .input-text{
+.table_form .input-text .easyui-combobox{
     /*background-color: #e5e5e5;*/
 }
 textarea,textarea.input-text,textarea.input-focus{font-size:12px;height:auto; padding:5px; margin:0;}
 
 /*表格表单*/
 .table_form{}
-.table_form input{}
+.table_form input{
+    color: #2F4F4F;
+    font-family: 微软雅黑;
+    /*background-color: #F5F5F5;*/
+}
 .table_form td{
     /*padding-left:12px;*/
     font-family: 微软雅黑;

@@ -124,7 +124,6 @@ define(function(){
                 $.each(checkedItems, function(index, item){
                     names.push(item.pr_id);
                 });
-                console.log(names.join(","));
                 $.ajax({
                     url:option.params.reduce_p_url,
                     type:'post',
@@ -155,7 +154,7 @@ define(function(){
                 $this.hide();
                 reduce_p_all2.show();
                 $.ajax({
-                    url:option.params.add_p_url,
+                    url:option.params.reduce_p_url,
                     type:'post',
                     data:{
                         id:option.params.id,

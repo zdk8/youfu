@@ -60,35 +60,26 @@ define(function(){
             },
             onDblClickRow: function (index,row) {
                 layer.load(2);
-                var title = row.name+'-信息';
-                $.ajax({
-                    url:'record/getrecordbyid',
-                    type:'post',
-                    data:{
-                        pr_id:row.pr_id
-                    },
-                    success: function (data) {
-                        require(['text!views/party/renshidangan/PersonnelFile_Child.htm','views/party/renshidangan/PersonnelFile_Child'],
-                            function(htmfile,jsfile){
-                                layer.open({
-                                    title:title,
-                                    type: 1,
-                                    area: ['700px', '440px'], //宽高
-                                    content: htmfile,
-                                    shift: 2,
-                                    success: function(layero, index){
-                                        jsfile.render(layero,{
-                                            index:index,
-                                            queryParams:{
-                                                childrecord:data
-                                            }
-                                        });
+                var title = row.name+'-证件领用记录';
+                require(['text!views/party/zhengjianguanli/PapersRecord.htm','views/party/zhengjianguanli/PapersRecord'],
+                    function(htmfile,jsfile){
+                        layer.open({
+                            title:title,
+                            type: 1,
+                            area: ['700px', '440px'], //宽高
+                            content: htmfile,
+                            shift: 2,
+                            success: function(layero, index){
+                                jsfile.render(layero,{
+                                    index:index,
+                                    queryParams:{
+                                        c_id:row.c_id
                                     }
                                 });
                             }
-                        )
+                        });
                     }
-                })
+                )
             }
         })
 
