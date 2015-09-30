@@ -12,7 +12,7 @@
     ))
 
 (defn upload-file [file]
-  (let [uploadpath (str schema/datapath "upload/")      ;获取当前目录
+  (let [uploadpath (str schema/datapath "resources/public/upload/")      ;获取当前目录
         timenow (c/to-long  (l/local-now))              ;当前时间数字
         filename (:filename file)
         pathname (str  timenow filename)
@@ -38,7 +38,7 @@
     ;(println "PPPPPPPPPP" params )
     ;(println "EEEEEEEEEE" photopath )
     ;(println "FFFFFFFFFF" familydata)
-    (db/add-pensonrecords (conj prdata {:photo photopath})  edudata familydata)
+    ;(db/add-pensonrecords (conj prdata {:photo photopath})  edudata familydata)
     (str "true")))
 
 (defn get-record-list
