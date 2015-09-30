@@ -464,9 +464,10 @@
   (let [params (:params request)
         pc_id (:pr_id params)
         file_name (:file_name params)
+        attach_type (:attach_type params)
         rows (:rows params)
         page (:page params)
-        conds (str (common/likecond "file_name" file_name) (str " and pc_id = " pc_id))
+        conds (str (common/likecond "file_name" file_name) (str " and pc_id = " pc_id) (str " and attach_type = " (if (> (count attach_type) 0) attach_type "gbrm")))
         getresults (common/fenye rows page "t_attach_files" "*" conds " order by attach_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "loaddate")})))
 
