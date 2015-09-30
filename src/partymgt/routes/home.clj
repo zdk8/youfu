@@ -29,6 +29,7 @@
   (POST "/party/updatepartybyid" request (ctl/update-party-byid request))
   (POST "/party/getpartylist" request (ctl/get-depart-list request))
   (POST "/party/addpeopletoparty" request (ctl/add-people-to-party request))
+  (POST "/party/removepeopletoparty" request (ctl/remove-people-to-party request))
   (POST "/party/delpartybranch" request (ctl/delete-partybranch request))
 
   ;;共青团
@@ -36,6 +37,7 @@
   (POST "/party/updateyouthleaguebyid" request (ctl/update-youthleague-byid request))
   (POST "/party/getyouthleaguelist" request (ctl/get-youthleague-list request))
   (POST "/party/addpeopletoyouthleague" request (ctl/add-people-to-youthleague request))
+  (POST "/party/removepeopletoleague" request (ctl/remove-people-to-league request))
   (POST "/party/delyouthleague" request (ctl/delete-youthleague request))
 
   ;;老干部
@@ -43,6 +45,7 @@
   (POST "/party/updateveteranbyid" request (ctl/update-veteran-byid request))
   (POST "/party/getveteranlist" request (ctl/get-veteran-list request))
   (POST "/party/addpeopletoveteran" request (ctl/add-people-to-veteran request))
+  (POST "/party/removepeopletoveteran" request (ctl/remove-people-to-veteran request))
   (POST "/party/delveterancadre" request (ctl/delete-veterancadre request))
 
   ;;妇女小组
@@ -50,6 +53,7 @@
   (POST "/party/updatewomengroupbyid" request (ctl/update-womengroup-byid request))
   (POST "/party/getwomengrouplist" request (ctl/get-womengroup-list request))
   (POST "/party/addpeopletowomengroup" request (ctl/add-people-to-womengroup request))
+  (POST "/party/removepeopletowomengroup" request (ctl/remove-people-to-womengroup request))
   (POST "/party/delwomengroup" request (ctl/delete-womengroup request))
 
   ;;工会
@@ -57,6 +61,7 @@
   (POST "/party/updatetradeunionbyid" request (ctl/update-tradeunion-byid request))
   (POST "/party/gettradeunionlist" request (ctl/get-tradeunion-list request))
   (POST "/party/addpeopletotradeunion" request (ctl/add-people-to-tradeunion request))
+  (POST "/party/removepeopletotradeunion" request (ctl/remove-people-to-tradeunion request))
   (POST "/party/deltradeunion" request (ctl/delete-tradeunion request))
 
   ;;证件备案管理

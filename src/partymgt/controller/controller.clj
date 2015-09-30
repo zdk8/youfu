@@ -125,8 +125,17 @@
         pb_id (:id params)
         pr_ids  (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:pb pb_id} {:pb nil :isdel nil})
-                         (db/add-people-to-group "t_personalrecords" {:pb pb_id} (cstr/split pr_ids #"," )))
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:pb pb_id} {:pb nil :isdel nil})
+                         (db/deal-people-to-group "t_personalrecords" {:pb pb_id} (cstr/split pr_ids #"," )))
+    (str "true")))
+
+(defn remove-people-to-party [request]
+  (let [params (:params request)
+        pb_id (:id params)
+        pr_ids (:pr_ids params)
+        ]
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:pb nil} {:pb pb_id})
+                         (db/deal-people-to-group "t_personalrecords" {:pb nil} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-partybranch [request]
@@ -166,8 +175,17 @@
         pr_ids (:pr_ids params)
         ]
     (println "SSSSSSSSSSS"  pr_ids "    " (= pr_ids "all"))
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:cy cy_id} {:cy nil :isdel nil})
-                         (db/add-people-to-group "t_personalrecords" {:cy cy_id} (cstr/split pr_ids #"," )))
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:cy cy_id} {:cy nil :isdel nil})
+                         (db/deal-people-to-group "t_personalrecords" {:cy cy_id} (cstr/split pr_ids #"," )))
+    (str "true")))
+
+(defn remove-people-to-league [request]
+  (let [params (:params request)
+        cy_id (:id params)
+        pr_ids (:pr_ids params)
+        ]
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:cy nil} {:cy cy_id})
+                         (db/deal-people-to-group "t_personalrecords" {:cy nil} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-youthleague [request]
@@ -206,8 +224,17 @@
         vc_id (:id params)
         pr_ids (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:vc vc_id} {:vc nil :isdel nil})
-                         (db/add-people-to-group "t_personalrecords" {:vc vc_id} (cstr/split pr_ids #"," )))
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:vc vc_id} {:vc nil :isdel nil})
+                         (db/deal-people-to-group "t_personalrecords" {:vc vc_id} (cstr/split pr_ids #"," )))
+    (str "true")))
+
+(defn remove-people-to-veteran [request]
+  (let [params (:params request)
+        vc_id (:id params)
+        pr_ids (:pr_ids params)
+        ]
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:vc nil} {:vc vc_id})
+                         (db/deal-people-to-group "t_personalrecords" {:vc nil} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-veterancadre [request]
@@ -246,8 +273,17 @@
         wg_id (:id params)
         pr_ids (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:wg wg_id} {:wg nil :isdel nil})
-                         (db/add-people-to-group "t_personalrecords" {:wg wg_id} (cstr/split pr_ids #"," )))
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:wg wg_id} {:wg nil :isdel nil})
+                         (db/deal-people-to-group "t_personalrecords" {:wg wg_id} (cstr/split pr_ids #"," )))
+    (str "true")))
+
+(defn remove-people-to-womengroup [request]
+  (let [params (:params request)
+        wg_id (:id params)
+        pr_ids (:pr_ids params)
+        ]
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:wg nil} {:wg wg_id})
+                         (db/deal-people-to-group "t_personalrecords" {:wg nil} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-womengroup [request]
@@ -286,8 +322,17 @@
         tu_id (:id params)
         pr_ids (:pr_ids params)
         ]
-    (if (= pr_ids "all") (db/add-allpeople-to-group "t_personalrecords" {:tu tu_id} {:tu nil :isdel nil})
-                         (db/add-people-to-group "t_personalrecords" {:tu tu_id} (cstr/split pr_ids #"," )))
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:tu tu_id} {:tu nil :isdel nil})
+                         (db/deal-people-to-group "t_personalrecords" {:tu tu_id} (cstr/split pr_ids #"," )))
+    (str "true")))
+
+(defn remove-people-to-tradeunion [request]
+  (let [params (:params request)
+        tu_id (:id params)
+        pr_ids (:pr_ids params)
+        ]
+    (if (= pr_ids "all") (db/deal-allpeople-to-group "t_personalrecords" {:tu nil} {:tu tu_id})
+                         (db/deal-people-to-group "t_personalrecords" {:tu nil} (cstr/split pr_ids #"," )))
     (str "true")))
 
 (defn delete-tradeunion [request]

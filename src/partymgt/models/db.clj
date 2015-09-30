@@ -85,12 +85,13 @@
     (updatedata-by-tablename "t_certificate" {:isreceive nil} {:c_id c_id})))
 
 
-(defn add-people-to-group [tablename groupid peopleids]
+
+(defn deal-people-to-group [tablename groupid peopleids]
   (update tablename
           (set-fields groupid)
           (where {:pr_id [in peopleids]})))
 
-(defn add-allpeople-to-group [tablename groupid allcond]
+(defn deal-allpeople-to-group [tablename groupid allcond]
   (update tablename
           (set-fields groupid)
           (where allcond)))
