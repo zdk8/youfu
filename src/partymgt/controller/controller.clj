@@ -61,7 +61,6 @@
                     "0" (str " and " idtype " is null ")
                     "1" (str " and " idtype " = " id)
                     nil)
-
         ;groupcond (if (> (count group) 0)
         ;            (if (= group "0")
         ;              (str (if (> (count pb_id) 0) (str " and pb is null " )) (if (> (count cy_id) 0) (str " and cy is null  " )) (if (> (count vc_id) 0) (str " and vc is null  " )) (if (> (count wg_id) 0) (str " and wg is null  " )) (if (> (count tu_id) 0) (str " and tu is null  " )))
