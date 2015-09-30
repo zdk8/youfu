@@ -11,7 +11,15 @@
     [clj-time.coerce :as c]
     ))
 
-
+(defn upload-file [file]
+  (let [uploadpath (str schema/datapath "upload/")      ;获取当前目录
+        timenow (c/to-long  (l/local-now))              ;当前时间数字
+        filename (:filename file)
+        pathname (str  timenow filename)
+        photopath  (if (> (count filename) 0) (str uploadpath pathname) )
+        ]
+    (if (> (count filename) 0) (common/uploadfile file  uploadpath pathname))
+    photopath))
 
 (defn add-pensonrecords
   "人事档案数据增加"
@@ -24,11 +32,13 @@
         prdata (conj (common/dateformat-bf-insert getprdata  "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime") {:pr_id prnextid})
         edudata (map #(conj % {:pr_id prnextid}) getedudata)
         familydata (map #(conj % {:pr_id prnextid}) getfamilydata)
+        file (:file params)
+        photopath (upload-file file)
         ]
-    ;(println "PPPPPPPPPP" prdata)
-    ;(println "EEEEEEEEEE" edudata)
+    ;(println "PPPPPPPPPP" params )
+    ;(println "EEEEEEEEEE" photopath )
     ;(println "FFFFFFFFFF" familydata)
-    (db/add-pensonrecords prdata edudata familydata)
+    (db/add-pensonrecords (conj prdata {:photo photopath})  edudata familydata)
     (str "true")))
 
 (defn get-record-list

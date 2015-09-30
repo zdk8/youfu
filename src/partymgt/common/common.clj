@@ -51,6 +51,7 @@
         ;        filedata {:file_anme filenamemsg :attach_type filetype :fie_path (str "/upload/" filetype "/" filename) :file_size filesie :file_type fileext :pc_id pc_id}
         ]
     (if havedir "" (fs/mkdirs dirpath))     ;如果文件不存在，建立此文件
+    (println "DDDDDDDDD" dirpath)
     (io/upload-file dirpath  (conj file {:filename filename}))))  ;文件上传
 
 
