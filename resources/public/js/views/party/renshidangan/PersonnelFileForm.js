@@ -318,11 +318,11 @@ define(function(){
         })
         /*附件选择动态事件*/
         local.find('[opt=inputVal]').bind('change',function(){
-            var file=$(this).val();
-            var strFileName=file.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");  //正则表达式获取文件名，不带后缀
-            var FileExt='.'+file.replace(/.+\./,"");   //正则表达式获取后缀
+            //var file=$(this).val();
+            //var strFileName=file.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");  //正则表达式获取文件名，不带后缀
+            //var FileExt='.'+file.replace(/.+\./,"");   //正则表达式获取后缀
             //local.find('[name=filenamemsg]').val(strFileName);
-            local.find('[name=fileext]').val(FileExt);
+            //local.find('[name=fileext]').val(FileExt);
             cj.imgView(this,local);
         });
     }
@@ -370,8 +370,8 @@ define(function(){
         var record = option.queryParams.record; //主表信息
         local.find('form').form('load',record);//主表数据填充
         var imgurl;
-        record.photo == null ? imgurl = 'noperson.gif' : imgurl = record.photo;
-        var imghtm = '<img style="width:150px;height:120px;" src="personimgs/'+imgurl+'" />';//图片填充
+        record.photo == null ? imgurl = 'images/noperson.gif' : imgurl = record.photo;
+        var imghtm = '<img style="width:150px;height:120px;" src="'+imgurl+'" />';//图片填充
         local.find('[opt=personimg]').html(imghtm);
         var childrecord = option.queryParams.childrecord;//子表信息
         var educationway =childrecord.educationway; //学位学历信息

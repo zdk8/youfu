@@ -266,7 +266,9 @@
          ]
 ;      (uploadfile file  dirpath filename)
 ;      (db/adddata-by-tablename "t_attach_files" filedata)
-      (str "success"))
+;      (str "success")
+      (println "RRRRRRRRRRR" uploadpath filename filesie filedata dirpath)
+      )
     (catch Exception e (str (.getMessage e )))
     ))
 

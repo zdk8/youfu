@@ -52,7 +52,7 @@ define(function () {
 
             local.find('[opt=inputVal]').on('change', function () {
                 //console.log(this)
-                preview(this);
+                //preview(this);
             })
 
             /*图片预览*/
@@ -111,7 +111,7 @@ define(function () {
                 }else{
                     //local.find('[opt=fileuploadform]').ajaxForm(options).submit();
                     local.find('[opt=fileuploadform]').form('submit', {
-                        url: 'ddddd',
+                        url: 'uploadimg',
                         onSubmit: function (params) {
                             //layer.load();
                             var isValid = $(this).form('validate');
