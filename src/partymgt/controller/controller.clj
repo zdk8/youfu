@@ -49,7 +49,8 @@
         ;tu_id (:tu_id params)
         groupcond (condp = group
                     "0" (str " and " idtype " is null ")
-                    "1" (str " and " idtype " = " id))
+                    "1" (str " and " idtype " = " id)
+                    nil)
 
         ;groupcond (if (> (count group) 0)
         ;            (if (= group "0")
