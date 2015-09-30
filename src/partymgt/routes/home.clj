@@ -80,6 +80,7 @@
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除
+  (POST "/party/getfileslist" request (ctl/get-files-list request))
 
   ;;test
   (GET "/gettablecols" [tablename] (ctl/test-get-tablecols tablename))   ;;获取表的字段
