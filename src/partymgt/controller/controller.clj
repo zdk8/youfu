@@ -16,7 +16,7 @@
         timenow (c/to-long  (l/local-now))              ;当前时间数字
         filename (:filename file)
         pathname (str  timenow filename)
-        photopath  (if (> (count filename) 0) (str uploadpath pathname) )
+        photopath  (if (> (count filename) 0) (str "upload/" pathname) )
         ]
     (if (> (count filename) 0) (common/uploadfile file  uploadpath pathname))
     photopath))
@@ -38,7 +38,7 @@
     ;(println "PPPPPPPPPP" params )
     ;(println "EEEEEEEEEE" photopath )
     ;(println "FFFFFFFFFF" familydata)
-    ;(db/add-pensonrecords (conj prdata {:photo photopath})  edudata familydata)
+    (db/add-pensonrecords (conj prdata {:photo photopath})  edudata familydata)
     (str "true")))
 
 (defn get-record-list
