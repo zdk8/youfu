@@ -164,7 +164,19 @@ a:hover{
     top: 1px;
 }
 /*操作*/
-/*.btns_*/
+.btns_other{
+    background-color: #DAA520;
+    border: 1px solid #DAA520;
+    color: #ffffff;
+    cursor: pointer;
+}
+.btns_other:hover{
+    background-color: #B8860B;
+}
+.btns_other:active{
+    position: relative;
+    top: 1px;
+}
 
 
 /************表单上方或者下方的悬浮工具条***************/

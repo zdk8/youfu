@@ -423,8 +423,8 @@
         credentialsnumb (:credentialsnumb params)
         isback (:isback params)
         receivecond (if (> (count isback) 0) (if (= isback "0") (str " and isreceive = 1 ") (str " and isreceive is null ")))
-        conds (str receivecond (common/likecond "name" name) (common/likecond "credentialsnumb" credentialsnumb))
-        getsql (str "select c_id,name,gender,birthday,credentialstype,credentialsnumb,validity,handdate,manager,c_comments,isreceive,cr_id,receivedate,returndate,cr_comments from(select c.*,cr.cr_id,cr.receivedate,cr.returndate,cr.cr_comments from t_certificatereceive cr left join t_certificate c on cr.c_id = c.c_id)")
+        conds (str receivecond (common/likecond "name" name) (common/likecond "credentialsnumb" credentialsnumb) (str " and isdel is null"))
+        getsql (str "select c_id,name,gender,birthday,credentialstype,credentialsnumb,validity,isdel,handdate,manager,c_comments,isreceive,cr_id,receivedate,returndate,cr_comments from(select c.*,cr.cr_id,cr.receivedate,cr.returndate,cr.cr_comments from t_certificatereceive cr left join t_certificate c on cr.c_id = c.c_id)")
         getresults (common/fenye rows page (str "(" getsql ")") "*" conds " order by cr_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "validity" "handdate" "receivedate" "returndate" )})))
 

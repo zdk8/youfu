@@ -20,8 +20,8 @@ define(function () {
             var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
             addToolBar(local,option,li);
 
-            llo = local;
-            pllo = option.queryParams.plocal;
+            //llo = local;
+            //pllo = option.queryParams.plocal;
 
             /*if(option && option.params){
                 if(option.params == 'showimg'){     //需要显示照片
@@ -37,7 +37,7 @@ define(function () {
                 var strFileName=file.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");  //正则表达式获取文件名，不带后缀
                 var FileExt='.'+file.replace(/.+\./,"");   //正则表达式获取后缀
 
-                local.find('[name=filenamemsg]').val(strFileName);
+                local.find('[opt=inputMsg]').val(strFileName);
                 local.find('[name=fileext]').val(FileExt);
                 //option.queryParams.plocal.find('[name=fileext]').val(FileExt);
 
