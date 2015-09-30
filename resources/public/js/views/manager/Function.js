@@ -9,7 +9,6 @@ define(function(){
 
     var refresh=function(){
 
-
         if($functiontree.tree('getParent',funObj.target)){
             var parentTarget=$functiontree.tree('getParent',funObj.target).target;
             $functiontree.tree('expand', parentTarget);

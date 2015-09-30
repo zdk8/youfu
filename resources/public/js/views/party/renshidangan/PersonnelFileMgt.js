@@ -111,7 +111,7 @@ define(function(){
                     layer.open({
                         title:'人事档案添加',
                         type: 1,
-                        area: ['890px', '550px'], //宽高
+                        area: ['890px', '560px'], //宽高
                         content: htmfile,
                         success: function(layero, index){
                             jsfile.render(layero,{
@@ -146,7 +146,7 @@ define(function(){
                         layer.open({
                             title:title,
                             type: 1,
-                            area: ['890px', '550px'], //宽高
+                            area: ['890px', '560px'], //宽高
                             content: htmfile,
                             success: function(layero, index){
                                 jsfile.render(layero,{

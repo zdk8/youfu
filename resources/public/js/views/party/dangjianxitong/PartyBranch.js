@@ -3,7 +3,7 @@ define(function(){
         local.find('[opt=other]').on('click', function () {
             local.find('[opt=func_btn]').animate({"right":'', width : "show"},500);
         });
-        local.find('[opt=other_2]').on('click', function () {
+        local.find('[opt=close]').on('click', function () {
             local.find('[opt=func_btn]').animate({"right":'', width : "hide"},500);
         });
 
