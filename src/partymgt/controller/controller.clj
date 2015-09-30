@@ -410,6 +410,15 @@
         getresults (common/fenye rows page (str "(" getsql ")") "*" conds " order by cr_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "validity" "handdate" "receivedate" "returndate" )})))
 
+(defn get-cerreceive-byid [request]
+  (let [params (:params request)
+        c_id (:c_id params)
+        rows (:rows params)
+        page (:page params)
+        conds (str " and c_id = " c_id)
+        getresults (common/fenye rows page "t_certificatereceive" "*" conds " order by cr_id desc")]
+    (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "receivedate" "returndate")})))
+
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]
   (try
