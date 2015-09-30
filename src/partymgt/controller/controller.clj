@@ -21,6 +21,7 @@
     (if (> (count filename) 0) (common/uploadfile file  uploadpath pathname))
     photopath))
 
+
 (defn add-pensonrecords
   "人事档案数据增加"
   [request]
@@ -83,8 +84,14 @@
         prdata (common/dateformat-bf-insert getprdata  "worktime" "partytime" "employtime" "contractsigntime" "contractdeadline" "incumbenttime")
         edudata (map #(conj % {:pr_id pr_id}) getedudata)
         familydata (map #(conj % {:pr_id pr_id}) getfamilydata)
+        photo (:photo params)
+        file (:file params)
+        filename (:filename file)
+        photopath (if (> (count filename) 0) (do (common/delfile (str schema/datapath photo))                       ;如果头像图片更新，先删除旧头像
+                                                  (upload-file file))                                                 ;再更新新头像
+                                              photo)
         ]
-    (db/update-pensonrecords prdata edudata familydata pr_id)
+    (db/update-pensonrecords (conj prdata {:photo photopath})  edudata familydata pr_id)
     (str "true")))
 
 (defn delete-record-byid [request]
