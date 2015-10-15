@@ -108,7 +108,10 @@
 }
 .datagrid-header-row td{
     background-color:#6fb3e0;
-    color:#fff
+    color:#fff;
+}
+.datagrid-header-row td:hover{
+    background-color:#6fb3e0;
 }
 .panel-header, .panel-body {
     border-color: #e5e5e5;
@@ -134,4 +137,25 @@
 }
 .combo-arrow {
     background-color: #e5e5e5;
+}
+
+/*tabs竖排*/
+.verticaltabs .tabs-header{
+    background-color: #EAEAEA;
+}
+.verticaltabs .tabs-header .tabs-wrap .tabs{
+    border-color: #EFF5FF;!important;
+}
+.verticaltabs .tabs-header .tabs-wrap .tabs li{
+    border: none;
+}
+.verticaltabs .tabs-header .tabs-wrap .tabs li a{
+    border-color: #EFF5FF;!important;
+}
+.verticaltabs .tabs-header .tabs-wrap .tabs li.tabs-selected a.tabs-inner .tabs-title a {
+    color: #0080d8;!important;
+}
+.verticaltabs .tabs-header .tabs-wrap .tabs .tabs-inner .tabs-title a {
+    color: #3d3d3d;!important;
+    font-size: 13px;
 }

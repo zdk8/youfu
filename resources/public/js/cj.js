@@ -501,6 +501,76 @@ var cj=(function(){
                 prevDiv.html(imghtmie);
             }
 
+        },common_listFunc:function(local){  //表单动态增减行
+            local.find('[opt=addlist]').click(function () {
+                var $this =$(this);
+                var $tr = $this.parents('.list_min').find('tbody');
+                var td1 = $this.parents('tr').next().find('td').has('input');
+                var td = '<td><a opt="dellist" style="cursor: pointer;"><img src="images/reduce.png"></a></td>';
+                var tds = "";
+                for(var i=0;i<td1.length;i++){
+                    var hasdatebox = $(td1[i].outerHTML).find('span').hasClass('datebox');
+                    if(hasdatebox){
+                        var opt_td = $($(td1[i].outerHTML).find('input')[0]).attr('opt');
+                        var width_td = $($(td1[i].outerHTML).find('input')[0]).width();
+                        var datebox_td = '<td align="center"><input class="input-text easyui-datebox" opt="'+opt_td+'" style="width: '+width_td+'px"'+'></td>';
+                        tds += datebox_td;
+
+                    }else{
+                        tds += td1[i].outerHTML.toString();
+                    }
+                }
+                tds += td;
+                $tr.append('<tr>'+tds+'</tr>');
+                /*控件初始化*/
+                $(tds).find('input').each(function () {
+                    var $this1 = $(this);
+                    if($this1.hasClass('easyui-datebox')){
+                        local.find('[opt='+$this1.attr('opt')+']').datebox();
+                    }
+                })
+                var lasttr = $tr.find('tr')[$tr.find('tr').length-1];
+                $($($(lasttr).find('td')[0]).find('span.combo')[1]).remove();
+                local.find('[opt=dellist]').each(function () {
+                }).click(function () {
+                    var _tr = $(this).parents('tr');
+                    if (_tr.attr('class') != "demo") {
+                        var pp_id = _tr.find('[opt=pp_id]').val()
+                        if(!pp_id){
+                            _tr.remove();
+                        }
+                    }
+                })
+            });
+        },commonGetValue:function(local,option){  //动态表单提交时值获取
+            var field = option.field;
+            var arr = new Array();
+            for(var i=0;i<field.length;i++){
+                var arr_1 = new Array();
+                var code = local.find('[opt='+field[i]+']');
+                code.each(function () {
+                    var $this = $(this);
+                    if($this.hasClass('easyui-combobox')){
+                        arr_1.push($this.combobox('getValue'));
+                    }else if($this.hasClass('easyui-datebox')){
+                        arr_1.push($this.datebox('getValue'));
+                    }else{
+                        arr_1.push($this.val())
+                    }
+                });
+                arr.push(arr_1);
+            }
+
+            var arrall = new Array();
+            var arr2 = arr[0];
+            for(var i=0;i<arr2.length;i++){
+                var maparr = {};
+                for(var j=0;j<field.length;j++){
+                    maparr[field[j]]=arr[j][i];
+                }
+                arrall.push(maparr);
+            }
+            return arrall;
         }
     }
 

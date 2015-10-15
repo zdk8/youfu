@@ -1,0 +1,759 @@
+<div class="easyui-tabs verticaltabs" fit="true" opt="tabs_child">
+    <div title="<a title='获奖情况' opt='hjqk'>获奖情况</a>" data-options="closable:false">
+        <div class="easyui-layout" opt="layout_hjqk" data-options="fit:true">
+            <div data-options="region:'north',border:false"
+                 style="height:60px;padding:0 0 0 0px;">
+                <div style="width: auto;height: 50px;;background-color: #eff3f8;">
+                    <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                        &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
+                        &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                    </div>
+
+                    <div style="float: right;margin-top: -48px;right: 2px;display: inline">
+                        <input type="button" value="操作" class="btns_other" opt="other_hjqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                        <input type="button" value="查询" class="btns" opt="query_hjqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                    <div opt="func_btn_hjqk" style="float: right;background-color:snow;
+                        margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
+                        <input type="button" value=">" class="btns" opt="other2_hjqk" style="height: 50px;width: 15px;font-weight: bolder;">
+                        <input type="button" value="添加" class="btns" opt="addbtn_hjqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                </div>
+            </div>
+            <div data-options="region:'center',border:false" style="padding:0;">
+                <table class="easyui-datagrid-no" opt="edu_datagrid"
+                       data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'jc_date',width:100,align:'center'">时 间</th>
+                        <th data-options="field:'jc_name',width:100,align:'center'">获奖名称</th>
+                        <th data-options="field:'jc_reason',width:127,align:'center'">获奖原因</th>
+                        <th data-options="field:'jc_office',width:127,align:'center'">奖励机关</th>
+                        <th data-options="field:'jc_docnumber',width:127,align:'center'">文 号</th>
+                        <th data-options="field:'ro',width:100,align:'center',
+                                    formatter:function(value,rowData,rowIndex){
+                                        var str='<div></div>';
+                                        str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        return str.html();
+                                    }">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div title="<a title='受惩处情况' opt='ccqk'>受惩处情况</a>" data-options="closable:false">
+        <div class="easyui-layout" opt="layout_ccqk" data-options="fit:true">
+            <div data-options="region:'north',border:false"
+                 style="height:60px;padding:0 0 0 0px;">
+                <div style="width: auto;height: 50px;;background-color: #eff3f8;">
+                    <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                        &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
+                        &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                    </div>
+
+                    <div style="float: right;margin-top: -48px;right: 2px;display: inline">
+                        <input type="button" value="操作" class="btns_other" opt="other_ccqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                        <input type="button" value="查询" class="btns" opt="query_ccqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                    <div opt="func_btn_ccqk" style="float: right;background-color:snow;
+                        margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
+                        <input type="button" value=">" class="btns" opt="other2_ccqk" style="height: 50px;width: 15px;font-weight: bolder;">
+                        <input type="button" value="添加" class="btns" opt="addbtn_ccqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                </div>
+            </div>
+            <div data-options="region:'center',border:false" style="padding:0;">
+                <table class="easyui-datagrid-no" opt="edu_datagrid"
+                       data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'jc_date',width:100,align:'center'">时 间</th>
+                        <th data-options="field:'jc_name',width:100,align:'center'">所受处分</th>
+                        <th data-options="field:'jc_reason',width:127,align:'center'">受处分原因</th>
+                        <th data-options="field:'jc_office',width:127,align:'center'">惩处机关</th>
+                        <th data-options="field:'jc_docnumber',width:127,align:'center'">文 号</th>
+                        <th data-options="field:'ro',width:100,align:'center',
+                                    formatter:function(value,rowData,rowIndex){
+                                        var str='<div></div>';
+                                        str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        return str.html();
+                                    }">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div title="<a title='干部拒收或上交礼金、礼品情况' opt='jssjqk'>拒收或上交情况</a>" data-options="closable:false">
+        <div class="easyui-layout" opt="layout_jssjqk" data-options="fit:true">
+            <div data-options="region:'north',border:false"
+                 style="height:60px;padding:0 0 0 0px;">
+                <div style="width: auto;height: 50px;;background-color: #eff3f8;">
+                    <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                        &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
+                        &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                    </div>
+
+                    <div style="float: right;margin-top: -48px;right: 2px;display: inline">
+                        <input type="button" value="操作" class="btns_other" opt="other_jssjqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                        <input type="button" value="查询" class="btns" opt="query_jssjqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                    <div opt="func_btn_jssjqk" style="float: right;background-color:snow;
+                        margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
+                        <input type="button" value=">" class="btns" opt="other2_jssjqk" style="height: 50px;width: 15px;font-weight: bolder;">
+                        <input type="button" value="添加" class="btns" opt="addbtn_jssjqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                </div>
+            </div>
+            <div data-options="region:'center',border:false" style="padding:0;">
+                <table class="easyui-datagrid-no" opt="fam_datagrid"
+                       data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'sj_money',width:135,align:'center'"><a title="拒收或上交礼金、有价证券或支付凭证金额(元)" style="color: white;">金额(元)</a></th>
+                        <th data-options="field:'sj_gift',width:100,align:'center'">名称</th>
+                        <th data-options="field:'sj_number',width:70,align:'center'">数量</th>
+                        <th data-options="field:'sj_value',width:140,align:'center'">折合价值(元)</th>
+                        <th data-options="field:'sj_date',width:140,align:'center'">拒收或上交时间</th>
+                        <th data-options="field:'sj_department',width:140,align:'center'">上交部门</th>
+                        <th data-options="field:'ro',width:100,align:'center',
+                                    formatter:function(value,rowData,rowIndex){
+                                        var str='<div></div>';
+                                        str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        return str.html();
+                                    }">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div title="<a title='干部本人、配偶及共同生活的子女住房情况' opt='zfqk'>住房情况</a>" data-options="closable:false">
+        <div class="easyui-panel newRadio" opt="formcontentpanel"
+             style="overflow-y: scroll;border-bottom: 1px solid greenyellow;height:4px;"
+             data-options="fit:true,border:false,footer:'#ft4'">
+            <form opt="form_zfqk" class="common-form textcolor" method="post">
+                <table opt="baseinfo_table" width="100%" style="margin: 2px auto;" cellpadding="2" cellspacing="1" class="table_form">
+                    <thead>
+                    <tr>
+                        <th colspan="6" style="text-align: center;">干部本人、配偶及共同生活的子女住房情况</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td class="formtdtext" style="width: 100px">本人姓名<label></label></td>
+                        <td>
+                            <input class="input-text" name="name" style="width: 70px;">
+                        </td>
+                        <td class="formtdtext">单位<label></label></td>
+                        <td>
+                            <input class="input-text" name="workunit">
+                        </td>
+                        <td class="formtdtext">职务<label></label></td>
+                        <td>
+                            <input class="input-text" name="incumbent">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext" style="width: 100px">配偶姓名<label></label></td>
+                        <td>
+                            <input class="input-text" name="wifename" style="width: 70px;">
+                        </td>
+                        <td class="formtdtext">单位<label></label></td>
+                        <td>
+                            <input class="input-text" name="wifedepartment">
+                        </td>
+                        <td class="formtdtext">职务<label></label></td>
+                        <td>
+                            <input class="input-text" name="wifeposition">
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="8" style="text-align: center;font-size: 16px">本人、配偶及共同生活的子女现有住房情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">地址(具体到街道、幢、室)</td>
+                        <td align="center">建筑面积</td>
+                        <td align="center">房屋性质</td>
+                        <td align="center">房屋来源</td>
+                        <td align="center">产权人</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="xy_address" style="width: 170px;"></td>
+                        <td align="center"><input class="input-text" opt="xy_area" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="xy_property" style="width: 130px;"></td>
+                        <td align="center"><input class="input-text" opt="xy_source" style="width: 130px;"></td>
+                        <td align="center"><input class="input-text" opt="xy_owner" style="width: 100px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="8" style="text-align: center;font-size: 16px">房屋出售情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">房屋地址</td>
+                        <td align="center">建筑面积</td>
+                        <td align="center">房屋性质</td>
+                        <td align="center">售房时间</td>
+                        <td align="center">售房金额(元)</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center">
+                            <input class="input-text" opt="sf_address" style="width: 170px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="sf_area" style="width: 70px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="sf_property" style="width: 130px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="sf_selltime" style="width: 130px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="sf_money" style="width: 100px;">
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="8" style="text-align: center;font-size: 16px">房屋出租情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">房屋地址</td>
+                        <td align="center">建筑面积</td>
+                        <td align="center">房屋性质</td>
+                        <td align="center">租赁期限</td>
+                        <td align="center">年租金(元)</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center">
+                            <input class="input-text" opt="cz_address" style="width: 170px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="cz_area" style="width: 70px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="cz_property" style="width: 130px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="cz_deadline" style="width: 130px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="cz_annualrent" style="width: 100px;">
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="8" style="text-align: center;font-size: 16px">参加集资建房情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">房屋地址</td>
+                        <td align="center">建筑面积</td>
+                        <td align="center">集资单位</td>
+                        <td align="center">房款总额(元)</td>
+                        <td align="center">个人支付(元)</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center">
+                            <input class="input-text" opt="jz_address" style="width: 170px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="jz_area" style="width: 70px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="jz_unit" style="width: 130px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="jz_totalamount" style="width: 130px;">
+                        </td>
+                        <td align="center">
+                            <input class="input-text" opt="jz_payment" style="width: 100px;">
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form">
+                    <tbody>
+                    <tr>
+                        <td align="center" style="width: 100px;">其他需要<br/>说明的情况</td>
+                        <td align="center">
+                            <textarea name="zf_other" style="width: 90%;"></textarea>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="ft4" style="padding:5px;" align="center">
+            <input type="button" value="取消" class="btns" opt="cancel">
+            <input type="button" value="保存" class="btns" opt="save_zfqk">
+        </div>
+    </div>
+    <div title="<a title='干部从事或参与营利性活动及兼职持股情况' opt='cgqk'>持股情况</a>" data-options="closable:false">
+        <div class="easyui-panel" opt="formcontentpanel"
+             style="overflow-y: scroll;border-bottom: 1px solid greenyellow;height:5px;"
+             data-options="fit:true,border:false,footer:'#ft5'">
+            <form opt="form_cgqk" class="common-form textcolor" method="post">
+                <table opt="baseinfo_table" width="100%" style="margin: 2px auto;" cellpadding="2" cellspacing="1" class="table_form">
+                    <thead>
+                    <tr>
+                        <th colspan="6" style="text-align: center;">干部从事或参与营利性活动及兼职持股情况</th>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td class="formtdtext" style="width: 100px">姓名<label></label></td>
+                        <td>
+                            <input class="input-text" name="name" style="width: 70px;">
+                        </td>
+                        <td class="formtdtext">单位<label></label></td>
+                        <td>
+                            <input class="input-text" name="workunit">
+                        </td>
+                        <td class="formtdtext">职务<label></label></td>
+                        <td>
+                            <input class="input-text" name="incumbent">
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">干部经商办企业情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">注册名称</td>
+                        <td align="center">经营范围</td>
+                        <td align="center">注册资金(元)</td>
+                        <td align="center">经营地址</td>
+                        <td align="center">法人代表</td>
+                        <td align="center">联系方式</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="qy_name" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="qy_businessscope" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="qy_registercapital" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="qy_address" style="width: 130px;"></td>
+                        <td align="center"><input class="input-text" opt="qy_legalperson" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="qy_contact" style="width: 100px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">主要社会关系经商办企业情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">与干部关系</td>
+                        <td style="width: 27px;"><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="relationship" style="width: 90%;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">在企事业单位、社会团 体或其他营利性组织中兼职情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">兼职单位名称</td>
+                        <td align="center">兼职单位性质</td>
+                        <td align="center">兼任职务</td>
+                        <td align="center">组织批复文号</td>
+                        <td align="center">年取酬(元)</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="jz_departname" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="jz_property" style="width: 100px;"></td>
+                        <td align="center"><input class="input-text" opt="jz_position" style="width: 100px;"></td>
+                        <td align="center"><input class="input-text" opt="jz_docnumber" style="width: 100px;"></td>
+                        <td align="center"><input class="input-text" opt="jz_yearreward" style="width: 80px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">干部投资或入股情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">投资或入股单位</td>
+                        <td align="center">投资或入股单位性质</td>
+                        <td align="center">投资或入股方式</td>
+                        <td align="center">本人投资或入股金额(元)</td>
+                        <td align="center">年收益(元)</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="rg_departname" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="rg_property" style="width: 100px;"></td>
+                        <td align="center"><input class="input-text" opt="rg_way" style="width: 100px;"></td>
+                        <td align="center"><input class="input-text" opt="rg_money" style="width: 100px;"></td>
+                        <td align="center"><input class="input-text" opt="rg_yearincome" style="width: 80px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td align="center" style="width: 100px;">从事或参与其他营利性活动情况</td>
+                        <td align="center" colspan="6">
+                            <textarea name="otherincome" style="width: 90%;"></textarea>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="ft5" style="padding:5px;" align="center">
+            <input type="button" value="取消" class="btns" opt="cancel">
+            <input type="button" value="保存" class="btns" opt="save_cgqk">
+        </div>
+    </div>
+    <div title="<a title='干部婚姻变化情况' opt='hyqk'>婚姻变化情况</a>" data-options="closable:false">
+        <div class="easyui-layout" opt="layout_hyqk" data-options="fit:true">
+            <div data-options="region:'north',border:false"
+                 style="height:60px;padding:0 0 0 0px;">
+                <div style="width: auto;height: 50px;;background-color: #eff3f8;">
+                    <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                        &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
+                        &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                    </div>
+
+                    <div style="float: right;margin-top: -48px;right: 2px;display: inline">
+                        <input type="button" value="操作" class="btns_other" opt="other_hyqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                        <input type="button" value="查询" class="btns" opt="query_hyqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                    <div opt="func_btn_hyqk" style="float: right;background-color:snow;
+                        margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
+                        <input type="button" value=">" class="btns" opt="other2_hyqk" style="height: 50px;width: 15px;font-weight: bolder;">
+                        <input type="button" value="添加" class="btns" opt="addbtn_hyqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                </div>
+            </div>
+            <div data-options="region:'center',border:false" style="padding:0;">
+                <table class="easyui-datagrid-no" opt="fam_datagrid"
+                       data-options="fit:true,
+                        fitColumns:false,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+                    <thead data-options="frozen:true">
+                    <tr>
+                        <th data-options="field:'name',width:70,align:'center'" rowspan="2">姓名</th>
+                    </tr>
+                    </thead>
+                    <thead>
+                    <tr>
+                        <th data-options="field:'workunit',width:100,align:'center'" rowspan="2">单位</th>
+                        <th data-options="field:'incumbent',width:100,align:'center'" rowspan="2">职务</th>
+                        <th colspan="5">原配偶</th>
+                        <th colspan="4">现配偶</th>
+                    </tr>
+                    <tr>
+                        <th data-options="field:'hy_formerwife',width:80,align:'center'">姓  名</th>
+                        <th data-options="field:'hy_formeridentityid',width:140,align:'center'">身份证</th>
+                        <th data-options="field:'hy_formerdepart',width:170,align:'center'">单位</th>
+                        <th data-options="field:'hy_formerregister',width:100,align:'center'">婚姻登记时间</th>
+                        <th data-options="field:'hy_divorcedate',width:100,align:'center'">婚姻结束时间</th>
+                        <th data-options="field:'hy_wife',width:80,align:'center'">姓  名</th>
+                        <th data-options="field:'hy_identityid',width:140,align:'center'">身份证</th>
+                        <th data-options="field:'hy_department',width:170,align:'center'">单位</th>
+                        <th data-options="field:'hy_register',width:100,align:'center'">婚姻登记时间</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div title="<a title='干部本人、配偶、子女及其配偶出国（境）情况' opt='cgjqk'>出国（境）情况</>" data-options="closable:false">
+        <div class="easyui-panel" opt="formcontentpanel"
+             style="overflow-y: scroll;border-bottom: 1px solid greenyellow;height:5px;"
+             data-options="fit:true,border:false,footer:'#ft7'">
+            <form opt="form_cgjqk" class="common-form textcolor" method="post">
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <thead>
+                    <tr>
+                        <th colspan="7" style="text-align: center;">干部本人、配偶、子女及其配偶出国（境）情况报告表</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="formtdtext" style="width: 100px" colspan="2">本人姓名<label></label></td>
+                        <td style="width: 80px;">
+                            <input class="input-text" name="name" style="width: 70px;">
+                        </td>
+                        <td class="formtdtext">单位<label></label></td>
+                        <td>
+                            <input class="input-text" name="workunit">
+                        </td>
+                        <td class="formtdtext">职务<label></label></td>
+                        <td>
+                            <input class="input-text" name="incumbent">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">本人持有因私出国(境)证件情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">持有证件名称</td>
+                        <td align="center">编  号</td>
+                        <td align="center">签发部门</td>
+                        <td align="center">生效日期</td>
+                        <td align="center">失效日期</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="zj_name" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="zj_number" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="zj_issuedepart" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="zj_effectdate" style="width: 130px;"></td>
+                        <td align="center"><input class="input-text" opt="zj_Invaliddate" style="width: 70px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">本人及其配偶因私出国(境)和在国(境)外活动情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">姓 名</td>
+                        <td align="center">往返时间</td>
+                        <td align="center">往返地点</td>
+                        <td align="center">事由</td>
+                        <td align="center">审批渠道</td>
+                        <td align="center">经费来源</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="hd_name" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="hd_rounddate" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="hd_roundaddress" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="hd_reason" style="width: 130px;"></td>
+                        <td align="center"><input class="input-text" opt="hd_channel" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="hd_fundsource" style="width: 70px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">配偶、子女及其配偶出国(境)留学情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">姓 名</td>
+                        <td align="center">称谓</td>
+                        <td align="center">时间</td>
+                        <td align="center">地 点</td>
+                        <td align="center">每年留学费用(元)</td>
+                        <td align="center">经费来源</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="lx_name" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="lx_appellation" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="lx_time" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="lx_place" style="width: 130px;"></td>
+                        <td align="center"><input class="input-text" opt="lx_yeartuition" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="lx_fundsource" style="width: 70px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">子女与外国人、港澳台居民通婚情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">子女姓名</td>
+                        <td align="center">单位</td>
+                        <td align="center">职务</td>
+                        <td align="center">子女配偶姓名</td>
+                        <td align="center">国籍</td>
+                        <td align="center">婚姻登记时间</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="th_name" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="th_department" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="th_position" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="th_spouse" style="width: 130px;"></td>
+                        <td align="center"><input class="input-text" opt="th_nationality" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="th_registertime" style="width: 70px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">配偶、子女及其配偶出国(境)定居情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">姓名</td>
+                        <td align="center">称谓</td>
+                        <td align="center">时间</td>
+                        <td align="center">定居地点</td>
+                        <td align="center">从业情况</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="dj_name" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="dj_appellation" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="dj_time" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="dj_place" style="width: 130px;"></td>
+                        <td align="center"><input class="input-text" opt="dj_work" style="width: 70px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="ft7" style="padding:5px;" align="center">
+            <input type="button" value="取消" class="btns" opt="cancel">
+            <input type="button" value="保存" class="btns" opt="save_cgjqk">
+        </div>
+    </div>
+    <div title="<a title='干部配偶、子女、父母、岳父母受党政纪、刑事处分' opt='xscf'>亲属受党政纪刑事处分</a>" data-options="closable:false">
+        <div class="easyui-panel" opt="formcontentpanel"
+             style="overflow-y: scroll;border-bottom: 1px solid greenyellow;height:5px;"
+             data-options="fit:true,border:false,footer:'#ft8'">
+            <form opt="form_xscf" class="common-form textcolor" method="post">
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <thead>
+                    <tr>
+                        <th colspan="7" style="text-align: center;">干部配偶、子女、父母、岳父母受党政纪、刑事处分报告表</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="formtdtext" style="width: 100px" colspan="2">本人姓名<label></label></td>
+                        <td style="width: 80px;">
+                            <input class="input-text" name="name" style="width: 70px;">
+                        </td>
+                        <td class="formtdtext">单位<label></label></td>
+                        <td>
+                            <input class="input-text" name="workunit">
+                        </td>
+                        <td class="formtdtext">职务<label></label></td>
+                        <td>
+                            <input class="input-text" name="incumbent">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+                    <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;font-size: 16px">配偶、子女及其配偶受到执纪执法机关查处或涉嫌犯罪情况</td>
+                    </tr>
+                    <tr>
+                        <td align="center">姓  名</td>
+                        <td align="center">与本人关系</td>
+                        <td align="center">(原)工作单位及职务</td>
+                        <td align="center">处分类型</td>
+                        <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
+                    </tr>
+                    <tr class="demo">
+                        <td align="center"><input class="input-text" opt="cf_name" style="width: 150px;"></td>
+                        <td align="center"><input class="input-text" opt="cf_relation" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="cf_position" style="width: 70px;"></td>
+                        <td align="center"><input class="input-text" opt="cf_punishtype" style="width: 130px;"></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form">
+                    <tr>
+                        <td align="center" style="width: 50px;">备注</td>
+                        <td>
+                            <textarea name="cf_comments" style="width: 90%;"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="ft8" style="padding:5px;" align="center">
+            <input type="button" value="取消" class="btns" opt="cancel">
+            <input type="button" value="保存" class="btns" opt="save_xscf">
+        </div>
+    </div>
+    <!--<div title="<a title='干部信访情况'>信访情况</a>" data-options="closable:false">
+        <table class="easyui-datagrid-no" opt="fam_datagrid"
+               data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+            <thead>
+            <tr>
+                <th data-options="field:'appellation',width:70,align:'center'">称谓</th>
+                <th data-options="field:'fm_name',width:70,align:'center'">姓名</th>
+                <th data-options="field:'fm_identityid',width:140,align:'center'">身份证</th>
+                <th data-options="field:'fm_politicalstatus',width:80,align:'center',
+                        formatter: function(value,row,index){
+                                return getPoliticsstatus[value]
+                            }">政治面貌</th>
+                <th data-options="field:'fm_workunit',width:100,align:'center'">工作单位</th>
+                <th data-options="field:'fm_position',width:100,align:'center'">职务</th>
+                <th data-options="field:'fm_contactway',width:100,align:'center'">联系方式</th>
+            </tr>
+            </thead>
+        </table>
+    </div>-->
+</div>
