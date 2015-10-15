@@ -78,6 +78,8 @@
   (POST "/party/getcerreceivebyid" request (ctl/get-cerreceive-byid request))            ;;根据证件id获取证件领用记录
 
   ;;廉政档案
+  (POST "/party/addcadre" request (ctl/add-cadre request))
+
   ;;奖惩情况
   (POST "/party/addawardpunish" request (ctl/add-awardpunish request))
 

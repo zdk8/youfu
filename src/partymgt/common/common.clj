@@ -4,8 +4,8 @@
             (java.text DateFormat)
             (java.sql Timestamp))
   (:require  [noir.response :as resp]
-                [partymgt.layout :as layout]
-                [partymgt.models.schema :as schema]
+    ;[partymgt.layout :as layout]
+    ;[partymgt.models.schema :as schema]
                 [clj-time.local :as l]
                 [clj-time.coerce :as c]
                 [me.raynes.fs :as fs]
@@ -16,7 +16,7 @@
 
 
 (def selectcols {;;人事档案表
-                 :t_personalrecords [:name :identityid :gender :age :native :birthplace :photo :nation :marriage :workstatus :worktime :contactway :address :education :politicalstatus :organizeunit :partytime :department :position :positiontype :personnel :employtime :employterm :technicalpost :contractsigntime :contractdeadline :probation :post :workunit :incumbent :positionlevel :incumbenttime :chargework :pb :cy :vc :wg :tu]
+                 :t_personalrecords [:name :identityid :gender :age :native :birthplace :photo :nation :marriage :workstatus :worktime :contactway :address :education :politicalstatus :organizeunit :partytime :department :position :positiontype :personnel :employtime :employterm :technicalpost :contractsigntime :contractdeadline :probation :post :workunit :incumbent :positionlevel :incumbenttime :chargework :pb :cy :vc :wg :tu :birth]
                  ;;学位学历表
                  :t_educationway [:educationtype :college :profession]
                  ;;家庭成员表

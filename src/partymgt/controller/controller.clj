@@ -437,9 +437,25 @@
         getresults (common/fenye rows page "t_certificatereceive" "*" conds " order by cr_id desc")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "receivedate" "returndate")})))
 
-;;奖惩情况
+;;廉政档案干部添加
+(defn  add-cadre [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)
+        cadredata (common/dateformat-bf-insert (select-keys params (:t_personalrecords common/selectcols)) "birth" "partytime" "incumbenttime")
+        ]
+    (db/updatedata-by-tablename "t_personalrecords" (conj cadredata {:iscadre "1"}) {:pr_id pr_id})
+    (str "true")))
+
+;;奖惩情况          jc_date
 (defn add-awardpunish [request]
-  (let [params (:params request)]))
+  (let [params (:params request)
+        pr_id (:pr_id params)
+        mode (:mode params)
+        fields1 (json/read-str  (:fields1 params) :key-fn keyword)
+        apdatas (map #(conj (common/dateformat-bf-insert % "jc_date")  {:pr_id pr_id :jc_mode mode}) fields1 )]
+    (println "DDDDDDDDDDDDDD" apdatas)
+    ;(db/add-awardpunish apdatas)
+    (str "true")))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]

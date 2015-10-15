@@ -97,7 +97,9 @@
           (where allcond)))
 
 
-
+(defn add-awardpunish [apdatas]
+  (transaction
+    (dorun (map #(adddata-by-tablename "t_awardpunish" %) apdatas))))
 
 
 
