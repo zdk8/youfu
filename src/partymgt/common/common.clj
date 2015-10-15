@@ -35,6 +35,50 @@
                  :t_certificate [:name :gender :birthday :credentialstype :credentialsnumb :validity :handdate :manager :c_comments]
                  ;;证件管理领用登记表
                  :t_certificatereceive [:receivedate :returndate :cr_comments :c_id]
+
+                 ;;奖惩情况
+                 :t_awardpunish [:pr_id :jc_mode :jc_date :jc_name :jc_reason :jc_office :jc_docnumber :jc_comments]
+                 ;;上交情况
+                 :t_handgift [:pr_id :sj_money :sj_gift :sj_number :sj_value :sj_department :sj_comments :sj_date]
+
+                 ;;住房情况
+                 :t_housestatus [:pr_id :wifename :wifedepartment :wifeposition :zf_other]
+                 ;;住房情况-居住房情况
+                 :t_residenthouse [:zf_id :xy_address :xy_area :xy_property :xy_source :xy_owner]
+                 ;;住房情况-售房情况
+                 :t_sellhouse [:zf_id :sf_address :sf_area :sf_property :sf_selltime :sf_money]
+                 ;;住房情况-出租房情况
+                 :t_rentalhouse [:zf_id :cz_address :cz_area :cz_property :cz_deadline :cz_annualrent]
+                 ;;住房情况-集资建房情况
+                 :t_financehouse [:zf_id :jz_address :jz_area :jz_unit :jz_totalamount :jz_payment]
+
+                 ;;持股情况
+                 :t_profitstatus [:pr_id :relationship :otherincome]
+                 ;;持股情况-经商办企业情况
+                 :t_cadrebusiness [:yl_id :qy_name :qy_businessscope :qy_registercapital :qy_address :qy_legalperson :qy_contact]
+                 ;;持股情况-兼职情况
+                 :t_cadreparttime [:yl_id :jz_departname :jz_property :jz_position :jz_docnumber :jz_yearreward]
+                 ;;持股情况-投资入股情况
+                 :t_cadreinvest[:yl_id :rg_departname :rg_property :rg_way :rg_money :rg_yearincome]
+
+                 ;;干部婚姻变化情况
+                 :t_marriagetransition [:pr_id :hy_formerwife :hy_formerregister :hy_divorcedate :hy_wife :hy_politicalstatus :hy_register :hy_department :hy_position :hy_other :hy_formeridentityid :hy_formerdepart :hy_formerpolitical :hy_formernative :hy_formernation :hy_identityid :hy_native :hy_nation]
+
+                 ;;出国情况
+                 :t_goabroad [:pr_id]
+                 ;;出国情况-持证情况
+                 :t_overseavisa [:cg_id :zj_name :zj_number :zj_issuedepart :zj_effectdate :zj_invaliddate]
+                 ;;出国情况-出国活动情况
+                 :t_abroadactivitie [:cg_id :hd_name :hd_rounddate :hd_roundaddress :hd_reason :hd_channel :hd_fundsource]
+                 ;;出国情况-留学情况
+                 :t_abroadstudy [:cg_id :lx_name :lx_appellation :lx_time :lx_place :lx_yeartuition :lx_fundsource]
+                 ;;出国情况-通婚情况
+                 :t_abroadmarriage [:cg_id :th_name :th_department :th_position :th_spouse :th_nationality :th_registertime]
+                 ;;出国情况-定居情况
+                 :t_aboardsettle [:cg_id :dj_name :dj_appellation :dj_time :dj_place :dj_work]
+
+                 ;;亲属处分情况
+                 :t_relativespunish [:pr_id :cf_name :cf_relation :cf_position :cf_punishtype :cf_comments]
                  })
 
 

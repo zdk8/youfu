@@ -435,6 +435,10 @@
         getresults (common/fenye rows page "t_certificatereceive" "*" conds " order by cr_id desc")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "receivedate" "returndate")})))
 
+;;奖惩情况
+(defn add-awardpunish [request]
+  (let [params (:params request)]))
+
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]
   (try

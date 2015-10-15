@@ -77,6 +77,10 @@
   (POST "/party/getcerreceivelist" request (ctl/get-cerreceive-list request))
   (POST "/party/getcerreceivebyid" request (ctl/get-cerreceive-byid request))            ;;根据证件id获取证件领用记录
 
+  ;;廉政档案
+  ;;奖惩情况
+  (POST "/party/addawardpunish" request (ctl/add-awardpunish request))
+
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除
