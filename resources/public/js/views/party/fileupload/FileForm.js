@@ -20,7 +20,7 @@ define(function () {
             var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
             addToolBar(local,option,li);
 
-            llo = local;
+            //llo = local;
             //pllo = option.queryParams.plocal;
 
             /*if(option && option.params){
@@ -33,32 +33,28 @@ define(function () {
 
             /*存放附件信息*/
             local.find('[name=file]').bind('change',function(){
-                thi = this;
                 var file=$(this).val();
                 var strFileName=file.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");  //正则表达式获取文件名，不带后缀
                 var FileExt='.'+file.replace(/.+\./,"");   //正则表达式获取后缀
 
-                local.find('[name=filenamemsg]').val(strFileName);
+                local.find('[opt=inputMsg]').val(strFileName);
                 local.find('[name=fileext]').val(FileExt);
                 //option.queryParams.plocal.find('[name=fileext]').val(FileExt);
-
 
                 //local.find('[name=pc_id]').val(this.files[0]);
 
                 //option.queryParams.plocal.find('[opt=inputVal]').val(local.find('[opt=inputVal]').val());
 
-                console.log(file)
             })
 
-            local.find('[opt=inputVal]').on('change', function () {
+            /*local.find('[opt=inputVal]').on('change', function () {
                 //console.log(this)
                 //preview(this);
-            })
+            })*/
 
             /*图片预览*/
-            function preview(file)
+            /*function preview(file)
             {
-                ff = file;
                 //var prevDiv = document.getElementById('personimg');
                 var prevDiv = option.params.plocal.find('[opt=personimg]');
                 //var prevDiv = $('[opt=preview]');
@@ -78,14 +74,37 @@ define(function () {
                     prevDiv.html(noperson);
                     //prevDiv.innerHTML = '<div class="img" style="width:150px;height:120px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
                 }
-            }
+            }*/
 
             local.find('[opt=save]').click(function () {
+                local.find('[opt=fileuploadform]').form('submit', {
+                    url: 'party/fileupload',
+                    onSubmit: function (params) {
+                        layer.load();
+                        var isValid = $(this).form('validate');
+                        params.pc_id = option.queryParams.pr_id;
+                        params.filetype = option.queryParams.plocal.find('.filefolder ul li.menu_funcV span').attr('opt');
+                        if (!isValid) {
+                            layer.closeAll('loading');
+                        }
+                        return isValid;
+                    },
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        if(data == "success"){
+                            layer.alert('保存成功', {icon: 6,title:'温馨提示',shift:2});
+                            layer.close(option.index);
+                            option.queryParams.file_dg.datagrid('reload');
+                        }else{
+                            layer.alert('保存失败', {icon: 5,title:'温馨提示',shift:2});
+                        }
+                    }
+                })
                 //preview(local.find('[opt=inputVal]')[0]);
                 //preview(option.queryParams.plocal.find('[opt=inputVal]')[0]);
                 //layer.close(option.index);
 
-                var success=function(data)
+                /*var success=function(data)
                 {
                     option.parent.trigger('close');
                     option.refresh();
@@ -109,22 +128,8 @@ define(function () {
                 if(option && option.functype == "funcimg"){
                     local.find('[opt=fileuploadform]').ajaxForm(options).submit();
                 }else{
-                    //local.find('[opt=fileuploadform]').ajaxForm(options).submit();
-                    local.find('[opt=fileuploadform]').form('submit', {
-                        url: 'uploadimg',
-                        onSubmit: function (params) {
-                            //layer.load();
-                            var isValid = $(this).form('validate');
-                            if (!isValid) {
-                                layer.closeAll('loading');
-                            }
-                            return isValid;
-                        },
-                        success: function (data) {
-                            console.log(data)
-                        }
-                    })
-                }
+
+                }*/
             })
         }
     }

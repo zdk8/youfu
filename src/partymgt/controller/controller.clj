@@ -9,6 +9,8 @@
     [clojure.string :as cstr]
     [clj-time.local :as l]
     [clj-time.coerce :as c]
+    [ring.util.response :as response :refer [file-response]]
+    [clojure.string :as str]
     ))
 
 (defn upload-file [file]
@@ -421,8 +423,8 @@
         credentialsnumb (:credentialsnumb params)
         isback (:isback params)
         receivecond (if (> (count isback) 0) (if (= isback "0") (str " and isreceive = 1 ") (str " and isreceive is null ")))
-        conds (str receivecond (common/likecond "name" name) (common/likecond "credentialsnumb" credentialsnumb))
-        getsql (str "select c_id,name,gender,birthday,credentialstype,credentialsnumb,validity,handdate,manager,c_comments,isreceive,cr_id,receivedate,returndate,cr_comments from(select c.*,cr.cr_id,cr.receivedate,cr.returndate,cr.cr_comments from t_certificatereceive cr left join t_certificate c on cr.c_id = c.c_id)")
+        conds (str receivecond (common/likecond "name" name) (common/likecond "credentialsnumb" credentialsnumb) (str " and isdel is null"))
+        getsql (str "select c_id,name,gender,birthday,credentialstype,credentialsnumb,validity,isdel,handdate,manager,c_comments,isreceive,cr_id,receivedate,returndate,cr_comments from(select c.*,cr.cr_id,cr.receivedate,cr.returndate,cr.cr_comments from t_certificatereceive cr left join t_certificate c on cr.c_id = c.c_id)")
         getresults (common/fenye rows page (str "(" getsql ")") "*" conds " order by cr_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "validity" "handdate" "receivedate" "returndate" )})))
 
@@ -471,9 +473,57 @@
         attach_type (:attach_type params)
         rows (:rows params)
         page (:page params)
-        conds (str (common/likecond "file_name" file_name) (str " and pc_id = " pc_id) (str " and attach_type = " (if (> (count attach_type) 0) attach_type "gbrm")))
+        conds (str (common/likecond "file_name" file_name) (str " and pc_id = " pc_id) (str " and attach_type = " (if (> (count attach_type) 0) (str "'" attach_type "'") "'gbrm'")))
         getresults (common/fenye rows page "t_attach_files" "*" conds " order by attach_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "loaddate")})))
+
+(def filesys (str schema/datapath))
+(def convert-set #{"doc" "docx" "xls" "xlsx" "txt"})
+(defn getfilesysfile [filename convert remote-addr port]
+  (let [fin (str filesys filename)
+        ext-name (clojure.string/replace filename #".+\." "")
+        to-convert (get convert-set ext-name)
+        fout (str fin "-html")
+        redirect-url (str "http://" remote-addr ":" port "/filesys/htmlfiles/mainview.jsp?page=" (java.net.URLEncoder/encode filename "UTF-8"))]
+
+;    (println "filename:" filename "\n编码后：redirect-url: " redirect-url)
+;    (println "rttttttttttttttt" convert)
+    (if (= convert "1")
+      (do
+        "下载"
+        (->(file-response fin)
+          (response/header "Content-Disposition" (str "filename="
+                                                   (java.net.URLEncoder/encode
+                                                     (clojure.string/replace
+                                                       (clojure.string/trim (last (str/split filename #"/" )))
+                                                       #"\."
+                                                       (str "_"(.format (java.text.SimpleDateFormat. "yyyy-MM-dd"
+                                                                          java.util.Locale/SIMPLIFIED_CHINESE)
+                                                                 (java.util.Date.)
+                                                                 ) ".")
+                                                       ) "UTF-8")
+                                                   ))
+          (response/content-type (str "application/" ext-name)))
+        )
+      (do
+        "预览"
+        (if (nil? to-convert)
+          (do
+            ;        (println "图片:" fin)
+            "图片返回"
+            (file-response fin)
+            )
+          (do
+            "文件处理"
+            (println "*****************************:" fin)
+            (println "*****************************:" fout)
+            (println "*****************************:" (= convert "1"))
+            )
+          )
+        )
+      )
+    )
+  )
 
 
 

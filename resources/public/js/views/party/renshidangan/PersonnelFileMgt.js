@@ -61,9 +61,9 @@ define(function(){
             },
             onDblClickRow: function (index,row) {
                 layer.load(2);
-                var title = row.name+'-信息';
+                var title = row.name+'-其他信息';
                 $.ajax({
-                    url:'record/getrecordbyid',
+                    url:'record/getrecordbyid',//查出子表信息
                     type:'post',
                     data:{
                         pr_id:row.pr_id
@@ -81,7 +81,8 @@ define(function(){
                                         jsfile.render(layero,{
                                             index:index,
                                             queryParams:{
-                                                childrecord:data
+                                                childrecord:data,
+                                                record:row
                                             }
                                         });
                                     }

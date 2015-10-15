@@ -67,17 +67,17 @@
                 <div class="filefolder">
                     <div>附件类型</div>
                     <ul>
-                        <li>
-                            <span opt="approve">干部任免附件</span>
+                        <li class="menu_funcV">
+                            <span opt="gbrm">干部任免附件</span>
                         </li>
                         <li>
-                            <span opt="prove">党员发展附件</span>
+                            <span opt="dyfz">党员发展附件</span>
                         </li>
                         <li>
-                            <span opt="idcard">奖惩情况</span>
+                            <span opt="jlqk">奖惩情况</span>
                         </li>
                         <li>
-                            <span opt="icon">年度考核结果</span>
+                            <span opt="ndkh">年度考核结果</span>
                         </li>
                         <li>
                             <span opt="other">其他材料</span>
@@ -86,12 +86,12 @@
                 </div>
             </div>
             <div data-options="region:'center'">
-                <table class="easyui-datagrid" opt="file_dg"
+                <table class="easyui-datagrid" opt="file_datagrid"
                        data-options="fit:true,border:false,
                            rownumbers:true,
-                           fitColumns:false,
+                           fitColumns:true,
                            loadMsg:'',
-                           singleSelect:false,
+                           singleSelect:true,
                            pagination:true">
                     <thead>
                     <tr>
@@ -106,14 +106,11 @@
                             }">文件大小</th>
                         <th data-options="field:'file_type',width:70,align:'center'">文件类型</th>
                         <th data-options="field:'loaddate',width:130,align:'center'">上传时间</th>
-                        <th data-options="field:'oo',width:120,align:'right',
+                        <th data-options="field:'oo',width:120,align:'center',
                         formatter:function(value,rowData,rowIndex){
                             var str='<div></div>';
-
-                                str=$(str).append('<a action=&quot;view&quot;class=&quot;pFile-ico pFile-ico-preview&quot;title=&quot;预览&quot;></a>&nbsp;&nbsp;');
-
-                            str=$(str).append('<a action=&quot;download&quot;class=&quot;pFile-ico pFile-ico-download&quot;title=&quot;下载&quot;></a>&nbsp;&nbsp;');
-                            str=$(str).append('<a action=&quot;del&quot;class=&quot;pFile-ico pFile-ico-del&quot;title=&quot;删除&quot;></a>');
+                            str=$(str).append('<a action=&quot;download&quot;title=&quot;下载&quot;href=&quot;javaScript:;&quot;><span>下载</span></a>&nbsp;');
+                            str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                             return str.html();
                         }">操作</th>
                     </tr>
@@ -121,46 +118,5 @@
                 </table>
             </div>
         </div>
-        <!--<div class="easyui-layout" data-options="fit:true" style="background-color: white;border: 1px solid red;">
-            <div data-options="region:'north'" style="height:40px;border-bottom: 1px solid #d5ffd1;background-color: #f7f7f7">
-                <div id="filemnglinknav">
-                    <ul>
-                        <li>
-                            <a opt="uploadfile" href="javaScript:;">上传文件</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div data-options="region:'west'" style="width:100px;background-color:#eef;padding-top: 1px;border: 1px solid red;">
-                <div class="filefolder">
-                    <div style="text-align: center;"><d>文  件  目  录</d></div>
-                    <ul>
-                        <li class="filefolderli-hover">
-                            <span opt="approve">审批表</span>
-                        </li>
-                        <li>
-                            <span opt="prove">权属证明</span>
-                        </li>
-                        <li>
-                            <span opt="idcard">身份证</span>
-                        </li>
-                        <li>
-                            <span opt="icon">规划图纸</span>
-                        </li>
-                        <li>
-                            <span opt="other">其他材料</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div tb style="height: 20px;">
-                <div id="filemngpathnav" style="float: left;line-height: 20px;width: 145px;">
-                    <span style="float: left"><span style="float: left;color: #1c6a9e">当前路径:</span><span opt="currentpath" style="float: left;color: #1c6a9e"></span></span>
-                    <ul style="float: left">
-                    </ul>
-                </div>
-            </div>
-        </div>-->
     </div>
 </div>
