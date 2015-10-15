@@ -526,9 +526,10 @@ var cj=(function(){
                 $(tds).find('input').each(function () {
                     var $this1 = $(this);
                     if($this1.hasClass('easyui-datebox')){
-                        local.find('[opt='+$this1.attr('opt')+']').datebox();
+                        local.find('[opt='+$this1.attr('opt')+']').last().datebox();
                     }
                 })
+                //local.find('[opt=jc_date]').datebox();
                 var lasttr = $tr.find('tr')[$tr.find('tr').length-1];
                 $($($(lasttr).find('td')[0]).find('span.combo')[1]).remove();
                 local.find('[opt=dellist]').each(function () {
