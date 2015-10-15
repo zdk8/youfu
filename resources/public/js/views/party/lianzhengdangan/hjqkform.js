@@ -54,7 +54,7 @@ define(function(){
             $this.attr("disabled",true);//按钮禁用
             var fields1 = cj.commonGetValue(local,{field:field1});
             local.find('form').form('submit', {
-                url: 'party/addawardpunish1',
+                url: 'party/addawardpunish',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
