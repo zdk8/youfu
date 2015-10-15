@@ -66,6 +66,7 @@ define(function(){
                     return isValid;
                 },
                 success: function (data) {
+                    $this.attr("disabled",false);//按钮启用
                     if (data == "true") {
                         layer.closeAll('loading');
                         cj.showSuccess('保存成功');
