@@ -1,6 +1,6 @@
 define(function(){
     var arr_combobox = [];
-    var arr_datebox = ['jc_date'];
+    var arr_datebox = ['sj_date'];
     var arr_validatebox = [];
 
     /*添加功能按钮*/
@@ -44,20 +44,19 @@ define(function(){
         var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
         addToolBar(local,option,li);
         var record = option.queryParams.record;
-        var field1 = ['jc_date','jc_name','jc_reason','jc_office','jc_docnumber','jc_comments'];//获奖情况
+        var field1 = ['sj_money','sj_gift','sj_number','sj_value','sj_date','sj_department','sj_comments'];//干部拒收或上交礼金、礼品情况
         /*保存*/
         local.find('[opt=save]').click(function () {
             var $this = $(this);
             $this.attr("disabled",true);//按钮禁用
             var fields1 = cj.commonGetValue(local,{field:field1});
             local.find('form').form('submit', {
-                url: 'party/addawardpunish',
+                url: 'party/addawardpunish1',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
                     params.fields1 = JSON.stringify(fields1);
                     params.pr_id = option.queryParams.record.pr_id;
-                    params.mode = "j";
                     if (!isValid) {
                         layer.closeAll('loading');
                     }

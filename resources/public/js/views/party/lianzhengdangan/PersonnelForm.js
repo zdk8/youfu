@@ -46,7 +46,7 @@ define(function(){
         local.find("input[opt=pr_id]").combogrid({
             panelWidth:330,
             panelHeight:350,
-            url:'record/getrecordlist',
+            url:'party/getnewcadrelist',
             queryParams:{
             },
             method:'post',
@@ -76,10 +76,11 @@ define(function(){
             var identityid = local.find('[name=identityid]').val();
             if(identityid){
                 local.find('form').form('submit', {
-                    url: 'party/addcerreceive1',
+                    url: 'party/addcadre',
                     onSubmit: function (params) {
                         layer.load();
                         var isValid = $(this).form('validate');
+                        params.pr_id = local.find('[opt=pr_id]').combobox('getValue');
                         if (!isValid) {
                             layer.closeAll('loading');
                         }
@@ -106,12 +107,22 @@ define(function(){
     var updateFunc = function (local,option) {
         var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>';
         addToolBar(local,option,li);
-        var record = option.queryParams.record; //主表信息
-        local.find('form').form('load',record);//主表数据填充
+        local.find('[opt=pr_id]').combobox({disabled:true});
+        local.find('[name=identityid]').attr('readonly','readonly');
+        local.find('[opt=gender]').combobox({disabled:true});
+        local.find('[opt=politicalstatus]').combobox({disabled:true});
+        local.find('[opt=partytime]').datebox({disabled:true});
+        local.find('[name=native]').attr('readonly','readonly');
+        local.find('[name=address]').attr('readonly','readonly');
+
+        var record = option.queryParams.record; //表信息
+        local.find('form').form('load',record);//表数据填充
+        local.find('[opt=pr_id]').combobox('setValue',record.name);
+
 
         local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {
-                url: 'record/updaterecord1',
+                url: 'party/updatecadre',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');

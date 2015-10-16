@@ -1,6 +1,6 @@
 define(function(){
     var arr_combobox = [];
-    var arr_datebox = ['jc_date'];
+    var arr_datebox = ['sj_date'];
     var arr_validatebox = [];
 
     /*添加功能按钮*/
@@ -36,49 +36,8 @@ define(function(){
     /*界面初始化，公共方法*/
     var initFunc = function (local,option) {
         initControls(local);//控件初始化
-        cj.common_listFunc(local);//表单动态增减行
     }
-    
-    /*新增数据时进入*/
-    var saveFunc = function(local,option){
-        var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
-        addToolBar(local,option,li);
-        var record = option.queryParams.record;
-        var field1 = ['jc_date','jc_name','jc_reason','jc_office','jc_docnumber','jc_comments'];//获奖情况
-        /*保存*/
-        local.find('[opt=save]').click(function () {
-            var $this = $(this);
-            $this.attr("disabled",true);//按钮禁用
-            var fields1 = cj.commonGetValue(local,{field:field1});
-            local.find('form').form('submit', {
-                url: 'party/addawardpunish',
-                onSubmit: function (params) {
-                    layer.load();
-                    var isValid = $(this).form('validate');
-                    params.fields1 = JSON.stringify(fields1);
-                    params.pr_id = option.queryParams.record.pr_id;
-                    params.mode = "j";
-                    if (!isValid) {
-                        layer.closeAll('loading');
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    $this.attr("disabled",false);//按钮启用
-                    if (data == "true") {
-                        layer.closeAll('loading');
-                        cj.showSuccess('保存成功');
-                        //option.queryParams.refresh();
-                        layer.close(option.index);
-                    } else {
-                        layer.closeAll('loading');
-                        cj.showFail('保存失败');
-                    }
-                }
-            })
-        });
-    }
-    
+
     /*修改数据*/
     var updateFunc = function (local,option) {
         var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>';
@@ -120,9 +79,6 @@ define(function(){
             switch (o.queryParams.actiontype){
                 case 'update':
                     updateFunc(l, o);
-                    break;
-                case 'add':
-                    saveFunc(l, o);
                     break;
                 default :
                     break;

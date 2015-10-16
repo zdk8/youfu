@@ -5,8 +5,8 @@
                  style="height:60px;padding:0 0 0 0px;">
                 <div style="width: auto;height: 50px;;background-color: #eff3f8;">
                     <div style="height: 35px;padding-top: 12px;padding-right:3px;">
-                        &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
-                        &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                        &nbsp;<span>时 间 </span><span><input opt="date_hjqk" type="text" size="10" class="easyui-datebox"></span>
+                        &nbsp;<span>获奖名称 </span><span><input opt="name_hjqk" type="text" size="15" class="inputtext"></span>
                     </div>
 
                     <div style="float: right;margin-top: -48px;right: 2px;display: inline">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div data-options="region:'center',border:false" style="padding:0;">
-                <table class="easyui-datagrid-no" opt="edu_datagrid"
+                <table class="easyui-datagrid-no" opt="datagrid_hjqk"
                        data-options="fit:true,
                         fitColumns:true,
                         method:'post',
@@ -38,8 +38,8 @@
                         <th data-options="field:'ro',width:100,align:'center',
                                     formatter:function(value,rowData,rowIndex){
                                         var str='<div></div>';
-                                        str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
-                                        str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        str=$(str).append('<a action=&quot;update_hjqk&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del_hjqk&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                                         return str.html();
                                     }">操作</th>
                     </tr>
@@ -54,8 +54,8 @@
                  style="height:60px;padding:0 0 0 0px;">
                 <div style="width: auto;height: 50px;;background-color: #eff3f8;">
                     <div style="height: 35px;padding-top: 12px;padding-right:3px;">
-                        &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
-                        &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                        &nbsp;<span>时 间 </span><span><input opt="date_ccqk" type="text" size="10" class="easyui-datebox"></span>
+                        &nbsp;<span>所受处分 </span><span><input opt="name_ccqk" type="text" size="15" class="inputtext"></span>
                     </div>
 
                     <div style="float: right;margin-top: -48px;right: 2px;display: inline">
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div data-options="region:'center',border:false" style="padding:0;">
-                <table class="easyui-datagrid-no" opt="edu_datagrid"
+                <table class="easyui-datagrid-no" opt="datagrid_ccqk"
                        data-options="fit:true,
                         fitColumns:true,
                         method:'post',
@@ -87,8 +87,8 @@
                         <th data-options="field:'ro',width:100,align:'center',
                                     formatter:function(value,rowData,rowIndex){
                                         var str='<div></div>';
-                                        str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
-                                        str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        str=$(str).append('<a action=&quot;update_ccqk&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del_ccqk&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                                         return str.html();
                                     }">操作</th>
                     </tr>
@@ -103,8 +103,7 @@
                  style="height:60px;padding:0 0 0 0px;">
                 <div style="width: auto;height: 50px;;background-color: #eff3f8;">
                     <div style="height: 35px;padding-top: 12px;padding-right:3px;">
-                        &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
-                        &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                        &nbsp;<span>名称 </span><span><input opt="name_jssjqk" type="text" size="15" class="inputtext"></span>
                     </div>
 
                     <div style="float: right;margin-top: -48px;right: 2px;display: inline">
@@ -119,7 +118,7 @@
                 </div>
             </div>
             <div data-options="region:'center',border:false" style="padding:0;">
-                <table class="easyui-datagrid-no" opt="fam_datagrid"
+                <table class="easyui-datagrid-no" opt="datagrid_jssjqk"
                        data-options="fit:true,
                         fitColumns:true,
                         method:'post',
@@ -137,8 +136,8 @@
                         <th data-options="field:'ro',width:100,align:'center',
                                     formatter:function(value,rowData,rowIndex){
                                         var str='<div></div>';
-                                        str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
-                                        str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        str=$(str).append('<a action=&quot;update_jssjqk&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del_jssjqk&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                                         return str.html();
                                     }">操作</th>
                     </tr>
@@ -161,15 +160,15 @@
                     <tr>
                         <td class="formtdtext" style="width: 100px">本人姓名<label></label></td>
                         <td>
-                            <input class="input-text" name="name" style="width: 70px;">
+                            <input class="input-text" name="name" style="width: 70px;background-color: #FFFAF0" readonly>
                         </td>
                         <td class="formtdtext">单位<label></label></td>
                         <td>
-                            <input class="input-text" name="workunit">
+                            <input class="input-text" name="workunit" style="background-color: #FFFAF0" readonly>
                         </td>
                         <td class="formtdtext">职务<label></label></td>
                         <td>
-                            <input class="input-text" name="incumbent">
+                            <input class="input-text" name="incumbent" style="background-color: #FFFAF0" readonly>
                         </td>
                     </tr>
                     <tr>
@@ -340,15 +339,15 @@
                     <tr>
                         <td class="formtdtext" style="width: 100px">姓名<label></label></td>
                         <td>
-                            <input class="input-text" name="name" style="width: 70px;">
+                            <input class="input-text" name="name" style="width: 70px;background-color: #FFFAF0" readonly>
                         </td>
                         <td class="formtdtext">单位<label></label></td>
                         <td>
-                            <input class="input-text" name="workunit">
+                            <input class="input-text" name="workunit" style="background-color: #FFFAF0" readonly>
                         </td>
                         <td class="formtdtext">职务<label></label></td>
                         <td>
-                            <input class="input-text" name="incumbent">
+                            <input class="input-text" name="incumbent" style="background-color: #FFFAF0" readonly>
                         </td>
                     </tr>
                 </table>
@@ -527,15 +526,15 @@
                     <tr>
                         <td class="formtdtext" style="width: 100px" colspan="2">本人姓名<label></label></td>
                         <td style="width: 80px;">
-                            <input class="input-text" name="name" style="width: 70px;">
+                            <input class="input-text" name="name" style="width: 70px;background-color: #FFFAF0" readonly>
                         </td>
                         <td class="formtdtext">单位<label></label></td>
                         <td>
-                            <input class="input-text" name="workunit">
+                            <input class="input-text" name="workunit" style="background-color: #FFFAF0" readonly>
                         </td>
                         <td class="formtdtext">职务<label></label></td>
                         <td>
-                            <input class="input-text" name="incumbent">
+                            <input class="input-text" name="incumbent" style="background-color: #FFFAF0" readonly>
                         </td>
                     </tr>
                     </tbody>
@@ -683,15 +682,15 @@
                     <tr>
                         <td class="formtdtext" style="width: 100px" colspan="2">本人姓名<label></label></td>
                         <td style="width: 80px;">
-                            <input class="input-text" name="name" style="width: 70px;">
+                            <input class="input-text" name="name" style="width: 70px;background-color: #FFFAF0" readonly>
                         </td>
                         <td class="formtdtext">单位<label></label></td>
                         <td>
-                            <input class="input-text" name="workunit">
+                            <input class="input-text" name="workunit" style="background-color: #FFFAF0" readonly>
                         </td>
                         <td class="formtdtext">职务<label></label></td>
                         <td>
-                            <input class="input-text" name="incumbent">
+                            <input class="input-text" name="incumbent" style="background-color: #FFFAF0" readonly>
                         </td>
                     </tr>
                     </tbody>

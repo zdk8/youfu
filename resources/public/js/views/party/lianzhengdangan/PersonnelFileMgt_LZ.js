@@ -11,9 +11,9 @@ define(function(){
         var refreshGrid=function() {
             datagrid.datagrid('reload');
         };
-        /*加载人事档案人员*/
+        /*加载廉政档案人员*/
         datagrid.datagrid({
-            url:"record/getrecordlist",
+            url:"party/getcadrelist",
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
@@ -34,7 +34,7 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:'record/delpensonrecords1',
+                                            url:'party/deletecadre',
                                             type:'post',
                                             data:{
                                                 pr_id:record.pr_id

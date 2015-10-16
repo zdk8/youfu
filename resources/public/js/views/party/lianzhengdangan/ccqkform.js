@@ -43,21 +43,20 @@ define(function(){
     var saveFunc = function(local,option){
         var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
         addToolBar(local,option,li);
-        var record = option.queryParams.record;
-        var field1 = ['jc_date','jc_name','jc_reason','jc_office','jc_docnumber','jc_comments'];//获奖情况
+        var field1 = ['jc_date','jc_name','jc_reason','jc_office','jc_docnumber','jc_comments'];//惩处情况
         /*保存*/
         local.find('[opt=save]').click(function () {
             var $this = $(this);
             $this.attr("disabled",true);//按钮禁用
             var fields1 = cj.commonGetValue(local,{field:field1});
             local.find('form').form('submit', {
-                url: 'party/addawardpunish',
+                url: 'party/addawardpunish1',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
                     params.fields1 = JSON.stringify(fields1);
                     params.pr_id = option.queryParams.record.pr_id;
-                    params.mode = "j";
+                    params.mode = "c";
                     if (!isValid) {
                         layer.closeAll('loading');
                     }

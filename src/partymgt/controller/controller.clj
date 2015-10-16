@@ -443,7 +443,7 @@
         rows (:rows params)
         page (:page params)
         name (:name params)
-        conds (str " and idsel is null and (iscadre is null or iscadre = '0') " (common/likecond "name" name))
+        conds (str " and isdel is null and (iscadre is null or iscadre = '0') " (common/likecond "name" name))
         getresults (common/fenye rows page "t_personalrecords" "*" conds " order by pr_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birth" "partytime" "incumbenttime")})))
 
