@@ -60,7 +60,7 @@
         ;vc_id (:vc_id params)
         ;wg_id (:wg_id params)
         ;tu_id (:tu_id params)
-        groupcond (condp = group
+        groupcond (condp = group                                                ;党建组织查询过滤
                     "0" (str " and " idtype " is null ")
                     "1" (str " and " idtype " = " id)
                     nil)
@@ -438,6 +438,15 @@
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "receivedate" "returndate")})))
 
 ;;廉政档案干部添加
+(defn get-newcadre-list [request]
+  (let [params (:params request)
+        rows (:rows params)
+        page (:page params)
+        name (:name params)
+        conds (str " and idsel is null and (iscadre is null or iscadre = '0') " (common/likecond "name" name))
+        getresults (common/fenye rows page "t_personalrecords" "*" conds " order by pr_id desc ")]
+    (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birth" "partytime" "incumbenttime")})))
+
 (defn  add-cadre [request]
   (let [params (:params request)
         pr_id (:pr_id params)
@@ -445,6 +454,32 @@
         ]
     (db/updatedata-by-tablename "t_personalrecords" (conj cadredata {:iscadre "1"}) {:pr_id pr_id})
     (str "true")))
+
+(defn get-cadre-list [request]
+  (let [params (:params request)
+        rows (:rows params)
+        page (:page params)
+        name (:name params)
+        identityid (:identityid params)
+        conds (str " and isdel is null and iscadre = '1' " (common/likecond "name" name) (common/likecond "identityid" identityid) )
+        getresults (common/fenye rows page "t_personalrecords" "*" conds " order by pr_id desc ")]
+    (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birth" "partytime" "incumbenttime")})))
+
+
+(defn update-cadre [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)
+        cadredata (common/dateformat-bf-insert (select-keys params (:t_personalrecords common/selectcols)) "birth" "partytime" "incumbenttime")]
+    (db/updatedata-by-tablename "t_personalrecords" cadredata {:pr_id pr_id})
+    (str "true")))
+
+(defn delete-cadre [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)]
+    (db/updatedata-by-tablename "t_personalrecords" {:iscadre "0"} {:pr_id pr_id})
+    (str "true")))
+
+
 
 ;;奖惩情况          jc_date
 (defn add-awardpunish [request]
