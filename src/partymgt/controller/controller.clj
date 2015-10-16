@@ -492,6 +492,28 @@
     ;(db/add-awardpunish apdatas)
     (str "true")))
 
+(defn get-awardpunish-list [request]
+  (let [params (:params request)
+        mode (:mode params)
+        rows (:rows params)
+        page (:page params)
+        conds (str " and JC_MODE = " mode)
+        getresults (common/fenye rows page "t_awardpunish" * conds " order by jc_id desc ")]
+    (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "jc_date")})))
+
+(defn update-awardpunish [request]
+  (let [params (:params request)
+        jc_id (:jc_id params)
+        apdata (select-keys params (:t_awardpunish common/selectcols))]
+    (db/updatedata-by-tablename "t_awardpunish" (common/dateformat-bf-insert apdata "jc_date") {:jc_id jc_id})
+    (str "true")))
+
+(defn delete-awardpunish [request]
+  (let [params (:params request)
+        jc_id (:jc_id params)]
+    (db/deletedata-by-tablename "t_awardpunish" {:jc_id jc_id})
+    (str "true")))
+
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]
   (try

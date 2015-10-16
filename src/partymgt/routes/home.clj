@@ -86,6 +86,9 @@
 
   ;;奖惩情况
   (POST "/party/addawardpunish" request (ctl/add-awardpunish request))
+  (POST "/party/getawardpunishlist" request (ctl/get-awardpunish-list request))
+  (POST "/party/updateawardpunish" request (ctl/update-awardpunish request))
+  (POST "/party/deleteawardpunish" request (ctl/delete-awardpunish request))
 
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
