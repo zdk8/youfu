@@ -90,6 +90,12 @@
   (POST "/party/updateawardpunish" request (ctl/update-awardpunish request))
   (POST "/party/deleteawardpunish" request (ctl/delete-awardpunish request))
 
+  ;;上交情况
+  (POST "/party/addhandgift" request (ctl/add-handgift request))
+  (POST "/party/gethandgiftlist" request (ctl/get-handgift-list request))
+  (POST "/party/updatehandgift" request (ctl/update-handgift request))
+  (POST "/party/deletehandgift" request (ctl/delete-handgift request))
+
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除

@@ -101,7 +101,9 @@
   (transaction
     (dorun (map #(adddata-by-tablename "t_awardpunish" %) apdatas))))
 
-
+(defn add-handgift [hgdatas]
+  (transaction
+    (dorun (dorun (map #(adddata-by-tablename "t_handgift" %) hgdatas)))))
 
 (defn test-in []
   (select "t_personalrecords"

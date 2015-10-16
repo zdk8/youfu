@@ -489,7 +489,7 @@
         fields1 (json/read-str  (:fields1 params) :key-fn keyword)
         apdatas (map #(conj (common/dateformat-bf-insert % "jc_date")  {:pr_id pr_id :jc_mode mode}) fields1 )]
     (println "DDDDDDDDDDDDDD" apdatas)
-    ;(db/add-awardpunish apdatas)
+    (db/add-awardpunish apdatas)
     (str "true")))
 
 (defn get-awardpunish-list [request]
@@ -513,6 +513,39 @@
   (let [params (:params request)
         jc_id (:jc_id params)]
     (db/deletedata-by-tablename "t_awardpunish" {:jc_id jc_id})
+    (str "true")))
+
+
+;;上交情况           sj_date
+(defn add-handgift [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)
+        fields1 (json/read-str  (:fields1 params) :key-fn keyword)
+        hgdatas (map #(conj (common/dateformat-bf-insert % "sj_date")  {:pr_id pr_id}) fields1 )]
+    (println "DDDDDDDDDDDDDD" hgdatas)
+    (db/add-handgift hgdatas)
+    (str "true")))
+
+(defn get-handgift-list [request]
+  (let [params (:params request)
+        rows (:rows params)
+        page (:page params)
+        pr_id  (:pr_id params)
+        conds (str (if (> (count pr_id) 0) (str " and pr_id = " pr_id)))
+        getresults (common/fenye rows page "t_handgift" * conds " order by sj_id desc ")]
+    (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "sj_date")})))
+
+(defn update-handgift [request]
+  (let [params (:params request)
+        sj_id (:sj_id params)
+        apdata (select-keys params (:t_handgift common/selectcols))]
+    (db/updatedata-by-tablename "t_handgift" (common/dateformat-bf-insert apdata "sj_date") {:sj_id sj_id})
+    (str "true")))
+
+(defn delete-handgift [request]
+  (let [params (:params request)
+        sj_id (:sj_id params)]
+    (db/deletedata-by-tablename "t_handgift" {:sj_id sj_id})
     (str "true")))
 
 ;;附件管理
