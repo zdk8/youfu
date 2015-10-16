@@ -62,35 +62,26 @@ define(function(){
             onDblClickRow: function (index,row) {
                 layer.load(2);
                 var title = row.name+'-其他信息';
-                $.ajax({
-                    url:'record/getrecordbyid',//查出子表信息
-                    type:'post',
-                    data:{
-                        pr_id:row.pr_id
-                    },
-                    success: function (data) {
-                        require(['text!views/party/lianzhengdangan/Personnel_Child.htm','views/party/lianzhengdangan/Personnel_Child'],
-                            function(htmfile,jsfile){
-                                layer.open({
-                                    title:title,
-                                    type: 1,
-                                    area: ['900px', '500px'], //宽高
-                                    content: htmfile,
-                                    shift: 2,
-                                    success: function(layero, index){
-                                        jsfile.render(layero,{
-                                            index:index,
-                                            queryParams:{
-                                                childrecord:data,
-                                                record:row
-                                            }
-                                        });
+                require(['text!views/party/lianzhengdangan/Personnel_Child.htm','views/party/lianzhengdangan/Personnel_Child'],
+                    function(htmfile,jsfile){
+                        layer.open({
+                            title:title,
+                            type: 1,
+                            area: ['900px', '500px'], //宽高
+                            content: htmfile,
+                            shift: 2,
+                            success: function(layero, index){
+                                jsfile.render(layero,{
+                                    index:index,
+                                    queryParams:{
+                                        flag:undefined,
+                                        record:row
                                     }
                                 });
                             }
-                        )
+                        });
                     }
-                })
+                )
             }
         })
 

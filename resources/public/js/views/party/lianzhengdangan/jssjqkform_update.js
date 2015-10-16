@@ -47,24 +47,23 @@ define(function(){
 
         local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {
-                url: 'record/updaterecord111',
+                url: 'party/updatehandgift',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
-                    params.pr_id = record.pr_id;
+                    params.sj_id = record.sj_id;
                     if (!isValid) {
                         layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
+                    layer.closeAll('loading');
                     if (data == "true") {
-                        layer.closeAll('loading');
                         cj.showSuccess('修改成功');
-                        //option.queryParams.refresh();
+                        option.queryParams.dgrid.datagrid('reload');
                         layer.close(option.index);
                     } else {
-                        layer.closeAll('loading');
                         cj.showFail('修改失败');
                     }
                 }

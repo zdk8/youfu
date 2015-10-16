@@ -476,7 +476,7 @@
                 </div>
             </div>
             <div data-options="region:'center',border:false" style="padding:0;">
-                <table class="easyui-datagrid-no" opt="fam_datagrid"
+                <table class="easyui-datagrid-no" opt="datagrid_hyqk"
                        data-options="fit:true,
                         fitColumns:false,
                         method:'post',
@@ -485,6 +485,13 @@
                         pagination:true">
                     <thead data-options="frozen:true">
                     <tr>
+                        <th rowspan="2" data-options="field:'ro',width:70,align:'center',
+                                    formatter:function(value,rowData,rowIndex){
+                                        var str='<div></div>';
+                                        str=$(str).append('<a action=&quot;update_hyqk&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del_hyqk&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        return str.html();
+                                    }">操作</th>
                         <th data-options="field:'name',width:70,align:'center'" rowspan="2">姓名</th>
                     </tr>
                     </thead>

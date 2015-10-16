@@ -51,7 +51,7 @@ define(function(){
             $this.attr("disabled",true);//按钮禁用
             var fields1 = cj.commonGetValue(local,{field:field1});
             local.find('form').form('submit', {
-                url: 'party/addawardpunish1',
+                url: 'party/addhandgift',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
@@ -63,14 +63,13 @@ define(function(){
                     return isValid;
                 },
                 success: function (data) {
+                    layer.closeAll('loading');
                     $this.attr("disabled",false);//按钮启用
                     if (data == "true") {
-                        layer.closeAll('loading');
                         cj.showSuccess('保存成功');
-                        //option.queryParams.refresh();
+                        option.queryParams.dgrid.datagrid('reload');
                         layer.close(option.index);
                     } else {
-                        layer.closeAll('loading');
                         cj.showFail('保存失败');
                     }
                 }
@@ -78,48 +77,11 @@ define(function(){
         });
     }
     
-    /*修改数据*/
-    var updateFunc = function (local,option) {
-        var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>';
-        addToolBar(local,option,li);
-        var record = option.queryParams.record; //主表信息
-        local.find('form').form('load',record);//主表数据填充
-
-        local.find('[opt=update]').click(function () {
-            local.find('form').form('submit', {
-                url: 'record/updaterecord111',
-                onSubmit: function (params) {
-                    layer.load();
-                    var isValid = $(this).form('validate');
-                    params.pr_id = record.pr_id;
-                    if (!isValid) {
-                        layer.closeAll('loading');
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    if (data == "true") {
-                        layer.closeAll('loading');
-                        cj.showSuccess('修改成功');
-                        //option.queryParams.refresh();
-                        layer.close(option.index);
-                    } else {
-                        layer.closeAll('loading');
-                        cj.showFail('修改失败');
-                    }
-                }
-            })
-        });
-    }
-
     var render=function(l,o){
         layer.closeAll('loading');
         initFunc(l,o);//初始化
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
-                case 'update':
-                    updateFunc(l, o);
-                    break;
                 case 'add':
                     saveFunc(l, o);
                     break;
