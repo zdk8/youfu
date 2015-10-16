@@ -497,7 +497,8 @@
         mode (:mode params)
         rows (:rows params)
         page (:page params)
-        conds (str " and JC_MODE = " mode)
+        pr_id  (:pr_id params)
+        conds (str (if (> (count mode) 0) (str " and jc_mode = " mode)) (if (> (count pr_id) 0) (str " and pr_id = " pr_id)))
         getresults (common/fenye rows page "t_awardpunish" * conds " order by jc_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "jc_date")})))
 
