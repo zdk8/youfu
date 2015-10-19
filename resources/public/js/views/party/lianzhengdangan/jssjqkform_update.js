@@ -1,6 +1,6 @@
 define(function(){
     var arr_combobox = [];
-    var arr_datebox = ['jc_date'];
+    var arr_datebox = ['sj_date'];
     var arr_validatebox = [];
 
     /*添加功能按钮*/
@@ -36,28 +36,22 @@ define(function(){
     /*界面初始化，公共方法*/
     var initFunc = function (local,option) {
         initControls(local);//控件初始化
-        cj.common_listFunc(local);//表单动态增减行
     }
-    
-    /*新增数据时进入*/
-    var saveFunc = function(local,option){
-        var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
+
+    /*修改数据*/
+    var updateFunc = function (local,option) {
+        var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>';
         addToolBar(local,option,li);
-        var record = option.queryParams.record;
-        var field1 = ['jc_date','jc_name','jc_reason','jc_office','jc_docnumber','jc_comments'];//获奖情况
-        /*保存*/
-        local.find('[opt=save]').click(function () {
-            var $this = $(this);
-            $this.attr("disabled",true);//按钮禁用
-            var fields1 = cj.commonGetValue(local,{field:field1});
+        var record = option.queryParams.record; //主表信息
+        local.find('form').form('load',record);//主表数据填充
+
+        local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {
-                url: 'party/addawardpunish',
+                url: 'party/updatehandgift',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
-                    params.fields1 = JSON.stringify(fields1);
-                    params.pr_id = option.queryParams.record.pr_id;
-                    params.mode = "j";
+                    params.sj_id = record.sj_id;
                     if (!isValid) {
                         layer.closeAll('loading');
                     }
@@ -65,13 +59,12 @@ define(function(){
                 },
                 success: function (data) {
                     layer.closeAll('loading');
-                    $this.attr("disabled",false);//按钮启用
                     if (data == "true") {
-                        cj.showSuccess('保存成功');
+                        cj.showSuccess('修改成功');
                         option.queryParams.dgrid.datagrid('reload');
                         layer.close(option.index);
                     } else {
-                        cj.showFail('保存失败');
+                        cj.showFail('修改失败');
                     }
                 }
             })
@@ -83,8 +76,8 @@ define(function(){
         initFunc(l,o);//初始化
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
-                case 'add':
-                    saveFunc(l, o);
+                case 'update':
+                    updateFunc(l, o);
                     break;
                 default :
                     break;
