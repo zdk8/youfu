@@ -563,7 +563,7 @@
     (str "true")))
 
 (defn get-housemessage [zf_id]
-  (let [zfdata (db/selectdatas-by-tablename "t_residenthouse" {:zf_id :zf_id})
+  (let [zfdata (db/selectdatas-by-tablename "t_residenthouse" {:zf_id zf_id})
         sfdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_sellhouse" {:zf_id zf_id}) "sf_selltime ")
         czdata (db/selectdatas-by-tablename "t_rentalhouse" {:zf_id zf_id})
         jzdata (db/selectdatas-by-tablename "t_financehouse" {:zf_id zf_id})]
@@ -574,7 +574,7 @@
         pr_id (:pr_id params)
         zfdata (first (db/selectdatas-by-tablename "t_housestatus" {:pr_id pr_id}))
         zf_id (:zf_id zfdata)]
-    (if (> (count zf_id) 0) (resp/json (vector (conj zfdata (get-housemessage zf_id)) ) ) (str "false") )))
+    (if (> (count (str zf_id)) 0) (resp/json (vector (conj zfdata (get-housemessage zf_id)) ) ) (str "false") )))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]
