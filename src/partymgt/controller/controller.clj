@@ -573,7 +573,7 @@
         pr_id (:pr_id params)
         zfdata (first (db/selectdatas-by-tablename "t_housestatus" {:pr_id pr_id}))
         zf_id (:zf_id zfdata)]
-    (if (> (count zf_id) 0) (resp/json (vector (conj zfdata (get-housemessage zf_id)) ) )  )))
+    (if (> (count zf_id) 0) (resp/json (vector (conj zfdata (get-housemessage zf_id)) ) ) (str "false") )))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]
