@@ -111,12 +111,15 @@
 
 
 (defn add-housestatus [housedata zfdata sfdata czdata jzdata]
-  (transaction
-    (adddata-by-tablename "t_housestatus" housedata)                ;住房情况表数据添加
-    (adddata-by-tablename "t_residenthouse" zfdata)                 ;居住房情况
-    (adddata-by-tablename "t_sellhouse" sfdata)                     ;出售房情况
-    (adddata-by-tablename "t_rentalhouse" czdata)                   ;出租房情况
-    (adddata-by-tablename "t_financehouse" jzdata)))                ;集资房情况
+  (let [zf_id (:nextval (first(get-results-bysql "select seq_t_housestatus.nextval  from dual")))]
+    (transaction
+      (adddata-by-tablename "t_housestatus" (conj housedata {:zf_id zf_id}) )                         ;住房情况表数据添加
+      (dorun (map #(adddata-by-tablename "t_residenthouse" (conj % {:zf_id zf_id})) zfdata))                 ;居住房情况
+      (dorun (map #(adddata-by-tablename "t_sellhouse" (conj % {:zf_id zf_id})) sfdata))                     ;出售房情况
+      (dorun (map #(adddata-by-tablename "t_rentalhouse" (conj % {:zf_id zf_id})) czdata))                   ;出租房情况
+      (dorun (map #(adddata-by-tablename "t_financehouse" (conj % {:zf_id zf_id})) jzdata))))                ;集资房情况
+      )
+
 
 (defn update-housestatus [zf_id housedata zfdata sfdata czdata jzdata]
   (transaction
@@ -125,11 +128,10 @@
     (deletedata-by-tablename "t_rentalhouse" {:zf_id zf_id})                  ;出租房情况数据删除
     (deletedata-by-tablename "t_financehouse" {:zf_id zf_id})                 ;集资房情况数据删除
     (updatedata-by-tablename "t_housestatus" housedata {:zf_id zf_id})            ; 住房情况表数据更新
-    (adddata-by-tablename "t_residenthouse" zfdata)                               ;居住房情况
-    (adddata-by-tablename "t_sellhouse" sfdata)                                   ;出售房情况
-    (adddata-by-tablename "t_rentalhouse" czdata)                                 ;出租房情况
-    (adddata-by-tablename "t_financehouse" jzdata)                                ;集资房情况
-    ))
+    (dorun (map #(adddata-by-tablename "t_residenthouse" (conj % {:zf_id zf_id})) zfdata))                 ;居住房情况
+    (dorun (map #(adddata-by-tablename "t_sellhouse" (conj % {:zf_id zf_id})) sfdata))                     ;出售房情况
+    (dorun (map #(adddata-by-tablename "t_rentalhouse" (conj % {:zf_id zf_id})) czdata))                   ;出租房情况
+    (dorun (map #(adddata-by-tablename "t_financehouse" (conj % {:zf_id zf_id})) jzdata))))                ;集资房情况
 
 (defn test-in []
   (select "t_personalrecords"
