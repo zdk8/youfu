@@ -250,6 +250,7 @@ define(function(){
         var field2 = ['sf_address','sf_area','sf_property','sf_selltime','sf_money'];//房屋出售情况
         var field3 = ['cz_address','cz_area','cz_property','cz_deadline','cz_annualrent'];//房屋出租情况
         var field4 = ['jz_address','jz_area','jz_unit','jz_totalamount','jz_payment'];//参加集资建房情况
+        local.find('[opt=sf_selltime]').datebox();
         /*保存*/
         local.find('[opt=save_zfqk]').click(function () {
             var $this = $(this);
@@ -418,6 +419,12 @@ define(function(){
         var field3 = ['lx_name','lx_appellation','lx_time','lx_place','lx_yeartuition','lx_fundsource'];//配偶、子女及其配偶出国(境)留学情况
         var field4 = ['th_name','th_department','th_position','th_spouse','th_nationality','th_registertime'];//子女与外国人、港澳台居民通婚情况
         var field5 = ['dj_name','dj_appellation','dj_time','dj_place','dj_work'];//配偶、子女及其配偶出国(境)定居情况
+        local.find('[opt=zj_effectdate]').datebox();
+        local.find('[opt=zj_Invaliddate]').datebox();
+        local.find('[opt=hd_rounddate]').datebox();
+        local.find('[opt=lx_time]').datebox();
+        local.find('[opt=th_registertime]').datebox();
+        local.find('[opt=dj_time]').datebox();
         /*保存*/
         local.find('[opt=save_cgjqk]').click(function () {
             var $this = $(this);
@@ -616,11 +623,107 @@ define(function(){
             console.log('查询')
         });
     }
+
+    /*住房情况数据加载*/
+    var loadZFQKData = function (local,option) {
+        $.ajax({
+            url:'party/gethousestatus',
+            type:'post',
+            data:{
+                pr_id:option.queryParams.record.pr_id
+            },
+            success: function (data) {
+                console.log(data)
+                //更新当前tab
+                var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
+                require(['text!views/party/lianzhengdangan/zfqkform.htm','views/party/lianzhengdangan/zfqkform'],
+                    function (htmfile,jsfile) {
+                        local.find('[opt=tabs_child]').tabs('update', {
+                            tab : currTab,
+                            options : {
+                                content : htmfile
+                            }
+                        });
+                        jsfile.render(currTab,{
+                            queryParams:{
+                                actiontype:'add',
+                                poption:option,
+                                datas:data
+                            }
+                        });
+                    }
+                )
+            }
+        });
+    }
+    /*持股情况数据加载*/
+    var loadCGQKData = function (local,option) {
+        //更新当前tab
+        var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
+        require(['text!views/party/lianzhengdangan/cgqkform.htm','views/party/lianzhengdangan/cgqkform'],
+            function (htmfile,jsfile) {
+                local.find('[opt=tabs_child]').tabs('update', {
+                    tab : currTab,
+                    options : {
+                        content : htmfile
+                    }
+                });
+                jsfile.render(currTab,{
+                    queryParams:{
+                        actiontype:'add',
+                        poption:option
+                    }
+                });
+            }
+        )
+    }
+    /*出国(境)情况数据加载*/
+    var loadCGJQKData = function (local,option) {
+        //更新当前tab
+        var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
+        require(['text!views/party/lianzhengdangan/cgjqkform.htm','views/party/lianzhengdangan/cgjqkform'],
+            function (htmfile,jsfile) {
+                local.find('[opt=tabs_child]').tabs('update', {
+                    tab : currTab,
+                    options : {
+                        content : htmfile
+                    }
+                });
+                jsfile.render(currTab,{
+                    queryParams:{
+                        actiontype:'add',
+                        poption:option
+                    }
+                });
+            }
+        )
+    }
+    /*刑事处分数据加载*/
+    var loadXSCFData = function (local,option) {
+        //更新当前tab
+        var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
+        require(['text!views/party/lianzhengdangan/xscfform.htm','views/party/lianzhengdangan/xscfform'],
+            function (htmfile,jsfile) {
+                local.find('[opt=tabs_child]').tabs('update', {
+                    tab : currTab,
+                    options : {
+                        content : htmfile
+                    }
+                });
+                jsfile.render(currTab,{
+                    queryParams:{
+                        actiontype:'add',
+                        poption:option
+                    }
+                });
+            }
+        )
+    }
     var render=function(local,option){
         layer.closeAll('loading');
         local.find('[opt=tabs_child]').tabs({tabPosition:'left'});
 
-        local.find('div[opt=formcontentpanel]').panel({
+        /*local.find('div[opt=formcontentpanel]').panel({
             onResize: function (width, height) {
                 $(this).height($(this).height() - 35);
             }
@@ -629,20 +732,20 @@ define(function(){
         local.find('[opt=cancel]').click(function(){
             layer.close(option.index);
         });
-
-        cj.common_listFunc(local);//表单动态增减行
+*/
+        /*cj.common_listFunc(local);//表单动态增减行
         var record = option.queryParams.record;
         local.find('[name=name]').val(record.name);
         local.find('[name=workunit]').val(record.workunit);
-        local.find('[name=incumbent]').val(record.incumbent);
+        local.find('[name=incumbent]').val(record.incumbent);*/
 
         initAddFunc(local,option);
         hjqkFunc(local, option);//首先加载获奖情况
 
-        zfqkFunc(local, option);//住房情况
-        cgqkFunc(local, option);//持股情况
-        cgjqkFunc(local, option);//出国情况
-        xscfFunc(local, option);//亲属受党政纪刑事处分
+        //zfqkFunc(local, option);//住房情况
+        //cgqkFunc(local, option);//持股情况
+        //cgjqkFunc(local, option);//出国情况
+        //xscfFunc(local, option);//亲属受党政纪刑事处分
 
         /*tabs选择事件*/
         local.find('[opt=tabs_child]').tabs({
@@ -661,18 +764,22 @@ define(function(){
                         break;
                     case 'zfqk':        //住房情况
                         //zfqkFunc(local, option);
+                        loadZFQKData(local,option);//住房情况数据加载
                         break;
                     case 'cgqk':        //持股情况
                         //cgqkFunc(local, option);
+                        loadCGQKData(local,option);
                         break;
                     case 'hyqk':        //婚姻变化情况
                         hyqkFunc(local, option);
                         break;
                     case 'cgjqk':         //出国（境）情况
                         //cgjqkFunc(local, option);
+                        loadCGJQKData(local,option);
                         break;
                     case 'xscf':         //亲属受党政纪刑事处分
                         //xscfFunc(local, option);
+                        loadXSCFData(local,option);
                         break;
                     default :
                         break;

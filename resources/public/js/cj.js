@@ -572,6 +572,48 @@ var cj=(function(){
                 arrall.push(maparr);
             }
             return arrall;
+        },initTrData: function (local,tabopt,childdata,fields) {    //多行表单的值填充，动态加载
+            var $tbody = local.find('[opt='+tabopt+'] tbody');
+            var $tds = $tbody.find('tr').last().find('td').has('input');
+            var td_reduce = '<td><a opt="dellist" style="cursor: pointer;"><img src="images/reduce.png"></a></td>';
+            var $tr = "";
+            for(var i=0;i<$tds.length;i++){
+                var hasdatebox = $($tds[i].outerHTML).find('span').hasClass('datebox');
+                if(hasdatebox){
+                    var opt_td = $($($tds[i].outerHTML).find('input')[0]).attr('opt');
+                    var width_td = $($($tds[i].outerHTML).find('input')[0]).width();
+                    var datebox_td = '<td align="center"><input class="input-text easyui-datebox" opt="'+opt_td+'" style="width: '+width_td+'px"'+'></td>';
+                    $tr += datebox_td;
+
+                }else{
+                    $tr += $tds[i].outerHTML.toString();
+                }
+            }
+            $tr += td_reduce;
+            for(var i=1;i<childdata.length;i++){
+                $tbody.append('<tr>'+$tr+'</tr>');
+                for(var j=0;j<fields.length;j++){
+                    if(local.find('[opt='+fields[j]+']').last().hasClass('easyui-datebox')){
+                        local.find('[opt='+fields[j]+']').last().datebox();
+                        local.find('[opt='+fields[j]+']').last().datebox('setValue',childdata[i][fields[j]]);
+                    }else{
+                        local.find('[opt='+fields[j]+']').last().val(childdata[i][fields[j]]);
+                    }
+                }
+            }
+
+            var lasttr = $tbody.find('tr')[$tbody.find('tr').length-1];
+            $($($(lasttr).find('td')[0]).find('span.combo')[1]).remove();
+            local.find('[opt=dellist]').each(function () {
+            }).click(function () {
+                var _tr = $(this).parents('tr');
+                if (_tr.attr('class') != "demo") {
+                    var pp_id = _tr.find('[opt=pp_id]').val()
+                    if(!pp_id){
+                        _tr.remove();
+                    }
+                }
+            })
         }
     }
 
