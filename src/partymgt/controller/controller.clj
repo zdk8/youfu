@@ -552,11 +552,12 @@
 (defn add-housestatus [request]
   (let [params (:params request)
         zf_id (:zf_id params)
-        housedata (select-keys params (:t_housestatus common/selectcols))
-        zfdata (json/read-str  (:zfqk_v1 params) :key-fn keyword)
-        sfdata (map #(common/dateformat-bf-insert % "sf_selltime")(json/read-str  (:zfqk_v2 params) :key-fn keyword))
-        czdata (json/read-str  (:zfqk_v3 params) :key-fn keyword)
-        jzdata (json/read-str  (:zfqk_v4 params) :key-fn keyword)]
+        pr_id (:pr_id params)
+        housedata (conj (select-keys params (:t_housestatus common/selectcols)) {:pr_id pr_id})
+        zfdata (json/read-str  (:field1 params) :key-fn keyword)
+        sfdata (map #(common/dateformat-bf-insert % "sf_selltime")(json/read-str  (:field2 params) :key-fn keyword))
+        czdata (json/read-str  (:field3 params) :key-fn keyword)
+        jzdata (json/read-str  (:field4 params) :key-fn keyword)]
     (if (> (count zf_id) 0) (db/update-housestatus zf_id housedata zfdata sfdata czdata jzdata)
                              (db/add-housestatus housedata zfdata sfdata czdata jzdata))
     (str "true")))
