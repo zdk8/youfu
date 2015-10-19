@@ -626,6 +626,7 @@ define(function(){
 
     /*住房情况数据加载*/
     var loadZFQKData = function (local,option) {
+        layer.load(1);
         $.ajax({
             url:'party/gethousestatus',
             type:'post',
@@ -633,7 +634,6 @@ define(function(){
                 pr_id:option.queryParams.record.pr_id
             },
             success: function (data) {
-                console.log(data)
                 //更新当前tab
                 var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
                 require(['text!views/party/lianzhengdangan/zfqkform.htm','views/party/lianzhengdangan/zfqkform'],
@@ -658,66 +658,101 @@ define(function(){
     }
     /*持股情况数据加载*/
     var loadCGQKData = function (local,option) {
-        //更新当前tab
-        var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
-        require(['text!views/party/lianzhengdangan/cgqkform.htm','views/party/lianzhengdangan/cgqkform'],
-            function (htmfile,jsfile) {
-                local.find('[opt=tabs_child]').tabs('update', {
-                    tab : currTab,
-                    options : {
-                        content : htmfile
+        layer.load(1);
+        $.ajax({
+            url:'party/gethousestatus',
+            type:'post',
+            data:{
+                pr_id:option.queryParams.record.pr_id
+            },
+            success: function (data) {
+                //更新当前tab
+                var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
+                require(['text!views/party/lianzhengdangan/cgqkform.htm','views/party/lianzhengdangan/cgqkform'],
+                    function (htmfile,jsfile) {
+                        local.find('[opt=tabs_child]').tabs('update', {
+                            tab : currTab,
+                            options : {
+                                content : htmfile
+                            }
+                        });
+                        jsfile.render(currTab,{
+                            queryParams:{
+                                actiontype:'add',
+                                poption:option,
+                                datas:data
+                            }
+                        });
                     }
-                });
-                jsfile.render(currTab,{
-                    queryParams:{
-                        actiontype:'add',
-                        poption:option
-                    }
-                });
+                )
             }
-        )
+        });
+
     }
     /*出国(境)情况数据加载*/
     var loadCGJQKData = function (local,option) {
-        //更新当前tab
-        var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
-        require(['text!views/party/lianzhengdangan/cgjqkform.htm','views/party/lianzhengdangan/cgjqkform'],
-            function (htmfile,jsfile) {
-                local.find('[opt=tabs_child]').tabs('update', {
-                    tab : currTab,
-                    options : {
-                        content : htmfile
+        layer.load(1);
+        $.ajax({
+            url:'party/gethousestatus',
+            type:'post',
+            data:{
+                pr_id:option.queryParams.record.pr_id
+            },
+            success: function (data) {
+                //更新当前tab
+                var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
+                require(['text!views/party/lianzhengdangan/cgjqkform.htm','views/party/lianzhengdangan/cgjqkform'],
+                    function (htmfile,jsfile) {
+                        local.find('[opt=tabs_child]').tabs('update', {
+                            tab : currTab,
+                            options : {
+                                content : htmfile
+                            }
+                        });
+                        jsfile.render(currTab,{
+                            queryParams:{
+                                actiontype:'add',
+                                poption:option,
+                                datas:data
+                            }
+                        });
                     }
-                });
-                jsfile.render(currTab,{
-                    queryParams:{
-                        actiontype:'add',
-                        poption:option
-                    }
-                });
+                )
             }
-        )
+        });
+
     }
     /*刑事处分数据加载*/
     var loadXSCFData = function (local,option) {
-        //更新当前tab
-        var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
-        require(['text!views/party/lianzhengdangan/xscfform.htm','views/party/lianzhengdangan/xscfform'],
-            function (htmfile,jsfile) {
-                local.find('[opt=tabs_child]').tabs('update', {
-                    tab : currTab,
-                    options : {
-                        content : htmfile
+        layer.load(1);
+        $.ajax({
+            url:'party/gethousestatus',
+            type:'post',
+            data:{
+                pr_id:option.queryParams.record.pr_id
+            },
+            success: function (data) {
+                //更新当前tab
+                var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
+                require(['text!views/party/lianzhengdangan/xscfform.htm','views/party/lianzhengdangan/xscfform'],
+                    function (htmfile,jsfile) {
+                        local.find('[opt=tabs_child]').tabs('update', {
+                            tab : currTab,
+                            options : {
+                                content : htmfile
+                            }
+                        });
+                        jsfile.render(currTab,{
+                            queryParams:{
+                                actiontype:'add',
+                                poption:option,
+                                datas:data
+                            }
+                        });
                     }
-                });
-                jsfile.render(currTab,{
-                    queryParams:{
-                        actiontype:'add',
-                        poption:option
-                    }
-                });
+                )
             }
-        )
+        });
     }
     var render=function(local,option){
         layer.closeAll('loading');
