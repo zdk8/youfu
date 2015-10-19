@@ -97,13 +97,39 @@
           (where allcond)))
 
 
-(defn add-awardpunish [apdatas]
+(defn add-awardpunish
+  "奖惩情况添加"
+  [apdatas]
   (transaction
     (dorun (map #(adddata-by-tablename "t_awardpunish" %) apdatas))))
 
-(defn add-handgift [hgdatas]
+(defn add-handgift
+  "上交情况添加"
+  [hgdatas]
   (transaction
     (dorun (dorun (map #(adddata-by-tablename "t_handgift" %) hgdatas)))))
+
+
+(defn add-housestatus [housedata zfdata sfdata czdata jzdata]
+  (transaction
+    (adddata-by-tablename "t_housestatus" housedata)                ;住房情况表数据添加
+    (adddata-by-tablename "t_residenthouse" zfdata)                 ;居住房情况
+    (adddata-by-tablename "t_sellhouse" sfdata)                     ;出售房情况
+    (adddata-by-tablename "t_rentalhouse" czdata)                   ;出租房情况
+    (adddata-by-tablename "t_financehouse" jzdata)))                ;集资房情况
+
+(defn update-housestatus [zf_id housedata zfdata sfdata czdata jzdata]
+  (transaction
+    (deletedata-by-tablename "t_residenthouse" {:zf_id zf_id})                ;居住房情况数据删除
+    (deletedata-by-tablename "t_sellhouse" {:zf_id zf_id})                    ;出售房情况数据删除
+    (deletedata-by-tablename "t_rentalhouse" {:zf_id zf_id})                  ;出租房情况数据删除
+    (deletedata-by-tablename "t_financehouse" {:zf_id zf_id})                 ;集资房情况数据删除
+    (updatedata-by-tablename "t_housestatus" housedata {:zf_id zf_id})            ; 住房情况表数据更新
+    (adddata-by-tablename "t_residenthouse" zfdata)                               ;居住房情况
+    (adddata-by-tablename "t_sellhouse" sfdata)                                   ;出售房情况
+    (adddata-by-tablename "t_rentalhouse" czdata)                                 ;出租房情况
+    (adddata-by-tablename "t_financehouse" jzdata)                                ;集资房情况
+    ))
 
 (defn test-in []
   (select "t_personalrecords"

@@ -96,6 +96,10 @@
   (POST "/party/updatehandgift" request (ctl/update-handgift request))
   (POST "/party/deletehandgift" request (ctl/delete-handgift request))
 
+  ;;住房情况
+  (POST "/party/addhousestatus" request (ctl/add-housestatus request))
+  (POST "/party/gethousestatus" request (ctl/get-housestatus request))
+
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除
@@ -104,7 +108,7 @@
     (let [params (:params req)]
       (ctl/getfilesysfile (:filename params) (:convert params) (:server-name req) (:server-port req))))
 
-  ;;test
+  ;;test    t_rentalhouse
   (GET "/gettablecols" [tablename] (ctl/test-get-tablecols tablename))   ;;获取表的字段
   (GET "/dfsfs" [] (ctl/test-dfs))
   )

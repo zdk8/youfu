@@ -548,6 +548,33 @@
     (db/deletedata-by-tablename "t_handgift" {:sj_id sj_id})
     (str "true")))
 
+;;住房情况
+(defn add-housestatus [request]
+  (let [params (:params request)
+        zf_id (:zf_id params)
+        housedata (select-keys params (:t_housestatus common/selectcols))
+        zfdata (json/read-str  (:fields1 params) :key-fn keyword)
+        sfdata (json/read-str  (:fields1 params) :key-fn keyword)
+        czdata (json/read-str  (:fields1 params) :key-fn keyword)
+        jzdata (json/read-str  (:fields1 params) :key-fn keyword)]
+    (if (> (count zf_id) 0) (db/update-housestatus zf_id housedata zfdata sfdata czdata jzdata)
+                             (db/add-housestatus housedata zfdata sfdata czdata jzdata))
+    (str "true")))
+
+(defn get-housemessage [zf_id]
+  (let [zfdata (db/selectdatas-by-tablename "t_residenthouse" {:zf_id :zf_id})
+        sfdata (db/selectdatas-by-tablename "t_sellhouse" {:zf_id zf_id})
+        czdata (db/selectdatas-by-tablename "t_rentalhouse" {:zf_id zf_id})
+        jzdata (db/selectdatas-by-tablename "t_financehouse" {:zf_id zf_id})]
+    {:field1 zfdata :field2 sfdata :field3 czdata :field4 jzdata}))
+
+(defn get-housestatus [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)
+        zfdata (first (db/selectdatas-by-tablename "t_housestatus" {:pr_id pr_id}))
+        zf_id (:zf_id zfdata)]
+    (if (> (count zf_id) 0) (resp/json (vector (conj zfdata (get-housemessage zf_id)) ) )  )))
+
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]
   (try
