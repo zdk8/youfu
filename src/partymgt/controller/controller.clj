@@ -564,10 +564,10 @@
 
 (defn get-housemessage [zf_id]
   (let [zfdata (db/selectdatas-by-tablename "t_residenthouse" {:zf_id zf_id})
-        sfdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_sellhouse" {:zf_id zf_id}) "sf_selltime ")
+        sfdata (db/selectdatas-by-tablename "t_sellhouse" {:zf_id zf_id})
         czdata (db/selectdatas-by-tablename "t_rentalhouse" {:zf_id zf_id})
         jzdata (db/selectdatas-by-tablename "t_financehouse" {:zf_id zf_id})]
-    {:field1 zfdata :field2 sfdata :field3 czdata :field4 jzdata}))
+    {:field1 zfdata :field2 (common/dateymd-bf-list sfdata "sf_selltime") :field3 czdata :field4 jzdata}))
 
 (defn get-housestatus [request]
   (let [params (:params request)
