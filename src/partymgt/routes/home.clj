@@ -100,6 +100,11 @@
   (POST "/party/addhousestatus" request (ctl/add-housestatus request))
   (POST "/party/gethousestatus" request (ctl/get-housestatus request))
 
+  ;;持股经营情况
+  (POST "/party/addprofitstatus" request (ctl/add-profitstatus request))
+  (POST "/party/getprofitstatus" request (ctl/get-profitstatus request))
+
+
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除

@@ -558,7 +558,7 @@
         sfdata (map #(common/dateformat-bf-insert % "sf_selltime")(json/read-str  (:field2 params) :key-fn keyword))
         czdata (json/read-str  (:field3 params) :key-fn keyword)
         jzdata (json/read-str  (:field4 params) :key-fn keyword)]
-    (if (> (count zf_id) 0) (db/update-housestatus zf_id housedata zfdata sfdata czdata jzdata)
+    (if (> (count (str zf_id)) 0) (db/update-housestatus zf_id housedata zfdata sfdata czdata jzdata)
                              (db/add-housestatus housedata zfdata sfdata czdata jzdata))
     (str "true")))
 
@@ -574,7 +574,37 @@
         pr_id (:pr_id params)
         zfdata (first (db/selectdatas-by-tablename "t_housestatus" {:pr_id pr_id}))
         zf_id (:zf_id zfdata)]
-    (if (> (count (str zf_id)) 0) (resp/json (vector (conj zfdata (get-housemessage zf_id)) ) ) (str "false") )))
+    (if (> (count (str zf_id)) 0) (resp/json (vector (conj zfdata (get-housemessage zf_id))))
+                                   (str "false") )))
+
+;;持股经营情况
+(defn get-profitmessage [yl_id]
+  (let [qydata (db/selectdatas-by-tablename "t_cadrebusiness" {:yl_id yl_id})
+        gxdata (db/selectdatas-by-tablename "t_relationbusiness" {:yl_id yl_id})
+        jzdata (db/selectdatas-by-tablename "t_cadreparttime" {:yl_id yl_id})
+        rgdata (db/selectdatas-by-tablename "t_cadreinvest" {:yl_id yl_id})]
+    {:field1 qydata :field2 gxdata :field3 jzdata :field4 rgdata}))
+
+(defn get-profitstatus [request]
+  (let [params (:params request)
+        pr_id (:pr_id params)
+        profitdata (first (db/selectdatas-by-tablename "t_profitstatus" {:pr_id pr_id}))
+        yl_id (:yl_id profitdata)]
+    (if (> (count (str yl_id)) 0) (resp/json (vector (conj profitdata (get-profitmessage yl_id))))
+                                   (str "false"))))
+
+(defn add-profitstatus [request]
+  (let [params (:params request)
+        yl_id (:yl_id params)
+        ;pr_id (:pr_id params)
+        profitdata (select-keys params (:t_profitstatus common/selectcols))
+        qydata (json/read-str  (:field1 params) :key-fn keyword)
+        gxdata (json/read-str  (:field2 params) :key-fn keyword)
+        jzdata (json/read-str  (:field3 params) :key-fn keyword)
+        rgdata (json/read-str  (:field4 params) :key-fn keyword)]
+    (if (> (count (str yl_id))0) (db/update-profitstatus yl_id profitdata  qydata  gxdata jzdata rgdata)
+                                   (db/add-profitstatus profitdata qydata gxdata  jzdata rgdata))
+    (str "true")))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]

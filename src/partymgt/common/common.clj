@@ -53,7 +53,7 @@
                  :t_financehouse [:zf_id :jz_address :jz_area :jz_unit :jz_totalamount :jz_payment]
 
                  ;;持股情况
-                 :t_profitstatus [:pr_id :relationship :otherincome]
+                 :t_profitstatus [:pr_id :otherincome]
                  ;;持股情况-经商办企业情况
                  :t_cadrebusiness [:yl_id :qy_name :qy_businessscope :qy_registercapital :qy_address :qy_legalperson :qy_contact]
                  ;;持股情况-兼职情况

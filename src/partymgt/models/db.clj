@@ -133,6 +133,28 @@
     (dorun (map #(adddata-by-tablename "t_rentalhouse" (conj % {:zf_id zf_id})) czdata))                   ;出租房情况
     (dorun (map #(adddata-by-tablename "t_financehouse" (conj % {:zf_id zf_id})) jzdata))))                ;集资房情况
 
+(defn add-profitstatus [profitdata qydata gxdata  jzdata rgdata]
+  (let [yl_id (:nextval (first(get-results-bysql "select seq_t_profitstatus.nextval  from dual")))]
+    (transaction
+      (adddata-by-tablename "t_profitstatus" (conj profitdata {:yl_id yl_id}) )                               ;持股情况添加
+      (dorun (map #(adddata-by-tablename "t_cadrebusiness" (conj % {:yl_id yl_id})) qydata))                 ;经商办企业情况
+      (dorun (map #(adddata-by-tablename "t_relationbusiness" (conj % {:yl_id yl_id})) gxdata))              ;社会关系经商办企业
+      (dorun (map #(adddata-by-tablename "t_cadreparttime" (conj % {:yl_id yl_id})) jzdata))                 ;兼职情况
+      (dorun (map #(adddata-by-tablename "t_cadreinvest" (conj % {:yl_id yl_id})) rgdata)))))                ;投资入股情况
+
+(defn update-profitstatus [yl_id profitdata qydata gxdata jzdata rgdata]
+  (transaction
+    (deletedata-by-tablename "t_cadrebusiness" {:yl_id yl_id})                                      ;删除经商办企业情况
+    (deletedata-by-tablename "t_relationbusiness" {:yl_id yl_id})                                   ;删除社会关系经商办企业
+    (deletedata-by-tablename "t_cadreparttime" {:yl_id yl_id})                                      ;删除兼职情况
+    (deletedata-by-tablename "t_cadreinvest" {:yl_id yl_id})                                        ;删除投资入股情况
+    (updatedata-by-tablename "t_profitstatus" profitdata {:yl_id yl_id})                            ;更新持股情况
+    (dorun (map #(adddata-by-tablename "t_cadrebusiness" (conj % {:yl_id yl_id})) qydata))         ;经商办企业情况
+    (dorun (map #(adddata-by-tablename "t_relationbusiness" (conj % {:yl_id yl_id})) gxdata))      ;社会关系经商办企业
+    (dorun (map #(adddata-by-tablename "t_cadreparttime" (conj % {:yl_id yl_id})) jzdata))         ;兼职情况
+    (dorun (map #(adddata-by-tablename "t_cadreinvest" (conj % {:yl_id yl_id})) rgdata))           ;投资入股情况
+    ))
+
 (defn test-in []
   (select "t_personalrecords"
           (where {:pb 1})))
