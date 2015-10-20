@@ -104,6 +104,11 @@
   (POST "/party/addprofitstatus" request (ctl/add-profitstatus request))
   (POST "/party/getprofitstatus" request (ctl/get-profitstatus request))
 
+  ;;干部婚姻变化情况
+  (POST "/party/addcadremarriage" request (ctl/add-cadremarriage request))
+  (POST "/party/getmarriagelist" request (ctl/get-marriage-list request))
+  (POST "/party/updatemarriage" request (ctl/update-marriage request))
+  (POST "/party/deletemarriage" request (ctl/delete-marriage request))
 
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传

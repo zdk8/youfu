@@ -606,6 +606,34 @@
                                    (db/add-profitstatus profitdata qydata gxdata  jzdata rgdata))
     (str "true")))
 
+;;干部婚姻变化情况
+(defn add-cadremarriage [request]
+  (let [params (:params request)
+        hydata (select-keys params (:t_marriagetransition common/selectcols))
+        ]
+    (db/adddata-by-tablename "t_marriagetransition" (common/dateformat-bf-insert hydata "hy_formerregister" "hy_divorcedate" "hy_register"))
+    (str "true")))
+
+(defn get-marriage-list [request]
+  (let [params (:params request)
+        rows (:rows params)
+        page (:page params)
+        getresults (common/fenye rows page "t_marriagetransition" "*" "" " order by hy_id desc ")]
+    (resp/json {:total (:total getresults) :row (common/dateymd-bf-list (:rows getresults) "hy_formerregister" "hy_divorcedate" "hy_register")})))
+
+(defn update-marriage [request]
+  (let [params (:params request)
+        hy_id (:hy_id params)
+        hydata (select-keys params (:t_marriagetransition common/selectcols))]
+    (db/updatedata-by-tablename "t_marriagetransition" (common/dateformat-bf-insert hydata "hy_formerregister" "hy_divorcedate" "hy_register") {:hy_id hy_id})
+    (str "true")))
+
+(defn delete-marriage [request]
+  (let [params (:params request)
+        hy_id (:hy_id params)]
+    (db/deletedata-by-tablename "t_marriagetransition" {:hy_id hy_id})
+    (str "true")))
+
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]
   (try
