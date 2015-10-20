@@ -620,7 +620,7 @@
         page (:page params)
         pr_id (:hpr_id params)
         conds (str (if (> (count (str pr_id)) 0) (str " and pr_id = " pr_id)))
-        getresults (common/fenye rows page "t_marriagetransition" conds "" " order by hy_id desc ")]
+        getresults (common/fenye rows page "t_marriagetransition" "*" conds  " order by hy_id desc ")]
     (resp/json {:total (:total getresults) :row (common/dateymd-bf-list (:rows getresults) "hy_formerregister" "hy_divorcedate" "hy_register")})))
 
 (defn update-marriage [request]
@@ -666,6 +666,34 @@
     (if (> (count (str cg_id)) 0) (resp/json (vector (conj abroaddata (get-abroadmessage cg_id))))
                                   (str "false"))))
 
+;;亲属处分情况
+(defn add-qshpunish [request]
+  (let [params (:params request)
+        qpdata (select-keys params (:t_relativespunish common/selectcols))]
+    (db/adddata-by-tablename "t_relativespunish" qpdata)
+    (str "true")))
+
+(defn update-qshpunish [request]
+  (let [params (:params request)
+        cf_id (:cd_id params)
+        cfdata (select-keys params (:t_relativespunish common/selectcols))]
+    (db/updatedata-by-tablename "t_relativespunish" cfdata {:cf_id cf_id})
+    (str "true")))
+
+(defn get-qshpunish-list [request]
+  (let [params (:params request)
+        rows (:rows params)
+        page (:page params)
+        pr_id (:pr_id params)
+        conds (str (if (> (count (str pr_id)) 0) (str " and pr_id = " pr_id)))
+        getresults (common/fenye rows page "t_relativespunish" "*" conds " order by cf_id desc ")]
+    (resp/json {:total (:total getresults) :rows (:rows getresults)})))
+
+(defn delete-qshpunish [request]
+  (let [params (:params request)
+        cf_id (:cf_id params)]
+    (db/deletedata-by-tablename "t_relativespunish" {:cf_id cf_id})
+    (str "true")))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]

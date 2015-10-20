@@ -114,6 +114,12 @@
   (POST "/party/addgoabroad" request (ctl/add-goabroad request))
   (POST "/party/getgoabroad" request (ctl/get-goabroad request))
 
+  ;;亲属处分情况
+  (POST "/party/addqshpunish" request (ctl/add-qshpunish request))
+  (POST "/party/updateqshpunish" request (ctl/update-qshpunish request))
+  (POST "/party/getqshpunishlist" request (ctl/get-qshpunish-list request))
+  (POST "/party/deleteqshpunish" request (ctl/delete-qshpunish request))
+
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除
