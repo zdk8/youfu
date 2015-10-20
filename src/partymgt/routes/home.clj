@@ -110,6 +110,10 @@
   (POST "/party/updatemarriage" request (ctl/update-marriage request))
   (POST "/party/deletemarriage" request (ctl/delete-marriage request))
 
+  ;;出国情况
+  (POST "/party/addgoabroad" request (ctl/add-goabroad request))
+  (POST "/party/getgoabroad" request (ctl/get-goabroad request))
+
   ;;附件管理
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除

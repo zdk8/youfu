@@ -618,7 +618,9 @@
   (let [params (:params request)
         rows (:rows params)
         page (:page params)
-        getresults (common/fenye rows page "t_marriagetransition" "*" "" " order by hy_id desc ")]
+        pr_id (:hpr_id params)
+        conds (str (if (> (count (str pr_id)) 0) (str " and pr_id = " pr_id)))
+        getresults (common/fenye rows page "t_marriagetransition" conds "" " order by hy_id desc ")]
     (resp/json {:total (:total getresults) :row (common/dateymd-bf-list (:rows getresults) "hy_formerregister" "hy_divorcedate" "hy_register")})))
 
 (defn update-marriage [request]
@@ -633,6 +635,37 @@
         hy_id (:hy_id params)]
     (db/deletedata-by-tablename "t_marriagetransition" {:hy_id hy_id})
     (str "true")))
+
+;;出国情况
+(defn add-goabroad [request]
+  (let [params (:params request)
+        cg_id (:cg_id params)
+        abroaddata (select-keys params (:t_goabroad common/selectcols))
+        czdata (map #(common/dateformat-bf-insert % "zj_effectdate" "zj_Invaliddate")(json/read-str  (:field1 params) :key-fn keyword))
+        hddata (json/read-str  (:field2 params) :key-fn keyword)
+        lxdata (map #(common/dateformat-bf-insert % "lx_time")(json/read-str  (:field3 params) :key-fn keyword))
+        thdata (map #(common/dateformat-bf-insert % "th_registertime")(json/read-str  (:field4 params) :key-fn keyword))
+        djdata (map #(common/dateformat-bf-insert % "dj_time")(json/read-str  (:field5 params) :key-fn keyword))]
+    (if (> (count (str cg_id))0) (db/update-goabroad cg_id abroaddata  czdata  hddata lxdata thdata djdata)
+                                 (db/add-goabroad abroaddata  czdata  hddata lxdata thdata djdata))
+    (str "true")))
+
+(defn get-abroadmessage [cg_id]
+  (let [czdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_overseavisa" {:cg_id cg_id}) "zj_effectdate" "zj_Invaliddate")
+        hddata (db/selectdatas-by-tablename "t_abroadactivitie" {:cg_id cg_id})
+        lxdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_abroadstudy" {:cg_id cg_id}) "lx_time")
+        thdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_abroadmarriage" {:cg_id cg_id}) "th_registertime")
+        djdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_aboardsettle" {:cg_id cg_id}) "dj_time") ]
+    {:field1 czdata :field2 hddata :field3 lxdata :field4 thdata :field5 djdata}))
+
+(defn get-goabroad [request]
+  (let [params (:params request)
+        cg_id (:cg_id params)
+        abroaddata (first (db/selectdatas-by-tablename "t_goabroad" {:cg_id cg_id}))
+        cg_id (:cg_id abroaddata)]
+    (if (> (count (str cg_id)) 0) (resp/json (vector (conj abroaddata (get-abroadmessage cg_id))))
+                                  (str "false"))))
+
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]

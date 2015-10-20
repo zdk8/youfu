@@ -155,6 +155,31 @@
     (dorun (map #(adddata-by-tablename "t_cadreinvest" (conj % {:yl_id yl_id})) rgdata))           ;投资入股情况
     ))
 
+(defn update-goabroad [cg_id abroaddata  czdata  hddata lxdata thdata djdata]
+  (transaction
+    (deletedata-by-tablename "t_overseavisa" {:cg_id cg_id})                                             ;删除持证情况
+    (deletedata-by-tablename "t_abroadactivitie" {:cg_id cg_id})                                          ;删除出国活动情况
+    (deletedata-by-tablename "t_abroadstudy" {:cg_id cg_id})                                              ;删除留学情况
+    (deletedata-by-tablename "t_abroadmarriage" {:cg_id cg_id})                                           ;删除通婚情况
+    (deletedata-by-tablename "t_aboardsettle" {:cg_id cg_id})                                             ;删除定居情况
+    (updatedata-by-tablename "t_goabroad" abroaddata {:cg_id cg_id})                                      ;更新出国情况
+    (dorun (map #(adddata-by-tablename "t_overseavisa" (conj % {:cg_id cg_id})) czdata))                 ;持证情况
+    (dorun (map #(adddata-by-tablename "t_abroadactivitie" (conj % {:cg_id cg_id})) hddata))             ;出国活动情况
+    (dorun (map #(adddata-by-tablename "t_abroadstudy" (conj % {:cg_id cg_id})) lxdata))                 ;留学情况
+    (dorun (map #(adddata-by-tablename "t_abroadmarriage" (conj % {:cg_id cg_id})) thdata))              ;通婚情况
+    (dorun (map #(adddata-by-tablename "t_aboardsettle" (conj % {:cg_id cg_id})) djdata))                ;定居情况
+    ))
+
+(defn add-goabroad [abroaddata  czdata  hddata lxdata thdata djdata]
+  (let [cg_id (:nextval (first(get-results-bysql "select seq_t_goabroad.nextval  from dual")))]
+    (transaction
+      (adddata-by-tablename "t_goabroad" (conj abroaddata {:cg_id cg_id}))
+      (dorun (map #(adddata-by-tablename "t_overseavisa" (conj % {:cg_id cg_id})) czdata))
+      (dorun (map #(adddata-by-tablename "t_abroadactivitie" (conj % {:cg_id cg_id})) hddata))
+      (dorun (map #(adddata-by-tablename "t_abroadstudy" (conj % {:cg_id cg_id})) lxdata))
+      (dorun (map #(adddata-by-tablename "t_abroadmarriage" (conj % {:cg_id cg_id})) thdata))
+      (dorun (map #(adddata-by-tablename "t_aboardsettle" (conj % {:cg_id cg_id})) djdata)))))
+
 (defn test-in []
   (select "t_personalrecords"
           (where {:pb 1})))
