@@ -552,11 +552,17 @@ var cj=(function(){
                 code.each(function () {
                     var $this = $(this);
                     if($this.hasClass('easyui-combobox')){
-                        arr_1.push($this.combobox('getValue'));
+                        if($this.combobox('getValue').length>0){
+                            arr_1.push($this.combobox('getValue'));
+                        }
                     }else if($this.hasClass('easyui-datebox')){
-                        arr_1.push($this.datebox('getValue'));
+                        if($this.datebox('getValue').length>0){
+                            arr_1.push($this.datebox('getValue'));
+                        }
                     }else{
-                        arr_1.push($this.val())
+                        if($this.val().length>0){
+                            arr_1.push($this.val())
+                        }
                     }
                 });
                 arr.push(arr_1);

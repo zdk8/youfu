@@ -67,14 +67,13 @@ define(function(){
                         layer.open({
                             title:title,
                             type: 1,
-                            area: ['900px', '500px'], //宽高
+                            area: ['1000px', '500px'], //宽高
                             content: htmfile,
                             shift: 2,
                             success: function(layero, index){
                                 jsfile.render(layero,{
                                     index:index,
                                     queryParams:{
-                                        flag:undefined,
                                         record:row
                                     }
                                 });

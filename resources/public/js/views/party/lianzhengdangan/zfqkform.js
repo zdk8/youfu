@@ -1,6 +1,7 @@
 define(function () {
     return {
         render: function (local,option) {
+            layer.closeAll('loading');
             local.find('div[opt=formcontentpanel]').panel({
                 onResize: function (width, height) {
                     $(this).height($(this).height() - 35);
@@ -13,21 +14,17 @@ define(function () {
 
 
             var record = option.queryParams.poption.queryParams.record;
+
             local.find('[name=name]').val(record.name);
             local.find('[name=workunit]').val(record.workunit);
             local.find('[name=incumbent]').val(record.incumbent);
 
             var datas = option.queryParams.datas;
-            if(datas == "false"){
 
-            }
-
-            var childdata_zf = [{xy_address:'xy_address',xy_area:'xy_area',xy_property:'xy_property',xy_source:'xy_source',xy_owner:'xy_owner'},
-                {xy_address:'xy_address1',xy_area:'xy_area1',xy_property:'xy_property1',xy_source:'xy_source1',xy_owner:'xy_owner1'},
-                {xy_address:'xy_address2',xy_area:'xy_area2',xy_property:'xy_property2',xy_source:'xy_source2',xy_owner:'xy_owner2'}];
-            var childdata_cc = [{sf_address:'sf_address',sf_area:'sf_area',sf_property:'sf_property',sf_selltime:'2015-10-15',sf_money:'sf_money'},
-                {sf_address:'sf_address1',sf_area:'sf_area1',sf_property:'sf_property1',sf_selltime:'2015-10-19',sf_money:'sf_money1'},
-                {sf_address:'sf_address2',sf_area:'sf_area2',sf_property:'sf_property2',sf_selltime:'2015-10-10',sf_money:'sf_money2'}];
+            local.find('[name=wifename]').val(datas[0].wifename);
+            local.find('[name=wifedepartment]').val(datas[0].wifedepartment);
+            local.find('[name=wifeposition]').val(datas[0].wifeposition);
+            local.find('[name=zf_other]').val(datas[0].zf_other);
 
             var field1 = ['xy_address','xy_area','xy_property','xy_source','xy_owner'];//本人、配偶及共同生活的子女现有住房情况
             var field2 = ['sf_address','sf_area','sf_property','sf_selltime','sf_money'];//房屋出售情况
@@ -35,29 +32,34 @@ define(function () {
             var field4 = ['jz_address','jz_area','jz_unit','jz_totalamount','jz_payment'];//参加集资建房情况
 
             for(var i=0;i<field1.length;i++){
-                local.find('[opt='+field1[i]+']').val(i);
+                local.find('[opt='+field1[i]+']').val(datas[0].field1[0][field1[i]]);
             }
             for(var j=0;j<field2.length;j++){
                 if(local.find('[opt='+field2[j]+']').hasClass('easyui-datebox')){
-                    local.find('[opt='+field2[j]+']').datebox('setValue','2015-10-13');
+                    local.find('[opt='+field2[j]+']').datebox('setValue',datas[0].field2[0][field2[j]]);
                 }else{
-                    local.find('[opt='+field2[j]+']').val(j);
+                    local.find('[opt='+field2[j]+']').val(datas[0].field2[0][field2[j]]);
                 }
             }
             for(var k=0;k<field3.length;k++){
-                local.find('[opt='+field3[k]+']').val(k);
+                local.find('[opt='+field3[k]+']').val(datas[0].field3[0][field3[k]]);
             }
             for(var l=0;l<field4.length;l++){
-                local.find('[opt='+field4[l]+']').val(l);
+                local.find('[opt='+field4[l]+']').val(datas[0].field4[0][field4[l]]);
             }
 
-            cj.initTrData(local,'zfqk_zf',childdata_zf,field1);
-            cj.initTrData(local,'zfqk_cc',childdata_cc,field2);
-            //initTrData(local,'zfqk_cz',4,field3);
-            //initTrData(local,'zfqk_jf',5,field4);
-
-
-
+            local.find('[name=zf_id]').val(datas[0].zf_id);
+            if(datas != "false"){
+                var data = datas[0];
+                var childdata_zf = data.field1;
+                var childdata_cs = data.field2;
+                var childdata_cz = data.field3;
+                var childdata_jf = data.field4;
+                cj.initTrData(local,'zfqk_zf',childdata_zf,field1);
+                cj.initTrData(local,'zfqk_cs',childdata_cs,field2);
+                cj.initTrData(local,'zfqk_cz',childdata_cz,field3);
+                cj.initTrData(local,'zfqk_jf',childdata_jf,field4);
+            }
 
             /*保存*/
             local.find('[opt=save_zfqk]').click(function () {
@@ -73,10 +75,11 @@ define(function () {
                         var isValid = $(this).form('validate');
                         if (isValid) {
                             layer.load();
-                            params.zfqk_v1 = JSON.stringify(zfqk_v1);
-                            params.zfqk_v2 = JSON.stringify(zfqk_v2);
-                            params.zfqk_v3 = JSON.stringify(zfqk_v3);
-                            params.zfqk_v4 = JSON.stringify(zfqk_v4);
+                            params.pr_id = record.pr_id;
+                            params.field1 = JSON.stringify(zfqk_v1);
+                            params.field2 = JSON.stringify(zfqk_v2);
+                            params.field3 = JSON.stringify(zfqk_v3);
+                            params.field4 = JSON.stringify(zfqk_v4);
                         }else{
                             layer.closeAll('loading');
                         }
@@ -84,13 +87,10 @@ define(function () {
                     },
                     success: function (data) {
                         $this.attr("disabled",false);//按钮启用
+                        layer.closeAll('loading');
                         if (data == "true") {
-                            layer.closeAll('loading');
                             cj.showSuccess('保存成功');
-                            //option.queryParams.refresh();
-                            //layer.close(option.index);
                         } else {
-                            layer.closeAll('loading');
                             cj.showFail('保存失败');
                         }
                     }
