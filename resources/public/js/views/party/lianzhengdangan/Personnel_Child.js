@@ -244,95 +244,6 @@ define(function(){
             }
         });
     }
-    /*住房情况*/
-    function zfqkFunc(local,option){
-        var field1 = ['xy_address','xy_area','xy_property','xy_source','xy_owner'];//本人、配偶及共同生活的子女现有住房情况
-        var field2 = ['sf_address','sf_area','sf_property','sf_selltime','sf_money'];//房屋出售情况
-        var field3 = ['cz_address','cz_area','cz_property','cz_deadline','cz_annualrent'];//房屋出租情况
-        var field4 = ['jz_address','jz_area','jz_unit','jz_totalamount','jz_payment'];//参加集资建房情况
-        local.find('[opt=sf_selltime]').datebox();
-        /*保存*/
-        local.find('[opt=save_zfqk]').click(function () {
-            var $this = $(this);
-            $this.attr("disabled",true);//按钮禁用
-            var zfqk_v1 = cj.commonGetValue(local,{field:field1});
-            var zfqk_v2 = cj.commonGetValue(local,{field:field2});
-            var zfqk_v3 = cj.commonGetValue(local,{field:field3});
-            var zfqk_v4 = cj.commonGetValue(local,{field:field4});
-            local.find('[opt=form_zfqk]').form('submit', {
-                url: 'wwww',
-                onSubmit: function (params) {
-                    var isValid = $(this).form('validate');
-                    if (isValid) {
-                        layer.load();
-                        params.zfqk_v1 = JSON.stringify(zfqk_v1);
-                        params.zfqk_v2 = JSON.stringify(zfqk_v2);
-                        params.zfqk_v3 = JSON.stringify(zfqk_v3);
-                        params.zfqk_v4 = JSON.stringify(zfqk_v4);
-                    }else{
-                        layer.closeAll('loading');
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    $this.attr("disabled",false);//按钮启用
-                    if (data == "true") {
-                        layer.closeAll('loading');
-                        cj.showSuccess('保存成功');
-                        //option.queryParams.refresh();
-                        //layer.close(option.index);
-                    } else {
-                        layer.closeAll('loading');
-                        cj.showFail('保存失败');
-                    }
-                }
-            })
-        })
-    }
-    /*持股情况*/
-    function cgqkFunc(local,option){
-        var field1 = ['qy_name','qy_businessscope','qy_registercapital','qy_address','qy_legalperson','qy_contact'];//干部经商办企业情况
-        var field2 = ['relationship'];//主要社会关系经商办企业情况
-        var field3 = ['jz_departname','jz_property','jz_position','jz_docnumber','jz_yearreward'];//在企事业单位、社会团 体或其他营利性组织中兼职情况
-        var field4 = ['rg_departname','rg_property','rg_way','rg_money','rg_yearincome'];//干部投资或入股情况
-        /*保存*/
-        local.find('[opt=save_cgqk]').click(function () {
-            var $this = $(this);
-            $this.attr("disabled",true);//按钮禁用
-            var zfqk_v1 = cj.commonGetValue(local,{field:field1});
-            var zfqk_v2 = cj.commonGetValue(local,{field:field2});
-            var zfqk_v3 = cj.commonGetValue(local,{field:field3});
-            var zfqk_v4 = cj.commonGetValue(local,{field:field4});
-            local.find('[opt=form_cgqk]').form('submit', {
-                url: 'wwww1',
-                onSubmit: function (params) {
-                    var isValid = $(this).form('validate');
-                    if (isValid) {
-                        layer.load();
-                        params.zfqk_v1 = JSON.stringify(zfqk_v1);
-                        params.zfqk_v2 = JSON.stringify(zfqk_v2);
-                        params.zfqk_v3 = JSON.stringify(zfqk_v3);
-                        params.zfqk_v4 = JSON.stringify(zfqk_v4);
-                    }else{
-                        layer.closeAll('loading');
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    $this.attr("disabled",false);//按钮启用
-                    if (data == "true") {
-                        layer.closeAll('loading');
-                        cj.showSuccess('保存成功');
-                        //option.queryParams.refresh();
-                        //layer.close(option.index);
-                    } else {
-                        layer.closeAll('loading');
-                        cj.showFail('保存失败');
-                    }
-                }
-            })
-        });
-    }
     /*婚姻变化情况*/
     function hyqkFunc(local,option){
         layoutBtnInit(local,{
@@ -410,59 +321,6 @@ define(function(){
                     }
                 }
             }
-        });
-    }
-    /*出国(境)情况*/
-    function cgjqkFunc(local,option){
-        var field1 = ['zj_name','zj_number','zj_issuedepart','zj_effectdate','zj_Invaliddate'];//本人持有因私出国(境)证件情况
-        var field2 = ['hd_name','hd_rounddate','hd_roundaddress','hd_reason','hd_channel','hd_fundsource'];//本人及其配偶因私出国(境)和在国(境)外活动情况
-        var field3 = ['lx_name','lx_appellation','lx_time','lx_place','lx_yeartuition','lx_fundsource'];//配偶、子女及其配偶出国(境)留学情况
-        var field4 = ['th_name','th_department','th_position','th_spouse','th_nationality','th_registertime'];//子女与外国人、港澳台居民通婚情况
-        var field5 = ['dj_name','dj_appellation','dj_time','dj_place','dj_work'];//配偶、子女及其配偶出国(境)定居情况
-        local.find('[opt=zj_effectdate]').datebox();
-        local.find('[opt=zj_Invaliddate]').datebox();
-        local.find('[opt=hd_rounddate]').datebox();
-        local.find('[opt=lx_time]').datebox();
-        local.find('[opt=th_registertime]').datebox();
-        local.find('[opt=dj_time]').datebox();
-        /*保存*/
-        local.find('[opt=save_cgjqk]').click(function () {
-            var $this = $(this);
-            $this.attr("disabled",true);//按钮禁用
-            var zfqk_v1 = cj.commonGetValue(local,{field:field1});
-            var zfqk_v2 = cj.commonGetValue(local,{field:field2});
-            var zfqk_v3 = cj.commonGetValue(local,{field:field3});
-            var zfqk_v4 = cj.commonGetValue(local,{field:field4});
-            var zfqk_v5 = cj.commonGetValue(local,{field:field5});
-            local.find('[opt=form_cgjqk]').form('submit', {
-                url: 'wwww1',
-                onSubmit: function (params) {
-                    var isValid = $(this).form('validate');
-                    if (isValid) {
-                        layer.load();
-                        params.zfqk_v1 = JSON.stringify(zfqk_v1);
-                        params.zfqk_v2 = JSON.stringify(zfqk_v2);
-                        params.zfqk_v3 = JSON.stringify(zfqk_v3);
-                        params.zfqk_v4 = JSON.stringify(zfqk_v4);
-                        params.zfqk_v5 = JSON.stringify(zfqk_v5);
-                    }else{
-                        layer.closeAll('loading');
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    $this.attr("disabled",false);//按钮启用
-                    if (data == "true") {
-                        layer.closeAll('loading');
-                        cj.showSuccess('保存成功');
-                        //option.queryParams.refresh();
-                        //layer.close(option.index);
-                    } else {
-                        layer.closeAll('loading');
-                        cj.showFail('保存失败');
-                    }
-                }
-            })
         });
     }
     /*刑事处分*/
@@ -798,65 +656,12 @@ define(function(){
         });
 
     }
-    /*刑事处分数据加载*/
-    var loadXSCFData = function (local,option) {
-        layer.load(1);
-        $.ajax({
-            url:'party/gethousestatus',
-            type:'post',
-            data:{
-                pr_id:option.queryParams.record.pr_id
-            },
-            success: function (data) {
-                //更新当前tab
-                var currTab =  local.find('[opt=tabs_child]').tabs('getSelected'); //获得当前tab
-                require(['text!views/party/lianzhengdangan/xscfform.htm','views/party/lianzhengdangan/xscfform'],
-                    function (htmfile,jsfile) {
-                        local.find('[opt=tabs_child]').tabs('update', {
-                            tab : currTab,
-                            options : {
-                                content : htmfile
-                            }
-                        });
-                        jsfile.render(currTab,{
-                            queryParams:{
-                                actiontype:'add',
-                                poption:option,
-                                datas:data
-                            }
-                        });
-                    }
-                )
-            }
-        });
-    }
+
     var render=function(local,option){
         layer.closeAll('loading');
         local.find('[opt=tabs_child]').tabs({tabPosition:'left'});
-
-        /*local.find('div[opt=formcontentpanel]').panel({
-            onResize: function (width, height) {
-                $(this).height($(this).height() - 35);
-            }
-        });
-
-        local.find('[opt=cancel]').click(function(){
-            layer.close(option.index);
-        });
-*/
-        /*cj.common_listFunc(local);//表单动态增减行
-        var record = option.queryParams.record;
-        local.find('[name=name]').val(record.name);
-        local.find('[name=workunit]').val(record.workunit);
-        local.find('[name=incumbent]').val(record.incumbent);*/
-
         initAddFunc(local,option);
         hjqkFunc(local, option);//首先加载获奖情况
-
-        //zfqkFunc(local, option);//住房情况
-        //cgqkFunc(local, option);//持股情况
-        //cgjqkFunc(local, option);//出国情况
-        //xscfFunc(local, option);//亲属受党政纪刑事处分
 
         /*tabs选择事件*/
         local.find('[opt=tabs_child]').tabs({
@@ -874,23 +679,19 @@ define(function(){
                         jssjqkFunc(local, option);
                         break;
                     case 'zfqk':        //住房情况
-                        //zfqkFunc(local, option);
                         loadZFQKData(local,option);//住房情况数据加载
                         break;
                     case 'cgqk':        //持股情况
-                        //cgqkFunc(local, option);
                         loadCGQKData(local,option);
                         break;
                     case 'hyqk':        //婚姻变化情况
                         hyqkFunc(local, option);
                         break;
                     case 'cgjqk':         //出国（境）情况
-                        //cgjqkFunc(local, option);
                         loadCGJQKData(local,option);
                         break;
                     case 'xscf':         //亲属受党政纪刑事处分
                         xscfFunc(local, option);
-                        //loadXSCFData(local,option);
                         break;
                     default :
                         break;
