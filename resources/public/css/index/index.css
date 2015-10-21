@@ -176,6 +176,24 @@ a:hover{
     position: relative;
     top: 1px;
 }
+.close_btns{
+    background-color: #DAA520;
+    border: 1px solid #DAA520;
+    color: #ffffff;
+    cursor: pointer;
+    height: 50px;
+    width: 15px;
+    font-weight: bolder;
+    padding:3px;
+}
+.close_btns:hover{
+    background-color: #B8860B;
+}
+.close_btns：active{
+    position: relative;
+    top: 1px;
+}
+
 
 
 /************表单上方或者下方的悬浮工具条***************/
