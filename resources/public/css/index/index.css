@@ -30,7 +30,7 @@ body{
     font-size: 14px;
 }
 .bghead_r li{
-    float: left;
+    float: right;
     margin-right: 10px;
     cursor: pointer;
 }

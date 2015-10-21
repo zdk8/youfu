@@ -24,6 +24,9 @@ define(function(){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
                             var record=rows[index];
+                            if(record.returndate){
+                                $(btns_arr[j][i]).hide();
+                            }
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "back"){

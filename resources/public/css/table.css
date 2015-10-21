@@ -61,7 +61,9 @@ textarea,textarea.input-text,textarea.input-focus{font-size:12px;height:auto; pa
     margin: 0px auto;
     border: 1px solid #e5e5e5;
 }
-
+div.form-foot-btns{
+    text-align: center;
+}
 div.form-foot-btns ul li a, div.form-foot-btns ul li a:visited
 {
     cursor: pointer;
@@ -72,6 +74,8 @@ div.form-foot-btns ul li a, div.form-foot-btns ul li a:visited
     padding-right: 20px;
     padding-bottom: 6px;
     padding-top: 2px;
+    color: white;
+    background-color: #0d7fd7;
 }
 textarea{
     border: 1px solid #e5e5e5;
