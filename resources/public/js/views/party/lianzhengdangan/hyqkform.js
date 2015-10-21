@@ -36,70 +36,72 @@ define(function(){
     /*界面初始化，公共方法*/
     var initFunc = function (local,option) {
         initControls(local);//控件初始化
+        var record = option.queryParams.record;
+        local.find('[name=name]').val(record.name);
+        local.find('[name=workunit]').val(record.workunit);
+        local.find('[name=incumbent]').val(record.incumbent);
     }
     
     /*新增数据时进入*/
     var saveFunc = function(local,option){
         var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
         addToolBar(local,option,li);
-        var record = option.queryParams.record;
-        local.find('[name=name]').val(record.name);
-        local.find('[name=workunit]').val(record.workunit);
-        local.find('[name=incumbent]').val(record.incumbent);
         /*保存*/
         local.find('[opt=save]').click(function () {
+            var $this = $(this);
+            $this.attr("disabled",true);//按钮禁用
             local.find('form').form('submit', {
-                url: 'record/addpensonrecords11',
+                url: 'party/addcadremarriage',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
+                    params.pr_id = option.queryParams.record.pr_id;
                     if (!isValid) {
                         layer.closeAll('loading');
+                        $this.attr("disabled",false);//按钮启用
                     }
                     return isValid;
                 },
                 success: function (data) {
+                    layer.closeAll('loading');
+                    $this.attr("disabled",false);//按钮启用
                     if (data == "true") {
-                        layer.closeAll('loading');
                         cj.showSuccess('保存成功');
-                        //option.queryParams.refresh();
+                        option.queryParams.dgrid.datagrid('reload');
                         layer.close(option.index);
                     } else {
-                        layer.closeAll('loading');
                         cj.showFail('保存失败');
                     }
                 }
             })
         });
     }
-    
-    /*修改数据*/
-    var updateFunc = function (local,option) {
+    /*数据修改*/
+    var updateFunc = function(local,option){
         var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>';
         addToolBar(local,option,li);
-        var record = option.queryParams.record; //主表信息
+        var record = option.queryParams.data; //主表信息
         local.find('form').form('load',record);//主表数据填充
 
         local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {
-                url: 'record/updaterecord111',
+                url: 'party/updatemarriage',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
-                    params.pr_id = record.pr_id;
+                    params.hy_id = record.hy_id;
                     if (!isValid) {
                         layer.closeAll('loading');
                     }
                     return isValid;
                 },
                 success: function (data) {
+                    layer.closeAll('loading');
                     if (data == "true") {
-                        layer.closeAll('loading');
                         cj.showSuccess('修改成功');
-                        //option.queryParams.refresh();
+                        option.queryParams.dgrid.datagrid('reload');
                         layer.close(option.index);
                     } else {
-                        layer.closeAll('loading');
                         cj.showFail('修改失败');
                     }
                 }
@@ -107,16 +109,17 @@ define(function(){
         });
     }
 
+
     var render=function(l,o){
         layer.closeAll('loading');
         initFunc(l,o);//初始化
         if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
-                case 'update':
-                    updateFunc(l, o);
-                    break;
                 case 'add':
                     saveFunc(l, o);
+                    break;
+                case 'update':
+                    updateFunc(l, o);
                     break;
                 default :
                     break;

@@ -1,6 +1,7 @@
 ﻿getGender=['女','男'];             //性别
 getPoliticsstatus=['正式党员','预备党员','其他党派','群众'];             //政治面貌
 getEducationtype=['全日制教育','在职教育'];             //教育类别
+getPunishtype = ['党政纪','刑罚','其他'];//处分类型
 
 
 /*日期时间*/

@@ -343,10 +343,9 @@ define(function(){
         });
         var grid_hyqk = local.find('[opt=datagrid_hyqk]');
         grid_hyqk.datagrid({
-            url:"party/getawardpunishlist",
+            url:"party/getmarriagelist",
             queryParams:{
-                mode:'j',
-                pr_id:option.queryParams.record.pr_id
+                hpr_id:option.queryParams.record.pr_id
             },
             type:'post',
             onLoadSuccess:function(data){
@@ -365,10 +364,10 @@ define(function(){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:'party/deleteawardpunish',
+                                            url:'party/deletemarriage',
                                             type:'post',
                                             data:{
-                                                jc_id:record.jc_id
+                                                hy_id:record.hy_id
                                             },
                                             success: function (data) {
                                                 layer.closeAll('loading');
@@ -383,20 +382,21 @@ define(function(){
                                     });
                                 }else if(action == "update_hyqk"){                   //修改
                                     layer.load(2);
-                                    var title = record.jc_name+'-获奖情况修改';
-                                    require(['text!views/party/lianzhengdangan/hjqkform_update.htm','views/party/lianzhengdangan/hjqkform_update'],
+                                    var title = record.jc_name+'-婚姻情况修改';
+                                    require(['text!views/party/lianzhengdangan/hyqkform.htm','views/party/lianzhengdangan/hyqkform'],
                                         function(htmfile,jsfile){
                                             layer.open({
                                                 title:title,
                                                 type: 1,
-                                                area: ['600px', '300px'], //宽高
+                                                area: ['800px', '450px'], //宽高
                                                 content: htmfile,
                                                 success: function(layero, index){
                                                     jsfile.render(layero,{
                                                         index:index,
                                                         queryParams:{
                                                             actiontype:'update',
-                                                            record:record,
+                                                            record:option.queryParams.record,
+                                                            data:record,
                                                             dgrid:grid_hyqk
                                                         }
                                                     });
@@ -467,38 +467,82 @@ define(function(){
     }
     /*刑事处分*/
     function xscfFunc(local,option){
-        var field1 = ['cf_name','cf_relation','cf_position','cf_punishtype'];//配偶、子女及其配偶受到执纪执法机关查处或涉嫌犯罪情况
-        /*保存*/
-        local.find('[opt=save_xscf]').click(function () {
-            var $this = $(this);
-            $this.attr("disabled",true);//按钮禁用
-            var zfqk_v1 = cj.commonGetValue(local,{field:field1});
-            local.find('[opt=form_xscf]').form('submit', {
-                url: 'wwww1',
-                onSubmit: function (params) {
-                    var isValid = $(this).form('validate');
-                    if (isValid) {
-                        layer.load();
-                        params.zfqk_v1 = JSON.stringify(zfqk_v1);
-                    }else{
-                        layer.closeAll('loading');
-                    }
-                    return isValid;
-                },
-                success: function (data) {
-                    $this.attr("disabled",false);//按钮启用
-                    if (data == "true") {
-                        layer.closeAll('loading');
-                        cj.showSuccess('保存成功');
-                        //option.queryParams.refresh();
-                        //layer.close(option.index);
-                    } else {
-                        layer.closeAll('loading');
-                        cj.showFail('保存失败');
+        layoutBtnInit(local,{
+            layout:'layout_xscf',
+            other:'other_sxcf',
+            func_btn:'func_btn_xscf',
+            other2:'other2_xscf'
+        });
+        var grid_xscf = local.find('[opt=datagrid_xscf]');
+        grid_xscf.datagrid({
+            url:"party/getqshpunishlist",
+            queryParams:{
+                pr_id:option.queryParams.record.pr_id
+            },
+            type:'post',
+            onLoadSuccess:function(data){
+                var updatebtns = local.find('[action=update_xscf]');           //修改
+                var delbtns = local.find('[action=del_xscf]');           //删除
+                var rows=data.rows;
+                var btns_arr=[delbtns,updatebtns];
+                for(var i=0;i<rows.length;i++){
+                    for(var j=0;j<btns_arr.length;j++){
+                        (function(index){
+                            var record=rows[index];
+                            $(btns_arr[j][i]).click(function(){
+                                var action = $(this).attr("action");
+                                if(action == "del_xscf"){                   //处理
+                                    layer.confirm('确定删除么?', {icon: 3, title:'温馨提示'}, function(index){
+                                        layer.close(index);
+                                        layer.load();
+                                        $.ajax({
+                                            url:'party/deleteqshpunish',
+                                            type:'post',
+                                            data:{
+                                                cf_id:record.cf_id
+                                            },
+                                            success: function (data) {
+                                                layer.closeAll('loading');
+                                                if(data == "true"){
+                                                    layer.alert('删除成功', {icon: 6});
+                                                    grid_xscf.datagrid('reload');
+                                                }else{
+                                                    layer.alert('删除失败', {icon: 5});
+                                                }
+                                            }
+                                        });
+                                    });
+                                }else if(action == "update_xscf"){                   //修改
+                                    layer.load(2);
+                                    var title = record.cf_name+'-刑事处分修改';
+                                    require(['text!views/party/lianzhengdangan/xscfform.htm','views/party/lianzhengdangan/xscfform'],
+                                        function(htmfile,jsfile){
+                                            layer.open({
+                                                title:title,
+                                                type: 1,
+                                                area: ['700px', '300px'], //宽高
+                                                content: htmfile,
+                                                success: function(layero, index){
+                                                    jsfile.render(layero,{
+                                                        index:index,
+                                                        queryParams:{
+                                                            actiontype:'update',
+                                                            record:record,
+                                                            precord:option.queryParams.record,
+                                                            dgrid:grid_xscf
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    )
+                                }
+                            });
+                        })(i)
                     }
                 }
-            })
-        })
+            }
+        });
     }
     function initAddFunc(local,option){
         /*获奖情况增加、查询*/
@@ -579,7 +623,7 @@ define(function(){
                                 queryParams: {
                                     actiontype: 'add',
                                     record: option.queryParams.record,
-                                    dgrid: local.find('[opt=grid_jssjqk]')
+                                    dgrid: local.find('[opt=datagrid_jssjqk]')
                                 }
                             });
                         }
@@ -609,7 +653,7 @@ define(function(){
                                 queryParams:{
                                     actiontype:'add',
                                     record:option.queryParams.record,
-                                    refresh:""
+                                    dgrid:local.find('[opt=datagrid_hyqk]')
                                 }
                             });
                         }
@@ -621,6 +665,38 @@ define(function(){
         local.find('[opt=query_hyqk]').click(function () {
             var name_jssjqk = local.find('[opt=name_jssjqk]').val();
             console.log('查询')
+        });
+
+        /*刑事处分增加、查询*/
+        local.find('[opt=addbtn_xscf]').click(function () {
+            layer.load(2);
+            require(['text!views/party/lianzhengdangan/xscfform.htm','views/party/lianzhengdangan/xscfform'],
+                function(htmfile,jsfile){
+                    layer.open({
+                        title:'刑事处分添加',
+                        type: 1,
+                        area: ['700px', '300px'], //宽高
+                        content: htmfile,
+                        success: function(layero, index){
+                            jsfile.render(layero,{
+                                index:index,
+                                queryParams:{
+                                    actiontype:'add',
+                                    precord:option.queryParams.record,
+                                    dgrid:local.find('[opt=datagrid_xscf]')
+                                }
+                            });
+                        }
+                    });
+                }
+            )
+        });
+        /*查询*/
+        local.find('[opt=query_xscf]').click(function () {
+            var name_xscf = local.find('[opt=name_xscf]').val();
+            local.find('[opt=datagrid_xscf]').datagrid('load',{
+                cf_name:name_xscf
+            });
         });
     }
 
@@ -660,7 +736,7 @@ define(function(){
     var loadCGQKData = function (local,option) {
         layer.load(1);
         $.ajax({
-            url:'party/gethousestatus',
+            url:'party/getprofitstatus',
             type:'post',
             data:{
                 pr_id:option.queryParams.record.pr_id
@@ -693,7 +769,7 @@ define(function(){
     var loadCGJQKData = function (local,option) {
         layer.load(1);
         $.ajax({
-            url:'party/gethousestatus',
+            url:'party/getgoabroad',
             type:'post',
             data:{
                 pr_id:option.queryParams.record.pr_id
@@ -813,8 +889,8 @@ define(function(){
                         loadCGJQKData(local,option);
                         break;
                     case 'xscf':         //亲属受党政纪刑事处分
-                        //xscfFunc(local, option);
-                        loadXSCFData(local,option);
+                        xscfFunc(local, option);
+                        //loadXSCFData(local,option);
                         break;
                     default :
                         break;

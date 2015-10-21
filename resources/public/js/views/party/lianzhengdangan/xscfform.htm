@@ -1,62 +1,61 @@
-<div class="easyui-panel" opt="formcontentpanel"
-     style="overflow-y: scroll;border-bottom: 1px solid greenyellow;height:5px;"
-     data-options="fit:true,border:false,footer:'#ft8'">
-    <form opt="form_xscf" class="common-form textcolor" method="post">
-        <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
-            <thead>
-            <tr>
-                <th colspan="7" style="text-align: center;">干部配偶、子女、父母、岳父母受党政纪、刑事处分报告表</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="formtdtext" style="width: 100px" colspan="2">本人姓名<label></label></td>
-                <td style="width: 80px;">
-                    <input class="input-text" name="name" style="width: 70px;background-color: #FFFAF0" readonly>
-                </td>
-                <td class="formtdtext">单位<label></label></td>
-                <td>
-                    <input class="input-text" name="workunit" style="background-color: #FFFAF0" readonly>
-                </td>
-                <td class="formtdtext">职务<label></label></td>
-                <td>
-                    <input class="input-text" name="incumbent" style="background-color: #FFFAF0" readonly>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="xscf_cc">
-            <tbody>
-            <tr>
-                <td colspan="7" style="text-align: center;font-size: 16px">配偶、子女及其配偶受到执纪执法机关查处或涉嫌犯罪情况</td>
-            </tr>
-            <tr>
-                <td align="center">姓  名</td>
-                <td align="center">与本人关系</td>
-                <td align="center">(原)工作单位及职务</td>
-                <td align="center">处分类型</td>
-                <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>
-            </tr>
-            <tr class="demo">
-                <td align="center"><input class="input-text" opt="cf_name" style="width: 150px;"></td>
-                <td align="center"><input class="input-text" opt="cf_relation" style="width: 70px;"></td>
-                <td align="center"><input class="input-text" opt="cf_position" style="width: 70px;"></td>
-                <td align="center"><input class="input-text" opt="cf_punishtype" style="width: 130px;"></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-        <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form">
-            <tr>
-                <td align="center" style="width: 50px;">备注</td>
-                <td>
-                    <textarea name="cf_comments" style="width: 90%;"></textarea>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
-<div id="ft8" style="padding:5px;" align="center">
-    <input type="button" value="取消" class="btns" opt="cancel">
-    <input type="button" value="保存" class="btns" opt="save_xscf">
-</div>
+<form opt="form_xscf" class="common-form textcolor" method="post">
+    <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
+        <thead>
+        <tr>
+            <th colspan="7" style="text-align: center;">干部配偶、子女、父母、岳父母受党政纪、刑事处分报告表</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="formtdtext" style="width: 100px" colspan="2">本人姓名<label></label></td>
+            <td style="width: 80px;">
+                <input class="input-text" name="name" style="width: 70px;background-color: #FFFAF0" readonly>
+            </td>
+            <td class="formtdtext">单位<label></label></td>
+            <td>
+                <input class="input-text" name="workunit" style="background-color: #FFFAF0" readonly>
+            </td>
+            <td class="formtdtext">职务<label></label></td>
+            <td>
+                <input class="input-text" name="incumbent" style="background-color: #FFFAF0" readonly>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="xscf_cc">
+        <tbody>
+        <tr>
+            <td colspan="7" style="text-align: center;font-size: 16px">配偶、子女及其配偶受到执纪执法机关查处或涉嫌犯罪情况</td>
+        </tr>
+        <tr>
+            <td align="center">姓  名</td>
+            <td align="center">与本人关系</td>
+            <td align="center">(原)工作单位及职务</td>
+            <td align="center">处分类型</td>
+            <!--<td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td>-->
+        </tr>
+        <tr class="demo">
+            <td align="center"><input class="input-text" name="cf_name" style="width: 70px;"></td>
+            <td align="center"><input class="input-text" name="cf_relation" style="width: 70px;"></td>
+            <td align="center"><input class="input-text" name="cf_position" style="width: 150px;"></td>
+            <td align="center">
+                <input class="input-text" name="cf_punishtype" opt="cf_punishtype" style="width: 130px;"
+                       data-options="
+                                loader:cj.getLoader('cf_punishtype'),
+                                editable:false,
+                                valueField:'id',
+                                textField:'text'">
+            </td>
+            <!--<td></td>-->
+        </tr>
+        </tbody>
+    </table>
+    <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form">
+        <tr>
+            <td align="center" style="width: 50px;">备注</td>
+            <td>
+                <textarea name="cf_comments" style="width: 90%;"></textarea>
+            </td>
+        </tr>
+    </table>
+</form>

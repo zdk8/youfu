@@ -621,7 +621,7 @@
         pr_id (:hpr_id params)
         conds (str (if (> (count (str pr_id)) 0) (str " and pr_id = " pr_id)))
         getresults (common/fenye rows page "t_marriagetransition" "*" conds  " order by hy_id desc ")]
-    (resp/json {:total (:total getresults) :row (common/dateymd-bf-list (:rows getresults) "hy_formerregister" "hy_divorcedate" "hy_register")})))
+    (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "hy_formerregister" "hy_divorcedate" "hy_register")})))
 
 (defn update-marriage [request]
   (let [params (:params request)
@@ -641,7 +641,7 @@
   (let [params (:params request)
         cg_id (:cg_id params)
         abroaddata (select-keys params (:t_goabroad common/selectcols))
-        czdata (map #(common/dateformat-bf-insert % "zj_effectdate" "zj_Invaliddate")(json/read-str  (:field1 params) :key-fn keyword))
+        czdata (map #(common/dateformat-bf-insert % "zj_effectdate" "zj_invaliddate")(json/read-str  (:field1 params) :key-fn keyword))
         hddata (json/read-str  (:field2 params) :key-fn keyword)
         lxdata (map #(common/dateformat-bf-insert % "lx_time")(json/read-str  (:field3 params) :key-fn keyword))
         thdata (map #(common/dateformat-bf-insert % "th_registertime")(json/read-str  (:field4 params) :key-fn keyword))
@@ -651,7 +651,7 @@
     (str "true")))
 
 (defn get-abroadmessage [cg_id]
-  (let [czdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_overseavisa" {:cg_id cg_id}) "zj_effectdate" "zj_Invaliddate")
+  (let [czdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_overseavisa" {:cg_id cg_id}) "zj_effectdate" "zj_invaliddate")
         hddata (db/selectdatas-by-tablename "t_abroadactivitie" {:cg_id cg_id})
         lxdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_abroadstudy" {:cg_id cg_id}) "lx_time")
         thdata (common/dateymd-bf-list (db/selectdatas-by-tablename "t_abroadmarriage" {:cg_id cg_id}) "th_registertime")
@@ -660,8 +660,8 @@
 
 (defn get-goabroad [request]
   (let [params (:params request)
-        cg_id (:cg_id params)
-        abroaddata (first (db/selectdatas-by-tablename "t_goabroad" {:cg_id cg_id}))
+        pr_id (:pr_id params)
+        abroaddata (first (db/selectdatas-by-tablename "t_goabroad" {:pr_id pr_id}))
         cg_id (:cg_id abroaddata)]
     (if (> (count (str cg_id)) 0) (resp/json (vector (conj abroaddata (get-abroadmessage cg_id))))
                                   (str "false"))))

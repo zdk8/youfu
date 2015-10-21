@@ -510,12 +510,18 @@ var cj=(function(){
                 var tds = "";
                 for(var i=0;i<td1.length;i++){
                     var hasdatebox = $(td1[i].outerHTML).find('span').hasClass('datebox');
+                    var hascombobox = $(td1[i].outerHTML).find('input').hasClass('easyui-combobox');
                     if(hasdatebox){
                         var opt_td = $($(td1[i].outerHTML).find('input')[0]).attr('opt');
                         var width_td = $($(td1[i].outerHTML).find('input')[0]).width();
-                        var datebox_td = '<td align="center"><input class="input-text easyui-datebox" opt="'+opt_td+'" style="width: '+width_td+'px"'+'></td>';
+                        var datebox_td = '<td align="center"><input class="easyui-datebox" opt="'+opt_td+'" style="width: '+width_td+'px"'+'></td>';
                         tds += datebox_td;
 
+                    }else if(hascombobox){
+                        var opt_td2 = $($(td1[i].outerHTML).find('input')[0]).attr('opt');
+                        var width_td2 = $($(td1[i].outerHTML).find('input')[0]).width();
+                        var combobox_td = '<td align="center"><input class="easyui-combobox" opt="'+opt_td2+'" style="width: '+width_td2+'px"'+'></td>';
+                        tds += combobox_td;
                     }else{
                         tds += td1[i].outerHTML.toString();
                     }
@@ -527,6 +533,14 @@ var cj=(function(){
                     var $this1 = $(this);
                     if($this1.hasClass('easyui-datebox')){
                         local.find('[opt='+$this1.attr('opt')+']').last().datebox();
+                    }else if($this1.hasClass('easyui-combobox')){
+                        var combobox = local.find('[opt='+$this1.attr('opt')+']').last().combobox();
+                        combobox.combobox({
+                            loader:cj.getLoader($this1.attr('opt')),
+                            editable:false,
+                            valueField:'id',
+                            textField:'text'
+                        });
                     }
                 })
                 //local.find('[opt=jc_date]').datebox();
@@ -569,11 +583,22 @@ var cj=(function(){
             }
 
             var arrall = new Array();
-            var arr2 = arr[0];
+            var arr2 = "";
+            for(var a=0;a<arr.length;a++){
+                if(arr[a].length>0){
+                    arr2 = arr[a];
+                }
+            }
             for(var i=0;i<arr2.length;i++){
                 var maparr = {};
                 for(var j=0;j<field.length;j++){
-                    maparr[field[j]]=arr[j][i];
+                    if(field[j] == "politicsstatus"){
+                        maparr['fm_politicalstatus']=arr[j][i];
+                    }else if(field[j] == "edutype"){
+                        maparr['educationtype']=arr[j][i];
+                    }else{
+                        maparr[field[j]]=arr[j][i];
+                    }
                 }
                 arrall.push(maparr);
             }
@@ -585,12 +610,18 @@ var cj=(function(){
             var $tr = "";
             for(var i=0;i<$tds.length;i++){
                 var hasdatebox = $($tds[i].outerHTML).find('span').hasClass('datebox');
+                var hascombobox = $($tds[i].outerHTML).find('input').hasClass('easyui-combobox');
                 if(hasdatebox){
                     var opt_td = $($($tds[i].outerHTML).find('input')[0]).attr('opt');
                     var width_td = $($($tds[i].outerHTML).find('input')[0]).width();
-                    var datebox_td = '<td align="center"><input class="input-text easyui-datebox" opt="'+opt_td+'" style="width: '+width_td+'px"'+'></td>';
+                    var datebox_td = '<td align="center"><input class="easyui-datebox" opt="'+opt_td+'" style="width: '+width_td+'px"'+'></td>';
                     $tr += datebox_td;
 
+                }else if(hascombobox){
+                    var opt_td2 = $($($tds[i].outerHTML).find('input')[0]).attr('opt');
+                    var width_td2 = $($($tds[i].outerHTML).find('input')[0]).width();
+                    var combobox_td = '<td align="center"><input class="easyui-combobox" opt="'+opt_td2+'" style="width: '+width_td2+'px"'+'></td>';
+                    $tr += combobox_td;
                 }else{
                     $tr += $tds[i].outerHTML.toString();
                 }
@@ -602,6 +633,20 @@ var cj=(function(){
                     if(local.find('[opt='+fields[j]+']').last().hasClass('easyui-datebox')){
                         local.find('[opt='+fields[j]+']').last().datebox();
                         local.find('[opt='+fields[j]+']').last().datebox('setValue',childdata[i][fields[j]]);
+                    }else if(local.find('[opt='+fields[j]+']').last().hasClass('easyui-combobox')){
+                        local.find('[opt='+fields[j]+']').last().combobox({
+                            loader:cj.getLoader(fields[j]),
+                            editable:false,
+                            valueField:'id',
+                            textField:'text'
+                        });
+                        if(fields[j] == "edutype"){
+                            local.find('[opt='+fields[j]+']').last().combobox('setValue',childdata[i]["educationtype"]);
+                        }else if(fields[j] == "politicsstatus"){
+                            local.find('[opt='+fields[j]+']').last().combobox('setValue',childdata[i]["fm_politicalstatus"]);
+                        }else{
+                            local.find('[opt='+fields[j]+']').last().combobox('setValue',childdata[i][fields[j]]);
+                        }
                     }else{
                         local.find('[opt='+fields[j]+']').last().val(childdata[i][fields[j]]);
                     }

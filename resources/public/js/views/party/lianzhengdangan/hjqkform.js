@@ -60,6 +60,7 @@ define(function(){
                     params.mode = "j";
                     if (!isValid) {
                         layer.closeAll('loading');
+                        $this.attr("disabled",false);//按钮启用
                     }
                     return isValid;
                 },

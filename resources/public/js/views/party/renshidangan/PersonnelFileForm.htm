@@ -155,10 +155,11 @@
             </td>
             <td colspan="4">
                 <div style="display: none;" opt="shiye">
-                    聘用时间 :<input class="easyui-datebox" name="employtime" style="width: 100px">
+                    聘用时间 :<input class="easyui-datebox" name="employtime" opt="employtime" style="width: 100px">
                     聘期 :<input class="input-text" name="employterm">
                     专业技术职务 :<input class="easyui-combobox "
                                    name="technicalpost"
+                                   opt="technicalpost"
                                    style="width: 100px"
                                    data-options="
                                     loader:cj.getLoader('protech'),
@@ -167,15 +168,15 @@
                                     textField:'text'">
                 </div>
                 <div style="display: none;" opt="hetonggong">
-                    合同签订时间 :<input class="easyui-datebox" name="contractsigntime" style="width: 100px">
-                    截止时间 :<input class="easyui-datebox" name="contractdeadline" style="width: 100px">
+                    合同签订时间 :<input class="easyui-datebox" name="contractsigntime" opt="contractsigntime" style="width: 100px">
+                    截止时间 :<input class="easyui-datebox" name="contractdeadline" opt="contractdeadline" style="width: 100px">
                     试用期*月 :<input class="input-text" name="probation">
                 </div>
             </td>
         </tr>
     </table>
 
-    <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list" opt="edu">
+    <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="edu">
         <tbody>
             <tr>
                 <td colspan="4" style="text-align: center;font-size: 18px">学位学历</td>
@@ -184,7 +185,7 @@
                 <td align="center">教育类别</td>
                 <td align="center">毕业院校</td>
                 <td align="center">专业</td>
-                <td style="width: 30px;"><a opt="addlist_degree" style="cursor: pointer"><!--添加--><img src="images/add.png"></a></td>
+                <td style="width: 30px;"><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td><!--addlist_degree-->
             </tr>
             <tr class="demo">
                 <td align="center">
@@ -209,7 +210,7 @@
         </tbody>
     </table>
 
-    <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list" opt="fam">
+    <table width="100%" style="margin: 0 auto;" cellpadding="2" cellspacing="1" class="table_form list_min" opt="fam">
         <tbody>
         <tr>
             <td colspan="8" style="text-align: center;font-size: 18px">主要家庭成员</td>
@@ -222,7 +223,7 @@
             <td align="center">工作单位</td>
             <td align="center">职务</td>
             <td align="center">联系方式</td>
-            <td><a opt="addlist_family" style="cursor: pointer"><!--添加--><img src="images/add.png"></a></td>
+            <td><a opt="addlist" style="cursor: pointer"><img src="images/add.png"></a></td><!--addlist_family-->
         </tr>
         <tr class="demo">
             <td align="center">
@@ -236,7 +237,8 @@
             </td>
             <td align="center">
                 <input class="easyui-combobox "
-                       opt="fm_politicalstatus"
+                       opt="politicsstatus"
+                       opt2="fm_politicalstatus"
                        style="width: 80px"
                        data-options="
                                 loader:cj.getLoader('politicsstatus'),

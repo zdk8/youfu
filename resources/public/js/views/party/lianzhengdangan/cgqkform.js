@@ -21,31 +21,37 @@ define(function () {
             local.find('[name=otherincome]').val(datas[0].otherincome);
 
             var field1 = ['qy_name','qy_businessscope','qy_registercapital','qy_address','qy_legalperson','qy_contact'];//干部经商办企业情况
-            var field2 = ['relationship'];//主要社会关系经商办企业情况
+            var field2 = ['gx_relationship','gx_name','gx_businessscope','gx_registercapital','gx_address','gx_legalperson','gx_contact'];//主要社会关系经商办企业情况
             var field3 = ['jz_departname','jz_property','jz_position','jz_docnumber','jz_yearreward'];//在企事业单位、社会团 体或其他营利性组织中兼职情况
             var field4 = ['rg_departname','rg_property','rg_way','rg_money','rg_yearincome'];//干部投资或入股情况
 
-            for(var i=0;i<field1.length;i++){
-                local.find('[opt='+field1[i]+']').val(datas[0].field1[0][field1[i]]);
-            }
-            for(var j=0;j<field2.length;j++){
-                if(local.find('[opt='+field2[j]+']').hasClass('easyui-datebox')){
-                    local.find('[opt='+field2[j]+']').datebox('setValue',datas[0].field2[0][field2[j]]);
-                }else{
-                    local.find('[opt='+field2[j]+']').val(datas[0].field2[0][field2[j]]);
-                }
-            }
-            for(var k=0;k<field3.length;k++){
-                local.find('[opt='+field3[k]+']').val(datas[0].field3[0][field3[k]]);
-            }
-            for(var l=0;l<field4.length;l++){
-                local.find('[opt='+field4[l]+']').val(datas[0].field4[0][field4[l]]);
-            }
-
-            local.find('[name=zf_id]').val(datas[0].zf_id);
-
+            local.find('[name=yl_id]').val(datas[0].yl_id);
             if(datas != "false"){
                 var data = datas[0];
+                for(var i=0;i<field1.length;i++){
+                    if(data.field1[0] && data.field1[0][field1[i]]){
+                        local.find('[opt='+field1[i]+']').val(data.field1[0][field1[i]]);
+                    }
+                }
+                for(var j=0;j<field2.length;j++){
+                    if(data.field2[0] && data.field2[0][field2[j]]){
+                        if(local.find('[opt='+field2[j]+']').hasClass('easyui-datebox')){
+                            local.find('[opt='+field2[j]+']').datebox('setValue',data.field2[0][field2[j]]);
+                        }else{
+                            local.find('[opt='+field2[j]+']').val(data.field2[0][field2[j]]);
+                        }
+                    }
+                }
+                for(var k=0;k<field3.length;k++){
+                    if(data.field3[0] && data.field3[0][field3[k]]){
+                        local.find('[opt='+field3[k]+']').val(data.field3[0][field3[k]]);
+                    }
+                }
+                for(var l=0;l<field4.length;l++){
+                    if(data.field4[0] && data.field4[0][field4[l]]){
+                        local.find('[opt='+field4[l]+']').val(data.field4[0][field4[l]]);
+                    }
+                }
                 var childdata_gb = data.field1;
                 var childdata_sg = data.field2;
                 var childdata_qt = data.field3;
@@ -65,7 +71,7 @@ define(function () {
                 var cgqk_v3 = cj.commonGetValue(local,{field:field3});
                 var cgqk_v4 = cj.commonGetValue(local,{field:field4});
                 local.find('[opt=form_cgqk]').form('submit', {
-                    url: 'wwww1',
+                    url: 'party/addprofitstatus',
                     onSubmit: function (params) {
                         var isValid = $(this).form('validate');
                         if (isValid) {
@@ -77,6 +83,7 @@ define(function () {
                             params.field4 = JSON.stringify(cgqk_v4);
                         }else{
                             layer.closeAll('loading');
+                            $this.attr("disabled",false);//按钮启用
                         }
                         return isValid;
                     },

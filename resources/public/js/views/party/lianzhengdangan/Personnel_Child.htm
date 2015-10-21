@@ -154,13 +154,13 @@
                  style="height:60px;padding:0 0 0 0px;">
                 <div style="width: auto;height: 50px;;background-color: #eff3f8;">
                     <div style="height: 35px;padding-top: 12px;padding-right:3px;">
-                        &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
-                        &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
+                        <!--&nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>-->
+                        <!--&nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>-->
                     </div>
 
                     <div style="float: right;margin-top: -48px;right: 2px;display: inline">
                         <input type="button" value="操作" class="btns_other" opt="other_hyqk" style="height: 50px;width: 45px;font-weight: bolder;">
-                        <input type="button" value="查询" class="btns" opt="query_hyqk" style="height: 50px;width: 45px;font-weight: bolder;">
+                        <!--<input type="button" value="查询" class="btns" opt="query_hyqk" style="height: 50px;width: 45px;font-weight: bolder;">-->
                     </div>
                     <div opt="func_btn_hyqk" style="float: right;background-color:snow;
                         margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
@@ -186,13 +186,13 @@
                                         str=$(str).append('<a action=&quot;del_hyqk&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                                         return str.html();
                                     }">操作</th>
-                        <th data-options="field:'name',width:70,align:'center'" rowspan="2">姓名</th>
+                        <!--<th data-options="field:'name',width:70,align:'center'" rowspan="2">姓名</th>-->
                     </tr>
                     </thead>
                     <thead>
                     <tr>
-                        <th data-options="field:'workunit',width:100,align:'center'" rowspan="2">单位</th>
-                        <th data-options="field:'incumbent',width:100,align:'center'" rowspan="2">职务</th>
+                        <!--<th data-options="field:'workunit',width:100,align:'center'" rowspan="2">单位</th>-->
+                        <!--<th data-options="field:'incumbent',width:100,align:'center'" rowspan="2">职务</th>-->
                         <th colspan="5">原配偶</th>
                         <th colspan="4">现配偶</th>
                     </tr>
@@ -212,11 +212,56 @@
             </div>
         </div>
     </div>
-    <div title="<a title='干部本人、配偶、子女及其配偶出国（境）情况' opt='cgjqk'>出国（境）情况</>" data-options="closable:false">
-
-    </div>
+    <div title="<a title='干部本人、配偶、子女及其配偶出国（境）情况' opt='cgjqk'>出国（境）情况</>" data-options="closable:false"></div>
     <div title="<a title='干部配偶、子女、父母、岳父母受党政纪、刑事处分' opt='xscf'>亲属受党政纪刑事处分</a>" data-options="closable:false">
+        <div class="easyui-layout" opt="layout_xscf" data-options="fit:true">
+            <div data-options="region:'north',border:false"
+                 style="height:60px;padding:0 0 0 0px;">
+                <div style="width: auto;height: 50px;;background-color: #eff3f8;">
+                    <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                        &nbsp;<span>姓 名 </span><span><input opt="name_xscf" type="text" size="10" class="inputtext"></span>
+                    </div>
 
+                    <div style="float: right;margin-top: -48px;right: 2px;display: inline">
+                        <input type="button" value="操作" class="btns_other" opt="other_sxcf" style="height: 50px;width: 45px;font-weight: bolder;">
+                        <input type="button" value="查询" class="btns" opt="query_xscf" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                    <div opt="func_btn_xscf" style="float: right;background-color:snow;
+                        margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
+                        <input type="button" value=">" class="btns" opt="other2_xscf" style="height: 50px;width: 15px;font-weight: bolder;">
+                        <input type="button" value="添加" class="btns" opt="addbtn_xscf" style="height: 50px;width: 45px;font-weight: bolder;">
+                    </div>
+                </div>
+            </div>
+            <div data-options="region:'center',border:false" style="padding:0;">
+                <table class="easyui-datagrid-no" opt="datagrid_xscf"
+                       data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'cf_name',width:100,align:'center'">姓  名</th>
+                        <th data-options="field:'cf_relation',width:100,align:'center'">与本人关系</th>
+                        <th data-options="field:'cf_position',width:127,align:'center'">(原)工作单位及职务</th>
+                        <th data-options="field:'cf_punishtype',width:127,align:'center',
+                            formatter: function(value,row,index){
+                                    return getPunishtype[value]
+                                }">处分类型</th>
+                        <th data-options="field:'ro',width:100,align:'center',
+                                    formatter:function(value,rowData,rowIndex){
+                                        var str='<div></div>';
+                                        str=$(str).append('<a action=&quot;update_xscf&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                        str=$(str).append('<a action=&quot;del_xscf&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                        return str.html();
+                                    }">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
     <!--<div title="<a title='干部信访情况'>信访情况</a>" data-options="closable:false">
         <table class="easyui-datagrid-no" opt="fam_datagrid"

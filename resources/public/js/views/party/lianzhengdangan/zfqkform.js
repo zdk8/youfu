@@ -31,26 +31,33 @@ define(function () {
             var field3 = ['cz_address','cz_area','cz_property','cz_deadline','cz_annualrent'];//房屋出租情况
             var field4 = ['jz_address','jz_area','jz_unit','jz_totalamount','jz_payment'];//参加集资建房情况
 
-            for(var i=0;i<field1.length;i++){
-                local.find('[opt='+field1[i]+']').val(datas[0].field1[0][field1[i]]);
-            }
-            for(var j=0;j<field2.length;j++){
-                if(local.find('[opt='+field2[j]+']').hasClass('easyui-datebox')){
-                    local.find('[opt='+field2[j]+']').datebox('setValue',datas[0].field2[0][field2[j]]);
-                }else{
-                    local.find('[opt='+field2[j]+']').val(datas[0].field2[0][field2[j]]);
-                }
-            }
-            for(var k=0;k<field3.length;k++){
-                local.find('[opt='+field3[k]+']').val(datas[0].field3[0][field3[k]]);
-            }
-            for(var l=0;l<field4.length;l++){
-                local.find('[opt='+field4[l]+']').val(datas[0].field4[0][field4[l]]);
-            }
-
             local.find('[name=zf_id]').val(datas[0].zf_id);
             if(datas != "false"){
                 var data = datas[0];
+                for(var i=0;i<field1.length;i++){
+                    if(data.field1[0] && data.field1[0][field1[i]]){
+                        local.find('[opt='+field1[i]+']').val(data.field1[0][field1[i]]);
+                    }
+                }
+                for(var j=0;j<field2.length;j++){
+                    if(data.field2[0] && data.field2[0][field2[j]]){
+                        if(local.find('[opt='+field2[j]+']').hasClass('easyui-datebox')){
+                            local.find('[opt='+field2[j]+']').datebox('setValue',data.field2[0][field2[j]]);
+                        }else{
+                            local.find('[opt='+field2[j]+']').val(data.field2[0][field2[j]]);
+                        }
+                    }
+                }
+                for(var k=0;k<field3.length;k++){
+                    if(data.field3[0] && data.field3[0][field3[k]]){
+                        local.find('[opt='+field3[k]+']').val(data.field3[0][field3[k]]);
+                    }
+                }
+                for(var l=0;l<field4.length;l++){
+                    if(data.field4[0] && data.field4[0][field4[l]]){
+                        local.find('[opt='+field4[l]+']').val(data.field4[0][field4[l]]);
+                    }
+                }
                 var childdata_zf = data.field1;
                 var childdata_cs = data.field2;
                 var childdata_cz = data.field3;
