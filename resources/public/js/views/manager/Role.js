@@ -6,61 +6,18 @@ define(function(){
             localDataGrid.datagrid('reload');
         };
         var deleteRoleInfo=function(record) {
-            $.post('delrolebyid', {id:record.roleid}, function (data) {
-                refreshGrid();
-            }, 'json');
+            layer.confirm('确定要删除么？', {icon: 3,title:'温馨提示'}, function(index){
+                layer.close(index);
+                layer.load();
+                $.post('delrolebyid', {id:record.roleid}, function (data) {
+                    layer.closeAll('loading');
+                    cj.showSuccess('删除成功');
+                    refreshGrid();
+                }, 'json');
+            });
+
         };
-        var viewRoleInfo=function(record){
-            require(['commonfuncs/popwin/win','text!views/manager/RoleForm.htm'],
-                function(win,htmfile){
-                    win.render({
-                        title:'角色信息',
-                        width:524,
-                        height:200,
-                        //html:$(htmfile).eq(0),
-                        html:htmfile,
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},
-                            {text:'保存',handler:function(html,parent){ }}
-                        ],
-                        renderHtml:function(poplocal,submitbtn,parent){
-                            if(true){
-                                $(submitbtn).bind('click', function () {
-                                    poplocal.find('form').form('submit', {
-                                        url: 'saverole',
-                                        onSubmit: function (param) {
-                                            var isValid = $(this).form('validate');
-                                            if (!isValid) {
-                                                $.messager.progress('close');
-                                            }
-                                            if(!poplocal.find('[name=roleid]').val()){
-                                                param.flag=-1;
-                                            }
-                                            return isValid;
-                                        },
-                                        success: function (data) {
-                                            var obj = eval('('+data+')');
-                                            if(obj.success) {
-                                                parent.trigger('close');
-                                                refreshGrid();
-                                            }
-                                        }
-                                    })
-                                });
-                            }
-                            if(record) {
-                                $.post('getrolebyid',{
-                                    id:record.roleid
-                                },function(data){
-                                    poplocal.find('form').form('load', data);//加载数据到表单
-                                },'json')
-                            }
-                        }
-                    })
-                })
-        }
+
         var grant=function(record){
             require(['commonfuncs/popwin/win','text!views/manager/Grant.htm','views/manager/Grant'],
                 function(win,htmfile,jsfile){
@@ -107,9 +64,28 @@ define(function(){
                             (function(index){
                                 var record=rows[index];
                                 $(btns_arr[j][i]).click(function(){
-
                                     if($(this).attr("action")=='view'){
-                                        viewRoleInfo(record);
+                                        layer.load(2);
+                                        require(['text!views/manager/RoleForm.htm','views/manager/RoleForm'],
+                                            function(htmfile,jsfile){
+                                                layer.open({
+                                                    title:'角色信息',
+                                                    type: 1,
+                                                    area: ['400px', '200px'], //宽高
+                                                    content: htmfile,
+                                                    success: function(layero, index){
+                                                        jsfile.render(layero,{
+                                                            index:index,
+                                                            queryParams:{
+                                                                actiontype:'update',
+                                                                record:record,
+                                                                refresh:refreshGrid
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        );
                                     }else if($(this).attr("action")=='delete'){
                                         deleteRoleInfo(record);
                                     }else if($(this).attr("action")=='grant'){
@@ -130,7 +106,25 @@ define(function(){
 
         //添加用户的弹出表单
         local.find('[opt=addrole]').bind('click',function(){
-            viewRoleInfo();
+            require(['text!views/manager/RoleForm.htm','views/manager/RoleForm'],
+                function(htmfile,jsfile){
+                    layer.open({
+                        title:'添加角色',
+                        type: 1,
+                        area: ['400px', '200px'], //宽高
+                        content: htmfile,
+                        success: function(layero, index){
+                            jsfile.render(layero,{
+                                index:index,
+                                queryParams:{
+                                    actiontype:'add',
+                                    refresh:refreshGrid
+                                }
+                            });
+                        }
+                    });
+                }
+            );
         })
 
         if(option && option.submitbtn) {

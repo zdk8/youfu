@@ -84,7 +84,7 @@ define(function(){
                         layer.open({
                             title:'添加角色',
                             type: 1,
-                            area: ['524px', '500px'], //宽高
+                            area: ['624px', '500px'], //宽高
                             content: htmfile,
                             success: function(layero, index){
                                 jsfile.render(layero,{
@@ -98,30 +98,7 @@ define(function(){
                         });
                     }
                 );
-                /*require(['commonfuncs/popwin/win','text!views/manager/Role.htm','views/manager/Role'],
-                    function(win,htmfile,jsfile){
-                        win.render({
-                            title:'添加角色',
-                            width:524,
-                            height:500,
-                            html:$(htmfile),
-                            buttons:[
-                                {text:'取消',handler:function(html,parent){
-                                    parent.trigger('close');
-                                }},
-                                {text:'保存',handler:function(html,parent){ }}
-                            ],
-                            renderHtml:function(poplocal,submitbtn,parent){
-                                jsfile.render(poplocal,{
-                                    submitbtn:submitbtn,
-                                    queryParams:record,
-                                    parent:parent
-                                })
-                            }
-                        })
-                    })*/
             }
-
 
             //添加用户的弹出表单
             local.find('[opt=adduser]').bind('click',function(){
