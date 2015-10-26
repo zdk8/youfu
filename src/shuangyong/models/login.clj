@@ -1,10 +1,10 @@
-(ns partymgt.models.login
+(ns shuangyong.models.login
   (:use korma.core
         [korma.db :only [defdb with-db transaction]])
   (:import (java.sql Timestamp)
            (java.text SimpleDateFormat)
            (java.text DateFormat))
-  (:require [partymgt.models.schema :as schema]
+  (:require [shuangyong.models.schema :as schema]
             ))
 
 (defdb dboracle schema/db-oracle)

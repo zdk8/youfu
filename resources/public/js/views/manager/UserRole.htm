@@ -1,0 +1,48 @@
+<div class="easyui-layout" data-options="fit:true" opt="userrole_layout">
+    <div data-options="region:'north',border:false"
+         style="height:65px;padding:1px 1px 0 1px;">
+        <div style="border: 1px solid #e5e5e5;width: auto;height: 85%;min-width:400px;min-height:40px;background-color: #eff3f8;">
+            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
+                &nbsp;<span>角色名称 </span><span><input opt="rolename" type="text" size="5" class="inputtext"></span>
+                <span style="float: right;margin-top: 3px">
+                    <input type="button" value="查询" class="btns" opt="query">
+                    <!--<input type="button" value="新增角色" style="width: 70px;" class="btns" opt="addrole">-->
+                </span>
+            </div>
+        </div>
+    </div>
+    <div data-options="region:'center',border:false" style="padding:0px 1px 0 1px;">
+        <table class="easyui-datagrid-noauto"
+               data-options="
+               method:'post',
+               fit:true,
+               border:false,
+               rownumbers:true,
+               fitColumns:true,
+               pageSize:cj.getDataGridAttr('pageSize'),
+               pageList:cj.getDataGridAttr('pageList'),
+               singleSelect:false,
+               pagination:true">
+            <thead>
+            <tr>
+                <th data-options="field:'ck',checkbox:true"></th>
+                <th data-options="field:'rolename',width:100,align:'center',formatter:function(v,r,i)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
+                return str.html();
+            }">角色名称</th>
+                <th data-options="field:'roledesc',width:120,align:'center'">描述</th>
+                <th data-options="field:'createdate',width:80,align:'center',formatter:cj.dateFormatter()">创建时间</th>
+                <!--<th data-options="field:'delete',width:50,align:'center',formatter:function(v,r,i)
+            {
+                var str='<div></div>';
+                str=$(str).append('<a action=&quot;delete&quot;href=&quot;javaScript:;&quot;>删除</a>&nbsp;|&nbsp;');
+                str=$(str).append('<a action=&quot;grant&quot;href=&quot;javaScript:;&quot;>授权</a>');
+                return str.html();
+            }">操作</th>-->
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>

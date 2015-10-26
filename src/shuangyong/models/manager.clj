@@ -1,13 +1,21 @@
-(ns partymgt.models.manager
+(ns shuangyong.models.manager
   (:use korma.core
         [korma.db :only [defdb with-db]])
   (:import (java.util.UUID))
   (:require [clojure.string :as strs]
-            [partymgt.models.schema :as schema]
+            [shuangyong.models.schema :as schema]
             ))
 
 
 (defdb dboracle schema/db-oracle)
+(declare division)  ;;数据声明
+
+;;行政区划表
+(defentity division
+  (pk :dvcode)
+  (table :division)
+  (has-many division {:fk :dvhigh})
+  (database dboracle))
 
 (defn getenumeratebytype [keyword ]
   (with-db dboracle
@@ -43,6 +51,9 @@
   (with-db dboracle
     (exec-raw ["select dvname text,dvcode value,dvcode id,dvcode,dvname,dvhigh,totalname,(decode (dvrank ,'5' ,'true' ,'false')) leaf  from division where dvcode=?" [node]] :results) ))
 
+(defn getdistrictname [districtid]
+  (select division
+    (where {:dvcode districtid})))
 
 (defn get-function-by-id [id]
   (with-db dboracle

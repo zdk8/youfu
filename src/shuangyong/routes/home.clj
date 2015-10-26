@@ -1,15 +1,15 @@
-(ns partymgt.routes.home
+(ns shuangyong.routes.home
   (:require [compojure.core :refer :all]
-            [partymgt.layout :as layout]
-            [partymgt.util :as util]
+            [shuangyong.layout :as layout]
+            [shuangyong.util :as util]
             [noir.session :as session]
             [clojure.data.json :as json]
             [ring.util.response :refer [redirect file-response]]
             [noir.response :as resp]
 
-            [partymgt.controller.manager :as mymngctrl]
-            [partymgt.controller.controller :as ctl]
-            [partymgt.controller.login :as login]
+            [shuangyong.controller.manager :as mymngctrl]
+            [shuangyong.controller.controller :as ctl]
+            [shuangyong.controller.login :as login]
             ))
 
 (defroutes home-routes

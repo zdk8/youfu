@@ -1,4 +1,4 @@
-(ns partymgt.util
+(ns shuangyong.util
   (:require [noir.io :as io]
             [markdown.core :as md]))
 

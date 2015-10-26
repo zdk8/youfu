@@ -18,8 +18,8 @@
             </div>
         </div>
     </div>
-    <div data-options="region:'center',border:false" style="padding:0px 15px 15px 15px;">
-        <table class="easyui-datagrid-noauto"
+    <div data-options="region:'center',border:false" class="easyui2" style="padding:0px 15px 15px 15px;">
+        <table class="easyui-datagrid-noauto easyui2"
                data-options="fit:true,
                         fitColumns:true,
                         method:'post',
@@ -28,6 +28,22 @@
                         pagination:true">
             <thead frozen="true">
             <tr>
+                <!--formatter:function(value,row,index){
+                        if(value != null){
+                            return '<img src='+value+' style=&quot;width:45px;height:54px;&quot;/>';
+                        }else{
+                            return '<img src=&quot;images/noperson.gif&quot; style=&quot;width:45px;height:54px;&quot;/>';
+                        }-->
+                <th data-options="field:'photo',width:55,align:'center',
+                        formatter:function(v,r,i){
+                            var str='<div></div>';
+                            if(v != null){
+                                str=$(str).append('<a action=&quot;imgview&quot;href=&quot;javaScript:;&quot;><img src='+v+' style=&quot;width:45px;height:54px;&quot;/></a>');
+                            }else{
+                                str=$(str).append('<a action=&quot;imgview&quot;href=&quot;javaScript:;&quot;><img src=&quot;images/noperson.gif&quot; style=&quot;width:45px;height:54px;&quot;/></a>');
+                            }
+                            return str.html();
+                    }">照片</th>
                 <th data-options="field:'name',width:80,align:'center',
                             formatter:function(v,r,i){
                                         var str='<div></div>';

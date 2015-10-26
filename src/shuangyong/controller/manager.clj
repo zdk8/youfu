@@ -1,12 +1,12 @@
-(ns partymgt.controller.manager
+(ns shuangyong.controller.manager
   (:use compojure.core)
   (:require
-            [partymgt.models.manager :as basemd]
+            [shuangyong.models.manager :as basemd]
             [noir.response :as resp]
             [noir.session :as session]
             [taoensso.timbre :as timbre]
             [noir.io :as io]
-            [partymgt.models.schema :as schema]
+            [shuangyong.models.schema :as schema]
             ))
 
 
@@ -94,11 +94,16 @@
         id (get params :id)
         ni (if node node id)
         ;;current-xian (:dvcode (session/get :usermsg));(str (subs (:dvcode (session/get :usermsg)) 0 4) "00")
-        results (if ni (basemd/divisiontree ni) (basemd/divisiontreefirst "330482"))
+        results (if ni (basemd/divisiontree ni) (basemd/divisiontreefirst "330424"))
         ]
     (resp/json (map #(conj % {:leaf (if (=(get % :leaf) "true") true false) :state (if (=(get % :leaf) "true") "open" "closed")})results))
     )
   )
+
+(defn getdistrictname [request]
+  (let[params (:params request)
+       districtid (:districtid params)]
+    (resp/json (basemd/getdistrictname districtid))))
 
 
 (defn get-function-by-id [id]

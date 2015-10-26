@@ -1,13 +1,13 @@
-(ns partymgt.controller.login
+(ns shuangyong.controller.login
   (:use compojure.core)
   (:use korma.core
         [korma.db :only [oracle]])
   (:require [noir.response :as resp]
-            [partymgt.layout :as layout]
+            [shuangyong.layout :as layout]
             [noir.session :as session]
             [clojure.string :as strs]
             [clojure.data.json :as json]
-            [partymgt.models.login :as login]
+            [shuangyong.models.login :as login]
             ))
 
 ;;用户登录

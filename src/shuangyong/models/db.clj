@@ -1,7 +1,7 @@
-(ns partymgt.models.db
+(ns shuangyong.models.db
   (:use korma.core
         [korma.db :only [defdb with-db transaction]])
-  (:require [partymgt.models.schema :as schema]))
+  (:require [shuangyong.models.schema :as schema]))
 
 (defdb dboracle schema/db-oracle)
 

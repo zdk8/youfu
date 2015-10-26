@@ -1,4 +1,4 @@
-(ns partymgt.layout
+(ns shuangyong.layout
   (:require [selmer.parser :as parser]
             [clojure.string :as s]
             [ring.util.response :refer [content-type response]]

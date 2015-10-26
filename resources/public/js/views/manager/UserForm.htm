@@ -5,22 +5,28 @@
             <table width="100%" cellpadding="2" cellspacing="1" class="table_form">
                 <tbody>
                 <tr>
-                    <th width="80">用户名称 :</th>
+                    <td class="formtdtext" style="width: 100px">行政区划<label></label></td>
+                    <td>
+                        <input opt="division">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">用户名称<label></label></td>
                     <td><input type="text" name="username" id="name" class="input-text" >
 
                     </td>
                 </tr>
 
                 <tr>
-                    <th>登录名 :</th>
+                    <td class="formtdtext">登录名<label></label></td>
                     <td><input type="text" name="loginname" class="input-text"></td>
                 </tr>
                 <tr>
-                    <th>密码 :</th>
+                    <td class="formtdtext">密码<label></label></td>
                     <td><input type="password" name="passwd" class="input-text"></td>
                 </tr>
                 <tr>
-                    <th>是否有效 :</th>
+                    <td class="formtdtext">是否有效<label></label></td>
                     <td>
                         <select name="useful">
                             <option value="0">无效</option>
@@ -30,7 +36,7 @@
                 </tr>
 
                 <tr>
-                    <th>描述 :</th>
+                    <td class="formtdtext">描述<label></label></td>
                     <td>
                         <textarea class="input-text" name="description" style="width: 95%;height: 36px"placeholder="填写备注信息"></textarea>
                     </td>
@@ -40,32 +46,3 @@
         </form>
     </div>
 </div>
-<script>
-    $(function(){
-        var districtidmanager = $('[opt=districtidmanager]');
-        districtidmanager.combotree({
-            panelHeight:300,
-            url:'getdivisiontree',
-            method: 'get',
-            onLoadSuccess:function(load,data){
-                /*if(!this.firstloaded){
-                 divisiontree.combotree('setValue', data[0].id)
-                 .combotree('setText', data[0].text);
-                 this.firstloaded=true;
-                 }*/
-            },
-            onBeforeExpand: function (node) {
-                districtidmanager.combotree("tree").tree("options").url
-                        = 'getdivisiontree?dvhigh=' + node.id;
-            },
-            onHidePanel: function () {
-                districtidmanager.combotree('setValue',
-                        districtidmanager.combotree('tree').tree('getSelected').id)
-                        .combobox('setText',
-                        districtidmanager.combotree('tree').tree('getSelected').totalname);
-            }
-        });
-
-
-    })
-</script>

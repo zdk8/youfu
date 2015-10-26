@@ -1,4 +1,4 @@
-(ns partymgt.middleware
+(ns shuangyong.middleware
   (:require [taoensso.timbre :as timbre]
             [selmer.parser :as parser]
             [environ.core :refer [env]]

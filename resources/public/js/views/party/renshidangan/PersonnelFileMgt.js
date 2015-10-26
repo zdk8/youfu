@@ -7,6 +7,7 @@ define(function(){
             local.find('[opt=func_btn]').animate({"right":'', width : "hide"},500);
         });
 
+
         var datagrid = local.find('.easyui-datagrid-noauto');
         var refreshGrid=function() {
             datagrid.datagrid('reload');
@@ -19,8 +20,9 @@ define(function(){
                 var view = local.find('[action=view]');           //详细信息
                 var updatebtns = local.find('[action=update]');           //修改
                 var delbtns = local.find('[action=del]');           //删除
+                var imgviewbtns = local.find('[action=imgview]');           //预览
                 var rows=data.rows;
-                var btns_arr=[view,delbtns,updatebtns];
+                var btns_arr=[view,delbtns,updatebtns,imgviewbtns];
                 for(var i=0;i<rows.length;i++){
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -53,6 +55,30 @@ define(function(){
                                     });
                                 }else if(action == "update"){                   //修改
                                     updateFunc(record,refreshGrid);
+                                }else if(action == "imgview"){                   //预览
+                                    var FileExt=record.photo.replace(/.+\./,"").toLowerCase();
+                                    if(FileExt=='png' || FileExt=='jpg' || FileExt=='gif') {
+                                        layer.photos({
+                                            photos: {
+                                                "title": "图片预览",
+                                                "start": 0,
+                                                "status": 1,
+                                                "data": [{
+                                                    area: ['560px', '290px'],
+                                                    "alt": record.name,
+                                                    "pid": 109,
+                                                    //"src": 'party/filedown?filename=' + encodeURI(record.photo),
+                                                    "src": record.photo,
+                                                    "thumb": ""
+                                                }]
+                                            },
+                                            tab: function (pic, layero) {
+                                                layero.find('span.layui-layer-imguide').remove();
+                                            }
+                                        });
+                                    }else{
+                                        layer.alert('不是图片类型', {icon: 6});
+                                    }
                                 }
                             });
                         })(i)

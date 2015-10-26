@@ -14,7 +14,7 @@ define(function(){
         var localDataGrid=
             local.find('.easyui-datagrid-noauto').datagrid({
                 url:'getcombo',//cj.getUrl(filepathcombo,'mr','/'),
-                loadMsg:cj.dataGridLoadMsg(),
+                loadMsg:'',
                 queryParams: {
                     intelligentsp:null
                 },

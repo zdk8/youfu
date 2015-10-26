@@ -1,11 +1,11 @@
 ;;管理模块,主要负责代码(下拉选项)添加系统功能的添加,系统用户的添加,以及用户角色和角色权限的分配
-(ns partymgt.routes.manager
+(ns shuangyong.routes.manager
   (:require [compojure.core :refer :all]
-            [partymgt.layout :as layout]
-            [partymgt.util :as util]
+            [shuangyong.layout :as layout]
+            [shuangyong.util :as util]
             [noir.session :as session]
             [clojure.data.json :as json]
-            [partymgt.controller.manager :as myctrl]
+            [shuangyong.controller.manager :as myctrl]
             ))
 
 (defroutes manager-routes
@@ -39,6 +39,7 @@
   ;;用户维护
   (GET "/getdivisiontree" req (myctrl/get-divisiontree req))
   (POST "/getdivisiontree" req (myctrl/get-divisiontree req))
+  (POST "/getdistrictname" request (myctrl/getdistrictname request))
   (POST "/getuserbyregionid" req (myctrl/get-user-by-regionid req))
   (GET "/getuserbyid" [id] (myctrl/get-user-by-id id))
   (POST "/getuserbyid" [id] (myctrl/get-user-by-id id))

@@ -1,4 +1,4 @@
-(ns partymgt.session-manager
+(ns shuangyong.session-manager
   (:require [noir.session :refer [mem]]
             [cronj.core :refer [cronj]]))
 

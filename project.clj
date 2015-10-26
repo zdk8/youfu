@@ -1,4 +1,4 @@
-(defproject partymgt "0.1.0-SNAPSHOT"
+(defproject shuangyong "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.6.0"]
@@ -23,13 +23,13 @@
                  ;;[org.apache.poi/poi-ooxml "3.9"]  由于下载poi-ooxml及依赖jar不到的原�?暂停使用(在clj-excel.core)
                  [hvitmiddleware "0.1.6"]]
 
-  :repl-options {:init-ns partymgt.repl}
+  :repl-options {:init-ns shuangyong.repl}
   :jvm-opts ["-Dfile.encoding=utf8"]
   :plugins [[lein-ring "0.8.10"]
             [lein-environ "0.5.0"]]
-  :ring {:handler partymgt.handler/app
-         :init    partymgt.handler/init
-         :destroy partymgt.handler/destroy}
+  :ring {:handler shuangyong.handler/app
+         :init    shuangyong.handler/init
+         :destroy shuangyong.handler/destroy}
   :profiles
   {:uberjar {:aot :all}
    :production {:ring {:open-browser? false
@@ -62,5 +62,5 @@
                                :releases {:checksum :fail :update :always}}]
 
                   ]
-;  :java-source-paths ["src/partymgt/javaxls"]
+;  :java-source-paths ["src/shuangyong/javaxls"]
   :min-lein-version "2.0.0")

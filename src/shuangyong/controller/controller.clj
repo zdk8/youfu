@@ -1,9 +1,9 @@
-(ns partymgt.controller.controller
+(ns shuangyong.controller.controller
   (:use compojure.core)
   (:require
-    [partymgt.models.db :as db]
-    [partymgt.common.common :as common]
-    [partymgt.models.schema :as schema]
+    [shuangyong.models.db :as db]
+    [shuangyong.common.common :as common]
+    [shuangyong.models.schema :as schema]
     [noir.response :as resp]
     [clojure.data.json :as json]
     [clojure.string :as cstr]

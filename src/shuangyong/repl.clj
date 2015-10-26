@@ -1,5 +1,5 @@
-(ns partymgt.repl
-  (:use partymgt.handler
+(ns shuangyong.repl
+  (:use shuangyong.handler
         ring.server.standalone
         [ring.middleware file-info file]))
 

@@ -1,9 +1,9 @@
-(ns partymgt.handler
+(ns shuangyong.handler
   (:require [compojure.core :refer [defroutes]]
-            [partymgt.routes.home :refer [home-routes]]
-            [partymgt.routes.manager :refer [manager-routes]]
-            [partymgt.middleware :refer [load-middleware]]
-            [partymgt.session-manager :as session-manager]
+            [shuangyong.routes.home :refer [home-routes]]
+            [shuangyong.routes.manager :refer [manager-routes]]
+            [shuangyong.middleware :refer [load-middleware]]
+            [shuangyong.session-manager :as session-manager]
             [noir.response :refer [redirect]]
             [noir.util.middleware :refer [app-handler]]
             [compojure.route :as route]
@@ -33,18 +33,18 @@
 
   (timbre/set-config!
     [:shared-appender-config :rotor]
-    {:path "partymgt.log" :max-size (* 512 1024) :backlog 10})
+    {:path "shuangyong.log" :max-size (* 512 1024) :backlog 10})
 
   (if (env :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
   (cronj/start! session-manager/cleanup-job)
-  (timbre/info "partymgt started successfully"))
+  (timbre/info "shuangyong started successfully"))
 
 (defn destroy
   "destroy will be called when your application
    shuts down, put any clean up code here"
   []
-  (timbre/info "partymgt is shutting down...")
+  (timbre/info "shuangyong is shutting down...")
   (cronj/shutdown! session-manager/cleanup-job)
   (timbre/info "shutdown complete!"))
 

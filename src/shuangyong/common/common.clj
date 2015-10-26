@@ -1,16 +1,16 @@
-(ns partymgt.common.common
+(ns shuangyong.common.common
   (:use compojure.core)
   (:import  (java.text SimpleDateFormat)
             (java.text DateFormat)
             (java.sql Timestamp))
   (:require  [noir.response :as resp]
-    ;[partymgt.layout :as layout]
-    ;[partymgt.models.schema :as schema]
+    ;[shuangyong.layout :as layout]
+    ;[shuangyong.models.schema :as schema]
                 [clj-time.local :as l]
                 [clj-time.coerce :as c]
                 [me.raynes.fs :as fs]
                 [noir.io :as io]
-                [partymgt.models.db :as db]
+                [shuangyong.models.db :as db]
                 [noir.session :as session]
                ))
 

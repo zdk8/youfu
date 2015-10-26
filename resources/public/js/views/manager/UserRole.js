@@ -1,7 +1,11 @@
 define(function(){
     function initFunc(local,option){
         layer.closeAll('loading');
-        var localDataGrid,mynode;
+        local.find('[opt=userrole_layout]').layout();
+        var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
+        cj.addToolBar(local,option,li);
+        
+        var localDataGrid;
         var refreshGrid=function() {
             localDataGrid.datagrid('reload');
         };
@@ -94,7 +98,7 @@ define(function(){
                 url:'getrole',
                 queryParams: {
                     intelligentsp:null,
-                    userid:option && option.queryParams?option.queryParams.userid:null
+                    userid:option && option.queryParams?option.queryParams.record.userid:null
                 },
                 onLoadSuccess:function(data){
                     var viewbtns=local.find('[action=view]');
@@ -129,25 +133,23 @@ define(function(){
             })
 
         //添加用户的弹出表单
-        local.find('[opt=addrole]').bind('click',function(){
+        /*local.find('[opt=addrole]').bind('click',function(){
             viewRoleInfo();
-        })
-
-        if(option && option.submitbtn) {
-            option.submitbtn.bind('click',function(){
-                layer.load();
-                var checkedrows=localDataGrid.datagrid('getChecked');
-                var ids=""
-                for(var i= 0,len=checkedrows.length;i<len;i++) {
-                    if (ids != '') ids += ',';
-                    ids += checkedrows[i].roleid;
-                }
-                $.post('saveroleuser', {userid:option.queryParams.userid,roleids:ids}, function (data) {
-                    layer.closeAll('loading');
-                    option.parent.trigger('close');
-                }, 'json');
-            })
-        }
+        })*/
+        local.find('[opt=save]').click(function () {
+            layer.load();
+            var checkedrows=localDataGrid.datagrid('getChecked');
+            var ids=""
+            for(var i= 0,len=checkedrows.length;i<len;i++) {
+                if (ids != '') ids += ',';
+                ids += checkedrows[i].roleid;
+            }
+            $.post('saveroleuser', {userid:option.queryParams.record.userid,roleids:ids}, function (data) {
+                layer.closeAll('loading');
+                layer.close(option.index);
+                cj.showSuccess('添加成功');
+            }, 'json');
+        });
 
         local.find('[opt=query]').click(function () {
             localDataGrid.datagrid('load',{
@@ -157,11 +159,26 @@ define(function(){
 
     }
 
-
+    function saveFunc(local,option){
+        var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';
+        cj.addToolBar(local,option,li);
+    }
 
 
     var render=function(l,o){
         initFunc(l,o);//初始化
+        /*if(o && o.queryParams) {
+            switch (o.queryParams.actiontype){
+                case 'update':
+                    updateFunc(l, o);
+                    break;
+                case 'add':
+                    saveFunc(l, o);
+                    break;
+                default :
+                    break;
+            }
+        }*/
     }
 
     return {
