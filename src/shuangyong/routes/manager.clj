@@ -26,7 +26,9 @@
   (POST "/getcombo" req (myctrl/get-combo req))
   (POST "/getcombodt" req (myctrl/get-combodt req))
   (POST "/savecombo" req (myctrl/create-combo req))
+  (POST "/delcombo" req (myctrl/del-combo req))
   (POST "/savecombodt" req (myctrl/create-combodt req))
+  (POST "/delcombodt" req (myctrl/del-combodt req))
   (POST "/getcombobypr" req (myctrl/get-combo-by-pr req))
   (POST "/getcombodtbypr" req (myctrl/get-combodt-by-pr req))
 

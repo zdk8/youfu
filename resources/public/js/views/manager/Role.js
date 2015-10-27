@@ -19,31 +19,26 @@ define(function(){
         };
 
         var grant=function(record){
-            require(['commonfuncs/popwin/win','text!views/manager/Grant.htm','views/manager/Grant'],
-                function(win,htmfile,jsfile){
-                    win.render({
+            layer.load(2);
+            require(['text!views/manager/Grant.htm','views/manager/Grant'],
+                function(htmfile,jsfile){
+                    layer.open({
                         title:'授权信息',
-                        width:524,
-                        height:500,
-                        html:$(htmfile).eq(0),
-                        buttons:[
-                            {text:'取消',handler:function(html,parent){
-                                parent.trigger('close');
-                            }},
-                            {text:'保存',handler:function(html,parent){ }}
-                        ],
-                        renderHtml:function(poplocal,submitbtn,parent){
-                            jsfile.render(poplocal,{
-                                submitbtn:submitbtn,
-                                queryParams:record,
-                                parent:parent,
-                                onCreateSuccess:function(data){
-                                    refreshGrid();
+                        type: 1,
+                        area: ['524px', '400px'], //宽高
+                        content: htmfile,
+                        success: function(layero, index){
+                            jsfile.render(layero,{
+                                index:index,
+                                queryParams:{
+                                    record:record,
+                                    refresh:refreshGrid
                                 }
-                            })
+                            });
                         }
-                    })
-                })
+                    });
+                }
+            );
         }
 
         localDataGrid=
@@ -104,8 +99,9 @@ define(function(){
                 striped:true
             })
 
-        //添加用户的弹出表单
+        //添加角色的弹出表单
         local.find('[opt=addrole]').bind('click',function(){
+            layer.load(2);
             require(['text!views/manager/RoleForm.htm','views/manager/RoleForm'],
                 function(htmfile,jsfile){
                     layer.open({
@@ -127,7 +123,7 @@ define(function(){
             );
         })
 
-        if(option && option.submitbtn) {
+        /*if(option && option.submitbtn) {
             option.submitbtn.bind('click',function(){
                 layer.load();
                 var checkedrows=localDataGrid.datagrid('getChecked');
@@ -141,7 +137,7 @@ define(function(){
                     option.parent.trigger('close');
                 }, 'json');
             })
-        }
+        }*/
 
         local.find('[opt=query]').click(function () {
             localDataGrid.datagrid('load',{

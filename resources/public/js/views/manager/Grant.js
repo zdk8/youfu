@@ -21,7 +21,12 @@ define(function(){
 
     return {
         render:function(local,option){
-            var currentroleid=option.queryParams.roleid;
+            layer.closeAll('loading');
+            var li = '<li><input type="button" value="授权" class="btns" opt="grant"></li>';
+            cj.addToolBar(local,option,li);
+
+
+            var currentroleid=option.queryParams.record.roleid;
             $functiontree=local.find('[opt=functiontree]').tree({
                 checkbox:true,
                 url:'grantmenutree',
@@ -32,7 +37,7 @@ define(function(){
                 }
             });
 
-            function getChecked(){
+            function getChecked($this){
                 var nodes = $functiontree.tree('getChecked');
                 var s = [];
                 for(var i=0; i<nodes.length; i++){
@@ -52,11 +57,21 @@ define(function(){
                         url:'savegrant',
                         success:function(res){
                             layer.closeAll('loading');
-                            option.parent.trigger('close');
+                            layer.close(option.index);
+                            cj.showSuccess('授权完成');
+                            $this.attr("disabled",false);//按钮启用
                         }
                     }
                 )
             }
+
+            /*授权*/
+            local.find('[opt=grant]').click(function(){
+                layer.load(2);
+                var $this = $(this);
+                $this.attr("disabled",true);//按钮禁用
+                getChecked($this);
+            });
 
 
 
@@ -66,10 +81,6 @@ define(function(){
             })
             local.find('a[opt=collapseAll]').bind('click',function(){
                 $functiontree.tree('collapseAll');
-            })
-            option.submitbtn.bind('click',function(){
-                layer.load();
-                getChecked();
             })
 
         }

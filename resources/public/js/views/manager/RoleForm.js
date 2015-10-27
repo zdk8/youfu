@@ -1,7 +1,6 @@
 define(function(){
     function initFunc(local,option){
         layer.closeAll('loading');
-        cj.getdivision(local.find('[opt=division]'));
     }
     function saveFunc(local,option){
         var li = '<li><input type="button" value="保存" class="btns" opt="save"></li>';

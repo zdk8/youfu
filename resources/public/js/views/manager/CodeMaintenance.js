@@ -5,15 +5,12 @@
 
 define(function(){
 
-    var filepathcombo='manager/CodeMaintenance/combo';
-    var filepathcombodt='manager/CodeMaintenance/combodt';
-
     var combodtd;
 
     var rendercombo=function(local,option){
         var localDataGrid=
             local.find('.easyui-datagrid-noauto').datagrid({
-                url:'getcombo',//cj.getUrl(filepathcombo,'mr','/'),
+                url:'getcombo',
                 loadMsg:'',
                 queryParams: {
                     intelligentsp:null
@@ -22,10 +19,10 @@ define(function(){
                 onLoadSuccess:function(data){
                     var viewbtns=local.find('[action=view]');
                     var updatebtns=local.find('[action=update]');
-                    var logoutbtns=local.find('[action=logout]');
                     var addbtns=local.find('[action=add]');
+                    var delbtns=local.find('[action=del]');
                     var codetypes=local.find('[action=codetype]');
-                    var btns_arr=[viewbtns,updatebtns,logoutbtns,addbtns,codetypes];
+                    var btns_arr=[viewbtns,updatebtns,delbtns,addbtns,codetypes];
                     var rows=data.rows;
                     for(var i=0;i<rows.length;i++){
                         for(var j=0;j<btns_arr.length;j++){
@@ -33,37 +30,52 @@ define(function(){
                             (function(index){
                                 var record=rows[index];
                                 $(btns_arr[j][i]).click(function(){
-
                                     if($(this).attr("action")=='view'){
-                                        //view(option,record)
                                     }else if($(this).attr("action")=='add'){
-                                        require(['commonfuncs/popwin/win','text!views/manager/code/xt_combodt.htm','views/manager/code/xt_combodt'],function(win,htmfile,jsfile){
-                                            win.render({
-                                                title:'添加',
-                                                width:424,
-                                                height:200,
-                                                html:$(htmfile),
-                                                buttons:[],
-                                                renderHtml:function(local,submitbtn,parent){
-                                                    jsfile.render(local,{
-                                                        submitbtn:submitbtn,
-                                                        act:'c',
-                                                        queryParams:record,
-                                                        localDataGrid:combodtd,
-                                                        localDataGrid2:local.trigger('comboclick2'),
-                                                        parent:parent,
-                                                        onCreateSuccess:function(){
-                                                            //parent.trigger('close');
-                                                            local.trigger('comboclick2');
-                                                        }
-                                                    })
-                                                }
-                                            })
-                                        })
+                                        layer.load(2);
+                                        require(['text!views/manager/code/xt_combodt.htm','views/manager/code/xt_combodt'],
+                                            function(htmfile,jsfile){
+                                                layer.open({
+                                                    title:'添加',
+                                                    type: 1,
+                                                    area: ['424px', '200px'], //宽高
+                                                    content: htmfile,
+                                                    success: function(layero, index){
+                                                        jsfile.render(layero,{
+                                                            index:index,
+                                                            queryParams:{
+                                                                actiontype:'add',
+                                                                record:record,
+                                                                dgrid:combodtd
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        );
                                     }else if($(this).attr("action")=='update'){
                                         comboupdate(option,record,local,localDataGrid)
-                                    }else if($(this).attr("action")=='logout'){
-                                        //logout(option,record,local)
+                                    }else if($(this).attr("action")=='del'){
+                                        layer.confirm('确定要删除么？', {icon: 3,title:'温馨提示'}, function(index){
+                                            layer.close(index);
+                                            layer.load();
+                                            $.ajax({
+                                                url:'delcombo',
+                                                type:'post',
+                                                data:{
+                                                    aaa100:record.aaa100
+                                                },
+                                                success: function (data) {
+                                                    layer.closeAll('loading');
+                                                    if(data == "false"){
+                                                        layer.alert('该类别下存在代码值，请先将代码清空再进行删除!', {icon: 6,title:'温馨提示'});
+                                                    }else{
+                                                        cj.showSuccess('删除成功');
+                                                        localDataGrid.datagrid('reload');
+                                                    }
+                                                }
+                                            });
+                                        });
                                     }else if($(this).attr("action")=="codetype"){
                                         //option.parent.trigger('comboclick',record);
                                         local.trigger('comboclick',record);
@@ -75,57 +87,55 @@ define(function(){
                     }
                 }
             })
-        require(['commonfuncs/searchKeyWord'],function(js){
+        /*require(['commonfuncs/searchKeyWord'],function(js){
             js.bindEvent(local,localDataGrid,['aaa101'])
-        })
+        })*/
         local.find('[opt=addtype]').bind('click',function(){
-            require(['commonfuncs/popwin/win','text!views/manager/code/xt_combo.htm','views/manager/code/xt_combo'],function(win,htmfile,jsfile){
-                win.render({
-                    title:'添加',
-                    width:424,
-                    height:200,
-                    html:htmfile,
-                    buttons:[],
-                    renderHtml:function(local,submitbtn,parent){
-                        jsfile.render(local,{
-                            submitbtn:submitbtn,
-                            act:'c',
-                            localDataGrid:localDataGrid,
-                            parent:parent,
-                            onCreateSuccess:function(data){
-                                parent.trigger('close');
-                                localDataGrid.datagrid('reload');
-                            }
-                        })
-                    }
-                })
-            })
+            layer.load(2);
+            require(['text!views/manager/code/xt_combo.htm','views/manager/code/xt_combo'],
+                function(htmfile,jsfile){
+                    layer.open({
+                        title:'添加',
+                        type: 1,
+                        area: ['424px', '200px'], //宽高
+                        content: htmfile,
+                        success: function(layero, index){
+                            jsfile.render(layero,{
+                                index:index,
+                                queryParams:{
+                                    actiontype:'add',
+                                    dgrid:localDataGrid
+                                }
+                            });
+                        }
+                    });
+                }
+            );
         })
         return localDataGrid;
     }
     var comboupdate=function(option,record,local,localDataGrid){
-        require(['commonfuncs/popwin/win','text!views/manager/code/xt_combo.htm','views/manager/code/xt_combo'],function(win,htmfile,jsfile){
-            win.render({
-                title:'更新',
-                width:424,
-                height:200,
-                html:$(htmfile),
-                buttons:[],
-                renderHtml:function(local,submitbtn,parent){
-                    jsfile.render(local,{
-                        submitbtn:submitbtn,
-                        act:'u',
-                        queryParams:record,
-                        localDataGrid:localDataGrid,
-                        parent:parent,
-                        onCreateSuccess:function(data){
-                            parent.trigger('close');
-                            localDataGrid.datagrid('reload');
-                        }
-                    })
-                }
-            })
-        })
+        layer.load(2);
+        require(['text!views/manager/code/xt_combo.htm','views/manager/code/xt_combo'],
+            function(htmfile,jsfile){
+                layer.open({
+                    title:'类别信息',
+                    type: 1,
+                    area: ['424px', '200px'], //宽高
+                    content: htmfile,
+                    success: function(layero, index){
+                        jsfile.render(layero,{
+                            index:index,
+                            queryParams:{
+                                actiontype:'update',
+                                record:record,
+                                dgrid:localDataGrid
+                            }
+                        });
+                    }
+                });
+            }
+        );
     }
 
 
@@ -147,11 +157,9 @@ define(function(){
                     var rows=data.rows;
                     for(var i=0;i<rows.length;i++){
                         for(var j=0;j<btns_arr.length;j++){
-
                             (function(index){
                                 var record=rows[index];
                                 $(btns_arr[j][i]).click(function(){
-
                                     if($(this).attr("action")=='view'){
                                         //view(option,record)
                                     }else if($(this).attr("action")=='memlist'){
@@ -159,80 +167,63 @@ define(function(){
                                     }else if($(this).attr("action")=='update'){
                                         combodtupdate(option, record, local,localDataGrid);
                                     }else if($(this).attr("action")=='logout'){
-                                        //logout(option,record,local)
+                                        layer.confirm('确定要删除么？', {icon: 3,title:'温馨提示'}, function(index){
+                                            layer.close(index);
+                                            layer.load();
+                                            $.ajax({
+                                                url:'delcombodt',
+                                                type:'post',
+                                                data:{
+                                                    aaz093:record.aaz093
+                                                },
+                                                success: function (data) {
+                                                    layer.closeAll('loading');
+                                                    cj.showSuccess('删除成功');
+                                                    local.find('[opt=dgrid_combodt]').datagrid('reload');
+                                                    layer.close(option.index);
+                                                }
+                                            });
+                                        });
                                     }
                                 });
-
                             })(i);
                         }
                     }
                 }
             })
         combodtd = localDataGrid;
-        require(['commonfuncs/searchKeyWord'],function(js){
+        /*require(['commonfuncs/searchKeyWord'],function(js){
             js.bindEvent(local,localDataGrid,['aaa103'])
-        })
-        /*local.find('[opt=addcombodt]').bind('click',function(){
-            console.log(11)
-            var aaa100=local.find('div[tb]>[opt=value]').text();
-            if(!local.find('div[tb]>[opt=value]').text().length){
-                alert('请选择');return;
-            }
-            require(['commonfuncs/popwin/win','text!views/manager/code/xt_combodt.htm','views/manager/code/xt_combodt'],function(win,htmfile,jsfile){
-                win.render({
-                    title:'添加',
-                    width:424,
-                    height:200,
-                    html:$(htmfile),
-                    buttons:[],
-                    renderHtml:function(local,submitbtn,parent){
-                        jsfile.render(local,{
-                            submitbtn:submitbtn,
-                            act:'c',
-                            queryParams:{aaa100:aaa100,aae100:'1',aaa104:'1'},
-                            localDataGrid:localDataGrid,
-                            parent:parent,
-                            onCreateSuccess:function(data){
-                                //parent.trigger('close');
-                                localDataGrid.datagrid('reload');
-                            }
-                        })
-                    }
-                })
-            })
         })*/
         return localDataGrid;
     }
     var combodtupdate=function(option,record,local,localDataGrid){
-        var parentlocal=local;
-        require(['commonfuncs/popwin/win','text!views/manager/code/xt_combodt.htm','views/manager/code/xt_combodt'],function(win,htmfile,jsfile){
-            win.render({
-                title:'更新',
-                width:424,
-                height:200,
-                html:$(htmfile),
-                buttons:[],
-                renderHtml:function(local,submitbtn,parent){
-                    jsfile.render(local,{
-                        submitbtn:submitbtn,
-                        act:'u',
-                        localDataGrid:localDataGrid,
-                        queryParams:record,
-                        parent:parent,
-                        onUpdateSuccess:function(data){
-                            //parent.trigger('close');
-                            parentlocal.find('.easyui-datagrid-noauto').datagrid('reload');
-                        }
-                    })
-                }
-            })
-        })
+        layer.load(2);
+        require(['text!views/manager/code/xt_combodt.htm','views/manager/code/xt_combodt'],
+            function(htmfile,jsfile){
+                layer.open({
+                    title:'代码信息',
+                    type: 1,
+                    area: ['424px', '200px'], //宽高
+                    content: htmfile,
+                    success: function(layero, index){
+                        jsfile.render(layero,{
+                            index:index,
+                            queryParams:{
+                                actiontype:'update',
+                                record:record,
+                                dgrid:localDataGrid
+                            }
+                        });
+                    }
+                });
+            }
+        );
     }
 
 
     return {
         render:function(local,option){
-            //option.parent=local;
             if(option && option.parent){
                 option.parent=local;
             }

@@ -153,6 +153,15 @@
         results (if (= flag "-1") (basemd/create-combo params2) (basemd/update-combo params aaa100))
         ]
     (resp/json {:success true})))
+(defn del-combo [req]
+  (let [{params :params} req
+        {aaa100 :aaa100} params
+        isnull (basemd/query-combodt aaa100)
+        ]
+    (println "RRRRRRRRRRRRRRRR" (count isnull))
+    ;    (basemd/del-combo aaa100)
+    (if (> (count isnull) 0) (str "false") (do (basemd/del-combo aaa100) (str "true")))
+    ))
 (defn create-combodt [req]
   (let [{params :params} req
         {flag :flag} params
@@ -161,6 +170,13 @@
         results (if (= flag "-1") (basemd/create-combodt params2) (basemd/update-combodt params aaz093))
         ]
     (resp/json {:success true})))
+(defn del-combodt [req]
+  (let [{params :params} req
+        {aaz093 :aaz093} params
+        ]
+    (basemd/del-combodt aaz093)
+    (resp/json {:success true}))
+  )
 
 #_(defn delete-function [id]
     (let [results (basemd/delete-function id)]

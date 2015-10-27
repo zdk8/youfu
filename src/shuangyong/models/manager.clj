@@ -110,9 +110,13 @@
   (update xt_combo
     (set-fields combo)
     (where {:aaa100 aaa100})))
-(defn delete-combo [aaa100]
+
+(defn query-combodt [aaa100]
+  (select xt_combodt
+    (where {:aaa100 aaa100})))
+(defn del-combo [aaa100]
   (delete xt_combo
-    (where {:aaa100 [aaa100]})))
+    (where {:aaa100 aaa100})))
 
 
 (defn create-combodt [combo]
@@ -123,9 +127,9 @@
   (update xt_combodt
     (set-fields combo)
     (where {:aaz093 aaz093})))
-(defn delete-combodt [aaz093]
+(defn del-combodt [aaz093]
   (delete xt_combodt
-    (where {:aaz093 [aaz093]})))
+    (where {:aaz093 aaz093})))
 
 
 
