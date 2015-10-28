@@ -95,61 +95,17 @@
                 </td>
             </tr>
             <tr>
-                <td class="formtdtext">类别<label></label></td>
+                <td class="formtdtext">是否精神病<label></label></td>
                 <td colspan="5">
                     <input class="easyui-combobox"
-                           opt="eachtype"
-                           name="eachtype"
+                           opt="ispsychosis"
+                           name="ispsychosis"
                            style="width: 100px"
                            data-options="
-                                    loader:cj.getLoader('eachtype_scry'),
+                                    loader:cj.getLoader('ispsychosis'),
                                     editable:false,
                                     valueField:'id',
                                     textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">伤残等级<label></label></td>
-                <td>
-                    <input class="easyui-combobox"
-                           opt="disdegree"
-                           name="disdegree"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('disdegree'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-                <td class="formtdtext">伤残性质<label></label></td>
-                <td>
-                    <input class="easyui-combobox"
-                           opt="disaproperty"
-                           name="disaproperty"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('disaproperty'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-                <td class="formtdtext">伤残属别<label></label></td>
-                <td>
-                    <input class="easyui-combobox"
-                           opt="disgroup"
-                           name="disgroup"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('disgroup'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">残疾情形<label></label></td>
-                <td colspan="5">
-                    <textarea class="input-text" name="disituation" style="width: 95%;"></textarea>
                 </td>
             </tr>
             <tr>
