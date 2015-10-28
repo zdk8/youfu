@@ -4,7 +4,7 @@ table {
 }
 .input-text {
     border: 1px solid #e5e5e5;
-    height: 18px;
+    height: 16px;
     padding: 2px 0 2px 5px;
     background: #fff  repeat-x;
     font-family: Verdana, Geneva, sans-serif, "宋体";
@@ -49,6 +49,14 @@ textarea,textarea.input-text,textarea.input-focus{font-size:12px;height:auto; pa
     text-align: right;
 }
 .formtdtext label:after{
+    content: ":"
+}
+.formtdtext2 {
+    width:110px;
+    text-align: right;
+    color: #000099;
+}
+.formtdtext2 label:after{
     content: ":"
 }
 .common-form table{

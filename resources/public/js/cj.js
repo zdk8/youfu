@@ -390,6 +390,19 @@ var cj=(function(){
             local.find('[opt=cancel]').click(function () {
                 layer.close(option.index);
             });
+        },getChildTab: function(ltab,child,option){
+            require(['text!views/shuangyong/youfuduixiang/childtables/'+child+'.htm','views/shuangyong/youfuduixiang/childtables/'+child],
+                function(htmfile,jsfile){
+                    var tab = ltab.tabs('getSelected');
+                    ltab.tabs('update', {
+                        tab: tab,
+                        options: {
+                            content: htmfile
+                        }
+                    });
+                    jsfile.render(tab,{poption:option});
+                }
+            )
         }
     }
 
