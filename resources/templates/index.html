@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--<meta http-equiv=Content-Type content="text/html;charset=utf-8">-->
-    <meta http-equiv="X-UA-Compatible" content="text/html;charset=utf-8;IE=EmulateIE10" />
-    <meta name="Keywords" content="党建,系统"/>
-    <meta name="Description" content="党建人事管理系统" />
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta name="Keywords" content="养老,系统"/>
+    <meta name="Description" content="养老系统" />
     <link rel="shortcut icon" href="images/title.png"/>
-    <title>党建人事管理系统</title>
+    <title>养老</title>
     <script>
         <!--兼容windows无console的情况-->
         if (window.console && window.console.log) {
@@ -16,6 +15,7 @@
         }
     </script>
 
+    <link rel="stylesheet" type="text/css" href="css/index/index2.css"/>
     <link rel="stylesheet" type="text/css" href="css/index/index.css"/>
     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 
@@ -35,133 +35,112 @@
     <script type="text/javascript" defer="defer" src="js/require.js" data-main="js/main"></script>
     <script type="text/javascript" defer="defer" src="js/mycalendar.js"></script>
 
+
+
 </head>
 <body>
-<!--<div id="usermsg" style="display: block">{{usermsg}}</div>-->
+<!--<div id="usermsg" style="display: none">{{usermsg}}</div>-->
 <div class="easyui-layout" data-options="fit:true,border:false">
-    <div data-options="region:'north',height:96">
-        <div class="head_bg">
-            <div class="bghead_l">
-                <div>党建人事管理系统</div>
-            </div>
-            <div class="bghead_r">
-                <!--<span>欢迎！{{username}}</span>&nbsp;|
-                <span style="cursor: pointer" opt="closeAllTabs">关&nbsp;闭</span>&nbsp;|
-                <span style="cursor: pointer"><a href="logout" style="color: white;">退&nbsp;出</a></span>&nbsp;-->
-                <ul>
-                    <!--<li>
-                        <div style="float: right;margin-top: 5px;">&nbsp;首页</div>
-                        <div style="float: right;">
-                            <img src="images/index/func_home.png">
+    <div data-options="region:'west',border:false" style="width:260px;">
+        <!--<div style="height: 100%;">-->
+            <div class="left">
+                <div class="div1">
+                    <div class="left_title">
+                        <label>海盐县双拥管理系统</label>
+                    </div>
+                    <div class="left_top">
+                        <label>菜&nbsp;&nbsp;单</label>
+                    </div>
+                    <div opt="menu">
+                        <!--<div class="div2 div2bag">优抚对象</div>
+                        <div class="div3" opt="优抚对象" style="display: none;">
+                            <li><label style="cursor: pointer" opt="pension.pensioninfo/PensionPeopleInfo">现役军人</label></li>
+                            <li>
+                                <label style="cursor: pointer" opt="pension.pensioninfo/PensionPeopleAudit">退役军人</label>
+                            </li>
                         </div>
-                    </li>-->
-                    <!--<li>信息</li>-->
-                    <!--<li>刷新</li>-->
-                    <!--<li><a href="logout"><img src="images/index/func_logout.png" style="height: 20px;">退出</a></li>-->
-                    <li>
-                        <a href="logout">
-                            <div style="float: right;margin-top: 5px;">&nbsp;退出</div>
-                            <div style="float: right;">
-                                <img src="images/index/func_logout.png">
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="bghead_r_date">
-                <label opt="currentDate" style="float: right;font-size: 10px;color:white;font-style: oblique;"></label>
-            </div>
+                        <div class="div2">统计报表</div>
+                        <div class="div3" opt="统计报表" style="display: none;">
+                            <li>
+                                <label style="cursor: pointer" opt="pension.serviceassinfo/PensionServiceMGT">优抚对象</label>
+                            </li>
+                            <li>
+                                <label style="cursor: pointer" opt="pension.serviceassinfo/PensionServiceApplyQuery">现役军人</label>
+                            </li>
+                            <li>
+                                <label style="cursor: pointer" opt="pension.serviceassinfo/PensionAssessmentAudit">退役军人</label>
+                            </li>
+                        </div>-->
+                    </div>
+                </div>
+            <!--</div>-->
         </div>
     </div>
     <div data-options="region:'center',border:false">
         <div class="easyui-layout" data-options="fit:true">
-            <div data-options="region:'north',height:63,border:false"><!--style="background: #3273a9;"-->
-                <div class="centertip" opt="menutotal">
-                    <ul>
-                        <!--<li><span opt="jdxt">党建系统</span></li>-->
-                        <!--<li><span opt="lzdagl">廉政档案管理</span></li>-->
-                        <!--<li><span opt="rsgl">人事档案</span></li>-->
-                        <!--<li><span opt="jcsj">基础数据</span></li>-->
-                        <!--<li><span opt="tjfx">统计分析</span></li>-->
-                        <!--<li><span opt="qxgl">权限管理</span></li>-->
-                    </ul>
+            <div data-options="region:'north',height:80,border:false">
+                <div class="centertip">
+                    <!--<span>&nbsp;<span>主页</span></span>-->
+                    <!--<label opt="currentDate" style="float: right;margin-right: 8px;font-size: 10px;color:#104b67;font-style: oblique;"></label>-->
                 </div>
             </div>
-            <div opt="contentshow" data-options="region:'center',border:false" style="display: block;">
-                <div class="easyui-layout" data-options="fit:true">
-                    <div data-options="region:'west',border:false" style="width:270px;border-right: 1px solid #e5e5e5;">
-                        <div style="height: 99.6%;border: 1px solid red;">
-                            <div class="menubar">
-                                <div class="menubar_top">
-                                    <!--<img src="images/menu/1.png" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">党建系统-->
-                                </div>
-                                <div opt="menu">
-                                    <ul>
-                                        <!--<li><span opt="dddddd"><img src="images/menu/1.png" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">党支部</span></li>-->
-                                        <!--<li><a href="javaScript:;">共青团</a></li>-->
-                                        <!--<li><a href="javaScript:;">妇女小组</a></li>-->
-                                        <!--<li><a href="javaScript:;">公会</a></li>-->
-                                        <!--<li><a href="javaScript:;">老干部</a></li>-->
-                                    </ul>
-                                </div>
-                            </div>
+            <div opt="contents" data-options="region:'center',border:false" style="padding:36px 0 36px 24px;background-color: #ececec;">
+                <!--<div opt="content" class="easyui-panel" data-options="fit:true" style="background-color: #ececec;display: none;">
+                    <div class="easyui-layout" data-options="fit:true,border:false">
+                        <div data-options="region:'north',border:false" style="height:236px;width: 737px;background-color: #ececec;">
+                            <div class="box-shadow" style="width: 737px;height: 200px;background-color:white;">dsf</div>
+                        </div>
+                        <div data-options="region:'center',border:false" style="background-color:white;">
+                            <table class="easyui-datagrid"
+                                   data-options="fit:true,
+                                    fitColumns:true,
+                                    method:'post',
+                                    singleSelect:true,
+                                    loadMsg:'',
+                                    pagination:true">
+                                <thead>
+                                    <tr>
+                                        <th data-options="field:'code'">Code</th>
+                                        <th data-options="field:'name'">Name</th>
+                                        <th data-options="field:'price'">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>001</td><td>name1</td><td>2323</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td><td>name2</td><td>4612</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td><td>name2</td><td>4612</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td><td>name2</td><td>4612</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td><td>name2</td><td>4612</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td><td>name2</td><td>4612</td>
+                                    </tr>
+                                    <tr>
+                                        <td>002</td><td>name2</td><td>4612</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div opt="showright" data-options="region:'center',border:false">
-                        <div class="easyui-layout" data-options="fit:true">
-                            <div data-options="region:'center',border:false">
-                                <div id="panel" class="easyui-panel" data-options="fit:true"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
 </div>
 
-
 <script type="text/javascript">
 //    var usermsg;
+    $('.left_top').addClass('div2bag');
     $(document).ready(function(){
-        $('[opt=currentDate]').text(mycalendar.RunGLNL());//时间加载
-        /*功能节点加载*/
-        var loadFunction = function (funcid) {
-            $.ajax({
-                url:'getfunctionmenu',
-                type:'post',
-                data:{
-                    funcid:funcid
-                },
-                success:function(data){
-                    layer.closeAll('loading');
-                    var menuarr = new Array();
-                    if(data.length > 0){
-                        for(var i=0;i<data.length;i++){
-                            var menubg;
-                            if(data[i].img){
-                                menubg = data[i].img;
-                            }else{
-                                menubg = "1.png"
-                            }
-                            var menu = '<li><span opt="'+data[i].location+'">'+'<img src="images/menu/'+menubg+'" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">'+data[i].title+'</span></li>'
-                            menuarr.push(menu);
-                        }
-                        $('[opt=menu] ul').html(menuarr);
-                        $('[opt=menu] ul li').first().addClass('menubarV');
-
-                        var intface = $('[opt=menu] ul li').first().find('span').attr('opt');
-                        var funcarr = intface.replace('.','/');
-                        require(['text!views/'+funcarr+'.htm','views/'+funcarr], function (htm,js) {
-                            var panel = $('#panel').panel({content:htm,cache:false});
-                            if(js && js.render){
-                                js.render(panel);
-                            }
-                        })
-                    }
-                }
-            });
-        }
         /*菜单项加载*/
         $.ajax({
             url:'getfunction',
@@ -176,73 +155,97 @@
                         }else{
                             menubg = "1.png"
                         }
-                        var menuli = '<li><span opt="'+data[i].functionid+'">'+data[i].title+'</span></li>';
+                        var menuli = '<div class="div2" node="'+data[i].functionid+'">'+data[i].title+'</div>'+
+                                '<div class="div3" style="display: none;"></div>';
                         htmarr.push(menuli);
                     }
-                    $('[opt=menutotal] ul').html(htmarr);
-                    $('.centertip ul li').first().addClass('centertipV');
-                    var imghtm = '<img src="images/menu/'+menubg+'" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">';
-                    $('.menubar_top').html(imghtm+$('.centertip ul li').first().text());
-                    loadFunction($('.centertip ul li').first().find('span').attr('opt'));
+                    $('[opt=menu]').html(htmarr);
                 }else{
-                    $('[opt=menutotal] ul').html('<li><span style="color: red;">无相应功能模块!</span></li>');
+                    $('[opt=menu]').html('<div style="text-align: center;color: red;">无相应功能模块!请联系管理员配置功能。</div>');
                 }
             }
         })
 
-        /*上方功能菜单事件*/
-        $(document).on('click','.centertip ul li', function () {
-            layer.load();
-            var $this = $(this);
-            $this.addClass("centertipV").siblings().removeClass("centertipV");
-            var funcurl = $this.find('span').attr('opt');
-            $.ajax({
-                url:'getFunctionImg',
-                type:'post',
-                data:{
-                    funcid:funcurl
-                },
-                success: function (data) {
-                    var menubg;
-                    if(data.img){
-                        menubg = data.img;
-                    }else{
-                        menubg = "1.png"
-                    }
-                    var imghtm = '<img src="images/menu/'+menubg+'" style="width:25px;height: 20px;margin-right: 10px;margin-bottom: -3px;">';
-                    $('.menubar_top').html(imghtm+$this.text());
-                }
-            })
-            loadFunction(funcurl);
-        });
-
-        /*功能菜单事件*/
-        $(document).on('click','[opt=menu] ul li', function () {
-            var $this = $(this);
-            $this.addClass("menubarV").siblings().removeClass("menubarV");
-            var intface = $this.find('span').attr('opt');
-            var funcarr = intface.replace('.','/');
-            require(['text!views/'+funcarr+'.htm','views/'+funcarr], function (htm,js) {
-                var panel = $('#panel').panel({content:htm,cache:false});
+//        usermsg=eval('('+$('#usermsg').text()+')');
+//        $('[opt=currentDate]').text(mycalendar.RunGLNL());
+        /*初始化*/
+        function init(){
+            require(['text!views/shuangyong/shouye/index.htm','views/shuangyong/shouye/index'], function (htm,js) {
+                var panel = $('[opt=contents]').panel({
+                    content:htm
+                });
                 if(js && js.render){
                     js.render(panel);
                 }
-            })
-
-        });
+                $('[opt=content]').fadeIn(1500);
+            });
+        }
+        init();
+        $(document).on('click','.left_top',function(){
+            var $this = $(this);
+            $this.next().find('.div2').next('div').slideUp("slow");
+            $this.addClass("div2bag").siblings().removeClass("div2bag");
+            $this.next().find('.div2').addClass("div2bag").siblings().removeClass("div2bag");
+            init();
+        })
+        $(document).on('click','.div2', function () {
+            var $this = $(this);
+            var node = $this.attr('node');
+            if($(this).next().find('li').length == 0){
+                $.ajax({
+                    url:'getfunctionmenu',
+                    type:'post',
+                    data:{
+                        funcid:node
+                    },
+                    success:function(data){
+                        var menuarr = new Array();
+                        if(data.length > 0){
+                            for(var i=0;i<data.length;i++){
+                                var menu = '<li><label style="cursor: pointer" opt="'+data[i].location+'">'+data[i].title+'</label></li>';
+                                menuarr.push(menu);
+                            }
+                            $this.next().html(menuarr);
+                            menuclick($this);
+                        }
+                    }
+                });
+            }else{
+                menuclick($this);
+            }
+        })
+        var menuclick = function ($this) {
+            $('.left_top').removeClass("div2bag");
+            $this.next('div').slideToggle("slow").siblings(".div3:visible").slideUp("slow");
+            $this.addClass("div2bag").siblings().removeClass("div2bag");
+            $this.next().find('li').removeClass("div3bag");
+        }
+        $(document).on('click','.div3 li', function () {
+            var $this = $(this);
+            $this.parent().prev().removeClass('div2bag');
+            $(this).addClass("div3bag").siblings().removeClass("div3bag");
+            var intface = $this.find('label').attr('opt');
+            require(['text!views/'+intface+'.htm','views/'+intface], function (htm,js) {
+                var panel = $('[opt=contents]').panel({
+                    content:htm
+                });
+                if(js && js.render){
+                    js.render(panel);
+                }
+                $('[opt=content]').fadeIn(1500);
+            });
+        })
     });
 </script>
-
 
 </body>
 <script src="js/cj.js"></script>
 <script type="text/javascript" src="js/configurationFile.js"></script>
-<link rel="stylesheet" type="text/css" href="js/commonfuncs/popwin/win.css">
 <link rel="Stylesheet" type="text/css" href="css/table.css">
 
-<!--<link rel="Stylesheet" type="text/css" href="css/checkbox.css">-->
+<link rel="Stylesheet" type="text/css" href="css/checkbox.css">
 
-<script type="text/javascript" src="js/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="js/scripts/highcharts/highcharts.js"></script>
 
 <script src="js/scripts/jquery-form.js"></script>
 

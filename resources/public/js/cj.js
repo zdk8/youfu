@@ -390,7 +390,7 @@ var cj=(function(){
             local.find('[opt=cancel]').click(function () {
                 layer.close(option.index);
             });
-        },getChildTab: function(ltab,child,option){
+        },getChildTab: function(ltab,child,option,actiontype){
             require(['text!views/shuangyong/youfuduixiang/childtables/'+child+'.htm','views/shuangyong/youfuduixiang/childtables/'+child],
                 function(htmfile,jsfile){
                     var tab = ltab.tabs('getSelected');
@@ -400,7 +400,7 @@ var cj=(function(){
                             content: htmfile
                         }
                     });
-                    jsfile.render(tab,{poption:option});
+                    jsfile.render(tab,{poption:option,queryParams:{actiontype:actiontype}});
                 }
             )
         }

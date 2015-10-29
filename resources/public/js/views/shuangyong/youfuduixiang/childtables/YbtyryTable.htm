@@ -102,54 +102,24 @@
                            name="eachtype"
                            style="width: 100px"
                            data-options="
-                                    loader:cj.getLoader('eachtype_scry'),
+                                    loader:cj.getLoader('eachtype_yityry'),
                                     editable:false,
                                     valueField:'id',
                                     textField:'text'">
                 </td>
             </tr>
             <tr>
-                <td class="formtdtext">伤残等级<label></label></td>
+                <td class="formtdtext">服役部队名称<label></label></td>
                 <td>
-                    <input class="easyui-combobox"
-                           opt="disdegree"
-                           name="disdegree"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('disdegree'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
+                    <input class="input-text" name="armyname">
                 </td>
-                <td class="formtdtext">伤残性质<label></label></td>
+                <td class="formtdtext">部队专业<label></label></td>
                 <td>
-                    <input class="easyui-combobox"
-                           opt="disaproperty"
-                           name="disaproperty"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('disaproperty'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
+                    <input class="input-text" name="specialty">
                 </td>
-                <td class="formtdtext">伤残属别<label></label></td>
+                <td class="formtdtext">退役证件号<label></label></td>
                 <td>
-                    <input class="easyui-combobox"
-                           opt="disgroup"
-                           name="disgroup"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('disgroup'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">残疾情形<label></label></td>
-                <td colspan="5">
-                    <textarea class="input-text" name="disituation" style="width: 95%;"></textarea>
+                    <input class="input-text" name="retirenumber">
                 </td>
             </tr>
             <tr>
@@ -202,66 +172,6 @@
                                     editable:false,
                                     valueField:'id',
                                     textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">劳动能力<label></label></td>
-                <td>
-                    <input class="easyui-combobox"
-                           opt="laborability"
-                           name="laborability"
-                           style="width: 130px"
-                           data-options="
-                                    loader:cj.getLoader('laborability'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-                <td class="formtdtext">生活能力<label></label></td>
-                <td>
-                    <input class="easyui-combobox"
-                           opt="lifeability"
-                           name="lifeability"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('lifeability'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-                <td class="formtdtext">就业情况<label></label></td>
-                <td>
-                    <input class="easyui-combobox"
-                           opt="employment"
-                           name="employment"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('employment'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">发放状态<label></label></td>
-                <td>
-                    <input class="easyui-combobox"
-                           opt="grantstatus"
-                           name="grantstatus"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('grantstatus'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-                <td class="formtdtext">停发月数<label></label></td>
-                <td>
-                    <input class="input-text" name="stopmonth">
-                </td>
-                <td class="formtdtext">(暂)停发日期<label></label></td>
-                <td>
-                    <input class="easyui-datebox" name="stopdate" opt="stopdate" style="width: 100px">
                 </td>
             </tr>
             <tr>

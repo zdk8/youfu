@@ -1,0 +1,219 @@
+/*####north#####*/
+/*.bghead{
+    height:85px;
+    background: url("../../images/index/headbg1.png") repeat;
+}*/
+/*.bghead1{
+    width: 200px;
+    margin-top: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    padding-top: 4px;
+    margin-left: 5px;
+}*/
+/*.logo{
+    background: url("../../images/index/logo.png") no-repeat;
+    *//*height: 50px;*//*
+    *//*width: 50px;*//*
+}*/
+/*.bghead2{
+    background: url("../../images/index/headbg2.png") no-repeat;
+    *//*border: 1px solid red;*//*
+    width: 450px;
+    height: 40px;
+    margin-top: -83px;
+    float: right;
+
+    text-align: right;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 40px;
+    *//*padding-right: 5px;*//*
+}*/
+
+
+/*#####west######*/
+a,img{
+    border:0;
+    color:#000;
+    text-decoration:none;
+}
+a:hover{
+    color:#104b67;
+    border-bottom: 1px solid #6fb3e0;
+}
+
+.left{
+    width: 100%;
+    height:100%;
+    color:#000000;
+    font-size:14px;
+    text-align:left;
+    position:absolute;
+    left:0;top:0;
+    font:12px/180% "微软雅黑";
+    background-color: #f6f6f6;
+}
+
+.left_top{
+    background-color: #F6F6F6;
+    height: 40px;
+    /*border-bottom: 1px solid #e5e5e5;*/
+    padding-top: 10px;
+    padding-left: 50px;
+    color: #555555;
+    margin-top: 5px;
+    cursor: pointer;
+    font-family: 微软雅黑;
+    font-weight: bolder;
+    font-size: 17px;
+}
+.div1{
+    text-align:left;
+    /*width:99%;*/
+}
+.left_title{
+    height: 55px;
+    font-size: 20px;
+    color: #2db7f5;
+    padding-top: 25px;
+    padding-left: 20px;
+    background-color: #ffffff;
+}
+.div2{
+    height:40px;
+    line-height:40px;
+    cursor:pointer;
+    font-size:14px;
+    position:relative;
+    padding-left: 50px;
+    color: #5c6b77;
+    font-family: 微软雅黑;
+    font-weight: bolder;
+}
+.div2bag{
+    background-color: white;
+    border-left: 3px solid #1d80d3;
+    color:#2db7f5;
+}
+
+.div3{
+    display:none;
+    font-size:13px;
+    background-color: #f6f6f6;
+}
+.div3 ul{margin:0;padding:0;}
+.div3 li{
+    height:40px;
+    line-height:40px;
+    list-style:none;
+    text-align:left;
+    padding-left: 64px;
+    cursor: pointer;
+    color: #8b8b8b;
+}
+.div3 li:hover{
+    /*background-color: #e8f7df;*/
+    color: #6ac2f5;
+}
+
+.div3bag{
+    background-color: white;
+    border-left: 3px solid #1d80d3;
+    /*background-color: #e8f7df;*/
+
+}
+.div3bag label{
+    color: #6ac2f5;
+}
+
+/*#####center#######*/
+.centertip{
+    /*height: 80px;*/
+    height: 100%;
+    /*border-bottom: 1px solid #F2F2F2;*/
+    /*padding-top: 16px;*/
+    /*font-size: 14px;*/
+    background: #2db7f5;
+    margin: 0;
+    /*border: 1px solid red;*/
+}
+.centertip span{
+    color: #0080d8;
+}
+
+/*查询栏*/
+/*###########按钮############*/
+.inputtext{
+    height: 20px;border: 1px solid #e5e5e5;
+}
+.btns{
+    background-color: #6fb3e0;
+    color: #ffffff;
+    border: 1px solid #6fb3e0;
+    cursor: pointer;height: 22px;width: 60px;
+}
+.btns:hover{
+    background-color: #2D93CA;
+}
+.btns:active{
+    position: relative;
+    top: 1px;
+}
+
+
+/************表单上方或者下方的悬浮工具条***************/
+div.form-foot-btns{
+    border-top: 1px solid gainsboro;
+}
+div.form-foot-btns ul
+{
+    margin: 0;
+    padding: 0;
+    padding-top: 5px;
+    text-align: center;
+    list-style-type: none;
+}
+div.form-foot-btns ul li
+{
+    margin-left: 5px;
+    display:inline;
+    list-style-type:none;
+}
+div.form-foot-btns ul li a{
+    background-color: #6fb3e0;
+    color: #ffffff;
+    border: 1px solid #6fb3e0;
+    cursor: pointer;height: 22px;width: 60px;
+}
+div.form-foot-btns ul li a:hover{
+    background-color: #2D93CA;
+}
+div.form-foot-btns ul li a:active{
+    position: relative;
+    top: 1px;
+}
+
+/*工具栏背景*/
+.highcharstoolbar{
+    /*background: url("../../img/hengtiao.jpg");*/
+    background-color: #6fb3e0;
+    color: #ffffff;
+    height: 23px;
+    width: auto;
+    padding-top: 5px;
+}
+
+.box-shadow1{
+    -moz-box-shadow: 20px 0 0 #909090;/*firefox*/
+    -webkit-box-shadow: 20px 0 0 #909090;/*safari或chrome*/
+    box-shadow:0 0 15px #909090;;/*opera或ie9*/
+}
+.box-shadow{
+    -moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
+    -webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
+    box-shadow:2px 2px 10px #909090;/*opera或ie9*/
+}
+

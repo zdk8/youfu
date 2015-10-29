@@ -1,149 +1,3 @@
-/*####north#####*/
-body{
-    /*min-width: 1200px;*/
-}
-.head_bg{
-    height:100%;
-    width: 100%;
-    position: absolute;
-    background-color: #0d7fd7;
-}
-.bghead_l{
-    width: 240px;
-    margin-top: 25px;
-    font-size: 28px;
-    font-weight: bolder;
-    color: #ffffff;
-    margin-left: 25px;
-}
-/*.logo{
-    background: url("../../images/index/logo.png") no-repeat;
-}*/
-.bghead_r{
-    width: 250px;
-    height: 40px;
-    margin-top: -10px;
-    margin-right: 35px;
-    float: right;
-    text-align: right;
-    color: #ffffff;
-    font-size: 14px;
-}
-.bghead_r li{
-    float: right;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.bghead_r li a{
-    color: white;
-}
-.bghead_r_date{
-    width: 280px;
-    height: 20px;
-    margin-top: -55px;
-    margin-right: -280px;
-    float: right;
-    text-align: right;
-}
-
-/*#####west######*/
-a,img{
-    border:0;
-    color:#000;
-    text-decoration:none;
-}
-a:hover{
-    color:#104b67;
-    border-bottom: 1px solid #6fb3e0;
-}
-
-/*#####center#######*/
-.centertip{
-    height: 55px;
-    /*min-width: 1500px;*/
-    /*border-bottom: 1px solid #F2F2F2;*/
-    /*font-size: 14px;*/
-    background: #3273a9;
-    color: white;
-    font-family: Microsoft JhengHei;
-    font-size: 19px;
-    letter-spacing:2px;
-    padding-top: 4px;
-}
-.centertip ul{
-    display: inline;
-
-}
-.centertip li{
-    float: left;
-    border-right: 1px solid #045886;
-    /*border-bottom: 1px solid #045886;*/
-    cursor: pointer;
-    height: 36px;
-    /*height: 51px;*/
-    width: 200px;
-    text-align: center;
-    padding-top: 15px;
-}
-.centertip li:hover{
-    border-top: 4px solid #d6e3ee;
-}
-.centertipV{
-    /*height: 36px;*/
-    /*padding-top: 15px;*/
-    border-top: 4px solid #d6e3ee;
-    /*border: 1px solid red;*/
-}
-
-/*菜单栏*/
-.menubar{
-    width: 100%;
-    height:100%;
-    color:white;
-    font-size:14px;
-    text-align:left;
-    position:absolute;
-    left:0;top:0;
-    font:12px/180% "微软雅黑";
-    background-color: #0d7fd7;
-}
-
-.menubar_top{
-    height: 40px;
-    border-bottom: 1px solid #e5e5e5;
-    padding-top: 20px;
-    padding-left: 30px;
-    font-weight: bolder;
-    font-size: 20px;
-    letter-spacing:6px;
-    color: white;
-}
-.menubar ul{
-    margin: 0px;
-    padding: 0px;
-}
-.menubar ul li{
-    font-size: 19px;
-    margin-bottom: 5px;
-    /*margin-top: 5px;*/
-    height: 35px;
-    padding-top: 10px;
-    cursor: pointer;
-}
-.menubar ul li:hover{
-    border-right: 4px solid #d6e3ee;
-    background-color: #045886;
-}
-.menubar ul li span{
-    color: white;
-    margin-left: 48px;
-}
-.menubarV{
-    border-right: 4px solid #d6e3ee;
-    background-color: #045886;
-}
-
-
 /*查询栏*/
 /*###########按钮############*/
 .inputtext{
@@ -194,39 +48,6 @@ a:hover{
     top: 1px;
 }
 
-
-
-/************表单上方或者下方的悬浮工具条***************/
-/*div.form-foot-btns{
-    border-top: 1px solid gainsboro;
-}
-div.form-foot-btns ul
-{
-    margin: 0;
-    padding: 0;
-    padding-top: 5px;
-    text-align: center;
-    list-style-type: none;
-}
-div.form-foot-btns ul li
-{
-    margin-left: 5px;
-    display:inline;
-    list-style-type:none;
-}
-div.form-foot-btns ul li a{
-    background-color: #6fb3e0;
-    color: #ffffff;
-    border: 1px solid #6fb3e0;
-    cursor: pointer;height: 22px;width: 60px;
-}
-div.form-foot-btns ul li a:hover{
-    background-color: #2D93CA;
-}
-div.form-foot-btns ul li a:active{
-    position: relative;
-    top: 1px;
-}*/
 
 /*工具栏背景*/
 .highcharstoolbar{
@@ -353,7 +174,7 @@ ol, ul, li, dl, dd, dt {
 }
 
 /*人员添加*/
-.addpeople{
+/*.addpeople{
 
 }
 .addpeople div{
@@ -372,5 +193,5 @@ ol, ul, li, dl, dd, dt {
 .addpeople div:active{
     position: relative;
     top: 1px;
-}
+}*/
 
