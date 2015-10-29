@@ -1,5 +1,52 @@
 <!--现役军人-->
-<div class="easyui-layout" data-options="fit:true">
+<div opt="content" class="easyui-panel" data-options="fit:true" style="background-color: #ececec;display: none;">
+    <div class="easyui-layout" data-options="fit:true,border:false">
+        <div data-options="region:'north',border:false" style="height:236px;width: 737px;background-color: #ececec;">
+            <div class="box-shadow" style="width: 737px;height: 200px;background-color:white;">dsf</div>
+        </div>
+        <div data-options="region:'center',border:false" style="background-color:white;">
+            <table class="easyui-datagrid"
+                   data-options="fit:true,
+                                    fitColumns:true,
+                                    method:'post',
+                                    singleSelect:true,
+                                    loadMsg:'',
+                                    pagination:true">
+                <thead>
+                <tr>
+                    <th data-options="field:'code'">Code</th>
+                    <th data-options="field:'name'">Name</th>
+                    <th data-options="field:'price'">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>001</td><td>name1</td><td>2323</td>
+                </tr>
+                <tr>
+                    <td>002</td><td>name2</td><td>4612</td>
+                </tr>
+                <tr>
+                    <td>002</td><td>name2</td><td>4612</td>
+                </tr>
+                <tr>
+                    <td>002</td><td>name2</td><td>4612</td>
+                </tr>
+                <tr>
+                    <td>002</td><td>name2</td><td>4612</td>
+                </tr>
+                <tr>
+                    <td>002</td><td>name2</td><td>4612</td>
+                </tr>
+                <tr>
+                    <td>002</td><td>name2</td><td>4612</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--<div class="easyui-layout" data-options="fit:true">
     <div data-options="region:'north',border:false"
          style="height:60px;padding:0 0 0 0px;">
         <div style="width: auto;height: 50px;;background-color: #eff3f8;">
@@ -28,12 +75,6 @@
                         loadMsg:''">
             <thead frozen="true">
             <tr>
-                <!--formatter:function(value,row,index){
-                        if(value != null){
-                            return '<img src='+value+' style=&quot;width:45px;height:54px;&quot;/>';
-                        }else{
-                            return '<img src=&quot;images/noperson.gif&quot; style=&quot;width:45px;height:54px;&quot;/>';
-                        }-->
                 <th data-options="field:'photo',width:55,align:'center',
                         formatter:function(v,r,i){
                             var str='<div></div>';
@@ -73,6 +114,6 @@
             </thead>
         </table>
     </div>
-</div>
+</div>-->
 
 
