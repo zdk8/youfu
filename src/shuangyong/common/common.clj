@@ -16,6 +16,10 @@
 
 
 (def selectcols {
+                 ;;双拥人员信息表
+                 :t_soldiercommon [:districtid :identityid :name :sex :birthday :nation :marriage :joindate :retiredate :hktype :comments :isreceive :awardlevel :idaddress :phone :household :caretype :insured :pension :persontype :eachtype :armyname :specialty :retirenumber :disdegree :disaproperty :disgroup :workunit :disituation :laborability:lifeability :employment :grantstatus :stopmonth :stopdate :bankaccount :holder:deadrelation :armycode :awardyear :lifestatus :healthstatus :certificateid :community :opiniondate :communityopinion :streeter :reviewdate :streetreview :county :auditdate :countyaudit :preparer :filenumber :enterdate :ishandle]
+                 ;;审核表
+                 :approve [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators :messagebrief :bstablepkname]
                  })
 
 
