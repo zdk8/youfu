@@ -196,3 +196,21 @@ div.form-foot-btns ul li a:active{
     border-radius:5px;
 }
 
+.weboxbuttons{
+    text-align: center;
+}
+.weboxbuttons ul li{
+    display:inline;
+    list-style-type:none;
+    /*border: 1px solid red;*/
+    cursor: pointer;
+    margin-right: 10px;
+}
+.weboxbuttons ul li label{
+    background-color: #6fb3e0;
+    color: #ffffff;
+    height: 22px;
+    width: 60px;
+    border: 1px solid red;
+}
+
