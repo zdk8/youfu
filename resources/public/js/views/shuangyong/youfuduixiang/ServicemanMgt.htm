@@ -1,22 +1,88 @@
 <!--现役军人-->
 <div opt="content" class="easyui-panel" data-options="fit:true" style="background-color: #ececec;display: none;">
     <div class="easyui-layout" data-options="fit:true,border:false">
-        <div data-options="region:'north',border:false" style="height:236px;width: 737px;background-color: #ececec;">
-            <div class="box-shadow" style="width: 737px;height: 200px;background-color:white;">dsf</div>
+        <div data-options="region:'north',border:false" style="height:206px;width: 737px;background-color: #ececec;">
+            <div class="box-shadow" style="width: 1000px;height: 180px;background-color:white;">
+                <table width="100%" cellpadding="5" class="table_form2">
+                    <tr>
+                        <td class="formtdtext2" style="width: 130px;">行政区划<label></label></td>
+                        <td>
+                            <input opt="division" style="width: 170px;">
+                        </td>
+                        <td class="formtdtext2">姓名<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                        <td class="formtdtext2">身份证号<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                        <td class="formtdtext2">身份类别<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext2">审核状态<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                        <td class="formtdtext2">优抚对象状态<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                        <td class="formtdtext2">死亡审核<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                        <td class="formtdtext2">照片<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext2">出生年区间<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                        <td class="formtdtext2">入伍时间<label></label></td>
+                        <td>
+                            <input opt="division">
+                        </td>
+                        <td class="formtdtext2">退役时间<label></label></td>
+                        <td colspan="3">
+                            <input opt="division">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext2">模糊地址<label></label></td>
+                        <td colspan="4">
+                            <input opt="division" style="width: 509px;">
+                        </td>
+                        <td colspan="3" align="right">
+                            <div class="com_btns exportbtn" align="center">导出</div>
+                            <div class="com_btns addbtn" align="center">新增</div>
+                            <div class="com_btns querybtn" align="center">查询</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div data-options="region:'center',border:false" style="background-color:white;">
+        <div class="box-shadow" data-options="region:'center',border:false" style="background-color:white;padding: 20px;">
             <table class="easyui-datagrid"
-                   data-options="fit:true,
-                                    fitColumns:true,
-                                    method:'post',
-                                    singleSelect:true,
-                                    loadMsg:'',
-                                    pagination:true">
+                   data-options="method:'post',
+                       fit:true,
+                       border:false,
+                       fitColumns:true,
+                       pageSize:cj.getDataGridAttr('pageSize'),
+                       pageList:cj.getDataGridAttr('pageList'),
+                       singleSelect:true,
+                       pagination:true">
                 <thead>
                 <tr>
-                    <th data-options="field:'code'">Code</th>
-                    <th data-options="field:'name'">Name</th>
-                    <th data-options="field:'price'">Price</th>
+                    <th data-options="field:'code',width:200">Code</th>
+                    <th data-options="field:'name',width:200">Name</th>
+                    <th data-options="field:'price',width:200">Price</th>
                 </tr>
                 </thead>
                 <tbody>

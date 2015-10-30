@@ -3,7 +3,7 @@ table {
     border-spacing:0;
 }
 .input-text {
-    border: 1px solid #e5e5e5;
+    border: 1px solid #d9d9d9;
     height: 16px;
     padding: 2px 0 2px 5px;
     background: #fff  repeat-x;
@@ -43,18 +43,33 @@ textarea,textarea.input-text,textarea.input-focus{font-size:12px;height:auto; pa
 .table_form tbody td,.table_form tbody th{
     border:1px solid #e5e5e5;
 }
+
+/*表格表单2*/
+.table_form2 input{
+    border: 1px solid #d9d9d9;
+    height: 28px;
+    background: #fff  repeat-x;
+    font-family: Verdana, Geneva, sans-serif, "宋体";
+    font-size: 14px;
+    width: 130px;
+    color: #000000;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:5px;
+}
 .colorpanel tbody td,.colorpanel tbody th{ padding:0;border-bottom: none;}
 .formtdtext {
     width:110px;
     text-align: right;
 }
 .formtdtext label:after{
-    content: ":"
+    content: " :"
 }
 .formtdtext2 {
     width:110px;
     text-align: right;
-    color: #000099;
+    font-size: 12px;
+    font-family: 微软雅黑;
 }
 .formtdtext2 label:after{
     content: ":"
@@ -88,6 +103,43 @@ div.form-foot-btns ul li a, div.form-foot-btns ul li a:visited
 textarea{
     border: 1px solid #e5e5e5;
 }
+
+/*按钮样式*/
+.com_btns{
+    float: right;
+    width: 70px;
+    height: 25px;
+    border: none;
+    cursor: pointer;
+    color: #545454;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    text-align: center;
+    border: 1px solid #d9d9d9;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius:15px;
+    padding-top: 5px;
+    margin-right: 5px;
+}
+.com_btns:active{
+    position: relative;
+    top: 1px;
+}
+.querybtn{
+    color: white;
+    background-color: #57c5f7;
+}
+.querybtn:hover{
+    background-color: #2db7f5;
+}
+.addbtn{
+    background-color: #f3f3f3;
+}
+.exportbtn{
+    background-color: white;
+}
+
 
 
 

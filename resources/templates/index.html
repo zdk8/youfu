@@ -34,113 +34,46 @@
 
     <script type="text/javascript" defer="defer" src="js/require.js" data-main="js/main"></script>
     <script type="text/javascript" defer="defer" src="js/mycalendar.js"></script>
-
-
-
 </head>
 <body>
-<!--<div id="usermsg" style="display: none">{{usermsg}}</div>-->
+<div id="usermsg" style="display: none">{{usermsg}}</div>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'west',border:false" style="width:260px;">
-        <!--<div style="height: 100%;">-->
-            <div class="left">
-                <div class="div1">
-                    <div class="left_title">
-                        <label>海盐县双拥管理系统</label>
-                    </div>
-                    <div class="left_top">
-                        <label>菜&nbsp;&nbsp;单</label>
-                    </div>
-                    <div opt="menu">
-                        <!--<div class="div2 div2bag">优抚对象</div>
-                        <div class="div3" opt="优抚对象" style="display: none;">
-                            <li><label style="cursor: pointer" opt="pension.pensioninfo/PensionPeopleInfo">现役军人</label></li>
-                            <li>
-                                <label style="cursor: pointer" opt="pension.pensioninfo/PensionPeopleAudit">退役军人</label>
-                            </li>
-                        </div>
-                        <div class="div2">统计报表</div>
-                        <div class="div3" opt="统计报表" style="display: none;">
-                            <li>
-                                <label style="cursor: pointer" opt="pension.serviceassinfo/PensionServiceMGT">优抚对象</label>
-                            </li>
-                            <li>
-                                <label style="cursor: pointer" opt="pension.serviceassinfo/PensionServiceApplyQuery">现役军人</label>
-                            </li>
-                            <li>
-                                <label style="cursor: pointer" opt="pension.serviceassinfo/PensionAssessmentAudit">退役军人</label>
-                            </li>
-                        </div>-->
-                    </div>
+        <div class="left">
+            <div class="div1">
+                <div class="left_title">
+                    <label>海盐县双拥管理系统</label>
                 </div>
-            <!--</div>-->
+                <div class="left_top">
+                    <label>菜&nbsp;&nbsp;单</label>
+                </div>
+                <div opt="menu"></div>
+            </div>
         </div>
     </div>
     <div data-options="region:'center',border:false">
         <div class="easyui-layout" data-options="fit:true">
             <div data-options="region:'north',height:80,border:false">
                 <div class="centertip">
-                    <!--<span>&nbsp;<span>主页</span></span>-->
+                    <div class="center_text">
+                        <label>用户 <span opt="msgname"></span></label>
+                        &nbsp;<a href="logout">注销</a>
+                    </div>
                     <!--<label opt="currentDate" style="float: right;margin-right: 8px;font-size: 10px;color:#104b67;font-style: oblique;"></label>-->
                 </div>
             </div>
-            <div opt="contents" data-options="region:'center',border:false" style="padding:36px 0 36px 24px;background-color: #ececec;">
-                <!--<div opt="content" class="easyui-panel" data-options="fit:true" style="background-color: #ececec;display: none;">
-                    <div class="easyui-layout" data-options="fit:true,border:false">
-                        <div data-options="region:'north',border:false" style="height:236px;width: 737px;background-color: #ececec;">
-                            <div class="box-shadow" style="width: 737px;height: 200px;background-color:white;">dsf</div>
-                        </div>
-                        <div data-options="region:'center',border:false" style="background-color:white;">
-                            <table class="easyui-datagrid"
-                                   data-options="fit:true,
-                                    fitColumns:true,
-                                    method:'post',
-                                    singleSelect:true,
-                                    loadMsg:'',
-                                    pagination:true">
-                                <thead>
-                                    <tr>
-                                        <th data-options="field:'code'">Code</th>
-                                        <th data-options="field:'name'">Name</th>
-                                        <th data-options="field:'price'">Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>001</td><td>name1</td><td>2323</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td><td>name2</td><td>4612</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td><td>name2</td><td>4612</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td><td>name2</td><td>4612</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td><td>name2</td><td>4612</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td><td>name2</td><td>4612</td>
-                                    </tr>
-                                    <tr>
-                                        <td>002</td><td>name2</td><td>4612</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>-->
+            <div opt="contents" data-options="region:'center',border:false" style="padding:26px 0 16px 24px;background-color: #ececec;">
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-//    var usermsg;
+    var usermsg;
     $('.left_top').addClass('div2bag');
     $(document).ready(function(){
+        usermsg=eval('('+$('#usermsg').text()+')');
+        $('[opt=msgname]').html(usermsg.loginname);
         /*菜单项加载*/
         $.ajax({
             url:'getfunction',
@@ -166,7 +99,6 @@
             }
         })
 
-//        usermsg=eval('('+$('#usermsg').text()+')');
 //        $('[opt=currentDate]').text(mycalendar.RunGLNL());
         /*初始化*/
         function init(){
@@ -243,7 +175,7 @@
 <script type="text/javascript" src="js/configurationFile.js"></script>
 <link rel="Stylesheet" type="text/css" href="css/table.css">
 
-<link rel="Stylesheet" type="text/css" href="css/checkbox.css">
+<!--<link rel="Stylesheet" type="text/css" href="css/checkbox.css">-->
 
 <script type="text/javascript" src="js/scripts/highcharts/highcharts.js"></script>
 

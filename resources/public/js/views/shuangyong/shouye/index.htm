@@ -6,17 +6,19 @@
         </div>
         <div data-options="region:'center',border:false" style="background-color:white;">
             <table class="easyui-datagrid"
-                   data-options="fit:true,
-                                    fitColumns:true,
-                                    method:'post',
-                                    singleSelect:true,
-                                    loadMsg:'',
-                                    pagination:true">
+                   data-options="method:'post',
+                       fit:true,
+                       border:false,
+                       fitColumns:true,
+                       pageSize:cj.getDataGridAttr('pageSize'),
+                       pageList:cj.getDataGridAttr('pageList'),
+                       singleSelect:true,
+                       pagination:true">
                 <thead>
                 <tr>
-                    <th data-options="field:'code'">Code</th>
-                    <th data-options="field:'name'">Name</th>
-                    <th data-options="field:'price'">Price</th>
+                    <th data-options="field:'code',width:200">Code</th>
+                    <th data-options="field:'name',width:200">Name</th>
+                    <th data-options="field:'price',width:200">Price</th>
                 </tr>
                 </thead>
                 <tbody>
