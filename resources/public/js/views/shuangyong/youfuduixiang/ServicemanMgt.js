@@ -1,6 +1,6 @@
 define(function(){
     function render(local,option){
-        cj.getdivision(local.find('[opt=division]'));
+        cj.getdivision(local.find('[opt=districtid]'));
 
         var datagrid = local.find('.easyui-datagrid-noauto');
         var refreshGrid=function() {

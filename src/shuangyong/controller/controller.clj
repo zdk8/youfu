@@ -37,7 +37,7 @@
   (let [params (:params request)
         sdata (common/dateformat-bf-insert (select-keys params (:t_soldiercommon common/selectcols)) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")
         sc_id (:sc_id params)]
-    (db/updatedata-by-tablename "t_soldiercommon" sdata sc_id)
+    (db/updatedata-by-tablename "t_soldiercommon" sdata {:sc_id sc_id})
     (str "true")))
 
 (defn report-soilder [request]
