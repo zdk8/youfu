@@ -87,4 +87,8 @@
       (updatedata-by-tablename "t_soldiercommon" sdata {:sc_id sc_id})                             ;更新人员信息
       (adddata-by-tablename "approve" approvedata))))                                              ;新增审核信息
 
-(defn audit-soilder [])
+(defn audit-soilder [sc_id approvedata sdata]
+  (transaction
+    (updatedata-by-tablename "approve" {:status "0"} {:bstablepk sc_id})                            ;更改审核表状态
+    (adddata-by-tablename "approve" approvedata)                                                    ;新增审核信息
+    (updatedata-by-tablename "t_soldiercommon" sdata {:sc_id sc_id})))                              ;更改人员表数据信息

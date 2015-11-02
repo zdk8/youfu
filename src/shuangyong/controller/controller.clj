@@ -73,20 +73,27 @@
     {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
 
 
-(defn audit-soilder [request]
+(defn audit-soilder [request]                                              ; aulevel "1"     auflag "数据提交"       auuser (:community params)    audesc (:communityopinion params)
   (let [params          (:params request)
         ishandle        (:ishandle params)
+        issuccess       (:issuccess params)
         sc_id           (:sc_id params)
+        sdata           (common/dateformat-bf-insert (select-keys params [:streeter :streetreview :reviewdate :county :countyaudit :auditdate]) "reviewdate" "auditdate")                                    ;(common/dateformat-bf-insert (select-keys params (:t_soldiercommon common/selectcols)) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")
         streeter        (:streeter params)
         streetreview    (:streeter params)
         county          (:streeter params)
         countyaudit     (:streeter params)
         name            (:name params)
         identityid      (:identityid params)
+        approvedata {:bstablepk sc_id :bstablename "t_soldiercommon" :bstablepkname "sc_id"  :messagebrief (str "姓名：" name ",身份证："identityid )}
         ]
-    (if (> (count ishandle) 0) (if (= ishandle "1") (db/audit-soilder )
-                                                     (db/audit-soilder)))
-    ))
+    (if (= issuccess "1") (if (> (count ishandle) 0) (if (= ishandle "1") (db/audit-soilder sc_id (conj approvedata {:aulevel "2" :status "1" :auflag "街道审核通过" :auuser  streeter :audesc streetreview :appoperators streeter} ) (conj sdata {:ishandle "2"}) )
+                                                                           (db/audit-soilder sc_id (conj approvedata {:aulevel "3" :status "1" :auflag "民政局审批通过" :auuser  county :audesc countyaudit :appoperators county} )(conj sdata {:ishandle "3"})))
+                                                     (resp/json {:success "false"}))
+                          (if (> (count ishandle) 0) (if (= ishandle "1") (db/audit-soilder sc_id (conj approvedata {:aulevel "-1" :status "0" :auflag "街道审核不通过" :auuser  streeter :audesc streetreview :appoperators streeter} ) (conj sdata {:ishandle "-1"}) )
+                                                                           (db/audit-soilder sc_id (conj approvedata {:aulevel "-1" :status "0" :auflag "民政局审批不通过" :auuser  county :audesc countyaudit :appoperators county} )(conj sdata {:ishandle "-1"})))
+                                                     (resp/json {:success "false"})))
+    (str "true")))
 
 (defn add-soilder [request]
   (let [params (:params request)
