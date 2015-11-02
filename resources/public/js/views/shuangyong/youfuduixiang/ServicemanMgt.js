@@ -127,10 +127,21 @@ define(function(){
         var name = local.find('[opt=name]');                        //姓名
         var identityid = local.find('[opt=identityid]');        //身份证
         /*搜索*/
-        local.find('[opt=query]').click(function(){
+        local.find('.querybtn').click(function(){
             datagrid.datagrid('load',{
                 name:name.val(),
-                identityid:identityid.val()
+                identityid:identityid.val(),
+                districtid:local.find('[opt=districtid]').combobox('getValue'),
+                eachtype:local.find('[opt=eachtype]').combobox('getValue'),
+                ishandle:local.find('[opt=handle_type]').combobox('getValue'),
+                caretype:local.find('[opt=caretype]').combobox('getValue'),
+                isdead:local.find('[opt=die_type]').combobox('getValue'),
+                photo:local.find('[opt=hasphoto]').combobox('getValue'),
+                joindate:local.find('[opt=joindate]').val(),
+                retiredate:local.find('[opt=retiredate]').val(),
+                birthday1:local.find('[opt=birthday1]').datebox('getValue'),
+                birthday2:local.find('[opt=birthday2]').datebox('getValue'),
+                household:local.find('[opt=household]').val()
             })
         })
 

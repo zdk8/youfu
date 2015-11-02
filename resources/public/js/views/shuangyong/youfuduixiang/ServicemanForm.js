@@ -81,6 +81,7 @@ define(function(){
                         $this.attr("disabled",false);//按钮启用
                     }
                     params.districtid = local.find("[opt=districtid]").combotree("getValue");
+                    params.persontype = '100';
                     return isValid;
                 },
                 success: function (data) {
@@ -123,7 +124,7 @@ define(function(){
 
         local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {
-                url: 'record/updaterecord',
+                url: 'hyshy/updatesoilder',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
