@@ -1,4 +1,6 @@
 ﻿getGender=['男','女'];             //性别
+getStatus=['保存','已上报','已审核','已审批'];             //状态
+getEachtype=['义务兵(零年)','义务兵(第一年)','义务兵(第二年)','士官(义务兵转)','军官(提升)','军官(军校)'];             //类别(现役军人)
 
 String.prototype.trim = function () {
     return this .replace(/^\s\s*/, '' ).replace(/\s\s*$/, '' );

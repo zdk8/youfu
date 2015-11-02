@@ -60,9 +60,9 @@
         sc_id           (:sc_id params)
         sdata           (common/dateformat-bf-insert (select-keys params [:streeter :streetreview :reviewdate :county :countyaudit :auditdate]) "reviewdate" "auditdate")                                    ;(common/dateformat-bf-insert (select-keys params (:t_soldiercommon common/selectcols)) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")
         streeter        (:streeter params)
-        streetreview    (:streeter params)
-        county          (:streeter params)
-        countyaudit     (:streeter params)
+        streetreview    (:streetreview params)
+        county          (:county params)
+        countyaudit     (:countyaudit params)
         name            (:name params)
         identityid      (:identityid params)
         approvedata {:bstablepk sc_id :bstablename "t_soldiercommon" :bstablepkname "sc_id"  :messagebrief (str "姓名：" name ",身份证："identityid )}
