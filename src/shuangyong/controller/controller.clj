@@ -89,6 +89,7 @@
         retiredate      (:retiredate params)
         birthday1       (:birthday1  params)
         birthday2       (:birthday2  params)
+        household       (:household params)
         namecond        (if (> (count name) 0) (common/likecond "name" name))
         identityidcond  (if (> (count identityid) 0) (common/likecond "identityid" identityid))
         districtcond    (if (> (count districtid) 0) (str " and districtid like '" districtid "%'"))
@@ -101,7 +102,8 @@
         retiredatecond  (if (> (count retiredate) 0) (str " and to_char(retiredate,'yyyy') = '"retiredate"' "))
         birthday1cond   (if (> (count birthday1) 0) (str " and birthday > to_date('"birthday1"','yyyy-mm-dd') "))
         birthday2cond   (if (> (count birthday1) 0) (str " and birthday < to_date('"birthday2"','yyyy-mm-dd') "))
-        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond)]
+        housecond       (if (> (count household)0) (str (common/likecond "household" household)))
+        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond)]
     conds))
 
 
