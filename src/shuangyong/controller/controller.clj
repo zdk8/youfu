@@ -98,7 +98,8 @@
 (defn logout-soilder [request]
   (let [params (:params request)
         sc_id (:sc_id params)]
-    (if (> (count sc_id) 0) (db/updatedata-by-tablename "t_soldiercommon" {:ishandle "n"} {:sc_id sc_id}))))
+    (if (> (count sc_id) 0) (db/updatedata-by-tablename "t_soldiercommon" {:ishandle "n"} {:sc_id sc_id}))
+    (str "true")))
 
 
 

@@ -124,7 +124,11 @@
                     <!--<th data-options="field:'contactway',width:100,align:'center'">退役状态</th>-->
                     <th data-options="field:'ishandle',width:100,align:'center',
                         formatter: function(value,row,index){
+                                    if(value == '-1'){
+                                        return '退回';
+                                    }else{
                                         return getStatus[value]
+                                    }
                                     }">状态</th>
                     <th data-options="field:'ro',width:100,align:'center',
                                     formatter:function(value,rowData,rowIndex){
@@ -134,6 +138,7 @@
                                             str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                                             str=$(str).append('<a action=&quot;audit&quot;title=&quot;审核&quot;href=&quot;javaScript:;&quot;><span>审核</span></a>');
                                             str=$(str).append('<a action=&quot;approve&quot;title=&quot;审批&quot;href=&quot;javaScript:;&quot;><span>审批</span></a>');
+                                            str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;href=&quot;javaScript:;&quot;><span>注销</span></a>');
                                         return str.html();
                                     }">操作</th>
                 </tr>

@@ -17,11 +17,12 @@ define(function(){
                 var delbtns = local.find('[action=del]').hide();           //删除
                 var auditbtns = local.find('[action=audit]').hide();           //审核
                 var approvebtns = local.find('[action=approve]').hide();           //审批
+                var logoutbtns = local.find('[action=logout]').hide();           //注销
                 //var imgviewbtns = local.find('[action=imgview]');           //预览
                 var rows=data.rows;
-                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns];
+                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns];
                 for(var i=0;i<rows.length;i++){
-                    if(rows[i].ishandle == '0'){    //保存
+                    if(rows[i].ishandle == '0' || rows[i].ishandle == '-1'){    //保存
                         $(btns_arr[0][i]).show();
                         $(btns_arr[1][i]).show();
                         $(btns_arr[2][i]).show();
@@ -29,6 +30,8 @@ define(function(){
                         $(btns_arr[3][i]).show();
                     }else if(rows[i].ishandle == '2'){
                         $(btns_arr[4][i]).show();
+                    }else if(rows[i].ishandle == '3'){
+                        $(btns_arr[5][i]).show();
                     }
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -38,23 +41,21 @@ define(function(){
                                 if(action == "report"){                                       //详细信息
                                     updateFunc(record,refreshGrid,'report');
                                 }else if(action == "del"){                   //处理
-                                    console.log(record.name)
                                     layer.confirm('确定删除么?', {icon: 3, title:'温馨提示'}, function(index){
                                         layer.close(index);
                                         layer.load();
                                         $.ajax({
-                                            url:'record/delpensonrecords',
+                                            url:'hyshy/deletesoilder',
                                             type:'post',
                                             data:{
-                                                pr_id:record.pr_id
+                                                sc_id:record.sc_id
                                             },
                                             success: function (data) {
+                                                layer.closeAll('loading');
                                                 if(data == "true"){
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除成功', {icon: 6});
                                                     refreshGrid();
                                                 }else{
-                                                    layer.closeAll('loading');
                                                     layer.alert('删除失败', {icon: 5});
                                                 }
                                             }
@@ -66,6 +67,27 @@ define(function(){
                                     auditFunc(record,refreshGrid);
                                 }else if(action == "approve"){                   //审批
                                     approveFunc(record,refreshGrid);
+                                }else if(action == "logout"){                   //注销
+                                    layer.confirm('确定要注销此数据么?', {icon: 3, title:'温馨提示'}, function(index){
+                                        layer.close(index);
+                                        layer.load();
+                                        $.ajax({
+                                            url:'hyshy/logoutsoilder',
+                                            type:'post',
+                                            data:{
+                                                sc_id:record.sc_id
+                                            },
+                                            success: function (data) {
+                                                layer.closeAll('loading');
+                                                if(data == "true"){
+                                                    layer.alert('注销成功', {icon: 6});
+                                                    refreshGrid();
+                                                }else{
+                                                    layer.alert('注销失败', {icon: 5});
+                                                }
+                                            }
+                                        });
+                                    });
                                 }else if(action == "imgview"){                   //预览
                                     var FileExt=record.photo.replace(/.+\./,"").toLowerCase();
                                     if(FileExt=='png' || FileExt=='jpg' || FileExt=='gif') {
