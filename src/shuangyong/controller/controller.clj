@@ -76,16 +76,41 @@
     (str "true")))
 
 
+(defn soilderconds [params]
+  (let [name            (:name params)
+        identityid      (:identityid params)
+        districtid      (:districtid params)
+        eachtype        (:eachtype params)
+        ishandle        (:ishandle params)
+        caretype        (:caretype params)
+        isdead          (:isdead params)
+        photo           (:photo params)
+        joindate        (:joindate params)
+        retiredate      (:retiredate params)
+        birthday1       (:birthday1  params)
+        birthday2       (:birthday2  params)
+        namecond        (if (> (count name) 0) (common/likecond "name" name))
+        identityidcond  (if (> (count identityid) 0) (common/likecond "identityid" identityid))
+        districtcond    (if (> (count districtid) 0) (str " and districtid like '" districtid "%'"))
+        eachtypecond    (if (> (count eachtype) 0) (str " and eachtype = " eachtype))
+        ishandlecond    (if (> (count ishandle) 0) (str " and ishandle = " ishandle) (str " and (ishandle != 'n' or ishandle is null )"))
+        caretypecond    (if (> (count caretype) 0) (str " and caretype = " caretype))
+        isdeadcond      (if (> (count isdead) 0) (str " and isdead = " isdead))
+        photocond       (if (> (count photo) 0) (if (= photo "1") (str " and photo is not null " ) (str " and photo is null " )))
+        joindatecond    (if (> (count joindate) 0) (str " and to_char(joindate,'yyyy') = '"joindate"' "))   ;to_char(birthday,'yyyy') = '2015'
+        retiredatecond  (if (> (count retiredate) 0) (str " and to_char(retiredate,'yyyy') = '"retiredate"' "))
+        birthday1cond   (if (> (count birthday1) 0) (str " and birthday > to_date('"birthday1"','yyyy-mm-dd') "))
+        birthday2cond   (if (> (count birthday1) 0) (str " and birthday < to_date('"birthday2"','yyyy-mm-dd') "))
+        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond)]
+    conds))
 
 
 (defn get-soilder-list [request]
-  (let [params (:params request)
-        rows (:rows params)
-        page (:page params)
-        name (:name params)
-        identityid (:identityid params)
-        conds (str " and (ishandle != 'n' or ishandle is null )" (common/likecond "name" name) (common/likecond "identityid" identityid))
-        getresults (common/fenye rows page "t_soldiercommon" "*" conds " order by sc_id desc ")]
+  (let [params      (:params request)
+        rows        (:rows params)
+        page        (:page params)
+        conds       (soilderconds params)
+        getresults  (common/fenye rows page "t_soldiercommon" "*" conds " order by sc_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 
 
