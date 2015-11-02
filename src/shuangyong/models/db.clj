@@ -74,3 +74,15 @@
     (updatedata-by-tablename "approve" {:status "0"} {:sh_id sh_id})               ;;更改审核前审核信息状态为历史状态
     (updatedata-by-tablename "t_soldiercommon" scdata {:sc_id sc_id})              ;;更新双拥人员信息中街道审核的信息
     (adddata-by-tablename "approve" newappdata)))                                  ;;添加新的审核的信息
+
+(defn report-soilder
+  "数据上报"
+  ([approvedata sdata]
+    (let [sc_id (:nextval (first(get-results-bysql "select seq_t_soldiercommon.nextval  from dual")))]                ;新数据上报，需要先获取人员id
+      (transaction
+        (adddata-by-tablename "t_soldiercommon" (conj sdata {:sc_id sc_id}))                       ;新增人员信息
+        (adddata-by-tablename "approve" (conj approvedata {:bstablepk sc_id})))))                  ;新增审核信息
+  ([approvedata sc_id sdata]
+    (transaction
+      (updatedata-by-tablename "t_soldiercommon" sdata {:sc_id sc_id})                             ;更新人员信息
+      (adddata-by-tablename "approve" approvedata))))                                              ;新增审核信息

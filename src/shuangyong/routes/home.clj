@@ -18,6 +18,8 @@
   (GET "/logout" request (login/logout request)) ;;注销
 
   ;;双拥人员信息
+  (POST "/hyshy/savesoilder" request (ctl/save-soilder request))                        ;;双拥人员信息保存
+  (POST "/hyshy/reportsoilder" request (ctl/report-soilder request))                   ;;双拥人员信息上报
   (POST "/hyshy/addsoldier" request (ctl/add-soilder request))                         ;;双拥人员信息添加
   (POST "/hyshy/getapprovelist" request (ctl/get-approve-list request))               ;;查询审核信息
   (POST "/hyshy/dealapprove" request (ctl/deal-approve request))                       ;;审核

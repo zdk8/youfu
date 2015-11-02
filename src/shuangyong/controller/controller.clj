@@ -27,6 +27,36 @@
         bstablepkname "sc_id"]
     {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
 
+(defn approve-reportdata [params sc_id]
+  (let [bstablepk sc_id
+        bstablename "t_soldiercommon"
+        status "1"
+        aulevel "1"
+        auflag "数据提交"
+        auuser (:community params)
+        audesc (:communityopinion params)
+        appoperators (:community params)
+        messagebrief (str "姓名：" (:name params) ",身份证："(:identityid params) )
+        bstablepkname "sc_id"]
+    {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
+
+
+(defn save-soilder [request]
+  (let [params (:params request)
+        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "0"})]
+    (db/adddata-by-tablename "t_soldiercommon" (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
+    (str "true")))
+
+(defn report-soilder [request]
+  (let [params (:params request)
+        sc_id (:sc_id params)
+        approvedata (approve-reportdata params sc_id)
+        sdata (select-keys params (:t_soldiercommon common/selectcols))
+        ]
+    (if (> (count sc_id) 0) (db/report-soilder approvedata sc_id (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
+                             (db/report-soilder approvedata (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")))
+    (str "true")))
+
 (defn add-soilder [request]
   (let [params (:params request)
         sc_id (:nextval (first(db/get-results-bysql "select seq_t_soldiercommon.nextval  from dual")))
