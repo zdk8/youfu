@@ -51,11 +51,42 @@
   (let [params (:params request)
         sc_id (:sc_id params)
         approvedata (approve-reportdata params sc_id)
-        sdata (select-keys params (:t_soldiercommon common/selectcols))
+        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "1"})
         ]
     (if (> (count sc_id) 0) (db/report-soilder approvedata sc_id (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
                              (db/report-soilder approvedata (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")))
     (str "true")))
+
+
+(defn approve-auditdata [params sc_id]
+  (let [bstablepk sc_id
+        bstablename "t_soldiercommon"
+        bstablepkname "sc_id"
+        status "1"
+        aulevel "1"
+        auflag "数据提交"
+        auuser (:community params)
+        audesc (:communityopinion params)
+        appoperators (:community params)
+        messagebrief (str "姓名：" (:name params) ",身份证："(:identityid params) )
+        ]
+    {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
+
+
+(defn audit-soilder [request]
+  (let [params          (:params request)
+        ishandle        (:ishandle params)
+        sc_id           (:sc_id params)
+        streeter        (:streeter params)
+        streetreview    (:streeter params)
+        county          (:streeter params)
+        countyaudit     (:streeter params)
+        name            (:name params)
+        identityid      (:identityid params)
+        ]
+    (if (> (count ishandle) 0) (if (= ishandle "1") (db/audit-soilder )
+                                                     (db/audit-soilder)))
+    ))
 
 (defn add-soilder [request]
   (let [params (:params request)
@@ -128,7 +159,7 @@
         page (:page params)
         name (:name params)
         identityid (:identityid params)
-        conds (str " and ishandle = 'y' " (common/likecond "name" name) (common/likecond "identityid" identityid))
+        conds (str " and (ishandle != 'n' or ishandle is null )" (common/likecond "name" name) (common/likecond "identityid" identityid))
         getresults (common/fenye rows page "t_soldiercommon" "*" conds " order by sc_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 

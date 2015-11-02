@@ -86,3 +86,5 @@
     (transaction
       (updatedata-by-tablename "t_soldiercommon" sdata {:sc_id sc_id})                             ;更新人员信息
       (adddata-by-tablename "approve" approvedata))))                                              ;新增审核信息
+
+(defn audit-soilder [])
