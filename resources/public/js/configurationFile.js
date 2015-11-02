@@ -1,6 +1,8 @@
 ﻿getGender=['男','女'];             //性别
 
-
+String.prototype.trim = function () {
+    return this .replace(/^\s\s*/, '' ).replace(/\s\s*$/, '' );
+}
 /*日期时间*/
 var myformatter = function(date){
     var y = date.getFullYear();
