@@ -13,20 +13,6 @@
     [clojure.string :as str]
     ))
 
-
-(defn get-approve [params sc_id]
-  (let [bstablepk sc_id
-        bstablename "t_soldiercommon"
-        status "1"
-        aulevel "1"
-        auflag "数据提交"
-        auuser (:community params)
-        audesc (:communityopinion params)
-        appoperators (:community params)
-        messagebrief (str "姓名：" (:name params) ",身份证："(:identityid params) )
-        bstablepkname "sc_id"]
-    {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
-
 (defn approve-reportdata [params sc_id]
   (let [bstablepk sc_id
         bstablename "t_soldiercommon"
@@ -47,6 +33,13 @@
     (db/adddata-by-tablename "t_soldiercommon" (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
     (str "true")))
 
+(defn update-soilder [request]
+  (let [params (:params request)
+        sdata (common/dateformat-bf-insert (select-keys params (:t_soldiercommon common/selectcols)) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")
+        sc_id (:sc_id params)]
+    (db/updatedata-by-tablename "t_soldiercommon" sdata sc_id)
+    (str "true")))
+
 (defn report-soilder [request]
   (let [params (:params request)
         sc_id (:sc_id params)
@@ -58,22 +51,9 @@
     (str "true")))
 
 
-(defn approve-auditdata [params sc_id]
-  (let [bstablepk sc_id
-        bstablename "t_soldiercommon"
-        bstablepkname "sc_id"
-        status "1"
-        aulevel "1"
-        auflag "数据提交"
-        auuser (:community params)
-        audesc (:communityopinion params)
-        appoperators (:community params)
-        messagebrief (str "姓名：" (:name params) ",身份证："(:identityid params) )
-        ]
-    {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
 
 
-(defn audit-soilder [request]                                              ; aulevel "1"     auflag "数据提交"       auuser (:community params)    audesc (:communityopinion params)
+(defn audit-soilder [request]
   (let [params          (:params request)
         ishandle        (:ishandle params)
         issuccess       (:issuccess params)
@@ -95,70 +75,8 @@
                                                      (resp/json {:success "false"})))
     (str "true")))
 
-(defn add-soilder [request]
-  (let [params (:params request)
-        sc_id (:nextval (first(db/get-results-bysql "select seq_t_soldiercommon.nextval  from dual")))
-        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "1" :sc_id sc_id})
-        scdata-deal (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")
-        approvedata (get-approve params sc_id)]
-    (db/add-soilder scdata-deal approvedata)
-    (str "true")))
-
-(defn get-approve-list [request]
-  (let [params (:params request)
-        rows (:rows params)
-        page (:page params)
-        name (:name params)
-        identityid (:identityid params)
-        conds (str " and bstablename = 't_soldiercommon' and status = '1' " " and messagebrief LIKE '姓名%"name"%身份证%"identityid"%'")
-        getresult (common/fenye rows page "approve" "*" conds " order by sh_id desc ")]
-    (resp/json {:total (:total getresult) :rows (common/dateymd-bf-list (:rows getresult) "bstime")})))
-
-(defn assessaudit1
-  "街镇审查"
-  [params]
-  (let[issuccess (:issuccess params)
-       approvedata (select-keys params (:approve common/selectcols))
-       streetreview (:streetreview params)
-       reviewdate (common/get-nowtime)
-       sc_id (:bstablepk params)
-       sh_id   (:sh_id params)
-       newaulevel (if (= issuccess "0") "0" "2")
-       auflag (if (= issuccess "0") "街镇审查未通过" "街镇审查通过")
-       status  (if (= issuccess "0") "0" "1")
-       auuser (:streeter params)
-       scdata     (if (= issuccess "0") {:streeter auuser :reviewdate reviewdate :streetreview streetreview :ishandle "r"}
-                                        {:streeter auuser :reviewdate reviewdate :streetreview streetreview })
-       newappdata (conj approvedata {:aulevel newaulevel :auflag auflag :status status :bstime reviewdate :auuser auuser :audesc streetreview})]
-   (db/deal-approve sh_id sc_id scdata newappdata)
-   (str "街镇审查")))
-
-(defn assessaudit2
-  "县民政局审核"
-  [params]
-  (let[issuccess (:issuccess params)
-       approvedata (select-keys params (:approve common/selectcols))
-       countyaudit (:countyaudit params)
-       audittime (common/get-nowtime)
-       sc_id (:bstablepk params)
-       sh_id   (:sh_id params)
-       newaulevel (if (= issuccess "0") "r" "3")
-       auflag (if (= issuccess "0") "县民政局审核未通过" "县民政局审核通过")
-       auuser (:county params)
-       scdata (if (= issuccess "0") {:county auuser :countyaudit countyaudit :auditdate audittime :ishandle "r"}
-                                    {:county auuser :countyaudit countyaudit :auditdate audittime :ishandle "y"})
-       newappdata (conj approvedata {:aulevel newaulevel :status "0" :auflag auflag :bstime audittime :auuser auuser :audesc countyaudit})]
-    (db/deal-approve sh_id sc_id scdata newappdata)
-    (str "县民政局审核")))
 
 
-(defn deal-approve [request]
-  (let [params (:params request)
-        aulevel (:aulevel params)]
-    (cond
-      (= aulevel "1")        (assessaudit1 params)
-      (= aulevel "2")        (assessaudit2 params)
-      )))
 
 (defn get-soilder-list [request]
   (let [params (:params request)
@@ -171,8 +89,16 @@
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 
 
+ (defn delete-soilder [request]
+   (let [params (:params request)
+         sc_id (:sc_id params)]
+     (if (> (count sc_id) 0) (db/deletedata-by-tablename "t_soldiercommon" {:sc_id sc_id}))
+     (str "true")))
 
-
+(defn logout-soilder [request]
+  (let [params (:params request)
+        sc_id (:sc_id params)]
+    (if (> (count sc_id) 0) (db/updatedata-by-tablename "t_soldiercommon" {:ishandle "n"} {:sc_id sc_id}))))
 
 
 

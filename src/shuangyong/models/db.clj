@@ -61,20 +61,6 @@
   (select "t_personalrecords"
           (where {:pb 1})))
 
-
-
-(defn add-soilder [scdata-deal approvedata]
-  (transaction
-    (adddata-by-tablename "t_soldiercommon" scdata-deal)                      ;;新增双拥人员数据
-    (adddata-by-tablename "approve" approvedata)))                            ;;将审核信息添加到审核表中
-
-
-(defn deal-approve [sh_id sc_id scdata newappdata]
-  (transaction
-    (updatedata-by-tablename "approve" {:status "0"} {:sh_id sh_id})               ;;更改审核前审核信息状态为历史状态
-    (updatedata-by-tablename "t_soldiercommon" scdata {:sc_id sc_id})              ;;更新双拥人员信息中街道审核的信息
-    (adddata-by-tablename "approve" newappdata)))                                  ;;添加新的审核的信息
-
 (defn report-soilder
   "数据上报"
   ([approvedata sdata]

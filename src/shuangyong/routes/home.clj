@@ -19,12 +19,12 @@
 
   ;;双拥人员信息
   (POST "/hyshy/savesoilder" request (ctl/save-soilder request))                        ;;双拥人员信息保存
+  (POST "/hyshy/updatesoilder" request (ctl/update-soilder request))                           ;;双拥人员信息更新
   (POST "/hyshy/reportsoilder" request (ctl/report-soilder request))                   ;;双拥人员信息上报
   (POST "/hyshy/auditsoilder" request (ctl/audit-soilder request))                     ;;双拥人员信息审核
-  (POST "/hyshy/getsoilderlist" request (ctl/get-soilder-list request))               ;;查询审核通过人员信息
-  (POST "/hyshy/addsoldier" request (ctl/add-soilder request))                         ;;双拥人员信息添加
-  (POST "/hyshy/getapprovelist" request (ctl/get-approve-list request))               ;;查询审核信息
-  (POST "/hyshy/dealapprove" request (ctl/deal-approve request))                       ;;审核
+  (POST "/hyshy/getsoilderlist" request (ctl/get-soilder-list request))               ;;查询双拥人员信息
+  (POST "/hyshy/deletesoilder" request (ctl/delete-soilder request))                  ;;删除双拥人员信息
+  (POST "/hyshy/logoutsoilder" request (ctl/logout-soilder request))                  ;;注销双拥人员信息
 
 
   ;;附件管理
