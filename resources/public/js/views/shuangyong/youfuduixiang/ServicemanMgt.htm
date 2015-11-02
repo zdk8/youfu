@@ -1,119 +1,142 @@
 <!--现役军人-->
 <div opt="content" class="easyui-panel" data-options="fit:true" style="background-color: #ececec;display: none;">
     <div class="easyui-layout" data-options="fit:true,border:false">
-        <div data-options="region:'north',border:false" style="height:236px;width: 737px;background-color: #ececec;">
-            <div class="box-shadow" style="width: 737px;height: 200px;background-color:white;">dsf</div>
+        <div data-options="region:'north',border:false" style="height:206px;width: 737px;background-color: #ececec;">
+            <div class="box-shadow" style="width: 1000px;height: 180px;background-color:white;">
+                <table width="100%" cellpadding="5" class="table_form2">
+                    <tr>
+                        <td class="formtdtext2" style="width: 130px;">行政区划<label></label></td>
+                        <td>
+                            <input opt="division" style="width: 170px;height: 29px">
+                        </td>
+                        <td class="formtdtext2">姓名<label></label></td>
+                        <td>
+                            <input opt="name">
+                        </td>
+                        <td class="formtdtext2">身份证号<label></label></td>
+                        <td>
+                            <input name="identityid">
+                        </td>
+                        <td class="formtdtext2">身份类别<label></label></td>
+                        <td>
+                            <input class="easyui-combobox" name="eachtype" style="width: 130px;height: 29px;"
+                                   data-options="
+                                    loader:cj.getLoader('eachtype'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext2">审核状态<label></label></td>
+                        <td>
+                            <input class="easyui-combobox" opt="division1" style="width: 130px;height: 29px;"
+                                   data-options="
+                                    loader:cj.getLoader('eachtype'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+                        </td>
+                        <td class="formtdtext2">优抚对象状态<label></label></td>
+                        <td>
+                            <input class="easyui-combobox" opt="caretype" style="width: 130px;height: 29px;"
+                                   data-options="
+                                    loader:cj.getLoader('caretype'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+                        </td>
+                        <td class="formtdtext2">死亡审核<label></label></td>
+                        <td>
+                            <input class="easyui-combobox" opt="division1" style="width: 130px;height: 29px;"
+                                   data-options="
+                                    loader:cj.getLoader('eachtype'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+                        </td>
+                        <td class="formtdtext2">照片<label></label></td>
+                        <td>
+                            <input class="easyui-combobox" opt="division1" style="width: 130px;height: 29px;"
+                                   data-options="
+                                    loader:cj.getLoader('eachtype'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext2">入伍时间<label></label></td>
+                        <td>
+                            <input class="easyui-datebox" opt="joindate" style="height: 29px;width: 100px;">
+                        </td>
+                        <td class="formtdtext2">退役时间<label></label></td>
+                        <td>
+                            <input class="easyui-datebox" opt="retiredate" style="height: 29px;width: 100px;">
+                        </td>
+                        <td class="formtdtext2">出生年区间<label></label></td>
+                        <td colspan="3">
+                            <input class="easyui-datebox" opt="birthday1" style="height: 29px;width: 100px;"> - <input class="easyui-datebox" opt="birthday2" style="height: 29px;width: 100px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formtdtext2">模糊地址<label></label></td>
+                        <td colspan="4">
+                            <input opt="household" style="width: 509px;">
+                        </td>
+                        <td colspan="3" align="right">
+                            <div class="com_btns exportbtn" align="center">导出</div>
+                            <div class="com_btns addbtn" align="center">新增</div>
+                            <div class="com_btns querybtn" align="center">查询</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div data-options="region:'center',border:false" style="background-color:white;">
-            <table class="easyui-datagrid"
+        <div class="box-shadow" data-options="region:'center',border:false" style="background-color:white;padding: 20px;">
+            <table class="easyui-datagrid-noauto easyui2"
                    data-options="fit:true,
-                                    fitColumns:true,
-                                    method:'post',
-                                    singleSelect:true,
-                                    loadMsg:'',
-                                    pagination:true">
-                <thead>
-                <tr>
-                    <th data-options="field:'code'">Code</th>
-                    <th data-options="field:'name'">Name</th>
-                    <th data-options="field:'price'">Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>001</td><td>name1</td><td>2323</td>
-                </tr>
-                <tr>
-                    <td>002</td><td>name2</td><td>4612</td>
-                </tr>
-                <tr>
-                    <td>002</td><td>name2</td><td>4612</td>
-                </tr>
-                <tr>
-                    <td>002</td><td>name2</td><td>4612</td>
-                </tr>
-                <tr>
-                    <td>002</td><td>name2</td><td>4612</td>
-                </tr>
-                <tr>
-                    <td>002</td><td>name2</td><td>4612</td>
-                </tr>
-                <tr>
-                    <td>002</td><td>name2</td><td>4612</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<!--<div class="easyui-layout" data-options="fit:true">
-    <div data-options="region:'north',border:false"
-         style="height:60px;padding:0 0 0 0px;">
-        <div style="width: auto;height: 50px;;background-color: #eff3f8;">
-            <div style="height: 35px;padding-top: 12px;padding-right:3px;">
-                &nbsp;<span>姓名 </span><span><input opt="name" type="text" size="5" class="inputtext"></span>
-                &nbsp;<span>身份证号 </span><span><input opt="identityid" type="text" size="15" class="inputtext"></span>
-            </div>
-
-            <div style="float: right;margin-top: -48px;right: 2px;display: inline">
-                <input type="button" value="操作" class="btns_other" opt="other" style="height: 50px;width: 45px;font-weight: bolder;">
-                <input type="button" value="查询" class="btns" opt="query" style="height: 50px;width: 45px;font-weight: bolder;">
-            </div>
-            <div opt="func_btn" style="float: right;background-color:snow;
-                        margin-top: -48px;height: 50px;width: 100px;z-index: 900;display: none;">
-                <input type="button" value=">" class="close_btns" opt="other_2">
-                <input type="button" value="添加" class="btns" opt="addbtn" style="height: 50px;width: 45px;font-weight: bolder;">
-            </div>
-        </div>
-    </div>
-    <div data-options="region:'center',border:false" class="easyui2" style="padding:0px 15px 15px 15px;">
-        <table class="easyui-datagrid-noauto easyui2"
-               data-options="fit:true,
                         fitColumns:true,
                         method:'post',
                         singleSelect:true,
-                        loadMsg:''">
-            <thead frozen="true">
-            <tr>
-                <th data-options="field:'photo',width:55,align:'center',
-                        formatter:function(v,r,i){
-                            var str='<div></div>';
-                            if(v != null){
-                                str=$(str).append('<a action=&quot;imgview&quot;href=&quot;javaScript:;&quot;><img src='+v+' style=&quot;width:45px;height:54px;&quot;/></a>');
-                            }else{
-                                str=$(str).append('<a action=&quot;imgview&quot;href=&quot;javaScript:;&quot;><img src=&quot;images/noperson.gif&quot; style=&quot;width:45px;height:54px;&quot;/></a>');
-                            }
-                            return str.html();
-                    }">照片</th>
-                <th data-options="field:'name',width:80,align:'center',
+                        loadMsg:'',
+                        pagination:true">
+                <thead frozen="true">
+                <tr>
+                    <th data-options="field:'name',width:80,align:'center',
                             formatter:function(v,r,i){
                                         var str='<div></div>';
                                         str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
                                         return str.html();
                                     }">姓名</th>
-            </tr>
-            </thead>
-            <thead>
-            <tr>
-                <th data-options="field:'identityid',width:170,align:'center'">身份证</th>
-                <th data-options="field:'gender',width:74,align:'center',
+                </tr>
+                </thead>
+                <thead>
+                <tr>
+                    <th data-options="field:'gender',width:74,align:'center',
                             formatter: function(value,row,index){
                                     return getGender[value]
                                 }">性别</th>
-                <th data-options="field:'age',width:100,align:'center'">年龄</th>
-                <th data-options="field:'native',width:127,align:'center'">籍贯</th>
-                <th data-options="field:'contactway',width:140,align:'center'">联系方式</th>
-                <th data-options="field:'ro',width:100,align:'center',
+                    <th data-options="field:'identityid',width:100,align:'center'">出生日期</th>
+                    <th data-options="field:'identityid',width:170,align:'center'">身份证号</th>
+                    <th data-options="field:'identityid',width:100,align:'center'">身份类别</th>
+                    <th data-options="field:'native',width:127,align:'center'">户籍地址</th>
+                    <th data-options="field:'age',width:100,align:'center'">录入日期</th>
+                    <!--<th data-options="field:'contactway',width:140,align:'center'">死亡确认</th>-->
+                    <th data-options="field:'contactway',width:100,align:'center'">退役状态</th>
+                    <th data-options="field:'contactway',width:100,align:'center'">状态</th>
+                    <th data-options="field:'ro',width:100,align:'center',
                                     formatter:function(value,rowData,rowIndex){
                                         var str='<div></div>';
                                         str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
                                         str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
                                         return str.html();
                                     }">操作</th>
-            </tr>
-            </thead>
-        </table>
+                </tr>
+                </thead>
+            </table>
+        </div>
     </div>
-</div>-->
+</div>
 
 

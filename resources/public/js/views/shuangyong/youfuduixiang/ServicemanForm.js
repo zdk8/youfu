@@ -1,5 +1,5 @@
 define(function(){
-    var arr_combobox = ['sex','nation','marriage','hktype','eachtype','awardlevel'];
+    var arr_combobox = ['sex','nation','marriage','hktype','eachtype','awardlevel','caretype'];
     var arr_datebox = ['birthday','joindate','retiredate'];
     var arr_validatebox = ['name','identityid'];
 
@@ -37,37 +37,6 @@ define(function(){
     var initFunc = function (local,option) {
         initControls(local);//控件初始化
         cj.getdivision(local.find('[opt=division]'));
-        /*工作状况状态选择*/
-        local.find('[opt=workstatus]').combobox({
-            onSelect: function (record) {
-                var timename;
-                if(record.id == "0"){
-                    timename = '工作时间';
-                }else if(record.id == "1"){
-                    timename = '离休时间';
-                }else{
-                    timename = '退休时间';
-                }
-                var ht = timename+'<label></label>&nbsp;';
-                local.find('[opt=worktime_label]').html(ht)
-            }
-        });
-        /*人员身份选择*/
-        local.find('[opt=personnel]').combobox({
-            onSelect: function (record) {
-                if(record.id == "2"){       //事业处理
-                    local.find('[opt=shiye]').slideDown('slow');
-                    local.find('[opt=hetonggong]').slideUp('slow');
-                }else if(record.id == "3"){ //岗位合同工处理
-                    local.find('[opt=hetonggong]').slideDown('slow');
-                    local.find('[opt=shiye]').slideUp('slow');
-                }else{
-                    local.find('[opt=shiye]').slideUp('slow');
-                    local.find('[opt=hetonggong]').slideUp('slow');
-                }
-            }
-        });
-
         /*图片上传*/
         local.find('[opt=personimg]').click(function(){
             local.find('[opt=inputVal]').click();
@@ -87,15 +56,11 @@ define(function(){
         local.find('[opt=save]').click(function () {
             var $this = $(this);
             $this.attr("disabled",true);//按钮禁用
-            var nameedu = cj.commonGetValue(local,{field:field1});
-            var namefamily = cj.commonGetValue(local,{field:field2});
             local.find('form').form('submit', {
                 url: 'record/addpensonrecords',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
-                    params.educationway = JSON.stringify(nameedu);
-                    params.familymembers = JSON.stringify(namefamily);
                     if (!isValid) {
                         layer.closeAll('loading');
                         $this.attr("disabled",false);//按钮启用
@@ -127,32 +92,6 @@ define(function(){
         record.photo == null ? imgurl = 'images/noperson.gif' : imgurl = record.photo;
         var imghtm = '<img style="width:150px;height:120px;" src="'+imgurl+'" />';//图片填充
         local.find('[opt=personimg]').html(imghtm);
-        var childrecord = option.queryParams.childrecord;//子表信息
-        var educationway =childrecord.educationway; //学位学历信息
-        var familymembers =childrecord.familymembers; //主要家庭成员信息
-
-        /*工作状况状态填充*/
-        var timename = "";
-        if(record.workstatus == "0"){
-            timename = '工作时间';
-        }else if(record.workstatus == "1"){
-            timename = '离休时间';
-        }else{
-            timename = '退休时间';
-        }
-        var ht = timename+'<label></label>&nbsp;';
-        local.find('[opt=worktime_label]').html(ht);
-        /*人员身份填充*/
-        if(record.personnel == "2"){       //事业处理
-            local.find('[opt=shiye]').slideDown('slow');
-            local.find('[opt=hetonggong]').slideUp('slow');
-        }else if(record.personnel == "3"){ //岗位合同工处理
-            local.find('[opt=hetonggong]').slideDown('slow');
-            local.find('[opt=shiye]').slideUp('slow');
-        }else{
-            local.find('[opt=shiye]').slideUp('slow');
-            local.find('[opt=hetonggong]').slideUp('slow');
-        }
 
         local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {

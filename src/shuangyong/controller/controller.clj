@@ -128,7 +128,7 @@
         page (:page params)
         name (:name params)
         identityid (:identityid params)
-        conds (str " and is handle = 'y' " (common/likecond "name" name) (common/likecond "identityid" identityid))
+        conds (str " and ishandle = 'y' " (common/likecond "name" name) (common/likecond "identityid" identityid))
         getresults (common/fenye rows page "t_soldiercommon" "*" conds " order by sc_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 

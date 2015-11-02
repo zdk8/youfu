@@ -19,7 +19,6 @@
                        method:'post',
                        fit:true,
                        border:false,
-                       rownumbers:true,
                        fitColumns:true,
                        pageSize:cj.getDataGridAttr('pageSize'),
                        pageList:cj.getDataGridAttr('pageList'),
@@ -47,8 +46,8 @@
                         <th data-options="field:'delete',width:50,align:'center',formatter:function(v,r,i)
                         {
                             var str='<div></div>';
-                            str=$(str).append('<a action=&quot;delete&quot;href=&quot;javaScript:;&quot;>删除</a>&nbsp;|&nbsp;');
-                            str=$(str).append('<a action=&quot;addrole&quot;href=&quot;javaScript:;&quot;>添加角色</a>');
+                            str=$(str).append('<a action=&quot;delete&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>&nbsp;|&nbsp;');
+                            str=$(str).append('<a action=&quot;addrole&quot;href=&quot;javaScript:;&quot;><span>添加角色</span></a>');
                             return str.html();
                         }">操作</th>
                     </tr>

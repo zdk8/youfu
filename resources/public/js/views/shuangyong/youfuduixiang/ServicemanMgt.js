@@ -1,12 +1,6 @@
 define(function(){
     function render(local,option){
-        local.find('[opt=other]').on('click', function () {
-            local.find('[opt=func_btn]').animate({"right":'', width : "show"},500);
-        });
-        local.find('[opt=other_2]').on('click', function () {
-            local.find('[opt=func_btn]').animate({"right":'', width : "hide"},500);
-        });
-
+        cj.getdivision(local.find('[opt=division]'));
 
         var datagrid = local.find('.easyui-datagrid-noauto');
         var refreshGrid=function() {
@@ -14,7 +8,7 @@ define(function(){
         };
         /*加载现役军人*/
         datagrid.datagrid({
-            url:"record/getrecordlist",
+            url:"hyshy/getsoilderlist",
             type:'post',
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
@@ -131,14 +125,14 @@ define(function(){
         })
 
         /*添加现役军人*/
-        local.find('[opt=addbtn]').click(function(){
+        local.find('.addbtn').click(function(){
             layer.load(2);
             require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
                 function(htmfile,jsfile){
                     layer.open({
                         title:'添加现役军人',
                         type: 1,
-                        area: ['890px', '500px'], //宽高
+                        area: ['910px', '500px'], //宽高
                         content: htmfile,
                         success: function(layero, index){
                             jsfile.render(layero,{

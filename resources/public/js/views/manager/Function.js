@@ -77,7 +77,7 @@ define(function(){
             });
             var $btnarea=local.find('div.weboxbuttons ul');
             for(var i in buttons){
-                var $li=$('<li><a>'+buttons[i].text+'</a></li>');
+                var $li=$('<li><label>'+buttons[i].text+'</label></li>');
                 $btnarea.append($li);
                 $li.bind('click',(function(index){
                     return function(){
@@ -136,30 +136,51 @@ define(function(){
                 alert('noaction');
             })
 
-            /*添加图片*/
-            local.find('[opt=addimg]').click(function () {
-                /*图片上传*/
-                layer.load(2);
-                require(['text!views/party/fileupload/FileForm.htm','views/party/fileupload/FileForm'],
-                    function(htmfile,jsfile){
-                        layer.open({
-                            title:'上传附件',
-                            type: 1,
-                            area: ['400px', '200px'], //宽高
-                            content: htmfile,
-                            shift: 2,
-                            success: function(layero, index){
-                                jsfile.render(layero,{
-                                    index:index,
-                                    params:{
-                                        filetype:'no_showimg'
-                                        //childrecord:data
-                                    }
-                                });
-                            }
-                        });
+            /*添加*/
+            local.find('[opt=save]').click(function () {
+                local.find('form').form('submit', {
+                    url:'saveFunction',
+                    onSubmit: function(){
+
+                        var isValid = $(this).form('validate');
+                        if (!isValid){
+                            $.messager.progress('close');	// hide progress bar while the form is invalid
+                        }
+                        return isValid;	// return false will stop the form submission
+                    },
+                    success: function(res){
+                        refresh();
+                    }
+                });
+            });
+
+            /*删除*/
+            local.find('[opt=del]').click(function () {
+                $.ajax(
+                    {
+                        type: "POST",
+                        data: { functionid : funObj.functionid },
+                        url:'delFunctionById',
+                        success:function(){refresh();}
                     }
                 )
+            })
+
+            /*添加新节点*/
+            local.find('[opt=addnode]').click(function () {
+                if(!funObj){
+                    alert('请选择节点!');return;
+                }
+
+                if(funObj.nodetype=='1'){
+                    local.find('form').form('clear').form('load',{
+                        parent:funObj.functionid,
+                        functionid:'-1',
+                        log:'1',
+                        developer:'1',
+                        auflag:'1',rbflag:'1',param1:'1',param2:'1'
+                    })
+                }
             });
 
         }
