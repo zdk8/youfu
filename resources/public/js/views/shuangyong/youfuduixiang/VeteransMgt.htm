@@ -114,10 +114,22 @@
                                 }">性别</th>
                     <th data-options="field:'birthday',width:100,align:'center'">出生日期</th>
                     <th data-options="field:'identityid',width:170,align:'center'">身份证号</th>
-                    <th data-options="field:'eachtype',width:100,align:'center',
+                    <th data-options="field:'persontype',width:100,align:'center',
                         formatter: function(value,row,index){
-                                        return getEachtype[value]
-                                    }">身份类别</th>
+                                        if(value == '211'){
+                                            return '伤残人员';
+                                        }else if(value == '212'){
+                                            return '三属人员';
+                                        }else if(value == '213'){
+                                            return '两参人员';
+                                        }else if(value == '214'){
+                                            return '在乡老复人员';
+                                        }else if(value == '215'){
+                                            return '带病回乡人员';
+                                        }else if(value == '230'){
+                                            return '一般退役军人';
+                                        }
+                                    }">人员类别</th>
                     <th data-options="field:'household',width:127,align:'center'">户籍地址</th>
                     <!--<th data-options="field:'age',width:100,align:'center'">录入日期</th>-->
                     <!--<th data-options="field:'contactway',width:140,align:'center'">死亡确认</th>-->

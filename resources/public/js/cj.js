@@ -400,9 +400,143 @@ var cj=(function(){
                             content: htmfile
                         }
                     });
-                    jsfile.render(tab,{poption:option,queryParams:{actiontype:actiontype}});
+                    jsfile.render(tab,{index:option.index,queryParams:{actiontype:actiontype,refresh:option.queryParams.refresh,index:option}});
                 }
             )
+        },reportFunc: function (local,option,districtid,persontype,sc_id) { //上报
+            /*上报*/
+            local.find('[opt=report]').click(function () {
+                var communityopinion = local.find('[name=communityopinion]').val();
+                var community = local.find('[name=community]').val();
+                var opiniondate = local.find('[opt=opiniondate]').datebox('getValue');
+                var msg = [];
+                communityopinion.trim().length <=0 ? msg.push('社区审核意见'):null;
+                community.trim().length <=0 ? msg.push('社区审核人'):null;
+                opiniondate.trim().length <=0 ? msg.push('社区审核日期'):null;
+                if(communityopinion.trim().length <=0 || community.trim().length <=0 || opiniondate.trim().length <=0){
+                    layer.alert('请填写['+msg+']', {title:'温馨提示',icon: 6});
+                    local.find('[name=communityopinion]').focus();
+                }else{
+                    var $this = $(this);
+                    $this.attr("disabled",true);//按钮禁用
+                    local.find('form').form('submit', {
+                        url: 'hyshy/reportsoilder',
+                        onSubmit: function (params) {
+                            layer.load();
+                            var isValid = $(this).form('validate');
+                            if (!isValid) {
+                                layer.closeAll('loading');
+                                $this.attr("disabled",false);//按钮启用
+                            }
+                            params.districtid = districtid;
+                            params.persontype = persontype;
+                            params.sc_id = sc_id;
+                            return isValid;
+                        },
+                        success: function (data) {
+                            layer.closeAll('loading');
+                            $this.attr("disabled",false);//按钮启用
+                            if (data == "true") {
+                                cj.showSuccess('上报成功');
+                                option.queryParams.refresh();
+                                layer.close(option.index);
+                            } else {
+                                cj.showFail('上报失败');
+                            }
+                        }
+                    })
+                }
+            });
+        },shieldingSH: function (local) {/*屏蔽审核信息*/
+            local.find('[name=streetreview]').attr('readonly',true).css({'background-color':'#F5F5F5'});
+            local.find('[name=streeter]').attr('readonly',true).css({'background-color':'#F5F5F5'});
+            local.find('[opt=reviewdate]').datebox({disabled:true});
+        },shieldingSP: function (local) {/*屏蔽审批信息*/
+            local.find('[name=countyaudit]').attr('readonly',true).css({'background-color':'#F5F5F5'});
+            local.find('[name=county]').attr('readonly',true).css({'background-color':'#F5F5F5'});
+            local.find('[opt=auditdate]').datebox({disabled:true});
+        },auditClick: function (local,option,record,issuccess) {    //审核点击事件
+            var streetreview = local.find('[name=streetreview]').val();
+            var streeter = local.find('[name=streeter]').val();
+            var reviewdate = local.find('[opt=reviewdate]').datebox('getValue');
+            var msg = [];
+            streetreview.trim().length <=0 ? msg.push('街道审核意见'):null;
+            streeter.trim().length <=0 ? msg.push('街道审核人'):null;
+            reviewdate.trim().length <=0 ? msg.push('街道审核日期'):null;
+            if(streetreview.trim().length <=0 || streeter.trim().length <=0 || reviewdate.trim().length <=0){
+                layer.alert('请填写['+msg+']', {title:'温馨提示',icon: 6});
+                local.find('[name=streetreview]').focus();
+            }else{
+                var $this = $(this);
+                $this.attr("disabled",true);//按钮禁用
+                local.find('form').form('submit', {
+                    url: 'hyshy/auditsoilder',
+                    onSubmit: function (params) {
+                        layer.load();
+                        var isValid = $(this).form('validate');
+                        if (!isValid) {
+                            layer.closeAll('loading');
+                            $this.attr("disabled",false);//按钮启用
+                        }
+                        params.sc_id = record.sc_id;
+                        params.ishandle = record.ishandle;
+                        params.issuccess = issuccess;
+                        return isValid;
+                    },
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        $this.attr("disabled",false);//按钮启用
+                        if (data == "true") {
+                            cj.showSuccess('审核完成');
+                            option.queryParams.refresh();
+                            layer.close(option.index);
+                        } else {
+                            cj.showFail('审核失败');
+                        }
+                    }
+                })
+            }
+        },approveClick: function (local,option,record,issuccess) {      //审批点击事件
+            var streetreview = local.find('[name=countyaudit]').val();
+            var streeter = local.find('[name=county]').val();
+            var reviewdate = local.find('[opt=auditdate]').datebox('getValue');
+            var msg = [];
+            streetreview.trim().length <=0 ? msg.push('民政局审批意见'):null;
+            streeter.trim().length <=0 ? msg.push('民政局审核人'):null;
+            reviewdate.trim().length <=0 ? msg.push('民政局审核日期'):null;
+            if(streetreview.trim().length <=0 || streeter.trim().length <=0 || reviewdate.trim().length <=0){
+                layer.alert('请填写['+msg+']', {title:'温馨提示',icon: 6});
+                local.find('[name=countyaudit]').focus();
+            }else{
+                var $this = $(this);
+                $this.attr("disabled",true);//按钮禁用
+                local.find('form').form('submit', {
+                    url: 'hyshy/auditsoilder',
+                    onSubmit: function (params) {
+                        layer.load();
+                        var isValid = $(this).form('validate');
+                        if (!isValid) {
+                            layer.closeAll('loading');
+                            $this.attr("disabled",false);//按钮启用
+                        }
+                        params.sc_id = record.sc_id;
+                        params.ishandle = record.ishandle;
+                        params.issuccess = issuccess;
+                        return isValid;
+                    },
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        $this.attr("disabled",false);//按钮启用
+                        if (data == "true") {
+                            cj.showSuccess('审批完成');
+                            option.queryParams.refresh();
+                            layer.close(option.index);
+                        } else {
+                            cj.showFail('审批失败');
+                        }
+                    }
+                })
+            }
         }
     }
 

@@ -162,79 +162,149 @@ define(function(){
 
     /*退役军人修改*/
     var updateFunc = function (record,refreshGrid,type) {
-        layer.load(2);
-        var title ='【'+record.name+ '】现役军人信息修改';
-        require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
-            function(htmfile,jsfile){
-                layer.open({
-                    title:title,
-                    type: 1,
-                    area: ['910px', '500px'], //宽高
-                    content: htmfile,
-                    success: function(layero, index){
-                        jsfile.render(layero,{
-                            index:index,
-                            queryParams:{
-                                actiontype:'update',
-                                type:type,
-                                refresh:refreshGrid,
-                                record:record
-                            }
-                        });
-                    }
-                });
-            }
-        )
+        var title ='【'+record.name+ '】退役军人';
+        var tabname = '';
+        if(record.persontype == '211'){ //伤残
+            tabname = 'ScryTable';
+            title+='[伤残人员]';
+        }else if(record.persontype == '212'){ //三属
+            tabname = 'SsryTable';
+            title+='[三属人员]';
+        }else if(record.persontype == '213'){ //两参
+            tabname = 'LcryTable';
+            title+='[两参人员]';
+        }else if(record.persontype == '214'){ //在乡
+            tabname = 'ZxlfryTable';
+            title+='[在乡老复人员]';
+        }else if(record.persontype == '215'){ //带病
+            tabname = 'DbhxryTable';
+            title+='[带病回乡人员]';
+        }else if(record.persontype == '230'){ //一般退役
+            tabname = 'YbtyryTable';
+            title+='[一般退役军人]';
+        }
+        title+='信息';
+        if(tabname.length > 0){
+            layer.load(2);
+            require(['text!views/shuangyong/youfuduixiang/childtables/'+tabname+'.htm','views/shuangyong/youfuduixiang/childtables/'+tabname],
+                function(htmfile,jsfile){
+                    layer.open({
+                        title:title,
+                        type: 1,
+                        area: ['910px', '500px'], //宽高
+                        content: htmfile,
+                        success: function(layero, index){
+                            jsfile.render(layero,{
+                                index:index,
+                                queryParams:{
+                                    actiontype:'update',
+                                    type:type,
+                                    refresh:refreshGrid,
+                                    record:record
+                                }
+                            });
+                        }
+                    });
+                }
+            )
+        }
     }
     /*退役军人审核*/
     var auditFunc = function (record,refreshGrid) {
-        layer.load(2);
-        var title ='【'+record.name+ '】现役军人信息';
-        require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
-            function(htmfile,jsfile){
-                layer.open({
-                    title:title,
-                    type: 1,
-                    area: ['910px', '500px'], //宽高
-                    content: htmfile,
-                    success: function(layero, index){
-                        jsfile.render(layero,{
-                            index:index,
-                            queryParams:{
-                                actiontype:'audit',
-                                refresh:refreshGrid,
-                                record:record
-                            }
-                        });
-                    }
-                });
-            }
-        )
+        var title ='【'+record.name+ '】退役军人';
+        var tabname = '';
+        if(record.persontype == '211'){ //伤残
+            tabname = 'ScryTable';
+            title+='[伤残人员]';
+        }else if(record.persontype == '212'){ //三属
+            tabname = 'SsryTable';
+            title+='[三属人员]';
+        }else if(record.persontype == '213'){ //两参
+            tabname = 'LcryTable';
+            title+='[两参人员]';
+        }else if(record.persontype == '214'){ //在乡
+            tabname = 'ZxlfryTable';
+            title+='[在乡老复人员]';
+        }else if(record.persontype == '215'){ //带病
+            tabname = 'DbhxryTable';
+            title+='[带病回乡人员]';
+        }else if(record.persontype == '230'){ //一般退役
+            tabname = 'YbtyryTable';
+            title+='[一般退役军人]';
+        }
+        title+='审核';
+        if(tabname.length > 0){
+            layer.load(2);
+            require(['text!views/shuangyong/youfuduixiang/childtables/'+tabname+'.htm','views/shuangyong/youfuduixiang/childtables/'+tabname],
+                function(htmfile,jsfile){
+                    layer.open({
+                        title:title,
+                        type: 1,
+                        area: ['910px', '500px'], //宽高
+                        content: htmfile,
+                        success: function(layero, index){
+                            jsfile.render(layero,{
+                                index:index,
+                                queryParams:{
+                                    actiontype:'audit',
+                                    refresh:refreshGrid,
+                                    record:record
+                                }
+                            });
+                        }
+                    });
+                }
+            )
+        }
     }
     /*退役军人审批*/
     var approveFunc = function (record,refreshGrid) {
-        layer.load(2);
-        var title ='【'+record.name+ '】现役军人信息';
-        require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
-            function(htmfile,jsfile){
-                layer.open({
-                    title:title,
-                    type: 1,
-                    area: ['910px', '500px'], //宽高
-                    content: htmfile,
-                    success: function(layero, index){
-                        jsfile.render(layero,{
-                            index:index,
-                            queryParams:{
-                                actiontype:'approve',
-                                refresh:refreshGrid,
-                                record:record
-                            }
-                        });
-                    }
-                });
-            }
-        )
+        var title ='【'+record.name+ '】退役军人';
+        var tabname = '';
+        if(record.persontype == '211'){ //伤残
+            tabname = 'ScryTable';
+            title+='[伤残人员]';
+        }else if(record.persontype == '212'){ //三属
+            tabname = 'SsryTable';
+            title+='[三属人员]';
+        }else if(record.persontype == '213'){ //两参
+            tabname = 'LcryTable';
+            title+='[两参人员]';
+        }else if(record.persontype == '214'){ //在乡
+            tabname = 'ZxlfryTable';
+            title+='[在乡老复人员]';
+        }else if(record.persontype == '215'){ //带病
+            tabname = 'DbhxryTable';
+            title+='[带病回乡人员]';
+        }else if(record.persontype == '230'){ //一般退役
+            tabname = 'YbtyryTable';
+            title+='[一般退役军人]';
+        }
+        title+='审批';
+        if(tabname.length > 0){
+            layer.load(2);
+            require(['text!views/shuangyong/youfuduixiang/childtables/'+tabname+'.htm','views/shuangyong/youfuduixiang/childtables/'+tabname],
+                function(htmfile,jsfile){
+                    layer.open({
+                        title:title,
+                        type: 1,
+                        area: ['910px', '500px'], //宽高
+                        content: htmfile,
+                        success: function(layero, index){
+                            jsfile.render(layero,{
+                                index:index,
+                                queryParams:{
+                                    actiontype:'approve',
+                                    refresh:refreshGrid,
+                                    record:record
+                                }
+                            });
+                        }
+                    });
+                }
+            )
+        }
+
     }
 
 
