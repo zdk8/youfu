@@ -1,196 +1,243 @@
 <div class="easyui-panel newRadio" opt="panel"
      style="overflow-y: scroll;border-bottom: 1px solid greenyellow;height:4px;"
-     data-options="fit:true,border:false,footer:'#ft_ssry'">
+     data-options="fit:true,border:false">
     <form class="common-form" method="post" enctype="multipart/form-data">
-        <table opt="baseinfo_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
-            <tr>
-                <td class="formtdtext" style="width: 100px">行政区划<label></label></td>
-                <td colspan="3">
-                    <input opt="division" style="width: 270px;">
-                </td>
-                <td rowspan="4" colspan="2" style="text-align: center;">
-                    <div id="personimg" style="width: 150px;height: 120px;cursor: pointer;margin-left: 80px;" opt="personimg">
-                        <img src="images/noperson.gif" value="" alt="用户照片" width="150px" height="120px">
-                    </div>
-                    <input name="photo" style="display: none;">
-                    <input opt="inputVal"
-                           type="file"
-                           name="file"
-                           style="width:251px;border:0;height: 24px;display: none;" value="" maxlength="64">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">身份证号<label></label></td>
-                <td>
-                    <input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 170px;"
-                           data-options="required:true,invalidMessage:'请输入正确的身份证号',validType:'identityid'"><span style="color: red">*</span>
-                </td>
-                <td class="formtdtext" style="width: 80px">姓名<label></label></td>
-                <td>
-                    <input class="easyui-validatebox input-text" name="name" data-options="required:true" style="width: 93px;"><span style="color: red">*</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">性别<label></label></td>
-                <td>
-                    <input opt="sex" class="easyui-combobox" style="width: 100px;"
-                           name="sex"
-                           data-options="
-                                    loader:cj.getLoader('sex'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-                <td class="formtdtext">出生日期<label></label></td>
-                <td>
-                    <input class="easyui-datebox" name="birthday" opt="birthday" style="width: 100px">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">民族<label></label></td>
-                <td>
-                    <input class="easyui-combobox" style="width: 100px"
-                           opt="nation"
-                           name="nation"
-                           data-options="
-                                    loader: cj.getLoader('nation'),
-                                    mode: 'remote',
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-                <td class="formtdtext">婚姻情况<label></label></td>
-                <td>
-                    <input class="easyui-combobox "
-                           opt="marriage"
-                           name="marriage"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('marriage'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">入伍时间<label></label></td>
-                <td>
-                    <input class="easyui-datebox" name="joindate" opt="joindate" style="width: 100px">
-                </td>
-                <td class="formtdtext">退伍时间<label></label></td>
-                <td>
-                    <input class="easyui-datebox" name="retiredate" opt="retiredate" style="width: 100px">
-                </td>
-                <td class="formtdtext">户口类别<label></label></td>
-                <td>
-                    <input class="easyui-combobox "
-                           opt="hktype"
-                           name="hktype"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('hktype'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">类别<label></label></td>
-                <td colspan="5">
-                    <input class="easyui-combobox"
-                           opt="eachtype"
-                           name="eachtype"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('eachtype_yityry'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">服役部队名称<label></label></td>
-                <td>
-                    <input class="input-text" name="armyname">
-                </td>
-                <td class="formtdtext">部队专业<label></label></td>
-                <td>
-                    <input class="input-text" name="specialty">
-                </td>
-                <td class="formtdtext">退役证件号<label></label></td>
-                <td>
-                    <input class="input-text" name="retirenumber">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">备注<label></label></td>
-                <td colspan="5">
-                    <textarea class="input-text" name="comments" style="width: 95%;"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">立功等级<label></label></td>
-                <td>
-                    <input class="easyui-combobox "
-                           opt="awardlevel"
-                           name="awardlevel"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('awardlevel'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-                <td class="formtdtext">联系电话<label></label></td>
-                <td>
-                    <input class="input-text" name="phone">
-                </td>
-                <td class="formtdtext">工作单位<label></label></td>
-                <td>
-                    <input class="input-text" name="workunit">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">身份证上地址<label></label></td>
-                <td colspan="2">
-                    <input class="input-text" name="idaddress" style="width: 270px;">
-                </td>
-                <td class="formtdtext">户籍地址<label></label></td>
-                <td colspan="2">
-                    <input class="input-text" name="household" style="width: 270px;">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">优抚对象状态<label></label></td>
-                <td colspan="5">
-                    <input class="easyui-combobox"
-                           opt="caretype"
-                           name="caretype"
-                           style="width: 100px"
-                           data-options="
-                                    loader:cj.getLoader('caretype'),
-                                    editable:false,
-                                    valueField:'id',
-                                    textField:'text'">
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">参保信息<label></label></td>
-                <td colspan="5">
-                    <textarea class="input-text" name="insured" style="width: 95%;"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td class="formtdtext">养老保险信息<label></label></td>
-                <td colspan="5">
-                    <textarea class="input-text" name="pension" style="width: 95%;"></textarea>
-                </td>
-            </tr>
-        </table>
+        <fieldset>
+            <legend align="center">基本信息</legend>
+            <table opt="baseinfo_table" width="100%" style="margin: 0 auto;margin-top: 2px;" cellpadding="2" cellspacing="1" class="table_form">
+                <tr>
+                    <td class="formtdtext" style="width: 100px">行政区划<label></label></td>
+                    <td colspan="3">
+                        <input opt="districtid" style="width: 270px;">
+                    </td>
+                    <td rowspan="4" colspan="2" style="text-align: center;">
+                        <div id="personimg" style="width: 150px;height: 120px;cursor: pointer;margin-left: 80px;" opt="personimg">
+                            <img src="images/noperson.gif" value="" alt="用户照片" width="150px" height="120px">
+                        </div>
+                        <input name="photo" style="display: none;">
+                        <input opt="inputVal"
+                               type="file"
+                               name="file"
+                               style="width:251px;border:0;height: 24px;display: none;" value="" maxlength="64">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">身份证号<label></label></td>
+                    <td>
+                        <input opt="identityid" name="identityid" class="easyui-validatebox input-text" style="width: 170px;"
+                               data-options="required:true,invalidMessage:'请输入正确的身份证号',validType:'identityid'"><span style="color: red">*</span>
+                    </td>
+                    <td class="formtdtext" style="width: 80px">姓名<label></label></td>
+                    <td>
+                        <input class="easyui-validatebox input-text" name="name" data-options="required:true" style="width: 93px;"><span style="color: red">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">性别<label></label></td>
+                    <td>
+                        <input opt="sex" class="easyui-combobox" style="width: 100px;"
+                               name="sex"
+                               data-options="
+                                        loader:cj.getLoader('sex'),
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                    <td class="formtdtext">出生日期<label></label></td>
+                    <td>
+                        <input class="easyui-datebox" name="birthday" opt="birthday" style="width: 100px">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">民族<label></label></td>
+                    <td>
+                        <input class="easyui-combobox" style="width: 100px"
+                               opt="nation"
+                               name="nation"
+                               data-options="
+                                        loader: cj.getLoader('nation'),
+                                        mode: 'remote',
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                    <td class="formtdtext">婚姻情况<label></label></td>
+                    <td>
+                        <input class="easyui-combobox "
+                               opt="marriage"
+                               name="marriage"
+                               style="width: 100px"
+                               data-options="
+                                        loader:cj.getLoader('marriage'),
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">入伍时间<label></label></td>
+                    <td>
+                        <input class="easyui-datebox" name="joindate" opt="joindate" style="width: 100px">
+                    </td>
+                    <td class="formtdtext">退伍时间<label></label></td>
+                    <td>
+                        <input class="easyui-datebox" name="retiredate" opt="retiredate" style="width: 100px">
+                    </td>
+                    <td class="formtdtext">户口类别<label></label></td>
+                    <td>
+                        <input class="easyui-combobox "
+                               opt="hktype"
+                               name="hktype"
+                               style="width: 100px"
+                               data-options="
+                                        loader:cj.getLoader('hktype'),
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">类别<label></label></td>
+                    <td colspan="5">
+                        <input class="easyui-combobox"
+                               opt="eachtype"
+                               name="eachtype"
+                               style="width: 100px"
+                               data-options="
+                                        loader:cj.getLoader('eachtype_yityry'),
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">服役部队名称<label></label></td>
+                    <td>
+                        <input class="input-text" name="armyname">
+                    </td>
+                    <td class="formtdtext">部队专业<label></label></td>
+                    <td>
+                        <input class="input-text" name="specialty">
+                    </td>
+                    <td class="formtdtext">退役证件号<label></label></td>
+                    <td>
+                        <input class="input-text" name="retirenumber">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">备注<label></label></td>
+                    <td colspan="5">
+                        <textarea class="input-text" name="comments" style="width: 95%;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">立功等级<label></label></td>
+                    <td>
+                        <input class="easyui-combobox "
+                               opt="awardlevel"
+                               name="awardlevel"
+                               style="width: 100px"
+                               data-options="
+                                        loader:cj.getLoader('awardlevel'),
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                    <td class="formtdtext">联系电话<label></label></td>
+                    <td>
+                        <input class="input-text" name="phone">
+                    </td>
+                    <td class="formtdtext">工作单位<label></label></td>
+                    <td>
+                        <input class="input-text" name="workunit">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">身份证上地址<label></label></td>
+                    <td colspan="2">
+                        <input class="input-text" name="idaddress" style="width: 270px;">
+                    </td>
+                    <td class="formtdtext">户籍地址<label></label></td>
+                    <td colspan="2">
+                        <input class="input-text" name="household" style="width: 270px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">优抚对象状态<label></label></td>
+                    <td colspan="5">
+                        <input class="easyui-combobox"
+                               opt="caretype"
+                               name="caretype"
+                               style="width: 100px"
+                               data-options="
+                                        loader:cj.getLoader('caretype'),
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">参保信息<label></label></td>
+                    <td colspan="5">
+                        <textarea class="input-text" name="insured" style="width: 95%;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="formtdtext">养老保险信息<label></label></td>
+                    <td colspan="5">
+                        <textarea class="input-text" name="pension" style="width: 95%;"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend align="center">社区意见</legend>
+            <table width="100%" style="margin: 2px auto;" cellpadding="2" cellspacing="1" class="table_form">
+                <tr>
+                    <td class="formtdtext" style="width: 80px">社区审核<br>意见<label></label></td>
+                    <td colspan="5">
+                        <textarea class="input-text" name="communityopinion" style="width: 95%"></textarea>
+                        <div style="float: right;">
+                            社区审核人:<input class="input-text" name="community">
+                            社区审核日期:<input class="easyui-datebox" name="opiniondate" opt="opiniondate" style="width: 100px;">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend align="center">街道审核信息</legend>
+            <table width="100%" style="margin: 2px auto;" cellpadding="2" cellspacing="1" class="table_form">
+                <tr>
+                    <td class="formtdtext" style="width: 80px">街道审核<br>意见<label></label></td>
+                    <td colspan="5">
+                        <textarea class="input-text" name="streetreview" style="width: 95%"></textarea>
+                        <div style="float: right;">
+                            街道审核人:<input class="input-text" name="streeter">
+                            街道审核日期:<input class="easyui-datebox" name="reviewdate" opt="reviewdate" style="width: 100px;">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset>
+            <legend align="center">县民政局审批信息</legend>
+            <table width="100%" style="margin: 2px auto;" cellpadding="2" cellspacing="1" class="table_form">
+                <tr>
+                    <td class="formtdtext" style="width: 80px">民政局审批<br>意见<label></label></td>
+                    <td colspan="5">
+                        <textarea class="input-text" name="countyaudit" style="width: 95%"></textarea>
+                        <div style="float: right;">
+                            民政局审核人:<input class="input-text" name="county">
+                            民政局审核日期:<input class="easyui-datebox" name="auditdate" opt="auditdate" style="width: 100px;">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
     </form>
 </div>
-<div id="ft_ssry" style="padding:5px;" align="center">
-    <input type="button" value="取消" class="btns" opt="cancel">
-    <input type="button" value="保存" class="btns" opt="save" style="display: none;">
-    <input type="button" value="修改" class="btns" opt="update" style="display: none;">
-</div>
+<div opt="foot"></div>

@@ -81,6 +81,7 @@ define(function(){
                         $this.attr("disabled",false);//按钮启用
                     }
                     params.districtid = local.find("[opt=districtid]").combotree("getValue");
+                    params.persontype = '100';
                     return isValid;
                 },
                 success: function (data) {
@@ -96,7 +97,8 @@ define(function(){
                 }
             })
         });
-        reportFunc(local,option);
+        var districtid = local.find("[opt=districtid]").combotree("getValue");
+        cj.reportFunc(local,option,districtid,'100','');
 
     }
     
@@ -123,7 +125,7 @@ define(function(){
 
         local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {
-                url: 'record/updaterecord',
+                url: 'hyshy/updatesoilder',
                 onSubmit: function (params) {
                     layer.load();
                     var isValid = $(this).form('validate');
@@ -150,53 +152,15 @@ define(function(){
                 }
             })
         });
-        reportFunc(local,option);
+        var districtid='';
+        if(!isNaN(local.find("[opt=districtid]").combotree("getValue"))){          //是否是数字
+            districtid = local.find("[opt=districtid]").combotree("getValue");
+        }else{
+            districtid = record.districtid;
+        }
+        cj.reportFunc(local,option,districtid,'100',record.sc_id);
     }
-    /*上报*/
-    var reportFunc = function (local,option) {
-        /*上报*/
-        local.find('[opt=report]').click(function () {
-            var communityopinion = local.find('[name=communityopinion]').val();
-            var community = local.find('[name=community]').val();
-            var opiniondate = local.find('[opt=opiniondate]').datebox('getValue');
-            var msg = [];
-            communityopinion.trim().length <=0 ? msg.push('社区审核意见'):null;
-            community.trim().length <=0 ? msg.push('社区审核人'):null;
-            opiniondate.trim().length <=0 ? msg.push('社区审核日期'):null;
-            if(communityopinion.trim().length <=0 || community.trim().length <=0 || opiniondate.trim().length <=0){
-                layer.alert('请填写['+msg+']', {title:'温馨提示',icon: 6});
-                local.find('[name=communityopinion]').focus();
-            }else{
-                var $this = $(this);
-                $this.attr("disabled",true);//按钮禁用
-                local.find('form').form('submit', {
-                    url: 'hyshy/reportsoilder',
-                    onSubmit: function (params) {
-                        layer.load();
-                        var isValid = $(this).form('validate');
-                        if (!isValid) {
-                            layer.closeAll('loading');
-                            $this.attr("disabled",false);//按钮启用
-                        }
-                        return isValid;
-                    },
-                    success: function (data) {
-                        layer.closeAll('loading');
-                        $this.attr("disabled",false);//按钮启用
-                        if (data == "true") {
-                            cj.showSuccess('上报成功');
-                            option.queryParams.refresh();
-                            layer.close(option.index);
-                        } else {
-                            cj.showFail('上报失败');
-                        }
-                    }
-                })
-            }
-        });
-    }
-    
-    
+
     var auditClick = function (local,option,record,issuccess) {
         var streetreview = local.find('[name=streetreview]').val();
         var streeter = local.find('[name=streeter]').val();
