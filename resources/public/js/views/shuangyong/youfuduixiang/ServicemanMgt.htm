@@ -85,7 +85,7 @@
                             <input opt="household" style="width: 509px;">
                         </td>
                         <td colspan="3" align="right">
-                            <div class="com_btns exportbtn" align="center">导出</div>
+                            <!--<div class="com_btns exportbtn" align="center">导出</div>-->
                             <div class="com_btns addbtn" align="center">新增</div>
                             <div class="com_btns querybtn" align="center">查询</div>
                         </td>
@@ -103,7 +103,12 @@
                         pagination:true">
                 <thead frozen="true">
                 <tr>
-                    <th data-options="field:'name',width:80,align:'center'">姓名</th>
+                    <th data-options="field:'name',width:80,align:'center',
+                        formatter:function(v,r,i){
+                            var str='<div></div>';
+                            str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
+                            return str.html();
+                        }">姓名</th>
                 </tr>
                 </thead>
                 <thead>

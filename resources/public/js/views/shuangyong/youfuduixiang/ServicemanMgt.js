@@ -11,7 +11,7 @@ define(function(){
             url:"hyshy/getsoilderlist",
             type:'post',
             onLoadSuccess:function(data){
-                //var view = local.find('[action=view]');           //详细信息
+                var view = local.find('[action=view]');           //详细信息
                 var reportbtns = local.find('[action=report]').hide();           //上报
                 var updatebtns = local.find('[action=update]').hide();           //修改
                 var delbtns = local.find('[action=del]').hide();           //删除
@@ -20,7 +20,7 @@ define(function(){
                 var logoutbtns = local.find('[action=logout]').hide();           //注销
                 //var imgviewbtns = local.find('[action=imgview]');           //预览
                 var rows=data.rows;
-                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns];
+                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view];
                 for(var i=0;i<rows.length;i++){
                     if(rows[i].ishandle == '0' || rows[i].ishandle == '-1'){    //保存
                         $(btns_arr[0][i]).show();
@@ -111,6 +111,8 @@ define(function(){
                                     }else{
                                         layer.alert('不是图片类型', {icon: 6});
                                     }
+                                }else if(action == "view"){                   //预览
+
                                 }
                             });
                         })(i)

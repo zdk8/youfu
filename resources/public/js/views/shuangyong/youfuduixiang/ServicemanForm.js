@@ -106,10 +106,21 @@ define(function(){
     var updateFunc = function (local,option) {
         var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>&nbsp;'+
             '<li><input type="button" value="上报" class="btns" opt="report"></li>';
-        addToolBar(local,option,li);
         if(option.queryParams.type == 'report'){
             local.find('[opt=update]').hide();
         }
+
+        /*if(option.queryParams.type == 'view'){
+            local.find('[opt=update]').hide();
+            local.find('[opt=report]').hide();
+            li = '<li><input type="button" value="打印" class="btns" opt="print"></li>';
+            //local.find('.common-form').find('fieldset').not($('.common-form').find('fieldset')[0]).remove();
+            //local.find('.common-form').find('fieldset>legend').remove();
+        }*/
+
+        addToolBar(local,option,li);
+
+
         shieldingSH(local);
         shieldingSP(local);
 
@@ -122,6 +133,11 @@ define(function(){
 
         var districtnameval = cj.getDivisionTotalname(record.districtid);
         local.find('[opt=districtid]').combotree("setValue",districtnameval);  //填充行政区划
+
+        /*打印*/
+        /*local.find('[opt=print]').click(function () {
+            local.find('table').jqprint();
+        });*/
 
         local.find('[opt=update]').click(function () {
             local.find('form').form('submit', {
