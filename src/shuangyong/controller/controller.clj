@@ -26,25 +26,49 @@
         bstablepkname "sc_id"]
     {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
 
+(defn upload-file [file]
+  (let [uploadpath (str schema/datapath "resources/public/upload/")      ;获取当前目录
+        timenow (c/to-long  (l/local-now))              ;当前时间数字
+        filename (:filename file)
+        pathname (str  timenow filename)
+        photopath  (if (> (count filename) 0) (str "upload/" pathname) )
+        ]
+    (if (> (count filename) 0) (common/uploadfile file  uploadpath pathname))
+    photopath))
 
 (defn save-soilder [request]
   (let [params (:params request)
-        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "0"})]
+        file (:file params)
+        photopath (upload-file file)
+        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "0" :photo photopath})]
     (db/adddata-by-tablename "t_soldiercommon" (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
     (str "true")))
 
 (defn update-soilder [request]
   (let [params (:params request)
         sdata (common/dateformat-bf-insert (select-keys params (:t_soldiercommon common/selectcols)) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")
-        sc_id (:sc_id params)]
-    (db/updatedata-by-tablename "t_soldiercommon" sdata {:sc_id sc_id})
+        sc_id (:sc_id params)
+        photo (:photo params)
+        file (:file params)
+        filename (:filename file)
+        photopath (if (> (count filename) 0) (do (common/delfile (str schema/datapath photo))                       ;如果头像图片更新，先删除旧头像
+                                                 (upload-file file))                                                 ;再更新新头像
+                                             photo)]
+    (db/updatedata-by-tablename "t_soldiercommon" (conj sdata {:photo photopath})  {:sc_id sc_id})
     (str "true")))
 
 (defn report-soilder [request]
   (let [params (:params request)
         sc_id (:sc_id params)
         approvedata (approve-reportdata params sc_id)
-        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "1"})
+        photo (:photo params)
+        file (:file params)
+        filename (:filename file)
+        photopath (if (> (count sc_id) 0) (if (> (count filename) 0) (do (common/delfile (str schema/datapath photo))                       ;如果头像图片更新，先删除旧头像
+                                                                         (upload-file file))                                                 ;再更新新头像
+                                                                     photo)
+                                          (upload-file file))
+        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "1" :photo photopath})
         ]
     (if (> (count sc_id) 0) (db/report-soilder approvedata sc_id (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
                              (db/report-soilder approvedata (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")))
