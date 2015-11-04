@@ -10,6 +10,9 @@ define(function(){
         datagrid.datagrid({
             url:"hyshy/getsoilderlist",
             type:'post',
+            queryParams:{
+                stype:'2'
+            },
             onLoadSuccess:function(data){
                 //var view = local.find('[action=view]');           //详细信息
                 var reportbtns = local.find('[action=report]').hide();           //上报
@@ -142,7 +145,8 @@ define(function(){
                 retiredate:local.find('[opt=retiredate]').val(),
                 birthday1:local.find('[opt=birthday1]').datebox('getValue'),
                 birthday2:local.find('[opt=birthday2]').datebox('getValue'),
-                household:local.find('[opt=household]').val()
+                household:local.find('[opt=household]').val(),
+                stype:'2'
             })
         })
 
