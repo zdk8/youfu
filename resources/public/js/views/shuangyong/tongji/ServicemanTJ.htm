@@ -1,0 +1,90 @@
+<!--现役军人统计-->
+<div opt="content" class="easyui-panel" data-options="fit:true" style="background-color: #ececec;display: none;">
+    <div class="easyui-layout" data-options="fit:true,border:false">
+        <div data-options="region:'north',border:false" style="height:200px;width: 737px;background-color: #ececec;">
+            <div class="box-shadow" style="width: 1000px;height: 180px;background-color:white;">
+                <table width="100%" cellpadding="5" class="table_form2">
+                    <tr>
+                        <td class="formtdtext2" style="width: 130px;">行政区划<label></label></td>
+                        <td>
+                            <input opt="districtid" style="width: 170px;height: 29px">
+                        </td>
+                        <td class="formtdtext2">身份类别<label></label></td>
+                        <td>
+                            <input class="easyui-combobox" opt="eachtype" style="width: 130px;height: 29px;"
+                                   data-options="
+                                    loader:cj.getLoader('eachtype'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="right">
+                            <div class="com_btns querybtn" align="center">统计</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="box-shadow" data-options="region:'center',border:false" style="background-color:white;padding: 20px;">
+            <table class="easyui-datagrid-noauto easyui2"
+                   data-options="fit:true,
+                        fitColumns:true,
+                        method:'post',
+                        singleSelect:true,
+                        loadMsg:'',
+                        pagination:true">
+                <thead frozen="true">
+                <tr>
+                    <th data-options="field:'name',width:80,align:'center',
+                        formatter:function(v,r,i){
+                            var str='<div></div>';
+                            str=$(str).append('<a action=&quot;view&quot;href=&quot;javaScript:;&quot;>'+v+'</a>');
+                            return str.html();
+                        }">姓名</th>
+                </tr>
+                </thead>
+                <thead>
+                <tr>
+                    <th data-options="field:'sex',width:74,align:'center',
+                            formatter: function(value,row,index){
+                                    return getGender[value]
+                                }">性别</th>
+                    <th data-options="field:'birthday',width:100,align:'center'">出生日期</th>
+                    <th data-options="field:'identityid',width:170,align:'center'">身份证号</th>
+                    <th data-options="field:'eachtype',width:100,align:'center',
+                        formatter: function(value,row,index){
+                                        return getEachtype[value]
+                                    }">身份类别</th>
+                    <th data-options="field:'household',width:127,align:'center'">户籍地址</th>
+                    <!--<th data-options="field:'age',width:100,align:'center'">录入日期</th>-->
+                    <!--<th data-options="field:'contactway',width:140,align:'center'">死亡确认</th>-->
+                    <!--<th data-options="field:'contactway',width:100,align:'center'">退役状态</th>-->
+                    <th data-options="field:'ishandle',width:100,align:'center',
+                        formatter: function(value,row,index){
+                                    if(value == '-1'){
+                                        return '退回';
+                                    }else{
+                                        return getStatus[value]
+                                    }
+                                    }">状态</th>
+                    <th data-options="field:'ro',width:100,align:'center',
+                                    formatter:function(value,rowData,rowIndex){
+                                        var str='<div></div>';
+                                            str=$(str).append('<a action=&quot;report&quot;title=&quot;上报&quot;href=&quot;javaScript:;&quot;><span>上报</span></a>&nbsp;');
+                                            str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
+                                            str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
+                                            str=$(str).append('<a action=&quot;audit&quot;title=&quot;审核&quot;href=&quot;javaScript:;&quot;><span>审核</span></a>');
+                                            str=$(str).append('<a action=&quot;approve&quot;title=&quot;审批&quot;href=&quot;javaScript:;&quot;><span>审批</span></a>');
+                                            str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;href=&quot;javaScript:;&quot;><span>注销</span></a>');
+                                        return str.html();
+                                    }">操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
