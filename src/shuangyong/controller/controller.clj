@@ -115,6 +115,7 @@
         birthday2       (:birthday2  params)
         household       (:household params)
         stype           (:stype params)
+        persontype      (:p_type params)
         namecond        (if (> (count name) 0) (common/likecond "name" name))
         identityidcond  (if (> (count identityid) 0) (common/likecond "identityid" identityid))
         districtcond    (if (> (count districtid) 0) (str " and districtid like '" districtid "%'"))
@@ -129,7 +130,8 @@
         birthday2cond   (if (> (count birthday1) 0) (str " and birthday < to_date('"birthday2"','yyyy-mm-dd') "))
         housecond       (if (> (count household)0) (str (common/likecond "household" household)))
         typecond        (if (= stype "2") (str " and persontype like '2%' ") (str " and persontype like '1%' "))
-        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond)]
+        persontypecond  (if (> (count persontype) 0) (str " and persontype = " persontype))
+        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond)]
     conds))
 
 
@@ -154,6 +156,25 @@
     (if (> (count sc_id) 0) (db/updatedata-by-tablename "t_soldiercommon" {:ishandle "n"} {:sc_id sc_id}))
     (str "true")))
 
+;;统计分析
+(defn comboasql [col value conds]
+  (str "select t.sum,t.ptype,c.aaa103 as statictype from(select count(*) as sum,"col" as ptype from t_personalrecords "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
+
+(defn districtsql [conds]
+  (str "select s.districtid,s.tsum,d.dvname as statictype from (select districtid,count(*) as tsum from (select substr(districtid,0,9) as districtid  from t_soldiercommon t where  "conds" and ishandle = '3') group by districtid) s left join division d on d.dvcode = s.districtid"))
+
+
+(defn hyshy-analysis [request]
+  (let [params (:params request)
+        stype (:stype params)
+        tjtype (:tjtype params)
+        conds (if (= stype "2") (str " persontype like '2%' ") (str " persontype like '1%' "))
+        analysql (condp = tjtype
+                   "xzqh"  (districtsql conds)
+                   "xb" (comboasql "gender" "gender" conds)
+                   "lb" (comboasql "persontype" "persontype" conds)
+                   (str "select count(*) as sum from t_personalrecords " conds " and ishandle = '3'"))]
+    (resp/json (db/get-results-bysql analysql))))
 
 
 

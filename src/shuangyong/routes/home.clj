@@ -25,6 +25,7 @@
   (POST "/hyshy/getsoilderlist" request (ctl/get-soilder-list request))               ;;查询双拥人员信息
   (POST "/hyshy/deletesoilder" request (ctl/delete-soilder request))                  ;;删除双拥人员信息
   (POST "/hyshy/logoutsoilder" request (ctl/logout-soilder request))                  ;;注销双拥人员信息
+  (POST "/hyshy/hyshyanalysis" request (ctl/hyshy-analysis request))
 
 
   ;;附件管理
