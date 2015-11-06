@@ -172,8 +172,9 @@
         analysql (condp = tjtype
                    "xzqh"  (districtsql conds)
                    "xb" (comboasql "sex" "sex" conds)
-                   "lb" (comboasql "persontype" "persontype" conds)
+                   "lb" (comboasql "eachtype" "eachtype" conds)
                    (str "select count(*) as tsum from t_soldiercommon where " conds " and ishandle = '3'"))]
+    (println "SSSSSSSSSS" analysql)
     (resp/json (db/get-results-bysql analysql))))
 
 
