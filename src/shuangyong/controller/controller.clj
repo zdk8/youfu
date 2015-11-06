@@ -158,7 +158,7 @@
 
 ;;统计分析
 (defn comboasql [col value conds]
-  (str "select t.sum,t.ptype,c.aaa103 as statictype from(select count(*) as sum,"col" as ptype from t_personalrecords "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
+  (str "select t.sum,t.ptype,c.aaa103 as statictype from(select count(*) as sum,"col" as ptype from t_soldiercommon where "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
 
 (defn districtsql [conds]
   (str "select s.districtid,s.tsum,d.dvname as statictype from (select districtid,count(*) as tsum from (select substr(districtid,0,9) as districtid  from t_soldiercommon t where  "conds" and ishandle = '3') group by districtid) s left join division d on d.dvcode = s.districtid"))
@@ -171,7 +171,7 @@
         conds (if (= stype "2") (str " persontype like '2%' ") (str " persontype like '1%' "))
         analysql (condp = tjtype
                    "xzqh"  (districtsql conds)
-                   "xb" (comboasql "gender" "gender" conds)
+                   "xb" (comboasql "sex" "sex" conds)
                    "lb" (comboasql "persontype" "persontype" conds)
                    (str "select count(*) as tsum from t_soldiercommon where " conds " and ishandle = '3'"))]
     (resp/json (db/get-results-bysql analysql))))
