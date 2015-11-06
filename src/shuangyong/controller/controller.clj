@@ -173,7 +173,7 @@
                    "xzqh"  (districtsql conds)
                    "xb" (comboasql "gender" "gender" conds)
                    "lb" (comboasql "persontype" "persontype" conds)
-                   (str "select count(*) as sum from t_personalrecords " conds " and ishandle = '3'"))]
+                   (str "select count(*) as tsum from t_soldiercommon where " conds " and ishandle = '3'"))]
     (resp/json (db/get-results-bysql analysql))))
 
 
