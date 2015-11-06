@@ -116,6 +116,8 @@ define(function(){
             '<li><input type="button" value="上报" class="btns" opt="report"></li>';
         addToolBar(local,option,li);
         initControls(local);
+        cj.shieldingSH(local);
+        cj.shieldingSP(local);
         if(option.queryParams.type == 'report'){
             local.find('[opt=update]').hide();
         }

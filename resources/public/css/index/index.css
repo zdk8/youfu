@@ -51,12 +51,14 @@
 
 /*工具栏背景*/
 .highcharstoolbar{
-    /*background: url("../../img/hengtiao.jpg");*/
-    background-color: #6fb3e0;
-    color: #ffffff;
-    height: 23px;
+    background-color: #f3f3f3;
+    color: #666666;
+    height: 31px;
+    font-size: 12px;
+    font-family: 微软雅黑;
+    font-weight: bold;
     width: auto;
-    padding-top: 5px;
+    padding-top: 14px;
 }
 
 ol, ul, li, dl, dd, dt {
