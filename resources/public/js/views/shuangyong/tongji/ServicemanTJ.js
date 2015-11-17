@@ -104,7 +104,7 @@ define(function(){
         render:function(local,option){
             var dvnames=[];
             dvnames.push({
-                datename:'statictype',valuename:'tsum',datatype:'statictype'
+                datename:'ptype',valuename:'tsum',datatype:'statictype'
             })
             var localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({

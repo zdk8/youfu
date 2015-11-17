@@ -104,7 +104,7 @@ define(function(){
         render:function(local,option){
             var dvnames=[];
             dvnames.push({
-                datename:'statictype',valuename:'tsum',datatype:'statictype'
+                datename:'ptype',valuename:'sum',datatype:'statictype'
             })
             var localDataGrid=
                 local.find('.easyui-datagrid-noauto').datagrid({
@@ -215,14 +215,13 @@ define(function(){
             }
 
             ieMaxRowHeight();
-            var districtid = local.find('[opt=districtid]');      //行政区划值
 
             /*统计*/
             local.find('[opt=tongji]').bind('click',function(){
                 var type_tjval = local.find('[opt=type_tj]').combobox('getValue');
                 localDataGrid.datagrid('reload',{
                     tjtype:type_tjval,
-                    stype:'1'
+                    stype:'2'
                 });
                 ieMaxRowHeight();
             });

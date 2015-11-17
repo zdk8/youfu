@@ -7,11 +7,10 @@ body{
     background: url("images/shad.png") repeat center;
     margin-top: 10%;
     padding-bottom: 120px;
-
 }
 .lg{
     background-image: url("images/loginform.png");
-    width:575px;
+    width:569px;
     height: 357px;
     margin: 0 auto;
 }
