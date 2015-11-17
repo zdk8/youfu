@@ -110,7 +110,7 @@ define(function(){
                 local.find('.easyui-datagrid-noauto').datagrid({
                     url:'hyshy/hyshyanalysis',
                     queryParams:{
-                        stype:'1'
+                        stype:'2'
                     },
                     onLoadSuccess:function(data){
                         var detailbtns=local.find('[action=detail]');

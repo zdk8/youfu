@@ -120,10 +120,10 @@
         identityidcond  (if (> (count identityid) 0) (common/likecond "identityid" identityid))
         districtcond    (if (> (count districtid) 0) (str " and districtid like '" districtid "%'"))
         eachtypecond    (if (> (count eachtype) 0) (str " and eachtype = " eachtype))
-        ishandlecond    (if (> (count ishandle) 0) (str " and ishandle = " ishandle) (str " and (ishandle != 'n' or ishandle is null )"))
+        ishandlecond    (if (> (count ishandle) 0) (str " and ishandle = '" ishandle "'" ) (str " and (ishandle != 'n' or ishandle is null )"))
         caretypecond    (if (> (count caretype) 0) (str " and caretype = " caretype))
         isdeadcond      (if (> (count isdead) 0) (str " and isdead = " isdead))
-        photocond       (if (> (count photo) 0) (if (= photo "1") (str " and photo is not null " ) (str " and photo is null " )))
+        photocond       (if (> (count photo) 0) (if (not= photo "0") (if (= photo "1") (str " and photo is null " ) (str " and photo is not null " ))))
         joindatecond    (if (> (count joindate) 0) (str " and to_char(joindate,'yyyy') = '"joindate"' "))   ;to_char(birthday,'yyyy') = '2015'
         retiredatecond  (if (> (count retiredate) 0) (str " and to_char(retiredate,'yyyy') = '"retiredate"' "))
         birthday1cond   (if (> (count birthday1) 0) (str " and birthday > to_date('"birthday1"','yyyy-mm-dd') "))
@@ -158,7 +158,7 @@
 
 ;;统计分析
 (defn comboasql [col value conds]
-  (str "select t.sum,t.ptype,c.aaa103 as statictype from(select count(*) as sum,"col" as ptype from t_soldiercommon where "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
+  (str "select t.tsum,t.ptype,c.aaa103 as statictype from(select count(*) as tsum,"col" as ptype from t_soldiercommon where "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
 
 (defn districtsql [conds]
   (str "select s.districtid,s.tsum,d.dvname as statictype from (select districtid,count(*) as tsum from (select substr(districtid,0,9) as districtid  from t_soldiercommon t where  "conds" and ishandle = '3') group by districtid) s left join division d on d.dvcode = s.districtid"))
@@ -173,7 +173,7 @@
                    "xzqh"  (districtsql conds)
                    "xb" (comboasql "sex" "sex" conds)
                    "lb" (comboasql "eachtype" "eachtype" conds)
-                   (str "select count(*) as tsum from t_soldiercommon where " conds " and ishandle = '3'"))]
+                   (str "select '总数' as statictype,count(*) as tsum from t_soldiercommon where " conds " and ishandle = '3'"))]
     (println "SSSSSSSSSS" analysql)
     (resp/json (db/get-results-bysql analysql))))
 
