@@ -158,10 +158,10 @@
 
 ;;统计分析
 (defn comboasql [col value conds]
-  (str "select t.tsum,t.ptype,c.aaa103 as statictype from(select count(*) as tsum,"col" as ptype from t_soldiercommon where "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
+  (str "select t.sum,t.ptype,c.aaa103 as statictype from(select count(*) as sum,"col" as ptype from t_soldiercommon where "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
 
 (defn districtsql [conds]
-  (str "select s.districtid,s.sum,d.dvname as statictype from (select districtid,count(*) as sum from (select substr(districtid,0,9) as districtid  from t_soldiercommon t where  "conds" and ishandle = '3') group by districtid) s left join division d on d.dvcode = s.districtid"))
+  (str "select s.districtid as ptype,s.sum,d.dvname as statictype from (select districtid,count(*) as sum from (select substr(districtid,0,9) as districtid  from t_soldiercommon t where  "conds" and ishandle = '3') group by districtid) s left join division d on d.dvcode = s.districtid"))
 
 
 (defn hyshy-analysis [request]
@@ -173,7 +173,7 @@
                    "xzqh"  (districtsql conds)
                    "xb" (comboasql "sex" "sex" conds)
                    "lb" (comboasql "eachtype" "eachtype" conds)
-                   (str "select count(*) as sum from t_soldiercommon where " conds " and ishandle = '3'"))]
+                   (str "select 'csh' as ptype,'总数' as statictype, count(*) as sum from t_soldiercommon where " conds " and ishandle = '3'"))]
     (println "SSSSSSSSSS" analysql)
     (resp/json (db/get-results-bysql analysql))))
 

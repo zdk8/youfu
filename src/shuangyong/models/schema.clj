@@ -6,8 +6,8 @@
 (def db-oracle  {:classname "oracle.jdbc.OracleDriver"
                  :subprotocol "oracle"
                  :subname "thin:@192.168.2.142:1521:orcl"
+                 ;:subname "thin:@10.40.189.11:1521:orcl"
                  :user "hy_shuangyong"
-;                 :user "partybuild_hy"
                  :password "hvit"
                  :naming {:keys clojure.string/lower-case :fields clojure.string/upper-case}})
 
