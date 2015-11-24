@@ -6,6 +6,24 @@ define(function(){
         var refreshGrid=function() {
             datagrid.datagrid('reload');
         };
+
+
+
+
+
+      /*导入xls*/
+      local.find('[opt=importexcel]').click(function(){
+        local.find('[opt=importfile]').form('submit',{
+            url:"hyshy/soilderimportexcel",
+            onSubmit:function(){
+            },
+            success: function (data) {
+            }
+
+          })
+
+      });
+
         /*加载现役军人*/
         datagrid.datagrid({
             url:"hyshy/getsoilderlist",
