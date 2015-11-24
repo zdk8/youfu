@@ -97,8 +97,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="formtdtext">荣誉称号<label></label></td>
+                    <td>
+                        <input class="input-text" name="honor">
+                    </td>
                     <td class="formtdtext">类别<label></label></td>
-                    <td colspan="5">
+                    <td colspan="4">
                         <input class="easyui-combobox"
                                opt="eachtype"
                                name="eachtype"
@@ -109,6 +113,7 @@
                                         valueField:'id',
                                         textField:'text'">
                     </td>
+
                 </tr>
                 <!--<tr>
                     <td class="formtdtext">死者姓名<label></label></td>
@@ -170,6 +175,68 @@
                         <input class="input-text" name="workunit">
                     </td>
                 </tr>
+
+                <tr>
+                    <td class="formtdtext">培训情况<label></label></td>
+                    <td>
+                        <input class="easyui-combobox "
+                               opt="train"
+                               name="train"
+                               style="width: 100px"
+                               data-options="
+                                        loader:cj.getLoader('train'),
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                    <td class="formtdtext">医保情况<label></label></td>
+                    <td>
+                        <input class="easyui-combobox "
+                               opt="medicalinsurance"
+                               name="medicalinsurance"
+                               style="width: 100px"
+                               data-options="
+                                        loader:cj.getLoader('medicalinsurance'),
+                                        editable:false,
+                                        valueField:'id',
+                                        textField:'text'">
+                    </td>
+                    <td class="formtdtext">培训专业<label></label></td>
+                    <td>
+                        <input class="input-text" name="trainarea">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="formtdtext">家属姓名<label></label></td>
+                    <td>
+                        <input class="input-text" name="familyname">
+                    </td>
+                    <td class="formtdtext">家属联系方式<label></label></td>
+                    <td>
+                        <input class="input-text" name="familyphone">
+                    </td>
+                    <td class="formtdtext">家属地址<label></label></td>
+                    <td>
+                        <input class="input-text" name="familyaddress">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="formtdtext">家属工作单位<label></label></td>
+                    <td>
+                        <input class="input-text" name="familyunit">
+                    </td>
+                    <td class="formtdtext">服役部队代号<label></label></td>
+                    <td>
+                        <input class="input-text" name="armycode">
+                    </td>
+                    <td class="formtdtext">服役部队联系方式<label></label></td>
+                    <td>
+                        <input class="input-text" name="armyphone">
+                    </td>
+                </tr>
+
                 <tr>
                     <td class="formtdtext">身份证上地址<label></label></td>
                     <td colspan="2">
