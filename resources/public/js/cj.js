@@ -1,3 +1,4 @@
+
 //date extended
 /**
  * 对Date的扩展，将 Date 转化为指定格式的String
@@ -213,7 +214,7 @@ var cj=(function(){
                             textField:'text'
                         });
                     }
-                })
+                });
                 //local.find('[opt=jc_date]').datebox();
                 var lasttr = $tr.find('tr')[$tr.find('tr').length-1];
                 $($($(lasttr).find('td')[0]).find('span.combo')[1]).remove();
