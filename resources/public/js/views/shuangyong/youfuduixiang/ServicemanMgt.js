@@ -171,7 +171,7 @@ define(function(){
 
               /*导出*/
       local.find('.exportbtn').click(function(){
-        window.location.href="hyshy/soilderexpportexcel?"+$.param({
+        window.location.href="hyshy/soilderexportexcel?"+$.param({
                 name:name.val(),
                 identityid:identityid.val(),
                 districtid:local.find('[opt=districtid]').combobox('getValue'),
@@ -188,7 +188,7 @@ define(function(){
               stype:'1',
               soildertype:'xianyi'
 
-        })
+        })})
 
         /*添加现役军人*/
         local.find('.addbtn').click(function(){
