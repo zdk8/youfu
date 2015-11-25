@@ -69,7 +69,9 @@
 ;       :body (.getMessage ex)})))
 
 
-(defn soilder-import-excel [request]
+(defn soilder-export-excel
+  "双拥数据导出"
+  [request]
   (try
     (let [out (new java.io.ByteArrayOutputStream)]
       (xls-report-clj out)
@@ -90,10 +92,10 @@
        ; testdata [{:districtid "330424103" :name "test1" :identityid "330424193203052000" :gender 1 :age 18 :address "海盐县于城镇庄家村委会"}{:districtid "330424103" :name "test2" :identityid "330424193203052000" :gender 1 :age 18 :address "海盐县于城镇庄家村委会"}]
        ;dealdata (map #(str "insert into t_oldpeople (districtid, name, identityid,birthd, gender, age, address,datatype,operator_date) values ('" (nth % 0) "','" (nth % 1)"','"(nth % 2) "',to_date ( '" (common/format-time (nth % 3) "") "' , 'YYYY-MM-DD' )," (if (= (nth % 4) "男") "1" (if (= (nth % 4) "女") "0" (nth % 4))) "," (nth % 5) ",'" (nth % 6) "','k',to_date ( '" (common/format-time (common/get-nowtime) "") "' , 'YYYY-MM-DD' ))") data)
        ;oldsql (apply str (interpose ";\n" dealdata))
-       data (rest exldata)
-       keydata (map #(keyword %) (first exldata))
+       ;data (rest exldata)
+       ;keydata (map #(keyword %) (first exldata))
 
-       updata (map #(zipmap keydata %) data)
+       ;updata (map #(zipmap keydata %) data)
 
        ]
     ;(println (common/format-time (nth (first data) 3) ""))
@@ -107,10 +109,10 @@
     ; (old/insert-olddata dealdata)
     ;(old/importdata updata)
     ;(println "UUUUUUUUUUUU" (common/timefmt-bef-insert (first updata) "BIRTHD"))
-    )
 
-  (str "success")
-  )
+    (println "DDDDDDDDDDDDDDDDDDDD" exldata )
+    (str "success")))
+
 
 
 
