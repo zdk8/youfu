@@ -30,6 +30,7 @@
     <orderEntry type="library" name="Leiningen: com.google.javascript/closure-compiler:v20131014" level="project" />
     <orderEntry type="library" name="Leiningen: com.google.protobuf/protobuf-java:2.4.1" level="project" />
     <orderEntry type="library" name="Leiningen: com.ibm.icu/icu4j:52.1" level="project" />
+    <orderEntry type="library" name="Leiningen: com.lowagie/itext:4.2.1" level="project" />
     <orderEntry type="library" name="Leiningen: com.oracle/ojdbc6:11.2.0.3" level="project" />
     <orderEntry type="library" name="Leiningen: com.taoensso/encore:1.5.1" level="project" />
     <orderEntry type="library" name="Leiningen: com.taoensso/timbre:3.2.1" level="project" />
@@ -42,6 +43,7 @@
     <orderEntry type="library" name="Leiningen: crouton:0.1.2" level="project" />
     <orderEntry type="library" name="Leiningen: crypto-equality:1.0.0" level="project" />
     <orderEntry type="library" name="Leiningen: crypto-random:1.2.0" level="project" />
+    <orderEntry type="library" name="Leiningen: dom4j:1.6.1" level="project" />
     <orderEntry type="library" name="Leiningen: environ:0.5.0" level="project" />
     <orderEntry type="library" name="Leiningen: hiccup:1.0.5" level="project" />
     <orderEntry type="library" name="Leiningen: hvitmiddleware:0.1.6" level="project" />
@@ -49,6 +51,8 @@
     <orderEntry type="library" name="Leiningen: im.chit/hara:1.0.1" level="project" />
     <orderEntry type="library" name="Leiningen: im.chit/ova:1.0.1" level="project" />
     <orderEntry type="library" name="Leiningen: io.aviso/pretty:0.1.10" level="project" />
+    <orderEntry type="library" name="Leiningen: jfree/jcommon:1.0.15" level="project" />
+    <orderEntry type="library" name="Leiningen: jfree/jfreechart:1.0.12" level="project" />
     <orderEntry type="library" name="Leiningen: joda-time:2.3" level="project" />
     <orderEntry type="library" name="Leiningen: json-html:0.2.0" level="project" />
     <orderEntry type="library" name="Leiningen: korma:0.3.1" level="project" />
@@ -75,6 +79,9 @@
     <orderEntry type="library" name="Leiningen: org.apache.xmlgraphics/batik-svg-dom:1.7" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.xmlgraphics/batik-util:1.7" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.xmlgraphics/batik-xml:1.7" level="project" />
+    <orderEntry type="library" name="Leiningen: org.bouncycastle/bcmail-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Leiningen: org.bouncycastle/bcprov-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Leiningen: org.bouncycastle/bctsp-jdk14:1.38" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.6.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/clojurescript:0.0-2127" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/core.cache:0.6.3" level="project" />
@@ -102,6 +109,7 @@
     <orderEntry type="library" name="Leiningen: org.jsoup/jsoup:1.7.1" level="project" />
     <orderEntry type="library" name="Leiningen: org.mindrot/jbcrypt:0.3m" level="project" />
     <orderEntry type="library" name="Leiningen: org.mozilla/rhino:1.7R4" level="project" />
+    <orderEntry type="library" name="Leiningen: org.swinglabs/pdf-renderer:1.0.5" level="project" />
     <orderEntry type="library" name="Leiningen: org.tukaani/xz:1.5" level="project" />
     <orderEntry type="library" name="Leiningen: org.yaml/snakeyaml:1.5" level="project" />
     <orderEntry type="library" name="Leiningen: pjstadig/humane-test-output:0.6.0" level="project" />
