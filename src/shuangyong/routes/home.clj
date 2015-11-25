@@ -20,13 +20,14 @@
 
   ;;双拥人员信息
   (POST "/hyshy/savesoilder" request (ctl/save-soilder request))                        ;;双拥人员信息保存
-  (POST "/hyshy/updatesoilder" request (ctl/update-soilder request))                           ;;双拥人员信息更新
+  (POST "/hyshy/updatesoilder" request (ctl/update-soilder request))                    ;;双拥人员信息更新
   (POST "/hyshy/reportsoilder" request (ctl/report-soilder request))                   ;;双拥人员信息上报
   (POST "/hyshy/auditsoilder" request (ctl/audit-soilder request))                     ;;双拥人员信息审核
   (POST "/hyshy/getsoilderlist" request (ctl/get-soilder-list request))               ;;查询双拥人员信息
   (POST "/hyshy/deletesoilder" request (ctl/delete-soilder request))                  ;;删除双拥人员信息
   (POST "/hyshy/logoutsoilder" request (ctl/logout-soilder request))                  ;;注销双拥人员信息
-  (POST "/hyshy/hyshyanalysis" request (ctl/hyshy-analysis request))
+  (POST "/hyshy/hyshyanalysis" request (ctl/hyshy-analysis request))                  ;;双拥数据统计
+  (POST "/hyshy/retiresoilder" request (ctl/retire-soilder request))                   ;;退伍
 
 
   ;;附件管理
@@ -44,7 +45,7 @@
   ;(GET "/report-xls/:report-type" [report-type] (report/generate-report-xls report-type))
   ;;/report-xls/my-test1   调用的是java
   ;;/report-xls/my-test2   调用的是clj-excel.core
-  (POST "/hyshy/soilderexportexcel" request (report/soilder-export-excel request))                                      ;;双拥数据导出excel
+  (GET "/hyshy/soilderexportexcel" request (report/soilder-export-excel request))                 ;;双拥数据导出excel
   (POST "/hyshy/soilderimportexcel" file (report/excelimport file))                               ;;数据导入excel
 
   ;;test    t_rentalhouse

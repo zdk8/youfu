@@ -158,13 +158,15 @@
 
 ;;统计分析
 (defn comboasql [col value conds]
-  (str "select t.sum,t.ptype,c.aaa103 as statictype from(select count(*) as sum,"col" as ptype from t_soldiercommon where "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
+  (str "select t.sum,t.ptype,NVL(c.aaa103,'未知') as statictype from(select count(*) as sum,"col" as ptype from t_soldiercommon where "conds" and ishandle = '3' group by "col") t left join (select aaa102,aaa103 from xt_combodt where aaa100 = '"value"') c on t.ptype = c.aaa102"))
 
 (defn districtsql [conds]
-  (str "select s.districtid as ptype,s.sum,d.dvname as statictype from (select districtid,count(*) as sum from (select substr(districtid,0,9) as districtid  from t_soldiercommon t where  "conds" and ishandle = '3') group by districtid) s left join division d on d.dvcode = s.districtid"))
+  (str "select s.districtid as ptype,s.sum,NVL(d.dvname,'未知') as statictype from (select districtid,count(*) as sum from (select substr(districtid,0,9) as districtid  from t_soldiercommon t where  "conds" and ishandle = '3') group by districtid) s left join division d on d.dvcode = s.districtid"))
 
 
-(defn hyshy-analysis [request]
+(defn hyshy-analysis
+  "双拥数据统计分析"
+  [request]
   (let [params (:params request)
         stype (:stype params)
         tjtype (:tjtype params)
@@ -177,7 +179,14 @@
     (println "SSSSSSSSSS" analysql)
     (resp/json (db/get-results-bysql analysql))))
 
-
+(defn retire-soilder
+  "现役军人退伍"
+  [request]
+  (let [params (:params request)
+        sc_id  (:sc_id params)
+        ]
+    (if (> (count sc_id) 0) (db/updatedata-by-tablename "t_soldiercommon" {:persontype "230"} {:sc_id sc_id}) (resp/json {:success false :message "数据异常"}))
+    (str "true")))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]
