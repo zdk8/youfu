@@ -11,18 +11,6 @@ define(function(){
 
 
 
-      /*导入xls*/
-      local.find('[opt=importexcel]').click(function(){
-        local.find('[opt=importfile]').form('submit',{
-            url:"hyshy/soilderimportexcel",
-            onSubmit:function(){
-            },
-            success: function (data) {
-            }
-
-          })
-
-      });
 
         /*加载现役军人*/
         datagrid.datagrid({
@@ -168,6 +156,19 @@ define(function(){
               stype:'1'
             })
         })
+
+            /*导入xls*/
+      local.find('[opt=importexcel]').click(function(){
+        local.find('[opt=importfile]').form('submit',{
+            url:"hyshy/soilderimportexcel",
+            onSubmit:function(){
+            },
+            success: function (data) {
+            }
+
+          })
+
+      });
 
               /*导出*/
       local.find('.exportbtn').click(function(){

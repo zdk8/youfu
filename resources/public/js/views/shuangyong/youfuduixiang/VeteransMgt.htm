@@ -79,17 +79,36 @@
                             <input class="easyui-datebox" opt="birthday1" style="height: 29px;width: 100px;"> - <input class="easyui-datebox" opt="birthday2" style="height: 29px;width: 100px;">
                         </td>
                     </tr>
+
                     <tr>
-                        <td class="formtdtext2">模糊地址<label></label></td>
-                        <td colspan="4">
-                            <input opt="household" style="width: 509px;">
-                        </td>
-                        <td colspan="3" align="right">
-                            <!--<div class="com_btns exportbtn" align="center">导出</div>-->
-                            <div class="com_btns addbtn" align="center">新增</div>
-                            <div class="com_btns querybtn" align="center">查询</div>
-                        </td>
+                      <td class="formtdtext2">模糊地址<label></label></td>
+                      <td colspan="2">
+                        <input opt="household" style="width:300px">
+                      </td>
+                      <td colspan="3">
+                        <div class="file-box">
+                          <form opt="importfile" method="post" enctype="multipart/form-data">
+                            <!--
+                                <input type="file" name="file" class="file" size="28" style="float:left;margin-right:2px;margin-top:3px;"/>
+                                -->
+                            <div class="input-file-wrapper" style="float:left;">
+                              <a class="input-file-text">选择文件...</a>
+                              <input class="input-file" type="file" />
+                            </div>
+                            <div opt="importexcel" style="float:left;" class="com_btns">导入</div>
+                            <div class="com_btns exportbtn" align="center" style="float:left;">导出</div>
+
+                          </form>
+                        </div>
+                      </td>
+                      <td colspan="2" align="right">
+
+
+                        <div class="com_btns addbtn" align="center">新增</div>
+                        <div class="com_btns querybtn" align="center">查询</div>
+                      </td>
                     </tr>
+
                 </table>
             </div>
         </div>

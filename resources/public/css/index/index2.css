@@ -231,3 +231,32 @@ div.form-foot-btns ul li a:active{
     border: 1px solid red;
 }
 
+
+/*上传文件样式*/
+.input-file-wrapper {
+    position: relative; /* 保证子元素的定位 */
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    
+}
+
+.input-file-text {
+    display: inline-block;
+    margin-top: 5px;
+    color: #666;
+    
+}
+
+.input-file {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px; /* 宽高和外围元素保持一致 */
+    height: 30px;
+    opacity: 0;
+    -moz-opacity: 0;  /* 兼容老式浏览器 */
+    filter: alpha(opacity=0); /* 兼容IE */
+}

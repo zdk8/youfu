@@ -150,6 +150,40 @@ define(function(){
             })
         })
 
+                  /*导入xls*/
+      local.find('[opt=importexcel]').click(function(){
+        local.find('[opt=importfile]').form('submit',{
+            url:"hyshy/soilderimportexcel",
+            onSubmit:function(){
+            },
+            success: function (data) {
+            }
+
+          })
+
+      });
+
+              /*导出*/
+      local.find('.exportbtn').click(function(){
+        window.location.href="hyshy/soilderexportexcel?"+$.param({
+                name:name.val(),
+                identityid:identityid.val(),
+                districtid:local.find('[opt=districtid]').combobox('getValue'),
+                eachtype:local.find('[opt=eachtype]').combobox('getValue'),
+                ishandle:local.find('[opt=handle_type]').combobox('getValue'),
+                caretype:local.find('[opt=caretype]').combobox('getValue'),
+                isdead:local.find('[opt=die_type]').combobox('getValue'),
+                photo:local.find('[opt=hasphoto]').combobox('getValue'),
+                joindate:local.find('[opt=joindate]').val(),
+                retiredate:local.find('[opt=retiredate]').val(),
+                birthday1:local.find('[opt=birthday1]').datebox('getValue'),
+                birthday2:local.find('[opt=birthday2]').datebox('getValue'),
+                household:local.find('[opt=household]').val(),
+              stype:'1',
+              soildertype:'tuiyi'
+
+        })})
+
         /*添加退役军人*/
         local.find('.addbtn').click(function(){
             layer.load(2);
