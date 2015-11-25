@@ -165,8 +165,29 @@ define(function(){
                 birthday1:local.find('[opt=birthday1]').datebox('getValue'),
                 birthday2:local.find('[opt=birthday2]').datebox('getValue'),
                 household:local.find('[opt=household]').val(),
-                stype:'1'
+              stype:'1'
             })
+        })
+
+              /*导出*/
+      local.find('.exportbtn').click(function(){
+        window.location.href="hyshy/soilderexpportexcel?"+$.param({
+                name:name.val(),
+                identityid:identityid.val(),
+                districtid:local.find('[opt=districtid]').combobox('getValue'),
+                eachtype:local.find('[opt=eachtype]').combobox('getValue'),
+                ishandle:local.find('[opt=handle_type]').combobox('getValue'),
+                caretype:local.find('[opt=caretype]').combobox('getValue'),
+                isdead:local.find('[opt=die_type]').combobox('getValue'),
+                photo:local.find('[opt=hasphoto]').combobox('getValue'),
+                joindate:local.find('[opt=joindate]').val(),
+                retiredate:local.find('[opt=retiredate]').val(),
+                birthday1:local.find('[opt=birthday1]').datebox('getValue'),
+                birthday2:local.find('[opt=birthday2]').datebox('getValue'),
+                household:local.find('[opt=household]').val(),
+              stype:'1',
+              soildertype:'xianyi'
+
         })
 
         /*添加现役军人*/
