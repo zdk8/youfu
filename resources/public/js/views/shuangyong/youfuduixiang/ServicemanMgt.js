@@ -106,7 +106,7 @@ define(function(){
                                                     layer.alert('退伍成功', {icon: 6});
                                                     refreshGrid();
                                                 }else{
-                                                    layer.alert('注销失败', {icon: 5});
+                                                    layer.alert('退伍成功', {icon: 5});
                                                 }
                                             }
                                         });
