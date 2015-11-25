@@ -39,9 +39,10 @@ define(function(){
                 var auditbtns = local.find('[action=audit]').hide();           //审核
                 var approvebtns = local.find('[action=approve]').hide();           //审批
                 var logoutbtns = local.find('[action=logout]').hide();           //注销
+                var retirebtns = local.find('[action=retire]').hide();          //退休
                 //var imgviewbtns = local.find('[action=imgview]');           //预览
                 var rows=data.rows;
-                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view];
+                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view,retirebtns];
                 for(var i=0;i<rows.length;i++){
                     if(rows[i].ishandle == '0' || rows[i].ishandle == '-1'){    //保存
                         $(btns_arr[0][i]).show();
@@ -53,6 +54,7 @@ define(function(){
                         $(btns_arr[4][i]).show();
                     }else if(rows[i].ishandle == '3'){
                         $(btns_arr[5][i]).show();
+                        $(btns_arr[7][i]).show();
                     }
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -88,6 +90,27 @@ define(function(){
                                     auditFunc(record,refreshGrid);
                                 }else if(action == "approve"){                   //审批
                                     approveFunc(record,refreshGrid);
+                                } else if(action == "retire"){
+                                    layer.confirm('确定要退伍吗?', {icon: 3, title:'温馨提示'}, function(index){
+                                        layer.close(index);
+                                        layer.load();
+                                        $.ajax({
+                                            url:'hyshy/retiresoilder',
+                                            type:'post',
+                                            data:{
+                                                sc_id:record.sc_id
+                                            },
+                                            success: function (data) {
+                                                layer.closeAll('loading');
+                                                if(data == "true"){
+                                                    layer.alert('退伍成功', {icon: 6});
+                                                    refreshGrid();
+                                                }else{
+                                                    layer.alert('退伍成功', {icon: 5});
+                                                }
+                                            }
+                                        });
+                                    })
                                 }else if(action == "logout"){                   //注销
                                     layer.confirm('确定要注销此数据么?', {icon: 3, title:'温馨提示'}, function(index){
                                         layer.close(index);
