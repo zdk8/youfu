@@ -41,10 +41,11 @@
   ;(GET "/report-pdf/:report-type" [report-type] (report/generate-report-pdf report-type));;测试用例:table :list
   ;;/report-pdf/table-pdf
   ;;/report-pdf/list-pdf
-  (GET "/report-xls/:report-type" [report-type] (report/generate-report-xls report-type))
+  ;(GET "/report-xls/:report-type" [report-type] (report/generate-report-xls report-type))
   ;;/report-xls/my-test1   调用的是java
   ;;/report-xls/my-test2   调用的是clj-excel.core
-  (POST "/test/importexcel" [file] (report/excelimport file))                               ;;postgis 数据导入测试
+  (POST "/hyshy/soilderexportexcel" request (report/excelimport request))                                      ;;双拥数据导出excel
+  (POST "/hyshy/soilderimportexcel" [file] (report/soilder-import-excel file))                               ;;数据导入excel
 
   ;;test    t_rentalhouse
   (GET "/gettablecols" [tablename] (ctl/test-get-tablecols tablename))   ;;获取表的字段

@@ -54,12 +54,25 @@
   )
 
 
-(defn generate-report-xls [report-type]
+;(defn generate-report-xls [report-type]
+;  (try
+;    (let [out (new java.io.ByteArrayOutputStream)]
+;      (condp = (keyword report-type)
+;        ;:my-test1 (xls-report-java out)
+;        :my-test2  (xls-report-clj out))
+;      (write-response (.toByteArray out) "xls")
+;      )
+;
+;    (catch Exception ex
+;      {:status 500
+;       :headers {"Content-Type" "text/html"}
+;       :body (.getMessage ex)})))
+
+
+(defn soilder-import-excel [request]
   (try
     (let [out (new java.io.ByteArrayOutputStream)]
-      (condp = (keyword report-type)
-        ;:my-test1 (xls-report-java out)
-        :my-test2  (xls-report-clj out))
+      (xls-report-clj out)
       (write-response (.toByteArray out) "xls")
       )
 
