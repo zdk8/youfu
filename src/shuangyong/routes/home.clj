@@ -46,7 +46,7 @@
   ;;/report-xls/my-test1   调用的是java
   ;;/report-xls/my-test2   调用的是clj-excel.core
   (GET "/hyshy/soilderexportexcel" request (report/soilder-export-excel request))                 ;;双拥数据导出excel
-  (POST "/hyshy/soilderimportexcel" file (report/excelimport file))                               ;;数据导入excel
+  (POST "/hyshy/soilderimportexcel" [file]  (report/excelimport file))                               ;;数据导入excel
 
   ;;test    t_rentalhouse
   (GET "/gettablecols" [tablename] (ctl/test-get-tablecols tablename))   ;;获取表的字段

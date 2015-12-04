@@ -282,7 +282,8 @@
     )
   )
 
-
+(defn import-data-of-excel [updata]
+  )
 
 (defn test-get-tablecols [tablename]
   (let[tcsql (str "select column_name from user_tab_columns where table_name = '" (.toUpperCase tablename) "'")
