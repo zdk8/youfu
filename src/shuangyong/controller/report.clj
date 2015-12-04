@@ -7,37 +7,45 @@
             [clj-excel.core :as myexcel]
 
     ;       [noir.response :as resp]
-            [shuangyong.common.common :as common]
+    ;        [shuangyong.common.common :as common]
+            [shuangyong.controller.controller :as ctl]
             )
 
   )
 
-(defn a-cell-value [name]
-  {:value name
-   :alignment :center
+(defn a-cell-value [name]                                         ;:format :alignment :border :font :background-color :foreground-color :pattern
+  {:value name                                                    ;值
+   :alignment :center                                             ;对齐方式
    ;   :comment {:text "Lorem Ipsum" :width 4 :height 2}          ;提示框
-   :border [:none :thin :dashed :thin]
-   :foreground-color :grey-25-percent :pattern :solid-foreground
-   :font {:color :red :underline :single :italic true
+   :border [:none :thin :dashed :thin]                            ;边框
+   :foreground-color :sky-blue :pattern :solid-foreground         ;前景色
+   :font {:color :black :underline :none :italic false             ;字体样式
           :size 12 :font "Arial"}
-   :rows 2
+   :rows 2                                                        ;
    }
   )
 
 
-(defn xls-report-clj [out]
+(defn xls-report-clj [out getdatas]
+  (println (apply conj [[(a-cell-value "乡镇街道") (a-cell-value "姓名")
+                   (a-cell-value "身份证") (a-cell-value "家庭住址")
+                   ]] (map #(vec (vals %))  getdatas)  ) )
   (-> (myexcel/build-workbook (myexcel/workbook-hssf) {"资金发放表"
-                                                       [
-                                                        ;                                                         (vec '("乡镇街道" "姓名" "身份证" "家庭住址"))
-                                                        ;                                                        (vec (range 10))
-                                                        ;                                                        (vec (range 10 100 5))
+                                                       #_[
+                                                                                                                ; (vec '("乡镇街道" "姓名" "身份证" "家庭住址"))
+                                                                                                                ;(vec (range 10))
+                                                                                                                ;(vec (range 10 100 5))
                                                         [(a-cell-value "乡镇街道") (a-cell-value "姓名")
-                                                         (a-cell-value "身份证") (a-cell-value "家庭住址")
-                                                         ]
-                                                        [
-                                                         "武原街道" "朱介民" "330424192707120013" "百可社区"
-                                                         ]
+                                                        (a-cell-value "身份证") (a-cell-value "家庭住址")
                                                         ]
+                                                        [
+                                                        "武原街道" "朱介民" "330424192707120013" "百可社区"
+                                                        ]
+
+                                                        ]
+                                                       (apply conj [[(a-cell-value "乡镇街道") (a-cell-value "姓名")
+                                                                     (a-cell-value "身份证") (a-cell-value "家庭住址")
+                                                                     ]] (map #(vec (vals %))  getdatas)  )
                                                        }
                               )
       (myexcel/save out)))
@@ -73,8 +81,11 @@
   "双拥数据导出"
   [request]
   (try
-    (let [out (new java.io.ByteArrayOutputStream)]
-      (xls-report-clj out)
+    (let [out       (new java.io.ByteArrayOutputStream)
+          params    (:params request)
+          getdatas  (ctl/get-soilder-excel params)]
+      ;(println "DDDDDDDDDDDDDDDD" getdatas)
+      (xls-report-clj out getdatas)
       (write-response (.toByteArray out) "xls")
       )
 

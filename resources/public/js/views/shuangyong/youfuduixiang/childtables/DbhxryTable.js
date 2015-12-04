@@ -125,7 +125,7 @@ define(function(){
         local.find('form').form('load',record);//主表数据填充
         var imgurl;
         record.photo == null ? imgurl = 'images/noperson.gif' : imgurl = record.photo;
-        var imghtm = '<img style="width:150px;height:120px;" src="'+imgurl+'" />';//图片填充
+        var imghtm = '<img style="width:150px;height:120px;" src="../photofile/'+imgurl+'" />';//图片填充
         local.find('[opt=personimg]').html(imghtm);
 
         var districtnameval = cj.getDivisionTotalname(record.districtid);

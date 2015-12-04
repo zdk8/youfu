@@ -13,6 +13,10 @@
     [clojure.string :as str]
     ))
 
+(def file-path (str "D:/projectfile/shuangyong"))
+;(str schema/datapath "resources/public/upload/")
+; (str "E:/projectfile/shuangyong")
+
 (defn approve-reportdata [params sc_id]
   (let [bstablepk sc_id
         bstablename "t_soldiercommon"
@@ -26,12 +30,13 @@
         bstablepkname "sc_id"]
     {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
 
+
 (defn upload-file [file]
-  (let [uploadpath (str schema/datapath "resources/public/upload/")      ;获取当前目录
+  (let [uploadpath file-path      ;获取当前目录
         timenow (c/to-long  (l/local-now))              ;当前时间数字
         filename (:filename file)
         pathname (str  timenow filename)
-        photopath  (if (> (count filename) 0) (str "upload/" pathname) )
+        photopath  (if (> (count filename) 0) (str "shuangyong/" pathname) )
         ]
     (if (> (count filename) 0) (common/uploadfile file  uploadpath pathname))
     photopath))
@@ -135,13 +140,18 @@
     conds))
 
 
-(defn get-soilder-list [request]
+(defn get-soilder-list
+  "查询军人信息列表"
+  [request]
   (let [params      (:params request)
         rows        (:rows params)
         page        (:page params)
         conds       (soilderconds params)
         getresults  (common/fenye rows page "t_soldiercommon" "*" conds " order by sc_id desc ")]
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
+
+(defn get-soilder-excel [params]
+  (common/dateymd-bf-list (db/get-results-bysql "select t.identityid,t.name,t.sex,t.birthday from t_soldiercommon t where t.persontype = '230' order by sc_id desc") "birthday"))
 
 
  (defn delete-soilder [request]
