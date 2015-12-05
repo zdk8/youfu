@@ -184,7 +184,9 @@ define(function(){
       local.find('[opt=importexcel]').click(function(){
         local.find('[opt=importfile]').form('submit',{
             url:"hyshy/soilderimportexcel",
-            onSubmit:function(){
+
+            onSubmit:function(params){
+                params.sctype = '100';
             },
             success: function (data) {
             }

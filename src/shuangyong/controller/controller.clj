@@ -151,7 +151,13 @@
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 
 (defn get-soilder-excel [params]
-  (common/dateymd-bf-list (db/get-results-bysql "select t.identityid,t.name,t.sex,t.birthday from t_soldiercommon t where t.persontype = '230' order by sc_id desc") "birthday"))
+  (let [conds (soilderconds params)]
+    (common/dateymd-bf-list
+      (db/get-results-bysql (str "select t.*,s.aaa103 as sex1,h.aaa103 as hktype1,d.totalname from (select * from t_soldiercommon where 1=1 " conds " order by sc_id desc) t
+    left join (select * from xt_combodt where aaa100 = 'sex') s on t.sex = s.aaa102
+    left join (select * from xt_combodt where aaa100 = 'hktype') h on t.hktype = h.aaa102
+    left join division d on d.dvcode = t.districtid") ) "retiredate" "joindate") )
+  )
 
 
  (defn delete-soilder [request]
@@ -282,8 +288,9 @@
     )
   )
 
-(defn import-data-of-excel [updata]
-  )
+(defn import-data-of-excel [updata sctype]
+  (db/import-data-of-excel updata sctype)
+  (str "success"))
 
 (defn test-get-tablecols [tablename]
   (let[tcsql (str "select column_name from user_tab_columns where table_name = '" (.toUpperCase tablename) "'")

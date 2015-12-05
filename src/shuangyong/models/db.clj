@@ -1,6 +1,9 @@
 (ns shuangyong.models.db
   (:use korma.core
         [korma.db :only [defdb with-db transaction]])
+  (:import (java.sql Timestamp)
+           (java.text SimpleDateFormat)
+           (java.text DateFormat))
   (:require [shuangyong.models.schema :as schema]))
 
 (defdb dboracle schema/db-oracle)
@@ -78,3 +81,34 @@
     (updatedata-by-tablename "approve" {:status "0"} {:bstablepk sc_id})                            ;更改审核表状态
     (adddata-by-tablename "approve" approvedata)                                                    ;新增审核信息
     (updatedata-by-tablename "t_soldiercommon" sdata {:sc_id sc_id})))                              ;更改人员表数据信息
+
+
+(defn  time-before-insert [results timekey]    "before insert"
+  (let [sdf (new SimpleDateFormat "yyyy-MM-dd")]
+    ;(println  results  "   TMTMTMTMTTMTTTTMTTTTT  "  timekey)
+    (if (or  (= (timekey  results) "") (nil? (timekey  results)))
+      (dissoc results timekey)
+      (conj results {timekey  (new Timestamp (.getTime (.parse sdf (timekey results))))}{})
+      )))
+
+(defn insert-soldierdata [soldierdata sctype]
+  (let [sex (:sex soldierdata)
+        hktype (:hktype soldierdata)
+        persontype (if (> (count sctype) 0) sctype "100")
+        sexdata (condp = sex
+                  "男" "0"
+                  "女" "1"
+                  nil)
+        hktypedata (condp = hktype
+                     "城镇" "0"
+                     "农村" "1"
+                     nil)
+        insert-data (conj (time-before-insert (time-before-insert (dissoc soldierdata :xhid) :joindate) :retiredate) {:sex sexdata :hktype hktypedata :persontype persontype :ishandle "3"})   ]
+    (insert "t_soldiercommon"
+            (values insert-data))
+    ))
+
+
+(defn import-data-of-excel [updata sctype]
+  (transaction
+    (dorun (map #(insert-soldierdata % sctype) updata ))))
