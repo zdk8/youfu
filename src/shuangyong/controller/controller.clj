@@ -119,6 +119,8 @@
         birthday1       (:birthday1  params)
         birthday2       (:birthday2  params)
         household       (:household params)
+        train           (:train params)
+        employment      (:employment params)
         stype           (:stype params)
         persontype      (:p_type params)
         namecond        (if (> (count name) 0) (common/likecond "name" name))
@@ -134,9 +136,11 @@
         birthday1cond   (if (> (count birthday1) 0) (str " and birthday > to_date('"birthday1"','yyyy-mm-dd') "))
         birthday2cond   (if (> (count birthday1) 0) (str " and birthday < to_date('"birthday2"','yyyy-mm-dd') "))
         housecond       (if (> (count household)0) (str (common/likecond "household" household)))
+        traincond       (if (> (count train) 0) (str " and train = " train))
+        employcond      (if (> (count employment) 0) (str " and employment = " employment))
         typecond        (if (= stype "2") (str " and persontype like '2%' ") (str " and persontype like '1%' "))
         persontypecond  (if (> (count persontype) 0) (str " and persontype = " persontype))
-        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond)]
+        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond)]
     conds))
 
 

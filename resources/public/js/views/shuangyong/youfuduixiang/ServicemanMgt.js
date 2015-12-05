@@ -195,6 +195,12 @@ define(function(){
 
       });
 
+        /*导出excel模板*/
+        local.find('[opt=excelmuban]').click(function(){
+            var downloadurl = 'party/filedown?filename='+encodeURI("/resources/public/upload/soldier.xls")+"&convert=1";
+            window.location.href=downloadurl;
+        });
+
               /*导出*/
       local.find('.exportbtn').click(function(){
         window.location.href="hyshy/soilderexportexcel?"+$.param({

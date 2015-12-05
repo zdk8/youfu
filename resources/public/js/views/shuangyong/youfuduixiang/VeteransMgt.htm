@@ -1,8 +1,8 @@
 <!--现役军人-->
 <div opt="content" class="easyui-panel" data-options="fit:true" style="background-color: #ececec;display: none;">
     <div class="easyui-layout" data-options="fit:true,border:false">
-        <div data-options="region:'north',border:false" style="height:220px;width: 737px;background-color: #ececec;">
-            <div class="box-shadow" style="width: 1000px;height: 200px;background-color:white;">
+        <div data-options="region:'north',border:false" style="height:230px;width: 737px;background-color: #ececec;">
+            <div class="box-shadow" style="width: 1000px;height: 210px;background-color:white;">
                 <table width="100%" cellpadding="5" class="table_form2">
                     <tr>
                         <td class="formtdtext2" style="width: 130px;">行政区划<label></label></td>
@@ -104,10 +104,10 @@
 
                     <tr>
                       <td class="formtdtext2">模糊地址<label></label></td>
-                      <td colspan="2">
+                      <td colspan="1">
                         <input opt="household" style="width:300px">
                       </td>
-                      <td colspan="3">
+                      <td colspan="4">
                         <div class="file-box">
                           <form opt="importfile" method="post" enctype="multipart/form-data">
                             <!--
@@ -118,8 +118,10 @@
                               <!--<input class="input-file" type="file" />-->
                             <!--</div>-->
                               <input name="file" type="file" />
+                              <div opt="excelmuban" style="" class="com_btns">模板</div>
                               <div class="com_btns exportbtn" align="center" style="">导出</div>
-                            <div opt="importexcel" style="" class="com_btns">导入</div>
+                              <div opt="importexcel" style="" class="com_btns">导入</div>
+
 
 
                           </form>

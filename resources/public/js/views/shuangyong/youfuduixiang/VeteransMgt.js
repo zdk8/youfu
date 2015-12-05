@@ -146,6 +146,8 @@ define(function(){
                 birthday1:local.find('[opt=birthday1]').datebox('getValue'),
                 birthday2:local.find('[opt=birthday2]').datebox('getValue'),
                 household:local.find('[opt=household]').val(),
+                train:local.find('[opt=train]').combobox('getValue'),
+                employment:local.find('[opt=employment]').combobox('getValue'),
                 stype:'2'
             })
         })
@@ -163,6 +165,12 @@ define(function(){
           })
 
       });
+
+        /*导出excel模板*/
+        local.find('[opt=excelmuban]').click(function(){
+            var downloadurl = 'party/filedown?filename='+encodeURI("/resources/public/upload/soldier.xls")+"&convert=1";
+            window.location.href=downloadurl;
+        });
 
               /*导出*/
       local.find('.exportbtn').click(function(){
