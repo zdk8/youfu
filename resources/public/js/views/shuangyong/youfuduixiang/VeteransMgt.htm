@@ -1,8 +1,8 @@
 <!--现役军人-->
 <div opt="content" class="easyui-panel" data-options="fit:true" style="background-color: #ececec;display: none;">
     <div class="easyui-layout" data-options="fit:true,border:false">
-        <div data-options="region:'north',border:false" style="height:200px;width: 737px;background-color: #ececec;">
-            <div class="box-shadow" style="width: 1000px;height: 180px;background-color:white;">
+        <div data-options="region:'north',border:false" style="height:220px;width: 737px;background-color: #ececec;">
+            <div class="box-shadow" style="width: 1000px;height: 200px;background-color:white;">
                 <table width="100%" cellpadding="5" class="table_form2">
                     <tr>
                         <td class="formtdtext2" style="width: 130px;">行政区划<label></label></td>
@@ -81,6 +81,28 @@
                     </tr>
 
                     <tr>
+                        <td class="formtdtext2">培训情况<label></label></td>
+                        <td>
+                            <input class="easyui-combobox" opt="train" style="width: 130px;height: 27px;"
+                                   data-options="
+                                    loader:cj.getLoader('train'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+
+                        </td>
+                        <td class="formtdtext2">就业情况<label></label></td>
+                        <td>
+                            <input class="easyui-combobox" opt="employment" style="width: 130px;height: 27px;"
+                                   data-options="
+                                    loader:cj.getLoader('employment'),
+                                    editable:false,
+                                    valueField:'id',
+                                    textField:'text'">
+                        </td>
+                    </tr>
+
+                    <tr>
                       <td class="formtdtext2">模糊地址<label></label></td>
                       <td colspan="2">
                         <input opt="household" style="width:300px">
@@ -104,12 +126,11 @@
                         </div>
                       </td>
                       <td colspan="2" align="right">
-
-
                         <div class="com_btns addbtn" align="center">新增</div>
                         <div class="com_btns querybtn" align="center">查询</div>
                       </td>
                     </tr>
+
 
                 </table>
             </div>
