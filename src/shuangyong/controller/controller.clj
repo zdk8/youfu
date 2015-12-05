@@ -191,6 +191,8 @@
                    "xzqh"  (districtsql conds)
                    "xb" (comboasql "sex" "sex" conds)
                    "lb" (comboasql "eachtype" "eachtype" conds)
+                   "px" (comboasql "train" "train" conds)
+                   "jy" (comboasql "employment" "employment" conds)
                    (str "select 'csh' as ptype,'总数' as statictype, count(*) as sum from t_soldiercommon where " conds " and ishandle = '3'"))]
     (println "SSSSSSSSSS" analysql)
     (resp/json (db/get-results-bysql analysql))))
