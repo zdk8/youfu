@@ -18,6 +18,8 @@
 (def selectcols {
                  ;;双拥人员信息表
                  :t_soldiercommon [:districtid :identityid :name :sex :birthday :nation :marriage :joindate :retiredate :hktype :comments :isreceive :awardlevel :idaddress :phone :household :caretype :insured :pension :persontype :eachtype :armyname :specialty :retirenumber :disdegree :disaproperty :disgroup :workunit :disituation :laborability:lifeability :employment :grantstatus :stopmonth :stopdate :bankaccount :holder:deadrelation :armycode :awardyear :lifestatus :healthstatus :certificateid :community :opiniondate :communityopinion :streeter :reviewdate :streetreview :county :auditdate :countyaudit :preparer :filenumber :enterdate :ishandle :deadcertificate :honor :familyname :familyphone :familyaddress :familyunit :armyphone :train :trainarea :medicalinsurance :position :party :culture :troop :fname :fidentityid :mname :midentityid :yearmoney]
+                 ;;需要转变字符的字段
+                 :encodecols [:name :comments :idaddress :phone :household :insured :pension :armyname :specialty :retirenumber :workunit :disituation :stopdate :bankaccount :holder :armycode :certificateid :community :communityopinion :streeter :streetreview :county :countyaudit :preparer :filenumber :districtid :photo :deadcertificate :honor :familyname :familyphone :familyaddress :familyunit :armyphone :trainarea :position :party :culture :troop :fname :fidentityid :mname :midentityid]
                  ;;审核表
                  :approve [:bstablepk :bstablename :status :aulevel :auflag :bstime :auuser :audesc :dvcode :appoperators :messagebrief :bstablepkname]
                  })
