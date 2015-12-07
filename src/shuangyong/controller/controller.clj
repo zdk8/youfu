@@ -27,10 +27,10 @@
         status "1"
         aulevel "1"
         auflag "数据提交"
-        auuser (:community params)
-        audesc (:communityopinion params)
-        appoperators (:community params)
-        messagebrief (str "姓名：" (:name params) ",身份证："(:identityid params) )
+        auuser (touchfile-with-encode-utf8 (:community params))
+        audesc (touchfile-with-encode-utf8 (:communityopinion params))
+        appoperators (touchfile-with-encode-utf8 (:community params))
+        messagebrief (str "姓名：" (touchfile-with-encode-utf8 (:name params))  ",身份证：" (touchfile-with-encode-utf8 (:identityid params))  )
         bstablepkname "sc_id"]
     {:bstablepk bstablepk :bstablename bstablename :status status :aulevel aulevel :auflag auflag :auuser auuser :audesc audesc :appoperators appoperators :messagebrief messagebrief :bstablepkname bstablepkname}))
 
@@ -74,13 +74,14 @@
                                              photo)
         name (:name params)
         comments (:comments params)]
-    (println "SSSSSSSSSSS"  encodedata)
+    ;(println "SSSSSSSSSSS"  encodedata)
     (db/updatedata-by-tablename "t_soldiercommon" (conj sdata {:photo photopath } (formatvals encodedata))  {:sc_id sc_id})
     (str "true")))
 
 (defn report-soilder [request]
   (let [params (:params request)
         sc_id (:sc_id params)
+        encodedata (select-keys params (:encodecols common/selectcols))
         approvedata (approve-reportdata params sc_id)
         photo (:photo params)
         file (:file params)
@@ -89,7 +90,7 @@
                                                                          (upload-file file))                                                 ;再更新新头像
                                                                      photo)
                                           (upload-file file))
-        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "1" :photo photopath})
+        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "1" :photo photopath} (formatvals encodedata))
         ]
     (if (> (count sc_id) 0) (db/report-soilder approvedata sc_id (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
                              (db/report-soilder approvedata (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")))
@@ -103,15 +104,17 @@
         ishandle        (:ishandle params)
         issuccess       (:issuccess params)
         sc_id           (:sc_id params)
-        sdata           (common/dateformat-bf-insert (select-keys params [:streeter :streetreview :reviewdate :county :countyaudit :auditdate]) "reviewdate" "auditdate")                                    ;(common/dateformat-bf-insert (select-keys params (:t_soldiercommon common/selectcols)) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")
-        streeter        (:streeter params)
-        streetreview    (:streetreview params)
-        county          (:county params)
-        countyaudit     (:countyaudit params)
-        name            (:name params)
-        identityid      (:identityid params)
+        streeter        (touchfile-with-encode-utf8 (:streeter params))
+        streetreview    (touchfile-with-encode-utf8 (:streetreview params))
+        county          (touchfile-with-encode-utf8 (:county params))
+        countyaudit     (touchfile-with-encode-utf8 (:countyaudit params))
+        name            (touchfile-with-encode-utf8 (:name params))
+        identityid      (touchfile-with-encode-utf8 (:identityid params))
+        sdata           (conj (common/dateformat-bf-insert  (select-keys params [:reviewdate :auditdate]) "reviewdate" "auditdate") {:streeter streeter :streetreview streetreview :county county :countyaudit countyaudit})
         approvedata {:bstablepk sc_id :bstablename "t_soldiercommon" :bstablepkname "sc_id"  :messagebrief (str "姓名：" name ",身份证："identityid )}
         ]
+    ;(println "PPPPPPPPPPPPPPPPPPPPP" params)
+    ;(println "SSSSSSSSSSSSSSSSSSSSSSS"  approvedata)
     (if (= issuccess "1") (if (> (count ishandle) 0) (if (= ishandle "1") (db/audit-soilder sc_id (conj approvedata {:aulevel "2" :status "1" :auflag "街道审核通过" :auuser  streeter :audesc streetreview :appoperators streeter} ) (conj sdata {:ishandle "2"}) )
                                                                            (db/audit-soilder sc_id (conj approvedata {:aulevel "3" :status "1" :auflag "民政局审批通过" :auuser  county :audesc countyaudit :appoperators county} )(conj sdata {:ishandle "3"})))
                                                      (resp/json {:success "false"}))
@@ -214,7 +217,7 @@
                    "px" (comboasql "train" "train" conds)
                    "jy" (comboasql "employment" "employment" conds)
                    (str "select 'csh' as ptype,'总数' as statictype, count(*) as sum from t_soldiercommon where " conds " and ishandle = '3'"))]
-    (println "SSSSSSSSSS" analysql)
+    ;(println "SSSSSSSSSS" analysql)
     (resp/json (db/get-results-bysql analysql))))
 
 (defn retire-soilder
@@ -319,7 +322,7 @@
        cols (db/get-results-bysql tcsql)
        ;colskey (flatten (map #(keys %)cols))
        colskey (map #(keyword (first (vals % )) )cols) ]
-    (println colskey)
+    ;(println colskey)
     (resp/json {:success colskey})))
 
 (defn test-dfs []
