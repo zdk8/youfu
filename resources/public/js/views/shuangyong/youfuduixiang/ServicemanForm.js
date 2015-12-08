@@ -234,6 +234,7 @@ define(function(){
                     params.fidentityid = encodeURI(local.find('[name=fidentityid]').val());
                     params.mname = encodeURI(local.find('[name=mname]').val());
                     params.midentityid = encodeURI(local.find('[name=midentityid]').val());
+                    params.photo = encodeURI(local.find('[name=photo]').val());
                     if (!isValid) {
                         layer.closeAll('loading');
                     }

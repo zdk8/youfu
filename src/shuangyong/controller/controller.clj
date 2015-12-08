@@ -66,7 +66,7 @@
         sdata (common/dateformat-bf-insert (select-keys params (:t_soldiercommon common/selectcols)) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")
         encodedata (select-keys params (:encodecols common/selectcols))
         sc_id (:sc_id params)
-        photo (:photo params)
+        photo (touchfile-with-encode-utf8 (:photo params))
         file (:file params)
         filename (:filename file)
         photopath (if (> (count filename) 0) (do (common/delfile (str schema/datapath photo))                       ;如果头像图片更新，先删除旧头像
@@ -74,7 +74,7 @@
                                              photo)
         name (:name params)
         comments (:comments params)]
-    ;(println "SSSSSSSSSSS"  encodedata)
+    ;(println "SSSSSSSSSSS"  photopath)
     (db/updatedata-by-tablename "t_soldiercommon" (conj sdata {:photo photopath } (formatvals encodedata))  {:sc_id sc_id})
     (str "true")))
 
