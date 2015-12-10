@@ -114,13 +114,17 @@ define(function(){
         }).css({'border':'none'});
         var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>&nbsp;'+
             '<li><input type="button" value="上报" class="btns" opt="report"></li>';
+        if(option.queryParams.type == 'report'){
+            //local.find('[opt=update]').hide();
+            li =  '<li><input type="button" value="上报" class="btns" opt="report"></li>';
+        }else if (option.queryParams.type == 'chakan'){
+            li =  '';
+        }
         addToolBar(local,option,li);
         initControls(local);
         cj.shieldingSH(local);
         cj.shieldingSP(local);
-        if(option.queryParams.type == 'report'){
-            local.find('[opt=update]').hide();
-        }
+
         var record = option.queryParams.record; //主表信息
         local.find('form').form('load',record);//主表数据填充
         var imgurl;

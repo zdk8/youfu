@@ -28,6 +28,7 @@
   (POST "/hyshy/logoutsoilder" request (ctl/logout-soilder request))                  ;;注销双拥人员信息
   (POST "/hyshy/hyshyanalysis" request (ctl/hyshy-analysis request))                  ;;双拥数据统计
   (POST "/hyshy/retiresoilder" request (ctl/retire-soilder request))                   ;;退伍
+  (POST "/hyshy/getofficenumb" request (ctl/get-office-numb request))                  ;;
 
 
   ;;附件管理

@@ -6,6 +6,57 @@ define(function(){
         var refreshGrid=function() {
             datagrid.datagrid('reload');
         };
+
+        /*退役军人修改*/
+        var updateFunc = function (record,refreshGrid,type) {
+            var title ='【'+record.name+ '】退役军人';
+            var tabname = '';
+            if(record.persontype == '211'){ //伤残
+                tabname = 'ScryTable';
+                title+='[伤残人员]';
+            }else if(record.persontype == '212'){ //三属
+                tabname = 'SsryTable';
+                title+='[三属人员]';
+            }else if(record.persontype == '213'){ //两参
+                tabname = 'LcryTable';
+                title+='[两参人员]';
+            }else if(record.persontype == '214'){ //在乡
+                tabname = 'ZxlfryTable';
+                title+='[在乡老复人员]';
+            }else if(record.persontype == '215'){ //带病
+                tabname = 'DbhxryTable';
+                title+='[带病回乡人员]';
+            }else if(record.persontype == '230'){ //一般退役
+                tabname = 'YbtyryTable';
+                title+='[一般退役军人]';
+            }
+            title+='信息';
+            if(tabname.length > 0){
+                layer.load(2);
+                require(['text!views/shuangyong/youfuduixiang/childtables/'+tabname+'.htm','views/shuangyong/youfuduixiang/childtables/'+tabname],
+                    function(htmfile,jsfile){
+                        layer.open({
+                            title:title,
+                            type: 1,
+                            area: ['910px', '500px'], //宽高
+                            content: htmfile,
+                            success: function(layero, index){
+                                jsfile.render(layero,{
+                                    index:index,
+                                    queryParams:{
+                                        actiontype:'update',
+                                        type:type,
+                                        refresh:refreshGrid,
+                                        record:record
+                                    }
+                                });
+                            }
+                        });
+                    }
+                )
+            }
+        }
+
         /*加载退役军人*/
         datagrid.datagrid({
             url:"hyshy/getsoilderlist",
@@ -14,7 +65,7 @@ define(function(){
                 stype:'2'
             },
             onLoadSuccess:function(data){
-                //var view = local.find('[action=view]');           //详细信息
+                var view = local.find('[action=view]');           //详细信息
                 var reportbtns = local.find('[action=report]').hide();           //上报
                 var updatebtns = local.find('[action=update]').hide();           //修改
                 var delbtns = local.find('[action=del]').hide();           //删除
@@ -23,7 +74,7 @@ define(function(){
                 var logoutbtns = local.find('[action=logout]').hide();           //注销
                 //var imgviewbtns = local.find('[action=imgview]');           //预览
                 var rows=data.rows;
-                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns];
+                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view];
                 for(var i=0;i<rows.length;i++){
                     if(rows[i].ishandle == '0' || rows[i].ishandle == '-1'){    //保存
                         $(btns_arr[0][i]).show();
@@ -114,6 +165,8 @@ define(function(){
                                     }else{
                                         layer.alert('不是图片类型', {icon: 6});
                                     }
+                                }else if(action == "view"){
+                                    updateFunc(record,refreshGrid,'chakan');
                                 }
                             });
                         })(i)
@@ -215,57 +268,35 @@ define(function(){
                 }
             )
         });
+
+        if (option =="ty1") {
+            local.find("[opt=handle_type]").combobox('setValue', '0');
+            datagrid.datagrid('load',{
+                ishandle:0,
+                stype:'1'
+            })
+        }else if(option=="ty2"){
+            local.find("[opt=handle_type]").combobox('setValue', '1');
+            datagrid.datagrid('load',{
+                ishandle:1,
+                stype:'1'
+            })
+        } else if(option=="ty3"){
+            local.find("[opt=handle_type]").combobox('setValue', '2');
+            datagrid.datagrid('load',{
+                ishandle:2,
+                stype:'1'
+            })
+        }else if(option=="ty4"){
+            local.find("[opt=die_type]").combobox('setValue', '1');
+            datagrid.datagrid('load',{
+                isdead:'1',
+                stype:'1'
+            })
+        }
     }
 
-    /*退役军人修改*/
-    var updateFunc = function (record,refreshGrid,type) {
-        var title ='【'+record.name+ '】退役军人';
-        var tabname = '';
-        if(record.persontype == '211'){ //伤残
-            tabname = 'ScryTable';
-            title+='[伤残人员]';
-        }else if(record.persontype == '212'){ //三属
-            tabname = 'SsryTable';
-            title+='[三属人员]';
-        }else if(record.persontype == '213'){ //两参
-            tabname = 'LcryTable';
-            title+='[两参人员]';
-        }else if(record.persontype == '214'){ //在乡
-            tabname = 'ZxlfryTable';
-            title+='[在乡老复人员]';
-        }else if(record.persontype == '215'){ //带病
-            tabname = 'DbhxryTable';
-            title+='[带病回乡人员]';
-        }else if(record.persontype == '230'){ //一般退役
-            tabname = 'YbtyryTable';
-            title+='[一般退役军人]';
-        }
-        title+='信息';
-        if(tabname.length > 0){
-            layer.load(2);
-            require(['text!views/shuangyong/youfuduixiang/childtables/'+tabname+'.htm','views/shuangyong/youfuduixiang/childtables/'+tabname],
-                function(htmfile,jsfile){
-                    layer.open({
-                        title:title,
-                        type: 1,
-                        area: ['910px', '500px'], //宽高
-                        content: htmfile,
-                        success: function(layero, index){
-                            jsfile.render(layero,{
-                                index:index,
-                                queryParams:{
-                                    actiontype:'update',
-                                    type:type,
-                                    refresh:refreshGrid,
-                                    record:record
-                                }
-                            });
-                        }
-                    });
-                }
-            )
-        }
-    }
+
     /*退役军人审核*/
     var auditFunc = function (record,refreshGrid) {
         var title ='【'+record.name+ '】退役军人';
@@ -363,6 +394,7 @@ define(function(){
         }
 
     }
+
 
 
     return {

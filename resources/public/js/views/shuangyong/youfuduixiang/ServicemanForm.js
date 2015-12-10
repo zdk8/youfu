@@ -151,7 +151,10 @@ define(function(){
         var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>&nbsp;'+
             '<li><input type="button" value="上报" class="btns" opt="report"></li>';
         if(option.queryParams.type == 'report'){
-            local.find('[opt=update]').hide();
+            //local.find('[opt=update]').hide();
+            li =  '<li><input type="button" value="上报" class="btns" opt="report"></li>';
+        }else if (option.queryParams.type == 'chakan'){
+            li =  '';
         }
 
         /*if(option.queryParams.type == 'view'){
