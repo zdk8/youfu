@@ -498,9 +498,6 @@ define(function(){
     }
 
     var render=function(l,o){
-        console.log('ppp');
-        console.log(l);
-        console.log(o)
         layer.closeAll('loading');
         initFunc(l,o);//初始化
         if(o && o.queryParams) {

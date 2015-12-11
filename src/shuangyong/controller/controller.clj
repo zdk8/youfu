@@ -148,7 +148,7 @@
         eachtypecond    (if (> (count eachtype) 0) (str " and eachtype = " eachtype))
         ishandlecond    (if (> (count ishandle) 0) (str " and ishandle = '" ishandle "'" ) (str " and (ishandle != 'n' or ishandle is null )"))
         caretypecond    (if (> (count caretype) 0) (str " and caretype = " caretype))
-        isdeadcond      (if (> (count isdead) 0) (if (= isdead "1") (str " and identityid in (select identityid from NEWPENSION_SYSTEM.t_leavepeople )") (str " and identityid not in (select identityid from NEWPENSION_SYSTEM.t_leavepeople )")))
+        isdeadcond      (if (> (count isdead) 0) (if (= isdead "1") (str " and identityid in (select identityid from t_leavepeople )") (str " and identityid not in (select identityid from t_leavepeople )")))
         photocond       (if (> (count photo) 0) (if (not= photo "0") (if (= photo "1") (str " and photo is null " ) (str " and photo is not null " ))))
         joindatecond    (if (> (count joindate) 0) (str " and to_char(joindate,'yyyy') = '"joindate"' "))   ;to_char(birthday,'yyyy') = '2015'
         retiredatecond  (if (> (count retiredate) 0) (str " and to_char(retiredate,'yyyy') = '"retiredate"' "))
@@ -234,11 +234,11 @@
   (select count(*) as xybcsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '0') s1,
   (select count(*) as xyshsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '1') s2,
   (select count(*) as xyspsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '2') s3,
-  (select count(*) as xyqssum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '3' and t.identityid in (select identityid from NEWPENSION_SYSTEM.t_leavepeople )) s4,
+  (select count(*) as xyqssum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '3' and t.identityid in (select identityid from t_leavepeople )) s4,
   (select count(*) as tybcsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '0') s5,
   (select count(*) as tyshsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '1') s6,
   (select count(*) as tyspsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '2') s7,
-  (select count(*) as tyqssum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '3' and t.identityid in (select identityid from NEWPENSION_SYSTEM.t_leavepeople )) s8")))
+  (select count(*) as tyqssum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '3' and t.identityid in (select identityid from t_leavepeople )) s8")))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]

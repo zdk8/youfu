@@ -111,7 +111,7 @@ define(function(){
                                 });*/
                         });
                     }else{
-                        console.log(node.title + "没有父结点");
+                        //console.log(node.title + "没有父结点");
                         $.post("saveFunction",
                             {functionid:node.functionid,parent:$functiontree.tree('getRoot').parent},
                             function(result){

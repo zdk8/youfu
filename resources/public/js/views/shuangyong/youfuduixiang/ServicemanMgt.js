@@ -293,7 +293,7 @@ define(function(){
 
     /*现役军人修改*/
     var updateFunc = function (record,refreshGrid,type) {
-        console.log(type);
+        //console.log(type);
         layer.load(2);
         var title ='【'+record.name+ '】现役军人信息修改';
         require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],

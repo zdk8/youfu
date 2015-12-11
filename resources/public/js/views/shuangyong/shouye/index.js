@@ -5,7 +5,6 @@ define(function(){
             //console.log($(this).attr('class'));
             var classval =  $(this).attr('class');
             var sctypeval = classval.substr(0,2);
-            console.log(classval.substr(0,2)) ;
             if(sctypeval == "xy"){
                 require(['text!views/shuangyong/youfuduixiang/ServicemanMgt.htm','views/shuangyong/youfuduixiang/ServicemanMgt'], function (htm,js) {
                     var panel = $('[opt=contents]').panel({
