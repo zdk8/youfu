@@ -209,7 +209,7 @@ define(function(){
       local.find('[opt=importexcel]').click(function(){
         local.find('[opt=importfile]').form('submit',{
             url:"hyshy/soilderimportexcel",
-            onSubmit:function(){
+            onSubmit:function(params){
                 params.sctype = '230';
             },
             success: function (data) {
@@ -218,6 +218,7 @@ define(function(){
           })
 
       });
+
 
         /*导出excel模板*/
         local.find('[opt=excelmuban]').click(function(){
