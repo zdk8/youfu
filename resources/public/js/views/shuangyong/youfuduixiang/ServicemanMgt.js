@@ -1,16 +1,12 @@
 define(function(){
     function render(local,option){
-        cj.getdivision(local.find('[opt=districtid]'));
-
+        aa = local;
         var datagrid = local.find('.easyui-datagrid-noauto');
+
+        cj.getdivision(local.find('[opt=districtid]'));
         var refreshGrid=function() {
             datagrid.datagrid('reload');
         };
-
-
-
-
-
 
         /*加载现役军人*/
         datagrid.datagrid({
@@ -144,7 +140,27 @@ define(function(){
                                         layer.alert('不是图片类型', {icon: 6});
                                     }
                                 }else if(action == "view"){                   //预览
-
+                                    require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
+                                        function(htmfile,jsfile){
+                                            layer.open({
+                                                title:"现役军人查看",
+                                                type: 1,
+                                                area: ['910px', '500px'], //宽高
+                                                content: htmfile,
+                                                success: function(layero, index){
+                                                    jsfile.render(layero,{
+                                                        index:index,
+                                                        queryParams:{
+                                                            actiontype:'update',
+                                                            type:'chakan',
+                                                            refresh:refreshGrid,
+                                                            record:record
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    )
                                 }
                             });
                         })(i)
@@ -179,6 +195,32 @@ define(function(){
               stype:'1'
             })
         })
+
+        if (option =="xy1") {
+            local.find("[opt=handle_type]").combobox('setValue', '0');
+            datagrid.datagrid('load',{
+                ishandle:0,
+                stype:'1'
+            })
+        }else if(option=="xy2"){
+            local.find("[opt=handle_type]").combobox('setValue', '1');
+            datagrid.datagrid('load',{
+                ishandle:1,
+                stype:'1'
+            })
+        } else if(option=="xy3"){
+            local.find("[opt=handle_type]").combobox('setValue', '2');
+            datagrid.datagrid('load',{
+                ishandle:2,
+                stype:'1'
+            })
+        }else if(option=="xy4"){
+            local.find("[opt=die_type]").combobox('setValue', '1');
+            datagrid.datagrid('load',{
+                isdead:'1',
+                stype:'1'
+            })
+        }
 
             /*导入xls*/
       local.find('[opt=importexcel]').click(function(){
@@ -252,6 +294,7 @@ define(function(){
 
     /*现役军人修改*/
     var updateFunc = function (record,refreshGrid,type) {
+        //console.log(type);
         layer.load(2);
         var title ='【'+record.name+ '】现役军人信息修改';
         require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],

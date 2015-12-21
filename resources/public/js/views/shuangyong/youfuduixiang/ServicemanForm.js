@@ -151,7 +151,10 @@ define(function(){
         var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>&nbsp;'+
             '<li><input type="button" value="上报" class="btns" opt="report"></li>';
         if(option.queryParams.type == 'report'){
-            local.find('[opt=update]').hide();
+            //local.find('[opt=update]').hide();
+            li =  '<li><input type="button" value="上报" class="btns" opt="report"></li>';
+        }else if (option.queryParams.type == 'chakan'){
+            li =  '';
         }
 
         /*if(option.queryParams.type == 'view'){
@@ -234,6 +237,7 @@ define(function(){
                     params.fidentityid = encodeURI(local.find('[name=fidentityid]').val());
                     params.mname = encodeURI(local.find('[name=mname]').val());
                     params.midentityid = encodeURI(local.find('[name=midentityid]').val());
+                    params.photo = encodeURI(local.find('[name=photo]').val());
                     if (!isValid) {
                         layer.closeAll('loading');
                     }
@@ -494,9 +498,6 @@ define(function(){
     }
 
     var render=function(l,o){
-        console.log('ppp');
-        console.log(l);
-        console.log(o)
         layer.closeAll('loading');
         initFunc(l,o);//初始化
        /* if(o && o.queryParams) {

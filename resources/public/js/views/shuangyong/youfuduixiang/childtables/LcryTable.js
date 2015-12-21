@@ -81,11 +81,56 @@ define(function(){
                     layer.load();
                     var isValid = $(this).form('validate');
                     params.districtid = local.find("[opt=districtid]").combotree("getValue");
+                    params.name = encodeURI(local.find('[name=name]').val());
+                    params.identityid = encodeURI(local.find('[name=identityid]').val());
+                    params.comments = encodeURI(local.find('[name=comments]').val());
+                    params.idaddress = encodeURI(local.find('[name=idaddress]').val());
+                    params.phone = encodeURI(local.find('[name=phone]').val());
+                    params.household = encodeURI(local.find('[name=household]').val());
+                    params.insured = encodeURI(local.find('[name=insured]').val());
+                    params.pension = encodeURI(local.find('[name=pension]').val());
+                    params.armyname = encodeURI(local.find('[name=armyname]').val());
+                    params.specialty = encodeURI(local.find('[name=specialty]').val());
+                    params.retirenumber = encodeURI(local.find('[name=retirenumber]').val());
+                    params.workunit = encodeURI(local.find('[name=workunit]').val());
+                    params.disituation = encodeURI(local.find('[name=disituation]').val());
+                    params.stopdate = encodeURI(local.find('[name=stopdate]').val());
+                    params.bankaccount = encodeURI(local.find('[name=bankaccount]').val());
+                    params.holder = encodeURI(local.find('[name=holder]').val());
+                    params.armycode = encodeURI(local.find('[name=armycode]').val());
+                    params.certificateid = encodeURI(local.find('[name=certificateid]').val());
+                    params.community = encodeURI(local.find('[name=community]').val());
+                    params.communityopinion = encodeURI(local.find('[name=communityopinion]').val());
+                    params.streeter = encodeURI(local.find('[name=streeter]').val());
+                    params.streetreview = encodeURI(local.find('[name=streetreview]').val());
+                    params.county = encodeURI(local.find('[name=county]').val());
+                    params.countyaudit = encodeURI(local.find('[name=countyaudit]').val());
+                    params.preparer = encodeURI(local.find('[name=preparer]').val());
+                    params.filenumber = encodeURI(local.find('[name=filenumber]').val());
+                    params.districtid = encodeURI(local.find('[name=districtid]').val());
+                    params.photo = encodeURI(local.find('[name=photo]').val());
+                    params.deadcertificate = encodeURI(local.find('[name=deadcertificate]').val());
+                    params.honor = encodeURI(local.find('[name=honor]').val());
+                    params.familyname = encodeURI(local.find('[name=familyname]').val());
+                    params.familyphone = encodeURI(local.find('[name=familyphone]').val());
+                    params.familyaddress = encodeURI(local.find('[name=familyaddress]').val());
+                    params.familyunit = encodeURI(local.find('[name=familyunit]').val());
+                    params.armyphone = encodeURI(local.find('[name=armyphone]').val());
+                    params.trainarea = encodeURI(local.find('[name=trainarea]').val());
+                    params.position = encodeURI(local.find('[name=position]').val());
+                    params.party = encodeURI(local.find('[name=party]').val());
+                    params.culture = encodeURI(local.find('[name=culture]').val());
+                    params.troop = encodeURI(local.find('[name=troop]').val());
+                    params.fname = encodeURI(local.find('[name=fname]').val());
+                    params.fidentityid = encodeURI(local.find('[name=fidentityid]').val());
+                    params.mname = encodeURI(local.find('[name=mname]').val());
+                    params.midentityid = encodeURI(local.find('[name=midentityid]').val());
                     params.persontype = '213';
                     if (!isValid) {
                         layer.closeAll('loading');
                         $this.attr("disabled",false);//按钮启用
                     }
+                    params.districtid = local.find("[opt=districtid]").combotree("getValue");
                     return isValid;
                 },
                 success: function (data) {
@@ -114,13 +159,17 @@ define(function(){
         }).css({'border':'none'});
         var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>&nbsp;'+
             '<li><input type="button" value="上报" class="btns" opt="report"></li>';
+        if(option.queryParams.type == 'report'){
+            //local.find('[opt=update]').hide();
+            li =  '<li><input type="button" value="上报" class="btns" opt="report"></li>';
+        }else if (option.queryParams.type == 'chakan'){
+            li =  '';
+        }
         addToolBar(local,option,li);
         initControls(local);
         cj.shieldingSH(local);
         cj.shieldingSP(local);
-        if(option.queryParams.type == 'report'){
-            local.find('[opt=update]').hide();
-        }
+
         var record = option.queryParams.record; //主表信息
         local.find('form').form('load',record);//主表数据填充
         var imgurl;
@@ -138,6 +187,51 @@ define(function(){
                     layer.load();
                     var isValid = $(this).form('validate');
                     params.sc_id = record.sc_id;
+                    params.name = encodeURI(local.find('[name=name]').val());
+                    params.identityid = encodeURI(local.find('[name=identityid]').val());
+                    params.comments = encodeURI(local.find('[name=comments]').val());
+                    params.idaddress = encodeURI(local.find('[name=idaddress]').val());
+                    params.phone = encodeURI(local.find('[name=phone]').val());
+                    params.household = encodeURI(local.find('[name=household]').val());
+                    params.insured = encodeURI(local.find('[name=insured]').val());
+                    params.pension = encodeURI(local.find('[name=pension]').val());
+                    params.armyname = encodeURI(local.find('[name=armyname]').val());
+                    params.specialty = encodeURI(local.find('[name=specialty]').val());
+                    params.retirenumber = encodeURI(local.find('[name=retirenumber]').val());
+                    params.workunit = encodeURI(local.find('[name=workunit]').val());
+                    params.disituation = encodeURI(local.find('[name=disituation]').val());
+                    params.stopdate = encodeURI(local.find('[name=stopdate]').val());
+                    params.bankaccount = encodeURI(local.find('[name=bankaccount]').val());
+                    params.holder = encodeURI(local.find('[name=holder]').val());
+                    params.armycode = encodeURI(local.find('[name=armycode]').val());
+                    params.certificateid = encodeURI(local.find('[name=certificateid]').val());
+                    params.community = encodeURI(local.find('[name=community]').val());
+                    params.communityopinion = encodeURI(local.find('[name=communityopinion]').val());
+                    params.streeter = encodeURI(local.find('[name=streeter]').val());
+                    params.streetreview = encodeURI(local.find('[name=streetreview]').val());
+                    params.county = encodeURI(local.find('[name=county]').val());
+                    params.countyaudit = encodeURI(local.find('[name=countyaudit]').val());
+                    params.preparer = encodeURI(local.find('[name=preparer]').val());
+                    params.filenumber = encodeURI(local.find('[name=filenumber]').val());
+                    params.districtid = encodeURI(local.find('[name=districtid]').val());
+                    params.photo = encodeURI(local.find('[name=photo]').val());
+                    params.deadcertificate = encodeURI(local.find('[name=deadcertificate]').val());
+                    params.honor = encodeURI(local.find('[name=honor]').val());
+                    params.familyname = encodeURI(local.find('[name=familyname]').val());
+                    params.familyphone = encodeURI(local.find('[name=familyphone]').val());
+                    params.familyaddress = encodeURI(local.find('[name=familyaddress]').val());
+                    params.familyunit = encodeURI(local.find('[name=familyunit]').val());
+                    params.armyphone = encodeURI(local.find('[name=armyphone]').val());
+                    params.trainarea = encodeURI(local.find('[name=trainarea]').val());
+                    params.position = encodeURI(local.find('[name=position]').val());
+                    params.party = encodeURI(local.find('[name=party]').val());
+                    params.culture = encodeURI(local.find('[name=culture]').val());
+                    params.troop = encodeURI(local.find('[name=troop]').val());
+                    params.fname = encodeURI(local.find('[name=fname]').val());
+                    params.fidentityid = encodeURI(local.find('[name=fidentityid]').val());
+                    params.mname = encodeURI(local.find('[name=mname]').val());
+                    params.midentityid = encodeURI(local.find('[name=midentityid]').val());
+                    params.photo = encodeURI(local.find('[name=photo]').val());
                     if(!isNaN(local.find("[opt=districtid]").combotree("getValue"))){          //是否是数字
                         params.districtid = local.find("[opt=districtid]").combotree("getValue");
                     }else{
