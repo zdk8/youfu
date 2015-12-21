@@ -227,6 +227,7 @@ define(function(){
             layer.load(2);
             require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
                 function(htmfile,jsfile){
+                    console.log('ioioioioioi.....');
                     layer.open({
                         title:'添加现役军人',
                         type: 1,

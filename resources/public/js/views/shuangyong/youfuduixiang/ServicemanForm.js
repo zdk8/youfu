@@ -21,6 +21,7 @@ define(function(){
     };
     /*easyui控件初始化*/
     var initControls = function (local) {
+
         for(var i=0;i<arr_combobox.length;i++){
             local.find('[opt='+arr_combobox[i]+']').combobox();
         }
@@ -30,18 +31,17 @@ define(function(){
         for(var i=0;i<arr_validatebox.length;i++){
             local.find('[name='+arr_validatebox[i]+']').validatebox();
         }
-
     }
 
     /*界面初始化，公共方法*/
     var initFunc = function (local,option) {
         initControls(local);//控件初始化
-        cj.getdivision(local.find('[opt=districtid]'));
-        /*图片上传*/
+         cj.getdivision(local.find('[opt=districtid]'));
+        //图片上传
         local.find('[opt=personimg]').click(function(){
             local.find('[opt=inputVal]').click();
         })
-        /*附件选择动态事件*/
+       // 附件选择动态事件
         local.find('[opt=inputVal]').bind('change',function(){
             cj.imgView(this,local);
         });
@@ -499,7 +499,7 @@ define(function(){
         console.log(o)
         layer.closeAll('loading');
         initFunc(l,o);//初始化
-        if(o && o.queryParams) {
+       /* if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'update':
                     updateFunc(l, o);
@@ -516,7 +516,7 @@ define(function(){
                 default :
                     break;
             }
-        }
+        }*/
     }
     return {
         render:render
