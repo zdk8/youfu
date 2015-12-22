@@ -382,7 +382,7 @@ define(function(){
         local.find('[opt=back]').click(function () {
             auditClick(local,option,record,'0');
         })
-    }
+    };
 
     var approveClick = function (local,option,record,issuccess) {
         var streetreview = local.find('[name=countyaudit]').val();
@@ -500,7 +500,7 @@ define(function(){
     var render=function(l,o){
         layer.closeAll('loading');
         initFunc(l,o);//初始化
-       /* if(o && o.queryParams) {
+        /*if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'update':
                     updateFunc(l, o);
