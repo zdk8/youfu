@@ -142,6 +142,8 @@
         employment      (:employment params)
         stype           (:stype params)
         persontype      (:p_type params)
+        minage          (:minage params)
+        maxage          (:maxage params)
         namecond        (if (> (count name) 0) (common/likecond "name" name))
         identityidcond  (if (> (count identityid) 0) (common/likecond "identityid" identityid))
         districtcond    (if (> (count districtid) 0) (str " and districtid like '" districtid "%'"))
@@ -159,9 +161,15 @@
         employcond      (if (> (count employment) 0) (str " and employment = " employment))
         typecond        (if (= stype "2") (str " and persontype like '2%' ") (str " and persontype like '1%' "))
         persontypecond  (if (> (count persontype) 0) (str " and persontype = " persontype))
-        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond)]
+        minagecond      (if (> (count minage) 0) (str " and age > " minage))
+        maxagecond          (if (> (count maxage) 0) (str " and age < " maxage))
+        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond minagecond maxagecond)]
     conds))
 
+(def soilder-sql
+  "(select t.sixtydeal,t.sc_id,t.name,t.identityid,t.birthday,t.districtid,t.eachtype,t.ishandle,t.caretype,t.isdead,t.photo,t.joindate,t.retiredate,t.household,t.train,t.employment,t.persontype,
+trunc((to_char(sysdate,'yyyyMMdd')-to_char(case when length(t.identityid)=18 then substr(t.identityid,7,8) when  length(t.identityid)=15 then '19'||substr(t.identityid,7,6) end))/10000) as age
+from t_soldiercommon t)")
 
 (defn get-soilder-list
   "查询军人信息列表"
@@ -170,7 +178,7 @@
         rows        (:rows params)
         page        (:page params)
         conds       (soilderconds params)
-        getresults  (common/fenye rows page "t_soldiercommon" "*" conds " order by sc_id desc ")]
+        getresults  (common/fenye rows page soilder-sql "*" conds " order by sc_id desc ")]     ;"t_soldiercommon"
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 
 (defn get-soilder-excel [params]
@@ -239,6 +247,21 @@
   (select count(*) as tyshsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '1') s6,
   (select count(*) as tyspsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '2') s7,
   (select count(*) as tyqssum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '3' and t.identityid in (select identityid from t_leavepeople )) s8")))
+
+
+(defn dealsixty [request]
+  (let [params      (:params request)
+        sc_id       (:sc_id params)
+        sixtyopnion (:sixtyopnion params)
+        issuccess   (:issuccess params)
+        sixtydeal    (condp = issuccess
+                       "0" "1"
+                       "1" "2"
+                       "")
+        ]
+    (println "SSSSSSSSSS " sc_id)
+    (db/updatedata-by-tablename "t_soldiercommon" {:sixtyopnion sixtyopnion :sixtydeal sixtydeal} {:sc_id sc_id})
+    (str "true")))
 
 ;;附件管理
 (defn uploadfile [file pc_id filetype filenamemsg fileext]

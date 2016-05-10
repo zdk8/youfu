@@ -100,6 +100,10 @@
                                     valueField:'id',
                                     textField:'text'">
                         </td>
+                        <td class="formtdtext2">年龄<label></label></td>
+                        <td colspan="3">
+                            <input opt="minage" style="height: 29px;width: 100px;"> - <input opt="maxage" style="height: 29px;width: 100px;">
+                        </td>
                     </tr>
 
                     <tr>
@@ -161,6 +165,7 @@
                             formatter: function(value,row,index){
                                     return getGender[value]
                                 }">性别</th>
+                    <th data-options="field:'age',width:100,align:'center'">年龄</th>
                     <th data-options="field:'birthday',width:100,align:'center'">出生日期</th>
                     <th data-options="field:'identityid',width:170,align:'center'">身份证号</th>
                     <th data-options="field:'persontype',width:100,align:'center',

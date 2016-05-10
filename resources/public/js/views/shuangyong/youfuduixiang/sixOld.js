@@ -36,21 +36,20 @@ define(function(){
         });
     }
 
-    var isAgree= function (num) {
+    var isAgree= function (local,num,sc_id,option) {
         local.find('form').form('submit', {
             url: 'hyshy/saveolderthansixty',
             onSubmit: function (params) {
                 layer.load();
 
                 params.issuccess =num;
-                return isValid;
+                params.sc_id=sc_id;
             },
             success: function (data) {
                 layer.closeAll('loading');
-                $this.attr("disabled",false);//按钮启用
+                $(this).attr("disabled",false);//按钮启用
                 if (data == "true") {
                     cj.showSuccess('保存成功');
-                    option.queryParams.refresh();
                     layer.close(option.index);
                 } else {
                     cj.showFail('保存失败');
@@ -61,7 +60,6 @@ define(function(){
     
     /*新增数据时进入*/
     var oldFunc = function(local,option){
-        console.log('进来了。。')
         local.find('div[opt=panel]').panel({
             onResize: function (width, height) {
                 $(this).height($(this).height() - 50);
@@ -83,13 +81,15 @@ define(function(){
         cj.shieldingSP(local);
         /*保存*/
         
-        
+          var data=option.queryParams.record;
+        rrrrww=data;
+        var sc_id=data.sc_id
         
         local.find('[opt=agree]').click(function () {
-           isAgree(0)
+           isAgree(local,0,sc_id,option)
         });
         local.find('[opt=notagree]').click(function () {
-            isAgree(1)
+            isAgree(local,1,sc_id,option)
         });
 
     }

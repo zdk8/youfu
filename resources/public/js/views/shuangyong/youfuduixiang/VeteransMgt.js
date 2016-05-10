@@ -90,10 +90,10 @@ define(function(){
                         $(btns_arr[5][i]).show();
                     }
 
-                    $(btns_arr[7][i]).show().find('span').css('color','red');
-                   /* if(rows[i].age<=60){
 
-                    }*/
+                   if(rows[i].age>=60 && rows[i].persontype == "230" && rows[i].sixtydeal == null){        //60岁一般退役军人
+                       $(btns_arr[7][i]).show().find('span').css('color','red');
+                   }
 
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
@@ -228,6 +228,8 @@ define(function(){
                 household:local.find('[opt=household]').val(),
                 train:local.find('[opt=train]').combobox('getValue'),
                 employment:local.find('[opt=employment]').combobox('getValue'),
+                minage:local.find('[opt=minage]').val(),
+                maxage:local.find('[opt=maxage]').val(),
                 stype:'2'
             })
         })
