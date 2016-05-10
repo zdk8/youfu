@@ -55,7 +55,7 @@ define(function(){
                     }
                 )
             }
-        }
+        };
 
         /*加载退役军人*/
         datagrid.datagrid({
@@ -64,6 +64,7 @@ define(function(){
             queryParams:{
                 stype:'2'
             },
+
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
                 var reportbtns = local.find('[action=report]').hide();           //上报
@@ -72,9 +73,10 @@ define(function(){
                 var auditbtns = local.find('[action=audit]').hide();           //审核
                 var approvebtns = local.find('[action=approve]').hide();           //审批
                 var logoutbtns = local.find('[action=logout]').hide();           //注销
+                var oldtns = local.find('[action=old]').hide();
                 //var imgviewbtns = local.find('[action=imgview]');           //预览
                 var rows=data.rows;
-                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view];
+                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view,oldtns];
                 for(var i=0;i<rows.length;i++){
                     if(rows[i].ishandle == '0' || rows[i].ishandle == '-1'){    //保存
                         $(btns_arr[0][i]).show();
@@ -87,9 +89,17 @@ define(function(){
                     }else if(rows[i].ishandle == '3'){
                         $(btns_arr[5][i]).show();
                     }
+
+                    $(btns_arr[7][i]).show().find('span').css('color','red');
+                   /* if(rows[i].age<=60){
+
+                    }*/
+
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
                             var record=rows[index];
+
+
                             $(btns_arr[j][i]).click(function(){
                                 var action = $(this).attr("action");
                                 if(action == "report"){                                       //详细信息
@@ -167,15 +177,32 @@ define(function(){
                                     }
                                 }else if(action == "view"){
                                     updateFunc(record,refreshGrid,'chakan');
+                                }else if(action=='old'){
+                                    var title='60(或以上)人员确认'
+                                    layer.load(2);
+                                    require(['text!views/shuangyong/youfuduixiang/sixOld.htm','views/shuangyong/youfuduixiang/sixOld'],
+                                        function(htmfile,jsfile){
+                                            layer.open({
+                                                title:title,
+                                                type: 1,
+                                                area: ['910px', '180px'], //宽高
+                                                content: htmfile,
+                                                success: function(layero, index){
+                                                    jsfile.render(layero,{
+                                                        index:index,
+                                                        queryParams:{
+                                                            actiontype:'old',
+                                                            record:record
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    )
                                 }
                             });
                         })(i)
                     }
-                }
-            },
-            rowStyler: function(index,row){
-                if (row.ishandle == '0'){
-                    return 'color:red;';
                 }
             }
         })

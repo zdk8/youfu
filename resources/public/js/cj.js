@@ -85,6 +85,50 @@ var cj=(function(){
             });
         }
     }
+
+   var getAgeByIdentityid=function(){
+       return function(index,row){
+           var val=row.identityid;
+           var birthdayValue;
+           var age;
+           if (15 == val.length) { //15位身份证号码
+               birthdayValue = val.charAt(6) + val.charAt(7);
+               if (parseInt(birthdayValue) < 10) {
+                   birthdayValue = '20' + birthdayValue;
+               }
+               else {
+                   birthdayValue = '19' + birthdayValue;
+               }
+               age = Date.getFullYear()-parseInt(birthdayValue); //年龄
+               birthdayValue = birthdayValue + '-' + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11);
+
+           }
+           if (18 == val.length) { //18位身份证号码
+               birthdayValue = val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11)
+               + '-' + val.charAt(12) + val.charAt(13);
+               if (parseInt(val.charAt(16) / 2) * 2 != val.charAt(16)){
+                   sex = '男';
+                   sexcode = '1';
+               }
+               else{
+                   sex = '女';
+                   sexcode = '0';
+               }
+               age =(new Date()).getFullYear()-parseInt((val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9)));
+           }
+
+
+
+           if (age>=60){
+               return 'background-color:#6293BB;color:#fff;'; // return inline style
+               // return {class:'r1', style:{'color:#fff'}};
+           }else{
+               console.log('【【【');
+               console.log(age)
+               return 'color:red';
+           }
+   }
+   }
 //***************************
     var commonj = {
         version: '1.0',
@@ -107,6 +151,7 @@ var cj=(function(){
             }
 
         },getLoader:getLoader,
+       /* getAgeByIdentityid:getAgeByIdentityid,*/
         /**
          * 生成工具条
          * @param btns
@@ -343,11 +388,11 @@ var cj=(function(){
                 url:'getdivisiontree',
                 method: 'get',
                 onLoadSuccess:function(load,data){
-                    /*if(!this.firstloaded){
+                    if(!this.firstloaded){
                      divisiontree.combotree('setValue', data[0].id)
                      .combotree('setText', data[0].text);
                      this.firstloaded=true;
-                     }*/
+                     }
                 },
                 onBeforeExpand: function (node) {
                     divisiontree.combotree("tree").tree("options").url

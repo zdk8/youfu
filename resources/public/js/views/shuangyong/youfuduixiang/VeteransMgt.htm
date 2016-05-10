@@ -117,7 +117,7 @@
                               <!--<a class="input-file-text">选择文件...</a>-->
                               <!--<input class="input-file" type="file" />-->
                             <!--</div>-->
-                              <input name="file" type="file" />
+                              <input name="file" type="file" style="float: left"/>
                               <div opt="excelmuban" style="" class="com_btns">模板</div>
                               <div class="com_btns exportbtn" align="center" style="">导出</div>
                               <div opt="importexcel" style="" class="com_btns">导入</div>
@@ -187,6 +187,8 @@
                         formatter: function(value,row,index){
                                     if(value == '-1'){
                                         return '退回';
+                                    }else if(value==''||value==null){
+                                        return value
                                     }else{
                                         return getStatus[value]
                                     }
@@ -196,10 +198,11 @@
                                         var str='<div></div>';
                                             str=$(str).append('<a action=&quot;report&quot;title=&quot;上报&quot;href=&quot;javaScript:;&quot;><span>上报</span></a>&nbsp;');
                                             str=$(str).append('<a action=&quot;update&quot;title=&quot;修改&quot;href=&quot;javaScript:;&quot;><span>修改</span></a>&nbsp;');
-                                            str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>');
-                                            str=$(str).append('<a action=&quot;audit&quot;title=&quot;审核&quot;href=&quot;javaScript:;&quot;><span>审核</span></a>');
-                                            str=$(str).append('<a action=&quot;approve&quot;title=&quot;审批&quot;href=&quot;javaScript:;&quot;><span>审批</span></a>');
-                                            str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;href=&quot;javaScript:;&quot;><span>注销</span></a>');
+                                            str=$(str).append('<a action=&quot;del&quot;title=&quot;删除&quot;href=&quot;javaScript:;&quot;><span>删除</span></a>&nbsp;');
+                                            str=$(str).append('<a action=&quot;audit&quot;title=&quot;审核&quot;href=&quot;javaScript:;&quot;><span>审核</span></a>&nbsp;');
+                                            str=$(str).append('<a action=&quot;approve&quot;title=&quot;审批&quot;href=&quot;javaScript:;&quot;><span>审批</span></a>&nbsp;');
+                                            str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;href=&quot;javaScript:;&quot;><span>注销</span></a>&nbsp;');
+                                            str=$(str).append('<a action=&quot;old&quot;title=&quot;60+&quot;href=&quot;javaScript:;&quot;><span>60+</span></a>');
                                         return str.html();
                                     }">操作</th>
                 </tr>
