@@ -13,12 +13,13 @@ define(function(){
             url:"hyshy/getsoilderlist",
             type:'post',
             queryParams:{
-                stype:'1'
+                stype:'2',
+                sixtydeal:'1'
             },
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
                 var reportbtns = local.find('[action=report]').hide();           //上报
-                var updatebtns = local.find('[action=update]');           //修改
+                var updatebtns = local.find('[action=update]');         //修改
                 var delbtns = local.find('[action=del]').hide();           //删除
                 var auditbtns = local.find('[action=audit]').hide();           //审核
                 var approvebtns = local.find('[action=approve]').hide();           //审批
@@ -192,7 +193,7 @@ define(function(){
                 birthday1:local.find('[opt=birthday1]').datebox('getValue'),
                 birthday2:local.find('[opt=birthday2]').datebox('getValue'),
                 household:local.find('[opt=household]').val(),
-              stype:'1'
+                stype:'1'
             })
         })
 
@@ -222,20 +223,21 @@ define(function(){
             })
         }
 
-            /*导入xls*/
-      local.find('[opt=importexcel]').click(function(){
-        local.find('[opt=importfile]').form('submit',{
-            url:"hyshy/soilderimportexcel",
+        /*导入xls*/
+        local.find('[opt=importexcel]').click(function(){
+            local.find('[opt=importfile]').form('submit',{
+                url:"hyshy/soilderimportexcel",
 
-            onSubmit:function(params){
-                params.sctype = '100';
-            },
-            success: function (data) {
-            }
+                onSubmit:function(params){
+                    params.sctype = '230';
+                    params.sixtydeal = '1';
+                },
+                success: function (data) {
+                }
 
-          })
+            })
 
-      });
+        });
 
         /*导出excel模板*/
         local.find('[opt=excelmuban]').click(function(){
@@ -243,9 +245,9 @@ define(function(){
             window.location.href=downloadurl;
         });
 
-              /*导出*/
-      local.find('.exportbtn').click(function(){
-        window.location.href="hyshy/soilderexportexcel?"+$.param({
+        /*导出*/
+        local.find('.exportbtn').click(function(){
+            window.location.href="hyshy/soilderexportexcel?"+$.param({
                 name:name.val(),
                 identityid:identityid.val(),
                 districtid:local.find('[opt=districtid]').combobox('getValue'),
@@ -259,17 +261,17 @@ define(function(){
                 birthday1:local.find('[opt=birthday1]').datebox('getValue'),
                 birthday2:local.find('[opt=birthday2]').datebox('getValue'),
                 household:local.find('[opt=household]').val(),
-              stype:'1',
-              soildertype:'xianyi'
+                stype:'2',
+                soildertype:'xianyi',
+                sixtydeal:'1'
 
-        })})
+            })})
 
         /*添加现役军人*/
         local.find('.addbtn').click(function(){
             layer.load(2);
             require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
                 function(htmfile,jsfile){
-                    console.log('ioioioioioi.....');
                     layer.open({
                         title:'添加现役军人',
                         type: 1,
@@ -296,6 +298,7 @@ define(function(){
     var updateFunc = function (record,refreshGrid,type) {
         //console.log(type);
         layer.load(2);
+        console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
         var title ='【'+record.name+ '】现役军人信息修改';
         require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
             function(htmfile,jsfile){

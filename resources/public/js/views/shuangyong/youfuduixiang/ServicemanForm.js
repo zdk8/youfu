@@ -177,7 +177,6 @@ define(function(){
         record.photo == null ? imgurl = 'images/noperson.gif' : imgurl = record.photo;
         var imghtm = '<img style="width:150px;height:120px;" src="../photofile/'+imgurl+'" />';//图片填充
         local.find('[opt=personimg]').html(imghtm);
-
         var districtnameval = cj.getDivisionTotalname(record.districtid);
         local.find('[opt=districtid]').combotree("setValue",districtnameval);  //填充行政区划
 
@@ -500,7 +499,7 @@ define(function(){
     var render=function(l,o){
         layer.closeAll('loading');
         initFunc(l,o);//初始化
-        /*if(o && o.queryParams) {
+        if(o && o.queryParams) {
             switch (o.queryParams.actiontype){
                 case 'update':
                     updateFunc(l, o);
@@ -517,7 +516,7 @@ define(function(){
                 default :
                     break;
             }
-        }*/
+        }
     }
     return {
         render:render

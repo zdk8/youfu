@@ -99,12 +99,13 @@
   [request]
   (let[params (:params request)
        sctype (:sctype params)
+       sixtydeal (:sixtydeal params)
        file (:file params)
        exldata (rest (get (myexcel/lazy-workbook (myexcel/workbook-hssf (:tempfile file))) "Sheet1"))
        ;dealdata (map #(conj {:districtid (str(nth % 0))} {:name (str(nth % 1))}{:identityid (str(nth % 2))}{:gender (if (= (nth % 4) "男") "1" (if (= (nth % 4) "女") "0" (nth % 4)))} {:age (str(nth % 5))}{:address (str(nth % 6))}) data)
        updata (map #(zipmap excel-keys %) exldata)
        ]
-    (ctl/import-data-of-excel updata sctype)
+    (ctl/import-data-of-excel updata sctype sixtydeal)
     (println "DDDDDDDDDDDDDDDDDDDD" updata)
     (str "success")))
 

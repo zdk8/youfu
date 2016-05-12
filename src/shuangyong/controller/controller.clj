@@ -144,6 +144,7 @@
         persontype      (:p_type params)
         minage          (:minage params)
         maxage          (:maxage params)
+        sixtydeal       (:sixtydeal params)
         namecond        (if (> (count name) 0) (common/likecond "name" name))
         identityidcond  (if (> (count identityid) 0) (common/likecond "identityid" identityid))
         districtcond    (if (> (count districtid) 0) (str " and districtid like '" districtid "%'"))
@@ -162,12 +163,13 @@
         typecond        (if (= stype "2") (str " and persontype like '2%' ") (str " and persontype like '1%' "))
         persontypecond  (if (> (count persontype) 0) (str " and persontype = " persontype))
         minagecond      (if (> (count minage) 0) (str " and age > " minage))
-        maxagecond          (if (> (count maxage) 0) (str " and age < " maxage))
-        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond minagecond maxagecond)]
+        maxagecond      (if (> (count maxage) 0) (str " and age < " maxage))
+        sixtycond       (if (= sixtydeal "1") (str " and sixtydeal = '1'") (str " and (sixtydeal != '1' or sixtydeal is null)"))
+        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond minagecond maxagecond sixtycond)]
     conds))
 
 (def soilder-sql
-  "(select t.sixtydeal,t.sc_id,t.name,t.identityid,t.birthday,t.districtid,t.eachtype,t.ishandle,t.caretype,t.isdead,t.photo,t.joindate,t.retiredate,t.household,t.train,t.employment,t.persontype,
+  "(select t.*,
 trunc((to_char(sysdate,'yyyyMMdd')-to_char(case when length(t.identityid)=18 then substr(t.identityid,7,8) when  length(t.identityid)=15 then '19'||substr(t.identityid,7,6) end))/10000) as age
 from t_soldiercommon t)")
 
@@ -179,6 +181,7 @@ from t_soldiercommon t)")
         page        (:page params)
         conds       (soilderconds params)
         getresults  (common/fenye rows page soilder-sql "*" conds " order by sc_id desc ")]     ;"t_soldiercommon"
+    (println "CCCCCCCC" conds)
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 
 (defn get-soilder-excel [params]
@@ -347,8 +350,8 @@ from t_soldiercommon t)")
     )
   )
 
-(defn import-data-of-excel [updata sctype]
-  (db/import-data-of-excel updata sctype)
+(defn import-data-of-excel [updata sctype sixtydeal]
+  (db/import-data-of-excel updata sctype sixtydeal)
   (str "success"))
 
 (defn test-get-tablecols [tablename]

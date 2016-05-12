@@ -91,10 +91,11 @@
       (conj results {timekey  (new Timestamp (.getTime (.parse sdf (timekey results))))}{})
       )))
 
-(defn insert-soldierdata [soldierdata sctype]
+(defn insert-soldierdata [soldierdata sctype sixtydeal]
   (let [sex (:sex soldierdata)
         hktype (:hktype soldierdata)
         persontype (if (> (count sctype) 0) sctype "100")
+        sixtydealtype (if (> (count sixtydeal)0) sixtydeal nil)
         sexdata (condp = sex
                   "男" "0"
                   "女" "1"
@@ -103,12 +104,12 @@
                      "城镇" "0"
                      "农村" "1"
                      nil)
-        insert-data (conj (time-before-insert (time-before-insert (dissoc soldierdata :xhid) :joindate) :retiredate) {:sex sexdata :hktype hktypedata :persontype persontype :ishandle "3"})   ]
+        insert-data (conj (time-before-insert (time-before-insert (dissoc soldierdata :xhid) :joindate) :retiredate) {:sex sexdata :hktype hktypedata :persontype persontype :ishandle "3" :sixtydeal sixtydealtype})   ]
     (insert "t_soldiercommon"
             (values insert-data))
     ))
 
 
-(defn import-data-of-excel [updata sctype]
+(defn import-data-of-excel [updata sctype sixtydeal]
   (transaction
-    (dorun (map #(insert-soldierdata % sctype) updata ))))
+    (dorun (map #(insert-soldierdata % sctype sixtydeal) updata ))))

@@ -68,7 +68,7 @@ define(function(){
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
                 var reportbtns = local.find('[action=report]').hide();           //上报
-                var updatebtns = local.find('[action=update]').hide();           //修改
+                var updatebtns = local.find('[action=update]');           //修改
                 var delbtns = local.find('[action=del]').hide();           //删除
                 var auditbtns = local.find('[action=audit]').hide();           //审核
                 var approvebtns = local.find('[action=approve]').hide();           //审批
