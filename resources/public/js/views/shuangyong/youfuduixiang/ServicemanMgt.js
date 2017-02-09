@@ -2,7 +2,7 @@ define(function(){
     function render(local,option){
         aa = local;
         var datagrid = local.find('.easyui-datagrid-noauto');
-
+        var userlength = cj.getUserMsg().regionid.length;
         cj.getdivision(local.find('[opt=districtid]'));
         var refreshGrid=function() {
             datagrid.datagrid('reload');
@@ -25,6 +25,7 @@ define(function(){
                 var logoutbtns = local.find('[action=logout]').hide();           //注销
                 var retirebtns = local.find('[action=retire]').hide();          //退休
                 //var imgviewbtns = local.find('[action=imgview]');           //预览
+                //alert(userlength);
                 var rows=data.rows;
                 var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view,retirebtns];
                 for(var i=0;i<rows.length;i++){
@@ -32,11 +33,11 @@ define(function(){
                         $(btns_arr[0][i]).show();
                         $(btns_arr[1][i]).show();
                         $(btns_arr[2][i]).show();
-                    }else if(rows[i].ishandle == '1'){
+                    }else if(rows[i].ishandle == '1' && userlength <= 9){                           //审核
                         $(btns_arr[3][i]).show();
-                    }else if(rows[i].ishandle == '2'){
+                    }else if(rows[i].ishandle == '2' && userlength == 6){                           //审批
                         $(btns_arr[4][i]).show();
-                    }else if(rows[i].ishandle == '3'){
+                    }else if(rows[i].ishandle == '3'){                           //正式数据
                         $(btns_arr[5][i]).show();
                         $(btns_arr[7][i]).show();
                     }
@@ -269,7 +270,7 @@ define(function(){
             layer.load(2);
             require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
                 function(htmfile,jsfile){
-                    console.log('ioioioioioi.....');
+                    //console.log('ioioioioioi.....');
                     layer.open({
                         title:'添加现役军人',
                         type: 1,

@@ -1,6 +1,6 @@
 define(function(){
     var arr_combobox = ['sex','nation','marriage','hktype','eachtype','disdegree','disaproperty','disgroup','awardlevel',
-        'caretype','laborability','lifeability','employment','grantstatus'];
+        'caretype','laborability','lifeability','employment','grantstatus','train','medicalinsurance'];
     var arr_datebox = ['birthday','joindate','retiredate','stopdate','opiniondate','reviewdate','auditdate'];
     var arr_validatebox = ['name','identityid'];
 
@@ -37,7 +37,11 @@ define(function(){
     /*界面初始化，公共方法*/
     var initFunc = function (local,option) {
 
-        cj.getdivision(local.find('[opt=districtid]'));
+        var districtvalue = false;
+        if(option.queryParams.record){
+            districtvalue = option.queryParams.record.districtid;
+        }
+        cj.getdivision(local.find('[opt=districtid]'),districtvalue);
 
         /*图片上传*/
         local.find('[opt=personimg]').click(function(){
@@ -89,29 +93,29 @@ define(function(){
                     params.household = encodeURI(local.find('[name=household]').val());
                     params.insured = encodeURI(local.find('[name=insured]').val());
                     params.pension = encodeURI(local.find('[name=pension]').val());
-                    params.armyname = encodeURI(local.find('[name=armyname]').val());
-                    params.specialty = encodeURI(local.find('[name=specialty]').val());
-                    params.retirenumber = encodeURI(local.find('[name=retirenumber]').val());
+                    //params.armyname = encodeURI(local.find('[name=armyname]').val());
+                    //params.specialty = encodeURI(local.find('[name=specialty]').val());
+                    //params.retirenumber = encodeURI(local.find('[name=retirenumber]').val());
                     params.workunit = encodeURI(local.find('[name=workunit]').val());
                     params.disituation = encodeURI(local.find('[name=disituation]').val());
                     params.stopdate = encodeURI(local.find('[name=stopdate]').val());
-                    params.bankaccount = encodeURI(local.find('[name=bankaccount]').val());
-                    params.holder = encodeURI(local.find('[name=holder]').val());
+                    //params.bankaccount = encodeURI(local.find('[name=bankaccount]').val());
+                    //params.holder = encodeURI(local.find('[name=holder]').val());
                     params.armycode = encodeURI(local.find('[name=armycode]').val());
-                    params.certificateid = encodeURI(local.find('[name=certificateid]').val());
+                    //params.certificateid = encodeURI(local.find('[name=certificateid]').val());
                     params.community = encodeURI(local.find('[name=community]').val());
                     params.communityopinion = encodeURI(local.find('[name=communityopinion]').val());
                     params.streeter = encodeURI(local.find('[name=streeter]').val());
                     params.streetreview = encodeURI(local.find('[name=streetreview]').val());
                     params.county = encodeURI(local.find('[name=county]').val());
                     params.countyaudit = encodeURI(local.find('[name=countyaudit]').val());
-                    params.preparer = encodeURI(local.find('[name=preparer]').val());
-                    params.filenumber = encodeURI(local.find('[name=filenumber]').val());
+                    //params.preparer = encodeURI(local.find('[name=preparer]').val());
+                    //params.filenumber = encodeURI(local.find('[name=filenumber]').val());
                     params.districtid = encodeURI(local.find('[name=districtid]').val());
                     params.photo = encodeURI(local.find('[name=photo]').val());
-                    params.deadcertificate = encodeURI(local.find('[name=deadcertificate]').val());
-                    params.honor = encodeURI(local.find('[name=honor]').val());
-                    params.familyname = encodeURI(local.find('[name=familyname]').val());
+                    //params.deadcertificate = encodeURI(local.find('[name=deadcertificate]').val());
+                    //params.honor = encodeURI(local.find('[name=honor]').val());
+                    //params.familyname = encodeURI(local.find('[name=familyname]').val());
                     params.familyphone = encodeURI(local.find('[name=familyphone]').val());
                     params.familyaddress = encodeURI(local.find('[name=familyaddress]').val());
                     params.familyunit = encodeURI(local.find('[name=familyunit]').val());
@@ -146,8 +150,11 @@ define(function(){
                 }
             })
         });
-        var districtid = local.find("[opt=districtid]").combotree("getValue");
-        cj.reportFunc(local,option,districtid,'211','');
+        local.find('[opt=report]').click(function(){
+            var districtid = local.find("[opt=districtid]").combotree("getValue");
+            cj.reportFunc(local,option,districtid,'211','');
+        });
+
     }
 
     /*修改数据*/
@@ -157,8 +164,8 @@ define(function(){
                 $(this).height($(this).height());
             }
         }).css({'border':'none'});
-        var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>&nbsp;'+
-            '<li><input type="button" value="上报" class="btns" opt="report"></li>';
+        var li = '<li><input type="button" value="修改" class="btns" opt="update"></li>&nbsp;'
+        //+ '<li><input type="button" value="上报" class="btns" opt="report"></li>';
         if(option.queryParams.type == 'report'){
             //local.find('[opt=update]').hide();
             li =  '<li><input type="button" value="上报" class="btns" opt="report"></li>';
@@ -195,29 +202,29 @@ define(function(){
                     params.household = encodeURI(local.find('[name=household]').val());
                     params.insured = encodeURI(local.find('[name=insured]').val());
                     params.pension = encodeURI(local.find('[name=pension]').val());
-                    params.armyname = encodeURI(local.find('[name=armyname]').val());
-                    params.specialty = encodeURI(local.find('[name=specialty]').val());
-                    params.retirenumber = encodeURI(local.find('[name=retirenumber]').val());
+                    //params.armyname = encodeURI(local.find('[name=armyname]').val());
+                    //params.specialty = encodeURI(local.find('[name=specialty]').val());
+                    //params.retirenumber = encodeURI(local.find('[name=retirenumber]').val());
                     params.workunit = encodeURI(local.find('[name=workunit]').val());
                     params.disituation = encodeURI(local.find('[name=disituation]').val());
                     params.stopdate = encodeURI(local.find('[name=stopdate]').val());
-                    params.bankaccount = encodeURI(local.find('[name=bankaccount]').val());
-                    params.holder = encodeURI(local.find('[name=holder]').val());
+                    //params.bankaccount = encodeURI(local.find('[name=bankaccount]').val());
+                    //params.holder = encodeURI(local.find('[name=holder]').val());
                     params.armycode = encodeURI(local.find('[name=armycode]').val());
-                    params.certificateid = encodeURI(local.find('[name=certificateid]').val());
+                    //params.certificateid = encodeURI(local.find('[name=certificateid]').val());
                     params.community = encodeURI(local.find('[name=community]').val());
                     params.communityopinion = encodeURI(local.find('[name=communityopinion]').val());
                     params.streeter = encodeURI(local.find('[name=streeter]').val());
                     params.streetreview = encodeURI(local.find('[name=streetreview]').val());
                     params.county = encodeURI(local.find('[name=county]').val());
                     params.countyaudit = encodeURI(local.find('[name=countyaudit]').val());
-                    params.preparer = encodeURI(local.find('[name=preparer]').val());
-                    params.filenumber = encodeURI(local.find('[name=filenumber]').val());
+                    //params.preparer = encodeURI(local.find('[name=preparer]').val());
+                    //params.filenumber = encodeURI(local.find('[name=filenumber]').val());
                     params.districtid = encodeURI(local.find('[name=districtid]').val());
                     params.photo = encodeURI(local.find('[name=photo]').val());
-                    params.deadcertificate = encodeURI(local.find('[name=deadcertificate]').val());
+                    //params.deadcertificate = encodeURI(local.find('[name=deadcertificate]').val());
                     params.honor = encodeURI(local.find('[name=honor]').val());
-                    params.familyname = encodeURI(local.find('[name=familyname]').val());
+                    //params.familyname = encodeURI(local.find('[name=familyname]').val());
                     params.familyphone = encodeURI(local.find('[name=familyphone]').val());
                     params.familyaddress = encodeURI(local.find('[name=familyaddress]').val());
                     params.familyunit = encodeURI(local.find('[name=familyunit]').val());
@@ -254,13 +261,16 @@ define(function(){
                 }
             })
         });
-        var districtid='';
-        if(!isNaN(local.find("[opt=districtid]").combotree("getValue"))){          //是否是数字
-            districtid = local.find("[opt=districtid]").combotree("getValue");
-        }else{
-            districtid = record.districtid;
-        }
-        cj.reportFunc(local,option,districtid,'211',record.sc_id);
+
+        local.find('[opt=report]').click(function(){
+            var districtid='';
+            if(!isNaN(local.find("[opt=districtid]").combotree("getValue"))){          //是否是数字
+                districtid = local.find("[opt=districtid]").combotree("getValue");
+            }else{
+                districtid = record.districtid;
+            }
+            cj.reportFunc(local,option,districtid,'211',record.sc_id);
+        });
     }
 
     /*审核*/

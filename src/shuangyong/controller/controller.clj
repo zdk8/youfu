@@ -55,7 +55,7 @@
         encodedata (select-keys params (:encodecols common/selectcols))
         file (:file params)
         photopath (upload-file file)
-        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "0" :photo photopath} (formatvals encodedata))]
+        sdata (common/filter-undefined (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "0" :photo photopath} (formatvals encodedata)))]
     (db/adddata-by-tablename "t_soldiercommon" (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
     (str "true")))
 
@@ -75,7 +75,7 @@
         name (:name params)
         comments (:comments params)]
     ;(println "SSSSSSSSSSS"  photopath)
-    (db/updatedata-by-tablename "t_soldiercommon" (conj sdata {:photo photopath } (formatvals encodedata))  {:sc_id sc_id})
+    (db/updatedata-by-tablename "t_soldiercommon" (common/filter-undefined (conj sdata {:photo photopath } (formatvals encodedata)))  {:sc_id sc_id})
     (str "true")))
 
 (defn report-soilder [request]
@@ -86,11 +86,11 @@
         photo (:photo params)
         file (:file params)
         filename (:filename file)
-        photopath (if (> (count sc_id) 0) (if (> (count filename) 0) (do (common/delfile (str schema/datapath photo))                       ;如果头像图片更新，先删除旧头像
-                                                                         (upload-file file))                                                 ;再更新新头像
-                                                                     photo)
-                                          (upload-file file))
-        sdata (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "1" :photo photopath} (formatvals encodedata))
+        photopath (if (> (count sc_id) 0) (if (> (count filename) 0) (do (common/delfile (str schema/datapath photo)) ;如果头像图片更新，先删除旧头像
+                                                                       (upload-file file)) ;再更新新头像
+                                            photo)
+                    (upload-file file))
+        sdata (common/filter-undefined (conj (select-keys params (:t_soldiercommon common/selectcols)) {:ishandle "1" :photo photopath} (formatvals encodedata)))
         ]
     (if (> (count sc_id) 0) (db/report-soilder approvedata sc_id (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate"))
                              (db/report-soilder approvedata (common/dateformat-bf-insert sdata "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")))
@@ -145,6 +145,7 @@
         minage          (:minage params)
         maxage          (:maxage params)
         sixtydeal       (:sixtydeal params)
+        userdistrictid  (:regionid  (common/get-session))
         namecond        (if (> (count name) 0) (common/likecond "name" name))
         identityidcond  (if (> (count identityid) 0) (common/likecond "identityid" identityid))
         districtcond    (if (> (count districtid) 0) (str " and districtid like '" districtid "%'"))
@@ -165,7 +166,9 @@
         minagecond      (if (> (count minage) 0) (str " and age > " minage))
         maxagecond      (if (> (count maxage) 0) (str " and age < " maxage))
         sixtycond       (if (= sixtydeal "1") (str " and sixtydeal = '1'") (str " and (sixtydeal != '1' or sixtydeal is null)"))
-        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond minagecond maxagecond sixtycond)]
+        userdiscond     (if userdistrictid (str " and districtid like '" userdistrictid "%'"))
+        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond minagecond maxagecond sixtycond userdiscond)]
+;    (println "SSSSSS" userdistrictid)
     conds))
 
 (def soilder-sql
@@ -181,16 +184,18 @@ from t_soldiercommon t)")
         page        (:page params)
         conds       (soilderconds params)
         getresults  (common/fenye rows page soilder-sql "*" conds " order by sc_id desc ")]     ;"t_soldiercommon"
-    (println "CCCCCCCC" conds)
+;    (println "CCCCCCCC" conds)
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 
 (defn get-soilder-excel [params]
-  (let [conds (soilderconds params)]
-    (common/dateymd-bf-list
-      (db/get-results-bysql (str "select t.*,s.aaa103 as sex1,h.aaa103 as hktype1,d.totalname from (select * from t_soldiercommon where 1=1 " conds " order by sc_id desc) t
+  (let [conds (soilderconds params)
+        result-sql  (str "select t.*,s.aaa103 as sex1,h.aaa103 as hktype1,d.totalname from (select * from " soilder-sql " where 1=1 " conds " order by sc_id desc) t
     left join (select * from xt_combodt where aaa100 = 'sex') s on t.sex = s.aaa102
     left join (select * from xt_combodt where aaa100 = 'hktype') h on t.hktype = h.aaa102
-    left join division d on d.dvcode = t.districtid") ) "retiredate" "joindate") )
+    left join division d on d.dvcode = t.districtid")]
+    (println "SSSSSSSSSSSS"  result-sql)
+    (common/dateymd-bf-list
+      (db/get-results-bysql  result-sql) "retiredate" "joindate") )
   )
 
 
@@ -246,9 +251,9 @@ from t_soldiercommon t)")
   (select count(*) as xyshsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '1') s2,
   (select count(*) as xyspsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '2') s3,
   (select count(*) as xyqssum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '3' and t.identityid in (select identityid from t_leavepeople )) s4,
-  (select count(*) as tybcsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '0') s5,
-  (select count(*) as tyshsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '1') s6,
-  (select count(*) as tyspsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '2') s7,
+  (select count(*) as tybcsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '0') s5,
+  (select count(*) as tyshsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '1') s6,
+  (select count(*) as tyspsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '2') s7,
   (select count(*) as tyqssum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '3' and t.identityid in (select identityid from t_leavepeople )) s8")))
 
 
@@ -262,7 +267,7 @@ from t_soldiercommon t)")
                        "1" "2"
                        "")
         ]
-    (println "SSSSSSSSSS " sc_id)
+;    (println "SSSSSSSSSS " sc_id)
     (db/updatedata-by-tablename "t_soldiercommon" {:sixtyopnion sixtyopnion :sixtydeal sixtydeal} {:sc_id sc_id})
     (str "true")))
 
@@ -340,9 +345,9 @@ from t_soldiercommon t)")
             )
           (do
             "文件处理"
-            (println "*****************************:" fin)
-            (println "*****************************:" fout)
-            (println "*****************************:" (= convert "1"))
+;            (println "*****************************:" fin)
+;            (println "*****************************:" fout)
+;            (println "*****************************:" (= convert "1"))
             )
           )
         )

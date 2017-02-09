@@ -3,6 +3,7 @@ define(function(){
         cj.getdivision(local.find('[opt=districtid]'));
 
         var datagrid = local.find('.easyui-datagrid-noauto');
+        var userlength = cj.getUserMsg().regionid.length;
         var refreshGrid=function() {
             datagrid.datagrid('reload');
         };
@@ -82,9 +83,9 @@ define(function(){
                         $(btns_arr[0][i]).show();
                         $(btns_arr[1][i]).show();
                         $(btns_arr[2][i]).show();
-                    }else if(rows[i].ishandle == '1'){
+                    }else if(rows[i].ishandle == '1' && userlength <= 9 ){
                         $(btns_arr[3][i]).show();
-                    }else if(rows[i].ishandle == '2'){
+                    }else if(rows[i].ishandle == '2' && userlength == 6){
                         $(btns_arr[4][i]).show();
                     }else if(rows[i].ishandle == '3'){
                         $(btns_arr[5][i]).show();
@@ -261,7 +262,8 @@ define(function(){
                 name:name.val(),
                 identityid:identityid.val(),
                 districtid:local.find('[opt=districtid]').combobox('getValue'),
-                eachtype:local.find('[opt=eachtype]').combobox('getValue'),
+                p_type:local.find('[opt=p_type]').combobox('getValue'),
+                //eachtype:local.find('[opt=eachtype]').combobox('getValue'),
                 ishandle:local.find('[opt=handle_type]').combobox('getValue'),
                 caretype:local.find('[opt=caretype]').combobox('getValue'),
                 isdead:local.find('[opt=die_type]').combobox('getValue'),
@@ -271,7 +273,11 @@ define(function(){
                 birthday1:local.find('[opt=birthday1]').datebox('getValue'),
                 birthday2:local.find('[opt=birthday2]').datebox('getValue'),
                 household:local.find('[opt=household]').val(),
-              stype:'1',
+                train:local.find('[opt=train]').combobox('getValue'),
+                employment:local.find('[opt=employment]').combobox('getValue'),
+                minage:local.find('[opt=minage]').val(),
+                maxage:local.find('[opt=maxage]').val(),
+              stype:'2',
               soildertype:'tuiyi'
 
         })})

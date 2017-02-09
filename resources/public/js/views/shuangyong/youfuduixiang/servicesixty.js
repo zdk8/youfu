@@ -8,7 +8,7 @@ define(function(){
             datagrid.datagrid('reload');
         };
 
-        /*加载现役军人*/
+        /*加载60岁军人*/
         datagrid.datagrid({
             url:"hyshy/getsoilderlist",
             type:'post',
@@ -18,16 +18,16 @@ define(function(){
             },
             onLoadSuccess:function(data){
                 var view = local.find('[action=view]');           //详细信息
-                var reportbtns = local.find('[action=report]').hide();           //上报
+                //var reportbtns = local.find('[action=report]').hide();           //上报
                 var updatebtns = local.find('[action=update]');         //修改
                 var delbtns = local.find('[action=del]').hide();           //删除
-                var auditbtns = local.find('[action=audit]').hide();           //审核
-                var approvebtns = local.find('[action=approve]').hide();           //审批
+                //var auditbtns = local.find('[action=audit]').hide();           //审核
+                //var approvebtns = local.find('[action=approve]').hide();           //审批
                 var logoutbtns = local.find('[action=logout]').hide();           //注销
-                var retirebtns = local.find('[action=retire]').hide();          //退休
+                //var retirebtns = local.find('[action=retire]').hide();          //退休
                 //var imgviewbtns = local.find('[action=imgview]');           //预览
                 var rows=data.rows;
-                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view,retirebtns];
+                var btns_arr=[updatebtns,delbtns,logoutbtns,view];
                 for(var i=0;i<rows.length;i++){
                     if(rows[i].ishandle == '0' || rows[i].ishandle == '-1'){    //保存
                         $(btns_arr[0][i]).show();
@@ -35,12 +35,13 @@ define(function(){
                         $(btns_arr[2][i]).show();
                     }else if(rows[i].ishandle == '1'){
                         $(btns_arr[3][i]).show();
-                    }else if(rows[i].ishandle == '2'){
-                        $(btns_arr[4][i]).show();
-                    }else if(rows[i].ishandle == '3'){
-                        $(btns_arr[5][i]).show();
-                        $(btns_arr[7][i]).show();
                     }
+                    //else if(rows[i].ishandle == '2'){
+                    //    $(btns_arr[4][i]).show();
+                    //}else if(rows[i].ishandle == '3'){
+                    //    $(btns_arr[5][i]).show();
+                    //    $(btns_arr[7][i]).show();
+                    //}
                     for(var j=0;j<btns_arr.length;j++){
                         (function(index){
                             var record=rows[index];
@@ -144,7 +145,7 @@ define(function(){
                                     require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
                                         function(htmfile,jsfile){
                                             layer.open({
-                                                title:"现役军人查看",
+                                                title:"60岁军人查看",
                                                 type: 1,
                                                 area: ['910px', '500px'], //宽高
                                                 content: htmfile,
@@ -193,33 +194,34 @@ define(function(){
                 birthday1:local.find('[opt=birthday1]').datebox('getValue'),
                 birthday2:local.find('[opt=birthday2]').datebox('getValue'),
                 household:local.find('[opt=household]').val(),
-                stype:'1'
-            })
-        })
+                stype:'2',
+                sixtydeal:'1'
+            });
+        });
 
         if (option =="xy1") {
             local.find("[opt=handle_type]").combobox('setValue', '0');
             datagrid.datagrid('load',{
                 ishandle:0,
-                stype:'1'
+                stype:'2'
             })
         }else if(option=="xy2"){
             local.find("[opt=handle_type]").combobox('setValue', '1');
             datagrid.datagrid('load',{
                 ishandle:1,
-                stype:'1'
+                stype:'2'
             })
         } else if(option=="xy3"){
             local.find("[opt=handle_type]").combobox('setValue', '2');
             datagrid.datagrid('load',{
                 ishandle:2,
-                stype:'1'
+                stype:'2'
             })
         }else if(option=="xy4"){
             local.find("[opt=die_type]").combobox('setValue', '1');
             datagrid.datagrid('load',{
                 isdead:'1',
-                stype:'1'
+                stype:'2'
             })
         }
 
@@ -262,18 +264,19 @@ define(function(){
                 birthday2:local.find('[opt=birthday2]').datebox('getValue'),
                 household:local.find('[opt=household]').val(),
                 stype:'2',
-                soildertype:'xianyi',
+                soildertype:'60sui',
                 sixtydeal:'1'
 
             })})
 
-        /*添加现役军人*/
+        /*添加60岁军人*/
         local.find('.addbtn').click(function(){
+            console.log('pppzhangsan')
             layer.load(2);
-            require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
+            require(['text!views/shuangyong/youfuduixiang/sixOld.htm','views/shuangyong/youfuduixiang/sixOld'],
                 function(htmfile,jsfile){
                     layer.open({
-                        title:'添加现役军人',
+                        title:'添加60岁军人',
                         type: 1,
                         area: ['910px', '500px'], //宽高
                         content: htmfile,
@@ -294,12 +297,12 @@ define(function(){
 
     }
 
-    /*现役军人修改*/
+    /*60岁军人修改*/
     var updateFunc = function (record,refreshGrid,type) {
         //console.log(type);
-        layer.load(2);
-        console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
-        var title ='【'+record.name+ '】现役军人信息修改';
+        //layer.load(2);
+        //console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
+        var title ='【'+record.name+ '】60岁军人信息修改';
         require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
             function(htmfile,jsfile){
                 layer.open({
@@ -322,10 +325,10 @@ define(function(){
             }
         )
     }
-    /*现役军人审核*/
+    /*60岁军人审核*/
     var auditFunc = function (record,refreshGrid) {
         layer.load(2);
-        var title ='【'+record.name+ '】现役军人信息';
+        var title ='【'+record.name+ '】60岁军人信息';
         require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
             function(htmfile,jsfile){
                 layer.open({
@@ -347,10 +350,10 @@ define(function(){
             }
         )
     }
-    /*现役军人审批*/
+    /*60岁军人审批*/
     var approveFunc = function (record,refreshGrid) {
         layer.load(2);
-        var title ='【'+record.name+ '】现役军人信息';
+        var title ='【'+record.name+ '】60岁军人信息';
         require(['text!views/shuangyong/youfuduixiang/ServicemanForm.htm','views/shuangyong/youfuduixiang/ServicemanForm'],
             function(htmfile,jsfile){
                 layer.open({

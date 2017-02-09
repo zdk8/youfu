@@ -123,8 +123,8 @@ var cj=(function(){
                return 'background-color:#6293BB;color:#fff;'; // return inline style
                // return {class:'r1', style:{'color:#fff'}};
            }else{
-               console.log('【【【');
-               console.log(age)
+               //console.log('【【【');
+               //console.log(age)
                return 'color:red';
            }
    }
@@ -382,16 +382,16 @@ var cj=(function(){
                     }
                 }
             })
-        },getdivision: function(divisiontree){
+        },getdivision: function(divisiontree,treevalue){
+
             divisiontree.combotree({
                 panelHeight:300,
                 url:'getdivisiontree',
                 method: 'get',
                 onLoadSuccess:function(load,data){
-                    if(!this.firstloaded){
+                    if(!treevalue){
                      divisiontree.combotree('setValue', data[0].id)
                      .combotree('setText', data[0].text);
-                     this.firstloaded=true;
                      }
                 },
                 onBeforeExpand: function (node) {
@@ -451,92 +451,93 @@ var cj=(function(){
             )
         },reportFunc: function (local,option,districtid,persontype,sc_id) { //上报
             /*上报*/
-            local.find('[opt=report]').click(function () {
-                var communityopinion = local.find('[name=communityopinion]').val();
-                var community = local.find('[name=community]').val();
-                var opiniondate = local.find('[opt=opiniondate]').datebox('getValue');
-                var msg = [];
-                communityopinion.trim().length <=0 ? msg.push('社区审核意见'):null;
-                community.trim().length <=0 ? msg.push('社区审核人'):null;
-                opiniondate.trim().length <=0 ? msg.push('社区审核日期'):null;
-                if(communityopinion.trim().length <=0 || community.trim().length <=0 || opiniondate.trim().length <=0){
-                    layer.alert('请填写['+msg+']', {title:'温馨提示',icon: 6});
-                    local.find('[name=communityopinion]').focus();
-                }else{
-                    var $this = $(this);
-                    $this.attr("disabled",true);//按钮禁用
-                    local.find('form').form('submit', {
-                        url: 'hyshy/reportsoilder',
-                        onSubmit: function (params) {
-                            layer.load();
-                            var isValid = $(this).form('validate');
-                            params.name = encodeURI(local.find('[name=name]').val());
-                            params.identityid = encodeURI(local.find('[name=identityid]').val());
-                            params.comments = encodeURI(local.find('[name=comments]').val());
-                            params.idaddress = encodeURI(local.find('[name=idaddress]').val());
-                            params.phone = encodeURI(local.find('[name=phone]').val());
-                            params.household = encodeURI(local.find('[name=household]').val());
-                            params.insured = encodeURI(local.find('[name=insured]').val());
-                            params.pension = encodeURI(local.find('[name=pension]').val());
-                            params.armyname = encodeURI(local.find('[name=armyname]').val());
-                            params.specialty = encodeURI(local.find('[name=specialty]').val());
-                            params.retirenumber = encodeURI(local.find('[name=retirenumber]').val());
-                            params.workunit = encodeURI(local.find('[name=workunit]').val());
-                            params.disituation = encodeURI(local.find('[name=disituation]').val());
-                            params.stopdate = encodeURI(local.find('[name=stopdate]').val());
-                            params.bankaccount = encodeURI(local.find('[name=bankaccount]').val());
-                            params.holder = encodeURI(local.find('[name=holder]').val());
-                            params.armycode = encodeURI(local.find('[name=armycode]').val());
-                            params.certificateid = encodeURI(local.find('[name=certificateid]').val());
-                            params.community = encodeURI(local.find('[name=community]').val());
-                            params.communityopinion = encodeURI(local.find('[name=communityopinion]').val());
-                            params.streeter = encodeURI(local.find('[name=streeter]').val());
-                            params.streetreview = encodeURI(local.find('[name=streetreview]').val());
-                            params.county = encodeURI(local.find('[name=county]').val());
-                            params.countyaudit = encodeURI(local.find('[name=countyaudit]').val());
-                            params.preparer = encodeURI(local.find('[name=preparer]').val());
-                            params.filenumber = encodeURI(local.find('[name=filenumber]').val());
-                            params.districtid = encodeURI(local.find('[name=districtid]').val());
-                            params.photo = encodeURI(local.find('[name=photo]').val());
-                            params.deadcertificate = encodeURI(local.find('[name=deadcertificate]').val());
-                            params.honor = encodeURI(local.find('[name=honor]').val());
-                            params.familyname = encodeURI(local.find('[name=familyname]').val());
-                            params.familyphone = encodeURI(local.find('[name=familyphone]').val());
-                            params.familyaddress = encodeURI(local.find('[name=familyaddress]').val());
-                            params.familyunit = encodeURI(local.find('[name=familyunit]').val());
-                            params.armyphone = encodeURI(local.find('[name=armyphone]').val());
-                            params.trainarea = encodeURI(local.find('[name=trainarea]').val());
-                            params.position = encodeURI(local.find('[name=position]').val());
-                            params.party = encodeURI(local.find('[name=party]').val());
-                            params.culture = encodeURI(local.find('[name=culture]').val());
-                            params.troop = encodeURI(local.find('[name=troop]').val());
-                            params.fname = encodeURI(local.find('[name=fname]').val());
-                            params.fidentityid = encodeURI(local.find('[name=fidentityid]').val());
-                            params.mname = encodeURI(local.find('[name=mname]').val());
-                            params.midentityid = encodeURI(local.find('[name=midentityid]').val());
-                            if (!isValid) {
-                                layer.closeAll('loading');
-                                $this.attr("disabled",false);//按钮启用
-                            }
-                            params.districtid = districtid;
-                            params.persontype = persontype;
-                            params.sc_id = sc_id;
-                            return isValid;
-                        },
-                        success: function (data) {
+            var communityopinion = local.find('[name=communityopinion]').val();
+            var community = local.find('[name=community]').val();
+            var opiniondate = local.find('[opt=opiniondate]').datebox('getValue');
+            var msg = [];
+            communityopinion.trim().length <=0 ? msg.push('社区审核意见'):null;
+            community.trim().length <=0 ? msg.push('社区审核人'):null;
+            opiniondate.trim().length <=0 ? msg.push('社区审核日期'):null;
+            if(communityopinion.trim().length <=0 || community.trim().length <=0 || opiniondate.trim().length <=0){
+                layer.alert('请填写['+msg+']', {title:'温馨提示',icon: 6});
+                local.find('[name=communityopinion]').focus();
+            }else{
+                var $this = $(this);
+                $this.attr("disabled",true);//按钮禁用
+                local.find('form').form('submit', {
+                    url: 'hyshy/reportsoilder',
+                    onSubmit: function (params) {
+                        layer.load();
+                        var isValid = $(this).form('validate');
+                        params.name = encodeURI(local.find('[name=name]').val());
+                        params.identityid = encodeURI(local.find('[name=identityid]').val());
+                        params.comments = encodeURI(local.find('[name=comments]').val());
+                        params.idaddress = encodeURI(local.find('[name=idaddress]').val());
+                        params.phone = encodeURI(local.find('[name=phone]').val());
+                        params.household = encodeURI(local.find('[name=household]').val());
+                        params.insured = encodeURI(local.find('[name=insured]').val());
+                        params.pension = encodeURI(local.find('[name=pension]').val());
+                        params.armyname = encodeURI(local.find('[name=armyname]').val());
+                        params.specialty = encodeURI(local.find('[name=specialty]').val());
+                        params.retirenumber = encodeURI(local.find('[name=retirenumber]').val());
+                        params.workunit = encodeURI(local.find('[name=workunit]').val());
+                        params.disituation = encodeURI(local.find('[name=disituation]').val());
+                        params.stopdate = encodeURI(local.find('[name=stopdate]').val());
+                        params.bankaccount = encodeURI(local.find('[name=bankaccount]').val());
+                        params.holder = encodeURI(local.find('[name=holder]').val());
+                        params.armycode = encodeURI(local.find('[name=armycode]').val());
+                        params.certificateid = encodeURI(local.find('[name=certificateid]').val());
+                        params.community = encodeURI(local.find('[name=community]').val());
+                        params.communityopinion = encodeURI(local.find('[name=communityopinion]').val());
+                        params.streeter = encodeURI(local.find('[name=streeter]').val());
+                        params.streetreview = encodeURI(local.find('[name=streetreview]').val());
+                        params.county = encodeURI(local.find('[name=county]').val());
+                        params.countyaudit = encodeURI(local.find('[name=countyaudit]').val());
+                        params.preparer = encodeURI(local.find('[name=preparer]').val());
+                        params.filenumber = encodeURI(local.find('[name=filenumber]').val());
+                        params.districtid = encodeURI(local.find('[name=districtid]').val());
+                        params.photo = encodeURI(local.find('[name=photo]').val());
+                        params.deadcertificate = encodeURI(local.find('[name=deadcertificate]').val());
+                        params.honor = encodeURI(local.find('[name=honor]').val());
+                        params.familyname = encodeURI(local.find('[name=familyname]').val());
+                        params.familyphone = encodeURI(local.find('[name=familyphone]').val());
+                        params.familyaddress = encodeURI(local.find('[name=familyaddress]').val());
+                        params.familyunit = encodeURI(local.find('[name=familyunit]').val());
+                        params.armyphone = encodeURI(local.find('[name=armyphone]').val());
+                        params.trainarea = encodeURI(local.find('[name=trainarea]').val());
+                        params.position = encodeURI(local.find('[name=position]').val());
+                        params.party = encodeURI(local.find('[name=party]').val());
+                        params.culture = encodeURI(local.find('[name=culture]').val());
+                        params.troop = encodeURI(local.find('[name=troop]').val());
+                        params.fname = encodeURI(local.find('[name=fname]').val());
+                        params.fidentityid = encodeURI(local.find('[name=fidentityid]').val());
+                        params.mname = encodeURI(local.find('[name=mname]').val());
+                        params.midentityid = encodeURI(local.find('[name=midentityid]').val());
+                        if (!isValid) {
                             layer.closeAll('loading');
                             $this.attr("disabled",false);//按钮启用
-                            if (data == "true") {
-                                cj.showSuccess('上报成功');
-                                option.queryParams.refresh();
-                                layer.close(option.index);
-                            } else {
-                                cj.showFail('上报失败');
-                            }
                         }
-                    })
-                }
-            });
+                        params.districtid = districtid;
+                        params.persontype = persontype;
+                        params.sc_id = sc_id;
+                        return isValid;
+                    },
+                    success: function (data) {
+                        layer.closeAll('loading');
+                        $this.attr("disabled",false);//按钮启用
+                        if (data == "true") {
+                            cj.showSuccess('上报成功');
+                            option.queryParams.refresh();
+                            layer.close(option.index);
+                        } else {
+                            cj.showFail('上报失败');
+                        }
+                    }
+                })
+            }
+            //local.find('[opt=report]').click(function () {
+            //
+            //});
         },shieldingSH: function (local) {/*屏蔽审核信息*/
             local.find('[name=streetreview]').attr('readonly',true).css({'background-color':'#F5F5F5'});
             local.find('[name=streeter]').attr('readonly',true).css({'background-color':'#F5F5F5'});
