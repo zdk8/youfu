@@ -181,7 +181,7 @@ define(function(){
                                 }else if(action=='old'){
                                     var title='60(或以上)人员确认'
                                     layer.load(2);
-                                    require(['text!views/shuangyong/youfuduixiang/sixOld.htm','views/shuangyong/youfuduixiang/sixOld'],
+                                    require(['text!views/shuangyong/youfuduixiang/sixOldDeal.htm','views/shuangyong/youfuduixiang/sixOldDeal'],
                                         function(htmfile,jsfile){
                                             layer.open({
                                                 title:title,

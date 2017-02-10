@@ -73,6 +73,16 @@ define(function(){
         addToolBar(local,option,li);
         shieldingSH(local);
         shieldingSP(local);
+        //根据身份证号填充性别和出生日期
+        cj.getBaseInfoByIdentityid(
+            {
+                identityid:local.find("[opt=identityid]"),
+                birthdate:local.find('[opt=birthday]'),
+                gender:local.find('[opt=sex]'),
+                age:local.find('[opt=age]'),
+                agetype:null
+            }
+        );
         /*保存*/
         local.find('[opt=save]').click(function () {
             var $this = $(this);

@@ -7,6 +7,63 @@ define(function(){
         var refreshGrid=function() {
             datagrid.datagrid('reload');
         };
+        /*根据身份证获取基本信息*/
+
+
+        // local.find("[opt=identityid]").onChange(function(){
+        //     console.log(123)
+        //     var params= {
+        //         identityid:local.find("[opt=identityid]"),
+        //         birthdate:local.find('[opt=birthdate]'),
+        //         gender:local.find('[opt=gender]'),
+        //         age:local.find('[opt=age]'),
+        //         agetype:null
+        //     };
+        //     var val = params.identityid.val();
+        //     var sex;
+        //     var birthdayValue;
+        //     var age;
+        //     var sexcode;
+        //     if (15 == val.length) { //15位身份证号码
+        //         birthdayValue = val.charAt(6) + val.charAt(7);
+        //         if (parseInt(birthdayValue) < 10) {
+        //             birthdayValue = '20' + birthdayValue;
+        //         }
+        //         else {
+        //             birthdayValue = '19' + birthdayValue;
+        //         }
+        //         age = Date.getFullYear()-parseInt(birthdayValue); //年龄
+        //         birthdayValue = birthdayValue + '-' + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11);
+        //         if (parseInt(val.charAt(14) / 2) * 2 != val.charAt(14)) {
+        //             sex = '男';
+        //             sexcode = '1';
+        //         }
+        //         else{
+        //             sex = '女';
+        //             sexcode = '0';
+        //         }
+        //     }
+        //     if (18 == val.length) { //18位身份证号码
+        //         birthdayValue = val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9) + '-' + val.charAt(10) + val.charAt(11)
+        //             + '-' + val.charAt(12) + val.charAt(13);
+        //         if (parseInt(val.charAt(16) / 2) * 2 != val.charAt(16)){
+        //             sex = '男';
+        //             sexcode = '1';
+        //         }
+        //         else{
+        //             sex = '女';
+        //             sexcode = '0';
+        //         }
+        //         age =(new Date()).getFullYear()-parseInt((val.charAt(6) + val.charAt(7) + val.charAt(8) + val.charAt(9)));
+        //     }
+        //     params.birthdate.datebox('setValue',birthdayValue) ;
+        //     params.gender.combobox('setValue',sexcode) ;
+        //     //if(params.agetype == "span"){
+        //     //    params.age[0].innerText = age+"岁";
+        //     //}else{
+        //     //    params.age.val(age);
+        //     //}
+        // });
 
         /*加载现役军人*/
         datagrid.datagrid({
@@ -292,6 +349,8 @@ define(function(){
 
 
     }
+
+
 
     /*现役军人修改*/
     var updateFunc = function (record,refreshGrid,type) {

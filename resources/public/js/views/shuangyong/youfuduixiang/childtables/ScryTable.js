@@ -68,7 +68,17 @@ define(function(){
         local.find('[opt=foot]').html(btns);
         local.find('div[opt=panel]').panel({
             footer:'#ft_ssry'
-        })
+        });
+        //根据身份证号填充性别和出生日期
+        cj.getBaseInfoByIdentityid(
+            {
+                identityid:local.find("[opt=identityid]"),
+                birthdate:local.find('[opt=birthday]'),
+                gender:local.find('[opt=sex]'),
+                age:local.find('[opt=age]'),
+                agetype:null
+            }
+        );
 
         local.find('[opt=cancel]').click(function(){
             layer.close(option.index);

@@ -184,7 +184,7 @@ from t_soldiercommon t)")
         page        (:page params)
         conds       (soilderconds params)
         getresults  (common/fenye rows page soilder-sql "*" conds " order by sc_id desc ")]     ;"t_soldiercommon"
-;    (println "CCCCCCCC" conds)
+    (println "CCCCCCCC" conds)
     (resp/json {:total (:total getresults) :rows (common/dateymd-bf-list (:rows getresults) "birthday" "joindate" "retiredate" "awardyear" "opiniondate" "reviewdate" "auditdate" "enterdate")})))
 
 (defn get-soilder-excel [params]
@@ -246,15 +246,16 @@ from t_soldiercommon t)")
     (str "true")))
 
 (defn get-office-numb [request]
-  (resp/json (db/get-results-bysql "select s1.xybcsum,s2.xyshsum,s3.xyspsum,s4.xyqssum,s5.tybcsum,s6.tyshsum,s7.tyspsum,s8.tyqssum from
-  (select count(*) as xybcsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '0') s1,
-  (select count(*) as xyshsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '1') s2,
-  (select count(*) as xyspsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '2') s3,
-  (select count(*) as xyqssum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '3' and t.identityid in (select identityid from t_leavepeople )) s4,
-  (select count(*) as tybcsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '0') s5,
-  (select count(*) as tyshsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '1') s6,
-  (select count(*) as tyspsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '2') s7,
-  (select count(*) as tyqssum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '3' and t.identityid in (select identityid from t_leavepeople )) s8")))
+  (let   [userdistrictid  (:regionid  (common/get-session))]
+    (resp/json (db/get-results-bysql (str "select s1.xybcsum,s2.xyshsum,s3.xyspsum,s4.xyqssum,s5.tybcsum,s6.tyshsum,s7.tyspsum,s8.tyqssum from
+  (select count(*) as xybcsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '0' and districtid like '" userdistrictid "%'  and (sixtydeal != '1' or sixtydeal is null)) s1,
+  (select count(*) as xyshsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '1' and districtid like '" userdistrictid "%'  and (sixtydeal != '1' or sixtydeal is null)) s2,
+  (select count(*) as xyspsum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '2' and districtid like '" userdistrictid "%'  and (sixtydeal != '1' or sixtydeal is null)) s3,
+  (select count(*) as xyqssum from t_soldiercommon t where t.persontype like '1%' and t.ishandle = '3' and districtid like '" userdistrictid "%'  and (sixtydeal != '1' or sixtydeal is null) and t.identityid in (select identityid from t_leavepeople )) s4,
+  (select count(*) as tybcsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '0' and districtid like '" userdistrictid "%'  and (sixtydeal != '1' or sixtydeal is null)) s5,
+  (select count(*) as tyshsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '1' and districtid like '" userdistrictid "%'  and (sixtydeal != '1' or sixtydeal is null)) s6,
+  (select count(*) as tyspsum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '2' and districtid like '" userdistrictid "%'  and (sixtydeal != '1' or sixtydeal is null)) s7,
+  (select count(*) as tyqssum from t_soldiercommon t where t.persontype like '2%' and t.ishandle = '3' and districtid like '" userdistrictid "%'  and (sixtydeal != '1' or sixtydeal is null) and t.identityid in (select identityid from t_leavepeople )) s8")))))
 
 
 (defn dealsixty [request]
