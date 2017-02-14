@@ -36,6 +36,7 @@
   (POST "/party/fileupload" [file pc_id filetype filenamemsg fileext] (ctl/uploadfile file pc_id filetype filenamemsg fileext));;附件上传
   (POST "/party/deletefilebyid" [attach_id fie_path] (ctl/deletefile attach_id fie_path))   ;附件删除
   (POST "/party/getfileslist" request (ctl/get-files-list request))
+  (GET "/party/filedown2" req (ctl/get-soldier-xml))
   (GET "/party/filedown" req
     (let [params (:params req)]
       (ctl/getfilesysfile (:filename params) (:convert params) (:server-name req) (:server-port req))))

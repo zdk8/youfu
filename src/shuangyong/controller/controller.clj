@@ -232,6 +232,7 @@ from t_soldiercommon t)")
                    "lb" (comboasql "eachtype" "eachtype" conds)
                    "px" (comboasql "train" "train" conds)
                    "jy" (comboasql "employment" "employment" conds)
+                   "tylb"  (comboasql  "persontype" "p_type" conds)
                    (str "select 'csh' as ptype,'总数' as statictype, count(*) as sum from t_soldiercommon where " conds " and ishandle = '3'"))]
     ;(println "SSSSSSSSSS" analysql)
     (resp/json (db/get-results-bysql analysql))))
@@ -310,6 +311,11 @@ from t_soldiercommon t)")
 
 (def filesys (str schema/datapath))
 (def convert-set #{"doc" "docx" "xls" "xlsx" "txt"})
+(defn get-soldier-xml []
+  (->(file-response (str filesys "/resources/public/upload/soldier.xls"))
+    (response/header "Content-Disposition" "filename=soldiermb.xls")
+    (response/content-type (str "application/xls"))))
+
 (defn getfilesysfile [filename convert remote-addr port]
   (let [fin (str filesys filename)
         ext-name (clojure.string/replace filename #".+\." "")

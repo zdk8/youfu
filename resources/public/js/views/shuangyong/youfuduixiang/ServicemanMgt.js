@@ -297,7 +297,7 @@ define(function(){
 
         /*导出excel模板*/
         local.find('[opt=excelmuban]').click(function(){
-            var downloadurl = 'party/filedown?filename='+encodeURI("/upload/excel/soldier.xls")+"&convert=1";
+            var downloadurl = 'party/filedown2?filename='+encodeURI("/upload/excel/soldier.xls")+"&convert=1";
             window.location.href=downloadurl;
         });
 
