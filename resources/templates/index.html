@@ -73,7 +73,7 @@
     $('.left_top').addClass('div2bag');
     $(document).ready(function(){
         usermsg=eval('('+$('#usermsg').text()+')');
-        $('[opt=msgname]').html(usermsg.loginname);
+        $('[opt=msgname]').html(usermsg.username);
         /*菜单项加载*/
         $.ajax({
             url:'getfunction',
@@ -97,7 +97,7 @@
                     $('[opt=menu]').html('<div style="text-align: center;color: red;">无相应功能模块!请联系管理员配置功能。</div>');
                 }
             }
-        })
+        });
 
 //        $('[opt=currentDate]').text(mycalendar.RunGLNL());
         /*初始化*/

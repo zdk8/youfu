@@ -1,3 +1,4 @@
+<!--两参人员-->
 <div class="easyui-panel newRadio" opt="panel"
      style="overflow-y: scroll;border-bottom: 1px solid greenyellow;height:4px;"
      data-options="fit:true,border:false">
@@ -277,7 +278,7 @@
                 </tr>
                 <tr>
                     <td class="formtdtext">优抚对象状态<label></label></td>
-                    <td colspan="5">
+                    <td >
                         <input class="easyui-combobox"
                                opt="caretype"
                                name="caretype"
@@ -287,6 +288,15 @@
                                         editable:false,
                                         valueField:'id',
                                         textField:'text'">
+                    </td>
+                    <td class="formtdtext">是否安置<label></label></td>
+                    <td>
+                        <input type="radio" name="isarrange" value="1">是</input>
+                        <input type="radio" name="isarrange" value="0">否</input>
+                    </td>
+                    <td class="formtdtext">安置单位<label></label></td>
+                    <td>
+                        <input class="input-text" name="arrangeplace">
                     </td>
                 </tr>
                 <tr>

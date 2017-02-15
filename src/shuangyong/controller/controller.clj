@@ -312,7 +312,9 @@ from t_soldiercommon t)")
 (def filesys (str schema/datapath))
 (def convert-set #{"doc" "docx" "xls" "xlsx" "txt"})
 (defn get-soldier-xml []
-  (->(file-response (str filesys "/resources/public/upload/soldier.xls"))
+  (->
+;    (file-response (str filesys "/resources/public/upload/soldier.xls"))
+    (file-response (str  "D:/projectfile/shuangyong/soldier.xls"))
     (response/header "Content-Disposition" "filename=soldiermb.xls")
     (response/content-type (str "application/xls"))))
 
