@@ -74,10 +74,11 @@ define(function(){
                 var auditbtns = local.find('[action=audit]').hide();           //审核
                 var approvebtns = local.find('[action=approve]').hide();           //审批
                 var logoutbtns = local.find('[action=logout]').hide();           //注销
+                var removebtns = local.find('[action=remove]').hide();           //转移
                 var oldtns = local.find('[action=old]').hide();
                 //var imgviewbtns = local.find('[action=imgview]');           //预览
                 var rows=data.rows;
-                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view,oldtns];
+                var btns_arr=[reportbtns,updatebtns,delbtns,auditbtns,approvebtns,logoutbtns,view,oldtns,removebtns];
                 for(var i=0;i<rows.length;i++){
                     if(rows[i].ishandle == '0' || rows[i].ishandle == '-1'){    //保存
                         $(btns_arr[0][i]).show();
@@ -88,7 +89,12 @@ define(function(){
                     }else if(rows[i].ishandle == '2' && userlength == 6){
                         $(btns_arr[4][i]).show();
                     }else if(rows[i].ishandle == '3'){
-                        $(btns_arr[5][i]).show();
+                        if(rows[i].persontype == '230'){         //一般退役军人转移
+                            $(btns_arr[5][i]).show();
+                            $(btns_arr[8][i]).show();
+                        }else{
+                            $(btns_arr[5][i]).show();
+                        }
                     }
 
 
@@ -178,8 +184,30 @@ define(function(){
                                     }
                                 }else if(action == "view"){
                                     updateFunc(record,refreshGrid,'chakan');
+                                }else if(action=='remove'){
+                                    var title='一般退役军人转移确认';
+                                    layer.load(2);
+                                    require(['text!views/shuangyong/youfuduixiang/ybtyremove.htm','views/shuangyong/youfuduixiang/ybtyremove'],
+                                        function(htmfile,jsfile){
+                                            layer.open({
+                                                title:title,
+                                                type: 1,
+                                                area: ['610px', '200px'], //宽高
+                                                content: htmfile,
+                                                success: function(layero, index){
+                                                    jsfile.render(layero,{
+                                                        index:index,
+                                                        queryParams:{
+                                                            actiontype:'remove',
+                                                            record:record
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    )
                                 }else if(action=='old'){
-                                    var title='60(或以上)人员确认'
+                                    var title='60(或以上)人员确认';
                                     layer.load(2);
                                     require(['text!views/shuangyong/youfuduixiang/sixOldDeal.htm','views/shuangyong/youfuduixiang/sixOldDeal'],
                                         function(htmfile,jsfile){
@@ -231,6 +259,7 @@ define(function(){
                 employment:local.find('[opt=employment]').combobox('getValue'),
                 minage:local.find('[opt=minage]').val(),
                 maxage:local.find('[opt=maxage]').val(),
+                isremove:local.find('[opt=isremove]').combobox('getValue'),
                 stype:'2'
             })
         })
@@ -280,7 +309,7 @@ define(function(){
               stype:'2',
               soildertype:'tuiyi'
 
-        })})
+        })});
 
         /*添加退役军人*/
         local.find('.addbtn').click(function(){

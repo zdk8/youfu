@@ -66,13 +66,26 @@
                         </td>
                     </tr>
                     <tr>
+                        <!--<td class="formtdtext2">入伍年份<label></label></td>-->
+                        <!--<td>-->
+                            <!--<input opt="joindate" style="height: 29px;width: 100px;">-->
+                        <!--</td>-->
+                        <!--<td class="formtdtext2">退役年份<label></label></td>-->
+                        <!--<td>-->
+                            <!--<input opt="retiredate" style="height: 29px;width: 100px;">-->
+                        <!--</td>-->
+
                         <td class="formtdtext2">入伍年份<label></label></td>
+                        <td><input opt="joindate" style="height: 29px;width: 100px;">退役年份:<label></label><input opt="retiredate" style="height: 29px;width: 100px;"></td>
+                        <td class="formtdtext2">是否安置</td>
                         <td>
-                            <input opt="joindate" style="height: 29px;width: 100px;">
-                        </td>
-                        <td class="formtdtext2">退役年份<label></label></td>
-                        <td>
-                            <input opt="retiredate" style="height: 29px;width: 100px;">
+                            <input opt="isremove" type="text" style="height: 29px;width: 100px;" class="easyui-combobox"
+                                   data-options="
+                            editable:false,
+                            valueField: 'id',
+                            textField: 'text',
+                            data: [{text:'是',id:'1'},{text:'否',id:'0'}]"
+                            >
                         </td>
                         <td class="formtdtext2">出生年区间<label></label></td>
                         <td colspan="3">
@@ -207,6 +220,7 @@
                                             str=$(str).append('<a action=&quot;audit&quot;title=&quot;审核&quot;href=&quot;javaScript:;&quot;><span>审核</span></a>&nbsp;');
                                             str=$(str).append('<a action=&quot;approve&quot;title=&quot;审批&quot;href=&quot;javaScript:;&quot;><span>审批</span></a>&nbsp;');
                                             str=$(str).append('<a action=&quot;logout&quot;title=&quot;注销&quot;href=&quot;javaScript:;&quot;><span>注销</span></a>&nbsp;');
+                                            str=$(str).append('<a action=&quot;remove&quot;title=&quot;转移&quot;href=&quot;javaScript:;&quot;><span>转移</span></a>&nbsp;');
                                             str=$(str).append('<a action=&quot;old&quot;title=&quot;60+&quot;href=&quot;javaScript:;&quot;><span>60+</span></a>');
                                         return str.html();
                                     }">操作</th>

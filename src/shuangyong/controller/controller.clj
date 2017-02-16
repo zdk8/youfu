@@ -145,7 +145,9 @@
         minage          (:minage params)
         maxage          (:maxage params)
         sixtydeal       (:sixtydeal params)
+        isremove        (:isremove params)
         userdistrictid  (:regionid  (common/get-session))
+        removecond      (if (> (count isremove) 0) (if (= isremove "1") (str " and isarrange = " isremove) (str " and (isarrange = " isremove " or isarrange is null)")))
         namecond        (if (> (count name) 0) (common/likecond "name" name))
         identityidcond  (if (> (count identityid) 0) (common/likecond "identityid" identityid))
         districtcond    (if (> (count districtid) 0) (str " and districtid like '" districtid "%'"))
@@ -167,7 +169,7 @@
         maxagecond      (if (> (count maxage) 0) (str " and age < " maxage))
         sixtycond       (if (= sixtydeal "1") (str " and sixtydeal = '1'") (str " and (sixtydeal != '1' or sixtydeal is null)"))
         userdiscond     (if userdistrictid (str " and districtid like '" userdistrictid "%'"))
-        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond minagecond maxagecond sixtycond userdiscond)]
+        conds           (str namecond identityidcond districtcond eachtypecond ishandlecond caretypecond isdeadcond photocond joindatecond retiredatecond birthday1cond birthday2cond housecond typecond persontypecond traincond employcond minagecond maxagecond sixtycond userdiscond removecond)]
 ;    (println "SSSSSS" userdistrictid)
     conds))
 
@@ -271,6 +273,15 @@ from t_soldiercommon t)")
         ]
 ;    (println "SSSSSSSSSS " sc_id)
     (db/updatedata-by-tablename "t_soldiercommon" {:sixtyopnion sixtyopnion :sixtydeal sixtydeal} {:sc_id sc_id})
+    (str "true")))
+
+(defn removesoilder [request]
+  (let [params      (:params request)
+        sc_id       (:sc_id params)
+        issuccess   (:issuccess params)
+        persontype  (:persontype params)]
+    (if (= issuccess "0")
+      (db/updatedata-by-tablename "t_soldiercommon" {:persontype persontype} {:sc_id sc_id}))
     (str "true")))
 
 ;;附件管理

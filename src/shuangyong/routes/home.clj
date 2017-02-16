@@ -30,6 +30,7 @@
   (POST "/hyshy/retiresoilder" request (ctl/retire-soilder request))                   ;;退伍
   (POST "/hyshy/getofficenumb" request (ctl/get-office-numb request))                  ;;
   (POST "/hyshy/saveolderthansixty" request (ctl/dealsixty request))                   ;;处理60一般退役军人
+  (POST "/hyshy/removesoilder" request (ctl/removesoilder request))                   ;;处理60一般退役军人
 
 
   ;;附件管理
